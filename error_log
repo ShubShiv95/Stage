@@ -1,0 +1,29 @@
+[30-Jul-2020 02:57:02 Asia/Kolkata] PHP Warning:  include(dbhandle.php): failed to open stream: No such file or directory in /home/solvethe/public_html/lmspanel.php on line 3
+[30-Jul-2020 02:57:02 Asia/Kolkata] PHP Warning:  include(dbhandle.php): failed to open stream: No such file or directory in /home/solvethe/public_html/lmspanel.php on line 3
+[30-Jul-2020 02:57:02 Asia/Kolkata] PHP Warning:  include(): Failed opening 'dbhandle.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/solvethe/public_html/lmspanel.php on line 3
+[30-Jul-2020 02:57:02 Asia/Kolkata] PHP Notice:  Undefined index: STATUS in /home/solvethe/public_html/lmspanel.php on line 5
+[30-Jul-2020 02:57:02 Asia/Kolkata] PHP Notice:  Undefined index: NAME in /home/solvethe/public_html/lmspanel.php on line 297
+[30-Jul-2020 02:57:02 Asia/Kolkata] PHP Notice:  Undefined variable: dbhandle in /home/solvethe/public_html/lmspanel.php on line 345
+[30-Jul-2020 02:57:02 Asia/Kolkata] PHP Fatal error:  Call to a member function query() on null in /home/solvethe/public_html/lmspanel.php on line 345
+[01-Aug-2020 21:46:08 Asia/Kolkata] PHP Warning:  include(hot-link.php): failed to open stream: No such file or directory in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:08 Asia/Kolkata] PHP Warning:  include(hot-link.php): failed to open stream: No such file or directory in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:08 Asia/Kolkata] PHP Warning:  include(): Failed opening 'hot-link.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:17 Asia/Kolkata] PHP Warning:  include(hot-link.php): failed to open stream: No such file or directory in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:17 Asia/Kolkata] PHP Warning:  include(hot-link.php): failed to open stream: No such file or directory in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:17 Asia/Kolkata] PHP Warning:  include(): Failed opening 'hot-link.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:19 Asia/Kolkata] PHP Warning:  include(hot-link.php): failed to open stream: No such file or directory in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:19 Asia/Kolkata] PHP Warning:  include(hot-link.php): failed to open stream: No such file or directory in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:19 Asia/Kolkata] PHP Warning:  include(): Failed opening 'hot-link.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:19 Asia/Kolkata] PHP Warning:  include(hot-link.php): failed to open stream: No such file or directory in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:19 Asia/Kolkata] PHP Warning:  include(hot-link.php): failed to open stream: No such file or directory in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:19 Asia/Kolkata] PHP Warning:  include(): Failed opening 'hot-link.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:19 Asia/Kolkata] PHP Warning:  include(hot-link.php): failed to open stream: No such file or directory in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:19 Asia/Kolkata] PHP Warning:  include(hot-link.php): failed to open stream: No such file or directory in /home/solvethe/public_html/index.php on line 464
+[01-Aug-2020 21:46:19 Asia/Kolkata] PHP Warning:  include(): Failed opening 'hot-link.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/solvethe/public_html/index.php on line 464
+[07-Aug-2020 00:23:16 Asia/Kolkata] PHP Warning:  include(dbhandle.php): failed to open stream: No such file or directory in /home/solvethe/public_html/lmspanel.php on line 3
+[07-Aug-2020 00:23:16 Asia/Kolkata] PHP Warning:  include(dbhandle.php): failed to open stream: No such file or directory in /home/solvethe/public_html/lmspanel.php on line 3
+[07-Aug-2020 00:23:16 Asia/Kolkata] PHP Warning:  include(): Failed opening 'dbhandle.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/solvethe/public_html/lmspanel.php on line 3
+[07-Aug-2020 00:23:16 Asia/Kolkata] PHP Notice:  Undefined index: STATUS in /home/solvethe/public_html/lmspanel.php on line 5
+[07-Aug-2020 00:23:16 Asia/Kolkata] PHP Notice:  Undefined index: NAME in /home/solvethe/public_html/lmspanel.php on line 297
+[07-Aug-2020 00:23:16 Asia/Kolkata] PHP Notice:  Undefined variable: dbhandle in /home/solvethe/public_html/lmspanel.php on line 345
+[07-Aug-2020 00:23:16 Asia/Kolkata] PHP Fatal error:  Call to a member function query() on null in /home/solvethe/public_html/lmspanel.php on line 345

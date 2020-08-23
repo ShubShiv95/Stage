@@ -8,7 +8,7 @@
 		
 		function __construct()
 			{
-				$this->logfile = $_SERVER['DOCUMENT_ROOT'] . '/drawourdream/log/error.log';
+				$this->logfile = $_SERVER['DOCUMENT_ROOT'] . '/solvethemess/stage/log/error.log';
 			}
 			
 			

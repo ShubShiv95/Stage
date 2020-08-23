@@ -10,7 +10,8 @@ $lid = mysql_real_escape_string(trim($_POST['loginid']), $dbhandle);
 $passwd = mysql_real_escape_string($_POST['passwd'],$dbhandle);
 //$_SESSION['LOGINID']= $lid;
 */
-include 'dbhandle.php';
+//include 'dbhandle.php';
+include 'dbobj.php';
 $lid = mysqli_real_escape_string($dbhandle,trim($_REQUEST['loginid']));
 $passwd = mysqli_real_escape_string($dbhandle,$_REQUEST['password']);
 
@@ -20,8 +21,9 @@ $query = "select * from employee_master_table where login_id='" . $lid . "' and 
 //echo $query;
 
           //select * from user_login where user_id='admin';
-$result = mysqli_query($dbhandle,$query);   //mysqli_query just runs the query only without returning any extra properties.
-$row = mysqli_fetch_assoc($result);
+//$result = mysqli_query($dbhandle,$query);   //mysqli_query just runs the query only without returning any extra properties.
+$result=$dbhandle->query($query);
+$row = $result->fetch_assoc();
 //echo mysqli_num_rows($result);
 if(mysqli_num_rows($result) == 1)  // Checks if the userid exist in the database.
 {
@@ -39,7 +41,8 @@ if(mysqli_num_rows($result) == 1)  // Checks if the userid exist in the database
 			if($financialYear_result)
 				$financialYear_row=mysqli_fetch_assoc($financialYear_result);
 			*/	
-			$_SESSION["STATUS"]=1;
+			$_SESSION["STATUS"]=$row["LOGIN_STATUS"];
+			
 			$_SESSION["NAME"] = $row["Employee_Name"];
 			$_SESSION["LOGINID"] = $row["Login_id"];
 			$_SESSION["EMPLOYEEID"] = $row["Employee_Id"];
@@ -48,6 +51,8 @@ if(mysqli_num_rows($result) == 1)  // Checks if the userid exist in the database
 			$_SESSION["SCHOOLID"]= $row["School_Id"];
 			
 			$_SESSION["LOGINGRADE"]= $row["login_grade"];
+			$_SESSION["FOOTER"]="SMS SCHOOL ERP COPYRIGHT 2020";
+			$_SESSION["LINK"]=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
 			/*
 			//$_SESSION["DISTRICTID"]= $financialYear_row["district_id"];
 			$_SESSION["STARTMONTH"]= $financialYear_row["start_month"];

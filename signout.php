@@ -39,5 +39,5 @@ echo '<body onload="doOnClick()">'; //Onclick function is called during loading 
 echo '</body>';
 echo '</html>';
 */
-echo '<meta HTTP-EQUIV="Refresh" content="0; URL=index.html">';
+echo '<meta HTTP-EQUIV="Refresh" content="0; URL=index.php">';
 ?>

@@ -32,12 +32,14 @@ include 'security.php';
     <link rel="stylesheet" href="css/select2.min.css">
     <!-- Date Picker CSS -->
     <link rel="stylesheet" href="css/datepicker.min.css">
+	<!-- Data Table CSS -->
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
-   <!--The ajex-function.js file contains all controller ajex functions used in the erp.-->
-   <script src="js/ajex-function.js"></script>
+	
+  
 </head>
 
 <body>
@@ -61,18 +63,17 @@ include 'security.php';
                 <!-- Hot Links Area End Here -->
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
+				  <!--<div class="col-xl-2 col-lg-4 col-4 fsec">
+                    <h3>Visitor Eqnuiry</h3>
+				  </div>-->
+                 			  
                    <ul>
                         <li>
                             <a href="dashboard.php">Home</a>
                         </li>
-                        <li>Admission Eqnuiry</li>
+                        <li>Follow Up Eqnuiry</li>
                     </ul>
-				 	
-                </div>
-                <div class="ui-alart-box">
-                            <div class="icon-color-alart" id="msgreply">
-                                
-                            </div>
+				  	
                 </div>
                 <!-- Breadcubs Area End Here -->
 				<!--<div class="page-title-section">
@@ -100,79 +101,25 @@ include 'security.php';
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form" id="admissionform" method="post" action="AdmissionEnquiry2.php">
-						<input type="hidden" id="votp" name="votp" placeholder="" value="0" class="form-control" required>
-                            <div class="row">
-							
-							    
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Student Name *</label>
-                                    <input type="text" id="sname" name="sname" placeholder="" class="form-control" onkeypress="lettersOnly(event);" required>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Enquirer Name *</label>
-                                    <input type="text" id="enqname" name="enqname" placeholder="" class="form-control" onkeypress="lettersOnly(event);" required>
-                                </div>
-                                
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Enquirer Relation *</label>
-                                    <select class="select2" id="enqrel" name="enqrel" required>
-                                        <option value="">Select Option Values *</option>
-                                        <option value="Father">Father</option>
-                                        <option value="Mother">Mother</option>
-                                        <option value="Uncle">Uncle</option>
-                                        <option value="Aunt">Aunt</option>
-                                        <option value="Brother">Brother</option>
-                                        <option value="Sister">Sister</option>
-                                        <option value="Neighbour">Neighbour</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Contact Number *</label>
-                                    <input type="text" id="contactno" name="contactno" placeholder="" class="form-control" onkeypress="return isNumberKey(event);"  onkeyup="restrict_textlength('contactno','10');" required>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Email ID</label>
-                                    <input type="email" id="email" name="email" placeholder="" class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Select Locality</label>
-                                    <select class="select2" id="locality" name="locality">
-                                        <option value="">Please Select Locality</option>
-										<?php
-                                            $query='select locationid,location_name from marketting_location_table where School_Id=' . $_SESSION["SCHOOLID"];
-                                            $result=mysqli_query($dbhandle,$query);
-                                            if(!$result)
-                                                {
-                                                    //var_dump($getStudentCount_result);
-                                                    $error_msg=mysqli_error($dbhandle);
-                                                    $el=new LogMessage();
-                                                    $sql=$query;
-                                                    //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                                                    $el->write_log_message('Admission Eqnuiry',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
-                                                    $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate location list array. Please try after some time.</h1>";
-                                                    $dbhandle->query("unlock tables");
-                                                    mysqli_rollback($dbhandle);
-                                                    //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
-                                                    $messsage='Error: Admission Enquiry Not Saved.  Please consult application consultant.';
-                                                    //$str_end='</div>';
-                                                    //echo $str_start.$messsage.$str_end;
-                                                    //echo "";
-                                                    //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
-                                                }
-                                            while($row=mysqli_fetch_assoc($result))
-                                            {
-                                                 echo '<option value="' . $row["locationid"] . '">' . $row["location_name"] . '</option>';
-                                            }
-                                        ?>
-                                       
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Applying For Class *</label>
-                                    <select class="select2" id="classno" name="classno" required>
-                                        <option value="">Please Select Class *</option>
-										<?php
+                        
+						<div class="followupenq-form-sec">
+							<form class="mg-b-20 new-added-form" action="GetEnquiry.php" method="post" id="enquiryform">
+								<div class="row gutters-8">
+								   <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+										<label>Enquiry Status</label>
+										<select class="select2" id="enqtype" name="enqtype">
+											<option value="All">All</option>
+											<option value="PENDING">Pending</option>
+											<option value="PROCESSING">Processing</option>
+											<option value="CONVERTED">Converted</option>
+											<option value="Closed">Closed</option>
+										</select>
+                                   </div>
+								   <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+										<label>Applying For Class</label>
+										<select class="select2" id="class" name="class">
+											<option value="All">All</option>
+											<?php
                                             $query='select Class_Id,class_name,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
                                             $result=mysqli_query($dbhandle,$query);
                                             if(!$result)
@@ -206,24 +153,26 @@ include 'security.php';
                                             echo $str;
                                         }
                                         ?>
-                                       
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Applying for Session *</label>
-                                    <select class="select2" id="session" name="session" required>
-                                        <option value="">Please Select Session *</option>
-										<option value="2020-2021">2020-2021</option>
-											<option value="2019-2020">019-2020</option>
+											
+										</select>
+                                   </div>
+								   <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+										<label>Applying For Session</label>
+										<select class="select2" id="session" name="session">
+											<option value="All">All</option>
+											<option value="2020-2021">2020-2021</option>
+											<option value="2019-2020">2019-2020</option>
 											<option value="2018-2019">2018-2019</option>
 											<option value="2017-2018">2017-2018</option>
-                                    </select>
-                                </div>
-                               <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Lead Source *</label>
-                                    <select class="select2" id="lsource" name="lsource" required>
-                                    <?php
-                                            $query='select leadid,lead_source_name from lead_source_table where School_Id=' . $_SESSION["SCHOOLID"];
+											
+										</select>
+                                   </div>
+								   <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <label>Select Locality</label>
+                                    <select class="select2" id="locality" name="locality">
+                                        <option value="All">All</option>
+                                        <?php
+                                            $query='select locationid,location_name from marketting_location_table where School_Id=' . $_SESSION["SCHOOLID"];
                                             $result=mysqli_query($dbhandle,$query);
                                             if(!$result)
                                                 {
@@ -245,58 +194,87 @@ include 'security.php';
                                                 }
                                             while($row=mysqli_fetch_assoc($result))
                                             {
-                                                 echo '<option value="' . $row["leadid"] . '">' . $row["lead_source_name"] . '</option>';
+                                                 echo '<option value="' . $row["locationid"] . '">' . $row["location_name"] . '</option>';
                                             }
                                         ?>
                                        
                                     </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Follow Up Date *</label>
-                                    <input type="text" id="fdate" name="fdate" placeholder="dd/mm/yyyy" class="form-control air-datepicker future-date"
-                                        data-position='bottom right' required>
-                                    <i class="far fa-calendar-alt"></i>
-                                </div>
-								
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Any Sibling</label>
-                                    <select class="select2" id="anysib" name="anysib">
-                                        <option value="No">No</option>
-										<option value="Yes">Yes</option>
+                                   </div>
+								   <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <label>Search Date As</label>
+                                    <select class="select2" id="searchdate" name="searchdate">
+										<option value="createdon">By Created on</option>
+                                        <option value="followup">By Followup Date</option>                                       
                                     </select>
-                                </div>
-								
-								
-								<div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Enter OTP</label>
-                                    <input type="text" id="vmobno" name="vmobno" placeholder="" class="form-control">
-                                </div>
-								<div class="col-xl-9 col-lg-9 col-12 form-group">
-                                    <label>Remarks</label>
-									 <textarea class="textarea form-control"id="remarks" name="remarks"  cols="10" rows="4"></textarea>
-                                </div>
-								
-								<div class="col-xl-3 col-lg-6 col-12 form-group btn-group-main">
-								    <label>&nbsp;</label>
-									<div class="col-xl-6 col-lg-6 col-6 form-group">
-                                    <button type="button" name="otpbtn" id="otpbtn" class="btn-fill-md radius-4 text-light bg-true-v mbtn-verify">Generate OTP</button>
+                                   </div>
+							
+									<div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+									    <label>From Date *</label>
+										<input type="text" id="fromdate" name="fromdate" placeholder="From Date" class="form-control air-datepicker"
+											data-position='bottom right' required>
+										<i class="far fa-calendar-alt"></i>
 									</div>
-									<div class="col-xl-6 col-lg-6 col-6 form-group">
-									<button type="button" name="votpbtn" id="votpbtn" class="btn-fill-md radius-4 text-light bg-dark-pastel-green mbtn-verify verify">Verify OTP</button>
+									<div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+									    <label>To Date *</label>
+										<input type="text" id="todate" name="todate" placeholder="To Date" class="form-control air-datepicker"
+											data-position='bottom right' required>
+										<i class="far fa-calendar-alt"></i>
 									</div>
-									<div class="col-xl-6 col-lg-6 col-6 form-group form-main-btn">
-										<button type="button" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark save" onclick="frm.submit();">Save</button>
+									<div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group followupenq-form-btn">
+									    <label>&nbsp;</label>
+										<!--button type="submit" class="btn-fill-lg bg-blue-dark btn-hover-yellow" onclick="frm.submit();">SEARCH</button-->
+										<button type="submit" class="btn-fill-lg bg-blue-dark btn-hover-yellow">SEARCH</button>
 									</div>
-                                    <div class="col-xl-6 col-lg-6 col-6 form-group form-main-btn">									
-										<button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow resetm">Reset</button>
-									</div>
-                                </div>
-								
-								
-                                
-                                
-                            </div>
-                        </form>
+								</div>
+							</form>
+						</div>
+						
+						<div class="tabular-section-info follow-up-enq-middle">
+							
+							<div class="col-12-xxxl col-xl-12 col-lg-12 col-12 form-group"> 
+							<span class="dexcel"><a href="#"><i class="fas fa-file-excel"></i></a></span><span class="dpdf"><a href="#"><i class="fas fa-file-pdf"></i></a></span>
+							</div>
+						
+					    </div>
+						
+						<div class="tabular-section-detail"  id="msgreply">
+						 <div class="table-responsive">
+                            <table class="table display data-table text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>
+										SL NO.
+										</th>
+										<th>Enquirer Name</th>
+										<th>Contact No.</th>
+										<th>Student Name</th>
+										<th>Location</th>
+										<th>Class</th>
+										<th>Session</th>
+										<th>Relation</th>
+										<th>Sibling</th>
+										<th>Last Attend By</th>
+										<th>Last Attend On</th>
+										<th>Status</th>
+                                        <th>Action</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                  
+                                </tbody>
+                            </table>
+							
+							
+							
+							
+							
+							
+                        </div>
+						</div>
+						
+						
                     </div>
                 </div>
                 <!-- Admit Form Area End Here -->
@@ -322,11 +300,16 @@ include 'security.php';
     <script src="js/datepicker.min.js"></script>
     <!-- Scroll Up Js -->
     <script src="js/jquery.scrollUp.min.js"></script>
+	<!-- Data Table Js -->
+    <script src="js/jquery.dataTables.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
 	<script src="js/myscript.js"></script>
+
+
+<!--Ajex Function for Submit Operation-->                                            
     <script type="text/javascript">
-    var frm = $('#admissionform');
+    var frm = $('#enquiryform');
 
     frm.submit(function (e) {
         //alert(data);
@@ -353,6 +336,8 @@ include 'security.php';
         });
     });
 </script>
+	
+
 </body>
 
 </html>

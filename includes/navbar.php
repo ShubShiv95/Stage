@@ -2,7 +2,7 @@
             <div class="nav-bar-header-one">
                 <div class="header-logo">
                     <a href="index.html">
-                        <img src="img/SwiftTechLogo-dashboard.jpg" alt="logo">
+                        <img src="img/logo.png" alt="logo">
                     </a>
                 </div>
                  <div class="toggle-button sidebar-toggle">

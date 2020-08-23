@@ -1,0 +1,432 @@
+
+Date:	09-Aug-2020 10:17:13 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	Column 'SCHOOL_ID' cannot be null
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\SaveAdmEnq.php
+
+Date:	10-Aug-2020 12:24:17 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	Column 'SCHOOL_ID' cannot be null
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\SaveAdmEnq.php
+
+Date:	17-Aug-2020 12:09:18 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	Unknown column 'locationid' in 'field list'
+SQL:	select locationid,location_name marketting_location_table where School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry.php
+
+Date:	17-Aug-2020 12:09:24 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	Unknown column 'locationid' in 'field list'
+SQL:	select locationid,location_name marketting_location_table where School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry.php
+
+Date:	17-Aug-2020 12:10:02 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	Unknown column 'locationid' in 'field list'
+SQL:	select locationid,location_name marketting_location_table where School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry.php
+
+Date:	17-Aug-2020 12:10:24 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	Unknown column 'locationid' in 'field list'
+SQL:	select locationid,location_name marketting_location_table where School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry.php
+
+Date:	17-Aug-2020 12:11:14 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	Unknown column 'locationid' in 'field list'
+SQL:	select locationid,location_name marketting_location_table where School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry.php
+
+Date:	17-Aug-2020 11:22:39 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:22:39 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:23:08 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:23:08 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:29:36 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:29:36 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:32:08 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:32:08 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:32:09 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:32:09 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:32:09 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:32:09 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:32:09 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:32:09 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:32:10 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	17-Aug-2020 11:32:10 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	19-Aug-2020 11:17:32 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'created_on between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/08/2' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:17:45 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'created_on between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/08/2' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:16 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:18 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:19 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:19 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:19 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:19 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:20 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:20 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:20 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:20 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:20 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:21 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:26 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:27 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:27 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:27 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:27 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:27 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:28 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:18:39 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:20:37 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:20:38 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:20:38 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:20:38 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	19-Aug-2020 11:21:41 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'followup_date between str_to_date('18/08/2020','%d/%m/%Y') and str_to_date('20/0' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	20-Aug-2020 07:27:47 AM	 By User:
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select locationid,location_name from marketting_location_table where School_Id=
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry.php
+
+Date:	20-Aug-2020 07:27:47 AM	 By User:
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and class_no!=0 order by class_no' at line 1
+SQL:	select Class_Id,class_name,stream from class_master_table where enabled=1 and School_Id= and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry.php
+
+Date:	20-Aug-2020 07:27:47 AM	 By User:
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select leadid,lead_source_name from lead_source_table where School_Id=
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry.php
+
+Date:	20-Aug-2020 07:44:06 AM	 By User:
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and class_no!=0 order by class_no' at line 1
+SQL:	select Class_Id,class_name,stream from class_master_table where enabled=1 and School_Id= and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\followupEnquiry.php
+
+Date:	20-Aug-2020 07:44:06 AM	 By User:
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select locationid,location_name from marketting_location_table where School_Id=
+File:	D:\xampp\htdocs\solvethemess\stage\followupEnquiry.php
+
+Date:	20-Aug-2020 07:44:39 AM	 By User:
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and class_no!=0 order by class_no' at line 1
+SQL:	select Class_Id,class_name,stream from class_master_table where enabled=1 and School_Id= and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\followupEnquiry.php
+
+Date:	20-Aug-2020 07:44:39 AM	 By User:
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select locationid,location_name from marketting_location_table where School_Id=
+File:	D:\xampp\htdocs\solvethemess\stage\followupEnquiry.php
+
+Date:	21-Aug-2020 09:50:10 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	Column 'school_id' in where clause is ambiguous
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	21-Aug-2020 09:50:33 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	Column 'school_id' in where clause is ambiguous
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\GetEnquiry.php
+
+Date:	21-Aug-2020 11:12:54 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php
+
+Date:	21-Aug-2020 11:50:00 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php
+
+Date:	21-Aug-2020 11:50:07 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php
+
+Date:	22-Aug-2020 08:36:25 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	22-Aug-2020 08:38:17 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	22-Aug-2020 08:38:22 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	22-Aug-2020 08:38:47 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	22-Aug-2020 08:39:19 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	22-Aug-2020 08:41:15 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	22-Aug-2020 11:26:27 PM	 By User:
+Module Name: 	View Feedback Note
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by date_of_visit desc' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php
+
+Date:	23-Aug-2020 08:22:12 PM	 By User:
+Module Name: 	View Feedback Note
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by date_of_visit desc' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php
+
+Date:	23-Aug-2020 08:22:41 PM	 By User:
+Module Name: 	View Feedback Note
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by date_of_visit desc' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php
+
+Date:	23-Aug-2020 09:27:57 PM	 By User:
+Module Name: 	View Feedback Note
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by date_of_visit desc' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php

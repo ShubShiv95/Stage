@@ -430,3 +430,129 @@ Module Name: 	View Feedback Note
 Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by date_of_visit desc' at line 1
 SQL:	
 File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php
+
+Date:	26-Aug-2020 03:58:08 PM	 By User:admin
+Module Name: 	Eearch Inquiry
+Message:	Unknown column 'class_no' in 'where clause'
+SQL:	select * from visitor_type_master where enabled=1 and School_Id=1 and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch.php
+
+Date:	26-Aug-2020 04:01:59 PM	 By User:admin
+Module Name: 	Eearch Inquiry
+Message:	Table 'smserp.visitor_purpose_master' doesn't exist
+SQL:	select * from visitor_purpose_master where enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch.php
+
+Date:	26-Aug-2020 04:02:04 PM	 By User:admin
+Module Name: 	Eearch Inquiry
+Message:	Table 'smserp.visitor_purpose_master' doesn't exist
+SQL:	select * from visitor_purpose_master where enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch.php
+
+Date:	26-Aug-2020 04:02:55 PM	 By User:admin
+Module Name: 	Eearch Inquiry
+Message:	Table 'smserp.visitor_purpose_master' doesn't exist
+SQL:	select * from visitor_purpose_master where enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch.php
+
+Date:	26-Aug-2020 04:04:44 PM	 By User:admin
+Module Name: 	Eearch Inquiry
+Message:	Table 'smserp.visitor_purpose_master' doesn't exist
+SQL:	select * from visitor_purpose_master where enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch.php
+
+Date:	26-Aug-2020 04:37:11 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	Column 'created_on' in field list is ambiguous
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch.php
+
+Date:	26-Aug-2020 05:27:56 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	Column 'created_on' in field list is ambiguous
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch.php
+
+Date:	26-Aug-2020 05:29:16 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	Column 'created_on' in field list is ambiguous
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch.php
+
+Date:	26-Aug-2020 05:29:33 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	Column 'created_on' in field list is ambiguous
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch.php
+
+Date:	26-Aug-2020 06:45:01 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	Column 'created_on' in field list is ambiguous
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch2.php
+
+Date:	26-Aug-2020 06:47:06 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	Unknown column 'vpm.visitor_purpose' in 'field list'
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch2.php
+
+Date:	26-Aug-2020 06:49:27 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	Unknown column 'vpm.visitor_purpose' in 'field list'
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch2.php
+
+Date:	26-Aug-2020 06:53:01 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	Unknown column 'vpm.visit_purpose_id' in 'where clause'
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorSearch2.php
+
+Date:	26-Aug-2020 10:18:47 PM	 By User:
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select locationid,location_name from marketting_location_table where School_Id=
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry.php
+
+Date:	26-Aug-2020 10:18:47 PM	 By User:
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and class_no!=0 order by class_no' at line 1
+SQL:	select Class_Id,class_name,stream from class_master_table where enabled=1 and School_Id= and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry.php
+
+Date:	26-Aug-2020 10:18:47 PM	 By User:
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select leadid,lead_source_name from lead_source_table where School_Id=
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry.php
+
+Date:	27-Aug-2020 12:30:19 AM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\AdmissionEnquiry2.php
+
+Date:	27-Aug-2020 08:36:57 PM	 By User:
+Module Name: 	Eearch Inquiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select * from visitor_type_master where enabled=1 and School_Id=
+File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php
+
+Date:	27-Aug-2020 08:36:57 PM	 By User:
+Module Name: 	Eearch Inquiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select * from visit_purpose_master where enabled=1 and School_Id=
+File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php
+
+Date:	27-Aug-2020 08:36:57 PM	 By User:
+Module Name: 	View Feedback Note
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by date_of_visit desc' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php
+
+Date:	27-Aug-2020 09:34:44 PM	 By User:admin
+Module Name: 	View Feedback Note
+Message:	Table 'smserp.visitor_purpose_master' doesn't exist
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php

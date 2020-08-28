@@ -92,12 +92,54 @@
                                     <a href="AdmissionEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Admission Eqnuiry</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="visitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
-                                </li>
-								<li class="nav-item">
                                     <a href="followupEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Follow Up Eqnuiry</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="visitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
+                                </li>
+								
+                                
+                                <li class="nav-item sidebar-nav-item">
+									<a href="#" class="nav-link"><span>Reports</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+									    <ul class="nav sub-group-menu">
+                                            <li class="nav-item">
+                                                <a href="visitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor List Report</a>
+                                            </li>
+    									</ul>
+                                </li>
+                                
                             </ul>
+                         
+                        </li>
+
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-mortarboard"></i><span>Communication</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="individualSMS.php" class="nav-link"><i class="fas fa-angle-right"></i>Individual SMS</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Group SMS</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>BroadCast SMS</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Recharge Media</a>
+                                </li>
+								
+                                
+                                <li class="nav-item sidebar-nav-item">
+									<a href="#" class="nav-link"><span>Reports</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+									    <ul class="nav sub-group-menu">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>SMS Delivery Reports</a>
+                                            </li>
+    									</ul>
+                                </li>
+                                
+                            </ul>
+                         
                         </li>
                         <!--li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Library</span></a>

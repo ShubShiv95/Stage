@@ -36,7 +36,7 @@ $sibid='';
 $anysib=$_REQUEST["anysib"];
 //$vmobno=$_REQUEST["vmobno"];
 $vmobno='YES';
-//$votp=$_REQUEST["votp"];
+$votp=$_REQUEST["votp"];
 
 
 
@@ -56,7 +56,7 @@ $insertAdmissionEnquiry_sql="insert into admission_enquiry_table
     ENQUIRY_STATUS,
     MOBILE_VERIFIED,
     CREATED_BY,
-    SCHOOL_ID) values(?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,'PENDING','YES',?,?)";
+    SCHOOL_ID) values(?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,'PENDING',?,?,?)";
     $lid=$_SESSION["LOGINID"];
     $sid=$_SESSION["SCHOOLID"];
 
@@ -64,7 +64,7 @@ $insertAdmissionEnquiry_sql="insert into admission_enquiry_table
 
 $stmt=$dbhandle->prepare($insertAdmissionEnquiry_sql);
 echo $dbhandle->error;	
-$stmt->bind_param('sssssiisissssi',
+$stmt->bind_param('sssssiisisssisi',
     $sname,
     $enqname,
     $enqrel,
@@ -77,6 +77,7 @@ $stmt->bind_param('sssssiisissssi',
     $fdate,
     $anysib,
     $remarks,
+    $votp,
     $lid,
     $sid);
 

@@ -81,7 +81,7 @@ include 'security.php';
 				
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
-                    <div class="card-body bg-skyblue">
+                    <div class="card-body bg-skybluelight">
                        <!-- <div class="heading-layout1">
                             <div class="item-title">
                                 <h3>Add New Students</h3>
@@ -101,7 +101,7 @@ include 'security.php';
                             </div>
                         </div> -->
                         <form class="new-added-form" id="admissionform" method="post" action="AdmissionEnquiry2.php">
-						<input type="hidden" id="votp" name="votp" placeholder="" value="0" class="form-control" required>
+						<input type="hidden" id="votp" name="votp" placeholder="" value="0" class="form-control" value="0" required>
                             <div class="row">
 							
 							    
@@ -111,7 +111,7 @@ include 'security.php';
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Enquirer Name *</label>
-                                    <input type="text" id="enqname" name="enqname" placeholder="" class="form-control" onkeypress="lettersOnly(event);" required>
+                                    <input type="text" id="enqname" name="enqname" placeholder="" class="form-control" onkeypress="lettersOnly(event);">
                                 </div>
                                 
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
@@ -268,8 +268,8 @@ include 'security.php';
 								
 								
 								<div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Enter OTP</label>
-                                    <input type="text" id="vmobno" name="vmobno" placeholder="" class="form-control">
+                                    <label>Enter OTP</label> <label id="otpverifymsg">&nbsp;&nbsp;</label>
+                                    <input type="text" id="otptoverify" name="otptoverify" placeholder="" class="form-control">
                                 </div>
 								<div class="col-xl-9 col-lg-9 col-12 form-group">
                                     <label>Remarks</label>
@@ -279,10 +279,11 @@ include 'security.php';
 								<div class="col-xl-3 col-lg-6 col-12 form-group btn-group-main">
 								    <label>&nbsp;</label>
 									<div class="col-xl-6 col-lg-6 col-6 form-group">
-                                    <button type="button" name="otpbtn" id="otpbtn" class="btn-fill-md radius-4 text-light bg-true-v mbtn-verify">Generate OTP</button>
-									</div>
+                                    <button type="button" name="otpbtn" id="otpbtn" class="btn-fill-md radius-4 text-light bg-true-v mbtn-verify" onclick="generateOtp();">Generate OTP</button>
+                                            <input type="hidden" id="otp" name="otp" />
+                                </div>
 									<div class="col-xl-6 col-lg-6 col-6 form-group">
-									<button type="button" name="votpbtn" id="votpbtn" class="btn-fill-md radius-4 text-light bg-dark-pastel-green mbtn-verify verify">Verify OTP</button>
+									<button type="button" name="votpbtn" id="votpbtn" class="btn-fill-md radius-4 text-light bg-dark-pastel-green mbtn-verify verify" onclick="verifyOtp();">Verify OTP</button>
 									</div>
 									<div class="col-xl-6 col-lg-6 col-6 form-group form-main-btn">
 										<button type="button" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark save" onclick="frm.submit();">Save</button>
@@ -352,6 +353,57 @@ include 'security.php';
             },
         });
     });
+</script>
+<script>
+function generateOtp()
+{
+var mobileno=document.getElementById('contactno').value;
+var xmlhttp;    
+if (mobileno=="")
+  {
+  alert('Please Provide the Contact Numebr.');
+  return;
+  }
+//alert(outtime);
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+        document.getElementById('otp').value=xmlhttp.responseText;
+        //alert('OTP'+ xmlhttp.responseText);
+    }
+  }
+xmlhttp.open("POST","sendOtp.php?mobileno="+mobileno,true);
+xmlhttp.send();
+}
+
+function verifyOtp(){
+
+    var otp=document.getElementById('otp').value;
+    var verifyingotp=document.getElementById('otptoverify').value;
+    //alert('Generated OTP is ' + otp + ' and verifying OTP is ' + verifyingotp)
+    if(otp==verifyingotp)
+    {
+        //alert("OTP Verified.")
+        document.getElementById('votp').value=1;
+        document.getElementById('otpverifymsg').innerHTML='Contact Number Verified.';
+    }
+    else
+    {
+        //alert("Invalid OTP.")
+        document.getElementById('votp').value=0;
+        document.getElementById('otpverifymsg').value='Invalid OTP.';
+    }
+
+}
 </script>
 </body>
 

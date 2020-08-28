@@ -1,9 +1,9 @@
 <?php
 session_start();
+include 'security.php';
 include 'dbobj.php';
 include 'error_log.php';
-include 'security.php';
-
+include 'sequence_generator.php';
 
 $visitortype=$_REQUEST["visitortype"];
 $companyname=$_REQUEST["companyname"];
@@ -17,15 +17,26 @@ $note=$_REQUEST["note"];
 $loginid=$_SESSION['LOGINID'];
 $schoolid=$_SESSION['SCHOOLID'];
 
+$veid=sequence_number('visitor_enquiry_table',$dbhandle);
+if($veid==false)
+    {
+            $el=new LogMessage();
+            $sql='Please fix generate_sequence.php file.';
+            $errpr_msg="<h1>Database Error: Not able to generate Visitor Unique Id. Please try after some time.</h1>";
+            //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+            $el->write_log_message('Add New Visitor',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+            $_SESSION["MESSAGE"]=$error_msg;    
+    }
 
 mysqli_autocommit($dbhandle,FALSE);
 
 $insertVisitorEnquiry_sql="insert into visitor_enquiry_table
-    (visitor_type,
+    (veid,
+    visitor_type_id,
     visitor_name,
     contact_no,
     company_name,
-    purpose,
+    visit_purpose_id,
     location,
     person_to_meet,
     no_of_person,
@@ -34,11 +45,12 @@ $insertVisitorEnquiry_sql="insert into visitor_enquiry_table
     note,
     created_by,
     created_on,
-    school_id) values(?,?,?,?,?,?,?,?,NOW(),TIME_FORMAT(current_time,'%h:%i %p'),?,?,NOW(),?)";
+    school_id) values(?,?,?,?,?,?,?,?,?,NOW(),TIME_FORMAT(current_time,'%h:%i %p'),?,?,NOW(),?)";
  
     $insertVisitorEnquiry_stmt=$dbhandle->prepare($insertVisitorEnquiry_sql);
-    //echo $dbhandle->error;die;	
-    $insertVisitorEnquiry_stmt->bind_param('ssssssisssi',
+    echo $dbhandle->error;	
+    $insertVisitorEnquiry_stmt->bind_param('iisssisisssi',
+    $veid,
     $visitortype,
     $vname,
     $contactno,
@@ -58,14 +70,15 @@ $insertVisitorEnquiry_sql="insert into visitor_enquiry_table
     //$imgurl = $_REQUEST["image"];
 
     $myimg = $_REQUEST['image'];
-    $destinationPath = "data/images/";
+    $destinationPath = "app_images/visitors/";
   
     $web_capture_part = explode(";base64,", $myimg);
     $image_type_aux = explode("image/", $web_capture_part[0]);
     $image_type = $image_type_aux[1];
   
     $image_base64 = base64_decode($web_capture_part[1]);
-    $myimgName = uniqid() . '.png';
+    //$myimgName = uniqid() . '.png';
+    $myimgName = 'visitor' . $veid  . '.png';
   
     $file = $destinationPath . $myimgName;
     file_put_contents($file, $image_base64);

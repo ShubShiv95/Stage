@@ -4172,6 +4172,9 @@ ul {
 .bg-skyblue {
   background-color: #40dfcd;
 }
+.bg-skybluelight {
+  background-color: #cddff5;
+}
 .bg-pink {
   background-color: #f939a1;
 }
@@ -5189,16 +5192,29 @@ float:right;
     top: 10px;	
 }
 .new-added-form input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #000 !important;
+  color: #ab3c3c !important;
   opacity: 1; /* Firefox */
 }
 
 .new-added-form input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #000 !important;
+  color: #ab3c3c !important;
 }
 
 .new-added-form input::-ms-input-placeholder { /* Microsoft Edge */
-  color: #000 !important;
+  color: #ab3c3c !important;
+}
+.new-added-form select::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #ab3c3c !important;
+  opacity: 1; /* Firefox */
+}
+.new-added-form select:-ms-select-placeholder { /* Internet Explorer 10-11 */
+  color: #ab3c3c !important;
+}
+.new-added-form select::-ms-select-placeholder { /* Microsoft Edge */
+  color: #ab3c3c !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+  color: #ab3c3c !important;	
 }
 .formwithtable .new-added-form .select2-container .select2-selection--single{
     background-color: #fff;

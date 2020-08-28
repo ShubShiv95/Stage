@@ -38,6 +38,8 @@ include 'security.php';
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
+    <!--Print Dialog Box Command to Print the content printData(id)-->
+    <script src="js/print-function.js"></script>
 	
   
 </head>
@@ -82,7 +84,7 @@ include 'security.php';
 				
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
-                    <div class="card-body bg-skyblue">
+                    <div class="card-body bg-skybluelight">
                        <!-- <div class="heading-layout1">
                             <div class="item-title">
                                 <h3>Add New Students</h3>
@@ -232,7 +234,7 @@ include 'security.php';
 						<div class="tabular-section-info follow-up-enq-middle">
 							
 							<div class="col-12-xxxl col-xl-12 col-lg-12 col-12 form-group"> 
-							<span class="dexcel"><a href="#"><i class="fas fa-file-excel"></i></a></span><span class="dpdf"><a href="#"><i class="fas fa-file-pdf"></i></a></span>
+                            <span class="dexcel"><a href="#"><i class="fas fa-file-excel"></i></a></span><span class="dpdf"><a href="#"><i class="fas fa-file-pdf"></i></a></span><span><li class="fa"><a href="javascript:printData('msgreply');"><img src="img/icon/printer.jpg" height="40" width="36"></a></span>
 							</div>
 						
 					    </div>

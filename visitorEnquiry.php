@@ -44,7 +44,7 @@ include 'security.php';
         var pdf = new jsPDF('p', 'pt', 'letter');
         // source can be HTML-formatted string, or a reference
         // to an actual DOM element from which the text will be scraped.
-		 source = $(visitor)[0];
+		 source = $('#visitor-list')[0];
 
         specialElementHandlers = {
             '#bypassme': function (element, renderer) {
@@ -117,7 +117,7 @@ include 'security.php';
 				
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
-                    <div class="card-body bg-skyblue">
+                    <div class="card-body bg-skybluelight">
                        <!-- <div class="heading-layout1">
                             <div class="item-title">
                                 <h3>Add New Students</h3>
@@ -144,13 +144,35 @@ include 'security.php';
 							    <div class="col-xl-6 col-lg-6 col-12 form-group">
                                     <label>Visitor Type *</label>
                                     <select class="select2" id="visitortype" name="visitortype" required>
-                                        <option value="">Select Option Values *</option>
-                                        <option value="PARENT">PARENT</option>
-                                        <option value="PUBLICATION">PUBLICATION</option>
-                                        <option value="VENDOR">VENDOR</option>
-                                        <option value="SMARTCLASS">SMART CLASS</option>
-                                        <option value="OTHERS">OTHERS</option>
-                                        
+                                    <option value="0">Select Visitor Type</option>
+											<?php
+                                            $query='select * from visitor_type_master where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"];
+                                            $result=mysqli_query($dbhandle,$query);
+                                            if(!$result)
+                                                {
+                                                    //var_dump($getStudentCount_result);
+                                                    $error_msg=mysqli_error($dbhandle);
+                                                    $el=new LogMessage();
+                                                    $sql=$query;
+                                                    //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                                    $el->write_log_message('Eearch Inquiry',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                                                    $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+                                                    $dbhandle->query("unlock tables");
+                                                    mysqli_rollback($dbhandle);
+                                                    //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
+                                                    $messsage='Error: Eearch Inquiry Not Saved.  Please consult application consultant.';
+                                                    //$str_end='</div>';
+                                                    //echo $str_start.$messsage.$str_end;
+                                                    //echo "";
+                                                    //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
+                                                }
+                                            while($row=mysqli_fetch_assoc($result))
+                                            {
+                                            $str='<option value="' . $row["vtid"] . '">' .  $row["Visitor_Type"];
+                                            
+                                            echo $str;
+                                        }
+                                        ?>
                                     </select>
                                 </div>
 								<div class="col-xl-6 col-lg-6 col-12 form-group">
@@ -168,13 +190,34 @@ include 'security.php';
 							    <div class="col-xl-6 col-lg-6 col-12 form-group">
                                     <label>Purpose *</label>
                                     <select class="select2" id="purpose" name="purpose" required>
-                                        <option value="">Select Option Values *</option>
-                                        <option value="PRINCIPALMEET">PRINCIPAL MEET</option>
-                                        <option value="TEACHERMEET">EACHER MEET</option>
-                                        <option value="PRODUCTSELLING">PRODUCT SELLING</option>
-                                        <option value="FEESUBMIT">FEE SUBMIT</option>
-                                        <option value="STUDENTMEET">STUDENT MEET</option>
-                                        <option value="OTHERS">OTHERS</option>
+                                    <option value="0">Select Visitor Purpose</option>
+											<?php
+                                                 $query='select * from visit_purpose_master where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"];
+                                                $result=mysqli_query($dbhandle,$query);
+                                                if(!$result)
+                                                    {
+                                                        //var_dump($getStudentCount_result);
+                                                        $error_msg=mysqli_error($dbhandle);
+                                                        $el=new LogMessage();
+                                                        $sql=$query;
+                                                        //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                                        $el->write_log_message('Eearch Inquiry',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                                                        $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+                                                        $dbhandle->query("unlock tables");
+                                                        mysqli_rollback($dbhandle);
+                                                        //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
+                                                        $messsage='Error: Eearch Inquiry Not Saved.  Please consult application consultant.';
+                                                        //$str_end='</div>';
+                                                        //echo $str_start.$messsage.$str_end;
+                                                        //echo "";
+                                                        //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
+                                                    }
+                                                    while($row=mysqli_fetch_assoc($result))
+                                                        {
+                                                            $str='<option value="' . $row["vpid"] . '">' . $row["visitor_purpose"] . '</option>';
+                                                            echo $str;
+                                                        }
+                                            ?>
                                     </select>
                                 </div>
 								<div class="col-xl-6 col-lg-6 col-12 form-group">
@@ -218,7 +261,7 @@ include 'security.php';
                                 
 							</div>
 							<div class="col-xl-6 col-lg-6 col-12">
-							  <button onclick="take_snapshot()" class="btn-fill-lg bg-blue-dark btn-hover-yellow take-snap">Take Snap</button>
+							  <button onclick="take_snapshot();" class="btn-fill-lg bg-blue-dark btn-hover-yellow take-snap">Take Snap</button>
 							  <input type="hidden" name="image" class="image-tag">
 							</div>
 							
@@ -229,7 +272,7 @@ include 'security.php';
 							
                             </div>
                         </form>
-						<div class="second-form-sec">
+						<!-- commented to remove <div class="second-form-sec">
 							<form class="mg-b-20 new-added-form">
 								<div class="row gutters-8">
 								   <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
@@ -269,11 +312,13 @@ include 'security.php';
 									</div>
 								</div>
 							</form>
-						</div>
+						</div-->
                         <?php
 
-                       
-                            $getVisitorEnquiry_sql="select *,date_format(created_on,'%d-%m-%Y') as createdon from visitor_enquiry_table where out_time is null or date_format(created_on,'%d-%m-%y')=date_format(now(),'%d-%m-%y') and school_id=" . $_SESSION["SCHOOLID"] . " order by date_of_visit desc";
+
+                            $getVisitorEnquiry_sql="select vet.*,date_format(vet.created_on,'%d-%m-%Y') as createdon,vtm.visitor_type as visitor_type,vpm.visitor_purpose as visit_purpose from visitor_enquiry_table vet, visitor_type_master vtm, visit_purpose_master vpm where vtm.vtid=vet.visitor_type_id and vpm.vpid=vet.visit_purpose_id and out_time is null or date_format(vet.created_on,'%d-%m-%y')=date_format(now(),'%d-%m-%y') and vet.school_id=" . $_SESSION["SCHOOLID"] . " order by date_of_visit desc";
+                            //echo $getVisitorEnquiry_sql;
+                            
                             $getVisitorEnquiry_result=mysqli_query($dbhandle,$getVisitorEnquiry_sql);
                             $rowcount=$getVisitorEnquiry_result->num_rows;
                             if(!$getVisitorEnquiry_result)
@@ -317,39 +362,40 @@ include 'security.php';
 
 						<div class="tabular-section-info">
 							<div class="col-2-xxxl col-xl-2 col-lg-2 col-12 form-group">
-							Total Visitors Found: <span class="novisitorfound"><?php echo $rowcount;?> </span>
+							<span class="novisitorfound"><?php //echo $rowcount;?> </span>
 							</div>
 							<div class="col-2-xxxl col-xl-2 col-lg-2 col-12 form-group">
-							From Date: <span class="fromdate"><?php echo $earlier_date;  ?></span>
+							<span class="fromdate"><?php// echo $earlier_date;  ?></span>
 							</div>
 							<div class="col-2-xxxl col-xl-2 col-lg-2 col-12 form-group">
-							To Date: <span class="todate"><?php echo date("d-m-Y"); ?></span>
+							<span class="todate"><?php //echo date("d-m-Y"); ?></span>
 							</div>
 							<div class="col-2-xxxl col-xl-2 col-lg-2 col-12 form-group">
-							Out Time Not Defined: <span class="todate"><?php echo  $blank_out_time;?></span>
+							<span class="todate"><?php //echo  $blank_out_time;?></span>
 							</div>
 							<div class="col-2-xxxl col-xl-2 col-lg-2 col-12 form-group">
 							&nbsp;
 							</div>
 							<div class="col-2-xxxl col-xl-2 col-lg-2 col-12 form-group">
-							<span class="dexcel"><a href="#"><i class="fas fa-file-excel"></i></a></span><span class="dpdf"><a href="#"><i class="fas fa-file-pdf"></i></a></span>
+							<span class="dexcel"><a href="#"><i class="fas fa-file-excel"></i></a></span><span class="dpdf"><a href="javascript:demoFromHTML();"><i class="fas fa-file-pdf"></i></a></span>
 							</div>
 						
 					    </div>
 
 						<div class="tabular-section-detail" id="visitorlist">
 						 <div class="table-responsive">
-                            <table class="table display data-table text-nowrap">
+                            <table class="table display data-table text-nowrap" id="visitor-list">
                                 <thead>
                                     <tr>
                                         <th width="5%">
 										<div class="form-check">
-                                                <input type="checkbox" class="form-check-input checkAll">
+                                                <!--input type="checkbox" class="form-check-input checkAll"-->
                                                 <label class="form-check-label">SL NO</label>
                                         </div>
 										</th>
 										<th width="10%">Visitor Name</th>
-										<th width="10%">Purpose</th>
+										<th width="10%">Visitor Type</th>
+										<th width="10%">Visit Purpose</th>
 										<th width="10%">Contact No.</th>
 										<th width="10%">Address</th>
 										<th width="5%">No Of Person</th>
@@ -369,22 +415,23 @@ include 'security.php';
                             $cnt=1;
                              while($getVisitorEnquiry_row=$getVisitorEnquiry_result->fetch_assoc()){                    
                                 echo '<tr id=id="visitor"' . $cnt . '>
-                                        <td>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input">
-                                                <label class="form-check-label">' . $cnt . '</label>
-                                            </div>
+                                        <td>' . $cnt . '
+                                            <!--div class="form-check">
+                                                <!--input type="checkbox" class="form-check-input">
+                                                <label class="form-check-label"></label>
+                                            </div-->
                                         </td>
 										<td>' . $getVisitorEnquiry_row["visitor_name"] .  '</td>
-										<td>' . $getVisitorEnquiry_row["purpose"] .  '</td>
+										<td>' . $getVisitorEnquiry_row["visitor_type"] .  '</td>
+										<td>' . $getVisitorEnquiry_row["visit_purpose"] .  '</td>
 										<td>' . $getVisitorEnquiry_row["contact_no"] .  '</td>
 										<td>' . $getVisitorEnquiry_row["location"] .  '</td>
 										<td>' . $getVisitorEnquiry_row["no_of_person"] .  '</td>
 										<td>' . $getVisitorEnquiry_row["date_of_visit"] .  '</td>
 										<td>' . $getVisitorEnquiry_row["in_time"] .  '</td>
 										<td id="td_outtime'.$cnt.'">' . ($getVisitorEnquiry_row["out_time"]!="" ? $getVisitorEnquiry_row["out_time"] : '<input type="time" step="1" min='. "'1:00'" . " max='12:59' " . ' id="outtime' . $cnt . '" name="outtime" class="form-control"> <img src="img/update-icon.png" class="update" alt="update" onClick="outtime(' . "'outtime" . $cnt . "'," . $getVisitorEnquiry_row["veid"] .  ",'td_outtime" . $cnt ."'" . ');" />').' </td>
-                                        <td class="text-center"><img src="img/figure/student1.png" alt="visitor"></td>
-                                        <td><a href="javascript:demoFromHTML(' . "'visitor" . $cnt . "'" .  ');" >Print</a></td>
+                                        <td class="text-center"><img src="app_images/visitors/visitor' . $getVisitorEnquiry_row["veid"]. '.png" alt="visitor"></td>
+                                        <td>Print</td>
                                     </tr>';
                                     $cnt++;
                     }
@@ -407,8 +454,8 @@ include 'security.php';
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
+                    <div class="copyright">© Copyrights <a href="#">ShishaSoft</a> 2019. All rights reserved. Designed by <a
+                            href="#">ShishaSoft</a></div>
                 </footer>
             </div>
         </div>
@@ -445,13 +492,11 @@ image_format: 'jpeg',
 jpeg_quality: 120
 });
 Webcam.attach( '#camContainer' );
+
 function take_snapshot() {
 Webcam.snap( function(data_uri) {
 $(".image-tag").val(data_uri);
 document.getElementById('picture_from_cam').innerHTML = '<img src="'+data_uri+'"/>';
-//document.getElementById('imgurl').value = data_uri;
-//document.getElementById('photo').value=data_uri;
-//alert(data_uri);
 });
 }
 

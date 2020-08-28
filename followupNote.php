@@ -81,7 +81,7 @@ include 'security.php';
 				
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
-                    <div class="card-body bg-skyblue">
+                    <div class="card-body bg-skybluelight">
                        <!-- <div class="heading-layout1">
                             <div class="item-title">
                                 <h3>Add New Students</h3>

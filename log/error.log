@@ -556,3 +556,9 @@ Module Name: 	View Feedback Note
 Message:	Table 'smserp.visitor_purpose_master' doesn't exist
 SQL:	
 File:	D:\xampp\htdocs\solvethemess\stage\visitorEnquiry.php
+
+Date:	31-Aug-2020 10:35:04 PM	 By User:
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and class_no!=0 order by class_no' at line 1
+SQL:	select Class_Id,class_name,stream from class_master_table where enabled=1 and School_Id= and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\GetMessageTo2.php

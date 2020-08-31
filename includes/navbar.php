@@ -1,8 +1,9 @@
+    <?php session_start();  ?>
     <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
                 <div class="header-logo">
                     <a href="index.html">
-                        <img src="img/logo.png" alt="logo">
+                        <img src="img/logo9.png" alt="logo">
                     </a>
                 </div>
                  <div class="toggle-button sidebar-toggle">
@@ -26,14 +27,17 @@
             <div class="header-main-menu collapse navbar-collapse" id="mobile-navbar">
                 <ul class="navbar-nav left">
                     <li class="navbar-item header-search-bar">
-                        <div class="input-group stylish-input-group">
+                        <div class="admin-img">
+                            <img src="app_images/school_images/logo.jpeg" alt="Logo">
+                        </div>
+                        <!--div class="input-group stylish-input-group">
                             <span class="input-group-addon">
                                 <button type="submit">
                                     <span class="flaticon-search" aria-hidden="true"></span>
                                 </button>
                             </span>
                             <input type="text" class="form-control" placeholder="Find Something . . .">
-                        </div>
+                        </div-->
                     </li>
                 </ul>
                 <ul class="navbar-nav right">
@@ -41,16 +45,16 @@
                         <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
                             <div class="admin-title">
-                                <h5 class="item-title">Stevne Zone</h5>
+                                <h5 class="item-title"><?php echo $_SESSION["NAME"];?></h5>
                                 <span>Admin</span>
                             </div>
                             <div class="admin-img">
-                                <img src="img/figure/admin.jpg" alt="Admin">
+                                <img src="app_images/profile/<?php echo $_SESSION["EMPID"];?>.jpg" alt="<?php echo $_SESSION["NAME"];?>" width="40" height="40">
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="item-header">
-                                <h6 class="item-title">Steven Zone</h6>
+                                <h6 class="item-title"><?php echo $_SESSION["NAME"];?></h6>
                             </div>
                             <div class="item-content">
                                 <ul class="settings-list">
@@ -78,7 +82,7 @@
                             <div class="item-content">
                                 <div class="media">
                                     <div class="item-img bg-skyblue author-online">
-                                        <img src="img/figure/student11.png" alt="img">
+                                        <img src="app_imges/profile/student11.png" alt="img">
                                     </div>
                                     <div class="media-body space-sm">
                                         <div class="item-title">

@@ -99,166 +99,78 @@
                         <div class="row">
 							    
 							<div class="main-form-data-communication col-xl-6 col-lg-6 col-12">
-							    <div class="col-xl-12 col-lg-12 col-12 form-group">
-                                    <label>Message To Student*</label>
-                                    <select class="select2" id="smscommclass" name="smscommclass" required>
-                                        <option value="">Select Class *</option>
-										<option value="Play School">Play School</option>
-                                        <option value="Nursery">Nursery</option>
-                                        <option value="LKG">LKG</option>
-                                        <option value="UKG">UKG</option>
-                                       
-                                    </select>
-                                </div>
-                                
-								<div class="col-xl-12 col-lg-12 col-12 form-group">
-                                    <label>&nbsp;</label>
-                                    <select class="select2" id="smscommsection" name="smscommsection" required>
-                                        <option value="">Select Section *</option>
-										<option value="A">A</option>
-                                        <option value="B">B</option>
-                                    </select>
-                                </div>
-								
-								<div class="col-xl-12 col-lg-12 col-12 form-group initial-disable1">
-                                    <div class="tabular-section-detail comm-message">
-                                            <div class="table-responsive">
-                                                <table class="table display data-table text-nowrap">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>
-                                                            <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input checkAll">
-                                                                    <label class="form-check-label">Student of Nursery A</label>
-                                                            </div>
-                                                            </th>
-                                                            
-                                                            
-                                                            
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                    <label class="form-check-label">Mark Willy</label>
-                                                                </div>
-                                                            </td>
-                                                            
-                                                            
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                    <label class="form-check-label">Mark Willy</label>
-                                                                </div>
-                                                            </td>
-                                                            
-                                                            
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                    <label class="form-check-label">Mark Willy</label>
-                                                                </div>
-                                                            </td>
-                                                            
-                                                            
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                    <label class="form-check-label">Mark Willy</label>
-                                                                </div>
-                                                            </td>
-                                                            
-                                                            
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                    <label class="form-check-label">Mark Willy</label>
-                                                                </div>
-                                                            </td>
-                                                            
-                                                            
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                    <label class="form-check-label">Mark Willy</label>
-                                                                </div>
-                                                            </td>
-                                                            
-                                                            
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                    <label class="form-check-label">Mark Willy</label>
-                                                                </div>
-                                                            </td>
-                                                            
-                                                            
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                    <label class="form-check-label">Mark Willy</label>
-                                                                </div>
-                                                            </td>
-                                                            
-                                                            
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                    <label class="form-check-label">Mark Willy</label>
-                                                                </div>
-                                                            </td>
-                                                            
-                                                            
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                    <label class="form-check-label">Mark Willy</label>
-                                                                </div>
-                                                            </td>
-                                                            
-                                                            
-                                                            
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                            </div>
+                                <div class="row" id="Select-level1-div">
+                                        <div class="col-xl-12 col-lg-12 col-12 form-group">
+                                            <label>Message To*</label>
+                                            <select class="select2" id="MessageTo1" name="MessageTo1" required onChange="GetMessageTo2(this.value);">
+                                                <option value="0">Select Message To</option>
+                                                <option value="1">Students</option>
+                                                <option value="2">Staff</option>
+                                                <option value="3">Other Numbers</option>
+                                            
+                                            </select>
+                                        </div>
+                                </div>   
+
+                                    <div class="row" id="Select-level1-div">
+                                        <div class="col-xl-12 col-lg-12 col-12 form-group">
+                                            <label>&nbsp;</label>
+                                            <select class="select2" id="smscommsection1" name="smscommsection1" required>
+                                                <option value="">Select Section *</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                            </select>
+                                        </div>
                                     </div>
-								</div>
+
+                                    <div class="row" id="Select-level2-div">
+                                        <div class="col-xl-12 col-lg-12 col-12 form-group">
+                                        <label>&nbsp;</label>
+                                            <select class="select2" id="smscommsection2" name="smscommsection2" required>
+                                                <option value="">Select Section *</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="Select-level3-div">
+                                        <div class="col-xl-12 col-lg-12 col-12 form-group">
+                                            <div class="tabular-section-detail comm-message">
+                                                        <div class="table-responsive">
+                                                            <table class="table display data-table text-nowrap">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                        <div class="form-check">
+                                                                                <input type="checkbox" class="form-check-input checkAll">
+                                                                                <label class="form-check-label">Student of Nursery A</label>
+                                                                        </div>
+                                                                        </th>
+                                                                        
+                                                                        
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="form-check">
+                                                                                <input type="checkbox" class="form-check-input">
+                                                                                <label class="form-check-label">Mark Willy</label>
+                                                                            </div>
+                                                                        </td>
+                                                                        
+                                                                        
+                                                                        
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                    </div>
+
+
 						    </div>
                                 
 								
@@ -359,6 +271,7 @@
     <!-- Custom Js -->
     <script src="js/main.js"></script>
 	<script src="js/myscript.js"></script>
+	<script src="js/ajex-function.js"></script>
 
 
 </body>

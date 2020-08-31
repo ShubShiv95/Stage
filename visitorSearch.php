@@ -287,9 +287,9 @@ include 'security.php';
     <script src="js/main.js"></script>
 	<script src="js/myscript.js"></script>
 	<script src="js/webcam.min.js"></script>
-
+    <script type="text/javascript" src="js/ajex-function.js"></script>                                                      
 <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script-->
-<script>
+<!--script>
     function outtime(outtime_control,visitor_id,target_td)
     {
     var outtime=document.getElementById(outtime_control).value;
@@ -318,38 +318,11 @@ include 'security.php';
     xmlhttp.open("GET","update_outtime.php?outtime="+outtime+"&veid="+visitor_id+"&target_td="+target_td,true);
     xmlhttp.send();
     }
-</script>
+</script-->
 
 
-<!--Ajex Function for Submit Operation-->                                            
-<script type="text/javascript">
-    var frm = $('#searchEnquiryForm');
+                                          
 
-    frm.submit(function (e) {
-        //alert(data);
-        e.preventDefault();
-
-        $.ajax({
-            type: frm.attr('method'),
-            url: frm.attr('action'),
-            data: frm.serialize(),
-            success: function (data) {
-                //console.log('Submission was successful.');
-                //console.log(data);
-                //alert(data);
-                $('div#visitorList').html(data);
-                //alert(data);
-            },
-            error: function (data) {
-                //console.log('An error occurred.');
-                //console.log(data);
-                //alert(data);
-                $('div#visitorList').html(data);
-                
-            },
-        });
-    });
-</script>
 
 </body>
 

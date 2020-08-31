@@ -481,57 +481,27 @@ include 'security.php';
     <script src="js/main.js"></script>
 	<script src="js/myscript.js"></script>
 	<script src="js/webcam.min.js"></script>
-	
+	<script type="text/javascript" src="js/ajex-function.js"></script>
+
 <script language="JavaScript">
+    var data_uri;
+    Webcam.set({
+    width: 520,
+    height: 400,
+    image_format: 'jpeg',
+    jpeg_quality: 120
+    });
+    Webcam.attach( '#camContainer' );
 
-var data_uri;
-Webcam.set({
-width: 520,
-height: 400,
-image_format: 'jpeg',
-jpeg_quality: 120
-});
-Webcam.attach( '#camContainer' );
-
-function take_snapshot() {
-Webcam.snap( function(data_uri) {
-$(".image-tag").val(data_uri);
-document.getElementById('picture_from_cam').innerHTML = '<img src="'+data_uri+'"/>';
-});
-}
-
-</script>
-<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script-->
-<script>
-function outtime(outtime_control,visitor_id,target_td)
-{
-var outtime=document.getElementById(outtime_control).value;
-var xmlhttp;    
-if (outtime=="")
-  {
-  alert('Please Provide Outtime.');
-  return;
-  }
-//alert(outtime);
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById(target_td).innerHTML=xmlhttp.responseText;
+    function take_snapshot() {
+    Webcam.snap( function(data_uri) {
+    $(".image-tag").val(data_uri);
+    document.getElementById('picture_from_cam').innerHTML = '<img src="'+data_uri+'"/>';
+    });
     }
-  }
-xmlhttp.open("GET","update_outtime.php?outtime="+outtime+"&veid="+visitor_id+"&target_td="+target_td,true);
-xmlhttp.send();
-}
 </script>
+
+
 </body>
 
 </html>

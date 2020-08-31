@@ -1,6 +1,13 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html class="no-js" lang="">
-
+<?php
+include 'dbobj.php';
+include 'error_log.php';
+include 'security.php';
+?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -196,7 +203,7 @@
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Students</h3>
+                                        <h3>Student's Attendance</h3>
                                     </div>
                                     <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -218,11 +225,11 @@
                                 <div class="student-report">
                                     <div class="student-count pseudo-bg-blue">
                                         <h4 class="item-title">Female Students</h4>
-                                        <div class="item-number">45,000</div>
+                                        <div class="item-number">478</div>
                                     </div>
                                     <div class="student-count pseudo-bg-yellow">
                                         <h4 class="item-title">Male Students</h4>
-                                        <div class="item-number">1,05,000</div>
+                                        <div class="item-number">765</div>
                                     </div>
                                 </div>
                             </div>

@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="css/jquery.dataTables.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
 	
@@ -56,9 +57,6 @@
                 <!-- Hot Links Area End Here -->
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-				  <!--<div class="col-xl-2 col-lg-4 col-4 fsec">
-                    <h3>Visitor Eqnuiry</h3>
-				  </div>-->
                  			  
                    <ul>
                         <li>
@@ -76,182 +74,162 @@
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body bg-skybluelight">
-                       <!-- <div class="heading-layout1">
-                            <div class="item-title">
-                                <h3>Add New Students</h3>
-                            </div>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                    aria-expanded="false">...</a>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                </div>
-                            </div>
-                        </div> -->
-                    <form class="new-added-form">
-						
-                        <div class="row">
-							    
-							<div class="main-form-data-communication col-xl-6 col-lg-6 col-12">
-                                <div class="row" id="Select-level1-div">
-                                        <div class="col-xl-12 col-lg-12 col-12 form-group">
-                                            <label>Message To*</label>
-                                            <select class="select2" id="MessageTo1" name="MessageTo1" required onChange="GetMessageTo2(this.value);">
-                                                <option value="0">Select Message To</option>
-                                                <option value="1">Students</option>
-                                                <option value="2">Staff</option>
-                                                <option value="3">Other Numbers</option>
-                                            
-                                            </select>
-                                        </div>
-                                </div>   
-
-                                    <div class="row" id="Select-level1-div">
-                                        <div class="col-xl-12 col-lg-12 col-12 form-group">
-                                            <label>&nbsp;</label>
-                                            <select class="select2" id="smscommsection1" name="smscommsection1" required>
-                                                <option value="">Select Section *</option>
-                                                <option value="A">A</option>
-                                                <option value="B">B</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="row" id="Select-level2-div">
-                                        <div class="col-xl-12 col-lg-12 col-12 form-group">
-                                        <label>&nbsp;</label>
-                                            <select class="select2" id="smscommsection2" name="smscommsection2" required>
-                                                <option value="">Select Section *</option>
-                                                <option value="A">A</option>
-                                                <option value="B">B</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row" id="Select-level3-div">
-                                        <div class="col-xl-12 col-lg-12 col-12 form-group">
-                                            <div class="tabular-section-detail comm-message">
-                                                        <div class="table-responsive">
-                                                            <table class="table display data-table text-nowrap">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>
-                                                                        <div class="form-check">
-                                                                                <input type="checkbox" class="form-check-input checkAll">
-                                                                                <label class="form-check-label">Student of Nursery A</label>
-                                                                        </div>
-                                                                        </th>
-                                                                        
-                                                                        
-                                                                        
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="form-check">
-                                                                                <input type="checkbox" class="form-check-input">
-                                                                                <label class="form-check-label">Mark Willy</label>
-                                                                            </div>
-                                                                        </td>
-                                                                        
-                                                                        
-                                                                        
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                       
+                        <form class="new-added-form" action="individualSms2.php" method="post">
+                            
+                            <div class="row">
+                                    
+                                <div class="main-form-data-communication col-xl-6 col-lg-6 col-12">
+                                        <div class="row" id="Select-level1-div">
+                                                <div class="col-xl-12 col-lg-12 col-12 form-group">
+                                                    <label>Message To*</label>
+                                                    <select class="select2" id="L1-Select" name="L1-Select" required onChange="Communication_Call1(this.value);">
+                                                        <option value="0">Select Message To</option>
+                                                        <option value="1">Students</option>
+                                                        <option value="2">Staff</option>
+                                                        <option value="3">Other Numbers</option>
+                                                    </select>
                                                 </div>
+                                        </div>   
+
+                                        <div class="row" id="Select-level2-div">
+                                            <div class="col-xl-12 col-lg-12 col-12 form-group">
+                                                <label>&nbsp;</label>
+                                                <select class="select2" id="L2-Select" name="L2-Select" required onChange="Communication_Call2('L1-Select',this.value,'L3-Select','Select-level4-subdiv1');" >
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" >
+                                            <div class="col-xl-12 col-lg-12 col-12 form-group" id="Select-level3-div">
+                                            <label>&nbsp;</label>
+                                                <select class="select2" id="L3-Select" name="L3-Select" required onChange="getStuNumList(this.value);">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <BR>
+                                        <div class="row" >    
+                                            <div class="col-xl-12 col-lg-12 col-12 form-group" id="unknownNo-div">
+                                                <label>Enter 10 digit Mobile Numbers separated with semicolon ( ; ) *</label>
+                                                <textarea class="textarea form-control" name="messagedetail" id="messagedetail" cols="10" rows="4" onkeyup="restrict_textlength('messagedetail','300');"></textarea>
+                                             </div>  
+                                        </div> 
+                                       
+                                        <div class="row">
+
+                                            <div class="col-xl-12 col-lg-12 col-12 tabular-section-detail" id="Select-level4-subdiv1">
+                                            
+                                                <div class="table-responsive">
+                                                    <table class="table display data-table text-nowrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th> 
+                                                                    <div >
+                                                                        
+                                                                        <label>Select Individuals</label>
+                                                                    </div>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                       
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                      
+                                        </div>
+                                        
+                                         
+                                          
+                                </div>   
+                                    
+                                <div class="snap-area-visitor col-xl-6 col-lg-6 col-12 comm-messaage-send-section">
+                                    <div class="col-xl-12 col-lg-12 col-12 form-group">
+                                            <label>Title *</label>
+                                            <input type="text" id="messagetitle" name="messagetitle" placeholder="" class="form-control" required>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-12 form-group">
+                                        <label>Compose Messeage *</label>
+                                        <textarea class="textarea form-control" name="composemsg" id="composemsg" cols="10" rows="10" onkeyup="restrict_textlength('composemsg','480');return smsLength('composemsg');" required></textarea>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-12 form-group count-row">
+                                        <div class="col-xl-6 col-lg-6 col-6 form-group char-count" id="charCount-div">
+                                        <span id="charCount-span">Character Count:</span>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-6 form-group sms-count" id="smsCount-div" >
+                                        <span id="smsCount-span">Sms Count:</span>
+                                        </div>
+                                    
+                                    </div>
+
+                                    <div class="col-xl-12 col-lg-12 col-12 form-group count-row">
+                                        <div class="col-xl-6 col-lg-6 col-12 form-group">
+                                            <span>Message Balance: 25000</span>
                                         </div>
                                     </div>
 
+                                    <div class="col-xl-12 col-lg-12 col-12 form-group count-row">
+                                        <div class="col-xl-4 col-lg-4 col-12 form-group">
+                                            <span>Message Sending Date</span>
+                                        </div>
+                                    <div class="col-xl-5 col-lg-5 col-12 form-group">
+                                        <input type="text" id="messagedate" name="messagedate" placeholder="Select Date" class="form-control air-datepicker future-date" data-position='bottom right' required>
+                                            <i class="far fa-calendar-alt messagedate"></i>
+                                        
+                                    </div>
 
-						    </div>
+                                    <div class="col-xl-3 col-lg-3 col-12 form-group">
+                                        <input type="time" id="messagetime" name="messagetime" class="form-control" required>
+                                        
+                                    </div>
+                                    </div>
+                                    
+                                    <div class="col-xl-12 col-lg-12 col-12 form-group count-row">
+                                        <div class="col-xl-6 col-lg-6 col-12 form-group">
+                                            <span>Message As</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12 col-lg-12 col-12 form-group count-row" id="messagetype">
+                                        
+                                        <div class="col-xl-4 col-lg-4 col-12 form-group">
+                                            <span>SMS</span> <input type="checkbox" id="smsmessage" name="messageas[]" value="SMS" class="">
+                                        </div>
+
+                                        <div class="col-xl-4 col-lg-4 col-12 form-group">
+                                            <span>What's App</span> <input type="checkbox" id="whatsappmessage" name="messageas[]" value="What's App" class="">
+                                        </div>
+                                    
+                                        <div class="col-xl-4 col-lg-4 col-12 form-group btncomm">
+                                        <button type="submit" id="sendmessage" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Create/Send</button>
+                                        </div>
+                                    
+                                    </div>
                                 
-								
-							
-					
-							<div class="snap-area-visitor col-xl-6 col-lg-6 col-12 comm-messaage-send-section">
-								<div class="col-xl-12 col-lg-12 col-12 form-group">
-										<label>Title *</label>
-										<input type="text" id="messagetitle" name="messagetitle" placeholder="" class="form-control" required>
-								</div>
-								<div class="col-xl-12 col-lg-12 col-12 form-group">
-                                    <label>Compose Messeage *</label>
-                                    <textarea class="textarea form-control" name="messagedetail" id="messagedetail" cols="10" rows="10" onkeyup="restrict_textlength('messagedetail','300');" required></textarea>
                                 </div>
-								<div class="col-xl-12 col-lg-12 col-12 form-group count-row">
-								 <div class="col-xl-6 col-lg-6 col-6 form-group char-count">
-								   <span>Character Count: 189</span>
-								 </div>
-								 <div class="col-xl-6 col-lg-6 col-6 form-group sms-count">
-								   <span>Sms Count: 2</span>
-								 </div>
-								
-								</div>
-								<div class="col-xl-12 col-lg-12 col-12 form-group count-row">
-								 <div class="col-xl-6 col-lg-6 col-12 form-group">
-								   <span>Message Balance: 25000</span>
-								 </div>
-								</div>
-								<div class="col-xl-12 col-lg-12 col-12 form-group count-row">
-								 <div class="col-xl-4 col-lg-4 col-12 form-group">
-								   <span>Message Sending Date</span>
-								 </div>
-								 <div class="col-xl-5 col-lg-5 col-12 form-group">
-								       <input type="text" id="messagedate" name="messagedate" placeholder="Select Date" class="form-control air-datepicker future-date"
-											data-position='bottom right' required>
-										<i class="far fa-calendar-alt messagedate"></i>
-									
-								 </div>
-								 <div class="col-xl-3 col-lg-3 col-12 form-group">
-								       <input type="time" id="messagetime" name="messagetime" class="form-control" required>
-									
-								 </div>
-								</div>
-								<div class="col-xl-12 col-lg-12 col-12 form-group count-row">
-								 <div class="col-xl-6 col-lg-6 col-12 form-group">
-								   <span>Message As</span>
-								 </div>
-								</div>
-								<div class="col-xl-12 col-lg-12 col-12 form-group count-row" id="messagetype">
-								 <div class="col-xl-4 col-lg-4 col-12 form-group">
-								   <span>SMS</span> <input type="checkbox" id="messagesms" name="messageas[]" value="SMS" class="">
-								 </div>
-								 <div class="col-xl-4 col-lg-4 col-12 form-group">
-								      <span>What's App</span> <input type="checkbox" id="messagewhatsapp" name="messageas[]" value="What's App" class="">
-								 </div>
-								 <div class="col-xl-4 col-lg-4 col-12 form-group btncomm">
-								       <button type="submit" id="sendmessage" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Create/Send</button>
-									
-								 </div>
-								</div>
-							</div>
-							
-							
+                                
+                                
                             </div>
+                            
                         </form>
-						
-						
-						
-						
-						
+
                     </div>
                 </div>
+
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
                     <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
                             href="#">PsdBosS</a></div>
                 </footer>
+
             </div>
+
         </div>
         <!-- Page Area End Here -->
+
     </div>
+
+
     <!-- jquery-->
     <script src="js/jquery-3.3.1.min.js"></script>
     <!-- Plugins js -->
@@ -271,9 +249,56 @@
     <!-- Custom Js -->
     <script src="js/main.js"></script>
 	<script src="js/myscript.js"></script>
-	<script src="js/ajex-function.js"></script>
+	<script src="js/ajax-function.js"></script>
+	<script src="js/app-functions.js"></script>
 
 
+    <script>
+        window.onload=function(){
+            $("#unknownNo-div").hide();
+            };
+       // });
+    </script>
+    <script>    
+     $('#L1-Select').on('change', function(){
+    	var demovalue = $(this).val(); 
+    	if(demovalue ==1){
+			 $("#Select-level2-div").show();
+             $("#Select-level3-div").show();
+             $('#Select-level4-subdiv1').show();
+             $('#unknownNo-div').hide();
+			 
+        }
+        else if(demovalue ==2){
+            $("#Select-level3-div").hide();
+            $('#unknownNo-div').hide();
+            $('#Select-level4-subdiv1').show();
+            
+
+        }
+        else{
+            $("#Select-level2-div").hide();
+             $("#Select-level3-div").hide();
+             $('#unknownNo-div').show();
+             $('#Select-level4-subdiv1').hide();
+             
+
+        }
+    });
+    </script>
+    <script>
+    $('#myform').submit(function() {
+            var techs = [];
+            $.each($("input[name='tech']:checked"), function() {
+                techs.push($(this).val());
+            });
+            alert("My favourite techs are: " + techs.join(", "));
+         });
+         return true; // return false to cancel form action
+});
+    </script>
+  
+  
 </body>
 
 </html>

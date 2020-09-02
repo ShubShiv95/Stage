@@ -105,7 +105,7 @@ include 'security.php';
                         </div> -->
                         
 						<div class="followupenq-form-sec">
-							<form class="mg-b-20 new-added-form" action="GetEnquiry.php" method="post" id="enquiryform">
+							<form class="mg-b-20 new-added-form" action="GetEnquiry.php" method="post" id="MainForm">
 								<div class="row gutters-8">
 								   <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
 										<label>Enquiry Status</label>
@@ -311,6 +311,7 @@ include 'security.php';
 
 <!--Ajex Function for Submit Operation-->                                            
     <script type="text/javascript">
+    /*
     var frm = $('#enquiryform');
 
     frm.submit(function (e) {
@@ -336,7 +337,7 @@ include 'security.php';
                 
             },
         });
-    });
+    });*/
 </script>
 	
 

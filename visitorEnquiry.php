@@ -413,14 +413,22 @@ include 'security.php';
 
                         <?php
                             $cnt=1;
-                             while($getVisitorEnquiry_row=$getVisitorEnquiry_result->fetch_assoc()){                    
+                             while($getVisitorEnquiry_row=$getVisitorEnquiry_result->fetch_assoc()){  
+                                
+                                //Preparing delimetered data for  Hidden textbox data for pringing purpose
+                                    $str='SLNo.-' . $cnt;
+                                    $str= $str . ';Visitor Name-'. $getVisitorEnquiry_row["visitor_name"];
+                                    $str= $str . ';Visitor Type-'. $getVisitorEnquiry_row["visitor_type"];
+                                    $str= $str . ';Purpose-' . $getVisitorEnquiry_row["visit_purpose"];
+                                    $str= $str . ';Contact Number-' . $getVisitorEnquiry_row["contact_no"];
+                                    $str= $str . ';Address-' . $getVisitorEnquiry_row["location"] ;
+                                    $str= $str . ';Number of Person-' . $getVisitorEnquiry_row["no_of_person"];
+                                    $str= $str . ';Visiging Date-' . $getVisitorEnquiry_row["date_of_visit"];
+                                    $str= $str . ';In Time-' . $getVisitorEnquiry_row["in_time"];                                
+                                //End of Delimetered data preparation.    
+
                                 echo '<tr id=id="visitor"' . $cnt . '>
-                                        <td>' . $cnt . '
-                                            <!--div class="form-check">
-                                                <!--input type="checkbox" class="form-check-input">
-                                                <label class="form-check-label"></label>
-                                            </div-->
-                                        </td>
+                                        <td>' . $cnt . '</td>
 										<td>' . $getVisitorEnquiry_row["visitor_name"] .  '</td>
 										<td>' . $getVisitorEnquiry_row["visitor_type"] .  '</td>
 										<td>' . $getVisitorEnquiry_row["visit_purpose"] .  '</td>
@@ -431,17 +439,21 @@ include 'security.php';
 										<td>' . $getVisitorEnquiry_row["in_time"] .  '</td>
 										<td id="td_outtime'.$cnt.'">' . ($getVisitorEnquiry_row["out_time"]!="" ? $getVisitorEnquiry_row["out_time"] : '<input type="time" step="1" min='. "'1:00'" . " max='12:59' " . ' id="outtime' . $cnt . '" name="outtime" class="form-control"> <img src="img/update-icon.png" class="update" alt="update" onClick="outtime(' . "'outtime" . $cnt . "'," . $getVisitorEnquiry_row["veid"] .  ",'td_outtime" . $cnt ."'" . ');" />').' </td>
                                         <td class="text-center"><img src="app_images/visitors/visitor' . $getVisitorEnquiry_row["veid"]. '.png" alt="visitor"></td>
-                                        <td>Print</td>
+                                        <td>Print <input type="hidden" id="printval' . $cnt . '" value=" ' . $str . '"> </td>
                                     </tr>';
                                     $cnt++;
                     }
-                    ?> 
-                                    
-                               
+                    
+                    
+                                   
+                               ?>
                                 </tbody>
                             </table>
 							
-							
+                        <?php 
+                            // May be used in Printing Process if search record count value is required :: The below input control contains total number of records generated in search list above in the table structure.
+                            echo '<input type="hidden" id="searchlistcount" value="' . $cnt . '">'; 
+                        ?>
 							
 							
 							

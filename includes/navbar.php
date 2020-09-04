@@ -1,4 +1,4 @@
-    <?php session_start();  ?>
+    <?php //session_start();  ?>
     <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
                 <div class="header-logo">

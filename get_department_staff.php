@@ -61,7 +61,7 @@ while($row=mysqli_fetch_assoc($result))
 
 	$str= $str .  '<tr><td>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="mobileno[]" value="' . $row["mob_number"] . '-' $row["employee_id"] .  '">
+                            <input type="checkbox" class="form-check-input" name="mobileno[]" value="' . $row["mob_number"] . '-' . $row["employee_id"] .  '">
 							<label class="form-check-label">' . $row["employee_name"] . '</label>
                             </div>
                         </td></tr>';

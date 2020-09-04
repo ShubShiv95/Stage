@@ -1,3 +1,10 @@
+<?php
+session_start();
+include 'dbobj.php';
+include 'error_log.php';
+include 'security.php';
+include 'crawlerBhashSMS.php';
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -83,11 +90,37 @@
                                         <div class="row" id="Select-level1-div">
                                                 <div class="col-xl-12 col-lg-12 col-12 form-group">
                                                     <label>Message To*</label>
-                                                    <select class="select2" id="L1-Select" name="L1-Select" required onChange="Communication_Call1(this.value);">
-                                                        <option value="0">Select Message To</option>
-                                                        <option value="1">Students</option>
-                                                        <option value="2">Staff</option>
-                                                        <option value="3">Other Numbers</option>
+                                                    <select class="select2" id="L1-Select" name="user_type" required onChange="Communication_Call1(this.value);">
+                                                    <option value="0">Select Visitor Type</option>
+                                                    
+                                                    <?php
+                                                    $query='select * from user_type_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"];
+                                                    $result=mysqli_query($dbhandle,$query);
+                                                    if(!$result)
+                                                        {
+                                                            //var_dump($getStudentCount_result);
+                                                            $error_msg=mysqli_error($dbhandle);
+                                                            $el=new LogMessage();
+                                                            $sql=$query;
+                                                            //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                                            $el->write_log_message('Individual Message ',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                                                            $_SESSION["MESSAGE"]="<h1>Database Error: Not able to Fetch user type value from user_type_master_table. Please try after some time.</h1>";
+                                                            $dbhandle->query("unlock tables");
+                                                            mysqli_rollback($dbhandle);
+                                                            //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
+                                                            $messsage='Error: Eearch Inquiry Not Saved.  Please consult application consultant.';
+                                                            //$str_end='</div>';
+                                                            //echo $str_start.$messsage.$str_end;
+                                                            //echo "";
+                                                            //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
+                                                        }
+                                                    while($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                    $str='<option value="' . $row["utype_id"] . '">' .  $row["user_type"];
+                                                    
+                                                    echo $str;
+                                                }
+                                                ?>
                                                     </select>
                                                 </div>
                                         </div>   
@@ -164,7 +197,7 @@
 
                                     <div class="col-xl-12 col-lg-12 col-12 form-group count-row">
                                         <div class="col-xl-6 col-lg-6 col-12 form-group">
-                                            <span>Message Balance: 25000</span>
+                                            <span>Message Balance: <?php echo crawlerBhashSMS('CHECK_BALANCE');?></span>
                                         </div>
                                     </div>
 
@@ -193,11 +226,11 @@
                                     <div class="col-xl-12 col-lg-12 col-12 form-group count-row" id="messagetype">
                                         
                                         <div class="col-xl-4 col-lg-4 col-12 form-group">
-                                            <span>SMS</span> <input type="checkbox" id="smsmessage" name="messageas[]" value="SMS" class="">
+                                            <span>SMS</span> <input type="checkbox" id="smsmessage" name="smsmessage" value="1" class="">
                                         </div>
 
                                         <div class="col-xl-4 col-lg-4 col-12 form-group">
-                                            <span>What's App</span> <input type="checkbox" id="whatsappmessage" name="messageas[]" value="What's App" class="">
+                                            <span>What's App</span> <input type="checkbox" id="whatsappmessage" name="whatsappmessage" value="1" class="">
                                         </div>
                                     
                                         <div class="col-xl-4 col-lg-4 col-12 form-group btncomm">

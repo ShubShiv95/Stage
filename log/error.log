@@ -580,3 +580,135 @@ Module Name: 	Investment Payment
 Message:	Unknown column 'class_no' in 'where clause'
 SQL:	select * from department_master_table where enabled=1 and School_Id=1 and class_no!=0 order by class_no
 File:	D:\xampp\htdocs\solvethemess\stage\GetMessageTo2.php
+
+Date:	04-Sep-2020 12:30:39 AM	 By User:admin
+Module Name: 	Add Feedback Note
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 12:38:06 AM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Column 'date_of_delivery' cannot be null
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 12:38:57 AM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Column 'date_of_delivery' cannot be null
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 12:47:34 AM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Column 'date_of_delivery' cannot be null
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 12:48:13 AM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Column 'date_of_delivery' cannot be null
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 12:52:37 AM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Column 'date_of_delivery' cannot be null
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:06:11 AM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Column 'date_of_delivery' cannot be null
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:06:50 AM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Column 'date_of_delivery' cannot be null
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:11:36 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:12:13 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:13:28 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:13:59 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:14:35 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:17:06 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:18:27 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:19:09 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:20:31 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:22:40 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:26:28 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:32:50 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:32:59 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 01:51:15 AM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php

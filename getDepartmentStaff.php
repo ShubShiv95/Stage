@@ -1,13 +1,13 @@
 <?php
 session_start();
 include 'dbhandle.php';
-include 'error_log.php';
+include 'errorLog.php';
 include 'security.php';
 
 
 $department=NULL;
 $deptid=$_REQUEST["deptid"];
-if($deptid==-1){
+if($deptid==0){
 	$department='dept.department_id in (select deptn.department_id from department_master_table as deptn)';
 }
 if($deptid>0){

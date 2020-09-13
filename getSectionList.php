@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'dbhandle.php';
-include 'error_log.php';
+include 'errorLog.php';
 //include 'security.php';
 
 

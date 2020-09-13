@@ -3,6 +3,7 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
+
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -68,7 +69,7 @@ include 'security.php';
                         <li>
                             <a href="index.php">Home</a>
                         </li>
-                        <li>Individual Sms</li>
+                        <li>Group Sms</li>
                     </ul>
 				  	
                 </div>
@@ -81,7 +82,7 @@ include 'security.php';
                 <div class="card height-auto">
                     <div class="card-body bg-skybluelight">
                        
-                        <form class="new-added-form" action="individualSms2.php" method="post" id="indMsgForm">
+                        <form class="new-added-form" id="groupSmsForm" action="groupSms2.php" method="post">
                             
                             <div class="row">
                                     
@@ -89,37 +90,36 @@ include 'security.php';
                                         <div class="row" id="Select-level1-div">
                                                 <div class="col-xl-12 col-lg-12 col-12 form-group">
                                                     <label>Message To*</label>
-                                                    <select class="select2" id="L1-Select" name="user_type" required onChange="Communication_Call1(this.value);">
-                                                    <option value="0">Select User Type</option>
-                                                    
-                                                    <?php
-                                                    $query='select * from message_user_group_table where enabled=1' . ' and individual_select_enabled=1 and School_Id=' . $_SESSION["SCHOOLID"];
-                                                    $result=mysqli_query($dbhandle,$query);
-                                                    if(!$result)
-                                                        {
-                                                            //var_dump($getStudentCount_result);
-                                                            $error_msg=mysqli_error($dbhandle);
-                                                            $el=new LogMessage();
-                                                            $sql=$query;
-                                                            //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                                                            $el->write_log_message('Individual Message ',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
-                                                            $_SESSION["MESSAGE"]="<h1>Database Error: Not able to Fetch user type value from user_type_master_table. Please try after some time.</h1>";
-                                                            $dbhandle->query("unlock tables");
-                                                            mysqli_rollback($dbhandle);
-                                                            //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
-                                                            $messsage='Error: Eearch Inquiry Not Saved.  Please consult application consultant.';
-                                                            //$str_end='</div>';
-                                                            //echo $str_start.$messsage.$str_end;
-                                                            //echo "";
-                                                            //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
-                                                        }
-                                                    while($row=mysqli_fetch_assoc($result))
-                                                    {
-                                                    $str='<option value="' . $row["utype_id"] . '">' .  $row["user_type"];
-                                                    
-                                                    echo $str;
-                                                }
-                                                ?>
+                                                    <select class="select2" id="L1-Select" name="user_type" required onChange="GrpMsgGroupList(this.value);">
+                                                        <option value="0">Select Visitor Type</option>
+                                                        
+                                                        <?php
+                                                            $query='select * from message_user_group_table where enabled=1' . ' and group_select_enabled=1 and School_Id=' . $_SESSION["SCHOOLID"];
+                                                            $result=mysqli_query($dbhandle,$query);
+                                                            if(!$result)
+                                                                {
+                                                                    //var_dump($getStudentCount_result);
+                                                                    $error_msg=mysqli_error($dbhandle);
+                                                                    $el=new LogMessage();
+                                                                    $sql=$query;
+                                                                    //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                                                    $el->write_log_message('Individual Message ',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                                                                    $_SESSION["MESSAGE"]="<h1>Database Error: Not able to Fetch user type value from user_type_master_table. Please try after some time.</h1>";
+                                                                    $dbhandle->query("unlock tables");
+                                                                    mysqli_rollback($dbhandle);
+                                                                    //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
+                                                                    $messsage='Error: Eearch Inquiry Not Saved.  Please consult application consultant.';
+                                                                    //$str_end='</div>';
+                                                                    //echo $str_start.$messsage.$str_end;
+                                                                    //echo "";
+                                                                    //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
+                                                                }
+                                                            while($row=mysqli_fetch_assoc($result))
+                                                            {
+                                                                $str='<option value="' . $row["utype_id"] . '">' .  $row["user_type"];
+                                                                echo $str;
+                                                            }
+                                                        ?>
                                                     </select>
                                                 </div>
                                         </div>   
@@ -127,25 +127,25 @@ include 'security.php';
                                         <div class="row" id="Select-level2-div">
                                             <div class="col-xl-12 col-lg-12 col-12 form-group">
                                                 <label>&nbsp;</label>
-                                                <select class="select2" id="L2-Select" name="L2-Select" required onChange="Communication_Call2('L1-Select',this.value,'L3-Select','Select-level4-subdiv1');" >
+                                                <select class="select2" id="L2-Select" name="L2-Select" required onChange="Grp_Communication_Call2('L1-Select',this.value,'Select-level4-subdiv1');" >
                                                 </select>
                                             </div>
                                         </div>
 
-                                        <div class="row" >
+                                        <!--div class="row" >
                                             <div class="col-xl-12 col-lg-12 col-12 form-group" id="Select-level3-div">
                                             <label>&nbsp;</label>
-                                                <select class="select2" id="L3-Select" name="L3-Select"  onChange="getStuNumList(this.value);"  required>
+                                                <select class="select2" id="L3-Select" name="L3-Select" required onChange="getStuNumList(this.value);">
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div-->
                                         
-                                        <div class="row" >    
+                                        <!--div class="row" >    
                                             <div class="col-xl-12 col-lg-12 col-12 form-group" id="unknownNo-div">
                                                 <label>Enter 10 digit Mobile Numbers separated with semicolon ( ; ) *</label>
-                                                <textarea class="textarea form-control" name="unknownno" id="unknownno" cols="10" rows="4" onkeyup="restrict_textlength('messagedetail','300');"></textarea>
+                                                <textarea class="textarea form-control" name="messagedetail" id="messagedetail" cols="10" rows="4" onkeyup="restrict_textlength('messagedetail','300');"></textarea>
                                              </div>  
-                                        </div> 
+                                        </div--> 
                                        
                                         <div class="row">
 
@@ -158,7 +158,7 @@ include 'security.php';
                                                                 <th> 
                                                                     <div >
                                                                         
-                                                                        <label>Select Individuals</label>
+                                                                        <label>Select Groups</label>
                                                                     </div>
                                                             </tr>
                                                         </thead>
@@ -205,13 +205,13 @@ include 'security.php';
                                             <span>Message Sending Date</span>
                                         </div>
                                     <div class="col-xl-5 col-lg-5 col-12 form-group">
-                                        <input type="text" id="messagedate" name="messagedate" placeholder="Select Date" class="form-control air-datepicker future-date" data-position='bottom right'>
+                                        <input type="text" id="messagedate" name="messagedate" placeholder="Select Date" class="form-control air-datepicker future-date" data-position='bottom right' required>
                                             <i class="far fa-calendar-alt messagedate"></i>
                                         
                                     </div>
 
                                     <div class="col-xl-3 col-lg-3 col-12 form-group">
-                                        <input type="time" id="messagetime" name="messagetime" class="form-control">
+                                        <input type="time" id="messagetime" name="messagetime" class="form-control" required>
                                         
                                     </div>
                                     </div>
@@ -299,35 +299,41 @@ include 'security.php';
              $("#Select-level3-div").show();
              $('#Select-level4-subdiv1').show();
              $('#unknownNo-div').hide();
-             $("#L2-Select").prop('required',true);
-             $("#L3-Select").prop('required',true); 
-
 			 
         }
         else if(demovalue ==2){
-            $("#Select-level3-div").hide();            
+            $("#Select-level3-div").hide();
             $('#unknownNo-div').hide();
             $('#Select-level4-subdiv1').show();
-            $("#L2-Select").prop('required',true);
-            $("#L3-Select").prop('required',false); 
             
 
         }
         else{
-             $("#Select-level2-div").hide();
+            $("#Select-level2-div").hide();
              $("#Select-level3-div").hide();
              $('#unknownNo-div').show();
              $('#Select-level4-subdiv1').hide();
-             $("#L2-Select").prop('required',false);
-             $("#L3-Select").prop('required',false);
-             
              
 
         }
     });
     </script>
-<script type="text/javascript">
-    var frm = $('#indMsgForm');
+    <script>
+    $('#myform').submit(function() {
+            var techs = [];
+            $.each($("input[name='tech']:checked"), function() {
+                techs.push($(this).val());
+            });
+            alert("My favourite techs are: " + techs.join(", "));
+         });
+         return true; // return false to cancel form action
+});
+</script>
+  
+
+
+  <script type="text/javascript">
+    var frm = $('#groupSmsForm');
 
     frm.submit(function (e) {
         //alert(data);
@@ -354,7 +360,6 @@ include 'security.php';
         });
     });
 </script>
-  
   
 </body>
 

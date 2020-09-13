@@ -2,7 +2,7 @@
 session_start();
 include 'dbobj.php';
 include 'security.php';
-include 'error_log.php';   
+include 'errorLog.php';   
 //include 'generate_sequence.php';
 
 

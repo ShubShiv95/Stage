@@ -9,6 +9,10 @@
 		
 		//used in stage.solvethemess.in cloud.
 		//@ $dbhandle = new mysqli('localhost','solvethe_smserp_admin','smserp@admin','solvethe_smserp'); // mysqli('hostname','databasse_user','database_user_password','database name') easyschool_admin/easyschool@admin
+		
+		
+		//used in demo.swiftcampus.com cloud.
+	//@ $dbhandle = new mysqli('localhost','solvethe_smserp_admin','smserp@admin','solvethe_swiftcampus'); // mysqli('hostname','databasse_user','database_user_password','database name') easyschool_admin/easyschool@admin
 
 
 		if(mysqli_connect_errno())

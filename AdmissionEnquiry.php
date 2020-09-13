@@ -5,7 +5,7 @@ session_start();
 <html class="no-js" lang="">
 <?php
 include 'dbobj.php';
-include 'error_log.php';
+include 'errorLog.php';
 include 'security.php';
 ?>
 <head>
@@ -34,10 +34,7 @@ include 'security.php';
     <link rel="stylesheet" href="css/datepicker.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- Modernize js -->
-    <script src="js/modernizr-3.6.0.min.js"></script>
-   <!--The ajex-function.js file contains all controller ajex functions used in the erp.-->
-   <script src="js/ajex-function.js"></script>
+    
 </head>
 
 <body>
@@ -100,7 +97,7 @@ include 'security.php';
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form" id="admissionform" method="post" action="AdmissionEnquiry2.php">
+                        <form class="new-added-form" id="admissionform" method="post" action="admissionEnquiry2.php">
 						<input type="hidden" id="votp" name="votp" placeholder="" value="0" class="form-control" value="0" required>
                             <div class="row">
 							
@@ -222,6 +219,7 @@ include 'security.php';
                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Lead Source *</label>
                                     <select class="select2" id="lsource" name="lsource" required>
+                                        <option value="0">Select Lead Source</option>
                                     <?php
                                             $query='select leadid,lead_source_name from lead_source_table where School_Id=' . $_SESSION["SCHOOLID"];
                                             $result=mysqli_query($dbhandle,$query);
@@ -325,6 +323,10 @@ include 'security.php';
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <!-- Modernize js -->
+    <script src="js/modernizr-3.6.0.min.js"></script>
+   <!--The ajex-function.js file contains all controller ajex functions used in the erp.-->
+   <script src="js/ajax-function.js"></script>
 	<script src="js/myscript.js"></script>
     <script type="text/javascript">
     var frm = $('#admissionform');
@@ -364,6 +366,7 @@ if (mobileno=="")
   alert('Please Provide the Contact Numebr.');
   return;
   }
+  document.getElementById('otpverifymsg').innerHTML=' - OTP Sent';
 //alert(outtime);
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -378,6 +381,7 @@ xmlhttp.onreadystatechange=function()
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
         document.getElementById('otp').value=xmlhttp.responseText;
+        document.getElementById('otpverifymsg').innerHTML=' - Verify Now';
         //alert('OTP'+ xmlhttp.responseText);
     }
   }
@@ -394,7 +398,7 @@ function verifyOtp(){
     {
         //alert("OTP Verified.")
         document.getElementById('votp').value=1;
-        document.getElementById('otpverifymsg').innerHTML='Contact Number Verified.';
+        document.getElementById('otpverifymsg').innerHTML=' - Verified.';
     }
     else
     {

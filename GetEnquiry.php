@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'dbobj.php';
-include 'error_log.php';
+include 'errorLog.php';
 include 'security.php';
 
 
@@ -38,7 +38,7 @@ if($_REQUEST["class"]=='All'){
 }    
 else{    
   //  if($condition_found==0){
-        $query=$query . "class_id='" . $_REQUEST["class"] . " ' and ";
+        $query=$query . "aet.class_id='" . $_REQUEST["class"] . " ' and ";
   //      $condition_found++;
     }
    // else{
@@ -53,7 +53,7 @@ if($_REQUEST["session"]=='All'){
 }    
 else{    
   //  if($condition_found==0){
-        $query=$query . "session='" . $_REQUEST["session"] . "' and ";
+        $query=$query . "aet.session='" . $_REQUEST["session"] . "' and ";
 //        $condition_found++;
     }
   //  else{
@@ -69,7 +69,7 @@ if($_REQUEST["locality"]=='All'){
 }    
 else{    
    // if($condition_found==0){
-        $query=$query . "locality_id='" . $_REQUEST["locality"] . "' and ";
+        $query=$query . "aet.locality_id='" . $_REQUEST["locality"] . "' and ";
      //   $condition_found++;
     }
     //else{
@@ -82,7 +82,7 @@ else{
 if($_REQUEST["searchdate"]=='createdon'){
 
    // if($condition_found>0){
-        $query=$query . "created_on between str_to_date('" . $_REQUEST["fromdate"] . "','%d/%m/%Y') and str_to_date('" . $_REQUEST["todate"] . "','%d/%m/%Y') and ";            
+        $query=$query . "aet.created_on between str_to_date('" . $_REQUEST["fromdate"] . "','%d/%m/%Y') and str_to_date('" . $_REQUEST["todate"] . "','%d/%m/%Y') and ";            
     }
     //else{
       //  $query=$query . " where created_on between str_to_date('" . $_REQUEST["fromdate"] . "','%d/%m/%Y') and str_to_date('" . $_REQUEST["todate"] . "','%d/%m/%Y')";                      

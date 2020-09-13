@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'dbobj.php';
-include 'error_log.php';
+include 'errorLog.php';
 include 'security.php';
 ?>
 <!doctype html>
@@ -230,7 +230,7 @@ include 'security.php';
 						
 					    </div>
 
-						<div class="tabular-section-detail" id="visitorList">
+						<div class="tabular-section-detail" id="search-result-div">
 						    <div class="table-responsive">
                                 <table class="table display data-table text-nowrap" id="visitor-list">
                                     <thead>
@@ -287,7 +287,7 @@ include 'security.php';
     <script src="js/main.js"></script>
 	<script src="js/myscript.js"></script>
 	<script src="js/webcam.min.js"></script>
-    <script type="text/javascript" src="js/ajex-function.js"></script>                                                      
+    <script type="text/javascript" src="js/ajax-function.js"></script>                                                      
 <!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script-->
 <!--script>
     function outtime(outtime_control,visitor_id,target_td)

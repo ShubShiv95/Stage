@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include 'crawlerBhashSms.php';
 /*
 @ $dbhandle = mysql_connect('localhost','dsc_user','dscuser','dsc'); // mysqli('hostname','databasse_user','database_user_password','database name')
 
@@ -41,6 +41,7 @@ if(mysqli_num_rows($result) == 1)  // Checks if the userid exist in the database
 			if($financialYear_result)
 				$financialYear_row=mysqli_fetch_assoc($financialYear_result);
 			*/	
+			$_SESSION["SMSBALANCE"]=crawlerBhashSMS('CHECK_BALANCE');
 			$_SESSION["STATUS"]=$row["LOGIN_STATUS"];
 			
 			$_SESSION["NAME"] = $row["Employee_Name"];

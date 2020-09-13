@@ -2,8 +2,8 @@
 session_start();
 include 'security.php';
 include 'dbobj.php';
-include 'error_log.php';
-include 'sequence_generator.php';
+include 'errorLog.php';
+include 'sequenceGenerator.php';
 
 $visitortype=$_REQUEST["visitortype"];
 $companyname=$_REQUEST["companyname"];
@@ -121,7 +121,7 @@ $insertVisitorEnquiry_sql="insert into visitor_enquiry_table
             //echo $str_start.$messsage.$str_end;
             //die;
             //echo "unsecessful";
-            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=visitorEnquiry.php">';
+            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=https://demo.swiftcampus.com/visitorEnquiry.php">';
         }
     else
         {

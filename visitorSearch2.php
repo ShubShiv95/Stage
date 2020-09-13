@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'dbobj.php';
-include 'error_log.php';
+include 'errorLog.php';
 include 'security.php';
                             $getVisitorEnquiry_sql="select vet.*,date_format(vet.created_on,'%d-%m-%Y') as createdon,vtm.visitor_type as visitortype,vpm.visitor_purpose as visitpurpose from visitor_enquiry_table vet,visitor_type_master vtm,visit_purpose_master vpm where vtm.vtid=vet.visitor_type_id and vpm.vpid=vet.visit_purpose_id and "; 
                             if($_REQUEST["visitortype"]=='0'){

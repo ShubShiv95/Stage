@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'dbobj.php';
-include 'error_log.php';
+include 'errorLog.php';
 include 'security.php';
 
 $msg_receiver_Type=$_REQUEST["msg_receiver_Type"];
@@ -11,7 +11,7 @@ if($msg_receiver_Type==1)   //1 means individual message sending to Students.
     {
         //Adding Class Select controller.
       
-        $query='select Class_Id,class_name,class_no,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
+        $query='select Class_Id,class_name,class_no,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " order by next_class_id";
         //echo $query;
         $result=mysqli_query($dbhandle,$query);
         if(!$result)
@@ -32,17 +32,20 @@ if($msg_receiver_Type==1)   //1 means individual message sending to Students.
                 //echo "";
                 //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
             }
-            $html_str=$html_str.'<option value="0">Select Class </option>';    
+            $html_str=$html_str.'<option value="-10">Select Class</option>'; //To keep the ajex function execution stop by this option value as this value will never exist in classid in the class_master_table.;
+             
         while($row=mysqli_fetch_assoc($result))
             {
-                if($row["class_no"]>=-2 and $row["class_no"]<0)
+                
+                $html_str=$html_str.'<option value="' . $row["Class_Id"] . '">' . ($row["class_no"] > 0 ? 'Class ' : '')  . $row["class_name"] . '</option>';
+                /*if($row["class_no"]>=-2 and $row["class_no"]<0)
                     {
                        $html_str=$html_str.'<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . '</option>';
                     }    
                 if($row["class_no"]>0)  
                     {
-                        $html_str=$html_str.'<option value="' . $row["Class_Id"] . '">Class ' . $row["class_no"] . '</option>';
-                    }    
+                        $html_str=$html_str.'<option value="' . $row["Class_Id"] . '">Class ' . $row["class_n"] . '</option>';
+                    } */   
             }
            
             echo $html_str;
@@ -73,8 +76,8 @@ else if ($msg_receiver_Type==2)    //2 means individual message sending to Staff
                 //echo "";
                 //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
             }
-            $html_str=$html_str.'<option value="0">Select Department </option>';    
-            $html_str=$html_str.'<option value="-1">All Departments </option>';    
+            //$html_str=$html_str.'<option value="">Select Department </option>';    
+            $html_str=$html_str.'<option value="0">All Departments </option>';    
             while($row=mysqli_fetch_assoc($result))
                 {
                   

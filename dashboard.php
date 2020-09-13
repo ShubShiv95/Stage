@@ -5,7 +5,7 @@ session_start();
 <html class="no-js" lang="">
 <?php
 include 'dbobj.php';
-include 'error_log.php';
+include 'errorLog.php';
 include 'security.php';
 ?>
 <head>

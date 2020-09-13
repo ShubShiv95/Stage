@@ -712,3 +712,369 @@ Module Name: 	Individual Message
 Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
 SQL:	Please fix generate_sequence.php file.
 File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	04-Sep-2020 06:58:26 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.leadid=' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\samplecomm.php
+
+Date:	04-Sep-2020 06:59:02 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.leadid=' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\samplecomm.php
+
+Date:	04-Sep-2020 06:59:04 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.leadid=' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\samplecomm.php
+
+Date:	04-Sep-2020 06:59:05 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.leadid=' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\samplecomm.php
+
+Date:	04-Sep-2020 06:59:34 PM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.leadid=' at line 1
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\samplecomm.php
+
+Date:	04-Sep-2020 11:19:55 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	Unknown column 'sectionclass_no' in 'field list'
+SQL:	select class_name,sectionclass_no,stream from class_master_table where enabled=1 and School_Id=1 and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\getMessageGrpChkbox.php
+
+Date:	04-Sep-2020 11:19:57 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	Unknown column 'sectionclass_no' in 'field list'
+SQL:	select class_name,sectionclass_no,stream from class_master_table where enabled=1 and School_Id=1 and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\getMessageGrpChkbox.php
+
+Date:	04-Sep-2020 11:29:37 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from class_master_table cmt,class_section_table cst where cst.class_id=cmt.class' at line 1
+SQL:	select class_name,section, from class_master_table cmt,class_section_table cst where cst.class_id=cmt.class_id and cmt.class_id=3 and enabled=1 and School_Id=1 and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\getMessageGrpChkbox.php
+
+Date:	04-Sep-2020 11:29:57 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from class_master_table cmt,class_section_table cst where cst.class_id=cmt.class' at line 1
+SQL:	select class_name,section, from class_master_table cmt,class_section_table cst where cst.class_id=cmt.class_id and cmt.class_id=1 and enabled=1 and School_Id=1 and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\getMessageGrpChkbox.php
+
+Date:	04-Sep-2020 11:34:18 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	Column 'School_Id' in where clause is ambiguous
+SQL:	select class_name,section,class_sec_id from class_master_table cmt,class_section_table cst where cst.class_id=cmt.class_id and cmt.class_id=3 and cst.enabled=1 and School_Id=1 and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\getMessageGrpChkbox.php
+
+Date:	04-Sep-2020 11:38:53 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by class_no' at line 1
+SQL:	select class_name,section,class_sec_id from class_master_table cmt,class_section_table cst where cst.class_id=cmt.class_id and  cst.enabled=1  and cst.School_Id=1 and order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\getMessageGrpChkbox.php
+
+Date:	05-Sep-2020 05:39:00 PM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Table 'smserp.user_type_master_table' doesn't exist
+SQL:	select * from user_type_master_table where enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\samplecomm.php
+
+Date:	05-Sep-2020 05:39:00 PM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Table 'smserp.user_type_master_table' doesn't exist
+SQL:	select * from user_type_master_table where enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\samplecomm.php
+
+Date:	05-Sep-2020 05:39:06 PM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Table 'smserp.user_type_master_table' doesn't exist
+SQL:	select * from user_type_master_table where enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\samplecomm.php
+
+Date:	05-Sep-2020 09:09:05 PM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Table 'smserp.user_type_master_table' doesn't exist
+SQL:	select * from user_type_master_table where enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\samplecomm.php
+
+Date:	05-Sep-2020 09:09:05 PM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Table 'smserp.user_type_master_table' doesn't exist
+SQL:	select * from user_type_master_table where enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\samplecomm.php
+
+Date:	05-Sep-2020 09:09:14 PM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Table 'smserp.user_type_master_table' doesn't exist
+SQL:	select * from user_type_master_table where enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\samplecomm.php
+
+Date:	08-Sep-2020 08:51:38 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 08:56:57 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:04:27 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:07:58 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:08:40 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:10:37 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:11:43 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:11:44 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:11:45 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:11:47 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:13:09 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:14:00 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:15:18 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:17:24 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	08-Sep-2020 09:20:25 PM	 By User:admin
+Module Name: 	Individual Message
+Message:	<h1>Database Error: Not able to insert into message_master_table . Please try after some time.</h1>
+SQL:	Please fix generate_sequence.php file.
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	09-Sep-2020 07:13:01 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and  cst.enabled=1 and cst. School_Id=1 and class_no!=0 order by class_no' at line 1
+SQL:	select class_name,section,class_sec_id from class_master_table cmt,class_section_table cst where  cmt.class_id= and  cst.enabled=1 and cst. School_Id=1 and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\getMessageGrpChkbox.php
+
+Date:	09-Sep-2020 07:26:04 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and  cst.enabled=1 and cst. School_Id=1 and class_no!=0 order by class_no' at line 1
+SQL:	select class_name,section,class_sec_id from class_master_table cmt,class_section_table cst where  cmt.class_id= and  cst.enabled=1 and cst. School_Id=1 and class_no!=0 order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\getMessageGrpChkbox.php
+
+Date:	09-Sep-2020 07:31:36 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by class_no' at line 1
+SQL:	select class_name,section,class_sec_id from class_master_table cmt,class_section_table cst where  cmt.class_id=3 and  cst.enabled=1 and cst. School_Id=1 and order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\getMessageGrpChkbox.php
+
+Date:	09-Sep-2020 07:32:43 PM	 By User:admin
+Module Name: 	Investment Payment
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by class_no' at line 1
+SQL:	select class_name,section,class_sec_id from class_master_table cmt,class_section_table cst where  cmt.class_id=1 and  cst.enabled=1 and cst. School_Id=1 and order by class_no
+File:	D:\xampp\htdocs\solvethemess\stage\getMessageGrpChkbox.php
+
+Date:	10-Sep-2020 09:51:38 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 09:52:25 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 09:52:59 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 09:58:40 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:27:54 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:30:44 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_mobile_no,whatsapp_mobile_no from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in 1,2,4,3 and scd.session=2020-2021 and scd.school_id=1 order by scd.class_section_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:31:55 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_mobile_no,whatsapp_mobile_no from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in 1,2,4,3 and scd.session=2020-2021 and scd.school_id=1 order by scd.class_section_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:32:17 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_mobile_no,whatsapp_mobile_no from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in 1,2,4,3 and scd.session=2020-2021 and scd.school_id=1 order by scd.class_section_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:33:00 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_mobile_no,whatsapp_mobile_no from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in 1,2,4,3 and scd.session=2020-2021 and scd.school_id=1 order by scd.class_section_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:38:09 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_mobile_no,whatsapp_mobile_no from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in 1,2,4,3 and scd.session=2020-2021 and scd.school_id=1 order by scd.class_section_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:39:02 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_mobile_no,whatsapp_mobile_no from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in 1,2,4,3 and scd.session=2020-2021 and scd.school_id=1 order by scd.class_sec_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:39:43 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_mobile_no,whatsapp_mobile_no from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in(1,2,4,3) and scd.session=2020-2021 and scd.school_id=1 order by scd.class_sec_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:49:09 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select emt.employee_id,emt.sms_number,emt.whatsapp_number from employee_master_table emt,  scd where smt.student_id=scd.student_id and scd.class_sec_id in(1-Accounts,2-Administration) and scd.session='2020-2021' and scd.school_id=1 and scd.enabled=1 order by scd.class_sec_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:49:25 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select emt.employee_id,emt.sms_number,emt.whatsapp_number from employee_master_table emt,  scd where smt.student_id=scd.student_id and scd.class_sec_id in(1-Accounts,2-Administration) and scd.session='2020-2021' and scd.school_id=1 and scd.enabled=1 order by scd.class_sec_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:52:21 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_number,whatsapp_number from emt_master_table emt where emt.department_id in(1-Accounts,2-Administration) and emt.school_id=1 and emt.enabled=1 order by emt.department_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:52:34 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_number,whatsapp_number from emt_master_table emt where emt.department_id in(1-Accounts,2-Administration) and emt.school_id=1 and emt.enabled=1 order by emt.department_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:53:38 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select emt.employee_id,emt.sms_number,emt.whatsapp_number from emt_master_table emt where emt.department_id in(1-Accounts,2-Administration) and emt.school_id=1 and emt.enabled=1 order by emt.department_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:54:05 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select emt.employee_id,emt.sms_number,emt.whatsapp_number from emt employee_master_table emt where emt.department_id in(1-Accounts,2-Administration) and emt.school_id=1 and emt.enabled=1 order by emt.department_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:55:37 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select emt.employee_id,emt.sms_number,emt.whatsapp_number from employee_master_table emt where emt.department_id in(1-Accounts,2-Administration) and emt.school_id=1 and emt.enabled=1 order by emt.department_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	10-Sep-2020 11:57:43 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select emt.employee_id,emt.sms_number,emt.whatsapp_number from employee_master_table emt where emt.department_id in(1-Accounts,2-Administration) and emt.school_id=1 and emt.enabled=1 order by emt.department_id
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms2.php
+
+Date:	11-Sep-2020 05:18:42 PM	 By User:admin
+Module Name: 	Individual Message 
+Message:	
+SQL:	
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms2.php
+
+Date:	11-Sep-2020 06:38:01 PM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Unknown column 'individual_sms_enabled' in 'where clause'
+SQL:	select * from message_user_group_table where enabled=1 and individual_sms_enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms.php
+
+Date:	11-Sep-2020 06:38:07 PM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Unknown column 'individual_sms_enabled' in 'where clause'
+SQL:	select * from message_user_group_table where enabled=1 and individual_sms_enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\individualSms.php
+
+Date:	11-Sep-2020 07:51:39 PM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Unknown column 'group_sms_enabled' in 'where clause'
+SQL:	select * from message_user_group_table where enabled=1 and group_sms_enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms.php
+
+Date:	11-Sep-2020 10:26:48 PM	 By User:admin
+Module Name: 	Individual Message 
+Message:	Unknown column 'group_sms_enabled' in 'where clause'
+SQL:	select * from message_user_group_table where enabled=1 and group_sms_enabled=1 and School_Id=1
+File:	D:\xampp\htdocs\solvethemess\stage\groupSms.php

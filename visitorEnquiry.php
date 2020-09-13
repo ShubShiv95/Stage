@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'dbobj.php';
-include 'error_log.php';
+include 'errorLog.php';
 include 'security.php';
 ?>
 <!doctype html>
@@ -493,7 +493,7 @@ include 'security.php';
     <script src="js/main.js"></script>
 	<script src="js/myscript.js"></script>
 	<script src="js/webcam.min.js"></script>
-	<script type="text/javascript" src="js/ajex-function.js"></script>
+	<script type="text/javascript" src="js/ajax-function.js"></script>
 
 <script language="JavaScript">
     var data_uri;

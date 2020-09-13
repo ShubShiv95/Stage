@@ -1,7 +1,9 @@
 <?php
 include 'bashSmsApi.php';
 $mno=$_REQUEST["mobileno"];
-$val=mt_rand(1000,9999);
+$otp=mt_rand(1000,9999);
+$val="Dear enquirer, the OTP from The ABC PAATHSHALA sent to you is " . $otp. ".  Please share it at enquiry section. ";
 $x=fireOtp($mno,$val);
-echo $val;
+//echo $val . '<br>' . $x;
+echo $otp;
 ?>

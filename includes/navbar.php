@@ -67,6 +67,54 @@
                             </div>
                         </div>
                     </li>
+
+<!--Theme Change Drop Down System -->
+<li class="navbar-item dropdown header-notification">
+                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                            aria-expanded="false">
+                            <!--i class="far fa-bell"></i-->
+                            <div class="item-title d-md-none text-16 mg-l-10">Notification</div>
+                            <img  src="img/theme-change-icon.png" width="40" height="40">
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="item-header">
+                                <h6 class="item-title">Select Your Theme</h6>
+                            </div>
+                            <div class="item-content">
+                                <div class="media">
+                                    <div class="item-icon bg-skyblue">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="media-body space-sm">
+                                        <div class="post-title">Clasical</div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="item-icon bg-orange">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div class="media-body space-sm">
+                                        <div class="post-title">Education</div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="item-icon bg-violet-blue">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                    <div class="media-body space-sm">
+                                        <div class="post-title">Super Storm</div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--End of Theme change system -->
+
+
                     <li class="navbar-item dropdown header-message">
                         <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
@@ -82,7 +130,7 @@
                             <div class="item-content">
                                 <div class="media">
                                     <div class="item-img bg-skyblue author-online">
-                                        <img src="app_imges/profile/student11.png" alt="img">
+                                        <!---img src="app_imges/profile/19.jpg" alt="img"-->
                                     </div>
                                     <div class="media-body space-sm">
                                         <div class="item-title">
@@ -186,14 +234,17 @@
                             </div>
                         </div>
                     </li>
+
+                    
+
                      <li class="navbar-item dropdown header-language">
                         <a class="navbar-nav-link dropdown-toggle" href="#" role="button" 
-                        data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>EN</a>
+                        data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>Session 2020-2021</a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">English</a>
-                            <a class="dropdown-item" href="#">Spanish</a>
-                            <a class="dropdown-item" href="#">Franchis</a>
-                            <a class="dropdown-item" href="#">Chiness</a>
+                            <a class="dropdown-item" href="#">2021-2022</a>
+                            <a class="dropdown-item" href="#">2020-2021</a>
+                            <a class="dropdown-item" href="#">2019-2020</a>
+                            <a class="dropdown-item" href="#">2018-2019</a>
                         </div>
                     </li>
                 </ul>

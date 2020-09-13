@@ -5,7 +5,7 @@ session_start();
 <html class="no-js" lang="">
 <?php
 include 'dbobj.php';
-include 'error_log.php';
+include 'errorLog.php';
 include 'security.php';
 ?>
 <head>
@@ -105,7 +105,7 @@ include 'security.php';
                         </div> -->
                         
 						<div class="followupenq-form-sec">
-							<form class="mg-b-20 new-added-form" action="GetEnquiry.php" method="post" id="MainForm">
+							<form class="mg-b-20 new-added-form" action="getEnquiry.php" method="post" id="MainForm">
 								<div class="row gutters-8">
 								   <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
 										<label>Enquiry Status</label>
@@ -239,7 +239,7 @@ include 'security.php';
 						
 					    </div>
 						
-						<div class="tabular-section-detail"  id="msgreply">
+						<div class="tabular-section-detail"  id="search-result-div">
 						 <div class="table-responsive">
                             <table class="table display data-table text-nowrap">
                                 <thead>
@@ -307,6 +307,7 @@ include 'security.php';
     <!-- Custom Js -->
     <script src="js/main.js"></script>
 	<script src="js/myscript.js"></script>
+	<script src="js/ajax-function.js"></script>
 
 
 <!--Ajex Function for Submit Operation-->                                            

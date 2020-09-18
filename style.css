@@ -5416,6 +5416,7 @@ text-align: center;
     /*border: 1px solid #000;*/	
 	max-height: 400px;
     height: 400px;
+    border-style: ridge;
 }
 .tabular-section-detail .table thead th{
     border-bottom: 2px solid #000;	
@@ -5592,6 +5593,10 @@ width: 96%;
     padding: 0px;
     margin-bottom: 5px;	
 }
+}
+
+.div-alignItem-center{
+  align-items: center;
 }
 
 /* Custom CSS End */

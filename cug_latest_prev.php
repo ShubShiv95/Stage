@@ -385,7 +385,7 @@ include 'errorLog.php';
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" value="Test 1 Nursery 1" label="Test 1 Nursery 1"  name="groupsms">
+                                                                        <input type="checkbox" class="form-check-input" value="Test 1 Nursery 1" name="groupsms">
                                                                         <label class="form-check-label">Test 1 Nursery</label>
                                                                     </div>
                                                                 </td>
@@ -396,7 +396,7 @@ include 'errorLog.php';
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" value="Test 1 PlyaSchool" label="Test 1 PlyaSchool" name="groupsms">
+                                                                        <input type="checkbox" class="form-check-input" value="Test 1 PlyaSchool" name="groupsms">
                                                                         <label class="form-check-label">Test 1 PlyaSchool</label>
                                                                     </div>
                                                                 </td>
@@ -404,7 +404,7 @@ include 'errorLog.php';
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" value="Test 2 Nursery" label="Test 2 Nursery" name="groupsms">
+                                                                        <input type="checkbox" class="form-check-input" value="Test 2 Nursery" name="groupsms">
                                                                         <label class="form-check-label">Test 2 Nursery</label>
                                                                     </div>
                                                                 </td>
@@ -415,7 +415,7 @@ include 'errorLog.php';
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" value="Test 2 PlyaSchool" label="Test 2 PlyaSchool" name="groupsms">
+                                                                        <input type="checkbox" class="form-check-input" value="Test 2 PlyaSchool" name="groupsms">
                                                                         <label class="form-check-label">Test 2 PlyaSchool</label>
                                                                     </div>
                                                                 </td>
@@ -437,7 +437,7 @@ include 'errorLog.php';
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" value="Test 3 PlyaSchool" label="Test 3 PlyaSchool" name="groupsms">
+                                                                        <input type="checkbox" class="form-check-input" value="Test 3 PlyaSchool" name="groupsms">
                                                                         <label class="form-check-label">Test 3 PlyaSchool</label>
                                                                     </div>
                                                                 </td>
@@ -607,7 +607,7 @@ include 'errorLog.php';
 		 		 
 		}
         $('#CheckselectedGroup').click(function() {
-			 var atLeastOneIsChecked = false;
+			// var atLeastOneIsChecked = false;
 			  $('input[name="groupsmsact[]"]').each(function () {
 				if ($(this).is(':checked')) {
 				  atLeastOneIsChecked = true;
@@ -615,12 +615,12 @@ include 'errorLog.php';
 				  return false;
 				}
 			  });
-			  if(atLeastOneIsChecked == true){
+			  /*if(atLeastOneIsChecked == true){
 				  return true;
 			  }else{
 				  alert('Please select any group to create sms');
 				return false;  
-			  }
+			  }*/
 		});		
 		$(".delete-values").click(function(){	
 		$.each($("input[name='groupsmsact[]']:checked"), function(){

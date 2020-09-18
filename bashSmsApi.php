@@ -30,6 +30,6 @@ $curl=curl_init($var);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
 $response=curl_exec($curl);
 curl_close($curl);
-return $response;}
+return $var;}
 //http://bhashsms.com/api/sendmsg.php?user=smsventure&pass=123456&sender=TRMRTI&phone=9987567713&text=Test SMS&priority=ndnd&stype=normal
 ?>

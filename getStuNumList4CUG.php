@@ -12,13 +12,13 @@ $secid=$_REQUEST['secid'];
 $query="select smt.student_id,smt.student_name,smt.sms_number,smt.whatsapp_number,smt.student_id from student_master_table smt,student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id=" . $secid . " and scd.session='" . $_SESSION["SESSION"] . "' and scd.enabled=1 and scd.school_id=" . $_SESSION["SCHOOLID"] . ' order by rollno';
 
 
-echo $query;
+//echo $query;
 
 
 $result=$dbhandle->query($query);
 $x=array();
 $x=var_dump($result);
-echo $x;
+//echo $x;
 $str='<div class="table-responsive">
 <table class="table display data-table text-nowrap">
     <thead>

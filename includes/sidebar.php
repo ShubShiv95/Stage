@@ -149,7 +149,7 @@
                             <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Student</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="admit-form.html" class="nav-link"><i class="fas fa-angle-right"></i>Admission</a>
+                                    <a href="admissionForm.php" class="nav-link"><i class="fas fa-angle-right"></i>Admission</a>
                                 </li>
                               </ul>
                         </li>

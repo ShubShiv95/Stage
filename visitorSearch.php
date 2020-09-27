@@ -117,7 +117,7 @@ include 'security.php';
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body bg-skybluelight">
-                        <form class="new-added-form" method="post" name="MainForm" id="MainForm" action="visitorSearch2.php">
+                        <form class="new-added-form" method="post" name="MainForm" id="MainForm" action="VisitorSearch2.php">
 						<div class="second-form-sec">
 							<form class="mg-b-20 new-added-form">
 								<div class="row gutters-8">

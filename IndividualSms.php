@@ -81,7 +81,7 @@ include 'security.php';
                 <div class="card height-auto">
                     <div class="card-body bg-skybluelight">
                        
-                        <form class="new-added-form" action="individualSms2.php" method="post" id="indMsgForm">
+                        <form class="new-added-form" action="IndividualSMS2.php" method="post" id="indMsgForm">
                             
                             <div class="row">
                                     

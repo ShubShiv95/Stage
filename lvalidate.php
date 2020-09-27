@@ -51,7 +51,8 @@ if(mysqli_num_rows($result) == 1)  // Checks if the userid exist in the database
 			$_SESSION["EMPID"] = $row["Employee_Id"];
 			//$_SESSION["SCHOOLID"]= $row["School_Id"];
 			$_SESSION["SCHOOLID"]= 1;
-			
+			//$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST'];
+			$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST']."/solvethemess/stage";
 			$_SESSION["LOGINGRADE"]= $row["login_grade"];
 			$_SESSION["FOOTER"]="SMS SCHOOL ERP COPYRIGHT 2020";
 			$_SESSION["LINK"]=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];

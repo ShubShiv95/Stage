@@ -100,8 +100,6 @@ include 'security.php';
                         <form class="new-added-form" id="admissionform" method="post" action="admissionEnquiry2.php">
 						<input type="hidden" id="votp" name="votp" placeholder="" value="0" class="form-control" value="0" required>
                             <div class="row">
-							
-							    
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Student Name *</label>
                                     <input type="text" id="sname" name="sname" placeholder="" class="form-control" onkeypress="lettersOnly(event);" required>

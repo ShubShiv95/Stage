@@ -36,7 +36,7 @@
         <div class="login-page-content">
             <div class="login-box">
                 <div class="item-logo">
-                    <img src="img/SwiftTechLogo.JPG" alt="logo">
+                    <img src="img/login-logo.JPG" alt="logo">
                 </div>
                 <form action="lvalidate.php" class="login-form">
                     <div class="form-group">

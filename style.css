@@ -1544,7 +1544,8 @@ ul {
   box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
 }
 .nav-bar-header-one {
-  background: linear-gradient(to right, #ff9d01, #ffaa01);
+  /*background: linear-gradient(to right, #ff9d01, #ffaa01);*/
+  background: linear-gradient(to right, #ffffff, #ffffff);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2136,7 +2137,7 @@ ul {
 }
 /*=============== 5.5 Sidebar Menu ==================*/
 .sidebar-menu-one {
-  width: 26rem;
+  width: 32rem;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -5965,7 +5966,10 @@ width: 96%;
     top: 45px;
 }
 
-
+.mm-row-padding{
+  /*padding-top:10px;*/
+  padding-bottom: 20px;
+}
 
 
 

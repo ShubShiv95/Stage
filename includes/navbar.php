@@ -3,7 +3,7 @@
             <div class="nav-bar-header-one">
                 <div class="header-logo">
                     <a href="index.html">
-                        <img src="img/logo9.png" alt="logo">
+                        <img src="img/sidemenu-logo.jpg" alt="logo">
                     </a>
                 </div>
                  <div class="toggle-button sidebar-toggle">

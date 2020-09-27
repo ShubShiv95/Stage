@@ -111,7 +111,7 @@
 
     //School Configured Code, this will be dynamic
     $schoolCode = "DPS";
-    $admissionId = 101;
+    $admissionId = 100;
     
 
     $insertAdmissionTableSql = "insert into admission_master_table

@@ -34,6 +34,8 @@ include 'security.php';
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
+    <!-- Date Picker CSS -->
+    <link rel="stylesheet" href="css/datepicker.min.css">
 </head>
 
 <body>
@@ -78,32 +80,58 @@ include 'security.php';
                                         <div class="col-xl-4 col-lg-6 col-12 form-group">
                                         <div class="form-group aj-form-group">
                                                 <label>Select Class</label>
-                                                <select class="select2" name="attn-class">
-                                                    <option value="">Class K.G. 1</option>
-                                                    <option value="1">Nursery</option>
-                                                    <option value="2">Play</option>
-                                                    <option value="3">One</option>
-                                                    <option value="4">Two</option>
-                                                    <option value="5">Three</option>
+                                                <select class="select2" required name="classid" id="classid" onchange="showsection(this.value)">
+                                                    <!--option value="">Please Select Class *</option-->
+                                                    <option value="0">PleaseSelect Class *</option>
+                                                    <?php
+                                                        $query='select Class_Id,class_name,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
+                                                        $result=mysqli_query($dbhandle,$query);
+                                                        if(!$result)
+                                                            {
+                                                                //var_dump($getStudentCount_result);
+                                                                $error_msg=mysqli_error($dbhandle);
+                                                                $el=new LogMessage();
+                                                                $sql=$query;
+                                                                //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                                                $el->write_log_message('Investment Payment',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                                                                $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+                                                                $dbhandle->query("unlock tables");
+                                                                mysqli_rollback($dbhandle);
+                                                                //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
+                                                                $messsage='Error: Admission Enquiry Not Saved.  Please consult application consultant.';
+                                                                //$str_end='</div>';
+                                                                //echo $str_start.$messsage.$str_end;
+                                                                //echo "";
+                                                                //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
+                                                            }
+                                                        while($row=mysqli_fetch_assoc($result))
+                                                        {
+                                                        $str='<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"];
+                                                        if($row["stream"]==1)
+                                                        $str= $str . ' Science';
+                                                        else if($row["stream"]==2)
+                                                        $str= $str . ' Commerce';
+                                                        else if($row["stream"]==3)
+                                                        $str= $str . ' Arts';
+                                                        $str=$str . '</option>';
+                                                        echo $str;
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-6 col-12 form-group">
                                             <div class="form-group aj-form-group">
                                                 <label>Select Section</label>
-                                                <select class="select2" name="attn-section">
-                                                    <option value="0">Select Section</option>
-                                                    <option value="1">A</option>
-                                                    <option value="2">B</option>
-                                                    <option value="3">C</option>
-                                                    <option value="4">D</option>
+                                                <select class="select2" name="secid" id="secid" required>
+                                                    <option value="">Please Select Section *</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-6 col-12 form-group">
                                             <div class="form-group aj-form-group">
                                                 <label>Select Date</label>
-                                                <input type="text" name="attn_dob" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker" data-position='bottom right'>
+                                                <input type="text" id="attn_dob" name="attn_dob" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker" data-position='bottom right'>
                                         <i class="far fa-calendar-alt"></i>
                                             </div>
                                         </div>
@@ -119,14 +147,16 @@ include 'security.php';
                                     <div class="row justify-content-center">
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                             <div class="form-group aj-form-group">
-                                                <label>Select Attendance Halfs <span>*</span></label>
+                                                <label>Select Attendance Period <span>*</span></label>
                                                 <select class="select2" name="f_class">
-                                                    <option value="">First Half</option>
-                                                    <option value="3">One</option>
-                                                    <option value="3">Two</option>
-                                                    <option value="3">Three</option>
-                                                    <option value="3">Four</option>
-                                                    <option value="3">Five</option>
+                                                    <option value="">Period 1</option>
+                                                    <option value="">Period 2</option>
+                                                    <option value="">Period 3</option>
+                                                    <option value="">Period 4</option>
+                                                    <option value="">Period 5</option>
+                                                    <option value="">Period 6</option>
+                                                    <option value="">Period 7</option>
+                                                    <option value="">Period 8</option>
                                                 </select>
                                             </div>
                                         
@@ -285,9 +315,10 @@ include 'security.php';
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Date Picker Js -->
     <script src="js/datepicker.min.js"></script>
-
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <!--Ajex Function Call-->
+	<script src="js/ajax-function.js"></script>
 <script type="text/javascript">
     $(function(){
         $("input[type='text']").each(function( index ) {

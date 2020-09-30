@@ -1545,14 +1545,19 @@ ul {
 }
 .nav-bar-header-one {
   /*background: linear-gradient(to right, #ff9d01, #ffaa01);*/
-  background: linear-gradient(to right, #ffffff, #ffffff);
+  background: linear-gradient(to right, #000000, #000000);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-width: 32rem;
+  margin-top: -15px;
+  margin-bottom: -17px;
+  margin-left: -1rem;
+  /*
   min-width: 26rem;
   margin-top: -5px;
   margin-bottom: -5px;
-  margin-left: -1rem;
+  margin-left: -1rem;*/
 }
 @media only screen and (max-width: 767px) {
   .nav-bar-header-one {
@@ -1647,7 +1652,7 @@ ul {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 0 20px 0 50px;
+  padding: 10px 20px 10px 50px;
 }
 @media only screen and (min-width: 768px) {
   .header-main-menu .navbar-nav {
@@ -5579,7 +5584,7 @@ float:right;
 .header-main-menu.fixed{
 position: fixed;
 width: 100%;
-left: 260px;
+left: 320px;
 background: #fff;
 z-index: 99999;
 }

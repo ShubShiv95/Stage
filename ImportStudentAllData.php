@@ -86,7 +86,7 @@ include 'security.php';
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form">
+                        <form class="new-added-form school-form aj-new-added-form" enctype="multipart/form-data" method="post" action="formats/import-excel/uploadexcel1.php">
                             
                             
                             <div class="row justify-content-center">
@@ -104,19 +104,15 @@ include 'security.php';
                                         <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                             <div class="form-group aj-form-group">
                                                 <label>School Name <span>*</span></label>
-                                                <select class="select2" name="f_class">
+                                                <select class="select2" name="f_class" required>
                                                     <option value="">Please Select School Name</option>
-                                                    <option value="3">One</option>
-                                                    <option value="3">Two</option>
-                                                    <option value="3">Three</option>
-                                                    <option value="3">Four</option>
-                                                    <option value="3">Five</option>
+                                                    <option value="1">The ABC PAATHSHALA</option>
                                                 </select>
                                             </div>
                                             <div class="form-group text-center">
                                                 <label>Download Excel Format</label>
                                                 <br>
-                                                <a href="javascript:void(0);"><img src="img/aj-img/excel.png" width="80"></a>
+                                                <a href="formats/test.xls" download><img src="img/aj-img/excel.png" width="80"></a>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
@@ -133,7 +129,7 @@ include 'security.php';
                                             </div>
                                             <div class="form-group">
                                                 <label>Import Excel</label>
-                                                <input type="file" name="s_l_name" placeholder="" required="" class="form-control">
+                                                <input type="file" name="file" id="file" placeholder="" required="" class="form-control" accept=".xls,.xlsx">
                                             </div>
                                         </div>
                                     </div>
@@ -151,7 +147,7 @@ include 'security.php';
                                             </div>
                                      </div>
                                     <div class="aaj-btn-chang-cbtn">
-                                            <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Import </button>
+                                            <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark" name="submit" value="submit">Import </button>
                                             <button type="reset" class="aj-btn-a1 btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                             
                                     </div>
@@ -161,6 +157,8 @@ include 'security.php';
                             
                             
                         </form>
+
+
                     </div>
                 </div>
                 <!-- Admit Form Area End Here -->

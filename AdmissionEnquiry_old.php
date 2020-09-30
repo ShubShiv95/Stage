@@ -529,6 +529,8 @@ include 'security.php';
     <!-- Custom Js -->
     <script src="js/main.js"></script>
 	<script src="js/myscript.js"></script>
+    <!--Ajex Function Call-->
+	<script src="js/ajax-function.js"></script>
     <script type="text/javascript">
     var frm = $('#admissionform');
 

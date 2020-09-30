@@ -756,7 +756,7 @@ include 'security.php';
 	                                    <div class="form-group faj-form-group">
 	                                        <label class="text-dark-medium">Upload Mother Photo ( JPEG Less Than 2MB)</label>
 	                                        <div class="d-image-user">
-	                                            <img src="img/avtar-female.png">
+	                                            <img src="img/avatar-female.png">
 	                                        </div>
 	                                        <div class="file-in">
 	                                            <span class="fa fa-pencil-alt" aria-hidden="true"></span>

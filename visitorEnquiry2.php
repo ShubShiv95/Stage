@@ -4,7 +4,6 @@ include 'security.php';
 include 'dbobj.php';
 include 'errorLog.php';
 include 'sequenceGenerator.php';
-
 $visitortype=$_REQUEST["visitortype"];
 $companyname=$_REQUEST["companyname"];
 $vname=$_REQUEST["vname"];
@@ -16,7 +15,6 @@ $nperson=$_REQUEST["nperson"];
 $note=$_REQUEST["note"];
 $loginid=$_SESSION['LOGINID'];
 $schoolid=$_SESSION['SCHOOLID'];
-
 $veid=sequence_number('visitor_enquiry_table',$dbhandle);
 if($veid==false)
     {
@@ -27,9 +25,7 @@ if($veid==false)
             $el->write_log_message('Add New Visitor',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
             $_SESSION["MESSAGE"]=$error_msg;    
     }
-
 mysqli_autocommit($dbhandle,FALSE);
-
 $insertVisitorEnquiry_sql="insert into visitor_enquiry_table
     (veid,
     visitor_type_id,
@@ -46,7 +42,6 @@ $insertVisitorEnquiry_sql="insert into visitor_enquiry_table
     created_by,
     created_on,
     school_id) values(?,?,?,?,?,?,?,?,?,NOW(),TIME_FORMAT(current_time,'%h:%i %p'),?,?,NOW(),?)";
- 
     $insertVisitorEnquiry_stmt=$dbhandle->prepare($insertVisitorEnquiry_sql);
     echo $dbhandle->error;	
     $insertVisitorEnquiry_stmt->bind_param('iisssisisssi',
@@ -62,35 +57,20 @@ $insertVisitorEnquiry_sql="insert into visitor_enquiry_table
     $note,
     $loginid,
     $schoolid);
-
-    
     $insertVisitorEnquiry_stmt_result=$insertVisitorEnquiry_stmt->execute(); //Feedback note added to admission_followup_note Table.
-    
     // Remote image URL
     //$imgurl = $_REQUEST["image"];
-
     $myimg = $_REQUEST['image'];
     $destinationPath = "app_images/visitors/";
-  
     $web_capture_part = explode(";base64,", $myimg);
     $image_type_aux = explode("image/", $web_capture_part[0]);
     $image_type = $image_type_aux[1];
-  
     $image_base64 = base64_decode($web_capture_part[1]);
     //$myimgName = uniqid() . '.png';
     $myimgName = 'visitor' . $veid  . '.png';
-  
     $file = $destinationPath . $myimgName;
     file_put_contents($file, $image_base64);
-  
     //print_r($myimgName);
-
-
-
-
-
-
-
 /*
     // Image path
     $img = 'data/images/codexworld.jpg';
@@ -101,9 +81,7 @@ $insertVisitorEnquiry_sql="insert into visitor_enquiry_table
     curl_exec($ch);
     curl_close($ch);
     fclose($fp);
-
 */
-
     if(!$insertVisitorEnquiry_stmt_result)
         {
             //var_dump($getStudentCount_result);
@@ -121,13 +99,12 @@ $insertVisitorEnquiry_sql="insert into visitor_enquiry_table
             //echo $str_start.$messsage.$str_end;
             //die;
             //echo "unsecessful";
-            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=https://demo.swiftcampus.com/visitorEnquiry.php">';
+            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=http://'<?php echo $_SESSION["HOSTNAME"];?>'/VisitorEnquiry.php">';
         }
     else
         {
             mysqli_commit($dbhandle);
             //echo "success";
-            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=visitorEnquiry.php">';
+            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=http://'<?php echo $_SESSION["HOSTNAME"];?>'/VisitorEnquiry.php">';
         }    
-
 ?>

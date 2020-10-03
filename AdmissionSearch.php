@@ -11,7 +11,7 @@ include 'security.php';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>SwipeTouch | Admission Form</title>
+    <title>SWIFTCAMPUS | Admission Search</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->

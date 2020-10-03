@@ -15,12 +15,11 @@
     //starts here
     $lid=$_SESSION["LOGINID"];
     $schoolId=$_SESSION["SCHOOLID"];
-    $class = $_REQUEST["class"];
-    $session = $_REQUEST["session"];
+    $admission_Id = $_REQUEST["admission_Id"];
 
-    $selectAdmissionSql = "Select Admission_Id, First_Name, Last_Name, Gender, DOB, Father_Name, Mother_Name, Guardian_Name From admission_master_table Where Class_Id = ? and Session = ?";
+    $selectAdmissionSql = "Select * From admission_master_table Where Admission_Id = ?";
     $stmt=$dbhandle->prepare($selectAdmissionSql);
-    $stmt->bind_param("ii", $class, $session);
+    $stmt->bind_param("i", $admission_Id);
 
     //echo $admission_Id;
 
@@ -50,28 +49,17 @@ if(!$execResult)
     
 }
 
-$str_start='<div class="alert icon-alart bg-light-green2" role="alert"><i class="far fa-hand-point-right bg-light-green3"></i>';
 $message='Resultset = ';
 $execResult=$stmt->execute();
 $result = $stmt->get_result();
 //echo $result;
-$htmlbody = '<div class="table-responsive"><table class="table table-bordered"><thead><tr><th>First Name</th><th>Last Name </th><th>Gender</th><th>DOB</th><th>Father Name </th><th>Mother Name</th><th>Guardian Name</th><th>Select Actions</th></tr></thead>';
-$htmlbody = $htmlbody . '<tbody>';
-while ($row = $result->fetch_assoc()) {
-      $htmlbody = $htmlbody . '<tr>';
-      $htmlbody = $htmlbody . '<td>' . $row['First_Name'] . '</td>';
-      $htmlbody = $htmlbody . '<td>' . $row['Last_Name'] . '</td>';
-      $htmlbody = $htmlbody . '<td>' . $row['Gender'] . '</td>';
-      $htmlbody = $htmlbody . '<td>' . $row['DOB'] . '</td>';
-      $htmlbody = $htmlbody . '<td>' . $row['Father_Name'] . '</td>';
-      $htmlbody = $htmlbody . '<td>' . $row['Mother_Name'] . '</td>';
-      $htmlbody = $htmlbody . '<td>' . $row['Guardian_Name'] . '</td>';
-      $htmlbody = $htmlbody . '<td>' . '<a href="AdmissionView.php?admission_Id=' . $row['Admission_Id'] . '"> Edit </a>'  . '/' . '<a href=""> View </a>' . '</td>';
-      $htmlbody = $htmlbody . '</tr>';
-     //$message = $message . $row['First_Name'] ."<br>";
-}
-$htmlbody = $htmlbody . '</tbody></table></div>';
-echo $htmlbody ;
+$rows = [];
+$row = $result->fetch_assoc();
+$rows[] = $row;
+
+ //$row['First_Name']
+ //$htmlbody  = $rows;
+echo $row[0] ;
 $stmt->close();
 
 ?>

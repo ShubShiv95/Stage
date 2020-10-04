@@ -165,7 +165,6 @@
                                         <label>Social Category <span>*</span></label>
                                         <select class="select2" required="" name="studentSocialCat" id="studentSocialCat">
                                             <?php
-                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
                                                 $string = "";
                                                 foreach($GLOBAL_SOCIAL_CAT as $x=>$x_value)
                                                 {
@@ -179,7 +178,6 @@
                                         <label>Discount Category <span>*</span></label>
                                         <select class="select2" required="" name="studDiscCat" id="studDiscCat">
                                         <?php
-                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
                                                 $string = "";
                                                 foreach($GLOBAL_DISCOUNT_CAT as $x=>$x_value)
                                                 {
@@ -193,7 +191,6 @@
                                         <label>Locality </label>
                                         <select class="select2" name="studLocality" id="studLocality"> 
                                         <?php
-                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
                                                 $string = "";
                                                 foreach($GLOBAL_LOCALITY as $x=>$x_value)
                                                 {
@@ -206,7 +203,6 @@
                                         <label>Academic Session <span>*</span></label>
                                         <select class="select2" required="" name="studAcademicSession" id="studAcademicSession"> 
                                         <?php
-                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
                                                 $string = "";
                                                 foreach($GLOBAL_SCHOOL_SESSION as $x=>$x_value)
                                                 {
@@ -220,7 +216,6 @@
                                         <label>Mother Tongue <span>*</span></label>
                                         <select class="select2" required="" name="studMotherTongue" id="studMotherTongue" >
                                         <?php
-                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
                                                 $string = "";
                                                 foreach($GLOBAL_LANGUAGES as $x=>$x_value)
                                                 {
@@ -299,7 +294,6 @@
                                         <label>Medium of Instrction</label>
                                          <select class="select2" name="studMOI" id="studMOI">
                                          <?php
-                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
                                                 $string = "";
                                                 foreach($GLOBAL_LANGUAGES as $x=>$x_value)
                                                 {
@@ -992,15 +986,11 @@
 	          }
 	        })
         
-
         $(document).ready(function(){
             $("#studentAge").focusin(function(){
                 var dob = $('#studentDOB').val();
                 $("#studentAge").val(moment().diff(moment(dob, 'DD-MM-YYYY'), 'years'));              
-            });
-
-
-            
+            });            
         });
 	</script>
 </body>

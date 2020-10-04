@@ -77,8 +77,9 @@ include 'security.php';
                                 </div>
                                 <form class="new-added-form aj-new-added-form">
                                     <div class="row">
-                                        <div class="col-xl-4 col-lg-6 col-12 form-group">
-                                        <div class="form-group aj-form-group">
+                                        <!--div class="col-xl-4 col-lg-6 col-12 form-group"-->
+                                        <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                            <div class="form-group aj-form-group">
                                                 <label>Select Class</label>
                                                 <select class="select2" required name="classid" id="classid" onchange="showsection(this.value)">
                                                     <!--option value="">Please Select Class *</option-->
@@ -120,7 +121,7 @@ include 'security.php';
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4 col-lg-6 col-12 form-group">
+                                        <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                             <div class="form-group aj-form-group">
                                                 <label>Select Section</label>
                                                 <select class="select2" name="secid" id="secid" required>
@@ -128,45 +129,40 @@ include 'security.php';
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4 col-lg-6 col-12 form-group">
+                                        <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                            <div class="form-group aj-form-group">
+                                                <label>Select Section</label>
+                                                <select class="select2" name="cperiod" id="cperiod" required>
+                                                    <option value="1">Period 1</option>
+                                                    <option value="2">Period 2</option>
+                                                    <option value="3">Period 3</option>
+                                                    <option value="4">Period 4</option>
+                                                    <option value="5">Period 5</option>
+                                                    <option value="6">Period 6</option>
+                                                    <option value="7">Period 7</option>
+                                                    <option value="8">Period 8</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                             <div class="form-group aj-form-group">
                                                 <label>Select Date</label>
-                                                <input type="text" id="attn_dob" name="attn_dob" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker" data-position='bottom right'>
-                                        <i class="far fa-calendar-alt"></i>
+                                                <input type="text" id="adt" name="adt" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker" data-position='bottom right'>
+                                                <i class="far fa-calendar-alt"></i>
                                             </div>
                                         </div>
                                         
                                         <div class="col-12 aaj-btn-chang text-right">
-                                            <button type="submit" class="aj-btn-a btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Submit</button>
+                                            <button type="BUTTON" class="aj-btn-a btn-fill-lg btn-gradient-yellow btn-hover-bluedark" onclick="return getAttendanceList();">Submit</button>
                                             
                                         </div>
                                     </div>
                                 </form>
-                                <div class="tebal-promotion" >
-                                <form class="new-added-form aj-new-added-form" action="AbsentStudentList.php" method="post">
-                                    <div class="row justify-content-center">
-                                <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
-                                            <div class="form-group aj-form-group">
-                                                <label>Select Attendance Period <span>*</span></label>
-                                                <select class="select2" name="f_class">
-                                                    <option value="">Period 1</option>
-                                                    <option value="">Period 2</option>
-                                                    <option value="">Period 3</option>
-                                                    <option value="">Period 4</option>
-                                                    <option value="">Period 5</option>
-                                                    <option value="">Period 6</option>
-                                                    <option value="">Period 7</option>
-                                                    <option value="">Period 8</option>
-                                                </select>
-                                            </div>
-                                        
-                                   
-                                    
-                                </div>
-                               
-                            </div>
-                                    <div class="table-responsive mt-5">
-                                        <table class="table table-bordered redio-btn-ch">
+                                <form class="new-added-form aj-new-added-form" action="StudentAttendanceEntrySave.php" method="post">
+                                <div class="tebal-promotion" id="attendance-list-div">
+                                <!--form class="new-added-form aj-new-added-form" action="AbsentStudentList.php" method="post">
+                                    <div class="table-responsive mt-5" >
+                                        <table class="table table-bordered redio-btn-ch" style="text-align:center;">
                                             <thead>
                                                 <tr>
                                                     <th>Roll No. </th>
@@ -180,11 +176,27 @@ include 'security.php';
                                                     <td>1</td>
                                                     <td>K.G. Student 1</td>
                                                     <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present" checked> Present</span>
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present" > Late</span>
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present" > Half Day</span>
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present" > Abscent</span>
+                                                    <div class="row radio">
+                                                            <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                                                <div class="form-group aj-form-group">
+                                                                    <span><input checked type="radio" class="gaurdian-bs" name="Present1" > Present</span>
+                                                                </div>
+                                                            </div>        
+                                                            <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                                                <div class="form-group aj-form-group">
+                                                                <span><input  type="radio" class="gaurdian-bs" name="Present1" > Late</span>
+                                                                </div>
+                                                            </div>        
+                                                            <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                                                <div class="form-group aj-form-group">
+                                                                    <span><input type="radio" class="gaurdian-bs" name="Present1" > Half Day</span>
+                                                                </div>
+                                                            </div>        
+                                                            <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                                                <div class="form-group aj-form-group">
+                                                                <span><input type="radio" class="gaurdian-bs" name="Present1" > Abscent</span>
+                                                                </div>
+                                                            </div>        
                                                         </div>
                                                        
                                                     </td>
@@ -192,56 +204,6 @@ include 'security.php';
                                                         <textarea class="form-control"></textarea>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>K.G. Student 2</td>
-                                                    <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present1" > Present</span>
-                                                          <span><input checked type="radio" class="gaurdian-bs" name="Present1" > Late</span>
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present1" > Half Day</span>
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present1" > Abscent</span>
-                                                        </div>
-                                                       
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control"></textarea>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>K.G. Student 3</td>
-                                                    <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present2" > Present</span>
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present2" > Late</span>
-                                                          <span><input type="radio" class="gaurdian-bs" checked name="Present2" > Half Day</span>
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present2" > Abscent</span>
-                                                        </div>
-                                                       
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control"></textarea>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>K.G. Student 4</td>
-                                                    <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present4" > Present</span>
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present4" > Late</span>
-                                                          <span><input type="radio" class="gaurdian-bs" name="Present4" > Half Day</span>
-                                                          <span><input type="radio" class="gaurdian-bs" checked name="Present4" > Abscent</span>
-                                                        </div>
-                                                       
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control"></textarea>
-                                                    </td>
-                                                </tr>
-
-                                                
                                             </tbody>                                                
                                         </table>
                                     </div>
@@ -285,9 +247,9 @@ include 'security.php';
 
                                     </div>
 
-                                </form>
+                                </form-->
                             </div>
-
+                            </form>                           
                             </div>
                         </div>
                     </div>
@@ -319,7 +281,8 @@ include 'security.php';
     <script src="js/main.js"></script>
     <!--Ajex Function Call-->
 	<script src="js/ajax-function.js"></script>
-<script type="text/javascript">
+
+<!--script type="text/javascript">
     $(function(){
         $("input[type='text']").each(function( index ) {
           if(this.value == 'P' || this.value == 'p'){
@@ -352,6 +315,74 @@ $(document).on("change","input[type='text']",function(){
             $(this).addClass("atent-ap");
           }
 })
+</script-->
+<script type="text/javascript">
+function calc_attendance()
+	{
+		var present_count=0;
+		var late_count=0;
+		var halfday_count=0;
+		var abscent_count=0;
+		total_count=document.getElementById("total_count").value;
+		for(i=1;i<=total_count;i++)
+			{
+				if(document.getElementById(i+'present').checked)
+					{
+						present_count++;
+					}
+				else if(document.getElementById(i+'late').checked)
+					{
+						late_count++;
+						present_count++;
+					}
+				else if(document.getElementById(i+'halfday').checked)
+					{
+						halfday_count++;
+						present_count++;
+					}
+				else 
+					{
+						abscent_count++;
+					}
+			}
+			document.getElementById("presentno").value=present_count;
+			document.getElementById("lateno").value=late_count;
+			document.getElementById("halfdayno").value=halfday_count;
+			document.getElementById("abscentno").value=abscent_count;	
+	}
+</script>
+<script>
+function getAttendanceList()
+{
+var xmlhttp;
+var classid=document.getElementById("classid").value;
+var secid=document.getElementById("secid").value;
+var adt=document.getElementById("adt").value;
+var cperiod=document.getElementById("cperiod").value;
+
+if (classid=0 || secid==0 || adt=='')
+  {
+    alert('Please select proper values for class, section, attendance date and class period.');
+    return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById('attendance-list-div').innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","GetAttendanceList.php?classid="+classid+"&secid="+secid+"&adt="+adt+"&cperiod="+cperiod,true);
+xmlhttp.send();
+}
 </script>
 </body>
 

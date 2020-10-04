@@ -52,13 +52,12 @@
     $raCountry = $_REQUEST["raCountry"];
     $sibling1StudId = $_REQUEST["sibling1StudId"];
     $sibling2StudId = $_REQUEST["sibling2StudId"];
-    /*$sibling1Class = $_REQUEST["sibling1Class"];
+    $sibling1Class = $_REQUEST["sibling1Class"];
     $sibling1Section = $_REQUEST["sibling1Section"];
     $sibling1RollNo = $_REQUEST["sibling1RollNo"];
-    $sibling2StudId = $_REQUEST["sibling2StudId"];
     $sibling2Class = $_REQUEST["sibling2Class"];
     $sibling2Section = $_REQUEST["sibling2Section"];
-    $sibling2RollNo = $_REQUEST["sibling2RollNo"];*/
+    $sibling2RollNo = $_REQUEST["sibling2RollNo"];
     $fatherName = $_REQUEST["fatherName"];
     $fatherQual = $_REQUEST["fatherQual"];
     $fatherOccupation = $_REQUEST["fatherOccupation"];
@@ -118,14 +117,15 @@
         (Admission_Id, School_Id, Session, First_Name, Middle_Name, Last_Name, Class_Id, Gender , DOB, Age, Social_Category, Discount_Category, Locality,
         Academic_Session, Mother_Tongue, Religion, Nationality, Blood_Group, Aadhar_No, Student_Image, Prev_School_Name, Prev_School_Medium, Prev_School_Board, 
         Prev_School_Class, Comm_Address, Comm_Add_Country, Comm_Add_State, Comm_Add_City_Dist, Comm_Add_Pincode, Comm_Add_ContactNo, Resid_Address, Resid_Add_Country,
-        Resid_Add_State, Resid_Add_City_Dist, Resid_Add_Pincode, Resid_Add_ContactNo, Sibling_1_Student_Id,Sibling_2_Student_Id, Father_Name, Father_Qualification, Father_Occupation, Father_Designation,
+        Resid_Add_State, Resid_Add_City_Dist, Resid_Add_Pincode, Resid_Add_ContactNo, Sibling_1_Student_Id, Sibling_1_Class, Sibling_1_Section, Sibling_1_RollNo, 
+        Sibling_2_Student_Id, Sibling_2_Class, Sibling_2_Section, Sibling_2_RollNo, Father_Name, Father_Qualification, Father_Occupation, Father_Designation,
         Father_Org_Name, Father_Org_Add, Father_City, Father_State, Father_Country, Father_Pincode, Father_Email, Father_Contact_No, Father_Annual_Income, Father_Aadhar_Card, Father_Alumni, Father_Image,
         Mother_Name, Mother_Qualification, Mother_Occupation, Mother_Designation, Mother_Org_Name, Mother_Org_Add, Mother_City, Mother_State, Mother_Country, Mother_Pincode, Mother_Email,
         Mother_Contact_No, Mother_Annual_Income, Mother_Aadhar_Card, Mother_Alumni,Mother_Image, 
         Gurdian_Type, Guardian_Address, Guardian_Name, Guardian_Relation, Guardian_Contact_No, Guardian_Image, 
         SMS_Contact_No, Whatsapp_Contact_No, Email_Id,
         Doc_Upload_1, Doc_Upload_2, Doc_Upload_3, Doc_Upload_4, Doc_Upload_5, Doc_Upload_6, Doc_Upload_7, Doc_Upload_8) 
-        values(?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        values(?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
      
 
     //echo $insertAdmissionTableSql;
@@ -133,7 +133,8 @@
     $stmt=$dbhandle->prepare($insertAdmissionTableSql);
     echo $dbhandle->error;	
    
-    $stmt->bind_param("iissssissisiisiisssssssissssssssssssssssssssssssssisssssssssssssssissssssssssssssssssss",    
+    //$stmt->bind_param("iissssissisiisiisssssssissssssssssssssssssssssssssisssssssssssssssissssssssssssssssssss",  
+    $stmt->bind_param("iissssissisiisiisssssssisssssssssssssisisisissssssssssssisssssssssssssssissssssssssssssssssss",   
     $admissionId,
     $schoolId,
     $session,
@@ -171,7 +172,13 @@
     $raPinCode,
     $raContactNo,
     $sibling1StudId,
+    $sibling1Class,
+    $sibling1Section,
+    $sibling1RollNo,
     $sibling2StudId,
+    $sibling2Class,
+    $sibling2Section,
+    $sibling2RollNo,
     $fatherName,
     $fatherQual,
     $fatherOccupation,

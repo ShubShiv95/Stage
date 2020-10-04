@@ -7,6 +7,18 @@
         include 'dbobj.php';
         include 'errorLog.php';
         include 'security.php';
+        include 'AdmissionDropdowns.php';
+
+        $classDropdownValue = "";
+        $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
+                                
+        $result=mysqli_query($dbhandle,$sql);                     
+        while($row=mysqli_fetch_assoc($result))
+        {
+            $classDropdownValue = '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>' . $classDropdownValue;
+        }
+
+
     ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -152,56 +164,70 @@
                                     <div class="form-group aj-form-group">
                                         <label>Social Category <span>*</span></label>
                                         <select class="select2" required="" name="studentSocialCat" id="studentSocialCat">
-                                            <option value="">SELECT SOCIAL CATEGORY</option>
-                                            <option selected value="GENERAL">GENERAL</option>
-                                            <option value="SC">SC</option>
-                                            <option value="ST">ST</option>
-                                            <option value="OBC">OBC</option>
+                                            <?php
+                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
+                                                $string = "";
+                                                foreach($GLOBAL_SOCIAL_CAT as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?>                                                 
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Discount Category <span>*</span></label>
                                         <select class="select2" required="" name="studDiscCat" id="studDiscCat">
-                                        <option value="">Please Select Discount </option>
-                                        <option selected value="10">10%</option>
-                                        <option value="15">15%</option>
+                                        <?php
+                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
+                                                $string = "";
+                                                foreach($GLOBAL_DISCOUNT_CAT as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                        ?>      
                                     </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Locality </label>
                                         <select class="select2" name="studLocality" id="studLocality"> 
-                                            <option value="">Select Locality</option>
-                                            <option value="1">Bokaro Steel City</option>
-                                            <option value="2">Bokaro Chas</option>
-                                            <option value="3">Bokaro Sec-1</option>
-                                            <option value="4">Bokaro Sec-4</option>
-                                            <option value="5">Dhanbad City</option>                                
-                                        </select>
+                                        <?php
+                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
+                                                $string = "";
+                                                foreach($GLOBAL_LOCALITY as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                        ?>                                             </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Academic Session <span>*</span></label>
                                         <select class="select2" required="" name="studAcademicSession" id="studAcademicSession"> 
-                                            <option value="">Select Session</option>
-                                            <option value="2020-2021">2020-2021</option>
-                                            <option value="2019-2020">2019-2020</option>
+                                        <?php
+                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
+                                                $string = "";
+                                                foreach($GLOBAL_SCHOOL_SESSION as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                        ?>                                             
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Mother Tongue <span>*</span></label>
                                         <select class="select2" required="" name="studMotherTongue" id="studMotherTongue" >
-                                            <option value="">Select MotherTongue</option>
-                                            <option value="Hindi">Hindi</option>
-                                            <option value="Bengali">Bengali</option>
-                                            <option value="English">English</option>
-                                            <option value="Gujrati">Gujrati</option>
-                                            <option value="Oriya">Oriya</option>
-                                            <option value="Kannada">Kannada</option>
-                                            <option value="Malayalam">Malayalam</option>
-                                            <option value="Punjabi">Punjabi</option>
-                                            <option value="Marathi">Marathi</option>
-                                            <option value="Tamil">Tamil</option>
-                                            <option value="Telugu">Telugu</option>                                
-                                            <option value="Other">Other</option>
+                                        <?php
+                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
+                                                $string = "";
+                                                foreach($GLOBAL_LANGUAGES as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                        ?>
                                         </select>
                                     </div>
                                     
@@ -210,14 +236,14 @@
                                 	<div class="form-group aj-form-group">
                                         <label>Religion <span>*</span></label>
                                         <select class="select2" required="" name="studReligion" id="studReligion">
-                                            <option value="">Select Religion</option>
-                                            <option selected value="Buddhist">Buddhist</option>
-                                            <option value="Christian">Christian</option>
-                                            <option value="Hindu">Hindu</option>
-                                            <option value="Jain">Jain</option>
-                                            <option value="Muslim">Muslim</option>
-                                            <option value="Sikh">Sikh</option>
-                                            <option value="Other">Other</option>                                            
+                                        <?php
+                                                $string = "";
+                                                foreach($GLOBAL_RELIGION as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                        ?>                                                 
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
@@ -231,15 +257,14 @@
                                     <div class="form-group aj-form-group">
                                         <label>Blood Group </label>
                                         <select class="select2" name="studBloodGroup" id="studBloodGroup">
-                                            <option value="">Select Blood Group</option>
-                                            <option value="A-Positive">A +</option>
-                                            <option value="A-Negative">A -</option>
-                                            <option value="AB-Positive">AB +</option>
-                                            <option value="AB-Negative">AB -</option>
-                                            <option value="B-Positive">B +</option>
-                                            <option value="B-Negative">B -</option>
-                                            <option value="O-Positive">O +</option>
-                                            <option value="O-Negative">O -</option>
+                                        <?php
+                                                $string = "";
+                                                foreach($GLOBAL_BLOOD_GROUP as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                        ?>        
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
@@ -273,10 +298,15 @@
                                     <div class="form-group aj-form-group">
                                         <label>Medium of Instrction</label>
                                          <select class="select2" name="studMOI" id="studMOI">
-                                            <option value="">Select Medium of Instruction</option>
-                                            <option value="English">English</option>
-                                            <option value="Bangla">Bangla</option> 
-                                            <option value="Hindi">Hindi</option>                                        
+                                         <?php
+                                               // $age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
+                                                $string = "";
+                                                foreach($GLOBAL_LANGUAGES as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                        ?>                                      
                                         </select>
                                     </div>
                                 </div>
@@ -296,17 +326,9 @@
                                         <label>Class</label>
                                         <select class="select2" name="studClass" id="studClass">
                                         <?php
-                                                    
-                                                    $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
-                                                    
-                                                    $result=mysqli_query($dbhandle,$sql);
-                                                    
-                                                    while($row=mysqli_fetch_assoc($result))
-                                                    {
-                                                    echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>';
-                                                    }
-                                                    ?>                                         
-                                        </select>
+                                            echo $classDropdownValue;
+                                         ?> 			                                
+                                       </select>
                                     </div>
                                 </div>
                             </div>
@@ -423,18 +445,10 @@
                                 			<div class="col-xl-3 col-lg-3 col-12">
                                 				<div class="form-group aj-form-group">
 			                                        <label>Class <span>*</span></label>
-			                                        <select class="select2" name="sibling1Class"  id="sibling1Class">
+                                                    <select class="select2" name="sibling1Class"  id="sibling1Class">
                                                     <?php
-                                                    
-                                                    $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
-                                                    
-                                                    $result=mysqli_query($dbhandle,$sql);
-                                                    
-                                                    while($row=mysqli_fetch_assoc($result))
-                                                    {
-                                                    echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>';
-                                                    }
-                                                    ?> 			                                        
+                                                        echo $classDropdownValue;
+                                                    ?> 			                                
                                                     </select>
 			                                    </div>
 			                                   
@@ -442,26 +456,14 @@
                                 			<div class="col-xl-3 col-lg-3 col-12">
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Section</label>
-			                                         <select class="select2" name="sibling1Section" id="sibling1Section">
-                                                        <option value="">Please Select Section</option>
-                                                        <option value="A">A</option>
-                                                        <option value="B">B</option>
-                                                        <option value="C">C</option>
-                                                        
-                                                    </select>
+                                                    <input type="text" name="sibling1Section"  id="sibling1Section" placeholder="" class="form-control">
 			                                    </div>
 			                                    
                                 			</div>
                                 			<div class="col-xl-3 col-lg-3 col-12">
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Roll No.</label>
-			                                         <select class="select2" name="sibling1RollNo"  id="sibling1RollNo">
-                                                        <option value="">Please Select Roll No. </option>
-                                                        <option selected value="1">123456</option>
-                                                        <option value="2">123456</option>
-                                                        <option value="3">123456</option>
-                                                        <option value="3">123456</option>
-                                                    </select>
+                                                    <input type="text" name="sibling1RollNo"  id="sibling1RollNo" placeholder="" class="form-control">
 			                                    </div>
                                 			</div>
 
@@ -477,61 +479,29 @@
                                             <div class="col-xl-3 col-lg-3 col-12 mt-4">
                                                 <div class="form-group aj-form-group">
                                                     <label>Class <span>*</span></label>
-                                                    <select class="select2" name="sibling2Class" id="sibling2Class" >
-                                                    <option value="">Select Class</option>
-                                                    <option value="Nur">Nursery</option>
-                                                    <option value="PREP">PREP</option>
-                                                    <option value="KG1">KG1</option>
-                                                    <option value="KG2">KG2</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="Misc">Misc</option>
-                                                   </select>
+                                                    <select class="select2" name="sibling2Class"  id="sibling2Class">
+                                                    <?php
+                                                        echo $classDropdownValue;
+                                                    ?> 			                                
+                                                    </select>
                                                 </div>                                              
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-12 mt-4">                                              
                                                 <div class="form-group aj-form-group">
                                                     <label>Section</label>
-                                                     <select class="select2" name="sibling2Sec" id="sibling2Sec">
-                                                        <option value="">Please Select Section </option>
-                                                        <option value="1">A</option>
-                                                        <option value="2">B</option>
-                                                        <option value="3">C</option>                                                      
-                                                    </select>
-                                                </div>
-                                                
+                                                    <input type="text" name="sibling2Section"  id="sibling2Section" placeholder="" class="form-control">
+                                                </div>                                                
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-12 mt-4">
                                                 <div class="form-group aj-form-group">
                                                     <label>Roll No.</label>
-                                                     <select class="select2" name="sibling2RollNo" id="sibling2RollNo">
-                                                        <option value="">Please Select Roll No.</option>
-                                                        <option value="1">123456</option>
-                                                        <option value="2">123456</option>
-                                                        <option value="3">123456</option>
-                                                        <option value="3">123456</option>
-                                                    </select>
+                                                    <input type="text" name="sibling2RollNo"  id="sibling2RollNo" placeholder="" class="form-control">
                                                 </div>
                                             </div>
-
-
                                 		</div>
-
-
                                 	</div>
                                 </div>
                             </div>
-
                             <div class="item-title aj-item-title f-aj-item-title">
                                 <h3 class="mb-4">Parent Details</h3>
                             </div>
@@ -545,28 +515,28 @@
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Qualification</label>
-	                                        <select class="select2" name="fatherQual" id="fatherQual">
-	                                            <option value="">Select Qualification</option>
-	                                            <option selected value="Non-Matric">Non-Matric</option>
-	                                            <option value="Matriculation">Matriculation</option>
-	                                            <option value="Intermediate">Intermediate</option>
-	                                            <option value="Graduate">Graduate</option>
-	                                            <option value="Post Graduate">Post Graduate</option>
-	                                            <option value="PHD">PHD</option>
-                                                <option value="Other">Other</option>
-	                                        </select>
+                                            <select class="select2" name="fatherQualification" id="fatherQualification">
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_QUALIFICATION as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?> 
+                                            </select>                                     
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Occupation</label>
 	                                        <select class="select2" name="fatherOccupation" id="fatherOccupation">
-	                                            <option value="">Select Occupation</option>
-	                                            <option value="Armed Forces">Armed Forces</option>
-	                                            <option value="Business">Business</option>
-	                                            <option value="Doctor">Doctor</option>
-	                                            <option value="Engineer">Engineer</option>
-	                                            <option value="Public/PSU Sec. Employee">Public/PSU Sec. Employee</option>
-	                                            <option value="Private Sec. Employee">Private Sec. Employee</option>
-                                                <option value="Other">Other</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_OCCUPATION as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                        ?>                                      
 	                                        </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
@@ -649,27 +619,27 @@
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Qualification</label>
 	                                        <select class="select2" name="motherQual" id="motherQual">
-                                            <option value="">Select Qualification</option>
-	                                            <option value="Non-Matric">Non-Matric</option>
-	                                            <option value="Matriculation">Matriculation</option>
-	                                            <option value="Intermediate">Intermediate</option>
-	                                            <option value="Graduate">Graduate</option>
-	                                            <option value="Post Graduate">Post Graduate</option>
-	                                            <option value="PHD">PHD</option>
-                                                <option value="Other">Other</option>	                                        
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_QUALIFICATION as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Occupation </label>
 	                                        <select class="select2" name="motherOccupation" id="motherOccupation">
-                                                <option value="">Select Occupation</option>
-	                                            <option value="Armed Forces">Armed Forces</option>
-	                                            <option value="Business">Business</option>
-	                                            <option value="Doctor">Doctor</option>
-	                                            <option value="Engineer">Engineer</option>
-	                                            <option value="Public/PSU Sec. Employee">Public/PSU Sec. Employee</option>
-	                                            <option value="Private Sec. Employee">Private Sec. Employee</option>
-                                                <option value="Other">Other</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_OCCUPATION as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?>                                      
 	                                        </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
@@ -744,8 +714,6 @@
 	                            </div>		
 	                        </div>
 
-
-                           
                             <div class="item-title aj-item-title f-aj-item-title">
                                 <h3 class="mb-4">Gaurdian Details</h3>
                             </div>
@@ -782,14 +750,15 @@
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Relations</label>
                                                     <select class="select2" name="othersRelation" id="othersRelation">
-                                                        <option value="">Select Relation</option>
-                                                        <option value="Uncle">Uncle</option>
-                                                        <option value="Aunt">Aunt</option>
-                                                        <option value="Grand Father">Grand Father</option>
-                                                        <option value="Grand Mother">Grand Mother</option>
-                                                        <option value="Friend">Friend</option>
-                                                        <option value="Other">Other</option>
-	                                                </select>
+                                                    <?php
+                                                    $string = "";
+                                                    foreach($GLOBAL_OTHER_RELATION as $x=>$x_value)
+                                                        {
+                                                            $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                        }
+                                                        echo $string;
+                                                    ?>       	                                                
+                                                    </select>
 			                                    </div>
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Mobile No.</label>
@@ -847,14 +816,14 @@
                                 	<div class="form-group aj-form-group">
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_1" id="docUpload_1">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -862,14 +831,14 @@
                                 	<div class="form-group aj-form-group">
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_2" id="docUpload_2">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -877,14 +846,14 @@
                                 	<div class="form-group aj-form-group">
                                            <label>Document Upload </label>
                                             <select class="select2" name="docUpload_3" id="docUpload_3">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -892,14 +861,14 @@
                                 	<div class="form-group aj-form-group">
                                            <label>Document Upload </label>
                                             <select class="select2" name="docUpload_4" id="docUpload_4">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div> <br><br>
@@ -907,14 +876,14 @@
                                 	<div class="form-group aj-form-group">
                                            <label>Document Upload</label>
                                             <select class="select2" name="docUpload_5" id="docUpload_5">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -922,14 +891,14 @@
                                 	<div class="form-group aj-form-group">
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_6" id="docUpload_6">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -937,14 +906,14 @@
                                 	<div class="form-group aj-form-group">
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_7" id="docUpload_7">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -952,14 +921,14 @@
                                 	<div class="form-group aj-form-group">
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_8" id="docUpload_8">
-                                            <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -977,8 +946,7 @@
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
+                    <div class="copyright">© Copyrights <a href="#">SwipeTouch Technologies</a> 2020. All rights reserved.
                 </footer>
             </div>
         </div>

@@ -1,16 +1,20 @@
-<?php
-session_start();
-include 'dbobj.php';
-include 'errorLog.php';
-include 'security.php';
-?>
+    <?php
+        session_start();
+        ?>
+        <!doctype html>
+        <html class="no-js" lang="">
+        <?php
+        include 'dbobj.php';
+        include 'errorLog.php';
+        include 'security.php';
+    ?>
 <!doctype html>
 <html class="no-js" lang="">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
+    <title>SWIFTCAMPUS | Admission Form View</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -71,7 +75,7 @@ include 'security.php';
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Application Entry</h3>
                             </div>
-                        <form class="new-added-form aj-new-added-form"  action="admissionController.php" id="admitForm">
+                        <form class="new-added-form aj-new-added-form"  action="AdmissionController.php" id="admitForm">
                             <div class="row">
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
@@ -90,7 +94,7 @@ include 'security.php';
                                         <label>Class <span>*</span></label>
                                         <select class="select2" name="studclassToApply" id="studclassToApply">
                                         <option value="0">Select Class</option>
-                                    <?php
+                                        <?php
                                                     
                                                     $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
                                                     
@@ -100,8 +104,8 @@ include 'security.php';
                                                     {
                                                     echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>';
                                                     }
-                                                    ?>                                        
-                                            </select>
+                                                    ?> 
+                                        </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Section</label>
@@ -136,8 +140,7 @@ include 'security.php';
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Date of Birth <span>*</span></label>
-                                        <input type="text" name="studentDOB" id="studentDOB" required="" placeholder="DD/MM/YYYY" class="form-control air-datepicker"
-                                        data-position='bottom right'>
+                                        <input type="text" name="studentDOB" id="studentDOB" required="" placeholder="DD/MM/YYYY" class="form-control air-datepicker" data-position="bottom right">
                                         <i class="far fa-calendar-alt"></i>
                                     </div>
 
@@ -292,32 +295,21 @@ include 'security.php';
                                     <div class="form-group aj-form-group">
                                         <label>Class</label>
                                         <select class="select2" name="studClass" id="studClass">
-                                            <option value="">Select Class</option>
-                                            <option value="Nur">Nursery</option>
-                                            <option value="PREP">PREP</option>
-                                            <option value="KG1">KG1</option>
-                                            <option value="KG2">KG2</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                            <option value="Misc">Misc</option>
+                                        <?php
+                                                    
+                                                    $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
+                                                    
+                                                    $result=mysqli_query($dbhandle,$sql);
+                                                    
+                                                    while($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                    echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>';
+                                                    }
+                                                    ?>                                         
                                         </select>
                                     </div>
                                 </div>
                             </div>
-
-
-                            
-                            
                             <div class="item-title aj-item-title f-aj-item-title">
                                 <h3 class="mb-4">Communication Address</h3>
                             </div>
@@ -432,25 +424,18 @@ include 'security.php';
                                 				<div class="form-group aj-form-group">
 			                                        <label>Class <span>*</span></label>
 			                                        <select class="select2" name="sibling1Class"  id="sibling1Class">
-                                                    <option value="">Select Class</option>
-                                                    <option value="Nur">Nursery</option>
-                                                    <option value="PREP">PREP</option>
-                                                    <option value="KG1">KG1</option>
-                                                    <option value="KG2">KG2</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="Misc">Misc</option>
-			                                        </select>
+                                                    <?php
+                                                    
+                                                    $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
+                                                    
+                                                    $result=mysqli_query($dbhandle,$sql);
+                                                    
+                                                    while($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                    echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>';
+                                                    }
+                                                    ?> 			                                        
+                                                    </select>
 			                                    </div>
 			                                   
                                 			</div>
@@ -484,7 +469,7 @@ include 'security.php';
                                                 
                                                 <div class="form-group aj-form-group">
                                                     <label>Student Id</label>
-                                                    <input type="text" name="sibling2StudId" id="sibling2StudId" placeholder="" class="form-control" value="STU0001">
+                                                    <input type="text" name="sibling2StudId" id="sibling2StudId" placeholder="" class="form-control">
                                                 </div>
                                                 
                                             </div>
@@ -608,7 +593,7 @@ include 'security.php';
 	                                    </div>
 	                                	<div class="form-group aj-form-group">
 	                                        <label>Country</label>
-	                                        <input type="text" name="fatherCountry" id="fatherCountry" placeholder="" class="form-control" >
+	                                        <input type="text" name="fatherCountry" id="fatherCountry" placeholder="" class="form-control">
 	                                    </div>
                                         <div class="form-group aj-form-group">
                                             <label>Pincode</label>
@@ -671,7 +656,8 @@ include 'security.php';
 	                                            <option value="Graduate">Graduate</option>
 	                                            <option value="Post Graduate">Post Graduate</option>
 	                                            <option value="PHD">PHD</option>
-                                                <option value="Other">Other</option>	                                        </select>
+                                                <option value="Other">Other</option>	                                        
+                                            </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Occupation </label>
@@ -751,7 +737,7 @@ include 'security.php';
 	                                        </div>
 	                                        <div class="file-in">
 	                                            <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-	                                            <input type="file" name="motherPhoto"  id="motherPhoto" class="form-control-file">
+	                                            <input type="file" name="motherPhoto"  id="motherPhoto" class="form-control-file" >
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -849,7 +835,7 @@ include 'security.php';
                                 <div class="col-xl-4 col-lg-4 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>E-Mail Address</label>
-                                        <input type="text" name="studEmailAddress"  id="studEmailAddress" placeholder="" class="form-control"> 
+                                        <input type="text" name="studEmailAddress"  id="studEmailAddress" placeholder="" class="form-control" > 
                                     </div>
                                 </div>
                             </div>
@@ -862,12 +848,13 @@ include 'security.php';
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_1" id="docUpload_1">
                                                 <option value="">Select Document</option>
-                                                <option value="15^NEW DELHI^INDIA">DELHI</option>
-                                                <option selected value="7^U.P^INDIA">GHAZIABAD</option>
-                                                <option value="36^U.P^INDIA">Greater Noida West</option>
-                                                <option value="2^NEW DELHI^INDIA">NEW DELHI</option>
-                                                <option value="5^U.P^INDIA">NOIDA</option>
-                                                <option value="37^U.P^INDIA">NOIDA EXTENSION</option>
+                                                <option selected value="Aadhar">Aadhar</option>
+                                                <option value="Address Proof">Address Proof</option>
+                                                <option value="Birth_Cert">Birth Certificate</option>
+                                                <option value="Bonafied">Bonafied</option>
+                                                <option value="CC">Character Cert</option>
+                                                <option value="SLC">School Leaving Cert</option>
+                                                <option value="TC">Transfer Cert.</option>
                                             </select>
                                         </div>
                                 </div>
@@ -876,12 +863,13 @@ include 'security.php';
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_2" id="docUpload_2">
                                                 <option value="">Select Document</option>
-                                                <option value="15^NEW DELHI^INDIA">DELHI</option>
-                                                <option value="7^U.P^INDIA">GHAZIABAD</option>
-                                                <option selected value="36^U.P^INDIA">Greater Noida West</option>
-                                                <option value="2^NEW DELHI^INDIA">NEW DELHI</option>
-                                                <option value="5^U.P^INDIA">NOIDA</option>
-                                                <option value="37^U.P^INDIA">NOIDA EXTENSION</option>
+                                                <option selected value="Aadhar">Aadhar</option>
+                                                <option value="Address Proof">Address Proof</option>
+                                                <option value="Birth_Cert">Birth Certificate</option>
+                                                <option value="Bonafied">Bonafied</option>
+                                                <option value="CC">Character Cert</option>
+                                                <option value="SLC">School Leaving Cert</option>
+                                                <option value="TC">Transfer Cert.</option>
                                             </select>
                                         </div>
                                 </div>
@@ -890,12 +878,13 @@ include 'security.php';
                                            <label>Document Upload </label>
                                             <select class="select2" name="docUpload_3" id="docUpload_3">
                                                 <option value="">Select Document</option>
-                                                <option value="15^NEW DELHI^INDIA">DELHI</option>
-                                                <option selected value="7^U.P^INDIA">GHAZIABAD</option>
-                                                <option value="36^U.P^INDIA">Greater Noida West</option>
-                                                <option value="2^NEW DELHI^INDIA">NEW DELHI</option>
-                                                <option value="5^U.P^INDIA">NOIDA</option>
-                                                <option value="37^U.P^INDIA">NOIDA EXTENSION</option>
+                                                <option selected value="Aadhar">Aadhar</option>
+                                                <option value="Address Proof">Address Proof</option>
+                                                <option value="Birth_Cert">Birth Certificate</option>
+                                                <option value="Bonafied">Bonafied</option>
+                                                <option value="CC">Character Cert</option>
+                                                <option value="SLC">School Leaving Cert</option>
+                                                <option value="TC">Transfer Cert.</option>
                                             </select>
                                         </div>
                                 </div>
@@ -904,12 +893,13 @@ include 'security.php';
                                            <label>Document Upload </label>
                                             <select class="select2" name="docUpload_4" id="docUpload_4">
                                                 <option value="">Select Document</option>
-                                                <option value="15^NEW DELHI^INDIA">DELHI</option>
-                                                <option value="7^U.P^INDIA">GHAZIABAD</option>
-                                                <option selected value="36^U.P^INDIA">Greater Noida West</option>
-                                                <option value="2^NEW DELHI^INDIA">NEW DELHI</option>
-                                                <option value="5^U.P^INDIA">NOIDA</option>
-                                                <option value="37^U.P^INDIA">NOIDA EXTENSION</option>
+                                                <option selected value="Aadhar">Aadhar</option>
+                                                <option value="Address Proof">Address Proof</option>
+                                                <option value="Birth_Cert">Birth Certificate</option>
+                                                <option value="Bonafied">Bonafied</option>
+                                                <option value="CC">Character Cert</option>
+                                                <option value="SLC">School Leaving Cert</option>
+                                                <option value="TC">Transfer Cert.</option>
                                             </select>
                                         </div>
                                 </div> <br><br>
@@ -918,12 +908,13 @@ include 'security.php';
                                            <label>Document Upload</label>
                                             <select class="select2" name="docUpload_5" id="docUpload_5">
                                                 <option value="">Select Document</option>
-                                                <option value="15^NEW DELHI^INDIA">DELHI</option>
-                                                <option value="7^U.P^INDIA">GHAZIABAD</option>
-                                                <option selected value="36^U.P^INDIA">Greater Noida West</option>
-                                                <option value="2^NEW DELHI^INDIA">NEW DELHI</option>
-                                                <option value="5^U.P^INDIA">NOIDA</option>
-                                                <option value="37^U.P^INDIA">NOIDA EXTENSION</option>
+                                                <option selected value="Aadhar">Aadhar</option>
+                                                <option value="Address Proof">Address Proof</option>
+                                                <option value="Birth_Cert">Birth Certificate</option>
+                                                <option value="Bonafied">Bonafied</option>
+                                                <option value="CC">Character Cert</option>
+                                                <option value="SLC">School Leaving Cert</option>
+                                                <option value="TC">Transfer Cert.</option>
                                             </select>
                                         </div>
                                 </div>
@@ -932,12 +923,13 @@ include 'security.php';
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_6" id="docUpload_6">
                                                 <option value="">Select Document</option>
-                                                <option value="15^NEW DELHI^INDIA">DELHI</option>
-                                                <option value="7^U.P^INDIA">GHAZIABAD</option>
-                                                <option selected value="36^U.P^INDIA">Greater Noida West</option>
-                                                <option value="2^NEW DELHI^INDIA">NEW DELHI</option>
-                                                <option value="5^U.P^INDIA">NOIDA</option>
-                                                <option value="37^U.P^INDIA">NOIDA EXTENSION</option>
+                                                <option selected value="Aadhar">Aadhar</option>
+                                                <option value="Address Proof">Address Proof</option>
+                                                <option value="Birth_Cert">Birth Certificate</option>
+                                                <option value="Bonafied">Bonafied</option>
+                                                <option value="CC">Character Cert</option>
+                                                <option value="SLC">School Leaving Cert</option>
+                                                <option value="TC">Transfer Cert.</option>
                                             </select>
                                         </div>
                                 </div>
@@ -946,12 +938,13 @@ include 'security.php';
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_7" id="docUpload_7">
                                                 <option value="">Select Document</option>
-                                                <option value="15^NEW DELHI^INDIA">DELHI</option>
-                                                <option value="7^U.P^INDIA">GHAZIABAD</option>
-                                                <option selected value="36^U.P^INDIA">Greater Noida West</option>
-                                                <option value="2^NEW DELHI^INDIA">NEW DELHI</option>
-                                                <option value="5^U.P^INDIA">NOIDA</option>
-                                                <option value="37^U.P^INDIA">NOIDA EXTENSION</option>
+                                                <option selected value="Aadhar">Aadhar</option>
+                                                <option value="Address Proof">Address Proof</option>
+                                                <option value="Birth_Cert">Birth Certificate</option>
+                                                <option value="Bonafied">Bonafied</option>
+                                                <option value="CC">Character Cert</option>
+                                                <option value="SLC">School Leaving Cert</option>
+                                                <option value="TC">Transfer Cert.</option>
                                             </select>
                                         </div>
                                 </div>
@@ -959,24 +952,20 @@ include 'security.php';
                                 	<div class="form-group aj-form-group">
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_8" id="docUpload_8">
-                                                <option value="">Select Document</option>
-                                                <option value="15^NEW DELHI^INDIA">DELHI</option>
-                                                <option value="7^U.P^INDIA">GHAZIABAD</option>
-                                                <option selected value="36^U.P^INDIA">Greater Noida West</option>
-                                                <option value="2^NEW DELHI^INDIA">NEW DELHI</option>
-                                                <option value="5^U.P^INDIA">NOIDA</option>
-                                                <option value="37^U.P^INDIA">NOIDA EXTENSION</option>
+                                            <option value="">Select Document</option>
+                                                <option selected value="Aadhar">Aadhar</option>
+                                                <option value="Address Proof">Address Proof</option>
+                                                <option value="Birth_Cert">Birth Certificate</option>
+                                                <option value="Bonafied">Bonafied</option>
+                                                <option value="CC">Character Cert</option>
+                                                <option value="SLC">School Leaving Cert</option>
+                                                <option value="TC">Transfer Cert.</option>
                                             </select>
                                         </div>
                                 </div>
                                 
                             </div>
-
-
-
                             <div class="footer-sec-aj">
-                            	
-                            
                             </div>
                             
                             <div class="aaj-btn-chang-c">
@@ -1038,11 +1027,12 @@ include 'security.php';
 
         $(document).ready(function(){
             $("#studentAge").focusin(function(){
-                //$(this).css("background-color", "#FFFFFF");
                 var dob = $('#studentDOB').val();
-                //var age = moment().diff(moment(dob, 'DD-MM-YYYY'), 'years');  
                 $("#studentAge").val(moment().diff(moment(dob, 'DD-MM-YYYY'), 'years'));              
             });
+
+
+            
         });
 	</script>
 </body>

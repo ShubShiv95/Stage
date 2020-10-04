@@ -57,7 +57,7 @@
     $sibling1RollNo = $_REQUEST["sibling1RollNo"];
     $sibling2StudId = $_REQUEST["sibling2StudId"];
     $sibling2Class = $_REQUEST["sibling2Class"];
-    $sibling2Sec = $_REQUEST["sibling2Sec"];
+    $sibling2Section = $_REQUEST["sibling2Section"];
     $sibling2RollNo = $_REQUEST["sibling2RollNo"];*/
     $fatherName = $_REQUEST["fatherName"];
     $fatherQual = $_REQUEST["fatherQual"];

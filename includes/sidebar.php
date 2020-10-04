@@ -55,7 +55,10 @@
                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Student</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="AdmissionForm.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
+                                    <a href="AdmissionAddForm.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="AdmissionSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Search Admission</a>
                                 </li>
                                 <!--li class="nav-item">
                                     <a href="RegistrationForm.php" class="nav-link"><i class="fas fa-angle-right"></i>Online Registration</a>

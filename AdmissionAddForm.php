@@ -1,63 +1,13 @@
-<?php
-            session_start();
-            include 'dbobj.php';
-            include 'security.php';
-            include 'errorLog.php';   
-            //include 'generate_sequence.php';
-
-
-            // Turn on all error reporting
-            // Report all PHP errors (see changelog)
-            error_reporting(E_ALL);
-            //ini_set — Sets the value of a configuration option.Sets the value of the given configuration option. The configuration option will keep this new value during the script's execution, and will be restored at the script's ending.
-            ini_set('display_errors', 1);
-
-            //starts here
-            $lid=$_SESSION["LOGINID"];
-            $schoolId=$_SESSION["SCHOOLID"];
-            $admission_Id = $_REQUEST["admission_Id"];
-
-            $selectAdmissionSql = "Select * From admission_master_table Where Admission_Id = ?";
-            $stmt=$dbhandle->prepare($selectAdmissionSql);
-            $stmt->bind_param("i", $admission_Id);
-
-            //echo $admission_Id;
-
-            $execResult=$stmt->execute();
-            //echo $execResult . '<br>'; 
-            echo $dbhandle->error;
-        //
-
-    if(!$execResult)
-        {
-            //var_dump($getStudentCount_result);
-            $error_msg=mysqli_error($dbhandle);
-            $sql="";
-            //$el=new LogMessage();
-            //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-            //$el->write_log_message('Investment Payment',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
-            $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
-            $dbhandle->query("unlock tables");
-            mysqli_rollback($dbhandle);
-            $str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
-            $message='Error: Admission Enquiry Not Saved.  Please consult application consultant.';
-            $str_end='</div>';
-            echo $str_start.$message.$str_end;
-            die;
-            //echo "";
-            //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';	
-        
-        }
-
-    $str_start='<div class="alert icon-alart bg-light-green2" role="alert"><i class="far fa-hand-point-right bg-light-green3"></i>';
-    $message='Resultset = ';
-    $execResult=$stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $stmt->close();
-
+    <?php
+        session_start();
+        ?>
+        <!doctype html>
+        <html class="no-js" lang="">
+        <?php
+        include 'dbobj.php';
+        include 'errorLog.php';
+        include 'security.php';
     ?>
-
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -124,45 +74,37 @@
                         <div class="heading-layout1">
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Application Entry</h3>
-                                <h4>Admission Id : <?php echo $row['Admission_Id']  ?></h3>
                             </div>
                         <form class="new-added-form aj-new-added-form"  action="AdmissionController.php" id="admitForm">
                             <div class="row">
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>First Name (As Per Birth Certificate) <span>*</span></label>
-                                        <input type="text" name="studentFirstName" id="studentFirstName" placeholder="" required="" class="form-control" value='<?php echo $row['First_Name']  ?>' readonly>
+                                        <input type="text" name="studentFirstName" id="studentFirstName" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Middle Name</label>
-                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" required="" class="form-control" value='<?php echo $row['Middle_Name']  ?>' readonly>
+                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Last Name</label>
-                                        <input type="text" name="studentLastName" id="studentLastName=" placeholder="" required="" class="form-control" value='<?php echo $row['Last_Name']  ?>' readonly>
+                                        <input type="text" name="studentLastName" id="studentLastName=" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Class <span>*</span></label>
                                         <select class="select2" name="studclassToApply" id="studclassToApply">
                                         <option value="0">Select Class</option>
-                                        <option value="">Select Class</option>
-                                            <option value="NUR" <?php if($row["Class_Id"]=='NUR') echo 'selected="selected"'; else echo ''; ?>>Nursery</option>
-                                            <option value="PREP"<?php if($row["Class_Id"]=='PREP') echo 'selected="selected"'; else echo ''; ?>>PREP</option>
-                                            <option value="KG1" <?php if($row["Class_Id"]=='KG1') echo 'selected="selected"'; else echo ''; ?>>KG1</option>
-                                            <option value="KG2" <?php if($row["Class_Id"]=='KG2') echo 'selected="selected"'; else echo ''; ?>>KG2</option>
-                                            <option value="1"   <?php if($row["Class_Id"]=='1') echo 'selected="selected"'; else echo ''; ?>>1</option>
-                                            <option value="2"   <?php if($row["Class_Id"]=='2') echo 'selected="selected"'; else echo ''; ?>>2</option>
-                                            <option value="3"   <?php if($row["Class_Id"]=='3') echo 'selected="selected"'; else echo ''; ?>>3</option>
-                                            <option value="4"   <?php if($row["Class_Id"]=='4') echo 'selected="selected"'; else echo ''; ?>>4</option>
-                                            <option value="5"   <?php if($row["Class_Id"]=='5') echo 'selected="selected"'; else echo ''; ?>>5</option>
-                                            <option value="6"   <?php if($row["Class_Id"]=='6') echo 'selected="selected"'; else echo ''; ?>>6</option>
-                                            <option value="7"   <?php if($row["Class_Id"]=='7') echo 'selected="selected"'; else echo ''; ?>>7</option>
-                                            <option value="8"   <?php if($row["Class_Id"]=='8') echo 'selected="selected"'; else echo ''; ?>>8</option>
-                                            <option value="9"   <?php if($row["Class_Id"]=='9') echo 'selected="selected"'; else echo ''; ?>>9</option>
-                                            <option value="10"  <?php if($row["Class_Id"]=='10') echo 'selected="selected"'; else echo ''; ?>>10</option>
-                                            <option value="11"  <?php if($row["Class_Id"]=='11') echo 'selected="selected"'; else echo ''; ?>>11</option>
-                                            <option value="12"  <?php if($row["Class_Id"]=='12') echo 'selected="selected"'; else echo ''; ?>>12</option>
-                                            <option value="MISC"<?php if($row["Class_Id"]=='MISC') echo 'selected="selected"'; else echo ''; ?>>Misc</option>
+                                        <?php
+                                                    
+                                                    $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
+                                                    
+                                                    $result=mysqli_query($dbhandle,$sql);
+                                                    
+                                                    while($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                    echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>';
+                                                    }
+                                                    ?> 
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
@@ -198,7 +140,7 @@
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Date of Birth <span>*</span></label>
-                                        <input type="text" name="studentDOB" id="studentDOB" required="" placeholder="DD/MM/YYYY" class="form-control air-datepicker" data-position="bottom right" value='<?php echo $row['DOB'] ?>' readonly>
+                                        <input type="text" name="studentDOB" id="studentDOB" required="" placeholder="DD/MM/YYYY" class="form-control air-datepicker" data-position="bottom right">
                                         <i class="far fa-calendar-alt"></i>
                                     </div>
 
@@ -302,7 +244,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Adhaar Card No.</label>
-                                        <input type="text" name="studAdharCardNo" id="studAdharCardNo" placeholder="" class="form-control" value='<?php echo $row['Aadhar_No']?>' readonly>
+                                        <input type="text" name="studAdharCardNo" id="studAdharCardNo" placeholder="" class="form-control">
                                     </div>
                                     
                                     <div class="form-group faj-form-group">
@@ -324,7 +266,7 @@
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>School Name</label>
-                                        <input type="text" name="studPrevSchoolName" id="studPrevSchoolName" placeholder="" class="form-control" value='<?php echo $row['Prev_School_Name'] ?>' readonly>
+                                        <input type="text" name="studPrevSchoolName" id="studPrevSchoolName" placeholder="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
@@ -353,31 +295,21 @@
                                     <div class="form-group aj-form-group">
                                         <label>Class</label>
                                         <select class="select2" name="studClass" id="studClass">
-                                           <option value="NUR" <?php if($row["Prev_School_Class"]=='NUR') echo 'selected="selected"'; else echo ''; ?>>Nursery</option>
-                                            <option value="PREP"<?php if($row["Prev_School_Class"]=='PREP') echo 'selected="selected"'; else echo ''; ?>>PREP</option>
-                                            <option value="KG1" <?php if($row["Prev_School_Class"]=='KG1') echo 'selected="selected"'; else echo ''; ?>>KG1</option>
-                                            <option value="KG2" <?php if($row["Prev_School_Class"]=='KG2') echo 'selected="selected"'; else echo ''; ?>>KG2</option>
-                                            <option value="1"   <?php if($row["Prev_School_Class"]=='1') echo 'selected="selected"'; else echo ''; ?>>1</option>
-                                            <option value="2"   <?php if($row["Prev_School_Class"]=='2') echo 'selected="selected"'; else echo ''; ?>>2</option>
-                                            <option value="3"   <?php if($row["Prev_School_Class"]=='3') echo 'selected="selected"'; else echo ''; ?>>3</option>
-                                            <option value="4"   <?php if($row["Prev_School_Class"]=='4') echo 'selected="selected"'; else echo ''; ?>>4</option>
-                                            <option value="5"   <?php if($row["Prev_School_Class"]=='5') echo 'selected="selected"'; else echo ''; ?>>5</option>
-                                            <option value="6"   <?php if($row["Prev_School_Class"]=='6') echo 'selected="selected"'; else echo ''; ?>>6</option>
-                                            <option value="7"   <?php if($row["Prev_School_Class"]=='7') echo 'selected="selected"'; else echo ''; ?>>7</option>
-                                            <option value="8"   <?php if($row["Prev_School_Class"]=='8') echo 'selected="selected"'; else echo ''; ?>>8</option>
-                                            <option value="9"   <?php if($row["Prev_School_Class"]=='9') echo 'selected="selected"'; else echo ''; ?>>9</option>
-                                            <option value="10"  <?php if($row["Prev_School_Class"]=='10') echo 'selected="selected"'; else echo ''; ?>>10</option>
-                                            <option value="11"  <?php if($row["Prev_School_Class"]=='11') echo 'selected="selected"'; else echo ''; ?>>11</option>
-                                            <option value="12"  <?php if($row["Prev_School_Class"]=='12') echo 'selected="selected"'; else echo ''; ?>>12</option>
-                                            <option value="MISC"<?php if($row["Prev_School_Class"]=='MISC') echo 'selected="selected"'; else echo ''; ?>>Misc</option>
+                                        <?php
+                                                    
+                                                    $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
+                                                    
+                                                    $result=mysqli_query($dbhandle,$sql);
+                                                    
+                                                    while($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                    echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>';
+                                                    }
+                                                    ?>                                         
                                         </select>
                                     </div>
                                 </div>
                             </div>
-
-
-                            
-                            
                             <div class="item-title aj-item-title f-aj-item-title">
                                 <h3 class="mb-4">Communication Address</h3>
                             </div>
@@ -385,36 +317,36 @@
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Communication Address<span>*</span></label>
-                                        <textarea type="text" rows="4" name="commAddress" id="commAddress" required="" placeholder="" class="aj-form-control" value='<?php echo $row['Comm_Address'] ?>' readonly> </textarea>
+                                        <textarea type="text" rows="4" name="commAddress" id="commAddress" required="" placeholder="" class="aj-form-control"> </textarea>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>City/ District<span>*</span></label>
-                                        <input type="text" name="commCityDist" id="commCityDist" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_City_Dist'] ?>' readonly>
+                                        <input type="text" name="commCityDist" id="commCityDist" required="" placeholder="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Pincode<span>*</span></label>
-                                        <input type="text" name="commPinCode" id="commPinCode" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_Pincode'] ?>' readonly>
+                                        <input type="text" name="commPinCode" id="commPinCode" required="" placeholder="" class="form-control">
                                     </div>
                                     
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>State<span>*</span> </label>
-                                        <input type="text" name="commState" id="commState" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_State'] ?>' readonly>
+                                        <input type="text" name="commState" id="commState" required="" placeholder="" class="form-control">
 
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Contact No.<span>*</span></label>
-                                        <input type="text" name="commContactNo" id="commContactNo" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_ContactNo'] ?>' readonly>
+                                        <input type="text" name="commContactNo" id="commContactNo" required="" placeholder="" class="form-control">
                                     </div>
                                     
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>Country</label>
-                                        <input type="text" minlength="12" maxlength="12" name="commCountry" id="commCountry" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_Country'] ?>' readonly>
+                                        <input type="text" minlength="12" maxlength="12" name="commCountry" id="commCountry" placeholder="" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -425,37 +357,37 @@
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Residential Address<span>*</span></label>
-                                        <textarea type="text" rows="4" name="raAddress"  id="raAddress" required="" placeholder="" class="aj-form-control" value='<?php echo $row['Resid_Address']?>' readonly> </textarea>
+                                        <textarea type="text" rows="4" name="raAddress"  id="raAddress" required="" placeholder="" class="aj-form-control"> </textarea>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label> City/ District <span>*</span></label>
-                                        <input type="text" name="raCityDist"  id="raCityDist" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_City_Dist']?>' readonly>
+                                        <input type="text" name="raCityDist"  id="raCityDist" required="" placeholder="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Pincode <span>*</span></label>
-                                        <input type="text" name="raPinCode" id="raPinCode" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_Pincode']?>' readonly>
+                                        <input type="text" name="raPinCode" id="raPinCode" required="" placeholder="" class="form-control">
                                     </div>
                                     
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>State <span>*</span> </label>
-                                        <input type="text" name="raState" id="raState" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_State']?>' readonly>
+                                        <input type="text" name="raState" id="raState" required="" placeholder="" class="form-control">
 
                                         
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Contact No. <span>*</span></label>
-                                        <input type="text" name="raContactNo" id="raContactNo" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_ContactNo']?>' readonly>
+                                        <input type="text" name="raContactNo" id="raContactNo" required="" placeholder="" class="form-control">
                                     </div>
                                     
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>Country</label>
-                                        <input type="text" minlength="12" maxlength="12" name="raCountry" id="raCountry" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_Country']?>' readonly>
+                                        <input type="text" minlength="12" maxlength="12" name="raCountry" id="raCountry" placeholder="" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -483,7 +415,7 @@
                                                 
                                                 <div class="form-group aj-form-group">
                                                     <label>Student Id</label>
-                                                    <input type="text" name="sibling1StudId"  id="sibling1StudId" placeholder="" class="form-control" value='<?php echo $row['Sibling_1_Student_Id']?>' readonly>
+                                                    <input type="text" name="sibling1StudId"  id="sibling1StudId" placeholder="" class="form-control">
                                                 </div>
                                                 
                                             </div>
@@ -492,25 +424,18 @@
                                 				<div class="form-group aj-form-group">
 			                                        <label>Class <span>*</span></label>
 			                                        <select class="select2" name="sibling1Class"  id="sibling1Class">
-                                                    <option value="">Select Class</option>
-                                                    <option value="NUR" <?php if($row["Prev_School_Class"]=='NUR') echo 'selected="selected"'; else echo ''; ?>>Nursery</option>
-                                                    <option value="PREP"<?php if($row["Prev_School_Class"]=='PREP') echo 'selected="selected"'; else echo ''; ?>>PREP</option>
-                                                    <option value="KG1" <?php if($row["Prev_School_Class"]=='KG1') echo 'selected="selected"'; else echo ''; ?>>KG1</option>
-                                                    <option value="KG2" <?php if($row["Prev_School_Class"]=='KG2') echo 'selected="selected"'; else echo ''; ?>>KG2</option>
-                                                    <option value="1"   <?php if($row["Prev_School_Class"]=='1') echo 'selected="selected"'; else echo ''; ?>>1</option>
-                                                    <option value="2"   <?php if($row["Prev_School_Class"]=='2') echo 'selected="selected"'; else echo ''; ?>>2</option>
-                                                    <option value="3"   <?php if($row["Prev_School_Class"]=='3') echo 'selected="selected"'; else echo ''; ?>>3</option>
-                                                    <option value="4"   <?php if($row["Prev_School_Class"]=='4') echo 'selected="selected"'; else echo ''; ?>>4</option>
-                                                    <option value="5"   <?php if($row["Prev_School_Class"]=='5') echo 'selected="selected"'; else echo ''; ?>>5</option>
-                                                    <option value="6"   <?php if($row["Prev_School_Class"]=='6') echo 'selected="selected"'; else echo ''; ?>>6</option>
-                                                    <option value="7"   <?php if($row["Prev_School_Class"]=='7') echo 'selected="selected"'; else echo ''; ?>>7</option>
-                                                    <option value="8"   <?php if($row["Prev_School_Class"]=='8') echo 'selected="selected"'; else echo ''; ?>>8</option>
-                                                    <option value="9"   <?php if($row["Prev_School_Class"]=='9') echo 'selected="selected"'; else echo ''; ?>>9</option>
-                                                    <option value="10"  <?php if($row["Prev_School_Class"]=='10') echo 'selected="selected"'; else echo ''; ?>>10</option>
-                                                    <option value="11"  <?php if($row["Prev_School_Class"]=='11') echo 'selected="selected"'; else echo ''; ?>>11</option>
-                                                    <option value="12"  <?php if($row["Prev_School_Class"]=='12') echo 'selected="selected"'; else echo ''; ?>>12</option>
-                                                    <option value="MISC"<?php if($row["Prev_School_Class"]=='MISC') echo 'selected="selected"'; else echo ''; ?>>Misc</option>
-			                                        </select>
+                                                    <?php
+                                                    
+                                                    $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
+                                                    
+                                                    $result=mysqli_query($dbhandle,$sql);
+                                                    
+                                                    while($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                    echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>';
+                                                    }
+                                                    ?> 			                                        
+                                                    </select>
 			                                    </div>
 			                                   
                                 			</div>
@@ -544,7 +469,7 @@
                                                 
                                                 <div class="form-group aj-form-group">
                                                     <label>Student Id</label>
-                                                    <input type="text" name="sibling2StudId" id="sibling2StudId" placeholder="" class="form-control" value='<?php echo $row['Sibling_2_Student_Id']?>' readonly>
+                                                    <input type="text" name="sibling2StudId" id="sibling2StudId" placeholder="" class="form-control">
                                                 </div>
                                                 
                                             </div>
@@ -616,7 +541,7 @@
 	                            	<div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
 	                            		<div class="form-group aj-form-group aj-form-group0">
 	                                         <label>Father's Name (As Per Birth Certificate) </label>
-                                            <input type="text" name="fatherName" id="fatherName" placeholder="" class="form-control" value='<?php echo $row['Father_Name']?>' readonly>                                                                        
+                                            <input type="text" name="fatherName" id="fatherName" placeholder="" class="form-control">                                                                        
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Qualification</label>
@@ -646,52 +571,52 @@
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
                                             <label>Designation</label>
-                                            <input type="text" name="fatherDesig" id="fatherDesig" placeholder="" class="form-control" value='<?php echo $row['Father_Designation']?>' readonly>
+                                            <input type="text" name="fatherDesig" id="fatherDesig" placeholder="" class="form-control">
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Org Name</label>
-	                                        <input type="text" name="fatherOrgName" id="fatherOrgName" placeholder="" class="form-control" value='<?php echo $row['Father_Org_Name']?>' readonly>
+	                                        <input type="text" name="fatherOrgName" id="fatherOrgName" placeholder="" class="form-control">
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Org Address</label>
-	                                        <input type="text" name="fatherOrgAdd" id="fatherOrgAdd" placeholder="" class="form-control" value='<?php echo $row['Father_Org_Add']?>' readonly>
+	                                        <input type="text" name="fatherOrgAdd" id="fatherOrgAdd" placeholder="" class="form-control">
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
                                             <label>City</label>
-                                            <input type="text" name="fatherCity" id="fatherCity" placeholder="" class="form-control" value='<?php echo $row['Father_City']?>' readonly>
+                                            <input type="text" name="fatherCity" id="fatherCity" placeholder="" class="form-control">
                                         </div>
 	                            	</div>
 	                            	<div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
 	                            		<div class="form-group aj-form-group">
 	                                        <label>State</label>
-	                                        <input type="text"  name="fatherState" id="fatherState" placeholder="" class="form-control" value='<?php echo $row['Father_State']?>' readonly>
+	                                        <input type="text"  name="fatherState" id="fatherState" placeholder="" class="form-control">
 	                                    </div>
 	                                	<div class="form-group aj-form-group">
 	                                        <label>Country</label>
-	                                        <input type="text" name="fatherCountry" id="fatherCountry" placeholder="" class="form-control" value='<?php echo $row['Father_Country']?>' readonly>
+	                                        <input type="text" name="fatherCountry" id="fatherCountry" placeholder="" class="form-control">
 	                                    </div>
                                         <div class="form-group aj-form-group">
                                             <label>Pincode</label>
-                                            <input type="text"  name="fatherPinCode" id="fatherPinCode" placeholder="" class="form-control" value='<?php echo $row['Father_Pincode']?>' readonly>
+                                            <input type="text"  name="fatherPinCode" id="fatherPinCode" placeholder="" class="form-control">
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Email</label>
-	                                        <input type="text" name="fatherEmail" id="fatherEmail" placeholder="" class="form-control" value='<?php echo $row['Father_Email']?>' readonly>
+	                                        <input type="text" name="fatherEmail" id="fatherEmail" placeholder="" class="form-control">
 	                                    </div>
                                         <div class="form-group aj-form-group">
                                             <label>Contact No.</label>
-                                            <input type="text" minlength="10" maxlength="10" name="fatherContactNo" id="fatherContactNo" placeholder="" class="form-control" value='<?php echo $row['Father_Contact_No']?>' readonly>
+                                            <input type="text" minlength="10" maxlength="10" name="fatherContactNo" id="fatherContactNo" placeholder="" class="form-control">
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Annual Income</label>
-	                                        <input type="text"  name="fatherAnnualIncome" id="fatherAnnualIncome" placeholder="" class="form-control" value='<?php echo $row['Father_Annual_Income']?>' readonly>
+	                                        <input type="text"  name="fatherAnnualIncome" id="fatherAnnualIncome" placeholder="" class="form-control">
 	                                    </div>
 	                                    
 	                            	</div>
 	                            	<div class="col-xl-4 col-lg-4 col-12 ">
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Adhaar  Card No.</label>
-	                                         <input type="text"  name="fatherAdharCardNo" id="fatherAdharCardNo" placeholder="" class="form-control" value='<?php echo $row['Father_Aadhar_Card']?>' readonly>
+	                                         <input type="text"  name="fatherAdharCardNo" id="fatherAdharCardNo" placeholder="" class="form-control">
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Alumni</label>
@@ -707,7 +632,7 @@
 	                                        </div>
 	                                        <div class="file-in">
 	                                            <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-	                                            <input type="file" name="fatherPhoto" id="fatherPhoto"  class="form-control-file" value='<?php echo $row['Father_Image']?>' readonly>
+	                                            <input type="file" name="fatherPhoto" id="fatherPhoto"  class="form-control-file">
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -731,7 +656,8 @@
 	                                            <option value="Graduate">Graduate</option>
 	                                            <option value="Post Graduate">Post Graduate</option>
 	                                            <option value="PHD">PHD</option>
-                                                <option value="Other">Other</option>	                                        </select>
+                                                <option value="Other">Other</option>	                                        
+                                            </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Occupation </label>
@@ -748,53 +674,53 @@
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
                                             <label>Designation</label>
-                                            <input type="text" name="motherDesig" id="motherDesig" placeholder="" class="form-control" value='<?php echo $row['Mother_Designation']?>' readonly>
+                                            <input type="text" name="motherDesig" id="motherDesig" placeholder="" class="form-control">
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Org Name</label>
-	                                        <input type="text" name="motherOrgName" id="motherOrgName" placeholder="" class="form-control" value='<?php echo $row['Mother_Org_Name']?>' readonly>
+	                                        <input type="text" name="motherOrgName" id="motherOrgName" placeholder="" class="form-control">
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Org Address</label>
-	                                        <input type="text" name="motherOrgAdd" id="motherOrgAdd" placeholder="" class="form-control" value='<?php echo $row['Mother_Org_Add']?>' readonly>
+	                                        <input type="text" name="motherOrgAdd" id="motherOrgAdd" placeholder="" class="form-control">
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
                                             <label>City</label>
-                                            <input type="text" name="motherCity" id="motherCity" placeholder="" class="form-control" value='<?php echo $row['Mother_City']?>' readonly>
+                                            <input type="text" name="motherCity" id="motherCity" placeholder="" class="form-control">
                                         </div>
 	                                    
 	                            	</div>
 	                            	<div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
 	                            		<div class="form-group aj-form-group">
 	                                        <label>State</label>
-	                                        <input type="text" name="motherState" id="motherState" placeholder="" class="form-control" value='<?php echo $row['Mother_State']?>' readonly>
+	                                        <input type="text" name="motherState" id="motherState" placeholder="" class="form-control">
 	                                    </div>
 	                                	<div class="form-group aj-form-group">
 	                                        <label> Country </label>
-	                                        <input type="text" name="motherCountry" id="motherCountry" placeholder="" class="form-control" value='<?php echo $row['Mother_Country']?>' readonly>
+	                                        <input type="text" name="motherCountry" id="motherCountry" placeholder="" class="form-control">
 	                                    </div>
                                         <div class="form-group aj-form-group">
                                             <label>Pincode</label>
-                                            <input type="text" name="motherPinCode" id="motherPinCode" placeholder="" class="form-control" value='<?php echo $row['Mother_Pincode']?>' readonly>
+                                            <input type="text" name="motherPinCode" id="motherPinCode" placeholder="" class="form-control">
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Email</label>
-	                                        <input type="text" name="motherEmail"  id="motherEmail" placeholder="" class="form-control" value='<?php echo $row['Mother_Email']?>' readonly>
+	                                        <input type="text" name="motherEmail"  id="motherEmail" placeholder="" class="form-control">
 	                                    </div>
                                         <div class="form-group aj-form-group">
                                             <label>Contact No.</label>
-                                            <input type="text" minlength="12" maxlength="12" name="motherContactNo" id="motherContactNo" placeholder="" class="form-control" value='<?php echo $row['Mother_Contact_No']?>' readonly>
+                                            <input type="text" minlength="12" maxlength="12" name="motherContactNo" id="motherContactNo" placeholder="" class="form-control">
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Annual Income</label>
-	                                        <input type="text" name="motherAnnualIncome" id="motherAnnualIncome" placeholder="" class="form-control" value='<?php echo $row['Mother_Annual_Income']?>' readonly>
+	                                        <input type="text" name="motherAnnualIncome" id="motherAnnualIncome" placeholder="" class="form-control">
 	                                    </div>
 	                                    
 	                            	</div>
 	                            	<div class="col-xl-4 col-lg-4 col-12 ">
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Adhaar  Card No.</label>
-	                                         <input type="text" name="motherAdharCardNo" id="motherAdharCardNo" placeholder="" class="form-control" value='<?php echo $row['Mother_Aadhar_Card']?>' readonly>
+	                                         <input type="text" name="motherAdharCardNo" id="motherAdharCardNo" placeholder="" class="form-control">
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Alumni</label>
@@ -811,7 +737,7 @@
 	                                        </div>
 	                                        <div class="file-in">
 	                                            <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-	                                            <input type="file" name="motherPhoto"  id="motherPhoto" class="form-control-file" value='<?php echo $row['Mother_Image']?>' readonly>
+	                                            <input type="file" name="motherPhoto"  id="motherPhoto" class="form-control-file" >
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -845,13 +771,13 @@
 			                                <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Address</label>
-			                                        <textarea type="text" name="othersAddress" id="othersAddress" rows="7" placeholder="" class="aj-form-control" value='<?php echo $row['Guardian_Address']?>' readonly> </textarea>
+			                                        <textarea type="text" name="othersAddress" id="othersAddress" rows="7" placeholder="" class="aj-form-control"> </textarea>
 			                                    </div>
 			                                </div>
 			                                <div class="col-xl-4 col-lg-4 col-12">
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Name</label>
-			                                        <input type="text" name="othersName" id="othersName" placeholder="" class="form-control" value='<?php echo $row['Guardian_Name']?>' readonly>
+			                                        <input type="text" name="othersName" id="othersName" placeholder="" class="form-control">
 			                                    </div>
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Relations</label>
@@ -867,7 +793,7 @@
 			                                    </div>
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Mobile No.</label>
-			                                        <input type="text" name="othersMobileNo" id="othersMobileNo" placeholder="" class="form-control" value='<?php echo $row['Guardian_Contact_No']?>' readonly>
+			                                        <input type="text" name="othersMobileNo" id="othersMobileNo" placeholder="" class="form-control">
 			                                    </div>
 			                                </div>
 			                                <div class="col-xl-4 col-lg-4 col-12">
@@ -880,7 +806,7 @@
 			                                        </div>
 		                                            <div class="file-in">
 		                                                <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-		                                                <input type="file" name="othersPhoto" id="othersPhoto" class="form-control-file" value='<?php echo $row['Guardian_Image']?>' readonly>
+		                                                <input type="file" name="othersPhoto" id="othersPhoto" class="form-control-file">
 		                                            </div>
 		                                        </div>
 			                                </div>
@@ -897,19 +823,19 @@
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>SMS Contact No. <span>*</span></label>
-                                        <input type="text" name="studSMSContactNo" id="studSMSContactNo" minlength="10" maxlength="10" required="" placeholder="" class="form-control" value='<?php echo $row['SMS_Contact_No']?>' readonly>
+                                        <input type="text" name="studSMSContactNo" id="studSMSContactNo" minlength="10" maxlength="10" required="" placeholder="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Whatsapp Contact No.</label>
-                                        <input type="text" name="studWhatsAppContactNo" id="studWhatsAppContactNo" minlength="10" maxlength="10" placeholder="" class="form-control" value='<?php echo $row['Whatsapp_Contact_No']?>' readonly>
+                                        <input type="text" name="studWhatsAppContactNo" id="studWhatsAppContactNo" minlength="10" maxlength="10" placeholder="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>E-Mail Address</label>
-                                        <input type="text" name="studEmailAddress"  id="studEmailAddress" placeholder="" class="form-control" value='<?php echo $row['Email_Id']?>' readonly> 
+                                        <input type="text" name="studEmailAddress"  id="studEmailAddress" placeholder="" class="form-control" > 
                                     </div>
                                 </div>
                             </div>

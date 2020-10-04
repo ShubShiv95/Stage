@@ -35,7 +35,7 @@
                                     <a href="FollowupEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Follow Up Eqnuiry</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="https://<?php echo $_SESSION["HOSTNAME"];?>/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
+                                    <a href="http://localhost:8080/solvethemess/stage/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
                                 </li>
 								
                                 

@@ -20,6 +20,8 @@
     $GLOBAL_QUALIFICATION = array("Other"=>"Other","PHD"=>"PHD","Post Graduate"=>"Post Graduate", "Graduate"=>"Graduate",
     "Non-Matric"=>"Non-Matric", "Matriculation"=>"Matriculation","Intermediate"=>"Intermediate", ""=>"Select Qualification");
      
+    $GLOBAL_SCHOOL_BOARD = array("SB"=>"State Board","ICSE"=>"ICSE", "CBSE"=>"CBSE", "" => "Select Board");
+
     $GLOBAL_OCCUPATION = array("Other"=>"Other","Private Sec. Employee"=>"Private Sec. Employee","Public/PSU Sec. Employee"=>"Public/PSU Sec. Employee", "Engineer"=>"Engineer",
     "Doctor"=>"Doctor", "Business"=>"Business","Armed Forces"=>"Armed Forces", ""=>"Select Occupation");
 

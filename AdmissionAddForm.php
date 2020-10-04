@@ -107,34 +107,21 @@
                                         <select class="select2" name="studclassToApply" id="studclassToApply">
                                         <option value="0">Select Class</option>
                                         <?php
-                                                    
-                                                    $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
-                                                    
-                                                    $result=mysqli_query($dbhandle,$sql);
-                                                    
-                                                    while($row=mysqli_fetch_assoc($result))
-                                                    {
-                                                    echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>';
-                                                    }
-                                                    ?> 
+                                            echo $classDropdownValue;
+                                        ?> 
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Section</label>
-                                        <select class="select2" name="f_Section">
-                                            <option value="">Please Select Section </option>
-                                            <option value="1">A</option>
-                                            <option value="2">B</option>
-                                        </select>
+                                        <select class="select2" name="f_Section" readonly>
+                                            <option value="">Select</option>
+                                         </select>
                                     </div>
 
                                    <div class="form-group aj-form-group">
                                         <label>Roll No.</label>
-                                        <select class="select2" name="f_Gender">
-                                            <option value="">Please Select Roll Number </option>
-                                            <option selected value="1">Male</option>
-                                            <option value="2">Female</option>
-                                            <option value="3">Others</option>
+                                        <select class="select2" name="f_Gender" readonly> 
+                                        <option value="">Select </option>
                                         </select>
                                     </div>
                                     
@@ -308,10 +295,14 @@
                                     <div class="form-group aj-form-group">
                                         <label>Board</label>
                                         <select class="select2" name="studBoard" id="studBoard">
-                                            <option value="">Select Board</option>
-                                            <option value="CBSE">CBSE</option>
-                                            <option value="ICSE">ICSE</option>
-                                            <option value="OTHERS">OTHERS</option>
+                                        <?php
+                                                $string = "";
+                                                foreach($GLOBAL_SCHOOL_BOARD as $x=>$x_value)
+                                                {
+                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                }
+                                                echo $string;
+                                        ?>                                      
                                         </select>
                                     </div>
                                 </div>

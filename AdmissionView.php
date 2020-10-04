@@ -3,8 +3,7 @@
             include 'dbobj.php';
             include 'security.php';
             include 'errorLog.php';   
-            //include 'generate_sequence.php';
-
+            include 'AdmissionDropdowns.php';
 
             // Turn on all error reporting
             // Report all PHP errors (see changelog)
@@ -49,12 +48,57 @@
         
         }
 
-    $str_start='<div class="alert icon-alart bg-light-green2" role="alert"><i class="far fa-hand-point-right bg-light-green3"></i>';
-    $message='Resultset = ';
-    $execResult=$stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     $stmt->close();
+
+
+    $classDropdownValue = "";
+    $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
+                            
+    $result=mysqli_query($dbhandle,$sql);      
+    while($classRow=mysqli_fetch_assoc($result))
+    {
+        if($row["Class_Id"] ==  $classRow["Class_Id"]){
+            $classDropdownValue = '<option selected value="' . $classRow["Class_Id"] . '">Class ' . $classRow["class_name"] . ' ' . $classRow["stream"] . '</option>' . $classDropdownValue;
+        } else{
+            $classDropdownValue = '<option value="' . $classRow["Class_Id"] . '">Class ' . $classRow["class_name"] . ' ' . $classRow["stream"] . '</option>' . $classDropdownValue;        
+        }
+    }
+
+    $classDropdownValue_2 = "";
+    $result=mysqli_query($dbhandle,$sql);      
+    while($classRow_2=mysqli_fetch_assoc($result))
+    {
+        if($row["Prev_School_Class"] ==  $classRow_2["Class_Id"]){
+            $classDropdownValue_2 = '<option selected value="' . $classRow_2["Class_Id"] . '">Class ' . $classRow_2["class_name"] . ' ' . $classRow_2["stream"] . '</option>' . $classDropdownValue_2;
+        } else{
+            $classDropdownValue_2 = '<option value="' . $classRow_2["Class_Id"] . '">Class ' . $classRow_2["class_name"] . ' ' . $classRow_2["stream"] . '</option>' . $classDropdownValue_2;        
+        }
+    }
+
+
+    $classDropdownValue_3 = "";
+    $result=mysqli_query($dbhandle,$sql);      
+    while($classRow_3=mysqli_fetch_assoc($result))
+    {
+        if($row["Sibling_1_Class"] ==  $classRow_3["Class_Id"]){
+            $classDropdownValue_3 = '<option selected value="' . $classRow_3["Class_Id"] . '">Class ' . $classRow_3["class_name"] . ' ' . $classRow_3["stream"] . '</option>' . $classDropdownValue_3;
+        } else{
+            $classDropdownValue_3 = '<option value="' . $classRow_3["Class_Id"] . '">Class ' . $classRow_3["class_name"] . ' ' . $classRow_3["stream"] . '</option>' . $classDropdownValue_3;        
+        }
+    }
+
+    $classDropdownValue_4 = "";
+    $result=mysqli_query($dbhandle,$sql);      
+    while($classRow_4=mysqli_fetch_assoc($result))
+    {
+        if($row["Sibling_2_Class"] ==  $classRow_4["Class_Id"]){
+            $classDropdownValue_4 = '<option selected value="' . $classRow_4["Class_Id"] . '">Class ' . $classRow_4["class_name"] . ' ' . $classRow_4["stream"] . '</option>' . $classDropdownValue_4;
+        } else{
+            $classDropdownValue_4 = '<option value="' . $classRow_4["Class_Id"] . '">Class ' . $classRow_4["class_name"] . ' ' . $classRow_4["stream"] . '</option>' . $classDropdownValue_4;        
+        }
+    }
 
     ?>
 
@@ -144,30 +188,14 @@
                                     <div class="form-group aj-form-group">
                                         <label>Class <span>*</span></label>
                                         <select class="select2" name="studclassToApply" id="studclassToApply">
-                                        <option value="0">Select Class</option>
-                                        <option value="">Select Class</option>
-                                            <option value="NUR" <?php if($row["Class_Id"]=='NUR') echo 'selected="selected"'; else echo ''; ?>>Nursery</option>
-                                            <option value="PREP"<?php if($row["Class_Id"]=='PREP') echo 'selected="selected"'; else echo ''; ?>>PREP</option>
-                                            <option value="KG1" <?php if($row["Class_Id"]=='KG1') echo 'selected="selected"'; else echo ''; ?>>KG1</option>
-                                            <option value="KG2" <?php if($row["Class_Id"]=='KG2') echo 'selected="selected"'; else echo ''; ?>>KG2</option>
-                                            <option value="1"   <?php if($row["Class_Id"]=='1') echo 'selected="selected"'; else echo ''; ?>>1</option>
-                                            <option value="2"   <?php if($row["Class_Id"]=='2') echo 'selected="selected"'; else echo ''; ?>>2</option>
-                                            <option value="3"   <?php if($row["Class_Id"]=='3') echo 'selected="selected"'; else echo ''; ?>>3</option>
-                                            <option value="4"   <?php if($row["Class_Id"]=='4') echo 'selected="selected"'; else echo ''; ?>>4</option>
-                                            <option value="5"   <?php if($row["Class_Id"]=='5') echo 'selected="selected"'; else echo ''; ?>>5</option>
-                                            <option value="6"   <?php if($row["Class_Id"]=='6') echo 'selected="selected"'; else echo ''; ?>>6</option>
-                                            <option value="7"   <?php if($row["Class_Id"]=='7') echo 'selected="selected"'; else echo ''; ?>>7</option>
-                                            <option value="8"   <?php if($row["Class_Id"]=='8') echo 'selected="selected"'; else echo ''; ?>>8</option>
-                                            <option value="9"   <?php if($row["Class_Id"]=='9') echo 'selected="selected"'; else echo ''; ?>>9</option>
-                                            <option value="10"  <?php if($row["Class_Id"]=='10') echo 'selected="selected"'; else echo ''; ?>>10</option>
-                                            <option value="11"  <?php if($row["Class_Id"]=='11') echo 'selected="selected"'; else echo ''; ?>>11</option>
-                                            <option value="12"  <?php if($row["Class_Id"]=='12') echo 'selected="selected"'; else echo ''; ?>>12</option>
-                                            <option value="MISC"<?php if($row["Class_Id"]=='MISC') echo 'selected="selected"'; else echo ''; ?>>Misc</option>
+                                        <?php
+                                            echo $classDropdownValue;
+                                        ?>                                       
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Section</label>
-                                        <select class="select2" name="f_Section">
+                                        <select class="select2" name="f_Section" readonly>
                                             <option value="">Please Select Section </option>
                                             <option value="1">A</option>
                                             <option value="2">B</option>
@@ -176,7 +204,7 @@
 
                                    <div class="form-group aj-form-group">
                                         <label>Roll No.</label>
-                                        <select class="select2" name="f_Gender">
+                                        <select class="select2" name="f_Gender" readonly>
                                             <option value="">Please Select Roll Number </option>
                                             <option selected value="1">Male</option>
                                             <option value="2">Female</option>
@@ -210,57 +238,86 @@
                                     <div class="form-group aj-form-group">
                                         <label>Social Category <span>*</span></label>
                                         <select class="select2" required="" name="studentSocialCat" id="studentSocialCat">
-                                            <option value="">SELECT SOCIAL CATEGORY</option>
-                                            <option selected value="GENERAL"  <?php if($row["Social_Category"]=='GENERAL') echo 'selected="selected"'; else echo ''; ?>>GENERAL</option>
-                                            <option value="SC" <?php if($row["Social_Category"]=='SC') echo 'selected="selected"'; else echo ''; ?>>SC</option>
-                                            <option value="ST" <?php if($row["Social_Category"]=='ST') echo 'selected="selected"'; else echo ''; ?>>ST</option>
-                                            <option value="OBC" <?php if($row["Social_Category"]=='OBC') echo 'selected="selected"'; else echo ''; ?>>OBC</option>
+                                        <?php
+                                                $string = "";
+                                                foreach($GLOBAL_SOCIAL_CAT as $x=>$x_value)
+                                                {
+                                                    if($row['Social_Category'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }
+                                                }
+                                                echo $string;
+                                            ?>                                                 
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Discount Category <span>*</span></label>
                                         <select class="select2" required="" name="studDiscCat" id="studDiscCat">
-                                        <option value="">Please Select Discount </option>
-                                        <option value="10" <?php if($row["Discount_Category"]=='10') echo 'selected="selected"'; else echo ''; ?>>10%</option>
-                                        <option value="15" <?php if($row["Discount_Category"]=='15') echo 'selected="selected"'; else echo ''; ?>>15%</option>
-                                    </select>
+                                        <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DISCOUNT_CAT as $x=>$x_value)
+                                                {
+                                                    if($row['Discount_Category'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                }
+                                                echo $string;
+                                        ?>
+                                        </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Locality </label>
                                         <select class="select2" name="studLocality" id="studLocality"> 
-                                            <option value="">Select Locality</option>
-                                            <option value="1" <?php if($row["Locality"]=='1') echo 'selected="selected"'; else echo ''; ?>>Bokaro Steel City</option>
-                                            <option value="2" <?php if($row["Locality"]=='2') echo 'selected="selected"'; else echo ''; ?>>Bokaro Chas</option>
-                                            <option value="3" <?php if($row["Locality"]=='3') echo 'selected="selected"'; else echo ''; ?>>Bokaro Sec-1</option>
-                                            <option value="4" <?php if($row["Locality"]=='4') echo 'selected="selected"'; else echo ''; ?>>Bokaro Sec-4</option>
-                                            <option value="5" <?php if($row["Locality"]=='5') echo 'selected="selected"'; else echo ''; ?>>Dhanbad City</option>                                
+                                        <?php
+                                                $string = "";
+                                                foreach($GLOBAL_LOCALITY as $x=>$x_value)
+                                                {
+                                                    if($row['Locality'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                }
+                                                echo $string;
+                                        ?>                                             
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Academic Session <span>*</span></label>
                                         <select class="select2" required="" name="studAcademicSession" id="studAcademicSession"> 
-                                            <option value="">Select Session</option>
-                                            <option value="2020-2021" <?php if($row["Session"]=='2020-2021') echo 'selected="selected"'; else echo ''; ?>>2020-2021</option>
-                                            <option value="2019-2020" <?php if($row["Session"]=='2019-2020') echo 'selected="selected"'; else echo ''; ?>>2019-2020</option>
-                                        </select>
+                                        <?php
+                                                $string = "";
+                                                foreach($GLOBAL_SCHOOL_SESSION as $x=>$x_value)
+                                                {
+                                                    if($row['Session'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                }
+                                                echo $string;
+                                        ?>                                             
+                                       </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Mother Tongue <span>*</span></label>
                                         <select class="select2" required="" name="studMotherTongue" id="studMotherTongue" >
-                                            <option value="">Select MotherTongue</option>
-                                            <option value="Hindi" <?php if($row["Mother_Tongue"]=='1') echo 'selected="selected"'; else echo ''; ?>>Hindi</option>
-                                            <option value="Bengali" <?php if($row["Mother_Tongue"]=='2') echo 'selected="selected"'; else echo ''; ?>>Bengali</option>
-                                            <option value="English" <?php if($row["Mother_Tongue"]=='3') echo 'selected="selected"'; else echo ''; ?>>English</option>
-                                            <option value="Gujrati" <?php if($row["Mother_Tongue"]=='4') echo 'selected="selected"'; else echo ''; ?>>Gujrati</option>
-                                            <option value="Oriya" <?php if($row["Mother_Tongue"]=='5') echo 'selected="selected"'; else echo ''; ?>>Oriya</option>
-                                            <option value="Kannada" <?php if($row["Mother_Tongue"]=='6') echo 'selected="selected"'; else echo ''; ?>>Kannada</option>
-                                            <option value="Malayalam" <?php if($row["Mother_Tongue"]=='7') echo 'selected="selected"'; else echo ''; ?>>Malayalam</option>
-                                            <option value="Punjabi" <?php if($row["Mother_Tongue"]=='8') echo 'selected="selected"'; else echo ''; ?>>Punjabi</option>
-                                            <option value="Marathi" <?php if($row["Mother_Tongue"]=='9') echo 'selected="selected"'; else echo ''; ?>>Marathi</option>
-                                            <option value="Tamil" <?php if($row["Mother_Tongue"]=='10') echo 'selected="selected"'; else echo ''; ?>>Tamil</option>
-                                            <option value="Telugu" <?php if($row["Mother_Tongue"]=='11') echo 'selected="selected"'; else echo ''; ?>>Telugu</option>                                
-                                            <option value="Other" <?php if($row["Mother_Tongue"]=='12') echo 'selected="selected"'; else echo ''; ?>>Other</option>
-                                        </select>
+                                        <?php
+                                                $string = "";
+                                                foreach($GLOBAL_LANGUAGES as $x=>$x_value)
+                                                {
+                                                    if($row['Mother_Tongue'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                 }
+                                                echo $string;
+                                        ?>
+                                       </select>
                                     </div>
                                     
                                 </div>
@@ -268,14 +325,18 @@
                                 	<div class="form-group aj-form-group">
                                         <label>Religion <span>*</span></label>
                                         <select class="select2" required="" name="studReligion" id="studReligion">
-                                            <option value="">Select Religion</option>
-                                            <option value="Buddhist" <?php if($row["Religion"]=='1') echo 'selected="selected"'; else echo ''; ?>>Buddhist</option>
-                                            <option value="Christian" <?php if($row["Religion"]=='2') echo 'selected="selected"'; else echo ''; ?>>Christian</option>
-                                            <option value="Hindu" <?php if($row["Religion"]=='3') echo 'selected="selected"'; else echo ''; ?>>Hindu</option>
-                                            <option value="Jain" <?php if($row["Religion"]=='4') echo 'selected="selected"'; else echo ''; ?>>Jain</option>
-                                            <option value="Muslim" <?php if($row["Religion"]=='5') echo 'selected="selected"'; else echo ''; ?>>Muslim</option>
-                                            <option value="Sikh" <?php if($row["Religion"]=='6') echo 'selected="selected"'; else echo ''; ?>>Sikh</option>
-                                            <option value="Other" <?php if($row["Religion"]=='7') echo 'selected="selected"'; else echo ''; ?>>Other</option>                                            
+                                        <?php
+                                                $string = "";
+                                                foreach($GLOBAL_RELIGION as $x=>$x_value)
+                                                {
+                                                    if($row['Religion'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                }
+                                                echo $string;
+                                        ?>                                                 
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
@@ -289,15 +350,18 @@
                                     <div class="form-group aj-form-group">
                                         <label>Blood Group </label>
                                         <select class="select2" name="studBloodGroup" id="studBloodGroup">
-                                            <option value="">Select Blood Group</option>
-                                            <option value="A-Positive" <?php if($row["Blood_Group"]=='A-Positive') echo 'selected="selected"'; else echo ''; ?>>A +</option>
-                                            <option value="A-Negative" <?php if($row["Blood_Group"]=='A-Negative') echo 'selected="selected"'; else echo ''; ?>>A -</option>
-                                            <option value="AB-Positive" <?php if($row["Blood_Group"]=='AB-Positive') echo 'selected="selected"'; else echo ''; ?>>AB +</option>
-                                            <option value="AB-Negative" <?php if($row["Blood_Group"]=='AB-Negative') echo 'selected="selected"'; else echo ''; ?>>AB -</option>
-                                            <option value="B-Positive" <?php if($row["Blood_Group"]=='B-Positive') echo 'selected="selected"'; else echo ''; ?>>B +</option>
-                                            <option value="B-Negative" <?php if($row["Blood_Group"]=='B-Negative') echo 'selected="selected"'; else echo ''; ?>>B -</option>
-                                            <option value="O-Positive" <?php if($row["Blood_Group"]=='O-Positive') echo 'selected="selected"'; else echo ''; ?>>O +</option>
-                                            <option value="O-Negative" <?php if($row["Blood_Group"]=='O-Negative') echo 'selected="selected"'; else echo ''; ?>>O -</option>
+                                        <?php
+                                                $string = "";
+                                                foreach($GLOBAL_BLOOD_GROUP as $x=>$x_value)
+                                                {
+                                                    if($row['Blood_Group'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                }
+                                                echo $string;
+                                        ?>        
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
@@ -331,11 +395,18 @@
                                     <div class="form-group aj-form-group">
                                         <label>Medium of Instruction</label>
                                          <select class="select2" name="studMOI" id="studMOI">
-                                            <option value="">Select Medium of Instruction</option>
-                                            <option value="English" <?php if($row["Prev_School_Medium"]=='English') echo 'selected="selected"'; else echo ''; ?>>English</option>
-                                            <option value="Bengali" <?php if($row["Prev_School_Medium"]=='Bengali') echo 'selected="selected"'; else echo ''; ?>>Bangla</option> 
-                                            <option value="Hindi" <?php if($row["Prev_School_Medium"]=='Hindi') echo 'selected="selected"'; else echo ''; ?>>Hindi</option>                                        
-                                            <option value="Other" <?php if($row["Prev_School_Medium"]=='Other') echo 'selected="selected"'; else echo ''; ?>>Other</option> 
+                                         <?php
+                                                $string = "";
+                                                foreach($GLOBAL_LANGUAGES as $x=>$x_value)
+                                                {
+                                                    if($row['Prev_School_Medium'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                   }
+                                                echo $string;
+                                        ?>                                      
                                         </select>
                                     </div>
                                 </div>
@@ -343,10 +414,18 @@
                                     <div class="form-group aj-form-group">
                                         <label>Board</label>
                                         <select class="select2" name="studBoard" id="studBoard">
-                                            <option value="">Select Board</option>
-                                            <option value="CBSE" <?php if($row["Prev_School_Board"]=='CBSE') echo 'selected="selected"'; else echo ''; ?>>CBSE</option>
-                                            <option value="ICSE" <?php if($row["Prev_School_Board"]=='ICSE') echo 'selected="selected"'; else echo ''; ?>>ICSE</option>
-                                            <option value="OTHERS" <?php if($row["Prev_School_Board"]=='OTHERS') echo 'selected="selected"'; else echo ''; ?>>OTHERS</option>
+                                        <?php
+                                                $string = "";
+                                                foreach($GLOBAL_SCHOOL_BOARD as $x=>$x_value)
+                                                {
+                                                    if($row['Prev_School_Board'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                }
+                                                echo $string;
+                                        ?>                                                      
                                         </select>
                                     </div>
                                 </div>
@@ -354,23 +433,9 @@
                                     <div class="form-group aj-form-group">
                                         <label>Class</label>
                                         <select class="select2" name="studClass" id="studClass">
-                                           <option value="NUR" <?php if($row["Sibling_1_Class"]=='NUR') echo 'selected="selected"'; else echo ''; ?>>Nursery</option>
-                                            <option value="PREP"<?php if($row["Sibling_1_Class"]=='PREP') echo 'selected="selected"'; else echo ''; ?>>PREP</option>
-                                            <option value="KG1" <?php if($row["Sibling_1_Class"]=='KG1') echo 'selected="selected"'; else echo ''; ?>>KG1</option>
-                                            <option value="KG2" <?php if($row["Sibling_1_Class"]=='KG2') echo 'selected="selected"'; else echo ''; ?>>KG2</option>
-                                            <option value="1"   <?php if($row["Sibling_1_Class"]=='1') echo 'selected="selected"'; else echo ''; ?>>1</option>
-                                            <option value="2"   <?php if($row["Sibling_1_Class"]=='2') echo 'selected="selected"'; else echo ''; ?>>2</option>
-                                            <option value="3"   <?php if($row["Sibling_1_Class"]=='3') echo 'selected="selected"'; else echo ''; ?>>3</option>
-                                            <option value="4"   <?php if($row["Sibling_1_Class"]=='4') echo 'selected="selected"'; else echo ''; ?>>4</option>
-                                            <option value="5"   <?php if($row["Sibling_1_Class"]=='5') echo 'selected="selected"'; else echo ''; ?>>5</option>
-                                            <option value="6"   <?php if($row["Sibling_1_Class"]=='6') echo 'selected="selected"'; else echo ''; ?>>6</option>
-                                            <option value="7"   <?php if($row["Sibling_1_Class"]=='7') echo 'selected="selected"'; else echo ''; ?>>7</option>
-                                            <option value="8"   <?php if($row["Sibling_1_Class"]=='8') echo 'selected="selected"'; else echo ''; ?>>8</option>
-                                            <option value="9"   <?php if($row["Sibling_1_Class"]=='9') echo 'selected="selected"'; else echo ''; ?>>9</option>
-                                            <option value="10"  <?php if($row["Sibling_1_Class"]=='10') echo 'selected="selected"'; else echo ''; ?>>10</option>
-                                            <option value="11"  <?php if($row["Sibling_1_Class"]=='11') echo 'selected="selected"'; else echo ''; ?>>11</option>
-                                            <option value="12"  <?php if($row["Sibling_1_Class"]=='12') echo 'selected="selected"'; else echo ''; ?>>12</option>
-                                            <option value="MISC"<?php if($row["Sibling_1_Class"]=='MISC') echo 'selected="selected"'; else echo ''; ?>>Misc</option>
+                                        <?php
+                                            echo $classDropdownValue_2;
+                                        ?>                                      
                                         </select>
                                     </div>
                                 </div>
@@ -493,24 +558,9 @@
                                 				<div class="form-group aj-form-group">
 			                                        <label>Class <span>*</span></label>
 			                                        <select class="select2" name="sibling1Class"  id="sibling1Class">
-                                                    <option value="">Select Class</option>
-                                                    <option value="NUR" <?php if($row["Sibling_1_Class"]=='NUR') echo 'selected="selected"'; else echo ''; ?>>Nursery</option>
-                                                    <option value="PREP"<?php if($row["Sibling_1_Class"]=='PREP') echo 'selected="selected"'; else echo ''; ?>>PREP</option>
-                                                    <option value="KG1" <?php if($row["Sibling_1_Class"]=='KG1') echo 'selected="selected"'; else echo ''; ?>>KG1</option>
-                                                    <option value="KG2" <?php if($row["Sibling_1_Class"]=='KG2') echo 'selected="selected"'; else echo ''; ?>>KG2</option>
-                                                    <option value="1"   <?php if($row["Sibling_1_Class"]=='1') echo 'selected="selected"'; else echo ''; ?>>1</option>
-                                                    <option value="2"   <?php if($row["Sibling_1_Class"]=='2') echo 'selected="selected"'; else echo ''; ?>>2</option>
-                                                    <option value="3"   <?php if($row["Sibling_1_Class"]=='3') echo 'selected="selected"'; else echo ''; ?>>3</option>
-                                                    <option value="4"   <?php if($row["Sibling_1_Class"]=='4') echo 'selected="selected"'; else echo ''; ?>>4</option>
-                                                    <option value="5"   <?php if($row["Sibling_1_Class"]=='5') echo 'selected="selected"'; else echo ''; ?>>5</option>
-                                                    <option value="6"   <?php if($row["Sibling_1_Class"]=='6') echo 'selected="selected"'; else echo ''; ?>>6</option>
-                                                    <option value="7"   <?php if($row["Sibling_1_Class"]=='7') echo 'selected="selected"'; else echo ''; ?>>7</option>
-                                                    <option value="8"   <?php if($row["Sibling_1_Class"]=='8') echo 'selected="selected"'; else echo ''; ?>>8</option>
-                                                    <option value="9"   <?php if($row["Sibling_1_Class"]=='9') echo 'selected="selected"'; else echo ''; ?>>9</option>
-                                                    <option value="10"  <?php if($row["Sibling_1_Class"]=='10') echo 'selected="selected"'; else echo ''; ?>>10</option>
-                                                    <option value="11"  <?php if($row["Sibling_1_Class"]=='11') echo 'selected="selected"'; else echo ''; ?>>11</option>
-                                                    <option value="12"  <?php if($row["Sibling_1_Class"]=='12') echo 'selected="selected"'; else echo ''; ?>>12</option>
-                                                    <option value="MISC"<?php if($row["Sibling_1_Class"]=='MISC') echo 'selected="selected"'; else echo ''; ?>>Misc</option>
+                                                    <?php
+                                                        echo $classDropdownValue_3;
+                                                    ?> 			                                
 			                                        </select>
 			                                    </div>
 			                                   
@@ -539,25 +589,10 @@
                                                 <div class="form-group aj-form-group">
                                                     <label>Class <span>*</span></label>
                                                     <select class="select2" name="sibling2Class" id="sibling2Class" >
-                                                    <option value="">Select Class</option>
-                                                    <option value="NUR" <?php if($row["Sibling_2_Class"]=='NUR') echo 'selected="selected"'; else echo ''; ?>>Nursery</option>
-                                                    <option value="PREP"<?php if($row["Sibling_2_Class"]=='PREP') echo 'selected="selected"'; else echo ''; ?>>PREP</option>
-                                                    <option value="KG1" <?php if($row["Sibling_2_Class"]=='KG1') echo 'selected="selected"'; else echo ''; ?>>KG1</option>
-                                                    <option value="KG2" <?php if($row["Sibling_2_Class"]=='KG2') echo 'selected="selected"'; else echo ''; ?>>KG2</option>
-                                                    <option value="1"   <?php if($row["Sibling_2_Class"]=='1') echo 'selected="selected"'; else echo ''; ?>>1</option>
-                                                    <option value="2"   <?php if($row["Sibling_2_Class"]=='2') echo 'selected="selected"'; else echo ''; ?>>2</option>
-                                                    <option value="3"   <?php if($row["Sibling_2_Class"]=='3') echo 'selected="selected"'; else echo ''; ?>>3</option>
-                                                    <option value="4"   <?php if($row["Sibling_2_Class"]=='4') echo 'selected="selected"'; else echo ''; ?>>4</option>
-                                                    <option value="5"   <?php if($row["Sibling_2_Class"]=='5') echo 'selected="selected"'; else echo ''; ?>>5</option>
-                                                    <option value="6"   <?php if($row["Sibling_2_Class"]=='6') echo 'selected="selected"'; else echo ''; ?>>6</option>
-                                                    <option value="7"   <?php if($row["Sibling_2_Class"]=='7') echo 'selected="selected"'; else echo ''; ?>>7</option>
-                                                    <option value="8"   <?php if($row["Sibling_2_Class"]=='8') echo 'selected="selected"'; else echo ''; ?>>8</option>
-                                                    <option value="9"   <?php if($row["Sibling_2_Class"]=='9') echo 'selected="selected"'; else echo ''; ?>>9</option>
-                                                    <option value="10"  <?php if($row["Sibling_2_Class"]=='10') echo 'selected="selected"'; else echo ''; ?>>10</option>
-                                                    <option value="11"  <?php if($row["Sibling_2_Class"]=='11') echo 'selected="selected"'; else echo ''; ?>>11</option>
-                                                    <option value="12"  <?php if($row["Sibling_2_Class"]=='12') echo 'selected="selected"'; else echo ''; ?>>12</option>
-                                                    <option value="MISC"<?php if($row["Sibling_2_Class"]=='MISC') echo 'selected="selected"'; else echo ''; ?>>Misc</option>
-                                                   </select>
+                                                    <?php
+                                                        echo $classDropdownValue_4;
+                                                    ?>
+                                                     </select>
                                                 </div>                                              
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-12 mt-4">                                              
@@ -590,27 +625,35 @@
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Qualification</label>
 	                                        <select class="select2" name="fatherQual" id="fatherQual">
-	                                            <option value="">Select Qualification</option>
-	                                            <option selected value="Non-Matric">Non-Matric</option>
-	                                            <option value="Matriculation">Matriculation</option>
-	                                            <option value="Intermediate">Intermediate</option>
-	                                            <option value="Graduate">Graduate</option>
-	                                            <option value="Post Graduate">Post Graduate</option>
-	                                            <option value="PHD">PHD</option>
-                                                <option value="Other">Other</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_QUALIFICATION as $x=>$x_value)
+                                                {
+                                                if($row['Father_Qualification'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                }
+                                                echo $string;
+                                            ?> 
 	                                        </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Occupation</label>
 	                                        <select class="select2" name="fatherOccupation" id="fatherOccupation">
-	                                            <option value="">Select Occupation</option>
-	                                            <option value="Armed Forces">Armed Forces</option>
-	                                            <option value="Business">Business</option>
-	                                            <option value="Doctor">Doctor</option>
-	                                            <option value="Engineer">Engineer</option>
-	                                            <option value="Public/PSU Sec. Employee">Public/PSU Sec. Employee</option>
-	                                            <option value="Private Sec. Employee">Private Sec. Employee</option>
-                                                <option value="Other">Other</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_OCCUPATION as $x=>$x_value)
+                                                {
+                                                    if($row['Father_Occupation'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                }
+                                                echo $string;
+                                        ?>                                      
 	                                        </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
@@ -694,25 +737,35 @@
 	                                        <label>Qualification</label>
 	                                        <select class="select2" name="motherQual" id="motherQual">
                                             <option value="">Select Qualification</option>
-	                                            <option value="Non-Matric">Non-Matric</option>
-	                                            <option value="Matriculation">Matriculation</option>
-	                                            <option value="Intermediate">Intermediate</option>
-	                                            <option value="Graduate">Graduate</option>
-	                                            <option value="Post Graduate">Post Graduate</option>
-	                                            <option value="PHD">PHD</option>
-                                                <option value="Other">Other</option>	                                        </select>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_QUALIFICATION as $x=>$x_value)
+                                                {
+                                                if($row['Mother_Qualification'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                }
+                                                echo $string;
+                                            ?> 
+                                            </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Occupation </label>
 	                                        <select class="select2" name="motherOccupation" id="motherOccupation">
-                                                <option value="">Select Occupation</option>
-	                                            <option value="Armed Forces">Armed Forces</option>
-	                                            <option value="Business">Business</option>
-	                                            <option value="Doctor">Doctor</option>
-	                                            <option value="Engineer">Engineer</option>
-	                                            <option value="Public/PSU Sec. Employee">Public/PSU Sec. Employee</option>
-	                                            <option value="Private Sec. Employee">Private Sec. Employee</option>
-                                                <option value="Other">Other</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_OCCUPATION as $x=>$x_value)
+                                                {
+                                                    if($row['Mother_Occupation'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                }
+                                                echo $string;
+                                        ?>                                      
 	                                        </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
@@ -825,13 +878,18 @@
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Relations</label>
                                                     <select class="select2" name="othersRelation" id="othersRelation">
-                                                        <option value="">Select Relation</option>
-                                                        <option value="Uncle">Uncle</option>
-                                                        <option value="Aunt">Aunt</option>
-                                                        <option value="Grand Father">Grand Father</option>
-                                                        <option value="Grand Mother">Grand Mother</option>
-                                                        <option value="Friend">Friend</option>
-                                                        <option value="Other">Other</option>
+                                                    <?php
+                                                        $string = "";
+                                                        foreach($GLOBAL_OTHER_RELATION as $x=>$x_value)
+                                                        {
+                                                            if($row['Guardian_Relation'] == $x){
+                                                                $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                            }else {
+                                                                $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                            }                                                
+                                                        }
+                                                        echo $string;
+                                                    ?>       	                                                
 	                                                </select>
 			                                    </div>
 			                                    <div class="form-group aj-form-group">
@@ -890,14 +948,18 @@
                                 	<div class="form-group aj-form-group">
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_1" id="docUpload_1">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    if($row['Doc_Upload_1'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                 }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -905,14 +967,18 @@
                                 	<div class="form-group aj-form-group">
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_2" id="docUpload_2">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    if($row['Doc_Upload_2'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                 }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -920,14 +986,18 @@
                                 	<div class="form-group aj-form-group">
                                            <label>Document Upload </label>
                                             <select class="select2" name="docUpload_3" id="docUpload_3">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    if($row['Doc_Upload_3'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                 }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -935,14 +1005,18 @@
                                 	<div class="form-group aj-form-group">
                                            <label>Document Upload </label>
                                             <select class="select2" name="docUpload_4" id="docUpload_4">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    if($row['Doc_Upload_4'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                 }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div> <br><br>
@@ -950,14 +1024,18 @@
                                 	<div class="form-group aj-form-group">
                                            <label>Document Upload</label>
                                             <select class="select2" name="docUpload_5" id="docUpload_5">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    if($row['Doc_Upload_5'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                 }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -965,14 +1043,18 @@
                                 	<div class="form-group aj-form-group">
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_6" id="docUpload_6">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    if($row['Doc_Upload_6'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                 }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -980,14 +1062,18 @@
                                 	<div class="form-group aj-form-group">
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_7" id="docUpload_7">
-                                                <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    if($row['Doc_Upload_7'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                 }
+                                                echo $string;
+                                            ?>                                      
                                             </select>
                                         </div>
                                 </div>
@@ -995,15 +1081,19 @@
                                 	<div class="form-group aj-form-group">
                                             <label>Document Upload</label>
                                             <select class="select2" name="docUpload_8" id="docUpload_8">
-                                            <option value="">Select Document</option>
-                                                <option selected value="Aadhar">Aadhar</option>
-                                                <option value="Address Proof">Address Proof</option>
-                                                <option value="Birth_Cert">Birth Certificate</option>
-                                                <option value="Bonafied">Bonafied</option>
-                                                <option value="CC">Character Cert</option>
-                                                <option value="SLC">School Leaving Cert</option>
-                                                <option value="TC">Transfer Cert.</option>
-                                            </select>
+                                            <?php
+                                                $string = "";
+                                                foreach($GLOBAL_DOC_TYPE as $x=>$x_value)
+                                                {
+                                                    if($row['Doc_Upload_8'] == $x){
+                                                        $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }else {
+                                                        $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    }                                                
+                                                 }
+                                                echo $string;
+                                            ?>                                      
+                                          </select>
                                         </div>
                                 </div>
                                 

@@ -3,7 +3,7 @@
             include 'dbobj.php';
             include 'security.php';
             include 'errorLog.php';   
-            include 'AdmissionDropdowns.php';
+            include 'AdmissionModel.php';
 
             // Turn on all error reporting
             // Report all PHP errors (see changelog)

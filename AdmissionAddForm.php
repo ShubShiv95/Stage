@@ -7,7 +7,7 @@
         include 'dbobj.php';
         include 'errorLog.php';
         include 'security.php';
-        include 'AdmissionDropdowns.php';
+        include 'AdmissionModel.php';
 
         $classDropdownValue = "";
         $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";

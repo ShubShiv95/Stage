@@ -59,7 +59,7 @@
     $sibling2Section = $_REQUEST["sibling2Section"];
     $sibling2RollNo = $_REQUEST["sibling2RollNo"];
     $fatherName = $_REQUEST["fatherName"];
-    $fatherQual = $_REQUEST["fatherQual"];
+    $fatherQual = $_REQUEST["fatherQualification"];
     $fatherOccupation = $_REQUEST["fatherOccupation"];
     $fatherDesig = $_REQUEST["fatherDesig"];
     $fatherOrgName = $_REQUEST["fatherOrgName"];
@@ -75,7 +75,7 @@
     $fatherAlumni = $_REQUEST["fatherAlumni"];
     $fatherPhoto = $_REQUEST["fatherPhoto"];
     $motherName = $_REQUEST["motherName"];
-    $motherQual = $_REQUEST["motherQual"];
+    $motherQual = $_REQUEST["motherQualification"];
     $motherOccupation = $_REQUEST["motherOccupation"];
     $motherDesig = $_REQUEST["motherDesig"];
     $motherOrgName = $_REQUEST["motherOrgName"];
@@ -110,7 +110,18 @@
 
     //School Configured Code, this will be dynamic
     $schoolCode = "DPS";
-    $admissionId = 101;
+    $admissionId = 102;
+    $admissionCountSql = "Select count(Admission_Id) as admno from admission_master_table where school_id=" . $_SESSION["SCHOOLID"] . ' and Session=' . $session;
+    $admissionCountResult = $dbhandle->query($admissionCountSql);
+
+    if($admissionCountResult)
+		{
+			$getAdmissionCountRow = $admissionCountResult -> fetch_assoc();
+			$admId = ( $getAdmissionCountRow["admno"] ) + 1;
+			$admissionId = $schoolCode . $date("Y") .  $admId;
+		}
+    //echo $admissionId;
+    //$admissionId = 102;
     
 
     $insertAdmissionTableSql = "insert into admission_master_table

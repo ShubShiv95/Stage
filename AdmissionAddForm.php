@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Middle Name</label>
-                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" required="" class="form-control">
+                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Last Name</label>

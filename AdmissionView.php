@@ -168,7 +168,7 @@
                         <div class="heading-layout1">
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Application Entry</h3>
-                                <h4>Admission Id : <?php echo $row['Admission_Id']  ?></h3>
+                                <h4>Admission Id : <?php echo $row['School_Admission_Id']  ?></h3>
                             </div>
                         <form class="new-added-form aj-new-added-form"  action="admissionController.php" id="admitForm">
                             <div class="row">

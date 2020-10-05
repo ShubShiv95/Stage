@@ -1,5 +1,13 @@
 <?php
 error_reporting(0);
+
+include 'test.php';
+$globla_qualification=array(
+    {0=>'Metric',1=>}
+);
+
+
+
 //var_dump($_REQUEST["groupsmsact"]);
 /*
 foreach($_REQUEST["groupsmsact"] as $element)

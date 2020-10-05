@@ -172,7 +172,7 @@
                                     <a href="StaffAttendance.php" class="nav-link"><i class="fas fa-angle-right"></i>Staff Attendance</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="ImportSaffAttendance.php" class="nav-link"><i class="fas fa-angle-right"></i>Import Staff Attendance</a>
+                                    <a href="ImportStaffAttendance.php" class="nav-link"><i class="fas fa-angle-right"></i>Import Staff Attendance</a>
                                 </li>
                             </ul>
                         </li>

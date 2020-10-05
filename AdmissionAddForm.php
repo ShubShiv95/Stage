@@ -87,7 +87,7 @@
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Application Entry</h3>
                             </div>
-                        <form class="new-added-form aj-new-added-form"  action="AdmissionController.php" id="admitForm">
+                        <form class="new-added-form aj-new-added-form"  action="AdmissionAddForm_2.php" id="admitForm">
                             <div class="row">
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">

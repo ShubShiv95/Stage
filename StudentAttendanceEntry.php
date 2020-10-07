@@ -83,10 +83,10 @@ include 'security.php';
                                                 <label>Select Class</label>
                                                 <select class="select2" required name="classid" id="classid" onchange="showsection(this.value)">
                                                     <!--option value="">Please Select Class *</option-->
-                                                    <option value="0">PleaseSelect Class *</option>
+                                                    <option value="0">Please Select Class *</option>
                                                     <?php
                                                         $query='select Class_Id,class_name,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
-                                                        $result=mysqli_query($dbhandle,$query);
+                                                        $result=$dbhandle->query($query);
                                                         if(!$result)
                                                             {
                                                                 //var_dump($getStudentCount_result);
@@ -108,12 +108,6 @@ include 'security.php';
                                                         while($row=mysqli_fetch_assoc($result))
                                                         {
                                                         $str='<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"];
-                                                        if($row["stream"]==1)
-                                                        $str= $str . ' Science';
-                                                        else if($row["stream"]==2)
-                                                        $str= $str . ' Commerce';
-                                                        else if($row["stream"]==3)
-                                                        $str= $str . ' Arts';
                                                         $str=$str . '</option>';
                                                         echo $str;
                                                     }
@@ -147,18 +141,19 @@ include 'security.php';
                                         <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                             <div class="form-group aj-form-group">
                                                 <label>Select Date</label>
-                                                <input type="text" id="adt" name="adt" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker" data-position='bottom right'>
+                                                <input type="text" id="adt" name="adt" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker" data-position='bottom right' value="<?php echo date('d/m/Y');?>">
                                                 <i class="far fa-calendar-alt"></i>
                                             </div>
                                         </div>
                                         
                                         <div class="col-12 aaj-btn-chang text-right">
+                                            <br>
                                             <button type="BUTTON" class="aj-btn-a btn-fill-lg btn-gradient-yellow btn-hover-bluedark" onclick="return getAttendanceList();">Submit</button>
                                             
                                         </div>
                                     </div>
                                 </form>
-                                <form class="new-added-form aj-new-added-form" action="StudentAttendanceEntrySave.php" method="post">
+                                <form class="new-added-form aj-new-added-form" action="StudentAttendanceEntry2.php" method="post">
                                 <div class="tebal-promotion" id="attendance-list-div">
                                 <!--form class="new-added-form aj-new-added-form" action="AbsentStudentList.php" method="post">
                                     <div class="table-responsive mt-5" >
@@ -380,10 +375,74 @@ xmlhttp.onreadystatechange=function()
     document.getElementById('attendance-list-div').innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("GET","GetAttendanceList.php?classid="+classid+"&secid="+secid+"&adt="+adt+"&cperiod="+cperiod,true);
+xmlhttp.open("GET","GetStudentAttendanceList.php?classid="+classid+"&secid="+secid+"&adt="+adt+"&cperiod="+cperiod,true);
 xmlhttp.send();
 }
 </script>
+<script type="text/javascript">
+function calc_attendance()
+	{
+		var present_count=0;
+		var late_count=0;
+		var halfday_count=0;
+		var abscent_count=0;
+		total_count=document.getElementById("total_count").value;
+		for(i=1;i<=total_count;i++)
+			{
+				if(document.getElementById(i+'present').checked)
+					{
+						present_count++;
+					}
+				else if(document.getElementById(i+'late').checked)
+					{
+						late_count++;
+						present_count++;
+					}
+				else if(document.getElementById(i+'halfday').checked)
+					{
+						halfday_count++;
+						present_count++;
+					}
+				else 
+					{
+						abscent_count++;
+					}
+			}
+			document.getElementById("presentno").value=present_count;
+			document.getElementById("lateno").value=late_count;
+			document.getElementById("halfdayno").value=halfday_count;
+			document.getElementById("absentno").value=abscent_count;	
+	}
+</script>
+<script>
+function showsection(str)
+{
+var xmlhttp;    
+if (str=="")
+  {
+  document.getElementById("section").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("secid").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","getsectionList.php?classid="+str,true);
+xmlhttp.send();
+}
+</script>
+
 </body>
 
 </html>

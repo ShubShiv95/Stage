@@ -1,11 +1,11 @@
 <?php
     
     $GLOBAL_SOCIAL_CAT = array("SC"=>"SC","ST"=>"ST","GENERAL"=>"General");
-
+//Move
     $GLOBAL_DISCOUNT_CAT =  array("20"=>"20%","10"=>"10%","5"=>"5%","Select Discount"=>"Select Discount");
-
+    //Move
     $GLOBAL_LOCALITY =  array("4"=>"Dhanbad", "3"=>"Bokaro Sec-1","2"=>"Bokaro Chas","1"=>"Bokaro Steel City", "" => "Select Locality");
-
+    //Move
     $GLOBAL_SCHOOL_SESSION =  array("2019-2020"=>"2019-2020", "2020-2021"=>"2020-2021");
 
     $GLOBAL_LANGUAGES =  array("Other"=>"Other","Telugu"=>"Telugu","Tamil"=>"Tamil","Punjabi"=>"Punjabi","Marathi"=>"Marathi","Malayalam"=>"Malayalam",
@@ -24,7 +24,7 @@
 
     $GLOBAL_OCCUPATION = array("Other"=>"Other","Private Sec. Employee"=>"Private Sec. Employee","Public/PSU Sec. Employee"=>"Public/PSU Sec. Employee", "Engineer"=>"Engineer",
     "Doctor"=>"Doctor", "Business"=>"Business","Armed Forces"=>"Armed Forces", ""=>"Select Occupation");
-
+    //Move
     $GLOBAL_DOC_TYPE = array("TC"=>"Transfer Cert.","SLC"=>"School Leaving Cert","CC"=>"Character Cert", "Bonafied"=>"Bonafied",
     "Birth Certificate"=>"Birth Certificate", "Address Proof"=>"Address Proof","Aadhar"=>"Aadhar", ""=>"Select Document");
 

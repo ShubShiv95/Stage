@@ -59,7 +59,7 @@
     $sibling2Section = $_REQUEST["sibling2Section"];
     $sibling2RollNo = $_REQUEST["sibling2RollNo"];
     $fatherName = $_REQUEST["fatherName"];
-    $fatherQual = $_REQUEST["fatherQual"];
+    $fatherQual = $_REQUEST["fatherQualification"];
     $fatherOccupation = $_REQUEST["fatherOccupation"];
     $fatherDesig = $_REQUEST["fatherDesig"];
     $fatherOrgName = $_REQUEST["fatherOrgName"];
@@ -75,7 +75,7 @@
     $fatherAlumni = $_REQUEST["fatherAlumni"];
     $fatherPhoto = $_REQUEST["fatherPhoto"];
     $motherName = $_REQUEST["motherName"];
-    $motherQual = $_REQUEST["motherQual"];
+    $motherQual = $_REQUEST["motherQualification"];
     $motherOccupation = $_REQUEST["motherOccupation"];
     $motherDesig = $_REQUEST["motherDesig"];
     $motherOrgName = $_REQUEST["motherOrgName"];
@@ -110,11 +110,21 @@
 
     //School Configured Code, this will be dynamic
     $schoolCode = "DPS";
-    $admissionId = 101;
-    
+    $schoolAdmissionId;
+    $admissionCountSql = "Select count(Admission_Id) as admno from admission_master_table where school_id=" . $schoolId. ' and Session=' . "'" . $session . "'";
+    $admissionCountResult = $dbhandle->query($admissionCountSql);
+
+    $temp[] = $admissionCountResult;
+
+    if($admissionCountResult)
+		{
+            $getAdmissionCountRow = $admissionCountResult -> fetch_assoc();
+            $admId = ($getAdmissionCountRow["admno"] + 1);
+			$schoolAdmissionId = $schoolCode . date("Y") .  $admId;
+		}    
 
     $insertAdmissionTableSql = "insert into admission_master_table
-        (Admission_Id, School_Id, Session, First_Name, Middle_Name, Last_Name, Class_Id, Gender , DOB, Age, Social_Category, Discount_Category, Locality,
+        (Admission_Id, School_Admission_Id, School_Id, Session, First_Name, Middle_Name, Last_Name, Class_Id, Gender , DOB, Age, Social_Category, Discount_Category, Locality,
         Academic_Session, Mother_Tongue, Religion, Nationality, Blood_Group, Aadhar_No, Student_Image, Prev_School_Name, Prev_School_Medium, Prev_School_Board, 
         Prev_School_Class, Comm_Address, Comm_Add_Country, Comm_Add_State, Comm_Add_City_Dist, Comm_Add_Pincode, Comm_Add_ContactNo, Resid_Address, Resid_Add_Country,
         Resid_Add_State, Resid_Add_City_Dist, Resid_Add_Pincode, Resid_Add_ContactNo, Sibling_1_Student_Id, Sibling_1_Class, Sibling_1_Section, Sibling_1_RollNo, 
@@ -125,7 +135,7 @@
         Gurdian_Type, Guardian_Address, Guardian_Name, Guardian_Relation, Guardian_Contact_No, Guardian_Image, 
         SMS_Contact_No, Whatsapp_Contact_No, Email_Id,
         Doc_Upload_1, Doc_Upload_2, Doc_Upload_3, Doc_Upload_4, Doc_Upload_5, Doc_Upload_6, Doc_Upload_7, Doc_Upload_8) 
-        values(?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        values(?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
      
 
     //echo $insertAdmissionTableSql;
@@ -134,8 +144,9 @@
     echo $dbhandle->error;	
    
     //$stmt->bind_param("iissssissisiisiisssssssissssssssssssssssssssssssssisssssssssssssssissssssssssssssssssss",  
-    $stmt->bind_param("iissssissisiisiisssssssisssssssssssssisisisissssssssssssisssssssssssssssissssssssssssssssssss",   
-    $admissionId,
+    $stmt->bind_param("isissssissisiisiisssssssisssssssssssssisisisissssssssssssisssssssssssssssissssssssssssssssssss",   
+    $admId,
+    $schoolAdmissionId,
     $schoolId,
     $session,
 	$studentFirstName,

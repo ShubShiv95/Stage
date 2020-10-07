@@ -87,7 +87,7 @@
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Application Entry</h3>
                             </div>
-                        <form class="new-added-form aj-new-added-form"  action="AdmissionController.php" id="admitForm">
+                        <form class="new-added-form aj-new-added-form"  action="AdmissionAddForm_2.php" id="admitForm">
                             <div class="row">
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Middle Name</label>
-                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" required="" class="form-control">
+                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Last Name</label>
@@ -353,7 +353,7 @@
                                 <div class="col-xl-3 col-lg-3 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>Country</label>
-                                        <input type="text" minlength="12" maxlength="12" name="commCountry" id="commCountry" placeholder="" class="form-control">
+                                        <input type="text" maxlength="" name="commCountry" id="commCountry" placeholder="" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -394,7 +394,7 @@
                                 <div class="col-xl-3 col-lg-3 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>Country</label>
-                                        <input type="text" minlength="12" maxlength="12" name="raCountry" id="raCountry" placeholder="" class="form-control">
+                                        <input type="text"  maxlength="12" name="raCountry" id="raCountry" placeholder="" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -603,7 +603,7 @@
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Qualification</label>
-	                                        <select class="select2" name="motherQual" id="motherQual">
+	                                        <select class="select2" name="motherQualification" id="motherQualification">
                                             <?php
                                                 $string = "";
                                                 foreach($GLOBAL_QUALIFICATION as $x=>$x_value)
@@ -664,7 +664,7 @@
 	                                    </div>
                                         <div class="form-group aj-form-group">
                                             <label>Contact No.</label>
-                                            <input type="text" minlength="12" maxlength="12" name="motherContactNo" id="motherContactNo" placeholder="" class="form-control">
+                                            <input type="text" minlength="10" maxlength="12" name="motherContactNo" id="motherContactNo" placeholder="" class="form-control">
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Annual Income</label>

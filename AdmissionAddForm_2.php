@@ -249,11 +249,12 @@
 if(!$execResult)
 {
     //var_dump($getStudentCount_result);
-    $error_msg=mysqli_error($dbhandle);
+    //$error_msg=mysqli_error($dbhandle);
+    $error_msg = $dbhandle->error;
     $sql="";
-    //$el=new LogMessage();
+    $el=new LogMessage();
     //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-    //$el->write_log_message('Investment Payment',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+    $el->write_log_message('Admission Add Form',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
     $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
     $dbhandle->query("unlock tables");
     mysqli_rollback($dbhandle);

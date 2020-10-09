@@ -24,7 +24,4 @@ class LogMessage {
             //echo ;
     }
 }
-
-//$el=new LogMessage();
-//$el->write_log_message(0,'This is test message');
 ?>

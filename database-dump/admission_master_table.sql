@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 26, 2020 at 11:01 AM
+-- Generation Time: Oct 07, 2020 at 07:35 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admission_master_table` (
   `Admission_Id` mediumint(8) UNSIGNED NOT NULL,
+  `School_Admission_Id` varchar(10) DEFAULT NULL,
   `School_Id` mediumint(8) NOT NULL,
   `Session` varchar(9) NOT NULL,
   `First_Name` varchar(100) NOT NULL,
@@ -39,7 +40,7 @@ CREATE TABLE `admission_master_table` (
   `DOB` date NOT NULL,
   `Age` tinyint(3) UNSIGNED DEFAULT NULL,
   `Social_Category` enum('GENERAL','SC','ST','OBC') DEFAULT 'GENERAL',
-  `Discount_Category` smallint(6) NOT NULL,
+  `Discount_Category` smallint(6) DEFAULT NULL,
   `Locality` smallint(6) DEFAULT NULL,
   `Academic_Session` varchar(9) NOT NULL,
   `Mother_Tongue` smallint(3) UNSIGNED NOT NULL,
@@ -49,7 +50,7 @@ CREATE TABLE `admission_master_table` (
   `Aadhar_No` varchar(12) DEFAULT NULL,
   `Student_Image` varchar(100) DEFAULT NULL,
   `Prev_School_Name` varchar(100) DEFAULT NULL,
-  `Prev_School_Medium` enum('English','Hindi','Others') DEFAULT NULL,
+  `Prev_School_Medium` enum('English','Hindi','Others','Bengali') DEFAULT NULL,
   `Prev_School_Board` enum('CBSE','ICSE','OTHERS') DEFAULT NULL,
   `Prev_School_Class` smallint(6) DEFAULT NULL,
   `Comm_Address` varchar(100) NOT NULL,
@@ -64,8 +65,14 @@ CREATE TABLE `admission_master_table` (
   `Resid_Add_City_Dist` varchar(50) NOT NULL,
   `Resid_Add_Pincode` varchar(10) NOT NULL,
   `Resid_Add_ContactNo` varchar(12) NOT NULL,
-  `Sibling_1_Student_Id` varchar(20) NOT NULL,
-  `Sibling_2_Student_Id` varchar(20) NOT NULL,
+  `Sibling_1_Student_Id` varchar(20) DEFAULT NULL,
+  `Sibling_1_Class` smallint(6) DEFAULT NULL,
+  `Sibling_1_Section` varchar(3) DEFAULT NULL,
+  `Sibling_1_RollNo` mediumint(8) DEFAULT NULL,
+  `Sibling_2_Student_Id` varchar(20) DEFAULT NULL,
+  `Sibling_2_Class` smallint(6) DEFAULT NULL,
+  `Sibling_2_Section` varchar(3) DEFAULT NULL,
+  `Sibling_2_RollNo` mediumint(8) DEFAULT NULL,
   `Father_Name` varchar(150) DEFAULT NULL,
   `Father_Qualification` enum('Non-Matric','Matriculation','Intermediate','Graduate','Post Graduate','PHD','Other') DEFAULT NULL,
   `Father_Occupation` enum('Private Sec. Employee','Public/PSU Sec. Employee','Business','Doctor','Armed Forces','Lawyer','Engineer','Other') DEFAULT NULL,
@@ -96,7 +103,7 @@ CREATE TABLE `admission_master_table` (
   `Mother_Contact_No` varchar(12) DEFAULT NULL,
   `Mother_Annual_Income` int(10) DEFAULT NULL,
   `Mother_Aadhar_Card` varchar(12) DEFAULT NULL,
-  `Mother_Alumni` enum('Yes','No') NOT NULL,
+  `Mother_Alumni` enum('Yes','No') DEFAULT NULL,
   `Mother_Image` varchar(100) DEFAULT NULL,
   `Gurdian_Type` enum('Father','Mother','Other') DEFAULT 'Father',
   `Guardian_Address` varchar(150) DEFAULT NULL,
@@ -121,8 +128,11 @@ CREATE TABLE `admission_master_table` (
 -- Dumping data for table `admission_master_table`
 --
 
-INSERT INTO `admission_master_table` (`Admission_Id`, `School_Id`, `Session`, `First_Name`, `Middle_Name`, `Last_Name`, `Class_Id`, `Gender`, `DOB`, `Age`, `Social_Category`, `Discount_Category`, `Locality`, `Academic_Session`, `Mother_Tongue`, `Religion`, `Nationality`, `Blood_Group`, `Aadhar_No`, `Student_Image`, `Prev_School_Name`, `Prev_School_Medium`, `Prev_School_Board`, `Prev_School_Class`, `Comm_Address`, `Comm_Add_Country`, `Comm_Add_State`, `Comm_Add_City_Dist`, `Comm_Add_Pincode`, `Comm_Add_ContactNo`, `Resid_Address`, `Resid_Add_Country`, `Resid_Add_State`, `Resid_Add_City_Dist`, `Resid_Add_Pincode`, `Resid_Add_ContactNo`, `Sibling_1_Student_Id`, `Sibling_2_Student_Id`, `Father_Name`, `Father_Qualification`, `Father_Occupation`, `Father_Designation`, `Father_Org_Name`, `Father_Org_Add`, `Father_City`, `Father_State`, `Father_Country`, `Father_Pincode`, `Father_Email`, `Father_Contact_No`, `Father_Annual_Income`, `Father_Aadhar_Card`, `Father_Alumni`, `Father_Image`, `Mother_Name`, `Mother_Qualification`, `Mother_Occupation`, `Mother_Designation`, `Mother_Org_Name`, `Mother_Org_Add`, `Mother_City`, `Mother_State`, `Mother_Country`, `Mother_Pincode`, `Mother_Email`, `Mother_Contact_No`, `Mother_Annual_Income`, `Mother_Aadhar_Card`, `Mother_Alumni`, `Mother_Image`, `Gurdian_Type`, `Guardian_Address`, `Guardian_Name`, `Guardian_Relation`, `Guardian_Contact_No`, `Guardian_Image`, `SMS_Contact_No`, `Whatsapp_Contact_No`, `Email_Id`, `Doc_Upload_1`, `Doc_Upload_2`, `Doc_Upload_3`, `Doc_Upload_4`, `Doc_Upload_5`, `Doc_Upload_6`, `Doc_Upload_7`, `Doc_Upload_8`) VALUES
-(100, 200, '2020-2021', 'F Name', 'M Name', 'L Name', 1, 'MALE', '2020-09-01', 10, 'GENERAL', 0, 10, '10', 0, 6, 'INDIAN', 'AB-P	ositive', 'DSDF2323', '', 'DPS', 'English', 'CBSE', 16, ' Comm Add', 'India', 'UP', 'Noida', '201301', '919899395627', ' Resid Add', 'India', 'UP', 'Noida', '201301', '919899395627', 'Stu2010', 'STU0001', 'R N DUTTA', 'Non-Matric', 'Engineer', 'Sr Manager', 'RTD Ltd', 'Noida', 'Noida', 'UP', 'India', '201301', 'sdutta@gmail.com', '919899395627', 2000000, 'ABDF32242', 'Yes', '', 'KD', 'Non-Matric', 'Engineer', 'Housewife', 'NA', 'NA', '', 'UP', 'India', '201301', 'sd@abc.com', '011123456789', 20000, 'NCSDS00922', 'No', '', 'Other', ' Address', 'Suman', 'Uncle', '9899395627', '', '919899395627', '919899395627', 'sdutta@gmail.com', '7^U.P^INDIA', '36^U.P^INDIA', '7^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA');
+INSERT INTO `admission_master_table` (`Admission_Id`, `School_Admission_Id`, `School_Id`, `Session`, `First_Name`, `Middle_Name`, `Last_Name`, `Class_Id`, `Gender`, `DOB`, `Age`, `Social_Category`, `Discount_Category`, `Locality`, `Academic_Session`, `Mother_Tongue`, `Religion`, `Nationality`, `Blood_Group`, `Aadhar_No`, `Student_Image`, `Prev_School_Name`, `Prev_School_Medium`, `Prev_School_Board`, `Prev_School_Class`, `Comm_Address`, `Comm_Add_Country`, `Comm_Add_State`, `Comm_Add_City_Dist`, `Comm_Add_Pincode`, `Comm_Add_ContactNo`, `Resid_Address`, `Resid_Add_Country`, `Resid_Add_State`, `Resid_Add_City_Dist`, `Resid_Add_Pincode`, `Resid_Add_ContactNo`, `Sibling_1_Student_Id`, `Sibling_1_Class`, `Sibling_1_Section`, `Sibling_1_RollNo`, `Sibling_2_Student_Id`, `Sibling_2_Class`, `Sibling_2_Section`, `Sibling_2_RollNo`, `Father_Name`, `Father_Qualification`, `Father_Occupation`, `Father_Designation`, `Father_Org_Name`, `Father_Org_Add`, `Father_City`, `Father_State`, `Father_Country`, `Father_Pincode`, `Father_Email`, `Father_Contact_No`, `Father_Annual_Income`, `Father_Aadhar_Card`, `Father_Alumni`, `Father_Image`, `Mother_Name`, `Mother_Qualification`, `Mother_Occupation`, `Mother_Designation`, `Mother_Org_Name`, `Mother_Org_Add`, `Mother_City`, `Mother_State`, `Mother_Country`, `Mother_Pincode`, `Mother_Email`, `Mother_Contact_No`, `Mother_Annual_Income`, `Mother_Aadhar_Card`, `Mother_Alumni`, `Mother_Image`, `Gurdian_Type`, `Guardian_Address`, `Guardian_Name`, `Guardian_Relation`, `Guardian_Contact_No`, `Guardian_Image`, `SMS_Contact_No`, `Whatsapp_Contact_No`, `Email_Id`, `Doc_Upload_1`, `Doc_Upload_2`, `Doc_Upload_3`, `Doc_Upload_4`, `Doc_Upload_5`, `Doc_Upload_6`, `Doc_Upload_7`, `Doc_Upload_8`) VALUES
+(3, 'DPS20203', 200, '2020-2021', 'Sushil-2', 'K', 'Tripathi', 9, 'MALE', '2010-02-03', 0, 'GENERAL', 5, 0, '2020-2021', 0, 0, 'INDIAN', 'A-Positive', '', '', 'ISL', 'English', 'CBSE', 8, ' Comm Add', 'India', 'JH', 'Bokaro', '8201111', '9810304042', ' Reside Address', 'India', 'JH', 'Bokaro', '8201111', '9810090000', '', 15, '', 0, '', 15, '', 0, 'Mr Tripathi', 'Intermediate', 'Business', 'Business Ower', 'Personal', '', 'Bokaro', 'JH', 'India', '826001', '', '', 0, 'AKJLJ090', 'No', '', 'Mrs Tripathi', 'Matriculation', 'Other', 'Housewife', '', '', 'Bokaro', 'JH', 'India', '820111', '', '9810010102', 0, 'FDSFD42342', 'No', '', 'Other', ' ', '', 'Aunt', '', '', '9810104022', '9810330002', 'sd@gmail.com', 'Birth Certificate', 'Address Proof', 'Bonafied', 'CC', 'Bonafied', 'SLC', 'TC', ''),
+(4, 'DPS20204', 200, '2020-2021', 'Ravi ', 'K', 'Bansal', 9, 'MALE', '2011-02-09', 9, 'GENERAL', 5, 2, '2020-2021', 0, 0, 'INDIAN', 'A-Positive', '', '', 'ISL', 'English', 'CBSE', 8, ' Comm Add', 'India', 'JH', 'Bokaro', '8201111', '9810304042', ' Reside Address', 'India', 'JH', 'Bokaro', '8201111', '9810090000', '', 15, '', 0, '', 15, '', 0, 'Mr Bansal', 'Intermediate', 'Business', 'Business Ower', 'Personal', '', 'Bokaro', 'JH', 'India', '826001', '', '', 0, 'AKJLJ090', 'No', '', 'Mrs Bansal', 'Matriculation', 'Other', 'Housewife', '', '', 'Bokaro', 'JH', 'India', '820111', '', '9810010102', 0, 'FDSFD42342', 'No', 'IMG_3321.JPG', 'Other', ' ', '', 'Aunt', '', '', '9810104022', '9810330002', 'sd@gmail.com', 'Birth Certificate', 'Address Proof', 'Bonafied', 'CC', 'Bonafied', 'SLC', 'TC', ''),
+(99, NULL, 200, '2020-2021', 'Mithun', 'M Name', 'L Name', 5, 'MALE', '2020-09-09', 10, 'GENERAL', 15, 3, '10', 2, 3, 'INDIAN', 'B-Positive', 'DSDF2323', '', 'DPS', 'English', 'CBSE', 16, ' Comm Add', 'India', 'UP', 'Noida', '201301', '919899395627', ' Resid Address', 'India', 'UP', 'Noida', '201301', '919899395627', 'Stu2010', 6, 'B', 0, 'STU0001', 0, '', 0, 'R N DUTTA', 'PHD', 'Engineer', 'Sr Manager', 'RTD Ltd', 'Noida', 'Noida', 'UP', 'India', '201301', 'sdutta@gmail.com', '919899395627', 2000000, 'ABDF32242', 'Yes', '', 'KD', 'Non-Matric', 'Engineer', 'Housewife', 'NA', 'NA', 'Some city', 'UP', 'India', '201301', 'sd@abc.com', '011123456789', 20000, 'NCSDS00922', 'No', '', 'Other', ' ', '', 'Uncle', '', '', '919899395627', '919899395627', 'sdutta@gmail.com', '7^U.P^INDIA', '36^U.P^INDIA', '7^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA'),
+(100, NULL, 200, '2020-2021', 'Suman', 'M Name', 'L Name', 1, 'MALE', '2020-09-01', 10, 'GENERAL', 10, 1, '10', 1, 1, 'INDIAN', 'A-Negative', 'DSDF2323', '', 'DPS', 'English', 'CBSE', 1, ' Comm Add', 'India', 'UP', 'Noida', '201301', '919899395627', ' Resid Add', 'India', 'UP', 'Noida', '201301', '919899395627', 'Stu2010', 5, 'A', 0, 'STU0001', 0, '', 0, 'R N DUTTA', 'Post Graduate', 'Engineer', 'Sr Manager', 'RTD Ltd', 'Noida', 'Noida', 'UP', 'India', '201301', 'sdutta@gmail.com', '919899395627', 2000000, 'ABDF32242', 'Yes', '', 'KD', 'Non-Matric', 'Engineer', 'Housewife', 'NA', 'NA', '', 'UP', 'India', '201301', 'sd@abc.com', '011123456789', 20000, 'NCSDS00922', 'No', '', 'Other', ' Address', 'Suman', 'Uncle', '9899395627', '', '919899395627', '919899395627', 'sdutta@gmail.com', '7^U.P^INDIA', '36^U.P^INDIA', '7^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA', '36^U.P^INDIA');
 
 --
 -- Indexes for dumped tables
@@ -132,7 +142,8 @@ INSERT INTO `admission_master_table` (`Admission_Id`, `School_Id`, `Session`, `F
 -- Indexes for table `admission_master_table`
 --
 ALTER TABLE `admission_master_table`
-  ADD PRIMARY KEY (`Admission_Id`);
+  ADD PRIMARY KEY (`Admission_Id`),
+  ADD UNIQUE KEY `School_Admission_Id` (`School_Admission_Id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

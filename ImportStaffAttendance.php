@@ -153,9 +153,8 @@ include 'security.php';
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
+                    <div class="copyright">Powered by  <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
+                </footer>            
             </div>
         </div>
         <!-- Page Area End Here -->

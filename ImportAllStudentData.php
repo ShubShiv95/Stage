@@ -11,7 +11,7 @@ include 'security.php';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
+    <title>SWIFTCAMPUS | Import Bulk Entry</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -54,7 +54,7 @@ include 'security.php';
             ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
-                <!-- Breadcubs Area Start Here -->
+                <!-- Breadcumbs Area Start Here -->
                 <div class="breadcrumbs-area">
                     <h3>Students</h3>
                     <ul>
@@ -159,8 +159,7 @@ include 'security.php';
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
+                    <div class="copyright">Powered by  <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
                 </footer>
             </div>
         </div>

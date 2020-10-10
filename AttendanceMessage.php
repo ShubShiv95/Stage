@@ -105,6 +105,9 @@ include 'security.php';
                                             </div>  
                                         </div>
                                         <div class="table-responsive">
+                                            <?php 
+                                                $sql="select class_name,section,smsflag,attendance_status from class_master_table cmt,class_section_table cst,student_class_details scd where cst.class_id=cmt.class_id and scd.class_sec_id=cst.class_sec_id"
+                                            ?>
                                             <table class="table table-bordered attendence-msg">
                                                 <thead>
                                                     <tr>
@@ -123,53 +126,7 @@ include 'security.php';
 
                                                             </ul>
                                                         </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>K.G. 2</td>
-                                                        <td>
-                                                            <ul class="list-absent">
-                                                                <li><span class="red-a"></span> A </li>
-                                                                <li><span class="red-b"></span> B</li>
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-c"></span> C</li>
-
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Class 1</td>
-                                                        <td>
-                                                            <ul class="list-absent">
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-b"></span> B </li>
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-c"></span> C</li>
-
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>class 2</td>
-                                                        <td>
-                                                            <ul class="list-absent">
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-b"></span> B</li>
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-b"></span> B</li>
-                                                                <li><span class="red-c"></span> C</li>
-
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-
-                                                    
+                                                    </tr>                                                   
                                                 </tbody>   
                                             </table>
                                         </div>

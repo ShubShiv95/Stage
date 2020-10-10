@@ -90,126 +90,107 @@ include 'sequenceGenerator.php';
                                     <form class="new-added-form school-form aj-new-added-form">
                                         <div class="tebal-promotion" >
                                                 <?php
-                                                                $adt=$_REQUEST["adt"];
-                                                                $secid=$_REQUEST["secid"];
-                                                                $classid=$_REQUEST["classid"];
-                                                                $period=$_REQUEST["period"];
-                                                                $absent_student_list='';
+                                                    //Collecting Attendance id for the attendance.
+                                                    $AttendanceId=$_REQUEST["aid"]; 
+                                                    $adt=$_REQUEST["adt"];
+                                                    $secid=$_REQUEST["secid"];
+                                                    $classid=$_REQUEST["classid"];
+                                                    $period=$_REQUEST["period"];
 
+                                                    $absent_student_list='';
+                                                    mysqli_autocommit($dbhandle,FALSE);
 
-                                                                if($_REQUEST["absentno"]==0 and $_REQUEST["presentno"]==0)
-                                                                {
-                                                                    echo "<p><h1><br>Database option not found. Please check proper select values.</h1>";
-                                                                    exit;
-                                                                }
-                                                                
-                                                                mysqli_autocommit($dbhandle,true);
-                                                                
-                                                                //$dbhandle->query("lock table attendance_master_table write");
-                                                                $aid=sequence_number('attendance_master_table',$dbhandle);
-                                                                
-                                                                $query1="insert into attendance_master_table (attendance_id,class_id,class_sec_id,doa,period,attendance_taken_by,total_absent,total_present,total_halfday,total_late,school_id,	attendance_status) values($aid," .$classid . "," .$secid . ",str_to_date('" . $adt . "','%d/%m/%Y')," . $_REQUEST["period"] . ",'" . $_SESSION["LOGINID"] . "'," . $_REQUEST["absentno"] . "," .$_REQUEST["presentno"] ."," . $_REQUEST["halfdayno"] . "," .$_REQUEST["lateno"] ."," . $_SESSION["SCHOOLID"] . ",1)";
-                                                                //echo $query1.'<br>';
-                                                                $result1=$dbhandle->query($query1);
-                                                                //$error=mysqli_error($dbhandle);
-                                                                //echo $error;
-                                                                //var_dump($result1);
-                                                                if(!$result1)
-                                                                {
-                                                                    mysqli_rollback($dbhandle);
-                                                                    $dbhandle->query("unlock tables");
-                                                                    echo "<p><h1>At First Step. Database Error. Please try after some time.</h1>";
-                                                                    exit;
-                                                                }
+                                                    //$dbhandle->query("lock table attendance_master_table write");
+                                                    //Updating attendance master table with new updated master values.
+                                                    $query1="update attendance_master_table set total_present=" . $_REQUEST["presentno"] . ",total_late=" . $_REQUEST["lateno"] . ",total_halfday=" . $_REQUEST["halfdayno"] . ",total_absent=" . $_REQUEST["absentno"] . ",attendance_taken_by='" . $_SESSION["LOGINID"] . "' where attendance_id=" . $AttendanceId . " and school_id=" . $_SESSION["SCHOOLID"];
+                                                    //echo $query1;
+                                                    
+                                                    $result1=$dbhandle->query($query1);
+                                                    
+                                                    
+                                                    if(!$result1)
+                                                        {
+                                                            mysqli_rollback($dbhandle);
+                                                            echo "<p><h1>At First Step. Database Error. Please try after some time.</h1>";
+                                                            exit;
+                                                        }
+                                                    else	//if attendance master_table_update process done successfully then updating attendance_details_table;
+                                                    {
+                                                        //Preparing binding variables lists.
+                                                        $AttendanceStatus='';		//This will be holding updated attendance value coming from the edit process.
+                                                        $AttendanceRemarks='';		//This will be holding updated attendance remarks coming from the edit process.
+                                                        $PrevAttendanceStatus='';	//This will be holding previous attendance value stored in the database during create attendance for the class corresponding to the students. 
+                                                        $PrevAttendanceRemarks='';	//This will be holding previous attendance remarks value stored in the database during create attendance for the class corresponding to the students.
+                                                        $StudentId='';				//This will be holding student id for which the above values are achieved.
+                                                        $lid=$_SESSION["LOGINID"];	//This holds the user who is editing the attendance.
+                                                    
+                                                        $query4="update attendance_details_table set attendance_status=?,attendance_remarks=?,prev_attendance_status=?,prev_attendance_remarks=? where attendance_id=? and student_id=?";
+                                                        $stmt4=$dbhandle->prepare($query4);
+                                                        $stmt4->bind_param("ssssis",$AttendanceStatus,$AttendanceRemarks,$PrevAttendanceStatus,$PrevAttendanceRemarks,$AttendanceId,$StudentId);	
+                                                        
+                                                        $total_count=0;
+                                                        $success_count=0;
+                                                        $abscent_count=0;					// abscent student counter.
+                                                        $asbcent_student = array();   //student abscent array list
+                                                        
+                                                    
+                                                        for($i=1;$i<=$_REQUEST["total_count"];$i++)
+                                                            {
+                                                                //Generating index key values to fetch the Request array for the valiables posted.
+                                                                $sidkey='sid' . $i;		//This key is used to fetch the student id value from the request array.							
+                                                                $prevAttenStatusKey='prev_attendance_status' . $i;	//This key is used to fetch the previous attendancey value for the student stored during the previous attendance process.
+                                                                $prevAttenRemarksKey='prev_attendance_remarks' . $i;	//This key is used to fetch the previous attendancey remarks value for the student stored during the previous attendance process.
+                                                                $AttendanceRemarksKey='remarks' . $i;	//This key is used to fetch the current updated remarks provided in the remarks box. 
+                                                                $rollnoKey='rollno' . $i;
+                                                                $studentNameKey='sname'.$i; 
+                                                                //Here fetching the corresponding attendance values and remarks as per edit process.
+                                                                $AttendanceStatus=$_REQUEST[$i];
+                                                                $AttendanceRemarks=$_REQUEST[$AttendanceRemarksKey];
+                                                                $PrevAttendanceStatus=$_REQUEST[$prevAttenStatusKey];
+                                                                $PrevAttendanceRemarks=$_REQUEST[$prevAttenRemarksKey];
+                                                                $StudentId=$_REQUEST[$sidkey];
+                                                                /*
+                                                                if($PrevAttendanceStatus==$AttendanceStatus)
+                                                                    {
+                                                                        //This section checks if the previous attendance value and the updated attendance value are same then it means the attendance for the candidate is not edited and is correct as it was before.  So here we are not executing the updated process for this student attendance and continuing the for loop to the next incremental $i value to to process the next attendance record. 
+                                                                        echo 'not updating';
+                                                                        continue;
+                                                                    }
                                                                 else
-                                                                    {     
-                                                                        $sidkey='sid';
-                                                                        $attendance='';
-                                                                        $remarkskey='remarks';
-                                                                        $lid=$_SESSION["LOGINID"];
-                                                                        $schoolid=$_SESSION["SCHOOLID"];
-                                                                        $query4="insert into attendance_details_table (attendance_id,student_id,attendance_status,attendance_remarks,prev_attendance_status,prev_attendance_remarks,school_id) values(?,?,?,?,?,?,?)";
-                                                                        $stmt4=$dbhandle->prepare($query4);
-                                                                        $stmt4->bind_param("isssssi",$aid,$sid,$attendance,$remarks,$attendance,$remarks,$_SESSION["SCHOOLID"]);	
-                                                                        $total_count=0;
-                                                                        $success_count=0;
-                                                                        $abscent_count=0;					// abscent student counter.
-                                                                            
-                                                                        for($i=1;$i<=$_REQUEST["total_count"];$i++)
-                                                                        {
-                                                                            $sidkey='sid' . $i;
-                                                                            $sid=$_REQUEST[$sidkey];
-                                                                            $remarkskey='remarks' . $i;
-                                                                            $remarks=$_REQUEST[$remarkskey];
-                                                                            $attendance=$_REQUEST[$i];
-                                                                            $studentNameKey='sname'.$i; 
-                                                                            $rollnoKey='rollno' . $i; 
-                                                                            //var_dump($stmt4);
-                                                                            if($stmt4->execute())
-                                                                                {
-                                                                                    $total_count=$total_count+1; //counts total by 1 for the attendance record.
-                                                                                    $success_count=$success_count+1; //counts by 1 if the insertion is successful for the fee detail record.	
-                                                                                    if($attendance=='ABSENT')
-                                                                                        {
-                                                                                            $absent_student_list=$absent_student_list .'<tr><td>' . $_REQUEST[$rollnoKey] . '</td><td>' . $_REQUEST[$studentNameKey] . '</td></tr>';    
+                                                                    { */
+                                                                        if($stmt4->execute())
+                                                                            {
+                                                                                if($AttendanceStatus=='ABSENT')
+                                                                                    {
+                                                                                        $absent_student_list=$absent_student_list .'<tr><td>' . $_REQUEST[$rollnoKey] . '</td><td>' . $_REQUEST[$studentNameKey] . '</td></tr>';    
 
-                                                                                        }
-                                                                                    //echo "Attendance Status=" . $attendance . '<br>';
-                                                                                    
-                                                                                    /*Commented Abscent message system. Will be reconstruct as per new requirement.
-                                                                                    $attendance_result=true;
-                                                                                    $attenSmsFlag_result=true;
-                                                                                    //var_dump($stmt4);
-                                                                                        
-                                                                                        if($attendance=='ABSENT')	//if the student is abscent.
-                                                                                            {
-                                                                                                $sname_index="sname".$i;
-                                                                                                $sname=$_REQUEST[$sname_index];
-                                                                                                $attnd_msg="Dear Parent " . $sname ." has found abscent on " . $adt . " as per school attendance. Please take care of your child.";
-                                                                                                $attendance_sql="insert into student_message_list (student_id,message,mobile_no,message_cat,status_code,school_id,delivery_date) values('" . $sid . "','" . $attnd_msg . "',(select father_mob_no from student_master_table where student_id='" . $sid . "'),5,0," . $_SESSION["SCHOOLID"] . ",str_to_date(now(),'%Y-%m-%d'))";
-                                                                                                    //echo '<br>' . $attnd_msg;
-                                                                                                //echo '<br>' . $attendance_sql;
-                                                                                                    $attendance_result=$dbhandle->query($attendance_sql);
-                                                                                                //Update status of sms sent successful for the attendance for the class.
-                                                                                                $attenSmsFlag_result=$dbhandle->query("update attendance_details_table set sms_sent_status=1 where attendance_id=" . $aid );
-                                                                                            }
-                                                                                        if($attendance_result and $attenSmsFlag_result)
-                                                                                            {
-                                                                                                $total_count=$total_count+1; //counts total by 1 for the attendance record.
-                                                                                                $success_count=$success_count+1; //counts by 1 if the insertion is successful for the fee detail record.
-                                                                                            }
-                                                                                        else
-                                                                                            {
-                                                                                                $total_count=$total_count+1;
-                                                                                                echo mysqli_error($dbhandle);
-                                                                                            }
-                                                                                            */
-                                                                                        //echo "<p>Passed:Total Count=" . $total_count;
-                                                                                        //echo "<p>Passed:Success Count=" . $success_count;
-                                                                                        //echo '<p>' . $_REQUEST[$chkabskey];
-                                                                                }
-                                                                            else
-                                                                                {
-                                                                                    $total_count=$total_count+1;
-                                                                                    // echo mysql_error($dbhandle);
-                                                                                    //echo "<p>Failed:Total Count=" . $total_count;
-                                                                                    
-                                                                                }
-                                                                        }
-                                                                        //echo '<br>'.$total_count . ' and  ' . $success_count;
-                                                                        if($total_count==$success_count and ($total_count!=0 or $success_count!=0))
-                                                                        {
-                                                                            mysqli_commit($dbhandle);
-                                                                            echo "<p><br><h1>Attendance posted successfully.</h1>";
-                                                                            
-                                                                        }
+                                                                                    }
+                                                                                //var_dump($stmt4);
+                                                                                $total_count=$total_count+1; //counts total by 1 for the attendance record.
+                                                                                $success_count=$success_count+1; //counts by 1 if the insertion is successful for the fee detail record.
+                                                                            }
                                                                         else
-                                                                        {
-                                                                            mysqli_rollback($dbhandle);
-                                                                            echo "<h1><br><p>Database error. Please try again.</h1>";
-                                                                        }
-                                                                        $dbhandle->query("unlock tables");
-                                                                    }    
+                                                                            {
+                                                                                $total_count=$total_count+1;
+                                                                                //echo "<p>Failed:Total Count=" . $total_count;
+                                                                            }
+                                                                            
+                                                                            
+                                                                    //}	
+                                                            }
+                                                    
+                                                        if($total_count==$success_count)
+                                                            {
+                                                                mysqli_commit($dbhandle);
+                                                                echo "<p><br><h1>Attendance posted successfully.</h1>";
+                                                            }
+                                                        else
+                                                            {
+                                                                mysqli_rollback($dbhandle);
+                                                                echo "<h1><br><p>Database error. Please try again.</h1>";
+                                                            }
+                                                    
+                                                    }   
                                                 ?>            
                                                 <h5 class="text-center">List of Absent Students</h5>
                                                 <div class="table-responsive">
@@ -230,13 +211,13 @@ include 'sequenceGenerator.php';
                                                             
                                                             <label class=""><?php echo '<input type="checkbox" class="form-check-input" ' .  ($period>1 ? 'disabled':'') . '>';?> Send Absentees SMS</label>                                                        </div>
                                                         <div class="chack">
-                                                            <label class="form-check-label"><?php echo '<input type="checkbox" class="form-check-input" ' .  ($period>1 ? 'disabled':'') . '>';?> Send Absentees What's app</label>
+                                                            <label class="form-check-label"><input type="checkbox" class="form-check-input" disabled> Send Absentees What's app</label>
                                                         </div>
                                                     </div>
                                                     <div class="new-added-form aj-new-added-form">
                                                         <div class="aaj-btn-chang-cbtn">
-                                                            <?php echo '<a class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark mb-3" href="StudentAttendanceEdit.php?adt='.$adt.'&secid='.$secid.'&classid='.$classid .'&period='. $period .'&aid='.$aid.'">Edit Attendance  </a>';?>
-                                                            <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Post Attendance </button>
+                                                            <?php echo '<a class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark mb-3" href="StudentAttendanceEdit.php?adt='.$adt.'&secid='.$secid.'&classid='.$classid .'&period='. $period .'&aid='.$AttendanceId.'">Edit Attendance  </a>';
+                                                            if($period==1 ){ echo '<button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Post Attendance </button>';}?>
                                                         </div>
                                                     </div>       
                                         </div>                                    
@@ -249,8 +230,7 @@ include 'sequenceGenerator.php';
                 <!--/div-->
                     <!-- Admit Form Area End Here -->
                     <footer class="footer-wrap-layout1">
-                        <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                                href="#">PsdBosS</a></div>
+                        <div class="copyright"> <?php include 'footer.php';?>  </div>
                     </footer>
             </div>
         </div>

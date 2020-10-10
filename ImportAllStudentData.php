@@ -86,7 +86,7 @@ include 'security.php';
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form" id="fileInputForm" name="fileInputForm" enctype="multipart/form-data" method="POST" action="">
+                        <form class="new-added-form school-form aj-new-added-form"  enctype="multipart/form-data" id="fileInputForm" name="fileInputForm" method="POST" action="">
                             
                             
                             <div class="row justify-content-center">
@@ -119,7 +119,7 @@ include 'security.php';
                                             
                                             <div class="form-group">
                                                 <label>Import Excel</label>
-                                                <input type="file" name="file" id="file" placeholder="" required="" class="form-control" accept=".csv">
+                                                <input type="file" name="file" id="file" placeholder="" class="form-control" accept=".csv" required="">
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@ include 'security.php';
                                             </div>
                                      </div>
                                     <div class="aaj-btn-chang-cbtn">
-                                            <button  class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark" name="importBtn" id="importBtn" value="submit">Import </button>
+                                            <button  type="button" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark" name="importBtn" id="importBtn">Import </button>
                                             <button type="reset" class="aj-btn-a1 btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                             
                                     </div>

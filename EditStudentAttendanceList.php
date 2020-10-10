@@ -65,22 +65,22 @@ if(isset($_REQUEST["adt"])==True and isset($_REQUEST["secid"])==True and isset($
                         
                         $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                         <div class="form-group aj-form-group">
-                                            <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='PRESENT' ? 'checked="checked"' : null) . ' id="'. $count . 'present" value="PRESENT" onclick="calc_attendance();"/>Present</span>
+                                            <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='PRESENT' ? 'checked="checked"' : null) . ' id="'. $count . 'present" value="PRESENT" onclick="calc_attendance();"/>&nbsp;Present</span>
                                         </div>
                                     </div> ';
                         $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                         <div class="form-group aj-form-group">
-                                            <span><input  type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='LATE' ? 'checked="checked"' : null) . ' id="'. $count . 'late"  value="LATE" onclick="calc_attendance();"/>LATE</span>
+                                            <span><input  type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='LATE' ? 'checked="checked"' : null) . ' id="'. $count . 'late"  value="LATE" onclick="calc_attendance();"/>&nbsp;LATE</span>
                                         </div>
                                     </div> ';
                         $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                         <div class="form-group aj-form-group">
-                                            <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='HALFDAY' ? 'checked="checked"' : null) . ' id="'. $count . 'halfday" value="HALFDAY"  onclick="calc_attendance();"/>HALFDAY</span>
+                                            <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='HALFDAY' ? 'checked="checked"' : null) . ' id="'. $count . 'halfday" value="HALFDAY"  onclick="calc_attendance();"/>&nbsp;HALFDAY</span>
                                         </div>
                                 </div> ';   
                         $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                         <div class="form-group aj-form-group">
-                                            <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='ABSENT' ? 'checked="checked"' : null) . ' id="'. $count . 'absent"  value="ABSENT" onclick="calc_attendance();"/>ABSENT</span>
+                                            <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='ABSENT' ? 'checked="checked"' : null) . ' id="'. $count . 'absent"  value="ABSENT" onclick="calc_attendance();"/>&nbsp;ABSENT</span>
                                         </div>
                                     </div> ';                              
                         $str=$str . '</div></td><td><textarea class="form-control" name="remarks' . $count . '" id="reason' . $count . '" ' . '>' . $attendanceStudentList_row["attendance_remarks"] . '</textarea><input type="hidden" name="sid' . $count . '" value="' . $attendanceStudentList_row["student_id"] . '" /><input type="hidden" name="prev_attendance_status' . $count . '" value="' . $attendanceStudentList_row["attendance_status"] . '" /><input type="hidden" name="attendance_remarks' . $count . '" value="' . $attendanceStudentList_row["attendance_remarks"] . '" /></td></tr>';

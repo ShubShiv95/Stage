@@ -11,7 +11,7 @@ include 'security.php';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Student Attendence</title>
+    <title>SWIPETOUCH | Edit Student Attendence</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -36,6 +36,11 @@ include 'security.php';
     <script src="js/modernizr-3.6.0.min.js"></script>
     <!-- Date Picker CSS -->
     <link rel="stylesheet" href="css/datepicker.min.css">
+    <style>
+    .attendance-textarea{
+        font-size: 1.5rem;
+    }
+    </style>
 </head>
 
 <body>
@@ -153,26 +158,23 @@ include 'security.php';
                                         </div>
                                     </div>
                                 </form>
-                                <form class="new-added-form aj-new-added-form" action="StudentAttendanceEntry2.php" method="post">
+                                <form class="new-added-form aj-new-added-form" action="StudentAttendanceEdit2.php" method="post">
                                     <div class="tebal-promotion" id="attendance-list-div">
                                         <!--Student Attendance List Form Starts Here-->
                                         <?php 
-                                                    $adt='';
-                                                    $secid='';
-                                                    $classid='';
-                                                    $period='';
                                                     if(isset($_REQUEST["adt"])==True and isset($_REQUEST["secid"])==True and isset($_REQUEST["classid"])==True and isset($_REQUEST["period"])==True)
-                                                        {
-                                                            $adt=$_REQUEST["adt"];
-                                                            $secid=$_REQUEST["secid"];
-                                                            $classid=$_REQUEST["classid"];
-                                                            $period=$_REQUEST["period"];
-                                                            $attendance_date=strtotime($adt);
-                                                            $aid=$_REQUEST["aid"];
+                                                    {
+                                                                                                     
+                                                        $adt=$_REQUEST["adt"];
+                                                        $secid=$_REQUEST["secid"];
+                                                        $classid=$_REQUEST["classid"];
+                                                        $period=$_REQUEST["period"];
+                                                        $attendance_date=strtotime($adt);
+                                                        $aid=$_REQUEST["aid"];
 
                                                             //checking for any previous latest period attendance is present then will inherit the status of the previous period attendance to the attendance entry form.
                             
-                                                        $query="select * from attendance_master_table where class_sec_id=" . $_REQUEST["secid"] . " and school_id=" . $_SESSION["SCHOOLID"] . " and doa=str_to_date('" .$adt . "','%d/%m/%Y') and period=$period";
+                                                        $query="select * from attendance_master_table where attendance_id=" . $aid;
                                                         //echo '<br><br> ' . $query;
                                                         $pretAttendance_result=$dbhandle->query($query);
                                                         
@@ -216,31 +218,31 @@ include 'security.php';
                                                                             
                                                                             $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                                                                             <div class="form-group aj-form-group">
-                                                                                                <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='PRESENT' ? 'checked="checked"' : null) . ' id="'. $count . 'present" value="PRESENT" onclick="calc_attendance();"/>Present</span>
+                                                                                                <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='PRESENT' ? 'checked="checked"' : null) . ' id="'. $count . 'present" value="PRESENT" onclick="calc_attendance();"/>&nbsp;Present</span>
                                                                                             </div>
                                                                                         </div> ';
                                                                             $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                                                                             <div class="form-group aj-form-group">
-                                                                                                <span><input  type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='LATE' ? 'checked="checked"' : null) . ' id="'. $count . 'late"  value="LATE" onclick="calc_attendance();"/>LATE</span>
+                                                                                                <span><input  type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='LATE' ? 'checked="checked"' : null) . ' id="'. $count . 'late"  value="LATE" onclick="calc_attendance();"/>&nbsp;LATE</span>
                                                                                             </div>
                                                                                         </div> ';
                                                                             $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                                                                             <div class="form-group aj-form-group">
-                                                                                                <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='HALFDAY' ? 'checked="checked"' : null) . ' id="'. $count . 'halfday" value="HALFDAY"  onclick="calc_attendance();"/>HALFDAY</span>
+                                                                                                <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='HALFDAY' ? 'checked="checked"' : null) . ' id="'. $count . 'halfday" value="HALFDAY"  onclick="calc_attendance();"/>&nbsp;HALFDAY</span>
                                                                                             </div>
                                                                                     </div> ';   
                                                                             $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                                                                             <div class="form-group aj-form-group">
-                                                                                                <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='ABSENT' ? 'checked="checked"' : null) . ' id="'. $count . 'absent"  value="ABSENT" onclick="calc_attendance();"/>ABSENT</span>
+                                                                                                <span><input type="radio" class="gaurdian-bs" name="' . $count . '" ' . ($attendanceStudentList_row["attendance_status"]=='ABSENT' ? 'checked="checked"' : null) . ' id="'. $count . 'absent"  value="ABSENT" onclick="calc_attendance();"/>&nbsp;ABSENT</span>
                                                                                             </div>
                                                                                         </div> ';                              
-                                                                            $str=$str . '</div></td><td><textarea class="form-control" name="remarks' . $count . '" id="reason' . $count . '" ' . '>' . $attendanceStudentList_row["attendance_remarks"] . '</textarea><input type="hidden" name="sid' . $count . '" value="' . $attendanceStudentList_row["student_id"] . '" /><input type="hidden" name="prev_attendance_status' . $count . '" value="' . $attendanceStudentList_row["attendance_status"] . '" /><input type="hidden" name="attendance_remarks' . $count . '" value="' . $attendanceStudentList_row["attendance_remarks"] . '" /></td></tr>';
+                                                                                        $str=$str . '</div></td><td><textarea class="form-control attendance-textarea" name="remarks' . $count . '" id="remarks' . $count . '" ' . '>' . $attendanceStudentList_row["attendance_remarks"] . '</textarea><input type="hidden" name="sid' . $count . '" value="' . $attendanceStudentList_row["student_id"] . '" /><input type="hidden" name="prev_attendance_status' . $count . '" value="' . $attendanceStudentList_row["attendance_status"] . '" /><input type="hidden" name="prev_attendance_remarks' . $count . '" value="' . $attendanceStudentList_row["attendance_remarks"] . '" /></td></tr>';
 
                                                                             $present=$present + 1;
 
                                                                         }
                                                                         
-                                                                        $str=$str . '</tbody></table></div><div class="inpuy-chang-box atten-inpuy-chang-box">
+                                                                        $str=$str . '</tbody></table><div class="inpuy-chang-box atten-inpuy-chang-box">
                                                                         <div class="form-output">
                                                                             <div class="name-f">
                                                                                 <h6>Present Number</h6>
@@ -308,7 +310,9 @@ include 'security.php';
                 </div>
                 <!-- Student Attendence Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
+                    <div class="copyright">
+                       <?php include 'footer.php';?>                         
+                    </div>
                 </footer>
             </div>
         </div>
@@ -416,6 +420,7 @@ if (classid=0 || secid==0 || adt=='')
     alert('Please select proper values for class, section, attendance date and class period.');
     return;
   }
+  document.getElementById('attendance-list-div').empty;
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
   xmlhttp=new XMLHttpRequest();
@@ -428,10 +433,11 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
+    
     document.getElementById('attendance-list-div').innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("GET","EditStudentAttendanceList.php?classid="+classid+"&secid="+secid+"&adt="+adt+"&period="+cperiod,true);
+xmlhttp.open("POST","GetStudentAttendanceEditList.php?classid="+classid+"&secid="+secid+"&adt="+adt+"&period="+cperiod,true);
 xmlhttp.send();
 }
 </script>
@@ -498,7 +504,6 @@ xmlhttp.open("GET","getsectionList.php?classid="+str,true);
 xmlhttp.send();
 }
 </script>
-
 </body>
 
 </html>

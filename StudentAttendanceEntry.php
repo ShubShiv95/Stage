@@ -11,7 +11,7 @@ include 'security.php';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Student Attendence</title>
+    <title>SWIPETOUCH | Student Attendence</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -36,6 +36,11 @@ include 'security.php';
     <script src="js/modernizr-3.6.0.min.js"></script>
     <!-- Date Picker CSS -->
     <link rel="stylesheet" href="css/datepicker.min.css">
+    <style>
+    .attendance-textarea{
+        font-size: 1.5rem;
+    }
+    </style>
 </head>
 
 <body>
@@ -169,7 +174,7 @@ include 'security.php';
                 </div>
                 <!-- Student Attendence Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
+                    <div class="copyright"> <?php include 'footer.php';?>  </div>
                 </footer>
             </div>
         </div>

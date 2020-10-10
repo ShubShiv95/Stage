@@ -121,7 +121,7 @@ include 'security.php';
                                                 </div>
                                         </div>
                                         <div class="aaj-btn-chang-cbtn">
-                                                <button  class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark" name="importBtn" id="importBtn" value="submit">Import </button>
+                                                <button type="button" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark" name="importBtn" id="importBtn">Import </button>
                                                 <button type="reset" class="aj-btn-a1 btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                                 
                                         </div>

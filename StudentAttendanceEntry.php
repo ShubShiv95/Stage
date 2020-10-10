@@ -154,97 +154,14 @@ include 'security.php';
                                     </div>
                                 </form>
                                 <form class="new-added-form aj-new-added-form" action="StudentAttendanceEntry2.php" method="post">
-                                <div class="tebal-promotion" id="attendance-list-div">
-                                <!--form class="new-added-form aj-new-added-form" action="AbsentStudentList.php" method="post">
-                                    <div class="table-responsive mt-5" >
-                                        <table class="table table-bordered redio-btn-ch" style="text-align:center;">
-                                            <thead>
-                                                <tr>
-                                                    <th>Roll No. </th>
-                                                    <th>Student Name </th>
-                                                    <th>Attendance Status</th>
-                                                    <th>Remarks</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>K.G. Student 1</td>
-                                                    <td>
-                                                    <div class="row radio">
-                                                            <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
-                                                                <div class="form-group aj-form-group">
-                                                                    <span><input checked type="radio" class="gaurdian-bs" name="Present1" > Present</span>
-                                                                </div>
-                                                            </div>        
-                                                            <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
-                                                                <div class="form-group aj-form-group">
-                                                                <span><input  type="radio" class="gaurdian-bs" name="Present1" > Late</span>
-                                                                </div>
-                                                            </div>        
-                                                            <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
-                                                                <div class="form-group aj-form-group">
-                                                                    <span><input type="radio" class="gaurdian-bs" name="Present1" > Half Day</span>
-                                                                </div>
-                                                            </div>        
-                                                            <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
-                                                                <div class="form-group aj-form-group">
-                                                                <span><input type="radio" class="gaurdian-bs" name="Present1" > Abscent</span>
-                                                                </div>
-                                                            </div>        
-                                                        </div>
-                                                       
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control"></textarea>
-                                                    </td>
-                                                </tr>
-                                            </tbody>                                                
-                                        </table>
-                                    </div>
-
-                                    <div class="inpuy-chang-box atten-inpuy-chang-box">
-                                        <div class="form-output">
-                                            <div class="name-f">
-                                                <h6>Present Number</h6>
-                                            </div>
-                                            <div class="input-box-in">
-                                                <input type="text" readonly="" class="redonly-form-control" value="3" name="">
-                                            </div>
-                                            <div class="name-f">
-                                                <h6>Late Number</h6>
-                                            </div>
-                                            <div class="input-box-in">
-                                                <input type="text" readonly="" class="redonly-form-control" value="3" name="">
-                                            </div>
-
-                                            <div class="name-f">
-                                                <h6>Half Day Number</h6>
-                                            </div>
-                                            <div class="input-box-in">
-                                                <input type="text" readonly="" class="redonly-form-control" value="3" name="">
-                                            </div>
-                                            <div class="name-f">
-                                                <h6>Abscent Number</h6>
-                                            </div>
-                                            <div class="input-box-in n-br">
-                                                <input type="text" readonly="" class="redonly-form-control" value="1" name="">
-                                            </div>
-                                        </div>
-
-                                        <div class="new-added-form aj-new-added-form">
-                                         <div class="aaj-btn-chang-cbtn">
-                                                 <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Save Attendance </button>
-                                                 <button type="reset" class="aj-btn-a btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
-                                          </div>
-                                        </div> 
+                                    <div class="tebal-promotion" id="attendance-list-div">
+                                        <!--Student Attendance List Form Starts Here-->
+                                        <?php 
                                         
-
+                                        ?>
+                                        <!--Student Attendance List Form Ends Here-->
                                     </div>
-
-                                </form-->
-                            </div>
-                            </form>                           
+                                </form>                           
                             </div>
                         </div>
                     </div>

@@ -23,7 +23,7 @@ include 'dbobj.php';
             $query="select * from attendance_master_table where class_sec_id=" . $_REQUEST["secid"] . " and school_id=" . $_SESSION["SCHOOLID"] . " and doa=str_to_date('" .$adt . "','%d/%m/%Y') and period=1";
             //echo '<br><br> ' . $query;
             $result=$dbhandle->query($query);
-            if($result->num_rows==0)
+            if($result->num_rows==0 and $period >1)
                 {
                     echo "<h1>First period attendance is not found.  Attendance for other periods is not allowed before attendance of first period.  Please create the attendance for period 1 first.</h1>";
                     die;
@@ -39,12 +39,14 @@ include 'dbobj.php';
 		{
 				echo "<h1><p><br>Attendance has been created for the day and period.</h1><br><h2><p>To edit please contact your reporting manager.</h2>";
 				exit;
-		}
-	else if(strtotime(date('d-m-Y',$attendance_date)) > strtotime(date('d/m/Y')))
+        }
+        
+	else if(date('d/m/Y',$attendance_date) > strtotime(date('d/m/Y')))
 		{
-					echo "<h2> Future date attendance is not allowed.</h2>";
+					echo "<h2> Future date attendance is not allowed.</h2>".date('d/m/Y');
 					exit;
-		}
+        }
+        /*  //need to rectify the code as it is taking previous day of sunday as sunday.
 	else if (strtolower(date('D',strtotime($adt)))=='sun')
 		{		
 			//Extracting Day of the month if the day is sunday or not to restrict attendance on sunday.
@@ -52,7 +54,8 @@ include 'dbobj.php';
 			exit;
 		}
 				//End of Holiday checking for the attendance date.			
-	else
+    */
+    else
 		{
 			
 			//checking for any previous latest period attendance is present then will inherit the status of the previous period attendance to the attendance entry form.
@@ -97,7 +100,7 @@ include 'dbobj.php';
 						while($attendanceStudentList_row=$attendanceStudentList_result->fetch_assoc())
 							{
 								$count++;
-                                $str= $str .  '<tr><td>' . $attendanceStudentList_row["roll_number"] . '</td><td>' . $attendanceStudentList_row["student_name"] . '</td><td><div class="row radio">';
+                                $str= $str .  '<tr><td>' . $attendanceStudentList_row["roll_number"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["roll_number"] .'" /></td><td>' . $attendanceStudentList_row["student_name"] . '<input type="hidden" name="sname'.$count.'" value="'. $attendanceStudentList_row["student_name"] .'" /></td><td><div class="row radio">';
                                 
                                 $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                                 <div class="form-group aj-form-group">
@@ -222,7 +225,7 @@ include 'dbobj.php';
                         while($attendanceStudentList_row=$attendanceStudentList_result->fetch_assoc())
                             {
                                 $count++;
-                                $str= $str .  '<tr><td>' . $attendanceStudentList_row["rollno"] . '</td><td>' . $attendanceStudentList_row["student_name"] . '</td><td><div class="row radio">';
+                                $str= $str .  '<tr><td>' . $attendanceStudentList_row["rollno"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["rollno"] .'" /></td><td>' . $attendanceStudentList_row["student_name"] .'<input type="hidden" name="sname'.$count.'" value="'. $attendanceStudentList_row["student_name"] .'" /></td><td><div class="row radio">';
                                 
                                 $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                                 <div class="form-group aj-form-group">

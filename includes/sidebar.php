@@ -118,8 +118,11 @@
                             <a href="#" class="nav-link"><i
                                     class="flaticon-ring"></i><span>Student Attendance</span></a>
                             <ul class="nav sub-group-menu">
-                            <li class="nav-item">
+                                <li class="nav-item">
                                     <a href="StudentAttendanceEntry.php" class="nav-link"><i class="fas fa-angle-right"></i>Student Attendance Entry</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="StudentAttendanceEdit.php" class="nav-link"><i class="fas fa-angle-right"></i>Student Attendance Edit</a>
                                 </li>
                                 <!--li class="nav-item">
                                     <a href="list_of_absent_students.php" class="nav-link"><i class="fas fa-angle-right"></i>list of absent Students</a>

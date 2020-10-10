@@ -4,20 +4,18 @@
    include 'security.php';
    include 'errorLog.php';   
 
-if(isset($_REQUEST["submit"]))
-{
+
 
    $file = $_FILES['file']['tmp_name'];
    $fileHandle = fopen($file, "r");
    $counter = 0;
-   $IsTransSuccess = true;
+   
+   $htmlbody = '<table class="table table-bordered"><thead><tr><th>School ID</th><th>Session</th><th>First Name</th><th>Middle Name</th><th>Last Name </th><th>Class Id</th><th>Gender</th><th>DOB</th><th>Age</th><th>Social Category</th><th>Discount Category</th><th>Locality</th><th>Academic Session</th><th>Mother Tongue</th><th>Religion</th><th>Nationality</th><th>Blood Group</th><th>Aadhar No</th><th>Prev School Name</th><th>Prev School Medium</th><th>Prev School Board</th><th>Prev School Class</th><th>Comm Address</th><th>Comm City</th><th>Comm State</th><th>Comm Country </th><th>Comm PinCode</th><th>Comm ContactNo</th><th>Resid Add</th><th>Resid City</th><th>Resid State</th><th>Resid Country</th><th>Resid PinCode</th><th>Resid Contact No</th><th>Sibling_1 Stud Id</th><th>Sibling_1 Class</th><th>Sibling_1 Section</th><th>Sibling_1 Roll</th><th>Sibling_2 Stud Id</th><th>Sibling_2 Class</th><th>Sibling_2 Sec</th><th>Sibling_2 Roll</th><th>Father Name</th><th>Father Qual</th><th>Father Occup</th><th>Father Desig</th><th>Father Org Name</th><th>Father Org Add</th><th>Father City</th><th>Father State</th><th>Father Country</th><th>Father PinCode</th><th>Father Email</th><th>Father Contact</th><th>Father AnnualIncome</th><th>Father Aadhar</th><th>Father Alumni</th><th>Mother Name</th><th>Mother Qual</th><th>Mother Occup</th><th>Mother Desig</th><th>Mother Org Name</th><th>Mother Org Add</th><th>Mother City</th><th>Mother State</th><th>Mother Country</th><th>Mother PinCode</th><th>Father Email</th><th>Mother ContactNo</th><th>Mother AnnualIncome</th><th>Mother Aadhar</th><th>Mother Alumni</th><th>Guardian Type</th><th>Guardian Add</th><th>Guardian Name</th><th>Guardian Relation</th><th>Guardian ContactNo</th><th>SMS ContactNo</th><th>WhatsApp ContactNo</th></tr></thead></table> ';
 
-   mysqli_autocommit($dbhandle,FALSE);
-   $dbhandle->query('LOCK TABLES admission_master_table WRITE');
 
    while(($filesop = fgetcsv($fileHandle,100,',')) !== false) {
           
-      $schoolId = $filesop[0];
+     /* $schoolId = $filesop[0];
       $session = $filesop[1];
       $firstName = $filesop[2];
       $middleName = $filesop[3];
@@ -110,32 +108,12 @@ if(isset($_REQUEST["submit"]))
       $session = $filesop[90];
       $session = $filesop[91];
       $session = $filesop[92];
+*/
 
-
-
-      $sql = "insert into excel(fname,lname) values (?,?)";
-      $stmt4=$dbhandle->prepare($sql);
-      $stmt4->bind_param("ss",$fname,$lname);	
-      if($counter>0){
-            if(!$stmt4->execute()){
-               $IsTransSuccess = false;
-               mysqli_rollback($dbhandle);
-               break;
-            }
-      }
+     
 			$counter++;
    }
 
-   if($IsTransSuccess){
-      mysqli_commit($dbhandle);
-      $dbhandle->query('UNLOCK TABLES');
-      echo "Success";
-   } 
-	else{
-      mysqli_rollback($dbhandle);
-      $dbhandle->query('UNLOCK TABLES');
-      echo "Sorry! Unable to import";
-   }
+echo $htmlbody;   
 
-}
 ?>

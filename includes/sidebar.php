@@ -64,7 +64,7 @@
                                     <a href="RegistrationForm.php" class="nav-link"><i class="fas fa-angle-right"></i>Online Registration</a>
                                 </li-->
                                 <li class="nav-item">
-                                    <a href="ImportStudentAllData.php" class="nav-link"><i class="fas fa-angle-right"></i>Bulk Import</a>
+                                    <a href="ImportAllStudent Data.php" class="nav-link"><i class="fas fa-angle-right"></i>Bulk Import</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="ImportStudentSingleData.php" class="nav-link"><i class="fas fa-angle-right"></i>Bulk Import-Individual </a>

@@ -1,8 +1,8 @@
 <?php
    session_start();
    include 'dbobj.php';
-   include 'security.php';
-   include 'errorLog.php';   
+   //include 'security.php';
+   //include 'errorLog.php';   
 
 
 

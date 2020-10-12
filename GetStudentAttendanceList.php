@@ -12,10 +12,15 @@ include 'dbobj.php';
 
 	$adt=$_REQUEST["adt"];
 	$secid=$_REQUEST["secid"];
-	$classid=$_REQUEST["classid"];
+    if(!isset($_REQUEST["classid"]))
+        {
+            echo "Class Id has not come.";
+        }
 	$cperiod=$_REQUEST["cperiod"];
-	$attendance_date=strtotime($adt);
-	
+    $attendance_date=strtotime($adt);
+    $classid=$_REQUEST["classid"];
+	//echo $cid;
+	echo $classid;
 	
 	//Checking and forcing to create addendance for perion 1 in case the attendance is not created for period 1.
     if($cperiod!=1)
@@ -292,6 +297,7 @@ include 'dbobj.php';
                                 </div>
                             </div> 
                         </div>';  
+                        echo $classid;
                         echo $str;  
                      /* End of Creating New Attendance Form*/
 

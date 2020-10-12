@@ -90,6 +90,7 @@ include 'security.php';
                                                     <!--option value="">Please Select Class *</option-->
                                                     <option value="0">Please Select Class *</option>
                                                     <?php
+                                                        $str='';
                                                         $query='select Class_Id,class_name,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
                                                         $result=$dbhandle->query($query);
                                                         if(!$result)
@@ -99,23 +100,23 @@ include 'security.php';
                                                                 $el=new LogMessage();
                                                                 $sql=$query;
                                                                 //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                                                                $el->write_log_message('Investment Payment',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                                                                $el->write_log_message('Student Attendance Entry',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
                                                                 $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
                                                                 $dbhandle->query("unlock tables");
                                                                 mysqli_rollback($dbhandle);
                                                                 //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
-                                                                $messsage='Error: Admission Enquiry Not Saved.  Please consult application consultant.';
+                                                                $messsage='Error: Class list not generated.  Please consult application consultant.';
                                                                 //$str_end='</div>';
                                                                 //echo $str_start.$messsage.$str_end;
                                                                 //echo "";
                                                                 //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
                                                             }
-                                                        while($row=mysqli_fetch_assoc($result))
+                                                        while($row=$result->fetch_assoc())
                                                         {
-                                                        $str='<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"];
-                                                        $str=$str . '</option>';
-                                                        echo $str;
-                                                    }
+                                                            echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . '</option>';
+                                                            
+                                                        }
+                                                        //echo $str;
                                                     ?>
                                                 </select>
                                             </div>
@@ -273,11 +274,12 @@ function getAttendanceList()
 {
 var xmlhttp;
 var classid=document.getElementById("classid").value;
+alert(classid);
 var secid=document.getElementById("secid").value;
 var adt=document.getElementById("adt").value;
 var cperiod=document.getElementById("cperiod").value;
 
-if (classid=0 || secid==0 || adt=='')
+if (classid==0 || secid==0 || adt=='')
   {
     alert('Please select proper values for class, section, attendance date and class period.');
     return;
@@ -297,7 +299,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById('attendance-list-div').innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("GET","GetStudentAttendanceList.php?classid="+classid+"&secid="+secid+"&adt="+adt+"&cperiod="+cperiod,true);
+xmlhttp.open("POST","GetStudentAttendanceList.php?classid="+classid+"&secid="+secid+"&adt="+adt+"&cperiod="+cperiod,true);
 xmlhttp.send();
 }
 </script>

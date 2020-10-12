@@ -95,7 +95,7 @@ include 'sequenceGenerator.php';
                                                                 $classid=$_REQUEST["classid"];
                                                                 $period=$_REQUEST["period"];
                                                                 $absent_student_list='';
-
+                                                                echo $classid;
 
                                                                 if($_REQUEST["absentno"]==0 and $_REQUEST["presentno"]==0)
                                                                 {

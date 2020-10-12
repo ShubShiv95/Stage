@@ -415,7 +415,7 @@ var secid=document.getElementById("secid").value;
 var adt=document.getElementById("adt").value;
 var cperiod=document.getElementById("cperiod").value;
 
-if (classid=0 || secid==0 || adt=='')
+if (classid==0 || secid==0 || adt=='')
   {
     alert('Please select proper values for class, section, attendance date and class period.');
     return;

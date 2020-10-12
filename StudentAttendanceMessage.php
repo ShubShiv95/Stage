@@ -90,61 +90,24 @@ include 'security.php';
                             <div class="row justify-content-center">
                                 <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
                                     <div class="tebal-promotion" >
-                                        <h5 class="text-center">Student Attendence Message</h5>
+                                        <!--h5 class="text-center">Student Attendence Message</h5-->
                                         <div class="row justify-content-center mb-4">
                                             <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                                 <div class="form-group aj-form-group">
                                                     <label>Select Date </label>
-                                                    <input type="text" name="f_dob" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker"
+                                                    <input type="text" name="daa" id="doa" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker"
                                                 data-position='bottom right'>
                                                 <i class="far fa-calendar-alt"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-xl-4 col-12">
-                                                    <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Get Attendence</button>
+                                                    <button type="button" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark" onclick="return getPenAttendMsgList();">Get Attendence</button>
                                             </div>  
                                         </div>
-                                        <div class="table-responsive">
-                                            <?php 
-                                                $sql="select class_name,section,smsflag,attendance_status from class_master_table cmt,class_section_table cst,student_class_details scd where cst.class_id=cmt.class_id and scd.class_sec_id=cst.class_sec_id"
-                                            ?>
-                                            <table class="table table-bordered attendence-msg">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Calss Name </th>
-                                                        <th>Attendence </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>K.G. 1</td>
-                                                        <td>
-                                                            <ul class="list-absent">
-                                                                <li><span class="red-a"></span> A</li>
-                                                                <li><span class="red-b"></span> B</li>
-                                                                <li><span class="red-c"></span> c</li>
-
-                                                            </ul>
-                                                        </td>
-                                                    </tr>                                                   
-                                                </tbody>   
-                                            </table>
-                                        </div>
-                                        <div class="atten-chack">
-                                            <div class="chack">
-                                                
-                                                <label class=""><input type="checkbox" class=""> Send Absentees SMS</label>
-                                            </div>
-                                            <div class="chack">
-                                                <label class="form-check-label"><input type="checkbox" class="form-check-input"> Send Absentees What's app</label>
-                                            </div>
-                                        </div>
-                                        <div class="new-added-form aj-new-added-form">
-                                         <div class="aaj-btn-chang-cbtn">
-                                            <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Send  Attendance  Message</button>
-                                            
-                                          </div>
-                                        </div>       
+                                        <div class="row justify-content-center mb-4" id="div-AttendanceStatus">
+                                                 
+                                        </div>    
+                                        
                                     </div>                                    
                                 </div>
                                
@@ -180,11 +143,36 @@ include 'security.php';
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
-     <script type="text/javascript">
-        $('#opne-form-Promotion').click('.sibling-bs',function(){
-             $('.tebal-promotion').slideToggle('slow');
-            })
-    </script>  
+    <script>
+function getPenAttendMsgList()
+{
+var xmlhttp;    
+var doa=document.getElementById("doa").value;
+if (doa=="")
+  {
+  document.getElementById("doa").innerHTML="";
+
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("div-AttendanceStatus").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","getPendingAttendanceSMSList.php?doa="+doa,true);
+xmlhttp.send();
+}
+</script> 
 </body>
 
 </html>

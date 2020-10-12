@@ -128,7 +128,7 @@
                                     <a href="list_of_absent_students.php" class="nav-link"><i class="fas fa-angle-right"></i>list of absent Students</a>
                                 </li-->
                                 <li class="nav-item">
-                                    <a href="AttendanceMessage.php" class="nav-link"><i class="fas fa-angle-right"></i>Attendance Message</a>
+                                    <a href="StudentAttendanceMessage.php" class="nav-link"><i class="fas fa-angle-right"></i>Attendance Message</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="MonthlyAttendanceReport.php" class="nav-link"><i class="fas fa-angle-right"></i>Monthly Attendance Report</a>

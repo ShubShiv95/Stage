@@ -148,7 +148,7 @@ include 'security.php';
                                     <div class="item-title">
                                         <h3>Attendence Sheet Of Class One: Section A, April 2019</h3>
                                     </div>
-                                   <div class="dropdown">
+                                   <!--div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" 
                                         data-toggle="dropdown" aria-expanded="false">...</a>
                 
@@ -157,7 +157,7 @@ include 'security.php';
                                             <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
                                             <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                         </div>
-                                    </div>
+                                    </div-->
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table bs-table table-striped table-bordered text-nowrap tebal-form-in">

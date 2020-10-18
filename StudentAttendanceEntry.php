@@ -274,7 +274,6 @@ function getAttendanceList()
 {
 var xmlhttp;
 var classid=document.getElementById("classid").value;
-alert(classid);
 var secid=document.getElementById("secid").value;
 var adt=document.getElementById("adt").value;
 var cperiod=document.getElementById("cperiod").value;
@@ -299,7 +298,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById('attendance-list-div').innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("POST","GetStudentAttendanceList.php?classid="+classid+"&secid="+secid+"&adt="+adt+"&cperiod="+cperiod,true);
+xmlhttp.open("POST","GetStudentAttendanceList.php?classid="+classid+"&secid="+secid+"&adt="+adt+"&period="+cperiod,true);
 xmlhttp.send();
 }
 </script>

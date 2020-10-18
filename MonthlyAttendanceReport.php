@@ -78,32 +78,68 @@ include 'security.php';
                                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                                         <div class="form-group aj-form-group">
                                                 <label>Select Class</label>
-                                                <select class="select2">
-                                                    <option value="">Select Class</option>
-                                                    <option value="1">Nursery</option>
-                                                    <option value="2">Play</option>
-                                                    <option value="3">One</option>
-                                                    <option value="4">Two</option>
-                                                    <option value="5">Three</option>
+                                                <select class="select2" required name="classid" id="classid" onchange="showsection(this.value)">
+                                                    <!--option value="">Please Select Class *</option-->
+                                                    <option value="0">Please Select Class *</option>
+                                                    <?php
+                                                        $str='';
+                                                        $query='select Class_Id,class_name,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
+                                                        $result=$dbhandle->query($query);
+                                                        if(!$result)
+                                                            {
+                                                                //var_dump($getStudentCount_result);
+                                                                $error_msg=mysqli_error($dbhandle);
+                                                                $el=new LogMessage();
+                                                                $sql=$query;
+                                                                //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                                                $el->write_log_message('Student Attendance Entry',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                                                                $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+                                                                $dbhandle->query("unlock tables");
+                                                                mysqli_rollback($dbhandle);
+                                                                //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
+                                                                $messsage='Error: Class list not generated.  Please consult application consultant.';
+                                                                //$str_end='</div>';
+                                                                //echo $str_start.$messsage.$str_end;
+                                                                //echo "";
+                                                                //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
+                                                            }
+                                                        while($row=$result->fetch_assoc())
+                                                        {
+                                                            echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . '</option>';
+                                                            
+                                                        }
+                                                        //echo $str;
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                                             <div class="form-group aj-form-group">
                                                 <label>Select Section</label>
-                                                <select class="select2">
-                                                    <option value="0">Select Section</option>
-                                                    <option value="1">A</option>
-                                                    <option value="2">B</option>
-                                                    <option value="3">C</option>
-                                                    <option value="4">D</option>
+                                                <select class="select2" name="secid" id="secid" required>
+                                                    <option value="">Please Select Section *</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                            <div class="form-group aj-form-group">
+                                                <label>Select Period</label>
+                                                <select class="select2" name="period" id="period" required>
+                                                    <option value="1">Period 1</option>
+                                                    <option value="2">Period 2</option>
+                                                    <option value="3">Period 3</option>
+                                                    <option value="4">Period 4</option>
+                                                    <option value="5">Period 5</option>
+                                                    <option value="6">Period 6</option>
+                                                    <option value="7">Period 7</option>
+                                                    <option value="8">Period 8</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-xl-3 col-lg-6 col-12 form-group">
                                             <div class="form-group aj-form-group">
                                                 <label>Select Month</label>
-                                                <select class="select2">
+                                                <select class="select2" name="month" id="month" required>
                                                     <option value="0">Select Month</option>
                                                     <option value="1">January</option>
                                                     <option value="2">February</option>
@@ -113,28 +149,16 @@ include 'security.php';
                                                     <option value="6">June</option>
                                                     <option value="7">July</option>
                                                     <option value="8">August</option>
-                                                    <option value="9">September</option>
+                                                    <option value="9">Sepetember</option>
                                                     <option value="10">October</option>
                                                     <option value="11">November</option>
                                                     <option value="12">December</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                            <div class="form-group aj-form-group">
-                                                <label>Select Session</label>
-                                                <select class="select2">
-                                                    <option value="0">Select Session</option>
-                                                    <option value="1">2016-2017</option>
-                                                    <option value="2">2017-20108</option>
-                                                    <option value="3">2018-2019</option>
-                                                    <option value="4">2020-2021</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="col-12 aaj-btn-chang">
-                                            <button type="submit" class="aj-btn-a btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
-                                            <button type="reset" class="aj-btn-a btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                                            <button type="button" class="aj-btn-a btn-fill-lg btn-gradient-yellow btn-hover-bluedark" onClick="getMonthlyReport();">View</button>
+                                            <button type="button" class="aj-btn-a btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                         </div>
                                     </div>
                                 </form>
@@ -143,21 +167,11 @@ include 'security.php';
                     </div>
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-body">
-                                <div class="heading-layout1">
+                            <div class="card-body" id="div-AttendanceMonthlyReport">
+                                <!--div class="heading-layout1">
                                     <div class="item-title">
                                         <h3>Attendence Sheet Of Class One: Section A, April 2019</h3>
                                     </div>
-                                   <!--div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" 
-                                        data-toggle="dropdown" aria-expanded="false">...</a>
-                
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                        </div>
-                                    </div-->
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table bs-table table-striped table-bordered text-nowrap tebal-form-in">
@@ -889,7 +903,7 @@ include 'security.php';
                                             </tr>
                                         </tfoot>
                                     </table>
-                                </div>
+                                </div-->
                             </div>
                         </div>
                     </div>
@@ -1009,6 +1023,61 @@ $(document).on("change","input[type='text']",function(){
             $(this).addClass("atent-s");
           }
 })
+</script>
+<script>
+function showsection(str)
+{
+var xmlhttp;    
+if (str=="")
+  {
+  document.getElementById("section").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("secid").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","getsectionList.php?classid="+str,true);
+xmlhttp.send();
+}
+</script>
+<script>
+function getMonthlyReport()
+{
+var xmlhttp;    
+var classid=document.getElementById("classid").value;
+var secid=document.getElementById("secid").value;
+var month=document.getElementById("month").value;
+var period=document.getElementById("period").value;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("div-AttendanceMonthlyReport").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("POST","getMonthlyAttendanceReport.php?classid="+classid+"&secid="+secid+"&period="+period+"&month="+month,true);
+xmlhttp.send();
+}
 </script>
 </body>
 

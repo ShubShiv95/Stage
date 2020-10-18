@@ -8,9 +8,9 @@ include 'security.php';
                                                 $indicatorHTML='<div class="table-responsive">';
                                                 $indicatorHTML= $indicatorHTML.'<table class="table table-bordered attendence-msg">';
                                                 $indicatorHTML= $indicatorHTML.'<tr><td>Colour Legends</td><td><ul class="list-absent">';
-                                                $indicatorHTML= $indicatorHTML.'<li><span class="green-circle"></span>Attendance not done</li>';
-                                                $indicatorHTML= $indicatorHTML.'<li><span class="orange-circle"></span>Attendance done but SMS not sent.</li>';
-                                                $indicatorHTML= $indicatorHTML.'<li><span class="red-circle"></span>Attendance done and SMS sending triggered.</li>';
+                                                $indicatorHTML= $indicatorHTML.'<li><span class="red-circle"></span>Attendance Pending</li>';
+                                                $indicatorHTML= $indicatorHTML.'<li><span class="orange-circle"></span>Attendance Completed but SMS Pending.</li>';
+                                                $indicatorHTML= $indicatorHTML.'<li><span class="green-circle"></span>Attendance Completd and SMS Triggered.</li>';
                                                 $indicatorHTML= $indicatorHTML.'</td></tr></table>';
                                                 $indicatorHTML= $indicatorHTML.'<table class="table table-bordered attendence-msg">';
                                                 $indicatorHTML= $indicatorHTML.'<thead>';
@@ -66,7 +66,7 @@ include 'security.php';
                                                                 //finding section circle symbol css as per the corresponding smsflag and attendance_status value for the section.
                                                                 if($attendance_status==0 and $smsflag==0)
                                                                     {
-                                                                        $circletype="green-circle";
+                                                                        $circletype="red-circle";
                                                                         //echo $attendance_status . '<br>' . $smsflag;
                                                                     }
                                                                 else if($attendance_status==1 and $smsflag==0)
@@ -76,7 +76,7 @@ include 'security.php';
                                                                     }
                                                                 else if($attendance_status==1 and $smsflag==1)
                                                                     {
-                                                                        $circletype="red-circle";
+                                                                        $circletype="green-circle";
                                                                         //echo $attendance_status . '<br>' . $smsflag;
                                                                     }   
 

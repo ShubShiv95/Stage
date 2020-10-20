@@ -57,6 +57,8 @@ if(mysqli_num_rows($result) == 1)  // Checks if the userid exist in the database
 			$_SESSION["FOOTER"]="SMS SCHOOL ERP COPYRIGHT 2020";
 			$_SESSION["LINK"]=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
 			$_SESSION["SESSION"]='2020-2021';
+			$_SESSION["STARTYEAR"]= 2020;
+			$_SESSION["ENDYEAR"]= 2021;
 			/*
 			//$_SESSION["DISTRICTID"]= $financialYear_row["district_id"];
 			$_SESSION["STARTMONTH"]= $financialYear_row["start_month"];

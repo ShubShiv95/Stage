@@ -5976,14 +5976,41 @@ width: 96%;
   padding-bottom: 20px;
 }
 
+/*sticky table css testing*/
+.view {
+  margin: auto;
+  width: 600px;
+}
 
+.wrapper {
+  position: relative;
+  overflow: auto;
+  border: 1px solid black;
+  white-space: nowrap;
+  background-color: rgb(17, 185, 17)
+}
 
+.sticky-col {
+  position: -webkit-sticky;
+  position: sticky;
+  background-color: white;
+}
 
+.first-col {
+  /*width: 100%;
+  min-width: 100px;
+  max-width: 100px;*/
+  left: -1px;
+}
 
+.second-col {
+  width: 150px;
+  min-width: 150px;
+  max-width: 150px;
+  left: 100px;
+}
 
-
-
-
+/*end of sticky table css testing*/
 
 
 @media  (max-width: 767px){
@@ -6048,5 +6075,8 @@ width: 96%;
     display: inline-block;
 }
 }
+
+
+
 
 

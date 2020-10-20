@@ -230,13 +230,13 @@ include 'sequenceGenerator.php';
                                                             
                                                             <label class=""><?php echo '<input type="checkbox" class="form-check-input" ' .  ($period>1 ? 'disabled':'') . '>';?> Send Absentees SMS</label>                                                        </div>
                                                         <div class="chack">
-                                                            <label class="form-check-label"><?php echo '<input type="checkbox" class="form-check-input" ' .  ($period>1 ? 'disabled':'') . '>';?> Send Absentees What's app</label>
+                                                            <label class="form-check-label"><input type="checkbox" class="form-check-input" disabled> Send Absentees WhatsApp Message</label>
                                                         </div>
                                                     </div>
                                                     <div class="new-added-form aj-new-added-form">
                                                         <div class="aaj-btn-chang-cbtn">
-                                                            <?php echo '<a class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark mb-3" href="StudentAttendanceEdit.php?adt='.$adt.'&secid='.$secid.'&classid='.$classid .'&period='. $period .'&aid='.$aid.'">Edit Attendance  </a>';?>
-                                                            <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Post Attendance </button>
+                                                            <?php echo '<a class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark mb-3" href="StudentAttendanceEdit.php?adt='.$adt.'&secid='.$secid.'&classid='.$classid .'&period='. $period .'&aid='.$aid.'">Edit Attendance  </a>';
+                                                            if($period==1 ){ echo '<a class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark" href="StudentAttendanceMsgPost.php?&aid='.$aid.'&flag=NEW">SEND SMS </a>';}?>
                                                         </div>
                                                     </div>       
                                         </div>                                    

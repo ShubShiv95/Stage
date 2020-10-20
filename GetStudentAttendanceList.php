@@ -16,14 +16,14 @@ include 'dbobj.php';
         {
             echo "Class Id has not come.";
         }
-	$cperiod=$_REQUEST["cperiod"];
+	$period=$_REQUEST["period"];
     $attendance_date=strtotime($adt);
     $classid=$_REQUEST["classid"];
 	//echo $cid;
 	echo $classid;
 	
 	//Checking and forcing to create addendance for perion 1 in case the attendance is not created for period 1.
-    if($cperiod!=1)
+    if($period!=1)
         {
             $query="select * from attendance_master_table where class_sec_id=" . $_REQUEST["secid"] . " and school_id=" . $_SESSION["SCHOOLID"] . " and doa=str_to_date('" .$adt . "','%d/%m/%Y') and period=1";
             //echo '<br><br> ' . $query;
@@ -36,7 +36,7 @@ include 'dbobj.php';
         }
 	
 	//Fetching information from the database if the attendance has not been created for the selected attendance date with the corresponding class period.  If exist then create new attendance will be discarded and will be adviced to edit the attendance.
-	$query="select * from attendance_master_table where class_sec_id=" . $_REQUEST["secid"] . " and school_id=" . $_SESSION["SCHOOLID"] . " and doa=str_to_date('" .$adt . "','%d/%m/%Y') and period=$cperiod";
+	$query="select * from attendance_master_table where class_sec_id=" . $_REQUEST["secid"] . " and school_id=" . $_SESSION["SCHOOLID"] . " and doa=str_to_date('" .$adt . "','%d/%m/%Y') and period=$period";
 	//echo '<br><br> ' . $query;
 	$result=$dbhandle->query($query);
 
@@ -46,7 +46,7 @@ include 'dbobj.php';
 				exit;
         }
         
-	else if(date('d/m/Y',$attendance_date) > strtotime(date('d/m/Y')))
+	/*else if(date('d/m/Y',$attendance_date) > strtotime(date('d/m/Y')))
 		{
 					echo "<h2> Future date attendance is not allowed.</h2>".date('d/m/Y');
 					exit;
@@ -65,7 +65,7 @@ include 'dbobj.php';
 			
 			//checking for any previous latest period attendance is present then will inherit the status of the previous period attendance to the attendance entry form.
 			
-			$query="select * from attendance_master_table where class_sec_id=" . $_REQUEST["secid"] . " and school_id=" . $_SESSION["SCHOOLID"] . " and doa=str_to_date('" .$adt . "','%d/%m/%Y') and period<$cperiod order by period desc limit 1";
+			$query="select * from attendance_master_table where class_sec_id=" . $_REQUEST["secid"] . " and school_id=" . $_SESSION["SCHOOLID"] . " and doa=str_to_date('" .$adt . "','%d/%m/%Y') and period<$period order by period desc limit 1";
 			//echo '<br><br> ' . $query;
 			$pretAttendance_result=$dbhandle->query($query);
 			
@@ -85,7 +85,7 @@ include 'dbobj.php';
 					echo $heading . '<p>Dated ' .$date->format('d-m-Y') . '</H1><p>';
 					//End of Printing Class Information.
 					$present=0;
-					$attendanceStudentList_sql= "select adt.student_id,smt.student_name,smt.roll_number,adt.attendance_status,adt.attendance_remarks,adt.prev_attendance_status as prev_attendance_status, adt.prev_attendance_remarks as prev_attendance_remarks from attendance_details_table adt,student_master_table smt where adt.attendance_id=" . $pretAttendance_row["Attendance_id"] . " and smt.student_id=adt.student_id";
+					$attendanceStudentList_sql= "select adt.student_id,smt.first_name,smt.middle_name,smt.last_name,smt.roll_number,adt.attendance_status,adt.attendance_remarks,adt.prev_attendance_status as prev_attendance_status, adt.prev_attendance_remarks as prev_attendance_remarks from attendance_details_table adt,student_master_table smt where adt.attendance_id=" . $pretAttendance_row["Attendance_id"] . " and smt.student_id=adt.student_id";
 
 				    //echo $attendanceStudentList_sql;
 
@@ -104,8 +104,9 @@ include 'dbobj.php';
 						$count=0;
 						while($attendanceStudentList_row=$attendanceStudentList_result->fetch_assoc())
 							{
-								$count++;
-                                $str= $str .  '<tr><td>' . $attendanceStudentList_row["roll_number"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["roll_number"] .'" /></td><td>' . $attendanceStudentList_row["student_name"] . '<input type="hidden" name="sname'.$count.'" value="'. $attendanceStudentList_row["student_name"] .'" /></td><td><div class="row radio">';
+                                $count++;
+                                $name=$attendanceStudentList_row["first_name"] . ' ' . $attendanceStudentList_row["middle_name"] . ' ' . $attendanceStudentList_row["last_name"];
+                                $str= $str .  '<tr><td>' . $attendanceStudentList_row["roll_number"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["roll_number"] .'" /></td><td>' . $name . '<input type="hidden" name="sname'.$count.'" value="'. $name .'" /></td><td><div class="row radio">';
                                 
                                 $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                                 <div class="form-group aj-form-group">
@@ -163,7 +164,7 @@ include 'dbobj.php';
 							    <input type="hidden" name="adt" id="adt" value="'. $adt . '" readonly />
 							    <input type="hidden" name="classid" value="' . $classid . '" readonly />
 	    						<input type="hidden" name="secid"  value="' . $secid . '" readonly />	
-		    					<input type="hidden" name="period"  value="' .  $cperiod . '" readonly />
+		    					<input type="hidden" name="period"  value="' .  $period . '" readonly />
 			    				<input type="hidden" name="aid"  value="' . $pretAttendance_row["Attendance_id"] . '" readonly />
                             </div>
                             <div class="new-added-form aj-new-added-form">
@@ -213,8 +214,8 @@ include 'dbobj.php';
 				    */			
 			
 					$present=0;
-					$query2= "select smt.student_id,smt.student_name,scd.rollno from student_master_table smt, student_class_details scd where scd.class_sec_id=" . $secid . " and scd.enabled=1 and smt.student_id=scd.student_id and scd.session='" . $_SESSION["SESSION"] . "' and scd.school_id=". $_SESSION["SCHOOLID"];
-					//echo 'Second Section: ' . $query2;
+					$query2= "select smt.student_id,smt.first_name,smt.middle_name,smt.last_name,scd.rollno from student_master_table smt, student_class_details scd where scd.class_sec_id=" . $secid . " and scd.enabled=1 and smt.student_id=scd.student_id and scd.session='" . $_SESSION["SESSION"] . "' and scd.school_id=". $_SESSION["SCHOOLID"];
+					//$attendanceStudentList_row["first_name"]echo 'Second Section: ' . $query2;
                     $attendanceStudentList_result=$dbhandle->query($query2);
                   
                     
@@ -230,7 +231,8 @@ include 'dbobj.php';
                         while($attendanceStudentList_row=$attendanceStudentList_result->fetch_assoc())
                             {
                                 $count++;
-                                $str= $str .  '<tr><td>' . $attendanceStudentList_row["rollno"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["rollno"] .'" /></td><td>' . $attendanceStudentList_row["student_name"] .'<input type="hidden" name="sname'.$count.'" value="'. $attendanceStudentList_row["student_name"] .'" /></td><td><div class="row radio">';
+                                $name=$attendanceStudentList_row["first_name"] . ' '. $attendanceStudentList_row["middle_name"] . ' ' . $attendanceStudentList_row["last_name"];
+                                $str= $str .  '<tr><td>' . $attendanceStudentList_row["rollno"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["rollno"] .'" /></td><td>' . $name .'<input type="hidden" name="sname'.$count.'" value="'. $name .'" /></td><td><div class="row radio">';
                                 
                                 $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                                 <div class="form-group aj-form-group">
@@ -288,7 +290,7 @@ include 'dbobj.php';
                                 <input type="hidden" name="adt" id="adt" value="'. $adt . '" readonly />
                                 <input type="hidden" name="classid" value="' . $classid . '" readonly />
                                 <input type="hidden" name="secid"  value="' . $secid . '" readonly />	
-                                <input type="hidden" name="period"  value="' .  $cperiod . '" readonly />
+                                <input type="hidden" name="period"  value="' .  $period . '" readonly />
                             </div>
                             <div class="new-added-form aj-new-added-form">
                                 <div class="aaj-btn-chang-cbtn">

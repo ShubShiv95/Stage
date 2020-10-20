@@ -616,15 +616,20 @@
       $datarow = "";
       $tempArray = array();
       $size = count($dataArray);
-      $testVariable = "testing";
+      $testVariable ="";
+      $i = 0; $j = 0;
+
       for($i = 0; $i < $size; $i++)
       {
-          foreach($dataArray[$i] as $key => $value) {
-             $datarow =  $datarow . " $$ " . $value ;
+         $j = 0;
+         foreach($dataArray[$i] as $key => $value) { // for($j=0; $j < 78; $j++ ) {//
+              $datarow =  $datarow . "?" . $value ; //$datarow =  $datarow . "$$" . $dataArray[$i][$j]; //big string with delimited value 100$$2020-2021$$Ravi$$na$$Kishan$$5$$A$$MALE$$
+             //echo "i=$i" . "j=$j" ;
           }
-
-          $tempArray = explode("$$", $datarow);  
-          //$testVariable = count($tempArray) . $tempArray[2] . $tempArray[3] . $tempArray[4];
+         echo $datarow;
+          $tempArray = explode("?", $datarow);  
+          $x = 1;
+          $testVariable =  $tempArray[$x];
           /*
           $stmt = $dbhandle -> prepare($insertStudentTableSql);
 
@@ -756,6 +761,7 @@
          //mysqli_commit($dbhandle);
          //$dbhandle->query('UNLOCK TABLES');
          //echo "Success";
+         //echo print_r($tempArray);
          //echo print_r($tempArray);
          echo $testVariable;
       } 

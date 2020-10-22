@@ -5,6 +5,7 @@
    include 'security.php';
    include 'errorLog.php';   
 
+   mysqli_autocommit($dbhandle,FALSE);
 
 
    $file = $_FILES['file']['tmp_name'];
@@ -170,13 +171,11 @@
    } 
    else{   
       $testelse ="";
-
       $schoolCode = "DPS";
       $IsTransSuccess = true;
       $studentIdCountSql = "Select count(Student_Id) as studId from student_master_table where school_id='" . $schoolId. "'";
       $studentCountResult = $dbhandle->query($studentIdCountSql);
       $IsTransSuccess = true;
-      mysqli_autocommit($dbhandle,FALSE);
       //$dbhandle->query('LOCK TABLES student_master_table WRITE');
    
       if($studentCountResult)
@@ -188,8 +187,8 @@
       
       $insertStudentTableSql = "insert into student_master_table
       (Student_Id, School_Id, Session, Session_Start_Year, Session_End_Year, First_Name, Middle_Name, Last_Name, Class_Id, Class_Sec_Id, Gender, DOB, Discount_Category, Father_Name,
-      Mother_Name, Guardian_Name, SMS_Contact_No, Updated_By, Updated_On) 
-      values(?,?,?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?,?,?)";
+      Mother_Name, Guardian_Name, SMS_Contact_No, Updated_By) 
+      values(?,?,?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?,?)";
       
 
       $tempArray = array();
@@ -203,16 +202,14 @@
          foreach($dataArray[$i] as $key => $value) { 
               $datarow =  $datarow . "|" . $value ; 
           }
-          echo $datarow . '<br>'; 
 
           $tempArray = explode("|", $datarow);  
          
           $stmt = $dbhandle -> prepare($insertStudentTableSql);
 
-          $updatedBy = "Staff";
-          $updatedOn = date("Y/m/d");
-        
-          $stmt->bind_param("sisiisssiississssss",   
+          $updatedBy = $_SESSION["LOGINID"];
+
+          $stmt->bind_param("sisiisssiississsss",   
           $tempArray[1],
           $tempArray[2],
           $tempArray[3],
@@ -230,12 +227,11 @@
           $tempArray[15],
           $tempArray[16],
           $tempArray[17],
-          $updatedBy,
-          $updatedOn
-          );
+          $updatedBy          
+         );
             
           $execResult = $stmt->execute();
-          //echo $dbhandle->error;
+          echo $dbhandle->error;
          
           if(!$execResult){
             $IsTransSuccess = false;

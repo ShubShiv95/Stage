@@ -177,6 +177,26 @@
                                 <li class="nav-item">
                                     <a href="ImportStaffAttendance.php" class="nav-link"><i class="fas fa-angle-right"></i>Import Staff Attendance</a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a href="AddDepartment.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Department</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="AddDesignation.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Designation</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="AddStaffAttendanceTiming.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Staff Attendance Timing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="AddStaffDocument.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Staff Document</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="UpdateStaffDetails.php" class="nav-link"><i class="fas fa-angle-right"></i>Update Staff Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="ViewStaffList.php" class="nav-link"><i class="fas fa-angle-right"></i>View Staff List</a>
+                                </li>
+
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">

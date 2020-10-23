@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 22, 2020 at 11:05 AM
+-- Generation Time: Oct 23, 2020 at 10:58 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -480,30 +480,35 @@ CREATE TABLE `close_user_group_master` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `department_master_table`
+-- Table structure for table `Department_Master_Table`
 --
 
-CREATE TABLE `department_master_table` (
-  `department_id` int(11) NOT NULL,
-  `department_name` varchar(100) NOT NULL,
-  `enabled` tinyint(1) NOT NULL DEFAULT 1,
-  `school_id` int(11) NOT NULL,
-  `created_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_by` varchar(100) NOT NULL
+CREATE TABLE `Department_Master_Table` (
+  `Dept_Id` int(5) NOT NULL,
+  `Dept_Name` varchar(100) NOT NULL,
+  `Remarks` varchar(100) NOT NULL,
+  `Enabled` int(1) NOT NULL DEFAULT 1,
+  `School_Id` int(5) NOT NULL,
+  `Created_On` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Created_By` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `department_master_table`
+-- Table structure for table `designation_master_table`
 --
 
-INSERT INTO `department_master_table` (`department_id`, `department_name`, `enabled`, `school_id`, `created_on`, `created_by`) VALUES
-(1, 'Accounts', 1, 1, '2020-08-31 22:34:37', ''),
-(2, 'Administration', 1, 1, '2020-08-31 22:34:42', ''),
-(3, 'Senior Teacher', 1, 1, '2020-08-31 22:34:45', ''),
-(4, 'Junior Teacher', 1, 1, '2020-08-31 22:34:48', ''),
-(5, 'Sports', 1, 1, '2020-08-31 22:34:51', ''),
-(6, 'Transport', 1, 1, '2020-08-31 22:34:54', ''),
-(7, 'Housekeeping', 1, 1, '2020-08-31 22:34:57', '');
+CREATE TABLE `designation_master_table` (
+  `Desig_Id` int(5) NOT NULL,
+  `Designation` varchar(20) NOT NULL,
+  `Remarks` varchar(100) NOT NULL,
+  `Dept_Id` int(5) NOT NULL,
+  `School_Id` int(8) NOT NULL,
+  `Enabled` int(1) NOT NULL,
+  `Created_By` varchar(100) NOT NULL,
+  `Created_On` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -514,7 +519,7 @@ INSERT INTO `department_master_table` (`department_id`, `department_name`, `enab
 CREATE TABLE `employee_master_table` (
   `Employee_Id` mediumint(8) UNSIGNED NOT NULL,
   `Type_Id` mediumint(2) DEFAULT NULL,
-  `department_id` int(11) NOT NULL,
+  `Dept_Id` int(5) DEFAULT NULL,
   `Employee_Grade` varchar(10) DEFAULT NULL,
   `Login_id` varchar(100) DEFAULT NULL,
   `password` varchar(512) DEFAULT NULL,
@@ -542,28 +547,28 @@ CREATE TABLE `employee_master_table` (
 -- Dumping data for table `employee_master_table`
 --
 
-INSERT INTO `employee_master_table` (`Employee_Id`, `Type_Id`, `department_id`, `Employee_Grade`, `Login_id`, `password`, `login_grade`, `login_enabled`, `Employee_Name`, `Employee_Address`, `DOJ`, `Mob_Number`, `sms_number`, `whatsapp_number`, `Blood_Group`, `DOB`, `Sex`, `Aadhar_Number`, `School_Id`, `Enabled`, `authorized`, `authorized_by`, `shift_start_hour`, `shift_end_hour`) VALUES
-(1, 1, 1, NULL, 'mukherjee.mit@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 8, 1, 'Mithun Mukherjee', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(2, 2, 1, NULL, 'imbibeinfosystem@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 6, 1, 'Suman dutt', NULL, NULL, '8709321740', '9899395627', '9899395627', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(3, 3, 3, NULL, 'chaitan@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Chaitan Mishra', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(4, 3, 3, NULL, 'bhagat@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Bhagat Pandey', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(5, 3, 3, NULL, 'asha@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Asha Tyagi', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(6, 3, 4, NULL, 'varun@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Varun Kumar', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(7, 3, 4, NULL, 'mukesh@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Mukesh Sinha', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(8, 3, 5, NULL, 'tarun@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Tarun Thapar', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(9, 3, 5, NULL, 'pinky@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Pinky Banerjee', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(10, 3, 6, NULL, 'dali@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Dali Mukherjee', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(11, 3, 2, NULL, 'mithun@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 2, 1, 'Mithun Mukherjee', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(12, 3, 6, NULL, 'ashok@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Ashok Mishra', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(13, 1, 7, NULL, 'abc@def.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'abcdef', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(14, NULL, 7, NULL, 'test1', '12345', 1, 1, 'Amit Sinha', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, NULL, 1, 0, '0', NULL, NULL),
-(15, NULL, 7, NULL, 'test2', '12345', 1, 1, 'Rohan Verma', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, NULL, 1, 0, '0', NULL, NULL),
-(18, NULL, 7, NULL, 'test3', '12345', 1, 1, 'Ravi kant', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, NULL, 1, 0, '0', NULL, NULL),
-(19, NULL, 2, NULL, 'admin', '8cb2237d0679ca88db6464eac60da96345513964', 1, 1, 'Sushil Tripathi', NULL, NULL, '8709321740', '9801301878', '9801301878', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(20, NULL, 7, NULL, 'testadmin', '8cb2237d0679ca88db6464eac60da96345513964', 1, 1, 'Ashok Singh', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(21, NULL, 6, NULL, 'admintst2', '8cb2237d0679ca88db6464eac60da96345513964', 1, 1, 'Ram Lal', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
-(22, NULL, 5, NULL, 'varun', '7c4a8d09ca3762af61e59520943dc26494f8941b', 4, 1, 'Arvind Sharma', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 5, 1, 0, '0', NULL, NULL),
-(27, NULL, 1, NULL, 'mukherjee.mit', '8cb2237d0679ca88db6464eac60da96345513964', 1, 1, 'Gautam Dubey', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 3, 1, 0, '0', NULL, NULL);
+INSERT INTO `employee_master_table` (`Employee_Id`, `Type_Id`, `Dept_Id`, `Employee_Grade`, `Login_id`, `password`, `login_grade`, `login_enabled`, `Employee_Name`, `Employee_Address`, `DOJ`, `Mob_Number`, `sms_number`, `whatsapp_number`, `Blood_Group`, `DOB`, `Sex`, `Aadhar_Number`, `School_Id`, `Enabled`, `authorized`, `authorized_by`, `shift_start_hour`, `shift_end_hour`) VALUES
+(1, 1, NULL, NULL, 'mukherjee.mit@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 8, 1, 'Mithun Mukherjee', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(2, 2, NULL, NULL, 'imbibeinfosystem@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 6, 1, 'Suman dutt', NULL, NULL, '8709321740', '9899395627', '9899395627', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(3, 3, NULL, NULL, 'chaitan@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Chaitan Mishra', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(4, 3, NULL, NULL, 'bhagat@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Bhagat Pandey', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(5, 3, NULL, NULL, 'asha@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Asha Tyagi', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(6, 3, NULL, NULL, 'varun@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Varun Kumar', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(7, 3, NULL, NULL, 'mukesh@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Mukesh Sinha', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(8, 3, NULL, NULL, 'tarun@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Tarun Thapar', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(9, 3, NULL, NULL, 'pinky@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Pinky Banerjee', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(10, 3, NULL, NULL, 'dali@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Dali Mukherjee', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(11, 3, NULL, NULL, 'mithun@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 2, 1, 'Mithun Mukherjee', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(12, 3, NULL, NULL, 'ashok@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'Ashok Mishra', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(13, 1, NULL, NULL, 'abc@def.com', '8cb2237d0679ca88db6464eac60da96345513964', 0, 1, 'abcdef', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(14, NULL, NULL, NULL, 'test1', '12345', 1, 1, 'Amit Sinha', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, NULL, 1, 0, '0', NULL, NULL),
+(15, NULL, NULL, NULL, 'test2', '12345', 1, 1, 'Rohan Verma', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, NULL, 1, 0, '0', NULL, NULL),
+(18, NULL, NULL, NULL, 'test3', '12345', 1, 1, 'Ravi kant', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, NULL, 1, 0, '0', NULL, NULL),
+(19, NULL, NULL, NULL, 'admin', '8cb2237d0679ca88db6464eac60da96345513964', 1, 1, 'Sushil Tripathi', NULL, NULL, '8709321740', '9801301878', '9801301878', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(20, NULL, NULL, NULL, 'testadmin', '8cb2237d0679ca88db6464eac60da96345513964', 1, 1, 'Ashok Singh', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(21, NULL, NULL, NULL, 'admintst2', '8cb2237d0679ca88db6464eac60da96345513964', 1, 1, 'Ram Lal', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 1, 1, 0, '0', NULL, NULL),
+(22, NULL, NULL, NULL, 'varun', '7c4a8d09ca3762af61e59520943dc26494f8941b', 4, 1, 'Arvind Sharma', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 5, 1, 0, '0', NULL, NULL),
+(27, NULL, NULL, NULL, 'mukherjee.mit', '8cb2237d0679ca88db6464eac60da96345513964', 1, 1, 'Gautam Dubey', NULL, NULL, '8709321740', '8709321740', '8709321740', NULL, NULL, NULL, NULL, 3, 1, 0, '0', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -834,6 +839,43 @@ CREATE TABLE `school_master_table` (
 
 INSERT INTO `school_master_table` (`school_id`, `school_code`, `school_name`, `area`, `city`, `zip_code`, `district_id`, `business_id`, `start_year`, `end_year`, `start_month`, `end_month`, `start_date`, `end_date`, `next_start_year`, `next_end_year`, `next_start_month`, `next_end_month`, `next_start_date`, `next_end_date`, `current_addmission`, `addmission_status`, `opening_balance`, `closing_balance`, `updated_on`, `updated_by`, `enabled`, `conf_flag`, `created_by`, `created_on`) VALUES
 (1, 'ABC', 'The ABC PAATHSHALA', 'BARI CO-OPERATIVE', 'Bokaro Steel City', '', 2, 1, 2020, 2021, 4, 3, '2020-04-01', '2021-03-31', 2021, 2022, 4, 3, '2021-04-01', '2022-03-31', 2020, 1, NULL, NULL, '2020-08-31 14:14:13', 'mukherjee.mit@gmail.com', 1, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff_master_table`
+--
+
+CREATE TABLE `staff_master_table` (
+  `Staff_Id` varchar(20) NOT NULL,
+  `Staff_Name` varchar(100) NOT NULL,
+  `Gender` enum('MALE','FEMALE','OTHER','') NOT NULL,
+  `Contact_No` varchar(10) NOT NULL,
+  `Category` enum('Teaching','Non-Teaching') NOT NULL,
+  `Department` int(5) NOT NULL,
+  `Designation_Id` int(5) NOT NULL,
+  `Alt_Contact_No` varchar(10) NOT NULL,
+  `Address` varchar(200) NOT NULL,
+  `City` varchar(50) NOT NULL,
+  `District` varchar(50) NOT NULL,
+  `State` varchar(50) NOT NULL,
+  `Fathers_Or_Husband_Name` varchar(100) NOT NULL,
+  `DOB` date NOT NULL,
+  `Blood_Group` varchar(15) NOT NULL,
+  `Qualification` varchar(50) NOT NULL,
+  `Experience` int(5) NOT NULL,
+  `DOJ` date NOT NULL,
+  `Job_Status` varchar(50) NOT NULL,
+  `Bank_Account_No` varchar(50) NOT NULL,
+  `Bank_Name` varchar(100) NOT NULL,
+  `Bank_Branch` varchar(200) NOT NULL,
+  `Bank_IFSC` varchar(50) NOT NULL,
+  `PAN_No` varchar(50) NOT NULL,
+  `Aadhar_No` varchar(50) NOT NULL,
+  `UAN_No` varchar(50) NOT NULL,
+  `PF_Acc_No` varchar(50) NOT NULL,
+  `ESI_Acc_No` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1262,18 +1304,17 @@ ALTER TABLE `close_user_group_master`
   ADD PRIMARY KEY (`cugid`);
 
 --
--- Indexes for table `department_master_table`
+-- Indexes for table `Department_Master_Table`
 --
-ALTER TABLE `department_master_table`
-  ADD PRIMARY KEY (`department_id`);
+ALTER TABLE `Department_Master_Table`
+  ADD PRIMARY KEY (`Dept_Id`);
 
 --
 -- Indexes for table `employee_master_table`
 --
 ALTER TABLE `employee_master_table`
   ADD PRIMARY KEY (`Employee_Id`),
-  ADD UNIQUE KEY `login_id_unique` (`Login_id`),
-  ADD KEY `department_id` (`department_id`);
+  ADD UNIQUE KEY `login_id_unique` (`Login_id`);
 
 --
 -- Indexes for table `event_calender_master`
@@ -1313,6 +1354,13 @@ ALTER TABLE `school_master_table`
   ADD PRIMARY KEY (`school_id`),
   ADD UNIQUE KEY `school_id` (`school_id`),
   ADD KEY `business_id` (`business_id`);
+
+--
+-- Indexes for table `staff_master_table`
+--
+ALTER TABLE `staff_master_table`
+  ADD PRIMARY KEY (`Staff_Id`),
+  ADD UNIQUE KEY `Staff_Id` (`Staff_Id`);
 
 --
 -- Indexes for table `student_class_details`
@@ -1364,12 +1412,6 @@ ALTER TABLE `close_user_group_details`
   MODIFY `cugdid` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `department_master_table`
---
-ALTER TABLE `department_master_table`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
 -- AUTO_INCREMENT for table `login_table`
 --
 ALTER TABLE `login_table`
@@ -1401,7 +1443,7 @@ ALTER TABLE `close_user_group_details`
 -- Constraints for table `employee_master_table`
 --
 ALTER TABLE `employee_master_table`
-  ADD CONSTRAINT `employee_master_table_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department_master_table` (`department_id`);
+  ADD CONSTRAINT `employee_master_table_ibfk_1` FOREIGN KEY (`Dept_Id`) REFERENCES `department_master_table` (`department_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

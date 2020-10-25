@@ -172,18 +172,11 @@
    else{   
       $testelse ="";
       $schoolCode = "DPS";
+      $updatedBy = $_SESSION["LOGINID"];
       $IsTransSuccess = true;
-      $studentIdCountSql = "Select count(Student_Id) as studId from student_master_table where school_id='" . $schoolId. "'";
-      $studentCountResult = $dbhandle->query($studentIdCountSql);
-      $IsTransSuccess = true;
-      //$dbhandle->query('LOCK TABLES student_master_table WRITE');
-   
-      if($studentCountResult)
-      {
-         $getStudCountRow = $studentCountResult -> fetch_assoc();
-         $studId = ($getStudCountRow["studId"] + 1);
-         $student_Id = $schoolCode . date("Y") .  $studId;
-      }   
+
+      $insertStudentClassTableSql = "insert into Student_Class_Details_New (Student_Details_Id, Student_Id, Class_Id, Class_No, Class_Sec_Id, Session,
+      Session_Start_Year, Session_End_Year, School_Id, Updated_By) values(?,?,?,?,?,?,?,?,?,?)";
       
       $insertStudentTableSql = "insert into student_master_table
       (Student_Id, School_Id, Session, Session_Start_Year, Session_End_Year, First_Name, Middle_Name, Last_Name, Class_Id, Class_Sec_Id, Gender, DOB, Discount_Category, Father_Name,
@@ -195,7 +188,7 @@
       $size = count($dataArray);
       $testVariable ="";
       $i = 1;
-
+      
       for($i = 1; $i < $size; $i++)
       {
          $datarow = "";
@@ -204,12 +197,52 @@
           }
 
           $tempArray = explode("|", $datarow);  
-         
-          $stmt = $dbhandle -> prepare($insertStudentTableSql);
 
-          $updatedBy = $_SESSION["LOGINID"];
+          $studClassNo = $tempArray[9];
 
-          $stmt->bind_param("sisiisssiississsss",   
+          //########################   Below Block of SQL Gets Class ID from Class_Master Table  ###################################
+          $studentClassIdSql = "Select class_id from class_master_table where class_no='" . $studClassNo . "'";
+          $studentClassIdSqlResult = $dbhandle->query($studentClassIdSql);
+          $studClassId = $studentClassIdSqlResult -> fetch_assoc();
+          echo "studClassId =". $studClassId;
+          //########################   Below Block of SQL updates Student_Class_Details Table  ###################################
+
+          $studentClassDetIdCountSql = "Select count(Student_Details_Id) as studDetailId from Student_Class_Details_New where school_id='" . $schoolId. "'";
+          $studentClassDetCountResult = $dbhandle->query($studentClassDetIdCountSql);
+          $IsTransSuccess = true;
+    
+          if($studentClassDetCountResult)
+          {
+             $getStudCountRow = $studentClassDetCountResult -> fetch_assoc();
+             $student_Detail_Id = ($getStudCountRow["studDetailId"] + 1);
+          }  
+        
+          $stmt = $dbhandle -> prepare($insertStudentClassTableSql);
+    
+          $stmt->bind_param("isiiisiiis",   
+          $student_Detail_Id,
+          $tempArray[1],
+          $studClassId,
+          $studClassNo,
+          $tempArray[10],
+          $tempArray[3],
+          $tempArray[4],
+          $tempArray[5],
+          $tempArray[2],
+          $updatedBy          
+         );
+            
+          $execResult = $stmt->execute();
+          echo $dbhandle->error;
+
+         //############################    End of Student_Class_Details update.   #####################################
+
+         //########################   Below Block of SQL updates Student_Master_Table   ###################################
+
+          $stmt2 = $dbhandle -> prepare($insertStudentTableSql);
+
+
+          $stmt2->bind_param("sisiisssiississsss",   
           $tempArray[1],
           $tempArray[2],
           $tempArray[3],
@@ -230,7 +263,7 @@
           $updatedBy          
          );
             
-          $execResult = $stmt->execute();
+          $execResult = $stmt2->execute();
           echo $dbhandle->error;
          
           if(!$execResult){

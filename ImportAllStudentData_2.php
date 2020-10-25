@@ -45,8 +45,6 @@
          $htmlbody = $htmlbody . '<td>' . $studentId . '</td>';
       }
       
-
-   
       $isFieldMissing[] = ($isMandatory && empty($studentId) || $isDuplicate > 0) ? false : true ; 
 
       
@@ -177,10 +175,12 @@
    $htmlbody = $htmlbody . '</tbody></table></div>';
   
 
+   //########################   If Block in case of validation fails for the CSV file and it will highlight them  ###################################
    if(array_search(false,$isFieldMissing)!=""){
       echo $htmlbody; 
    } 
-   else{   
+   else{  
+   //########################   Else Block in case of validation passes and now data insert will begin  ################################### 
       $testelse ="";
       $schoolCode = "DPS";
       $updatedBy = $_SESSION["LOGINID"];
@@ -231,11 +231,11 @@
 
 
           //########################   Below Block of SQL Gets Sec ID from Class_Master Table  ###################################
-          $studentSecIdSql = "Select Class_Sec_Id as SECTION_ID from class_section_table where Class_Id='" . $studClassId . "'" . " and Section = '" . $tempArray[10] ."'" . "and School_Id = '" . $schoolId. "'" ;
+          $studentSecIdSql = "Select Class_Sec_Id as SECTION_ID from class_section_table where Class_Id=" . $studClassId  . " and Section = '" . $tempArray[10] ."'" . "and School_Id = " . $schoolId ;
           $studentSecIdSqlResult = $dbhandle->query($studentSecIdSql);
           $studSecIdResultSet = $studentSecIdSqlResult -> fetch_assoc();
           $studSecsId = "";
-          if(isset($studSecIdResultSet["Class_Id"])){
+          if(isset($studSecIdResultSet["SECTION_ID"])){
             $studSecsId = $studSecIdResultSet["SECTION_ID"];
           }else {
             $IsTransSuccess = false;
@@ -318,7 +318,7 @@
      if($IsTransSuccess){
          mysqli_commit($dbhandle);
          //$dbhandle->query('UNLOCK TABLES');
-         echo "Successfully Data Imported into Student Master.";
+         echo "Successfully Data Imported into Student Master, Student Class Details tables.";
        } 
       else{
           mysqli_rollback($dbhandle);

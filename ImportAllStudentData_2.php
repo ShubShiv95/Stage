@@ -12,11 +12,12 @@
    $fileHandle = fopen($file, "r");
    $counter = 0;
    
-   $htmlbody = '<div class="table-responsive"><table class="table table-bordered"><thead><tr><th>School ID</th><th>Session</th><th>First Name</th><th>Middle Name</th><th>Last Name </th><th>Class Id</th><th>Class Sec</th><th>Gender</th><th>DOB</th><th>Age</th><th>Social Category</th><th>Discount Category</th><th>Locality</th><th>Academic Session</th><th>Mother Tongue</th><th>Religion</th><th>Nationality</th><th>Blood Group</th><th>Aadhar No</th><th>Prev School Name</th><th>Prev School Medium</th><th>Prev School Board</th><th>Prev School Class</th><th>Comm Address</th><th>Comm City</th><th>Comm State</th><th>Comm Country </th><th>Comm PinCode</th><th>Comm ContactNo</th><th>Resid Add</th><th>Resid City</th><th>Resid State</th><th>Resid Country</th><th>Resid PinCode</th><th>Resid Contact No</th><th>Sibling_1 Stud Id</th><th>Sibling_1 Class</th><th>Sibling_1 Section</th><th>Sibling_1 Roll</th><th>Sibling_2 Stud Id</th><th>Sibling_2 Class</th><th>Sibling_2 Sec</th><th>Sibling_2 Roll</th><th>Father Name</th><th>Father Qual</th><th>Father Occup</th><th>Father Desig</th><th>Father Org Name</th><th>Father Org Add</th><th>Father City</th><th>Father State</th><th>Father Country</th><th>Father PinCode</th><th>Father Email</th><th>Father Contact</th><th>Father AnnualIncome</th><th>Father Aadhar</th><th>Father Alumni</th><th>Mother Name</th><th>Mother Qual</th><th>Mother Occup</th><th>Mother Desig</th><th>Mother Org Name</th><th>Mother Org Add</th><th>Mother City</th><th>Mother State</th><th>Mother Country</th><th>Mother PinCode</th><th>Father Email</th><th>Mother ContactNo</th><th>Mother AnnualIncome</th><th>Mother Aadhar</th><th>Mother Alumni</th><th>Guardian Type</th><th>Guardian Add</th><th>Guardian Name</th><th>Guardian Relation</th><th>Guardian ContactNo</th><th>SMS ContactNo</th><th>WhatsApp ContactNo</th><th>Email</th></tr></thead>';
+   $htmlbody = '<div class="table-responsive"><table class="table table-bordered"><th>Student Id</th><th>School ID</th><th>Session</th><th>Session Start Year</th><th>Session End Year</th><th>First Name</th><th>Middle Name</th><th>Last Name </th><th>Class Id</th><th>Class Sec</th><th>Gender</th><th>DOB</th><th>Discount Category</th><th>Father Name</th><th>Mother Name</th><th>Guardian Name</th><th>SMS ContactNo</th></tr></thead>';
    $htmlbody = $htmlbody . '<tbody>';
 
    
    $dataArray = array(array());
+   $studIdArray = array("");
 
    while(($filesop = fgetcsv($fileHandle,10000,',')) !== false) {
       
@@ -31,10 +32,22 @@
 
       $dataArray[$counter][0] = $filesop[0];
       $studentId = $filesop[0];
+      $isDuplicate = array_search($studentId,$studIdArray);
+      $studIdArray[$counter] = $studentId;
       $isMandatory = array_search("Student_Id",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
-      $htmlbody = ($isMandatory && empty($studentId)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
-                     : $htmlbody . '<td>' . $studentId . '</td>';
-      $isFieldMissing[] = ($isMandatory && empty($studentId)) ? false : true ; 
+
+      if($isDuplicate){
+         $htmlbody = ($isDuplicate) ? $htmlbody . '<td style="background-color: Orange">' . $studentId . '</td>'
+         : $htmlbody . '<td>' . $studentId . '</td>';
+      } elseif ($isMandatory && empty($studentId)) {
+         $htmlbody = $htmlbody . '<td style="background-color: red">' . " " . '</td>';
+      }else {
+         $htmlbody = $htmlbody . '<td>' . $studentId . '</td>';
+      }
+      
+
+   
+      $isFieldMissing[] = ($isMandatory && empty($studentId) || $isDuplicate > 0) ? false : true ; 
 
       
       $dataArray[$counter][1] = $filesop[1];
@@ -162,8 +175,6 @@
    }
    
    $htmlbody = $htmlbody . '</tbody></table></div>';
-
-  
   
 
    if(array_search(false,$isFieldMissing)!=""){
@@ -174,6 +185,7 @@
       $schoolCode = "DPS";
       $updatedBy = $_SESSION["LOGINID"];
       $IsTransSuccess = true;
+      $errorAreaMessage = "";
 
       $insertStudentClassTableSql = "insert into Student_Class_Details_New (Student_Details_Id, Student_Id, Class_Id, Class_No, Class_Sec_Id, Session,
       Session_Start_Year, Session_End_Year, School_Id, Updated_By) values(?,?,?,?,?,?,?,?,?,?)";
@@ -199,24 +211,52 @@
           $tempArray = explode("|", $datarow);  
 
           $studClassNo = $tempArray[9];
+          $schoolId = $tempArray[2];
+          $IsTransSuccess = true;
 
           //########################   Below Block of SQL Gets Class ID from Class_Master Table  ###################################
-          $studentClassIdSql = "Select class_id from class_master_table where class_no='" . $studClassNo . "'";
+          $studentClassIdSql = "Select class_id as Class_Id from class_master_table where class_no='" . $studClassNo . "'" . "and School_Id = '" . $schoolId. "'" ;
           $studentClassIdSqlResult = $dbhandle->query($studentClassIdSql);
-          $studClassId = $studentClassIdSqlResult -> fetch_assoc();
-          echo "studClassId =". $studClassId;
+          $studClassIdResultSet = $studentClassIdSqlResult -> fetch_assoc();
+          $studClassId = "";
+                    
+          if(isset($studClassIdResultSet["Class_Id"])){
+            $studClassId = $studClassIdResultSet["Class_Id"];
+          } else {
+            $IsTransSuccess = false;
+            $errorAreaMessage = "Unable to fetch Class_Id for corresponding data Student Class No =" . $studClassNo . " and  School ID = " . $schoolId;
+            break;
+          }
+         
+
+
+          //########################   Below Block of SQL Gets Sec ID from Class_Master Table  ###################################
+          $studentSecIdSql = "Select Class_Sec_Id as SECTION_ID from class_section_table where Class_Id='" . $studClassId . "'" . " and Section = '" . $tempArray[10] ."'" . "and School_Id = '" . $schoolId. "'" ;
+          $studentSecIdSqlResult = $dbhandle->query($studentSecIdSql);
+          $studSecIdResultSet = $studentSecIdSqlResult -> fetch_assoc();
+          $studSecsId = "";
+          if(isset($studSecIdResultSet["Class_Id"])){
+            $studSecsId = $studSecIdResultSet["SECTION_ID"];
+          }else {
+            $IsTransSuccess = false;
+            $errorAreaMessage = "Unable to fetch Class_Sec_Id for corresponding data  Student Class No =" . $studClassNo . ", Class_Id = " . $studClassId . ", Section = " .$tempArray[10] . " , School ID = " . $schoolId;
+            break;
+          }
+
           //########################   Below Block of SQL updates Student_Class_Details Table  ###################################
+
+         //Below Block of SQL calculates the Next value of Student_Class_detail index.
 
           $studentClassDetIdCountSql = "Select count(Student_Details_Id) as studDetailId from Student_Class_Details_New where school_id='" . $schoolId. "'";
           $studentClassDetCountResult = $dbhandle->query($studentClassDetIdCountSql);
-          $IsTransSuccess = true;
     
           if($studentClassDetCountResult)
           {
              $getStudCountRow = $studentClassDetCountResult -> fetch_assoc();
              $student_Detail_Id = ($getStudCountRow["studDetailId"] + 1);
           }  
-        
+         
+
           $stmt = $dbhandle -> prepare($insertStudentClassTableSql);
     
           $stmt->bind_param("isiiisiiis",   
@@ -224,11 +264,11 @@
           $tempArray[1],
           $studClassId,
           $studClassNo,
-          $tempArray[10],
+          $studSecsId,
           $tempArray[3],
           $tempArray[4],
           $tempArray[5],
-          $tempArray[2],
+          $schoolId,
           $updatedBy          
          );
             
@@ -237,6 +277,7 @@
 
          //############################    End of Student_Class_Details update.   #####################################
 
+
          //########################   Below Block of SQL updates Student_Master_Table   ###################################
 
           $stmt2 = $dbhandle -> prepare($insertStudentTableSql);
@@ -244,15 +285,15 @@
 
           $stmt2->bind_param("sisiisssiississsss",   
           $tempArray[1],
-          $tempArray[2],
+          $schoolId,
           $tempArray[3],
           $tempArray[4],
           $tempArray[5],
           $tempArray[6],
           $tempArray[7],
           $tempArray[8],
-          $tempArray[9],
-          $tempArray[10],
+          $studClassId,
+          $studSecsId,
           $tempArray[11],
           $tempArray[12],
           $tempArray[13],
@@ -277,12 +318,12 @@
      if($IsTransSuccess){
          mysqli_commit($dbhandle);
          //$dbhandle->query('UNLOCK TABLES');
-         echo "Successfully Data Imported";
+         echo "Successfully Data Imported into Student Master.";
        } 
       else{
           mysqli_rollback($dbhandle);
          //$dbhandle->query('UNLOCK TABLES');
-         echo "Sorry! Unable to import";
+         echo "Sorry! Unable to import  |  Error Area :- " . "<br>". $errorAreaMessage;
       }
    
 

@@ -30,5 +30,5 @@
 
     $GLOBAL_OTHER_RELATION = array("Other"=>"Other", "Friend"=>"Friend", "Grand Mother"=>"Grand Mother","Grand Father"=>"Grand Father", "Uncle"=>"Uncle","Aunt"=>"Aunt"); 
 
-    $GLOBAL_ADMISSION_FIELD_IS_MANDATORY = array("Student_Id",  "School_Id", "Session", "First_Name");
+    $GLOBAL_ADMISSION_FIELD_IS_MANDATORY = array("na","Student_Id",  "School_Id", "Session", "First_Name");
     ?>

@@ -7,11 +7,12 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
+include 'AdmissionModel.php';
 ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
+    <title>SWIFTCAMPUS | Import Bulk Single Column</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -72,21 +73,8 @@ include 'security.php';
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">School</h3>
                             </div>
-                            <!-- <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                    aria-expanded="false">...</a>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                </div>
-                            </div>
-                        </div> -->
-                        <form class="new-added-form school-form aj-new-added-form">
+                        <form class="new-added-form school-form aj-new-added-form"  id="fileInputForm" name="fileInputForm" method="POST" 
+                            action="ImportStudentSingleData_2.php">
                             
                             
                             <div class="row justify-content-center">
@@ -105,12 +93,7 @@ include 'security.php';
                                             <div class="form-group aj-form-group">
                                                 <label>School Name <span>*</span></label>
                                                 <select class="select2" name="f_class">
-                                                    <option value="">Please Select School Name</option>
-                                                    <option value="3">One</option>
-                                                    <option value="3">Two</option>
-                                                    <option value="3">Three</option>
-                                                    <option value="3">Four</option>
-                                                    <option value="3">Five</option>
+                                                    <option value="3">ABC PAATHSALA</option>
                                                 </select>
                                             </div>
                                             <div class="form-group text-center">
@@ -121,26 +104,27 @@ include 'security.php';
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                             <div class="form-group aj-form-group">
-                                                <label>Columan Name <span>*</span></label>
-                                                <select class="select2" name="s_class">
-                                                    <option value="">Please Select School Name</option>
-                                                    <option value="3">One</option>
-                                                    <option value="3">Two</option>
-                                                    <option value="3">Three</option>
-                                                    <option value="3">Four</option>
-                                                    <option value="3">Five</option>
+                                                <label>Student Column Name<span>*</span></label>
+                                                <select class="select2" name="colName" id="colName">
+                                                    <?php
+                                                         $string = "";
+                                                        foreach($GLOBAL_SINGLE_BULK_ENTRY_DROPDOWN as $x=>$x_value)
+                                                            {
+                                                                $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                            }
+                                                        echo $string;
+                                                    ?>                                                          
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>Import Excel</label>
-                                                <input type="file" name="s_l_name" placeholder="" required="" class="form-control">
+                                                <input type="file" name="s_l_name" placeholder="" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="aaj-btn-chang-cbtn">
-                                            <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Import </button>
-                                            <button type="reset" class="aj-btn-a1 btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
-                                            
+                                            <input  type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark" value="Get Excel" name="genXLS" id="genXLS">
+                                            <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Import </button>                                            
                                     </div>
                                 </div>
                                
@@ -152,10 +136,8 @@ include 'security.php';
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
-            </div>
+                    <div class="copyright">Powered by  <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
+                </footer>            </div>
         </div>
         <!-- Page Area End Here -->
     </div>
@@ -175,6 +157,26 @@ include 'security.php';
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <!-- <script type="text/javascript"> 
+        $(document).ready(function() { 
+            $("#genXLS").click(function() { 
+                var fd = new FormData(); 
+       
+                $.ajax({ 
+                    url: 'ImportStudentSingleData_2.php', 
+                    type: 'post', 
+                    data: fd, 
+                    contentType: false, 
+                    processData: false, 
+                    success: function(response){ 
+						//document.getElementById("dynamicContent").innerHTML = response;
+                        var win = window.open("", "_blank");
+                        win.location.href = response;
+                    }, 
+                }); 
+            }); 
+        }); 
+    </script>  -->
 
 </body>
 

@@ -31,4 +31,7 @@
     $GLOBAL_OTHER_RELATION = array("Other"=>"Other", "Friend"=>"Friend", "Grand Mother"=>"Grand Mother","Grand Father"=>"Grand Father", "Uncle"=>"Uncle","Aunt"=>"Aunt"); 
 
     $GLOBAL_ADMISSION_FIELD_IS_MANDATORY = array("na","Student_Id",  "School_Id", "Session", "First_Name","Class_Id", "DOB", "SMS_Contact_No");
+
+    $GLOBAL_SINGLE_BULK_ENTRY_DROPDOWN = array("Whatsapp_Contact_No"=>"Whatsapp Number", "Email_Id"=>"Email Address", "SMS_Contact_No"=>"Contact Number", "Birth_Cert"=>"Birth Certificate", "Aadhar"=>"Aadhar");
+
     ?>

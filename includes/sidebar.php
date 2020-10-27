@@ -63,12 +63,20 @@
                                 <!--li class="nav-item">
                                     <a href="RegistrationForm.php" class="nav-link"><i class="fas fa-angle-right"></i>Online Registration</a>
                                 </li-->
-                                <li class="nav-item">
-                                    <a href="ImportAllStudentData.php" class="nav-link"><i class="fas fa-angle-right"></i>Bulk Import</a>
+                                <li class="nav-item sidebar-nav-item">
+									<a href="#" class="nav-link"><span>Settings</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+									    <ul class="nav sub-group-menu">
+                                        <li class="nav-item">
+                                            <a href="ImportAllStudentData.php" class="nav-link"><i class="fas fa-angle-right"></i>Bulk Import</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="ImportStudentSingleData.php" class="nav-link"><i class="fas fa-angle-right"></i>Bulk Import-Individual</a>
+                                        </li>
+
+    									</ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="ImportStudentSingleData.php" class="nav-link"><i class="fas fa-angle-right"></i>Bulk Import-Individual </a>
-                                </li>
+
+                                
                                 <li class="nav-item sidebar-nav-item">
 									<a href="#" class="nav-link"><span>Reports</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
 									    <ul class="nav sub-group-menu">

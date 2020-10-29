@@ -69,7 +69,7 @@ if(mysqli_num_rows($result) == 1)  // Checks if the userid exist in the database
 			*/
 			//$_SESSION["SCHOOL"]=$row["school_name"] . ', ' . $row["area"] ;
 			$_SESSION["LASTUPDATEON"]=$cur_time=date("Y-m-d H:i:s");
-			$_SESSION["INTERVAL"]='+30 minutes';
+			$_SESSION["INTERVAL"]='+120 minutes';
 			//$_SESSION["GRADE"] = array();
 			//$_SESSION['PASSWORD']= $passwd;
 			

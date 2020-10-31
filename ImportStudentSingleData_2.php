@@ -21,7 +21,6 @@ $setData = '';
     $rowData = $rowData . '';
     $setData .= trim($rowData) . "\n";  
 }  
-echo $selectedColName;
 
 header("Content-type: application/octet-stream");  
 header("Content-Disposition: attachment; filename=User_Detail.xls");  

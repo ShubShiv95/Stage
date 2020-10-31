@@ -108,7 +108,7 @@ include 'errorLog.php';
                                         <div class="row justify-content-center">
                                                 <div class="form-group aj-form-group text-center mt-2">
                                                     <div class="row-chang">
-                                                    <span class="mt-2"> Import Type:</span>
+                                                    <span class="mt-2">Import Type:</span>
                                                         <div class="radio">
                                                         <span><input type="radio" class="sibling-bs" name="sibling" checked> Add New </span>
                                                         </div>

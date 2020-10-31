@@ -44,8 +44,5 @@
     $finalMsg = "Error in updating data, Error happened in Row # : " . $counter+1;
    }
    
-   //$htmlbody = $htmlbody . '</tbody></table></div>';
-   //echo $htmlbody;
-   //
-   echo $final;
+   echo $finalMsg;
 ?>

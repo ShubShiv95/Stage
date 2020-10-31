@@ -3,7 +3,7 @@
 
     
     $getseq_sql="select count(*) as cnt from $tablename";
-    $seqid='';
+    $seqid=0;
 	if($getseq_result=$dbhandle->query($getseq_sql))
 		{
             $getseq_row=$getseq_result->fetch_assoc();

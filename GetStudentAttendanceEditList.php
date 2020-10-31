@@ -14,15 +14,17 @@
 	$secid=$_REQUEST["secid"];
 	$adt=$_REQUEST["adt"];
 	$period=$_REQUEST["period"];
-	
+	$Date_format = "d/m/Y"; //Creating a Indian date format string variable.
+    date_default_timezone_set('Asia/Kolkata');  //setting Indian time zone at application server level.
+
 	$query1="select cm.class_no classno,cm.class_name,cm.stream stream ,cs.section section from class_master_table cm,class_section_table cs where cm.class_id=cs.class_id and cs.class_sec_id=" . $secid . " and cs.enabled=1 and cs.school_id=" . $_SESSION["SCHOOLID"];
 	//echo $query;
 	$result1=mysqli_query($dbhandle,$query1);
 	$row1=mysqli_fetch_assoc($result1);
 	$heading= '<h1 class="box">Attendance Entry For Class' . ' ' . $row1["class_name"] . '-' . $row1["section"] .' </h1>';;    
 
-	$date = new DateTime($adt);
-	echo  $heading . '<p><h2>Dated '  . $date->format('d-m-Y') . '</h2><p>';
+	$date =date_create_from_format($Date_format, $adt);
+	echo  $heading . '<p><h2>Dated '  . $adt . '</h2><p>';
 
 	$query="select * from attendance_master_table where class_sec_id=" . $secid . " and school_id=" . $_SESSION["SCHOOLID"] . " and doa=str_to_date('" . $adt . "','%d/%m/%Y') and period=$period";
 	//echo $query;
@@ -50,7 +52,9 @@
                         <tbody>';
 
         $present=0;
-        $attendanceStudentList_query= "select adt.student_id,smt.first_name,smt.middle_name,smt.last_name,smt.roll_number,adt.attendance_status,adt.attendance_remarks,adt.prev_attendance_status as prev_attendance_status, adt.prev_attendance_remarks as prev_attendance_remarks from attendance_details_table adt,student_master_table smt where adt.attendance_id=" . $row1["Attendance_id"] . " and smt.student_id=adt.student_id";
+        //$attendanceStudentList_query= "select adt.student_id,smt.first_name,smt.middle_name,smt.last_name,smt.roll_number,adt.attendance_status,adt.attendance_remarks,adt.prev_attendance_status as prev_attendance_status, adt.prev_attendance_remarks as prev_attendance_remarks from attendance_details_table adt,student_master_table smt where adt.attendance_id=" . $row1["Attendance_id"] . " and smt.student_id=adt.student_id";
+        $attendanceStudentList_query= "select adt.student_id,smt.first_name,smt.middle_name,smt.last_name,scd.rollno,adt.attendance_status,adt.attendance_remarks,adt.prev_attendance_status as prev_attendance_status, adt.prev_attendance_remarks as prev_attendance_remarks from attendance_details_table adt,student_master_table smt,student_class_details scd where adt.attendance_id=" . $row1["Attendance_id"] . " and smt.student_id=adt.student_id and scd.student_id=smt.student_id";
+        //echo $attendanceStudentList_query;
         $attendanceStudentList_result=$dbhandle->query($attendanceStudentList_query);
 		$count=0;
 		while($attendanceStudentList_row=$attendanceStudentList_result->fetch_assoc())
@@ -58,7 +62,7 @@
                 $count++;
                 $name=$attendanceStudentList_row["first_name"] . ' ' . $attendanceStudentList_row["middle_name"] . ' ' . $attendanceStudentList_row["last_name"];
                                
-                $str= $str .  '<tr><td>' . $attendanceStudentList_row["roll_number"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["roll_number"] .'" /></td><td>' . $name . '<input type="hidden" name="sname'.$count.'" value="'. $name .'" /></td>';
+                $str= $str .  '<tr><td>' . $attendanceStudentList_row["rollno"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["rollno"] .'" /></td><td>' . $name . '<input type="hidden" name="sname'.$count.'" value="'. $name .'" /></td>';
                                
                 $str=$str . '<td><div class="row radio">
                                     <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">

@@ -3,6 +3,7 @@ session_start();
 include 'dbobj.php';
 include 'security.php';
 include 'errorLog.php';   
+include 'sequenceGenerator.php';   
 //include 'generate_sequence.php';
 
 
@@ -37,11 +38,10 @@ $anysib=$_REQUEST["anysib"];
 //$vmobno=$_REQUEST["vmobno"];
 $vmobno='YES';
 $votp=$_REQUEST["votp"];
-
-
-
+$aeid=sequence_number('admission_enquiry_table',$dbhandle);
 $insertAdmissionEnquiry_sql="insert into admission_enquiry_table
-    (STUDENT_NAME,
+    (AEID,
+    STUDENT_NAME,
     ENQUIRER_NAME,
     ENQUIRER_RELATION,
     MOBILE_NO,
@@ -56,7 +56,7 @@ $insertAdmissionEnquiry_sql="insert into admission_enquiry_table
     ENQUIRY_STATUS,
     MOBILE_VERIFIED,
     CREATED_BY,
-    SCHOOL_ID) values(?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,'PENDING',?,?,?)";
+    SCHOOL_ID) values(?,?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,'PENDING',?,?,?)";
     $lid=$_SESSION["LOGINID"];
     $sid=$_SESSION["SCHOOLID"];
 
@@ -64,7 +64,8 @@ $insertAdmissionEnquiry_sql="insert into admission_enquiry_table
 
 $stmt=$dbhandle->prepare($insertAdmissionEnquiry_sql);
 echo $dbhandle->error;	
-$stmt->bind_param('sssssiisisssisi',
+$stmt->bind_param('isssssiisisssisi',
+    $aeid,
     $sname,
     $enqname,
     $enqrel,
@@ -108,9 +109,10 @@ if(!$execResult)
 }
 
 $str_start='<div class="alert icon-alart bg-light-green2" role="alert"><i class="far fa-hand-point-right bg-light-green3"></i>';
-$messsage='Enquiry Saved.';
+$messsage='Admission Enquiry Saved.';
 $str_end='</div>';
-echo $str_start.$messsage.$str_end;
+//echo $str_start.$messsage.$str_end;
+echo $messsage;
 
 
 ?>

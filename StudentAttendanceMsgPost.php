@@ -124,11 +124,22 @@ include 'sequenceGenerator.php';
                                                         }
                                                     else	//if attendance master_table_update process done successfully then updating attendance_details_table;
                                                     {
+                                                        $totalRows=$result1->num_rows;
+                                                        $count=0;
                                                         while($rows=$result1->fetch_assoc())
                                                         {
                                                             $SMS='Dear Parent, This is to inform you that your ' . ($rows["gender"]=='FEMALE'?'daughter' : 'son') . ' ' . $rows["first_name"] . ' is found absent in class on ' . $Message_Date.  '. Please take care of your '. ($rows["gender"]=='FEMALE'?'daughter' : 'son');  
                                                             echo $SMS . '<p>';
-                                                        }    
+                                                            $count++;
+                                                        } 
+                                                        $updateMessageStatus_sql="update attendance_master_table set smsflag=1 where attendance_id="  . $AttendanceId; 
+                                                        $updateMessageStatus_result=$dbhandle->query($updateMessageStatus_sql);
+                                                        if($count==$totalRows and $updateMessageStatus_result)
+                                                            {
+                                                                mysqli_commit($dbhandle);
+                                                                echo "Messages Sent Successfully.";
+                                                            }
+
                                                     }   
                                                 ?>            
                                                 

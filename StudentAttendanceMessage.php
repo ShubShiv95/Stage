@@ -86,7 +86,7 @@ include 'security.php';
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form">
+                        <form class="new-added-form school-form aj-new-added-form" action="StudentAttendanceMsgPost.php" method="post">
                             <div class="row justify-content-center">
                                 <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
                                     <div class="tebal-promotion" >

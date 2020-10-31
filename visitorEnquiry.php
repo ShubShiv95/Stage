@@ -135,7 +135,7 @@ include 'security.php';
 							    <div class="col-xl-6 col-lg-6 col-12 form-group">
                                     <label>Visitor Type *</label>
                                     <select class="select2" id="visitortype" name="visitortype" required>
-                                    <option value="0">Select Visitor Type</option>
+                                        <option value="0">Select Visitor Type</option>
 											<?php
                                             $query='select * from visitor_type_master where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"];
                                             $result=mysqli_query($dbhandle,$query);

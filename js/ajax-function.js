@@ -399,35 +399,7 @@ function getStuNumList4CUG(secid)
 
 
 
-//Ajex Function for Submit Operation used by visitorSearch.php file.  This function can use used to post the entire form data.  Make the changes as required 
-var MainForm = $('#MainForm');
 
-MainForm.submit(function (e) {
-        //alert(data);
-        e.preventDefault();
-
-        $.ajax({
-            type: MainForm.attr('method'),
-            url: MainForm.attr('action'),
-            data: MainForm.serialize(),
-            success: function (data) {
-                //console.log('Submission was successful.');
-                //console.log(data);
-                //alert(data);
-                $('div#search-result-div').html(data);
-                //alert(data);
-            },
-            error: function (data) {
-                //console.log('An error occurred.');
-                //console.log(data);
-                //alert(data);
-                $('div#search-result-div').html(data);
-                
-            },
-        });
-	});
-	
-//End of Ajex Function for Submit Operation used by visitorSearch.php file. 
 
 
 function getUserList4CUG(first_Select_id,second_select_value,next_dest_id1,next_dest_id2)	

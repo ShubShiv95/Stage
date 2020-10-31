@@ -7,6 +7,8 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
+$Date_format = "d/m/Y"; //Creating a Indian date format string variable.
+date_default_timezone_set('Asia/Kolkata');  //setting Indian time zone at application server level.
 ?>
 <head>
     <meta charset="utf-8">
@@ -188,13 +190,16 @@ include 'security.php';
                                                                 //echo $query;
                                                                 $result1=$dbhandle->query($query1);
                                                                 $row1=$result1->fetch_assoc();
-                                                                $heading= '<h1 class="box">Attendance Entry For Class' . ' ' . $row1["class_name"];
+                                                                $heading= '<h3 class="box">Attendance Entry For Class' . ' ' . $row1["class_name"];
                                                                 //Generating attendance format based on latest previous period attendance made.
-                                                                $date = new DateTime($adt);
-                                                                echo $heading . '<p>Dated ' .$date->format('d-m-Y') . ' for Attendance Id ' . $aid .'</H1><p>';
+                                                                //$date = new DateTime($adt);
+                                                                
+
+                                                                $date =date_create_from_format($Date_format, $adt);
+                                                                echo $heading . ' Dated ' .$date->format('d-m-Y') . '</H3>';
                                                                 //End of Printing Class Information.
                                                                 $present=0;
-                                                                $attendanceStudentList_sql= "select adt.student_id,smt.student_name,smt.roll_number,adt.attendance_status,adt.attendance_remarks,adt.prev_attendance_status as prev_attendance_status, adt.prev_attendance_remarks as prev_attendance_remarks from attendance_details_table adt,student_master_table smt where adt.attendance_id=" . $pretAttendance_row["Attendance_id"] . " and smt.student_id=adt.student_id";
+                                                                $attendanceStudentList_sql= "select adt.student_id,smt.first_name,smt.middle_name,smt.last_name,scd.rollno,adt.attendance_status,adt.attendance_remarks,adt.prev_attendance_status as prev_attendance_status, adt.prev_attendance_remarks as prev_attendance_remarks from attendance_details_table adt,student_class_details scd, student_master_table smt where adt.attendance_id=" . $pretAttendance_row["Attendance_id"] . " and scd.student_id=smt.student_id and smt.student_id=adt.student_id";
 
                                                                 //echo $attendanceStudentList_sql;
 
@@ -214,7 +219,8 @@ include 'security.php';
                                                                     while($attendanceStudentList_row=$attendanceStudentList_result->fetch_assoc())
                                                                         {
                                                                             $count++;
-                                                                            $str= $str .  '<tr><td>' . $attendanceStudentList_row["roll_number"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["roll_number"] .'" /></td><td>' . $attendanceStudentList_row["student_name"] . '<input type="hidden" name="sname'.$count.'" value="'. $attendanceStudentList_row["student_name"] .'" /></td><td><div class="row radio">';
+                                                                            $studentname=$attendanceStudentList_row["first_name"] . ' ' . $attendanceStudentList_row["middle_name"] . ' ' .$attendanceStudentList_row["last_name"];
+                                                                            $str= $str .  '<tr><td>' . $attendanceStudentList_row["rollno"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["rollno"] .'" /></td><td>' . $studentname . '<input type="hidden" name="sname'.$count.'" value="'.  $studentname .'" /></td><td><div class="row radio">';
                                                                             
                                                                             $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                                                                             <div class="form-group aj-form-group">

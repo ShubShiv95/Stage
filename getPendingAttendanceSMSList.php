@@ -4,14 +4,14 @@ include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
                                                     
-                                                    
+
                                                 $indicatorHTML='<div class="table-responsive">';
                                                 $indicatorHTML= $indicatorHTML.'<table class="table table-bordered attendence-msg">';
-                                                $indicatorHTML= $indicatorHTML.'<tr><td>Colour Legends</td><td><ul class="list-absent">';
-                                                $indicatorHTML= $indicatorHTML.'<li><span class="red-circle"></span>Attendance Pending</li>';
-                                                $indicatorHTML= $indicatorHTML.'<li><span class="orange-circle"></span>Attendance Completed but SMS Pending.</li>';
-                                                $indicatorHTML= $indicatorHTML.'<li><span class="green-circle"></span>Attendance Completd and SMS Triggered.</li>';
-                                                $indicatorHTML= $indicatorHTML.'</td></tr></table>';
+                                                $indicatorHTML= $indicatorHTML.'<tr><td>Colour Legends</td></tr>';
+                                                $indicatorHTML= $indicatorHTML.'<tr><td><ul class="list-absent"><li><span class="red-circle"></span>Attendance Pending</li></ul></td></tr>';
+                                                $indicatorHTML= $indicatorHTML.'<tr><td><ul class="list-absent"><li><span class="orange-circle"></span>Attendance Completed but SMS Pending.</li></ul></td></tr>';
+                                                $indicatorHTML= $indicatorHTML.'<tr><td><ul class="list-absent"><li><span class="green-circle"></span>Attendance Completd and SMS Triggered.</li></ul></td></tr>';
+                                                $indicatorHTML= $indicatorHTML.'</table>';
                                                 $indicatorHTML= $indicatorHTML.'<table class="table table-bordered attendence-msg">';
                                                 $indicatorHTML= $indicatorHTML.'<thead>';
                                                         
@@ -30,7 +30,8 @@ include 'security.php';
                                                     $attendanceList_result=$dbhandle->query($attendanceList_sql);
                                                     if(!$attendanceList_result)
                                                     {
-                                                        echo $attendanceList_sql;
+                                                        //echo $attendanceList_sql;
+                                                        echo "Database Error. Please contact Developer Team.";
                                                         die;
                                                     }
                                                     while($row=$attendanceList_result->fetch_assoc())
@@ -83,7 +84,7 @@ include 'security.php';
                                                                     $indicatorHTML=$indicatorHTML. '<li><span class="'. $circletype . '"></span>' . $row2["section"] . '</li>';
                                                                     if($attendance_status==1 and $smsflag==0)
                                                                     {
-                                                                        $indicatorHTML=$indicatorHTML.'<input type="hidden" name="pendingsms[]" value="' .  $Attendance_id .'">';
+                                                                        $indicatorHTML=$indicatorHTML.'<input type="hidden" name="pendingaid[]" value="' .  $Attendance_id .'">';
                                                                     }
                                                                     
 
@@ -106,12 +107,12 @@ include 'security.php';
                                                 </div>
                                             </div>
                                             <div class="new-added-form aj-new-added-form">
-                                            <div class="aaj-btn-chang-cbtn">
-                                                <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Send  Attendance  Message</button>
-                                                
+                                                <div class="aaj-btn-chang-cbtn">
+                                                    <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Send  Attendance  Message</button>
+                                                    
+                                                </div>
                                             </div>
                                             <div>
-                                            </div>
                                             <ul class="list-absent">
                                             </div>';  
                                             echo $indicatorHTML;

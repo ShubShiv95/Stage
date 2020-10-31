@@ -40,3 +40,33 @@ Module Name: 	Admission Add Form
 Message:	
 SQL:	
 File:	/opt/lampp/htdocs/stage/AdmissionAddForm_2.php
+
+Date:	30-Oct-2020 05:30:36 AM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.lead...' at line 1
+SQL:	
+File:	F:\xampp\htdocs\stage\followupNote.php
+
+Date:	30-Oct-2020 06:25:53 AM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.lead...' at line 1
+SQL:	
+File:	F:\xampp\htdocs\stage\followupNote.php
+
+Date:	30-Oct-2020 06:29:36 AM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.lead...' at line 1
+SQL:	
+File:	F:\xampp\htdocs\stage\FollowupNote.php
+
+Date:	30-Oct-2020 06:29:42 AM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.lead...' at line 1
+SQL:	
+File:	F:\xampp\htdocs\stage\FollowupNote.php
+
+Date:	31-Oct-2020 11:14:20 AM	 By User:admin
+Module Name: 	Admission Eqnuiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.lead...' at line 1
+SQL:	
+File:	F:\xampp\htdocs\stage\FollowupNote.php

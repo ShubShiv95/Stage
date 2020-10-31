@@ -34,7 +34,8 @@ include 'security.php';
     <link rel="stylesheet" href="css/datepicker.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    
+    <!-- Modernize js -->
+    <script src="js/modernizr-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -48,23 +49,23 @@ include 'security.php';
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-            <?php 
+             <?php 
             include 'includes/sidebar.php'; 
             ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
 			    <!-- Hot Links Area Start Here -->
-				<?php include ('includes/hot-link.php'); ?>
+				<!-- <?php include ('includes/hot-link.php'); ?> -->
                 <!-- Hot Links Area End Here -->
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
+                    <h3>Admission Eqnuiry</h3>
                    <ul>
                         <li>
-                            <a href="dashboard.php">Home</a>
+                            <a href="index.php">Home</a>
                         </li>
                         <li>Admission Eqnuiry</li>
                     </ul>
-				 	
                 </div>
                 <div class="ui-alart-box">
                             <div class="icon-color-alart" id="msgreply">
@@ -78,12 +79,13 @@ include 'security.php';
 				
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
-                    <div class="card-body bg-skybluelight">
-                       <!-- <div class="heading-layout1">
-                            <div class="item-title">
-                                <h3>Add New Students</h3>
+                    <div class="card-body">
+
+                       <div class="heading-layout1">
+                            <div class="item-title aj-item-title">
+                                <h3>Add New Enquiry</h3>
                             </div>
-                            <div class="dropdown">
+                            <!-- <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">...</a>
 
@@ -95,77 +97,55 @@ include 'security.php';
                                     <a class="dropdown-item" href="#"><i
                                             class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                 </div>
-                            </div>
-                        </div> -->
-                        <form class="new-added-form" id="admissionform" method="post" action="admissionEnquiry2.php">
-						<input type="hidden" id="votp" name="votp" placeholder="" value="0" class="form-control" value="0" required>
+                            </div> -->
+                        </div>
+                        <form class="new-added-form aj-new-added-form new-aj-new-added-form"  id="admissionform" method="post" action="admissionEnquiry2.php">
+						<input type="hidden" id="votp" name="votp" placeholder="" value="0" class="form-control" required>
                             <div class="row">
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Student Name *</label>
-                                    <input type="text" id="sname" name="sname" placeholder="" class="form-control" onkeypress="lettersOnly(event);" required>
+							
+							    
+                                <div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                        <label>Student Name <span>*</span></label>
+                                        <input type="text" id="sname" name="sname" placeholder="" class="form-control" onkeypress="lettersOnly(event);" required>
+                                    </div>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Enquirer Name *</label>
-                                    <input type="text" id="enqname" name="enqname" placeholder="" class="form-control" onkeypress="lettersOnly(event);">
+                                <div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                        <label>Enquirer Name <span>*</span></label>
+                                        <input type="text" id="enqname" name="enqname" placeholder="" class="form-control" required onkeypress="lettersOnly(event);">
+
+                                    </div>
                                 </div>
                                 
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Enquirer Relation *</label>
-                                    <select class="select2" id="enqrel" name="enqrel" required>
-                                        <option value="">Select Option Values *</option>
-                                        <option value="Father">Father</option>
-                                        <option value="Mother">Mother</option>
-                                        <option value="Uncle">Uncle</option>
-                                        <option value="Aunt">Aunt</option>
-                                        <option value="Brother">Brother</option>
-                                        <option value="Sister">Sister</option>
-                                        <option value="Neighbour">Neighbour</option>
-                                    </select>
+                                <div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                        <label>Enquirer Relation <span>*</span></label>
+                                        <select class="select2" id="enqrel" name="enqrel" required>
+                                            <option value="">Select Option Values *</option>
+                                            <option value="Admission">Father</option>
+                                            <option value="Publication House">Mother</option>
+                                            <option value="Vacancy">Uncle</option>
+                                            <option value="Vendor Payment Enquiry">Aunt</option>
+                                            <option value="Others">Brother</option>
+                                            <option value="Others">Sister</option>
+                                            <option value="Others">Neighbour</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Contact Number *</label>
-                                    <input type="text" id="contactno" name="contactno" placeholder="" class="form-control" onkeypress="return isNumberKey(event);"  onkeyup="restrict_textlength('contactno','10');" required>
+                                <div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                        <label>Contact Number <span>*</span></label>
+                                        <input type="text" id="contactno" name="contactno" placeholder="" class="form-control" onkeypress="return isNumberKey(event);"  onkeyup="restrict_textlength('contactno','10');" required>
+                                    </div>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Email ID</label>
-                                    <input type="email" id="email" name="email" placeholder="" class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Select Locality</label>
-                                    <select class="select2" id="locality" name="locality">
-                                        <option value="">Please Select Locality</option>
-										<?php
-                                            $query='select locationid,location_name from marketting_location_table where School_Id=' . $_SESSION["SCHOOLID"];
-                                            $result=mysqli_query($dbhandle,$query);
-                                            if(!$result)
-                                                {
-                                                    //var_dump($getStudentCount_result);
-                                                    $error_msg=mysqli_error($dbhandle);
-                                                    $el=new LogMessage();
-                                                    $sql=$query;
-                                                    //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                                                    $el->write_log_message('Admission Eqnuiry',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
-                                                    $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate location list array. Please try after some time.</h1>";
-                                                    $dbhandle->query("unlock tables");
-                                                    mysqli_rollback($dbhandle);
-                                                    //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
-                                                    $messsage='Error: Admission Enquiry Not Saved.  Please consult application consultant.';
-                                                    //$str_end='</div>';
-                                                    //echo $str_start.$messsage.$str_end;
-                                                    //echo "";
-                                                    //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
-                                                }
-                                            while($row=mysqli_fetch_assoc($result))
-                                            {
-                                                 echo '<option value="' . $row["locationid"] . '">' . $row["location_name"] . '</option>';
-                                            }
-                                        ?>
-                                       
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Applying For Class *</label>
-                                    <select class="select2" id="classno" name="classno" required>
+
+
+                                
+                                <div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                        <label>Applying For Class <span>*</span></label>
+                                        <select class="select2" id="classno" name="classno" required>
                                         <option value="">Please Select Class *</option>
 										<?php
                                             $query='select Class_Id,class_name,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
@@ -201,24 +181,78 @@ include 'security.php';
                                             echo $str;
                                         }
                                         ?>
-                                       
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Applying for Session *</label>
-                                    <select class="select2" id="session" name="session" required>
-                                        <option value="">Please Select Session *</option>
-										<option value="2020-2021">2020-2021</option>
-											<option value="2019-2020">019-2020</option>
-											<option value="2018-2019">2018-2019</option>
-											<option value="2017-2018">2017-2018</option>
-                                    </select>
+                                <div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                        <label>Applying for Session <span>*</span></label>
+                                        <select class="select2" id="session" name="session" required>
+                                            <option value="">Please Select Session *</option>
+    										<option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2018">2018</option>
+                                           
+                                        </select>
+                                    </div>
                                 </div>
-                               <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Lead Source *</label>
-                                    <select class="select2" id="lsource" name="lsource" required>
-                                        <option value="0">Select Lead Source</option>
-                                    <?php
+                               <div class="col-xl-4 col-lg-4 col-12">
+                                    <div class="form-group aj-form-group">
+                                        <label>Any Sibling <span>*</span></label>
+                                        <select class="select2"  id="anysib" name="anysib" required>
+                                            <option value="No" selected>No</option>
+										    <option value="Yes">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                        <label>Select Locality</label>
+                                        <select class="select2" id="locality" name="locality">
+                                        <option value="">Please Select Locality</option>
+										<?php
+                                            $query='select locationid,location_name from marketting_location_table where School_Id=' . $_SESSION["SCHOOLID"];
+                                            $result=mysqli_query($dbhandle,$query);
+                                            if(!$result)
+                                                {
+                                                    //var_dump($getStudentCount_result);
+                                                    $error_msg=mysqli_error($dbhandle);
+                                                    $el=new LogMessage();
+                                                    $sql=$query;
+                                                    //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                                    $el->write_log_message('Admission Eqnuiry',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                                                    $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate location list array. Please try after some time.</h1>";
+                                                    $dbhandle->query("unlock tables");
+                                                    mysqli_rollback($dbhandle);
+                                                    //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
+                                                    $messsage='Error: Admission Enquiry Not Saved.  Please consult application consultant.';
+                                                    //$str_end='</div>';
+                                                    //echo $str_start.$messsage.$str_end;
+                                                    //echo "";
+                                                    //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
+                                                }
+                                            while($row=mysqli_fetch_assoc($result))
+                                            {
+                                                 echo '<option value="' . $row["locationid"] . '">' . $row["location_name"] . '</option>';
+                                            }
+                                        ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                        <label>Email ID</label>
+                                        <input type="email" id="email" name="email" placeholder="" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-12">
+                                    <div class="form-group aj-form-group">
+                                        <label>Lead Source <span>*</span></label>
+                                        <select class="select2" id="lsource" name="lsource" required>
+                                            <option value="">Please Select Lead *</option>
+                                        <?php
                                             $query='select leadid,lead_source_name from lead_source_table where School_Id=' . $_SESSION["SCHOOLID"];
                                             $result=mysqli_query($dbhandle,$query);
                                             if(!$result)
@@ -244,54 +278,52 @@ include 'security.php';
                                                  echo '<option value="' . $row["leadid"] . '">' . $row["lead_source_name"] . '</option>';
                                             }
                                         ?>
-                                       
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Follow Up Date *</label>
+
+                                <div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+
+                                    <label>Follow Up Date <span>*</span></label>
                                     <input type="text" id="fdate" name="fdate" placeholder="dd/mm/yyyy" class="form-control air-datepicker future-date"
-                                        data-position='bottom right' required autocomplete="off">
+                                        data-position='bottom right' required>
                                     <i class="far fa-calendar-alt"></i>
                                 </div>
-								
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Any Sibling</label>
-                                    <select class="select2" id="anysib" name="anysib">
-                                        <option value="No">No</option>
-										<option value="Yes">Yes</option>
-                                    </select>
                                 </div>
-								
-								
-								<div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Enter OTP</label> <label id="otpverifymsg">&nbsp;&nbsp;</label>
-                                    <input type="text" id="otptoverify" name="otptoverify" placeholder="" class="form-control">
+								<div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                    
+                                        <label>Remarks</label>
+                                        <textarea class="textarea form-control" name="remarks" id="remarks" cols="40" rows="5"></textarea>
+                                    </div>
                                 </div>
-								<div class="col-xl-9 col-lg-9 col-12 form-group">
-                                    <label>Remarks</label>
-									 <textarea class="textarea form-control" id="remarks" name="remarks"  cols="10" rows="4"></textarea>
-                                </div>
-								
-								<div class="col-xl-3 col-lg-6 col-12 form-group btn-group-main">
-								    <label>&nbsp;</label>
-									<div class="col-xl-6 col-lg-6 col-6 form-group">
-                                    <button type="button" name="otpbtn" id="otpbtn" class="btn-fill-md radius-4 text-light bg-true-v mbtn-verify" onclick="generateOtp();">Generate OTP</button>
-                                            <input type="hidden" id="otp" name="otp" />
-                                </div>
-									<div class="col-xl-6 col-lg-6 col-6 form-group">
-									<button type="button" name="votpbtn" id="votpbtn" class="btn-fill-md radius-4 text-light bg-dark-pastel-green mbtn-verify verify" onclick="verifyOtp();">Verify OTP</button>
-									</div>
-									<div class="col-xl-6 col-lg-6 col-6 form-group form-main-btn">
-										<button type="button" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark save" onclick="frm.submit();">Save</button>
-									</div>
-                                    <div class="col-xl-6 col-lg-6 col-6 form-group form-main-btn">									
-										<button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow resetm">Reset</button>
-									</div>
-                                </div>
-								
-								
                                 
-                                
+								
+								<div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                        <label>Enter OTP</label>
+                                        <input type="text" id="otptoverify" name="otptoverify"  placeholder="" class="form-control" >
+                                    </div>
+                                </div>
+								<div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                        <button type="button" name="otpbtn" id="otpbtn" class="btn-fill-lmd radius-4 text-light bg-true-v btn-hover-bluedark" onclick="generateOtp();">Generate OTP</button><input type="hidden" id="otp" name="otp" />
+                                        <button type="button" name="votpbtn" id="votpbtn" class="btn-fill-lmd radius-4 text-light bg-dark-pastel-green btn-hover-bluedark" onclick="verifyOtp();">Verify OTP</button>
+                                    </div>
+                                </div>
+								<div class="col-xl-4 col-lg-4 col-12 text-right">
+                                    <button type="button" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" onclick="frm.submit();">Save</button>
+                                    <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                                </div>
+
+                                <div class="col-xl-4 col-lg-4 col-12 ">
+                                    <div class="form-group aj-form-group">
+                                    
+                                    <label id="otpverifymsg">&nbsp;&nbsp;</label>
+                                    </div>
+                                </div>
+
                             </div>
                         </form>
                     </div>
@@ -321,10 +353,6 @@ include 'security.php';
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
-    <!-- Modernize js -->
-    <script src="js/modernizr-3.6.0.min.js"></script>
-   <!--The ajex-function.js file contains all controller ajex functions used in the erp.-->
-   <script src="js/ajax-function.js"></script>
 	<script src="js/myscript.js"></script>
     <script type="text/javascript">
     var frm = $('#admissionform');
@@ -341,15 +369,16 @@ include 'security.php';
                 //console.log('Submission was successful.');
                 //console.log(data);
                 //alert(data);
-                $('div#msgreply').html(data);
-                //alert(data);
+                //$('div#msgreply').html(data);
+                alert(data);
+                $('#admissionform').trigger("reset");
             },
             error: function (data) {
                 //console.log('An error occurred.');
                 //console.log(data);
                 //alert(data);
-                $('div#msgreply').html(data);
-                
+                //$('div#msgreply').html(data);
+                alert(data);
             },
         });
     });
@@ -364,7 +393,7 @@ if (mobileno=="")
   alert('Please Provide the Contact Numebr.');
   return;
   }
-  document.getElementById('otpverifymsg').innerHTML=' - OTP Sent';
+  //document.getElementById('otpverifymsg').innerHTML=' - OTP Sent';
 //alert(outtime);
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -379,7 +408,7 @@ xmlhttp.onreadystatechange=function()
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
         document.getElementById('otp').value=xmlhttp.responseText;
-        document.getElementById('otpverifymsg').innerHTML=' - Verify Now';
+        document.getElementById('otpverifymsg').innerHTML=' OTP Sent - Verify Now';
         //alert('OTP'+ xmlhttp.responseText);
     }
   }
@@ -406,7 +435,7 @@ function verifyOtp(){
     }
 
 }
-</script>
+</script>                                        
 </body>
 
 </html>

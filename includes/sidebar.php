@@ -32,10 +32,20 @@
                                     <a href="AdmissionEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Admission Eqnuiry</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="New-AdmissionEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Admission Eqnuiry</a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="FollowupEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Follow Up Eqnuiry</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="http://localhost:8080/solvethemess/stage/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
+                                <li class="nav-item">
+                                    <a href="New-FollowupEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Follow Up Eqnuiry</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="http://localhost/stage/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="http://localhost/stage/New-VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Visitor</a>
                                 </li>
 								
                                 
@@ -97,10 +107,19 @@
                                     <a href="IndividualSMS.php" class="nav-link"><i class="fas fa-angle-right"></i>Individual SMS</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="New-IndividualSMS.php" class="nav-link"><i class="fas fa-angle-right"></i>New Individual SMS</a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="GroupSMS.php" class="nav-link"><i class="fas fa-angle-right"></i>Group SMS</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="New-group-SMS.php" class="nav-link"><i class="fas fa-angle-right"></i>New Group SMS</a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="CUG.php" class="nav-link"><i class="fas fa-angle-right"></i>Close User Group</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="New-CUG.php" class="nav-link"><i class="fas fa-angle-right"></i>New Close User Group</a>
                                 </li>
                                 <!--li class="nav-item">
                                     <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Recharge Media</a>

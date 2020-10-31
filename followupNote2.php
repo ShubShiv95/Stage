@@ -3,34 +3,40 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
+include 'sequenceGenerator.php';
 
 
 $aeid=$_REQUEST["aeid"];
 $followupdate=$_REQUEST["followupdate"];
 $enqstatus=$_REQUEST["enqstatus"];
 $feedbacknote=$_REQUEST["feedbacknote"];
-
+$noteid=sequence_number('admission_followup_note',$dbhandle);
 
 
 mysqli_autocommit($dbhandle,FALSE);
 
+
 $insertAdmissionFollowupNote_sql="insert into admission_followup_note
-    (AEID,
+    (NOTEID,
+    AEID,
     NOTE,
     NOTE_DATE,
     FOLLOWUP_DATE,
     CREATED_BY,
-    SCHOOL_ID) values(?,?,NOW(),str_to_date(?,'%d/%m/%Y'),'" . $_SESSION['LOGINID'] . "'," . $_SESSION['SCHOOLID'] . ")";
+    SCHOOL_ID) values(?,?,?,NOW(),str_to_date(?,'%d/%m/%Y'),?,?)";
     $AdmissionFollowupNote_stmt=$dbhandle->prepare($insertAdmissionFollowupNote_sql);
-    //echo $dbhandle->error;die;	
-    $AdmissionFollowupNote_stmt->bind_param('iss',
+    
+    $AdmissionFollowupNote_stmt->bind_param('iisssi',
+        $noteid,
         $aeid,
         $feedbacknote,
-        $followupdate
+        $followupdate,
+        $_SESSION["LOGINID"],
+        $_SESSION["SCHOOLID"]
         );
     
     $AdmissionFollowupNote_stmt_result=$AdmissionFollowupNote_stmt->execute(); //Feedback note added to admission_followup_note Table.
-    
+    //echo $dbhandle->error;die;	
     //Updating Enquiry_Status on admission_enquiry_table 
     
     $updateEnqiryStatus_sql="update admission_enquiry_table set enquiry_status=? where aeid=?";
@@ -61,13 +67,13 @@ $insertAdmissionFollowupNote_sql="insert into admission_followup_note
             //$str_end='</div>';
             //echo $str_start.$messsage.$str_end;
             //die;
-            echo "unsecessful";
+            //echo "unsecessful";
             echo '<meta HTTP-EQUIV="Refresh" content="0; URL=followupNote.php?aeid=' .$aeid . '">';
         }
     else
         {
             mysqli_commit($dbhandle);
-            echo "success";
+            //echo "success";
             echo '<meta HTTP-EQUIV="Refresh" content="0; URL=followupNote.php?aeid=' .$aeid . '">';
         }    
 

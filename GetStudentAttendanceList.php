@@ -1,6 +1,25 @@
 <?php
 session_start();
 include 'dbobj.php';
+
+    //Developed by Mithun Mukherjee.
+    //Last Updated: 28 October 2020.
+
+    // PHP code to find the number of days 
+    // between two given dates 
+    
+    // Function to find the difference  
+    // between two dates. 
+    function dateDiffInDays($date1, $date2)  
+    { 
+        // Calculating the difference in timestamps 
+        $diff = strtotime($date2) - strtotime($date1); 
+        
+        // 1 day = 24 hours 
+        // 24 * 60 * 60 = 86400 seconds 
+        return abs(round($diff / 86400)); 
+    } 
+
 	//Tables used in this page
 	//class_master_table
 	//class_section_table;
@@ -8,22 +27,47 @@ include 'dbobj.php';
 	//Attendance_master_table;
 	//Attendance_details_table;
 	//student_master_table;
-	//student_class_details; 
-
+    //student_class_details;
+    
+    //echo date_default_timezone_get();
+    $secid=$_REQUEST["secid"];  //Received Class Section id for creating attendance.
+    $period=$_REQUEST["period"];    //Received Attendance Period.
+    $classid=$_REQUEST["classid"];  //Received Class Id.
     $adt=$_REQUEST["adt"];
-    //echo $adt;
-	$secid=$_REQUEST["secid"];
+    $Date_format = "d/m/Y"; //Creating a Indian date format string variable.
+    date_default_timezone_set('Asia/Kolkata');  //setting Indian time zone at application server level.
+    
+    //Fetching database current date value in dd/mm/yyyy format.
+    $currentDate_sql="select date_format(now(),'%d/%m/%Y') as currdate";
+    $currentDate_result=$dbhandle->query($currentDate_sql);
+    $currentDate_row=$currentDate_result->fetch_assoc();
+    $currentDate = $currentDate_row["currdate"];   //fetching current date at application level.
+    //End of Current date value fetch.
+    $dateDiff = dateDiffInDays($currentDate, $adt);
+    $attendancedate=date_create_from_format($Date_format, $adt);    //creating attendance date object.
+    $day=$attendancedate->format("D");
+    //echo $adt . " " . $currentDate . " " . $dateDiff;
+
+    //validating class section id if not set.
     if(!isset($_REQUEST["classid"]))
         {
-            echo "Class Id has not come.";
+            echo "<h3>Section Details has not posted. Please contact Application Development Team.</h3>";
+            die;
         }
-	$period=$_REQUEST["period"];
-    $attendance_date=strtotime($adt);
-    $classid=$_REQUEST["classid"];
-	//echo $cid;
-	//echo $classid;
 	
-	//Checking and forcing to create addendance for perion 1 in case the attendance is not created for period 1.
+    
+     //Printing Class Information.
+     $query1="select cm.class_no classno,cm.class_name,cm.stream stream ,cs.section section from class_master_table cm,class_section_table cs where cm.class_id=cs.class_id and cs.class_sec_id=" . $secid . " and cs.enabled=1 and cs.school_id=" . $_SESSION["SCHOOLID"];
+     //echo $query;
+     $result1=$dbhandle->query($query1);
+     $row1=$result1->fetch_assoc();
+     $heading= '<h3 class="box">Attendance Entry For Class' . ' ' . $row1["class_name"];
+     //Generating attendance format based on latest previous period attendance made.
+     //$date1 = new DateTime($adt);
+     echo $heading . 'Dated ' .$adt . '</h3>';
+     //End of Printing Class Information.
+
+    //Checking and forcing to create addendance for perion 1 in case the attendance is not created for period 1.
     if($period!=1)
         {
             $query="select * from attendance_master_table where class_sec_id=" . $_REQUEST["secid"] . " and school_id=" . $_SESSION["SCHOOLID"] . " and doa=str_to_date('" .$adt . "','%d/%m/%Y') and period=1";
@@ -31,7 +75,7 @@ include 'dbobj.php';
             $result=$dbhandle->query($query);
             if($result->num_rows==0 and $period >1)
                 {
-                    echo "<h1>First period attendance is not found.  Attendance for other periods is not allowed before attendance of first period.  Please create the attendance for period 1 first.</h1>";
+                    echo "<h4>First period attendance is not found. <br>Attendance for other periods is not allowed before attendance of first period.  <br>Please create the attendance for first period.</h4>";
                     die;
                 }
         }
@@ -43,27 +87,29 @@ include 'dbobj.php';
 
 	if($result->num_rows>0)
 		{
-				echo "<h1><p><br>Attendance has been created for the day and period.</h1><br><h2><p>To edit please contact your reporting manager.</h2>";
+				echo "<h3><p><br>Attendance has been created for the day and period.<br>To edit please contact your reporting manager.</h3>";
 				exit;
         }
         
-	/*else if(date('d/m/Y',$attendance_date) > strtotime(date('d/m/Y')))
-		{
-					echo "<h2> Future date attendance is not allowed.</h2>".date('d/m/Y');
-					exit;
-        }
-        /*  //need to rectify the code as it is taking previous day of sunday as sunday.
-	else if (strtolower(date('D',strtotime($adt)))=='sun')
-		{		
-			//Extracting Day of the month if the day is sunday or not to restrict attendance on sunday.
-			echo "<h1>Student Attendance is not allowed for Sunday.</h1>";
-			exit;
-		}
-				//End of Holiday checking for the attendance date.			
+	else if($day=='Sun')
+    {		
+        //Extracting Day of the month if the day is sunday or not to restrict attendance on sunday.
+        echo "<h3>Student Attendance is not allowed for Sunday.</h3>";
+        exit;
+    }   //need to rectify the code as it is taking previous day of sunday as sunday.
+    /*
+    else if(strtotime(date('d/m/Y',$adt)) > strtotime(date('d/m/Y')))
+    {
+                echo "<h2> Future date attendance is not allowed.". $adt ."</h2>";
+                exit;
+    }
     */
-    else
-		{
-			
+
+	//End of Holiday checking for the attendance date.			
+            
+       
+
+			//echo strtolower(date('D',strtotime($adt)));
 			//checking for any previous latest period attendance is present then will inherit the status of the previous period attendance to the attendance entry form.
 			
 			$query="select * from attendance_master_table where class_sec_id=" . $_REQUEST["secid"] . " and school_id=" . $_SESSION["SCHOOLID"] . " and doa=str_to_date('" .$adt . "','%d/%m/%Y') and period<$period order by period desc limit 1";
@@ -76,16 +122,7 @@ include 'dbobj.php';
 					$pretAttendance_row=$pretAttendance_result->fetch_assoc();					
 					
 					
-					//Printing Class Information.
-					$query1="select cm.class_no classno,cm.class_name,cm.stream stream ,cs.section section from class_master_table cm,class_section_table cs where cm.class_id=cs.class_id and cs.class_sec_id=" . $secid . " and cs.enabled=1 and cs.school_id=" . $_SESSION["SCHOOLID"];
-					//echo $query;
-					$result1=$dbhandle->query($query1);
-					$row1=$result1->fetch_assoc();
-					$heading= '<h1 class="box">Attendance Entry For Class' . ' ' . $row1["class_name"];
-					//Generating attendance format based on latest previous period attendance made.
-                    $date1 = new DateTime($adt);
-                    echo $heading . '<p>Dated ' .$date1->format('d-m-Y') . '</H1><p>';
-					//End of Printing Class Information.
+					
 					$present=0;
 					$attendanceStudentList_sql= "select adt.student_id,smt.first_name,smt.middle_name,smt.last_name,smt.roll_number,adt.attendance_status,adt.attendance_remarks,adt.prev_attendance_status as prev_attendance_status, adt.prev_attendance_remarks as prev_attendance_remarks from attendance_details_table adt,student_master_table smt where adt.attendance_id=" . $pretAttendance_row["Attendance_id"] . " and smt.student_id=adt.student_id";
 
@@ -185,6 +222,7 @@ include 'dbobj.php';
 				{	
                     //This section executes only when the attendance for the class with the period number and for the day does not exist and reqires to generate a fresh attendance marking form for the class students.
                     
+                    /*
 					//Fetching the Class Details to Print.	
 					$query1="select cm.class_no classno,cm.class_name,cm.stream stream ,cs.section section from class_master_table cm,class_section_table cs where cm.class_id=cs.class_id and cs.class_sec_id=" . $secid . " and cs.enabled=1 and cs.school_id=" . $_SESSION["SCHOOLID"];
 					//echo $query1;
@@ -198,8 +236,13 @@ include 'dbobj.php';
                     //$date = date_format("d/m/Y", strtotime($adt));
                     //$date = date_create_from_format('d/m/Y', $adt);
 
-					echo $heading . '<p><h3>Dated ' . $adt . '</h3><p>';
-					//echo $heading . '<p><h1>Dated ' .$adt . '</H1><p>';
+                    echo $heading . '<p><h3>Dated ' . $adt . '</h3><p>';
+                    
+                    Commenting heading message.
+                    */
+                    
+                    
+                    //echo $heading . '<p><h1>Dated ' .$adt . '</H1><p>';
 					//echo $heading;
 					/*	
 					//Checking if the selected attendance date does not fall in any defined holiday by the school.
@@ -222,7 +265,8 @@ include 'dbobj.php';
 			
 					$present=0;
 					$query2= "select smt.student_id,smt.first_name,smt.middle_name,smt.last_name,scd.rollno from student_master_table smt, student_class_details scd where scd.class_sec_id=" . $secid . " and scd.enabled=1 and smt.student_id=scd.student_id and scd.session='" . $_SESSION["SESSION"] . "' and scd.school_id=". $_SESSION["SCHOOLID"];
-					//$attendanceStudentList_row["first_name"]echo 'Second Section: ' . $query2;
+                    //$attendanceStudentList_row["first_name"]
+                    //echo 'Second Section: ' . $query2;
                     $attendanceStudentList_result=$dbhandle->query($query2);
                   
                     
@@ -314,7 +358,7 @@ include 'dbobj.php';
                                 </div>
                             </div> 
                         </div>';  
-                        echo $classid;
+                        ///echo $classid;
                         echo $str;  
                      /* End of Creating New Attendance Form*/
 
@@ -323,6 +367,7 @@ include 'dbobj.php';
 
 		        }
 
-		}
+
+       
 	
 	?>

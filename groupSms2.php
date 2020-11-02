@@ -137,12 +137,12 @@ $messageTime=date('G:i');           //Initialized with current time value in hh2
 $getContactDetails_sql='';
     if($userGroupid==1)     //Designing SQL for Student Type Group Messaging.
         {
-            $getContactDetails_sql="select smt.student_id,smt.sms_number,whatsapp_number from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in($GroupListStr) and scd.session='" . $_SESSION["SESSION"] . "' and scd.school_id=" . $_SESSION["SCHOOLID"] . " order by scd.class_sec_id";
+            $getContactDetails_sql="select smt.student_id,smt.sms_contact_no,whatsapp_contact_no from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in($GroupListStr) and scd.session='" . $_SESSION["SESSION"] . "' and scd.school_id=" . $_SESSION["SCHOOLID"] . " order by scd.class_sec_id";
 
         }
     else if($userGroupid==2)    //Designing SQL for Staff Type Group Messaging.
         {
-            $getContactDetails_sql="select emt.employee_id,emt.sms_number,emt.whatsapp_number from employee_master_table emt where emt.department_id in($GroupListStr) and emt.school_id=" . $_SESSION["SCHOOLID"] . " and emt.enabled=1 order by emt.department_id";
+            $getContactDetails_sql="select emt.employee_id,emt.sms_number,emt.whatsapp_number from employee_master_table emt where emt.dept_id in($GroupListStr) and emt.school_id=" . $_SESSION["SCHOOLID"] . " and emt.enabled=1 order by emt.dept_id";
         }    
     else if($userGroupid==3)       //Designing SQL for CUG Type Group Messaging.
         {
@@ -159,7 +159,7 @@ $getContactDetails_sql='';
 
 
 // Step4:
-
+    //echo $getContactDetails_sql;    
     $getContactDetails_result=$dbhandle->query($getContactDetails_sql);
     
     if(!$getContactDetails_result)
@@ -175,7 +175,7 @@ $getContactDetails_sql='';
             die;
         }
     else
-        echo $getContactDetails_sql;    
+        echo "Group SMS created Successfully.";    //for testing printing messages here but contact list update in sms table is remainig.
 
 
 //End of Step4.

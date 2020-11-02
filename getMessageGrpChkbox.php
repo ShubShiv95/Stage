@@ -141,19 +141,19 @@ else if ($usergrptype==2)    //2 means individual message sending to Staff.
 
         if($deptid==0)
         {
-            $department='dept.department_id in (select deptn.department_id from department_master_table as deptn)';
+            $department='dept.dept_id in (select deptn.dept_id from department_master_table as deptn)';
         }
 
         if($deptid>0)
         {
-            $department='dept.department_id=' . $deptid;
+            $department='dept.dept_id=' . $deptid;
         }
 
 
-        $query="select employee_name,employee_id,mob_number,department_name,emp.department_id deptid from employee_master_table emp,department_master_table dept where " . $department . " and dept.department_id=emp.department_id and emp.enabled=1 and emp.school_id=" . $_SESSION["SCHOOLID"] . ' order by department_name,employee_name';
+        $query="select employee_name,employee_id,sms_number,whatsapp_number,mob_number,dept_name,emp.dept_id deptid from employee_master_table emp,department_master_table dept where " . $department . " and dept.dept_id=emp.dept_id and emp.enabled=1 and emp.school_id=" . $_SESSION["SCHOOLID"] . ' order by dept_name,employee_name';
 
 
-        //echo $query;
+        echo $query;
 
 
         $result=mysqli_query($dbhandle,$query);
@@ -177,15 +177,15 @@ else if ($usergrptype==2)    //2 means individual message sending to Staff.
         {
 
 
-            if($next_dept_name!=$row["department_name"])
+            if($next_dept_name!=$row["dept_name"])
             {
                 $prev_dept_name=$next_dept_name;
-                $next_dept_name=$row["department_name"];
+                $next_dept_name=$row["dept_name"];
                 $str=$str . '<tr>    
                                 <td>
                                     <div class="form-check">
                                     <input type="checkbox" class="form-check-input" name="msgGrpId[]" value="' . $row["deptid"] .  '">
-                                        <label><B>' . $row["department_name"] .' Department</B></label>
+                                        <label><B>' . $row["dept_name"] .' Department</B></label>
                                     </div>
                                 </td>
                                 

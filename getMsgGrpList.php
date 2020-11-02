@@ -82,7 +82,7 @@ else if ($msg_receiver_Type==2)    //2 means individual message sending to Staff
             while($row=mysqli_fetch_assoc($result))
                 {
                   
-                           $html_str=$html_str.'<option value="' . $row["department_id"] . '">' . $row["department_name"] . ' Department</option>';
+                           $html_str=$html_str.'<option value="' . $row["Dept_Id"] . '">' . $row["Dept_Name"] . ' Department</option>';
                         
                 }
                

@@ -121,6 +121,9 @@
                                 <li class="nav-item">
                                     <a href="New-CUG.php" class="nav-link"><i class="fas fa-angle-right"></i>New Close User Group</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="Notices.php" class="nav-link"><i class="fas fa-angle-right"></i>Notices</a>
+                                </li>
                                 <!--li class="nav-item">
                                     <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Recharge Media</a>
                                 </li>
@@ -312,6 +315,10 @@
                         <li class="nav-item">
                             <a href="transport.php" class="nav-link"><i
                                     class="flaticon-bus-side-view"></i><span>Transport</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="transport.php" class="nav-link"><i
+                                    class="flaticon-bus-side-view"></i><span>Fee Management</span></a>
                         </li>
                     
                         <!-- <li class="nav-item">

@@ -7,11 +7,13 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
+$lid=$_SESSION["LOGINID"];
+$schoolId=$_SESSION["SCHOOLID"];
 ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
+    <title>SWIFTCAMPUS | Add New Staff</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -64,6 +66,11 @@ include 'security.php';
                         <li>Staff  Form</li>
                     </ul>
                 </div>
+				<?php 
+					if(isset($_SESSION['successmsg'])){
+					echo $_SESSION["successmsg"]; 
+					}
+				?>
                 <!-- Breadcubs Area End Here -->
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
@@ -86,7 +93,7 @@ include 'security.php';
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form">
+                        <form class="new-added-form school-form aj-new-added-form" id="addstaffform" method="post" action="AddStaff2.php">
                             <div class="row">
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
@@ -95,7 +102,7 @@ include 'security.php';
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Gender </label>
-                                        <select class="select2" name="staf__Gender" required="">
+                                        <select class="select2" name="staf_Gender" required="">
                                             <option value="">Please Select Gender </option>
                                             <option value="1">Male</option>
                                             <option value="2">Female</option>
@@ -103,7 +110,7 @@ include 'security.php';
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Mobile No. <span>*</span></label>
-                                        <input type="text" minlength="12" maxlength="12" name="staf_phone" placeholder="" class="form-control">
+                                        <input type="text" minlength="12" maxlength="10" required="" name="staf_phone" placeholder="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>E-mail </label>
@@ -114,21 +121,22 @@ include 'security.php';
                                         <label>Category </label>
                                         <select class="select2" name="staf_category">
                                             <option value="">Please Select Class</option>
-                                            <option value="1">A</option>
-                                            <option value="2">B</option>
-                                            <option value="3">C</option>
-                                            <option value="3">D</option>
-                                            <option value="3">E</option>
-                                            <option value="3">F</option>
-                                            <option value="3">G</option>
+                                            <option value="Teaching">Teaching</option>
+                                            <option value="Non-Teaching">Non-Teaching</option>
+                                            
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Department</label>
                                         <select class="select2" name="staf_department">
                                             <option value="">Please Select Section</option>
-                                            <option value="">A</option>
-                                            <option value="1">B</option>
+											<?php	
+											 $sqldept='select Dept_Id, Dept_Name from department_master_table where Enabled=1 and School_Id="'.$schoolId.'" order by Dept_Id ';
+											 $resultdept=mysqli_query($dbhandle,$sqldept);
+											 while($row=mysqli_fetch_assoc($resultdept)) {
+											?>	
+											<option value="<?php echo $row["Dept_Id"]; ?>"><?php echo $row["Dept_Name"]; ?></option>
+											<?php } ?>  
                                             
                                         </select>
                                     </div>
@@ -137,15 +145,19 @@ include 'security.php';
                                         <label>Designation </label>
                                         <select class="select2" name="staf_designation">
                                             <option value="">Please Select Roll Number </option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                            <?php	
+											 $sqldesc='select Desig_Id, Designation from designation_master_table where Enabled=1 and School_Id="'.$schoolId.'" order by Desig_Id ';
+											 $resultdesc=mysqli_query($dbhandle,$sqldesc);
+											 while($row=mysqli_fetch_assoc($resultdesc)) {
+											?>	
+											<option value="<?php echo $row["Desig_Id"]; ?>"><?php echo $row["Designation"]; ?></option>
+											<?php } ?>
                                         </select>
                                     </div>
                                     
                                     <div class="form-group aj-form-group">
                                         <label>Alternate Contact No</label>
-                                        <input type="text" name="staf_alternate_con" placeholder="" required="" class="form-control">
+                                        <input type="text" name="staf_alternate_con" placeholder="" class="form-control">
                                     </div>
 
                                     <div class="form-group aj-form-group">
@@ -162,7 +174,7 @@ include 'security.php';
                                     <div class="form-group aj-form-group">
                                         <label>State</label>
                                         <select class="select2" name="staf_state">
-                                            <option value="">Please Select Class</option>
+                                            <option value="">Please Select State</option>
                                             <option value="1">A</option>
                                             <option value="2">B</option>
                                             <option value="3">C</option>
@@ -175,7 +187,7 @@ include 'security.php';
                                     <div class="form-group aj-form-group">
                                         <label>District</label>
                                         <select class="select2" name="staf_district">
-                                            <option value="">Please Select Class</option>
+                                            <option value="">Please Select District</option>
                                             <option value="1">A</option>
                                             <option value="2">B</option>
                                             <option value="3">C</option>
@@ -187,7 +199,7 @@ include 'security.php';
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Father Name/Husband Name</label>
-                                        <input type="text" name="staf_father-name" placeholder="" required="" class="form-control">
+                                        <input type="text" name="staf_father_name" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Date of Birth</label>
@@ -197,7 +209,7 @@ include 'security.php';
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Blood Group</label>
-                                        <input type="text" name="staf_blood-group" placeholder="" required="" class="form-control">
+                                        <input type="text" name="staf_blood_group" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Qualification </label>
@@ -215,7 +227,7 @@ include 'security.php';
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Job Status</label>
-                                        <select class="select2" name="staf_job-ststus">
+                                        <select class="select2" name="staf_job_ststus">
                                             <option value="">Please Select Class</option>
                                             <option value="1">A</option>
                                             <option value="2">B</option>
@@ -231,15 +243,15 @@ include 'security.php';
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                 	<div class="form-group aj-form-group">
                                         <label>Bank Acc. Number </label>
-                                        <input type="text" name="staf_bank-acc" placeholder="" required="" class="form-control">
+                                        <input type="text" name="staf_bank_acc" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Bank  Number </label>
-                                        <input type="text" name="staf_bank-name" placeholder="" required="" class="form-control">
+                                        <input type="text" name="staf_bank_name" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Bank Branch </label>
-                                        <input type="text" name="staf_bank-branch" placeholder="" required="" class="form-control">
+                                        <input type="text" name="staf_bank_branch" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>IFSC Code </label>
@@ -247,19 +259,19 @@ include 'security.php';
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>PAN Cord No. </label>
-                                        <input type="text" name="staf_pan-card" placeholder="" required="" class="form-control">
+                                        <input type="text" name="staf_pan_card" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Aadhaar No.</label>
-                                        <input type="text" name="staf_aadhar-no" placeholder="" required="" class="form-control">
+                                        <input type="text" name="staf_aadhar_no" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>UAN No.</label>
-                                        <input type="text" name="staf_uan-no" placeholder="" required="" class="form-control">
+                                        <input type="text" name="staf_uan_no" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>PF Acc. No. </label>
-                                        <input type="text" name="staf_pf-acc" placeholder="" required="" class="form-control">
+                                        <input type="text" name="staf_pf_acc" placeholder="" required="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>ESI Acc No. </label>
@@ -282,8 +294,7 @@ include 'security.php';
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
+                    <div class="copyright">Powered by  <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
                 </footer>
             </div>
         </div>
@@ -309,7 +320,10 @@ include 'security.php';
         $('#opne-form-Promotion').click('.sibling-bs',function(){
              $('.tebal-promotion').slideToggle('slow');
             })
-    </script>  
+    </script>
+<?php    
+unset($_SESSION['successmsg']); 
+?> 	
 </body>
 
 </html>

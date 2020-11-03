@@ -1,10 +1,21 @@
+<?php
+session_start();
+?>
 <!doctype html>
+<html class="no-js" lang="">
+<?php
+include 'dbobj.php';
+include 'errorLog.php';
+include 'security.php';
+$lid=$_SESSION["LOGINID"];
+$schoolId=$_SESSION["SCHOOLID"];
+?>
 <html class="no-js" lang="">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
+    <title>SWIFTCAMPUS | Add Designation</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -253,6 +264,11 @@
                         <li>Designation  Form</li>
                     </ul>
                 </div>
+				<?php 
+					if(isset($_SESSION['successmsg'])){
+					echo $_SESSION["successmsg"]; 
+					}
+				?>
                 <!-- Breadcubs Area End Here -->
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
@@ -275,7 +291,7 @@
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form">
+                        <form class="new-added-form school-form aj-new-added-form"id="designationform" method="post" action="AddDesignation2.php" >
                             <div class="row justify-content-center">
                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                     <div class="box-sedow">
@@ -286,18 +302,20 @@
                                             <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
                                                 <div class="form-group aj-form-group">
                                                     <label>Department <span>*</span></label>
-                                                    <select class="select2" name="desi_department">
+                                                    <select class="select2" name="desi_department" required>
                                                         <option value="">Please Select  Department</option>
-                                                        <option value="3">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="3">Three</option>
-                                                        <option value="3">Four</option>
-                                                        <option value="3">Five</option>
+													<?php	
+													 $sqldept='select Dept_Id, Dept_Name from department_master_table where Enabled=1 and School_Id="'.$schoolId.'" order by Dept_Id ';
+                                                     $resultdept=mysqli_query($dbhandle,$sqldept);
+													 while($row=mysqli_fetch_assoc($resultdept)) {
+													 ?>
+                                                        <option value="<?php echo $row["Dept_Id"]; ?>"><?php echo $row["Dept_Name"]; ?></option>
+                                                     <?php } ?>   
                                                     </select>
                                                 </div>
                                                 <div class="form-group aj-form-group">
                                                     <label>Designation   </label>
-                                                    <input type="text" name="desi_designation" placeholder="" class="form-control">
+                                                    <input type="text" name="desi_designation" placeholder="" required="" class="form-control">
                                                 </div>
                                                 <div class="form-group aj-form-group">
                                                     <label>Remarks </label>
@@ -306,8 +324,8 @@
                                             </div>
                                         </div>                                       
                                         <div class="aaj-btn-chang-cbtn text-right">
-                                                <!-- <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button> -->
-                                                <a  href="javascript:void(0);"  class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>
+                                                <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button> 
+                                                <!-- <a  href="javascript:void(0);"  class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>-->
                                         </div>
                                     
                                     <div class="Attendance-staff mt-5 aj-scroll-Attendance-staff">
@@ -321,79 +339,21 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="top-position-ss3">
+												<?php	
+													 $sqldesc='select Desig_Id, Designation, Dept_Id from designation_master_table where Enabled=1 and School_Id="'.$schoolId.'" order by Dept_Id ';
+                                                     $resultdesc=mysqli_query($dbhandle,$sqldesc);
+													 while($row=mysqli_fetch_assoc($resultdesc)) {
+													 $deptid=$row["Dept_Id"];	 
+													 $sqldept='select Dept_Name from department_master_table where Enabled=1 and School_Id="'.$schoolId.'" and Dept_Id="'.$deptid.'" ';
+                                                     $resultdept=mysqli_query($dbhandle,$sqldept);
+													 $rowdept=mysqli_fetch_assoc($resultdept);
+												?>
                                                     <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
+                                                        <td style="text-align: center; width:10%;"><a href="EditDesignation.php?descid=<?php echo $row["Desig_Id"]; ?>"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
+                                                        <td><?php echo $row["Designation"]; ?></td>
+                                                        <td><?php echo $rowdept["Dept_Name"]; ?></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="javascript:void(0);"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td>Account Manager</td>
-                                                        <td>Account Department</td>
-                                                    </tr>
-                                                    
-                                                    
-                                                    
+                                                 <?php } ?>  
                                                 </tbody>                                                
                                             </table>
                                         </div>
@@ -406,8 +366,7 @@
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
+                    <div class="copyright">© Copyrights <a href="#">SwipeTouch Technologies</a> 2020. All rights reserved.
                 </footer>
             </div>
         </div>
@@ -433,7 +392,10 @@
         $('#opne-form-Promotion').click('.sibling-bs',function(){
              $('.tebal-promotion').slideToggle('slow');
             })
-    </script>  
+    </script> 
+<?php    
+unset($_SESSION['successmsg']); 
+?>	
 </body>
 
 </html>

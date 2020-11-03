@@ -189,30 +189,9 @@
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-multiple-users-silhouette"></i><span>Staff Management</span></a>
                             <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="department.php" class="nav-link"><i class="fas fa-angle-right"></i>Department</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="designation.php" class="nav-link"><i class="fas fa-angle-right"></i>Designation</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="AddStaff.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Staff</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="StaffAttendance.php" class="nav-link"><i class="fas fa-angle-right"></i>Staff Attendance</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ImportStaffAttendance.php" class="nav-link"><i class="fas fa-angle-right"></i>Import Staff Attendance</a>
-                                </li>
 
                                 <li class="nav-item">
-                                    <a href="AddDepartment.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Department</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="AddDesignation.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Designation</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="AddStaffAttendanceTiming.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Staff Attendance Timing</a>
+                                    <a href="AddStaff.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Staff</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="AddStaffDocument.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Staff Document</a>
@@ -221,9 +200,35 @@
                                     <a href="UpdateStaffDetails.php" class="nav-link"><i class="fas fa-angle-right"></i>Update Staff Details</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="ViewStaffList.php" class="nav-link"><i class="fas fa-angle-right"></i>View Staff List</a>
+                                    <a href="ImportStaffAttendance.php" class="nav-link"><i class="fas fa-angle-right"></i>Import Staff Attendance</a>
                                 </li>
 
+                                <li class="nav-item">
+                                    <a href="AddStaffAttendanceTiming.php" class="nav-link"><i class="fas fa-angle-right"></i>Update Staff Out Time</a>
+                                </li>
+                                <li class="nav-item sidebar-nav-item">
+									<a href="#" class="nav-link"><span>Settings</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+									    <ul class="nav sub-group-menu">
+                                            <li class="nav-item">
+                                                <a href="AddDepartment.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Department</a>
+                                             </li>
+                                            <li class="nav-item">
+                                                 <a href="AddDesignation.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Designation</a>
+                                            </li>
+    									</ul>
+                                </li>
+
+                                <li class="nav-item sidebar-nav-item">
+									<a href="#" class="nav-link"><span>Reports</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+									    <ul class="nav sub-group-menu">
+                                            <li class="nav-item">
+                                                <a href="ViewStaffList.php" class="nav-link"><i class="fas fa-angle-right"></i>View Staff List</a>
+                                            </li> 
+                                            <li class="nav-item">
+                                                <a href="StaffAttendance.php" class="nav-link"><i class="fas fa-angle-right"></i>Staff Attendance</a>
+                                             </li>
+    									</ul>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
@@ -239,24 +244,24 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Acconunt</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="all-fees.php" class="nav-link"><i class="fas fa-angle-right"></i>All Fees
-                                        Collection</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="all-expense.php" class="nav-link"><i
-                                            class="fas fa-angle-right"></i>Expenses</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="add-expense.php" class="nav-link"><i class="fas fa-angle-right"></i>Add
-                                        Expenses</a>
-                                </li>
-                            </ul>
+                        <li class="nav-item">
+                            <a href="transport.php" class="nav-link"><i
+                                    class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Inventory</span></a>
                         </li>
                         <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Fees Management</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Settings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Reports</a>
+                                </li>
+                            </ul>
+
+                            
+                        </li>
+                        <!-- <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i
                                     class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Class</span></a>
                             <ul class="nav sub-group-menu">
@@ -271,8 +276,6 @@
                             </ul>
                         </li>
 
-                        
-
                         <li class="nav-item">
                             <a href="all-subject.php" class="nav-link"><i
                                     class="flaticon-open-book"></i><span>Subject</span></a>
@@ -280,11 +283,19 @@
                         <li class="nav-item">
                             <a href="class-routine.php" class="nav-link"><i class="flaticon-calendar"></i><span>Class
                                     Routine</span></a>
-                        </li>
-                        
-                                
-
-
+                        </li> -->
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i   class="flaticon-open-book"></i><span>Assignment</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="exam-schedule.php" class="nav-link"><i class="fas fa-angle-right"></i>Settings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="exam-grade.php" class="nav-link"><i class="fas fa-angle-right"></i>Reports</a>
+                                </li>
+                            </ul>
+                        </li>                        
+ 
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Exam</span></a>
                             <ul class="nav sub-group-menu">
@@ -302,14 +313,31 @@
                             <a href="transport.php" class="nav-link"><i
                                     class="flaticon-bus-side-view"></i><span>Transport</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a href="hostel.php" class="nav-link"><i class="flaticon-bed"></i><span>Hostel</span></a>
-                        </li>
-                        <li class="nav-item">
+                    
+                        <!-- <li class="nav-item">
                             <a href="notice-board.php" class="nav-link"><i
                                     class="flaticon-script"></i><span>Notice</span></a>
+                        </li> -->
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Account</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="all-fees.php" class="nav-link"><i class="fas fa-angle-right"></i>All Fees
+                                        Collection</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="all-expense.php" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Expenses</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="add-expense.php" class="nav-link"><i class="fas fa-angle-right"></i>Add
+                                        Expenses</a>
+                                </li>
+                            </ul>
                         </li>
-                    
+                        <li class="nav-item">
+                            <a href="hostel.php" class="nav-link"><i class="flaticon-bed"></i><span>Hostel</span></a>
+                        </li>                                           
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-menu-1"></i><span>UI Elements</span></a>
                             <ul class="nav sub-group-menu">

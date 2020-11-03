@@ -9,14 +9,18 @@ include 'errorLog.php';
 include 'security.php';
 $lid=$_SESSION["LOGINID"];
 $schoolId=$_SESSION["SCHOOLID"];
+$descid=$_REQUEST["descid"];
 
+$sqldesc='select * from designation_master_table where Enabled=1 and School_Id="'.$schoolId.'" and Desig_Id="'.$descid.'"';
+$resultdesc=mysqli_query($dbhandle,$sqldesc);
+$row=mysqli_fetch_assoc($resultdesc);
 ?>
 <html class="no-js" lang="">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>SWIFTCAMPUS | Add Department</title>
+    <title>AKKHOR | Designation Update Form</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -257,12 +261,12 @@ $schoolId=$_SESSION["SCHOOLID"];
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Department</h3>
+                    <h3>Designation</h3>
                     <ul>
                         <li>
                             <a href="index.html">Home</a>
                         </li>
-                        <li>Department  Form</li>
+                        <li>Designation  Form</li>
                     </ul>
                 </div>
 				<?php 
@@ -292,71 +296,75 @@ $schoolId=$_SESSION["SCHOOLID"];
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form" id="departmentform" method="post" action="AddDepartment2.php">
+                        <form class="new-added-form school-form aj-new-added-form"id="designationform" method="post" action="EditDesignation2.php" >
+						<input type="hidden" value="<?php echo $_REQUEST["descid"];;?>" id="descid" name="descid" />
                             <div class="row justify-content-center">
                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                     <div class="box-sedow">
                                         <div class="brouser-image ">
-                                            <h5 class="text-center">Create New Department</h5>
+                                            <h5 class="text-center">Create New Designation</h5>
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
                                                 <div class="form-group aj-form-group">
-                                                    <label>Category <span>*</span></label>
-                                                    <select class="select2" name="deptcat" id="deptcat">
-                                                        <option value="">Please Select  Category</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                        <option value="4">Four</option>
-                                                        <option value="5">Five</option>
+                                                    <label>Department <span>*</span></label>
+                                                    <select class="select2" name="desi_department" required>
+                                                        <option value="">Please Select  Department</option>
+													<?php	
+													 $sqldept='select Dept_Id, Dept_Name from department_master_table where Enabled=1 and School_Id="'.$schoolId.'" order by Dept_Id ';
+                                                     $resultdept=mysqli_query($dbhandle,$sqldept);
+													 while($rowdept=mysqli_fetch_assoc($resultdept)) {
+													 ?>
+                                                        <option value="<?php echo $rowdept["Dept_Id"]; ?>" <?php if($row["Dept_Id"]==$rowdept["Dept_Id"]){echo "selected";} ?>><?php echo $rowdept["Dept_Name"]; ?></option>
+                                                     <?php } ?>   
                                                     </select>
                                                 </div>
                                                 <div class="form-group aj-form-group">
-                                                    <label>Department   </label>
-                                                    <input type="text" name="deptname" id="deptname" placeholder="" class="form-control">
+                                                    <label>Designation   </label>
+                                                    <input type="text" name="desi_designation" value="<?php echo $row["Designation"]; ?>" placeholder="" required="" class="form-control">
                                                 </div>
                                                 <div class="form-group aj-form-group">
                                                     <label>Remarks </label>
-                                                    <textarea type="text" rows="3" name="deptremark" id="deptremark" required="" placeholder="" class="aj-form-control"> </textarea>
+                                                    <textarea type="text" rows="3" name="desi_remarks" required="" placeholder="" class="aj-form-control"><?php echo $row["Remarks"]; ?></textarea>
                                                 </div>
                                             </div>
                                         </div>                                       
                                         <div class="aaj-btn-chang-cbtn text-right">
-                                               <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button> 
-                                              <!--  <a  href="javascript:void(0);"  class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>-->
+                                                <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Update </button> 
+                                                <!-- <a  href="javascript:void(0);"  class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>-->
                                         </div>
                                     
-                                
-                                        <div class="Attendance-staff mt-5 aj-scroll-Attendance-staff">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 20%">Edit </th>
-                                                            <th style="  text-align: left; ">Department Name </th>
-                                                            <th style="text-align: left;">Category</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="top-position-ss3">
-													<?php	
-														 $sqldept='select Dept_Id, Dept_Name from department_master_table where Enabled=1 and School_Id="'.$schoolId.'" order by Dept_Id ';
-														 $resultdept=mysqli_query($dbhandle,$sqldept);
-														 while($row=mysqli_fetch_assoc($resultdept)) {
-													 ?>
-                                                        <tr> 
-                                                            <td style="width: 10%; text-align: center;"><a href="EditDepartment.php?deptid=<?php echo $row["Dept_Id"]; ?>"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                            <td><?php echo $row["Dept_Name"]; ?></td>
-                                                            <td>Non Teaching</td>
-                                                        </tr>
-                                                    <?php } ?>  
-                                                        
-                                                        
-                                                    </tbody>                                                
-                                                </table>
-                                            </div>
+                                    <div class="Attendance-staff mt-5 aj-scroll-Attendance-staff">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th  style="width: 20%">Edit </th>
+                                                        <th>Designation Name </th>
+                                                        <th>Department Name</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="top-position-ss3">
+												<?php	
+													 $sqldesc='select Desig_Id, Designation, Dept_Id from designation_master_table where Enabled=1 and School_Id="'.$schoolId.'" order by Dept_Id ';
+                                                     $resultdesc=mysqli_query($dbhandle,$sqldesc);
+													 while($row=mysqli_fetch_assoc($resultdesc)) {
+													 $deptid=$row["Dept_Id"];	 
+													 $sqldept='select Dept_Name from department_master_table where Enabled=1 and School_Id="'.$schoolId.'" and Dept_Id="'.$deptid.'" ';
+                                                     $resultdept=mysqli_query($dbhandle,$sqldept);
+													 $rowdept=mysqli_fetch_assoc($resultdept);
+												?>
+                                                    <tr>
+                                                        <td style="text-align: center; width:10%;"><a href="EditDesignation.php?deptid=<?php echo $row["Desig_Id"]; ?>"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
+                                                        <td><?php echo $row["Designation"]; ?></td>
+                                                        <td><?php echo $rowdept["Dept_Name"]; ?></td>
+                                                    </tr>
+                                                 <?php } ?>  
+                                                </tbody>                                                
+                                            </table>
                                         </div>
                                     </div>
+                                </div>
                                 </div>
                             </div>
                         </form>
@@ -364,7 +372,8 @@ $schoolId=$_SESSION["SCHOOLID"];
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">SwipeTouch Technologies</a> 2020. All rights reserved.
+                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
+                            href="#">PsdBosS</a></div>
                 </footer>
             </div>
         </div>
@@ -390,10 +399,10 @@ $schoolId=$_SESSION["SCHOOLID"];
         $('#opne-form-Promotion').click('.sibling-bs',function(){
              $('.tebal-promotion').slideToggle('slow');
             })
-    </script>
+    </script> 
 <?php    
 unset($_SESSION['successmsg']); 
-?> 	
+?>	
 </body>
 
 </html>

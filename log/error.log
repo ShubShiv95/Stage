@@ -70,3 +70,51 @@ Module Name: 	Admission Eqnuiry
 Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.lead...' at line 1
 SQL:	
 File:	F:\xampp\htdocs\stage\FollowupNote.php
+
+Date:	01-Nov-2020 09:32:05 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select emt.employee_id,emt.sms_number,emt.whatsapp_number from employee_master_table emt where emt.department_id in(1) and emt.school_id=1 and emt.enabled=1 order by emt.department_id
+File:	F:\xampp\htdocs\stage\GroupSMS2.php
+
+Date:	01-Nov-2020 09:32:48 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select emt.employee_id,emt.sms_number,emt.whatsapp_number from employee_master_table emt where emt.department_id in(1) and emt.school_id=1 and emt.enabled=1 order by emt.department_id
+File:	F:\xampp\htdocs\stage\GroupSMS2.php
+
+Date:	01-Nov-2020 09:38:11 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_number,whatsapp_number from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in(1,2) and scd.session='2020-2021' and scd.school_id=1 order by scd.class_sec_id
+File:	F:\xampp\htdocs\stage\GroupSMS2.php
+
+Date:	01-Nov-2020 09:38:17 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_number,whatsapp_number from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in(1,2) and scd.session='2020-2021' and scd.school_id=1 order by scd.class_sec_id
+File:	F:\xampp\htdocs\stage\GroupSMS2.php
+
+Date:	01-Nov-2020 09:39:42 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_number,whatsapp_number from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in(1,2) and scd.session='2020-2021' and scd.school_id=1 order by scd.class_sec_id
+File:	F:\xampp\htdocs\stage\GroupSMS2.php
+
+Date:	01-Nov-2020 09:41:52 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_number,whatsapp_number from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in(1,2) and scd.session='2020-2021' and scd.school_id=1 order by scd.class_sec_id
+File:	F:\xampp\htdocs\stage\GroupSMS2.php
+
+Date:	01-Nov-2020 09:42:02 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_number,whatsapp_number from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in(1,2) and scd.session='2020-2021' and scd.school_id=1 order by scd.class_sec_id
+File:	F:\xampp\htdocs\stage\GroupSMS2.php
+
+Date:	01-Nov-2020 09:42:47 PM	 By User:admin
+Module Name: 	Group Message
+Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
+SQL:	select smt.student_id,smt.sms_contact_number,whatsapp_contact_number from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in(1,2) and scd.session='2020-2021' and scd.school_id=1 order by scd.class_sec_id
+File:	F:\xampp\htdocs\stage\GroupSMS2.php

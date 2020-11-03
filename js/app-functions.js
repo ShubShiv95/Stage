@@ -14,8 +14,9 @@ function smsLength(msg)
 		msglength=document.getElementById(msg).value.length;
 		
 		smscount=Math.ceil(msglength/160);
-		document.getElementById("charCount-div").innerHTML='<span>Character Count: '+msglength+'</span>';
-		document.getElementById("smsCount-div").innerHTML='<span>SMS Count: '+smscount+'</span>';
+		strprint='<h6><b>Character Count: </b><span >'+msglength+'</span></h6><h6><b>Sms Count:  </b><span>'+smscount+'</span></h6>';
+		document.getElementById("PrintCount-div").innerHTML=strprint;
+
 			/*	
 			if(msglength > 160)
 					{

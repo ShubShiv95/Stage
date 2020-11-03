@@ -29,6 +29,7 @@ if($user_type==1 or $user_type==2)  //Executing for Student and Staff user type.
             }
 
         if(!isset($_REQUEST["messagetitle"]))
+
             {
 
                 echo "Data Required :: Title cannot left blank.";

@@ -1,6 +1,9 @@
-<!doctype html>
-<html class="no-js" lang="">
-
+<?php
+session_start();
+include 'dbobj.php';
+include 'errorLog.php';
+//include 'security.php';
+?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -43,203 +46,7 @@
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
         <!-- Header Menu Area Start Here -->
-        <div class="navbar navbar-expand-md header-menu-one bg-light">
-            <div class="nav-bar-header-one">
-                <div class="header-logo">
-                    <a href="index.html">
-                        <img src="img/logo.png" alt="logo">
-                    </a>
-                </div>
-                  <div class="toggle-button sidebar-toggle">
-                    <button type="button" class="item-link">
-                        <span class="btn-icon-wrap">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
-                    </button>
-                </div>
-            </div>
-            <div class="d-md-none mobile-nav-bar">
-               <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar" aria-expanded="false">
-                    <i class="far fa-arrow-alt-circle-down"></i>
-                </button>
-                <button type="button" class="navbar-toggler sidebar-toggle-mobile">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-            <div class="header-main-menu collapse navbar-collapse" id="mobile-navbar">
-                <ul class="navbar-nav">
-                    <li class="navbar-item header-search-bar">
-                        <div class="input-group stylish-input-group">
-                            <span class="input-group-addon">
-                                <button type="submit">
-                                    <span class="flaticon-search" aria-hidden="true"></span>
-                                </button>
-                            </span>
-                            <input type="text" class="form-control" placeholder="Find Something . . .">
-                        </div>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="navbar-item dropdown header-admin">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <div class="admin-title">
-                                <h5 class="item-title">Stevne Zone</h5>
-                                <span>Admin</span>
-                            </div>
-                            <div class="admin-img">
-                                <img src="img/figure/admin.jpg" alt="Admin">
-                            </div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="item-header">
-                                <h6 class="item-title">Steven Zone</h6>
-                            </div>
-                            <div class="item-content">
-                                <ul class="settings-list">
-                                    <li><a href="#"><i class="flaticon-user"></i>My Profile</a></li>
-                                    <li><a href="#"><i class="flaticon-list"></i>Task</a></li>
-                                    <li><a href="#"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
-                                    <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                                    <li><a href="login.html"><i class="flaticon-turn-off"></i>Log Out</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="navbar-item dropdown header-message">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="far fa-envelope"></i>
-                            <div class="item-title d-md-none text-16 mg-l-10">Message</div>
-                            <span>5</span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="item-header">
-                                <h6 class="item-title">05 Message</h6>
-                            </div>
-                            <div class="item-content">
-                                <div class="media">
-                                    <div class="item-img bg-skyblue author-online">
-                                        <img src="img/figure/student11.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Maria Zaman</span> 
-                                                <span class="item-time">18:30</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-img bg-yellow author-online">
-                                        <img src="img/figure/student12.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Benny Roy</span> 
-                                                <span class="item-time">10:35</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-img bg-pink">
-                                        <img src="img/figure/student13.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Steven</span> 
-                                                <span class="item-time">02:35</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-img bg-violet-blue">
-                                        <img src="img/figure/student11.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Joshep Joe</span> 
-                                                <span class="item-time">12:35</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="navbar-item dropdown header-notification">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="far fa-bell"></i>
-                            <div class="item-title d-md-none text-16 mg-l-10">Notification</div>
-                            <span>8</span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="item-header">
-                                <h6 class="item-title">03 Notifiacations</h6>
-                            </div>
-                            <div class="item-content">
-                                <div class="media">
-                                    <div class="item-icon bg-skyblue">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="post-title">Complete Today Task</div>
-                                        <span>1 Mins ago</span>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-icon bg-orange">
-                                        <i class="fas fa-calendar-alt"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="post-title">Director Metting</div>
-                                        <span>20 Mins ago</span>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-icon bg-violet-blue">
-                                        <i class="fas fa-cogs"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="post-title">Update Password</div>
-                                        <span>45 Mins ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                     <li class="navbar-item dropdown header-language">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" 
-                        data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>EN</a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">English</a>
-                            <a class="dropdown-item" href="#">Spanish</a>
-                            <a class="dropdown-item" href="#">Franchis</a>
-                            <a class="dropdown-item" href="#">Chiness</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <?php include ('includes/navbar.php') ?>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
@@ -251,12 +58,11 @@
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Group </h3>
                     <ul>
                         <li>
                             <a href="index.html">Home</a>
                         </li>
-                        <li>Group SMS</li>
+                        <li>Close User Group</li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
@@ -274,36 +80,53 @@
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>  Choose Unit Group Name <span>*</span></label>
-                                        <input type="text" minlength="12" maxlength="12" name="ra_telephone" placeholder="" class="form-control">
+                                        <input type="text" minlength="12" maxlength="12" id="smsgroupname" name="smsgroupname" placeholder="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
-                                        <select class="select2" id="class1" name="class">
-                                            <option value="All">All</option>
-                                            <option value="Nurshery" data-select2-id="17">Nurshery</option>
-                                            <option value="Play" data-select2-id="18">Play</option>
-                                            <option value="LKG" data-select2-id="19">LKG</option>
+                                        <select class="select2" id="L1-Select" name="user_type" required onChange="getGroups4CUG(this.value);">
+                                        <option value="0">Select User Type</option>
+                                                    
+                                                    <?php
+                                                        $query='select * from message_user_group_table where enabled=1' . ' and cug_enabled=1 and School_Id=' . $_SESSION["SCHOOLID"];
+                                                        $result=mysqli_query($dbhandle,$query);
+                                                        if(!$result)
+                                                            {
+                                                                //var_dump($getStudentCount_result);
+                                                                $error_msg=mysqli_error($dbhandle);
+                                                                $el=new LogMessage();
+                                                                $sql=$query;
+                                                                //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                                                $el->write_log_message('Close User Group Creation ',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                                                                $_SESSION["MESSAGE"]="<h1>Database Error: Not able to Fetch user type value from user_type_master_table. Please try after some time.</h1>";
+                                                                $dbhandle->query("unlock tables");
+                                                                mysqli_rollback($dbhandle);
+                                                                //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
+                                                                $messsage='Error: Eearch Inquiry Not Saved.  Please consult application consultant.';
+                                                                //$str_end='</div>';
+                                                                //echo $str_start.$messsage.$str_end;
+                                                                //echo "";
+                                                                //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
+                                                            }
+                                                        while($row=mysqli_fetch_assoc($result))
+                                                            {
+                                                                $str='<option value="' . $row["utype_id"] . '">' .  $row["user_type"];
+                                                                echo $str;
+                                                            }
+                                                    ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
-                                        <select class="select2" id="class" name="class">
-                                            <option value="All">All</option>
-                                            <option value="Nurshery" data-select2-id="17">Nurshery</option>
-                                            <option value="Play" data-select2-id="18">Play</option>
-                                            <option value="LKG" data-select2-id="19">LKG</option>
+                                        <select class="select2" id="L2-Select" name="L2-Select" required onChange="getGroupList4CUG('L1-Select',this.value,'L3-Select','Select-level4-subdiv1');">
                                         </select>
                                     </div> 
                                 </div>  
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
-                                        <select class="select2" id="class2" name="class">
-                                            <option value="All">All</option>
-                                            <option value="Nurshery" data-select2-id="17">Nurshery</option>
-                                            <option value="Play" data-select2-id="18">Play</option>
-                                            <option value="LKG" data-select2-id="19">LKG</option>
+                                        <select class="select2" id="L3-Select" name="L3-Select"  onChange="getStuNumList4CUG(this.value);"  required>
                                         </select>
                                     </div> 
                                 </div>                       
@@ -311,7 +134,7 @@
                                 <div class="row mt-5">
                                     <div class="col-xl-5 col-lg-5 col-12">
                                         <div class="Individuals-cug">
-                                            <div class="Attendance-staff Attendance-staff aj-scroll-Attendance-staff" >
+                                            <div class="Attendance-staff Attendance-staff aj-scroll-Attendance-staff" id="Select-level4-subdiv1">
                                                 <div class="table-responsive">
                                                     <table class="table table-striped">
                                                         <thead>
@@ -332,191 +155,7 @@
                                                                         <label class="form-check-label">Test 1 Nursery</label>
                                                                     </div>
                                                                 </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                        </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -527,11 +166,11 @@
                                         <div class="Individuals-cug">
                                             <div class="sec-icones-a">
                                                 <div class="text-center">
-                                                    <a href="javascript:void(0);" class="mb-4"><i class="fa fa-hand-o-right" style="color: green;" aria-hidden="true"></i></a>
+                                                    <button type="button" class="mb-4 get-values"><i class="fa fa-hand-o-right" style="color: green;" aria-hidden="true"></i></button>
                                                     <br>
                                                     <br>
                                                     <a href="javascript:void(0);" class="mt-4"><i class="fa fa-times" style="color: red;" aria-hidden="true"></i></a>
-                                                </div>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
@@ -551,149 +190,8 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody class="top-position-ss2">
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 1 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 2 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input">
-                                                                        <label class="form-check-label">Test 3 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
+                                                            <tr class="hiddenrow">
+                                                                <td>Test</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -740,27 +238,114 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Data Table Js -->
     <script src="js/jquery.dataTables.min.js"></script>
-    <!-- Custom Js -->
-    <script src="js/main.js"></script>
-    <script src="js/myscript.js"></script>
-    <script src="js/webcam.min.js"></script>
-    <script type="text/javascript" src="js/ajax-function.js"></script>
-<!-- <script language="JavaScript">
-    var data_uri;
-    Webcam.set({
-    width: 520,
-    height: 400,
-    image_format: 'jpeg',
-    jpeg_quality: 120
+     <!-- Custom Js -->
+     <script src="js/main.js"></script>
+	<script src="js/myscript.js"></script>
+    <script src="js/ajax-function.js"></script>
+	<script src="js/app-functions.js"></script>
+
+
+    <script>
+        window.onload=function(){
+            $("#unknownNo-div").hide();
+            };
+       // });
+    </script>
+    <script>    
+     $('#L1-Select').on('change', function(){
+    	var demovalue = $(this).val(); 
+    	if(demovalue ==1){
+			 $("#Select-level2-div").show();
+             $("#Select-level3-div").show();
+             $('#Select-level4-subdiv1').show();
+             $('#unknownNo-div').hide();
+             $("#L2-Select").prop('required',true);
+             $("#L3-Select").prop('required',true); 
+
+			 
+        }
+        else if(demovalue ==2){
+            $("#Select-level3-div").hide();            
+            $('#unknownNo-div').hide();
+            $('#Select-level4-subdiv1').show();
+            $("#L2-Select").prop('required',true);
+            $("#L3-Select").prop('required',false); 
+            
+
+        }
+        else{
+             $("#Select-level2-div").hide();
+             $("#Select-level3-div").hide();
+             $('#unknownNo-div').show();
+             $('#Select-level4-subdiv1').hide();
+             $("#L2-Select").prop('required',false);
+             $("#L3-Select").prop('required',false);
+             
+             
+
+        }
     });
-    Webcam.attach( '#camContainer' );
-    function take_snapshot() {
-    Webcam.snap( function(data_uri) {
-    $(".image-tag").val(data_uri);
-    document.getElementById('picture_from_cam').innerHTML = '<img src="'+data_uri+'"/>';
+    </script>
+<script>
+    $(document).ready(function() {
+		$(".groupsmssecondtable  table tr.hiddenrow").css("display", "none");
+        $(".get-values").click(function(){
+			
+			
+			
+			$.each($("input[name='groupsms']:checked"), function(){
+               $pushvalue = $(this).val();
+			   $pushlabel = $(this).attr('label');
+			   $dontmove = 0;
+			   
+			   
+				checkAll($(this).val());
+               	if($dontmove != 1)	{		
+				$('.groupsmssecondtable table tbody').append('<tr><td><div class="form-check"><input type="checkbox" class="form-check-input" value="'+$(this).val()+'" name="groupsmsact[]"><label class="form-check-label">'+$pushlabel+'</label></div></td></tr>');
+				
+				}
+				
+				
+            });
+			
+          
+			
+        });
+		function checkAll(evn) {
+				$("input[name='groupsmsact[]']").each(function () {
+					$pushvalueact = $(this).val();
+					if (evn == $pushvalueact) {
+					//alert(evn);
+					$dontmove =1;
+					}
+				});
+			}
+	    function CheckselectedGropu(){
+		 		 
+		}
+        $('#CheckselectedGroup').click(function() {
+			 var atLeastOneIsChecked = false;
+			  $('input[name="groupsmsact[]"]').each(function () {
+				if ($(this).is(':checked')) {
+				  atLeastOneIsChecked = true;
+				  // Stop .each from processing any more items
+				  return false;
+				}
+			  });
+			  if(atLeastOneIsChecked == true){
+				  return true;
+			  }else{
+				  alert('Please select any group to create sms');
+				return false;  
+			  }
+		});		
+		$(".delete-values").click(function(){	
+		$.each($("input[name='groupsmsact[]']:checked"), function(){
+			$(this).closest('tr').remove();
+		   });	
+		});	
     });
-    }
-</script> -->
+</script>
 </body>
 
 </html>

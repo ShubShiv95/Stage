@@ -330,7 +330,7 @@
                                                                 <th class="pt-3 pb-3"> 
                                                                     <div class="form-check">
                                                                         <input type="checkbox" class="form-check-input checkAll">
-                                                                        <label class="form-check-label text-white">Select Individuals</label>
+                                                                        <label class="form-check-label text-white" style="text-align:centre;">Select Individuals</label>
                                                                     </div>
                                                                 </th>
                                                             </tr>

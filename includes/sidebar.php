@@ -42,10 +42,10 @@
                                     <a href="New-FollowupEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Follow Up Eqnuiry</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="http://localhost/stage/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
+                                    <a href="https://stage.swiftcampus.com/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="http://localhost/stage/New-VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Visitor</a>
+                                    <a href="https://stage.swiftcampus.com/New-VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Visitor</a>
                                 </li>
 								
                                 

@@ -38,7 +38,7 @@
                 <div class="item-logo">
                     <img src="img/login-logo.JPG" alt="logo">
                 </div>
-                <form action="lvalidate.php" class="login-form">
+                <form action="lvalidate.php" class="login-form" method="post">
                     <div class="form-group">
                         <label>Username</label>
                         <input type="text" placeholder="Enter usrename" class="form-control" name="loginid" method="post">

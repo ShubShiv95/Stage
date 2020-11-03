@@ -1,6 +1,9 @@
 <?php
 session_start();
 include 'crawlerBhashSMS.php';
+include 'dbobj.php';
+$lid = mysqli_real_escape_string($dbhandle,trim($_REQUEST['loginid']));
+$passwd = mysqli_real_escape_string($dbhandle,$_REQUEST['password']);
 /*
 @ $dbhandle = mysql_connect('localhost','dsc_user','dscuser','dsc'); // mysqli('hostname','databasse_user','database_user_password','database name')
 
@@ -11,11 +14,12 @@ $passwd = mysql_real_escape_string($_POST['passwd'],$dbhandle);
 //$_SESSION['LOGINID']= $lid;
 */
 //include 'dbhandle.php';
-include 'dbobj.php';
-$lid = mysqli_real_escape_string($dbhandle,trim($_REQUEST['loginid']));
-$passwd = mysqli_real_escape_string($dbhandle,$_REQUEST['password']);
 
+//$lid = mysqli_real_escape_string($dbhandle,trim($_REQUEST['loginid']));
+//$passwd = mysqli_real_escape_string($dbhandle,$_REQUEST['password']);
 
+//$lid = mysql_real_escape_string(trim($_POST['loginid']), $dbhandle);
+//$passwd = mysql_real_escape_string($_POST['passwd'],$dbhandle);
 
 $query = "select * from employee_master_table where login_id='" . $lid . "' and enabled=1"; 
 //echo $query;
@@ -41,7 +45,7 @@ if(mysqli_num_rows($result) == 1)  // Checks if the userid exist in the database
 			if($financialYear_result)
 				$financialYear_row=mysqli_fetch_assoc($financialYear_result);
 			*/	
-			$_SESSION["SMSBALANCE"]=crawlerBhashSMS('CHECK_BALANCE');
+			//$_SESSION["SMSBALANCE"]=crawlerBhashSMS('CHECK_BALANCE');
 			$_SESSION["STATUS"]=$row["LOGIN_STATUS"];
 			
 			$_SESSION["NAME"] = $row["Employee_Name"];

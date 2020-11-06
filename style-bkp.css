@@ -5381,17 +5381,17 @@ display: inline-block;
 float: left;	
 }
 #camContainer {
-    width: 91% !important;
+    width: 100% !important;
     height: auto !important;
     display: inline-block;
 }
 #camContainer video{
 	width: 100% !important;
-    height: 174px !important;
+    height: auto !important;
 }
 #picture_from_cam {
-    width: 91% !important;
-     height: 174px !important;
+    width: 100% !important;
+     height: auto !important;
 }
 .snap-area-visitor button.take-snap{
 margin-top:30px;	
@@ -6230,7 +6230,7 @@ position: relative;
     top: -30px;
 }
 .box-web-cem {
-    /*border: 1px solid #ddd;*/
+    border: 1px solid #ddd;
     height: 156px;
     position: absolute;
     top: -183px;
@@ -6256,10 +6256,10 @@ position: relative;
     color: #595959;
 }
 .box-bac-chang-aj {
-    /*box-shadow: 0 0 15px 0 #bbb;*/
+    box-shadow: 0 0 15px 0 #bbb;
     padding: 20px;
     border-radius: 5px;
-    margin-bottom: 30px;
+        margin-bottom: 30px;
 }
 
 .new-scroll-in-a-1010 {
@@ -6367,12 +6367,3 @@ position: relative;
 }
 }
 
-.Individuals-cug .sec-icones-a button {
-    border: none;
-    background: #0000;
-    font-size: 28px;
-    cursor: pointer;
-}
-.Individuals-cug .sec-icones-a button:focus{
-  outline: none;
-}

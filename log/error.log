@@ -118,3 +118,9 @@ Module Name: 	Group Message
 Message:	<h1>Database Error: Not able to fetch user contact list for messaging. Please try after some time or contact Application Consultant.</h1>
 SQL:	select smt.student_id,smt.sms_contact_number,whatsapp_contact_number from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in(1,2) and scd.session='2020-2021' and scd.school_id=1 order by scd.class_sec_id
 File:	F:\xampp\htdocs\stage\GroupSMS2.php
+
+Date:	05-Nov-2020 09:28:46 PM	 By User:admin
+Module Name: 	Create Close User Group
+Message:	Column 'SMS_Contact_No' cannot be null
+SQL:	
+File:	F:\xampp\htdocs\stage\CUG2.php

@@ -152,10 +152,13 @@
                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Student</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="AdmissionAddForm.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
+                                    <a href="AdmissionAddForm.php" class="nav-link"><i class="fas fa-angle-right"></i>Student Admission</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="AdmissionSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Search Admission</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="AdmissionAddDocument.php" class="nav-link"><i class="fas fa-angle-right"></i>Upload Student Doc</a>
                                 </li>
                                 <!--li class="nav-item">
                                     <a href="RegistrationForm.php" class="nav-link"><i class="fas fa-angle-right"></i>Online Registration</a>
@@ -169,7 +172,6 @@
                                         <li class="nav-item">
                                             <a href="ImportStudentSingleData.php" class="nav-link"><i class="fas fa-angle-right"></i>Bulk Import-Individual</a>
                                         </li>
-
     									</ul>
                                 </li>
 
@@ -377,6 +379,15 @@
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i   class="flaticon-open-book"></i><span>Assignment</span></a>
                             <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                        <a href="CreateNewAssignments.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Assignment</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a href="ViewAssignments.php" class="nav-link"><i class="fas fa-angle-right"></i>View Assignment</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a href="UploadAssignments.php" class="nav-link"><i class="fas fa-angle-right"></i>Upload Assignment</a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="exam-schedule.php" class="nav-link"><i class="fas fa-angle-right"></i>Settings</a>
                                 </li>

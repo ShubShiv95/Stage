@@ -216,15 +216,12 @@
         $isSuccess = false;
      }
     echo $dbhandle->error;	
-
-    
-
-
+echo $updateAdmissionTableSql;
 /* what is str start and end. it is showing undefined so i am defining the as Start */
 $messsage='Admission Updated.';
 $str_start = 'Start';
 $str_end = 'End';
-echo $str_start.$messsage.$str_end.'<script>alert("Data Updated Successfully"); window.location.href="AdmissionSearch.php"</script>';
+//echo $str_start.$messsage.$str_end.'<script>alert("Data Updated Successfully"); window.location.href="AdmissionSearch.php"</script>';
 
 
 ?>

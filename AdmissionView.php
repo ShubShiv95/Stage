@@ -172,8 +172,7 @@
                             </div>
                         <form class="new-added-form aj-new-added-form"  action="AdmissionAddForm_3.php" id="admitForm">
                             <div class="row">
-                            <input type="text" name="admissionId" id="admissionId" placeholder="" required="" class="form-control" value='<?php echo $row['School_Admission_Id'];  ?>'  style="display: none;">
-                                <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
+                            <input type="text" name="admissionId" id="admissionId" placeholder="" required="" class="form-control" value='<?php echo $row['Admission_Id'];  ?>'  style="display: none;">                                <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>First Name (As Per Birth Certificate) <span>*</span></label>
                                         

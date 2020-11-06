@@ -5381,17 +5381,17 @@ display: inline-block;
 float: left;	
 }
 #camContainer {
-    width: 91% !important;
+    width: 100% !important;
     height: auto !important;
     display: inline-block;
 }
 #camContainer video{
 	width: 100% !important;
-    height: 174px !important;
+    height: auto !important;
 }
 #picture_from_cam {
-    width: 91% !important;
-     height: 174px !important;
+    width: 100% !important;
+     height: auto !important;
 }
 .snap-area-visitor button.take-snap{
 margin-top:30px;	
@@ -6230,7 +6230,7 @@ position: relative;
     top: -30px;
 }
 .box-web-cem {
-    /*border: 1px solid #ddd;*/
+    border: 1px solid #ddd;
     height: 156px;
     position: absolute;
     top: -183px;
@@ -6256,10 +6256,10 @@ position: relative;
     color: #595959;
 }
 .box-bac-chang-aj {
-    /*box-shadow: 0 0 15px 0 #bbb;*/
+    box-shadow: 0 0 15px 0 #bbb;
     padding: 20px;
     border-radius: 5px;
-    margin-bottom: 30px;
+        margin-bottom: 30px;
 }
 
 .new-scroll-in-a-1010 {
@@ -6272,12 +6272,113 @@ position: relative;
     overflow-y: scroll;
 }
 
+.new-added-form .cart-box-row {
+    box-shadow: 0 0 5px 0 #bbb;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    
+}
+.new-added-form .cart-box-row .box-row{
+  display: flex;
+    width: 100%;
+}
+.new-added-form .cart-box-row .left-content {
+    width: 65%;
+}
+.new-added-form .cart-box-row .right-content {
+    width: 35%;
+    text-align: right;
+    padding-top: 15px;
+}
+.new-added-form .cart-box-row .left-content h6 {
+    font-size: 16px;
+    color: #ffb109;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.new-added-form .cart-box-row .left-content .all-desc {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: #848484;
+    font-size: 18px;
+    margin-top: 5px;
+}
+.new-added-form .cart-box-row .left-content .all-desc span {
+    font-size: 14px;
+}
+.new-added-form .cart-box-row .right-content ul {
+    margin-right: 30px;
+}
+.new-added-form .cart-box-row .right-content ul li {
+    display: inline-block;
+    margin: 0 3px;
+}
+.new-added-form .cart-box-row .right-content ul li a {
+    padding: 5px 5px;
+}
 
+.new-added-form .cart-box-row .right-content ul li .color-1{color: #8BC34A;}
+.new-added-form .cart-box-row .right-content ul li .color-2{color: #3F51B5;}
+.new-added-form .cart-box-row .right-content ul li .color-3{color: red;}
+.new-added-form .cart-box-row .right-content ul li .color-4{color: blue;}
+.new-added-form .cart-box-row .right-content ul li .color-5{color: orange;}
+.new-added-form .cart-box-row .right-content ul li .color-6{}
+.new-added-form .cart-box-row .right-content ul li .color-7{color: crimson;}
 
+.new-added-form .cart-box-row .content-descr {
+   
+    font-size: 14px;
+}
+.new-added-form .cart-box-row .content-descr .color-8 {
+    position: relative;
+    top: -40px;
+    float: right;
+    right: 6px;
+    color: #000;
+}
+.new-added-form .cart-box-row .content-descr .content.active {
+  display: block;
+    border-top: dashed 1px #bbb;
+    padding-top: 10px;
 
+}
+.new-added-form .cart-box-row .content-descr .content  {
+display: none;
+}
+.new-added-form .box-scroll {
+    padding: 10px 15px 0;
+    width: 70%;
+    margin-right: 0;
 
+    margin-left: auto;
+}
+.new-added-form .box-scroll .radio span {
+    margin-right: 10px;
+}
+.new-added-form .box-scroll .radio {
+    overflow-x: scroll;
+    padding-bottom: 10px;
+    width: 100%;
+    white-space: nowrap;
+}
 
+.new-added-form .box-scroll .radio::-webkit-scrollbar-track {
+  -webkit-box-shadow: none ;
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
 
+.new-added-form .box-scroll .radio::-webkit-scrollbar {
+  width: 3px;
+  height: 4px;
+  background-color: #F5F5F5;
+}
+
+.new-added-form .box-scroll .radio::-webkit-scrollbar-thumb {
+  border-radius: none;
+  background-color: #1f4663;
+}
 @media  (max-width: 767px){
 .new-added-form.aj-new-added-form .aj-form-group label {
     font-size: 12px !important;
@@ -6367,12 +6468,3 @@ position: relative;
 }
 }
 
-.Individuals-cug .sec-icones-a button {
-    border: none;
-    background: #0000;
-    font-size: 28px;
-    cursor: pointer;
-}
-.Individuals-cug .sec-icones-a button:focus{
-  outline: none;
-}

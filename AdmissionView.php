@@ -2,7 +2,7 @@
             session_start();
             include 'dbobj.php';
             include 'security.php';
-            include 'errorLog.php';   
+            include 'errorLog.php';
             include 'AdmissionModel.php';
 
             // Turn on all error reporting
@@ -23,7 +23,7 @@
             //echo $admission_Id;
 
             $execResult=$stmt->execute();
-            //echo $execResult . '<br>'; 
+            //echo $execResult . '<br>';
             echo $dbhandle->error;
         //
 
@@ -44,8 +44,8 @@
             echo $str_start.$message.$str_end;
             die;
             //echo "";
-            //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';	
-        
+            //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';
+
         }
 
     $result = $stmt->get_result();
@@ -55,48 +55,48 @@
 
     $classDropdownValue = "";
     $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
-                            
-    $result=mysqli_query($dbhandle,$sql);      
+
+    $result=mysqli_query($dbhandle,$sql);
     while($classRow=mysqli_fetch_assoc($result))
     {
         if($row["Class_Id"] ==  $classRow["Class_Id"]){
             $classDropdownValue = '<option selected value="' . $classRow["Class_Id"] . '">Class ' . $classRow["class_name"] . ' ' . $classRow["stream"] . '</option>' . $classDropdownValue;
         } else{
-            $classDropdownValue = '<option value="' . $classRow["Class_Id"] . '">Class ' . $classRow["class_name"] . ' ' . $classRow["stream"] . '</option>' . $classDropdownValue;        
+            $classDropdownValue = '<option value="' . $classRow["Class_Id"] . '">Class ' . $classRow["class_name"] . ' ' . $classRow["stream"] . '</option>' . $classDropdownValue;
         }
     }
 
     $classDropdownValue_2 = "";
-    $result=mysqli_query($dbhandle,$sql);      
+    $result=mysqli_query($dbhandle,$sql);
     while($classRow_2=mysqli_fetch_assoc($result))
     {
         if($row["Prev_School_Class"] ==  $classRow_2["Class_Id"]){
             $classDropdownValue_2 = '<option selected value="' . $classRow_2["Class_Id"] . '">Class ' . $classRow_2["class_name"] . ' ' . $classRow_2["stream"] . '</option>' . $classDropdownValue_2;
         } else{
-            $classDropdownValue_2 = '<option value="' . $classRow_2["Class_Id"] . '">Class ' . $classRow_2["class_name"] . ' ' . $classRow_2["stream"] . '</option>' . $classDropdownValue_2;        
+            $classDropdownValue_2 = '<option value="' . $classRow_2["Class_Id"] . '">Class ' . $classRow_2["class_name"] . ' ' . $classRow_2["stream"] . '</option>' . $classDropdownValue_2;
         }
     }
 
 
     $classDropdownValue_3 = "";
-    $result=mysqli_query($dbhandle,$sql);      
+    $result=mysqli_query($dbhandle,$sql);
     while($classRow_3=mysqli_fetch_assoc($result))
     {
         if($row["Sibling_1_Class"] ==  $classRow_3["Class_Id"]){
             $classDropdownValue_3 = '<option selected value="' . $classRow_3["Class_Id"] . '">Class ' . $classRow_3["class_name"] . ' ' . $classRow_3["stream"] . '</option>' . $classDropdownValue_3;
         } else{
-            $classDropdownValue_3 = '<option value="' . $classRow_3["Class_Id"] . '">Class ' . $classRow_3["class_name"] . ' ' . $classRow_3["stream"] . '</option>' . $classDropdownValue_3;        
+            $classDropdownValue_3 = '<option value="' . $classRow_3["Class_Id"] . '">Class ' . $classRow_3["class_name"] . ' ' . $classRow_3["stream"] . '</option>' . $classDropdownValue_3;
         }
     }
 
     $classDropdownValue_4 = "";
-    $result=mysqli_query($dbhandle,$sql);      
+    $result=mysqli_query($dbhandle,$sql);
     while($classRow_4=mysqli_fetch_assoc($result))
     {
         if($row["Sibling_2_Class"] ==  $classRow_4["Class_Id"]){
             $classDropdownValue_4 = '<option selected value="' . $classRow_4["Class_Id"] . '">Class ' . $classRow_4["class_name"] . ' ' . $classRow_4["stream"] . '</option>' . $classDropdownValue_4;
         } else{
-            $classDropdownValue_4 = '<option value="' . $classRow_4["Class_Id"] . '">Class ' . $classRow_4["class_name"] . ' ' . $classRow_4["stream"] . '</option>' . $classDropdownValue_4;        
+            $classDropdownValue_4 = '<option value="' . $classRow_4["Class_Id"] . '">Class ' . $classRow_4["class_name"] . ' ' . $classRow_4["stream"] . '</option>' . $classDropdownValue_4;
         }
     }
 
@@ -146,8 +146,8 @@
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-            <?php 
-            include 'includes/sidebar.php'; 
+            <?php
+            include 'includes/sidebar.php';
             ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
@@ -170,32 +170,34 @@
                                 <h3 class="mb-4">Application Entry</h3>
                                 <h4>Admission Id : <?php echo $row['School_Admission_Id']  ?></h3>
                             </div>
-                        <form class="new-added-form aj-new-added-form"  action="admissionController.php" id="admitForm">
+                        <form class="new-added-form aj-new-added-form"  action="AdmissionAddForm_3.php" id="admitForm">
                             <div class="row">
+                            <input type="text" name="admissionId" id="admissionId" placeholder="" required="" class="form-control" value='<?php echo $row['School_Admission_Id'];  ?>'  style="display: none;">
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>First Name (As Per Birth Certificate) <span>*</span></label>
-                                        <input type="text" name="studentFirstName" id="studentFirstName" placeholder="" required="" class="form-control" value='<?php echo $row['First_Name']  ?>' readonly>
+                                        
+                                        <input type="text" name="studentFirstName" id="studentFirstName" placeholder="" required="" class="form-control" value='<?php echo $row['First_Name']  ?>'  >
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Middle Name</label>
-                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" required="" class="form-control" value='<?php echo $row['Middle_Name']  ?>' readonly>
+                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" required="" class="form-control" value='<?php echo $row['Middle_Name']  ?>'  >
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Last Name</label>
-                                        <input type="text" name="studentLastName" id="studentLastName=" placeholder="" required="" class="form-control" value='<?php echo $row['Last_Name']  ?>' readonly>
+                                        <input type="text" name="studentLastName" id="studentLastName=" placeholder="" required="" class="form-control" value='<?php echo $row['Last_Name']  ?>'  >
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Class <span>*</span></label>
                                         <select class="select2" name="studclassToApply" id="studclassToApply">
                                         <?php
                                             echo $classDropdownValue;
-                                        ?>                                       
+                                        ?>
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Section</label>
-                                        <select class="select2" name="f_Section" readonly>
+                                        <select class="select2" name="f_Section"  >
                                             <option value="">Please Select Section </option>
                                             <option value="1">A</option>
                                             <option value="2">B</option>
@@ -204,14 +206,14 @@
 
                                    <div class="form-group aj-form-group">
                                         <label>Roll No.</label>
-                                        <select class="select2" name="f_Gender" readonly>
+                                        <select class="select2" name="f_Gender"  >
                                             <option value="">Please Select Roll Number </option>
                                             <option selected value="1">Male</option>
                                             <option value="2">Female</option>
                                             <option value="3">Others</option>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="form-group aj-form-group">
                                         <label>Gender <span>*</span></label>
                                         <select class="select2" name="studentGender" id="studentGender" required="">
@@ -221,18 +223,18 @@
                                             <option value="OTHER"  <?php if($row["Gender"]=='OTHER') echo 'selected="selected"'; else echo ''; ?>>Others</option>
                                         </select>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Date of Birth <span>*</span></label>
-                                        <input type="text" name="studentDOB" id="studentDOB" required="" placeholder="DD/MM/YYYY" class="form-control air-datepicker" data-position="bottom right" value='<?php echo $row['DOB'] ?>' readonly>
+                                        <input type="text" name="studentDOB" id="studentDOB" required="" placeholder="DD/MM/YYYY" class="form-control air-datepicker" data-position="bottom right" value='<?php echo $row['DOB'] ?>'  >
                                         <i class="far fa-calendar-alt"></i>
                                     </div>
 
                                     <div class="form-group aj-form-group">
                                         <label>Age</label>
-                                        <input type="text" name="studentAge" id="studentAge" placeholder="" readonly="true" class="form-control">
+                                        <input type="text" name="studentAge" id="studentAge" placeholder=""  ="true" class="form-control">
                                     </div>
 
                                     <div class="form-group aj-form-group">
@@ -249,7 +251,7 @@
                                                     }
                                                 }
                                                 echo $string;
-                                            ?>                                                 
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
@@ -270,7 +272,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Locality </label>
-                                        <select class="select2" name="studLocality" id="studLocality"> 
+                                        <select class="select2" name="studLocality" id="studLocality">
                                         <?php
                                                 $string = "";
                                                 foreach($GLOBAL_LOCALITY as $x=>$x_value)
@@ -279,15 +281,15 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                 }
                                                 echo $string;
-                                        ?>                                             
+                                        ?>
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Academic Session <span>*</span></label>
-                                        <select class="select2" required="" name="studAcademicSession" id="studAcademicSession"> 
+                                        <select class="select2" required="" name="studAcademicSession" id="studAcademicSession">
                                         <?php
                                                 $string = "";
                                                 foreach($GLOBAL_SCHOOL_SESSION as $x=>$x_value)
@@ -296,10 +298,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                 }
                                                 echo $string;
-                                        ?>                                             
+                                        ?>
                                        </select>
                                     </div>
                                     <div class="form-group aj-form-group">
@@ -313,13 +315,13 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                  }
                                                 echo $string;
                                         ?>
                                        </select>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-12 ">
                                 	<div class="form-group aj-form-group">
@@ -333,10 +335,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                 }
                                                 echo $string;
-                                        ?>                                                 
+                                        ?>
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
@@ -358,17 +360,17 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                 }
                                                 echo $string;
-                                        ?>        
+                                        ?>
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Adhaar Card No.</label>
-                                        <input type="text" name="studAdharCardNo" id="studAdharCardNo" placeholder="" class="form-control" value='<?php echo $row['Aadhar_No']?>' readonly>
+                                        <input type="text" name="studAdharCardNo" id="studAdharCardNo" placeholder="" class="form-control" value='<?php echo $row['Aadhar_No']?>'  >
                                     </div>
-                                    
+
                                     <div class="form-group faj-form-group">
                                         <label class="text-dark-medium">Upload Student Photo ( JPEG Less Than  2MB)</label>
                                         <div class="d-image-user">
@@ -376,9 +378,9 @@
                                         </div>
                                             <div class="file-in">
                                                 <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-                                                <input type="file" name="studentPhoto" id="studentPhoto" class="form-control-file" value='<?php echo $row['Student_Image'] ?>' readonly>
+                                                <input type="file" name="studentPhoto" id="studentPhoto" class="form-control-file" value='<?php echo $row['Student_Image'] ?>'  >
                                             </div>
-                                        </div>  
+                                        </div>
                                 </div>
                             </div>
                             <div class="item-title aj-item-title f-aj-item-title">
@@ -388,7 +390,7 @@
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>School Name</label>
-                                        <input type="text" name="studPrevSchoolName" id="studPrevSchoolName" placeholder="" class="form-control" value='<?php echo $row['Prev_School_Name'] ?>' readonly>
+                                        <input type="text" name="studPrevSchoolName" id="studPrevSchoolName" placeholder="" class="form-control" value='<?php echo $row['Prev_School_Name'] ?>'  >
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
@@ -403,10 +405,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                    }
                                                 echo $string;
-                                        ?>                                      
+                                        ?>
                                         </select>
                                     </div>
                                 </div>
@@ -422,10 +424,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                 }
                                                 echo $string;
-                                        ?>                                                      
+                                        ?>
                                         </select>
                                     </div>
                                 </div>
@@ -435,15 +437,15 @@
                                         <select class="select2" name="studClass" id="studClass">
                                         <?php
                                             echo $classDropdownValue_2;
-                                        ?>                                      
+                                        ?>
                                         </select>
                                     </div>
                                 </div>
                             </div>
 
 
-                            
-                            
+
+
                             <div class="item-title aj-item-title f-aj-item-title">
                                 <h3 class="mb-4">Communication Address</h3>
                             </div>
@@ -451,36 +453,36 @@
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Communication Address<span>*</span></label>
-                                        <textarea type="text" rows="4" name="commAddress" id="commAddress" required="" placeholder="" class="aj-form-control" value='<?php echo $row['Comm_Address'] ?>' readonly> </textarea>
+                                        <textarea type="text" rows="4" name="commAddress" id="commAddress" required="" placeholder="" class="aj-form-control" value='<?php echo $row['Comm_Address'] ?>'  > </textarea>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>City/ District<span>*</span></label>
-                                        <input type="text" name="commCityDist" id="commCityDist" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_City_Dist'] ?>' readonly>
+                                        <input type="text" name="commCityDist" id="commCityDist" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_City_Dist'] ?>'  >
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Pincode<span>*</span></label>
-                                        <input type="text" name="commPinCode" id="commPinCode" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_Pincode'] ?>' readonly>
+                                        <input type="text" name="commPinCode" id="commPinCode" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_Pincode'] ?>'  >
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>State<span>*</span> </label>
-                                        <input type="text" name="commState" id="commState" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_State'] ?>' readonly>
+                                        <input type="text" name="commState" id="commState" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_State'] ?>'  >
 
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Contact No.<span>*</span></label>
-                                        <input type="text" name="commContactNo" id="commContactNo" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_ContactNo'] ?>' readonly>
+                                        <input type="text" name="commContactNo" id="commContactNo" required="" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_ContactNo'] ?>'  >
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>Country</label>
-                                        <input type="text" minlength="12" maxlength="12" name="commCountry" id="commCountry" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_Country'] ?>' readonly>
+                                        <input type="text" minlength="12" maxlength="12" name="commCountry" id="commCountry" placeholder="" class="form-control" value='<?php echo $row['Comm_Add_Country'] ?>'  >
                                     </div>
                                 </div>
                             </div>
@@ -491,37 +493,37 @@
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Residential Address<span>*</span></label>
-                                        <textarea type="text" rows="4" name="raAddress"  id="raAddress" required="" placeholder="" class="aj-form-control" value='<?php echo $row['Resid_Address']?>' readonly> </textarea>
+                                        <textarea type="text" rows="4" name="raAddress"  id="raAddress" required="" placeholder="" class="aj-form-control" value='<?php echo $row['Resid_Address']?>'  > </textarea>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label> City/ District <span>*</span></label>
-                                        <input type="text" name="raCityDist"  id="raCityDist" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_City_Dist']?>' readonly>
+                                        <input type="text" name="raCityDist"  id="raCityDist" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_City_Dist']?>'  >
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Pincode <span>*</span></label>
-                                        <input type="text" name="raPinCode" id="raPinCode" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_Pincode']?>' readonly>
+                                        <input type="text" name="raPinCode" id="raPinCode" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_Pincode']?>'  >
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>State <span>*</span> </label>
-                                        <input type="text" name="raState" id="raState" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_State']?>' readonly>
+                                        <input type="text" name="raState" id="raState" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_State']?>'  >
 
-                                        
+
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Contact No. <span>*</span></label>
-                                        <input type="text" name="raContactNo" id="raContactNo" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_ContactNo']?>' readonly>
+                                        <input type="text" name="raContactNo" id="raContactNo" required="" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_ContactNo']?>'  >
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>Country</label>
-                                        <input type="text" minlength="12" maxlength="12" name="raCountry" id="raCountry" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_Country']?>' readonly>
+                                        <input type="text" minlength="12" maxlength="12" name="raCountry" id="raCountry" placeholder="" class="form-control" value='<?php echo $row['Resid_Add_Country']?>'  >
                                     </div>
                                 </div>
                             </div>
@@ -546,12 +548,12 @@
                                 		<div class="row">
 
                                             <div class="col-xl-3 col-lg-3 col-12">
-                                                
+
                                                 <div class="form-group aj-form-group">
                                                     <label>Student Id</label>
-                                                    <input type="text" name="sibling1StudId"  id="sibling1StudId" placeholder="" class="form-control" value='<?php echo $row['Sibling_1_Student_Id']?>' readonly>
+                                                    <input type="text" name="sibling1StudId"  id="sibling1StudId" placeholder="" class="form-control" value='<?php echo $row['Sibling_1_Student_Id']?>'  >
                                                 </div>
-                                                
+
                                             </div>
 
                                 			<div class="col-xl-3 col-lg-3 col-12">
@@ -560,30 +562,30 @@
 			                                        <select class="select2" name="sibling1Class"  id="sibling1Class">
                                                     <?php
                                                         echo $classDropdownValue_3;
-                                                    ?> 			                                
+                                                    ?>
 			                                        </select>
 			                                    </div>
-			                                   
+
                                 			</div>
                                 			<div class="col-xl-3 col-lg-3 col-12">
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Section</label>
-                                                    <input type="text" name="sibling1Section"  id="sibling1Section" placeholder="" class="form-control" value='<?php echo $row['Sibling_1_Section']?>' readonly>
+                                                    <input type="text" name="sibling1Section"  id="sibling1Section" placeholder="" class="form-control" value='<?php echo $row['Sibling_1_Section']?>'  >
 			                                    </div>
-			                                    
+
                                 			</div>
                                 			<div class="col-xl-3 col-lg-3 col-12">
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Roll No.</label>
-                                                    <input type="text" name="sibling1RollNo"  id="sibling1RollNo" placeholder="" class="form-control" value='<?php echo $row['Sibling_1_RollNo']?>' readonly>
+                                                    <input type="text" name="sibling1RollNo"  id="sibling1RollNo" placeholder="" class="form-control" value='<?php echo $row['Sibling_1_RollNo']?>'  >
 			                                    </div>
                                 			</div>
 
                                             <div class="col-xl-3 col-lg-3 col-12 mt-4">
                                                 <div class="form-group aj-form-group">
                                                     <label>Student Id</label>
-                                                    <input type="text" name="sibling2StudId" id="sibling2StudId" placeholder="" class="form-control" value='<?php echo $row['Sibling_2_Student_Id']?>' readonly>
-                                                </div>                                                
+                                                    <input type="text" name="sibling2StudId" id="sibling2StudId" placeholder="" class="form-control" value='<?php echo $row['Sibling_2_Student_Id']?>'  >
+                                                </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-12 mt-4">
                                                 <div class="form-group aj-form-group">
@@ -593,18 +595,18 @@
                                                         echo $classDropdownValue_4;
                                                     ?>
                                                      </select>
-                                                </div>                                              
+                                                </div>
                                             </div>
-                                            <div class="col-xl-3 col-lg-3 col-12 mt-4">                                              
+                                            <div class="col-xl-3 col-lg-3 col-12 mt-4">
                                                 <div class="form-group aj-form-group">
                                                     <label>Section</label>
-                                                     <input type="text" name="sibling2Section"  id="sibling2Section" placeholder="" class="form-control" value='<?php echo $row['Sibling_2_Section']?>' readonly>
-                                                </div>                                                
+                                                     <input type="text" name="sibling2Section"  id="sibling2Section" placeholder="" class="form-control" value='<?php echo $row['Sibling_2_Section']?>'  >
+                                                </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3 col-12 mt-4">
                                                 <div class="form-group aj-form-group">
                                                     <label>Roll No.</label>
-                                                    <input type="text" name="sibling2RollNo"  id="sibling2RollNo" placeholder="" class="form-control" value='<?php echo $row['Sibling_2_RollNo']?>' readonly>
+                                                    <input type="text" name="sibling2RollNo"  id="sibling2RollNo" placeholder="" class="form-control" value='<?php echo $row['Sibling_2_RollNo']?>'  >
                                                 </div>
                                             </div>
                                 		</div>
@@ -620,7 +622,7 @@
 	                            	<div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
 	                            		<div class="form-group aj-form-group aj-form-group0">
 	                                         <label>Father's Name (As Per Birth Certificate) </label>
-                                            <input type="text" name="fatherName" id="fatherName" placeholder="" class="form-control" value='<?php echo $row['Father_Name']?>' readonly>                                                                        
+                                            <input type="text" name="fatherName" id="fatherName" placeholder="" class="form-control" value='<?php echo $row['Father_Name']?>'  >
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Qualification</label>
@@ -633,10 +635,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                 }
                                                 echo $string;
-                                            ?> 
+                                            ?>
 	                                        </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
@@ -650,66 +652,66 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                 }
                                                 echo $string;
-                                        ?>                                      
+                                        ?>
 	                                        </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
                                             <label>Designation</label>
-                                            <input type="text" name="fatherDesig" id="fatherDesig" placeholder="" class="form-control" value='<?php echo $row['Father_Designation']?>' readonly>
+                                            <input type="text" name="fatherDesig" id="fatherDesig" placeholder="" class="form-control" value='<?php echo $row['Father_Designation']?>'  >
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Org Name</label>
-	                                        <input type="text" name="fatherOrgName" id="fatherOrgName" placeholder="" class="form-control" value='<?php echo $row['Father_Org_Name']?>' readonly>
+	                                        <input type="text" name="fatherOrgName" id="fatherOrgName" placeholder="" class="form-control" value='<?php echo $row['Father_Org_Name']?>'  >
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Org Address</label>
-	                                        <input type="text" name="fatherOrgAdd" id="fatherOrgAdd" placeholder="" class="form-control" value='<?php echo $row['Father_Org_Add']?>' readonly>
+	                                        <input type="text" name="fatherOrgAdd" id="fatherOrgAdd" placeholder="" class="form-control" value='<?php echo $row['Father_Org_Add']?>'  >
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
                                             <label>City</label>
-                                            <input type="text" name="fatherCity" id="fatherCity" placeholder="" class="form-control" value='<?php echo $row['Father_City']?>' readonly>
+                                            <input type="text" name="fatherCity" id="fatherCity" placeholder="" class="form-control" value='<?php echo $row['Father_City']?>'  >
                                         </div>
 	                            	</div>
 	                            	<div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
 	                            		<div class="form-group aj-form-group">
 	                                        <label>State</label>
-	                                        <input type="text"  name="fatherState" id="fatherState" placeholder="" class="form-control" value='<?php echo $row['Father_State']?>' readonly>
+	                                        <input type="text"  name="fatherState" id="fatherState" placeholder="" class="form-control" value='<?php echo $row['Father_State']?>'  >
 	                                    </div>
 	                                	<div class="form-group aj-form-group">
 	                                        <label>Country</label>
-	                                        <input type="text" name="fatherCountry" id="fatherCountry" placeholder="" class="form-control" value='<?php echo $row['Father_Country']?>' readonly>
+	                                        <input type="text" name="fatherCountry" id="fatherCountry" placeholder="" class="form-control" value='<?php echo $row['Father_Country']?>'  >
 	                                    </div>
                                         <div class="form-group aj-form-group">
                                             <label>Pincode</label>
-                                            <input type="text"  name="fatherPinCode" id="fatherPinCode" placeholder="" class="form-control" value='<?php echo $row['Father_Pincode']?>' readonly>
+                                            <input type="text"  name="fatherPinCode" id="fatherPinCode" placeholder="" class="form-control" value='<?php echo $row['Father_Pincode']?>'  >
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Email</label>
-	                                        <input type="text" name="fatherEmail" id="fatherEmail" placeholder="" class="form-control" value='<?php echo $row['Father_Email']?>' readonly>
+	                                        <input type="text" name="fatherEmail" id="fatherEmail" placeholder="" class="form-control" value='<?php echo $row['Father_Email']?>'  >
 	                                    </div>
                                         <div class="form-group aj-form-group">
                                             <label>Contact No.</label>
-                                            <input type="text" minlength="10" maxlength="10" name="fatherContactNo" id="fatherContactNo" placeholder="" class="form-control" value='<?php echo $row['Father_Contact_No']?>' readonly>
+                                            <input type="text" minlength="10" maxlength="10" name="fatherContactNo" id="fatherContactNo" placeholder="" class="form-control" value='<?php echo $row['Father_Contact_No']?>'  >
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Annual Income</label>
-	                                        <input type="text"  name="fatherAnnualIncome" id="fatherAnnualIncome" placeholder="" class="form-control" value='<?php echo $row['Father_Annual_Income']?>' readonly>
+	                                        <input type="text"  name="fatherAnnualIncome" id="fatherAnnualIncome" placeholder="" class="form-control" value='<?php echo $row['Father_Annual_Income']?>'  >
 	                                    </div>
-	                                    
+
 	                            	</div>
 	                            	<div class="col-xl-4 col-lg-4 col-12 ">
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Adhaar  Card No.</label>
-	                                         <input type="text"  name="fatherAdharCardNo" id="fatherAdharCardNo" placeholder="" class="form-control" value='<?php echo $row['Father_Aadhar_Card']?>' readonly>
+	                                         <input type="text"  name="fatherAdharCardNo" id="fatherAdharCardNo" placeholder="" class="form-control" value='<?php echo $row['Father_Aadhar_Card']?>'  >
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Alumni</label>
 	                                        <select class="select2" name="fatherAlumni" id="fatherAlumni">
 	                                            <option selected value="No">No</option>
-	                                            <option value="Yes">Yes</option>  
+	                                            <option value="Yes">Yes</option>
 	                                        </select>
 	                                    </div>
 	                                    <div class="form-group faj-form-group">
@@ -719,7 +721,7 @@
 	                                        </div>
 	                                        <div class="file-in">
 	                                            <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-	                                            <input type="file" name="fatherPhoto" id="fatherPhoto"  class="form-control-file" value='<?php echo $row['Father_Image']?>' readonly>
+	                                            <input type="file" name="fatherPhoto" id="fatherPhoto"  class="form-control-file" value='<?php echo $row['Father_Image']?>'  >
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -745,10 +747,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                 }
                                                 echo $string;
-                                            ?> 
+                                            ?>
                                             </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
@@ -762,68 +764,68 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                 }
                                                 echo $string;
-                                        ?>                                      
+                                        ?>
 	                                        </select>
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
                                             <label>Designation</label>
-                                            <input type="text" name="motherDesig" id="motherDesig" placeholder="" class="form-control" value='<?php echo $row['Mother_Designation']?>' readonly>
+                                            <input type="text" name="motherDesig" id="motherDesig" placeholder="" class="form-control" value='<?php echo $row['Mother_Designation']?>'  >
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Org Name</label>
-	                                        <input type="text" name="motherOrgName" id="motherOrgName" placeholder="" class="form-control" value='<?php echo $row['Mother_Org_Name']?>' readonly>
+	                                        <input type="text" name="motherOrgName" id="motherOrgName" placeholder="" class="form-control" value='<?php echo $row['Mother_Org_Name']?>'  >
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Org Address</label>
-	                                        <input type="text" name="motherOrgAdd" id="motherOrgAdd" placeholder="" class="form-control" value='<?php echo $row['Mother_Org_Add']?>' readonly>
+	                                        <input type="text" name="motherOrgAdd" id="motherOrgAdd" placeholder="" class="form-control" value='<?php echo $row['Mother_Org_Add']?>'  >
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
                                             <label>City</label>
-                                            <input type="text" name="motherCity" id="motherCity" placeholder="" class="form-control" value='<?php echo $row['Mother_City']?>' readonly>
+                                            <input type="text" name="motherCity" id="motherCity" placeholder="" class="form-control" value='<?php echo $row['Mother_City']?>'  >
                                         </div>
-	                                    
+
 	                            	</div>
 	                            	<div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
 	                            		<div class="form-group aj-form-group">
 	                                        <label>State</label>
-	                                        <input type="text" name="motherState" id="motherState" placeholder="" class="form-control" value='<?php echo $row['Mother_State']?>' readonly>
+	                                        <input type="text" name="motherState" id="motherState" placeholder="" class="form-control" value='<?php echo $row['Mother_State']?>'  >
 	                                    </div>
 	                                	<div class="form-group aj-form-group">
 	                                        <label> Country </label>
-	                                        <input type="text" name="motherCountry" id="motherCountry" placeholder="" class="form-control" value='<?php echo $row['Mother_Country']?>' readonly>
+	                                        <input type="text" name="motherCountry" id="motherCountry" placeholder="" class="form-control" value='<?php echo $row['Mother_Country']?>'  >
 	                                    </div>
                                         <div class="form-group aj-form-group">
                                             <label>Pincode</label>
-                                            <input type="text" name="motherPinCode" id="motherPinCode" placeholder="" class="form-control" value='<?php echo $row['Mother_Pincode']?>' readonly>
+                                            <input type="text" name="motherPinCode" id="motherPinCode" placeholder="" class="form-control" value='<?php echo $row['Mother_Pincode']?>'  >
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Email</label>
-	                                        <input type="text" name="motherEmail"  id="motherEmail" placeholder="" class="form-control" value='<?php echo $row['Mother_Email']?>' readonly>
+	                                        <input type="text" name="motherEmail"  id="motherEmail" placeholder="" class="form-control" value='<?php echo $row['Mother_Email']?>'  >
 	                                    </div>
                                         <div class="form-group aj-form-group">
                                             <label>Contact No.</label>
-                                            <input type="text" minlength="12" maxlength="12" name="motherContactNo" id="motherContactNo" placeholder="" class="form-control" value='<?php echo $row['Mother_Contact_No']?>' readonly>
+                                            <input type="text" minlength="12" maxlength="12" name="motherContactNo" id="motherContactNo" placeholder="" class="form-control" value='<?php echo $row['Mother_Contact_No']?>'  >
                                         </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Annual Income</label>
-	                                        <input type="text" name="motherAnnualIncome" id="motherAnnualIncome" placeholder="" class="form-control" value='<?php echo $row['Mother_Annual_Income']?>' readonly>
+	                                        <input type="text" name="motherAnnualIncome" id="motherAnnualIncome" placeholder="" class="form-control" value='<?php echo $row['Mother_Annual_Income']?>'  >
 	                                    </div>
-	                                    
+
 	                            	</div>
 	                            	<div class="col-xl-4 col-lg-4 col-12 ">
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Adhaar  Card No.</label>
-	                                         <input type="text" name="motherAdharCardNo" id="motherAdharCardNo" placeholder="" class="form-control" value='<?php echo $row['Mother_Aadhar_Card']?>' readonly>
+	                                         <input type="text" name="motherAdharCardNo" id="motherAdharCardNo" placeholder="" class="form-control" value='<?php echo $row['Mother_Aadhar_Card']?>'  >
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Alumni</label>
 	                                        <select class="select2" name="motherAlumni" id="motherAlumni">
 	                                            <option value="No">No</option>
 	                                            <option value="Yes">Yes</option>
-	                                            
+
 	                                        </select>
 	                                    </div>
 	                                    <div class="form-group faj-form-group">
@@ -833,15 +835,15 @@
 	                                        </div>
 	                                        <div class="file-in">
 	                                            <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-	                                            <input type="file" name="motherPhoto"  id="motherPhoto" class="form-control-file" value='<?php echo $row['Mother_Image']?>' readonly>
+	                                            <input type="file" name="motherPhoto"  id="motherPhoto" class="form-control-file" value='<?php echo $row['Mother_Image']?>'  >
 	                                        </div>
 	                                    </div>
 	                                </div>
-	                            </div>		
+	                            </div>
 	                        </div>
 
 
-                           
+
                             <div class="item-title aj-item-title f-aj-item-title">
                                 <h3 class="mb-4">Gaurdian Details</h3>
                             </div>
@@ -867,13 +869,13 @@
 			                                <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Address</label>
-			                                        <textarea type="text" name="othersAddress" id="othersAddress" rows="7" placeholder="" class="aj-form-control" value='<?php echo $row['Guardian_Address']?>' readonly> </textarea>
+			                                        <textarea type="text" name="othersAddress" id="othersAddress" rows="7" placeholder="" class="aj-form-control" value='<?php echo $row['Guardian_Address']?>'  > </textarea>
 			                                    </div>
 			                                </div>
 			                                <div class="col-xl-4 col-lg-4 col-12">
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Name</label>
-			                                        <input type="text" name="othersName" id="othersName" placeholder="" class="form-control" value='<?php echo $row['Guardian_Name']?>' readonly>
+			                                        <input type="text" name="othersName" id="othersName" placeholder="" class="form-control" value='<?php echo $row['Guardian_Name']?>'  >
 			                                    </div>
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Relations</label>
@@ -886,19 +888,19 @@
                                                                 $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                             }else {
                                                                 $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                            }                                                
+                                                            }
                                                         }
                                                         echo $string;
-                                                    ?>       	                                                
+                                                    ?>
 	                                                </select>
 			                                    </div>
 			                                    <div class="form-group aj-form-group">
 			                                        <label>Mobile No.</label>
-			                                        <input type="text" name="othersMobileNo" id="othersMobileNo" placeholder="" class="form-control" value='<?php echo $row['Guardian_Contact_No']?>' readonly>
+			                                        <input type="text" name="othersMobileNo" id="othersMobileNo" placeholder="" class="form-control" value='<?php echo $row['Guardian_Contact_No']?>'  >
 			                                    </div>
 			                                </div>
 			                                <div class="col-xl-4 col-lg-4 col-12">
-			                                    
+
 
 			                                    <div class="form-group faj-form-group">
 			                                        <label class="text-dark-medium">Upload  Photo ( JPEG Less Than 2MB)</label>
@@ -907,7 +909,7 @@
 			                                        </div>
 		                                            <div class="file-in">
 		                                                <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-		                                                <input type="file" name="othersPhoto" id="othersPhoto" class="form-control-file" value='<?php echo $row['Guardian_Image']?>' readonly>
+		                                                <input type="file" name="othersPhoto" id="othersPhoto" class="form-control-file" value='<?php echo $row['Guardian_Image']?>'  >
 		                                            </div>
 		                                        </div>
 			                                </div>
@@ -924,19 +926,19 @@
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>SMS Contact No. <span>*</span></label>
-                                        <input type="text" name="studSMSContactNo" id="studSMSContactNo" minlength="10" maxlength="10" required="" placeholder="" class="form-control" value='<?php echo $row['SMS_Contact_No']?>' readonly>
+                                        <input type="text" name="studSMSContactNo" id="studSMSContactNo" minlength="10" maxlength="10" required="" placeholder="" class="form-control" value='<?php echo $row['SMS_Contact_No']?>'  >
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Whatsapp Contact No.</label>
-                                        <input type="text" name="studWhatsAppContactNo" id="studWhatsAppContactNo" minlength="10" maxlength="10" placeholder="" class="form-control" value='<?php echo $row['Whatsapp_Contact_No']?>' readonly>
+                                        <input type="text" name="studWhatsAppContactNo" id="studWhatsAppContactNo" minlength="10" maxlength="10" placeholder="" class="form-control" value='<?php echo $row['Whatsapp_Contact_No']?>'  >
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>E-Mail Address</label>
-                                        <input type="text" name="studEmailAddress"  id="studEmailAddress" placeholder="" class="form-control" value='<?php echo $row['Email_Id']?>' readonly> 
+                                        <input type="text" name="studEmailAddress"  id="studEmailAddress" placeholder="" class="form-control" value='<?php echo $row['Email_Id']?>'  >
                                     </div>
                                 </div>
                             </div>
@@ -956,10 +958,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                  }
                                                 echo $string;
-                                            ?>                                      
+                                            ?>
                                             </select>
                                         </div>
                                 </div>
@@ -975,10 +977,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                  }
                                                 echo $string;
-                                            ?>                                      
+                                            ?>
                                             </select>
                                         </div>
                                 </div>
@@ -994,10 +996,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                  }
                                                 echo $string;
-                                            ?>                                      
+                                            ?>
                                             </select>
                                         </div>
                                 </div>
@@ -1013,10 +1015,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                  }
                                                 echo $string;
-                                            ?>                                      
+                                            ?>
                                             </select>
                                         </div>
                                 </div> <br><br>
@@ -1032,10 +1034,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                  }
                                                 echo $string;
-                                            ?>                                      
+                                            ?>
                                             </select>
                                         </div>
                                 </div>
@@ -1051,10 +1053,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                  }
                                                 echo $string;
-                                            ?>                                      
+                                            ?>
                                             </select>
                                         </div>
                                 </div>
@@ -1070,10 +1072,10 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                  }
                                                 echo $string;
-                                            ?>                                      
+                                            ?>
                                             </select>
                                         </div>
                                 </div>
@@ -1089,21 +1091,22 @@
                                                         $string =  '<option selected value="' . $x . '">' .$x_value .'</option>' . $string;
                                                     }else {
                                                         $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                    }                                                
+                                                    }
                                                  }
                                                 echo $string;
-                                            ?>                                      
+                                            ?>
                                           </select>
                                         </div>
                                 </div>
-                                
+
                             </div>
                             <div class="footer-sec-aj">
                             </div>
-                            
+
                             <div class="aaj-btn-chang-c">
                                     <button type="submit" class="aj-btn-a btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Submit</button>
                                     <button type="reset" class="aj-btn-a btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                                    <a href="./ajax_controllers/admission_pdf.php?action=download_pdf&admission_Id=99"  class="aj-btn-a btn-fill-lg bg-blue-dark btn-hover-yellow" id="btn_save_pdf"><i class="fa fa-save"></i> Download PDF</a>
                             </div>
                         </form>
                     </div>
@@ -1116,7 +1119,7 @@
             </div>
         </div>
         <!-- Page Area End Here -->
-                                             
+
     </div>
     <!-- jquery-->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -1135,15 +1138,17 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <!-- MyScript Js -->
+    <script src="js/myscript.js"></script>
     <script type="text/javascript">
 	    $('.sibling-bs').change('.sibling-bs',function(){
 	         var a= $('input[name="sibling"]:checked').val();
 	         var id = $(this).attr('id')
 	          if(a == 'on'){
 	            $('.active-div-a').slideToggle('slow');
-	            
+
 	          }else{
-	            
+
 	          }
 	        })
 	     $('.gaurdian-bs').change('.gaurdian-bs',function(){
@@ -1151,23 +1156,24 @@
 	         var id = $(this).attr('id')
 	          if(a == 'on'){
 	            $('.active-div-aa').slideToggle('slow');
-	            
+
 	          }else{
-	            
+
 	          }
 	        })
-        
+
 
         $(document).ready(function(){
             $("#studentAge").focusin(function(){
                 var dob = $('#studentDOB').val();
-                $("#studentAge").val(moment().diff(moment(dob, 'DD-MM-YYYY'), 'years'));              
+                $("#studentAge").val(moment().diff(moment(dob, 'DD-MM-YYYY'), 'years'));
             });
 
 
-            
+
         });
 	</script>
+
 </body>
 
 </html>

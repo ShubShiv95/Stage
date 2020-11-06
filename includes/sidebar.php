@@ -6,7 +6,7 @@
                </div>
                 <div class="sidebar-menu-content">
                     <ul class="nav nav-sidebar-menu sidebar-toggle-view">
-                        <li class="nav-item sidebar-nav-item">
+                        <!--li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
@@ -24,23 +24,110 @@
                                             class="fas fa-angle-right"></i>Teachers</a>
                                 </li>
                             </ul>
+                        </li-->
+                      
+						<li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-checklist"></i><span>Master Settings</span></a>
+                            <ul class="nav sub-group-menu">
+                            
+                                <li class="nav-item sidebar-nav-item">
+									<a href="#" class="nav-link"><span>Class Setting</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+									    <ul class="nav sub-group-menu">
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Class</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Configure Class</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Section</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Merge Section</a>
+                                            </li>
+    									</ul>
+                                </li>
+
+                               <li class="nav-item sidebar-nav-item">
+									<a href="#" class="nav-link"><span>Subject Settings</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+									    <ul class="nav sub-group-menu">
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Subject</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Edit Subject</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Subject List </a>
+                                            </li>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Edit Subject List </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Book List</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Subject</a>
+                                            </li>
+    									</ul>
+                                </li>
+                               <li class="nav-item sidebar-nav-item">
+									<a href="#" class="nav-link"><span>Fee Settings</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+									    <ul class="nav sub-group-menu">
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Fee Head</a>
+                                            </li>
+                                            <li class="nav-item">
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Edit Fee Head</a>
+                                            </li>
+                                            <li class="nav-item">
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Fee Template</a>
+                                            </li>
+                                            <li class="nav-item">
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Edit Fee Template</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Post Fee Template</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee  From Template</a>
+                                            </li>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Book List</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Subject</a>
+                                            </li>
+    									</ul>
+                                </li>
+                                
+                            </ul>
+                         
                         </li>
 						<li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-checklist"></i><span>Enquiry</span></a>
                             <ul class="nav sub-group-menu">
-                                <li class="nav-item">
+                                <!--li class="nav-item">
                                     <a href="AdmissionEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Admission Eqnuiry</a>
-                                </li>
+                                </li-->
                                 <li class="nav-item">
-                                    <a href="New-AdmissionEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Admission Eqnuiry</a>
+                                    <a href="New-AdmissionEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Admission Eqnuiry</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="FollowupEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Follow Up Eqnuiry</a>
                                 </li>
                                 <li class="nav-item">
-                                <li class="nav-item">
+                                <!--li class="nav-item">
                                     <a href="New-FollowupEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Follow Up Eqnuiry</a>
-                                </li>
+                                </li-->
                                 <li class="nav-item">
                                     <a href="https://stage.swiftcampus.com/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
                                 </li>
@@ -115,11 +202,11 @@
                                 <li class="nav-item">
                                     <a href="GroupSMS.php" class="nav-link"><i class="fas fa-angle-right"></i>New Group SMS</a>
                                 </li>
+                                <!--li class="nav-item">
+                                    <a href="CUG.php" class="nav-link"><i class="fas fa-angle-right"></i>Close User Group</a>
+                                </li-->
                                 <li class="nav-item">
                                     <a href="CUG.php" class="nav-link"><i class="fas fa-angle-right"></i>Close User Group</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="New-CUG.php" class="nav-link"><i class="fas fa-angle-right"></i>New Close User Group</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="Notices.php" class="nav-link"><i class="fas fa-angle-right"></i>Notices</a>

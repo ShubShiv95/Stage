@@ -58,7 +58,7 @@ else if ($msg_receiver_Type==2)    //2 means individual message sending to Staff
 
         $query='select * from department_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"];
         //echo $query;
-        $result=mysqli_query($dbhandle,$query);
+        $result=$dbhandle->query($query);
         if(!$result)
             {
                 //var_dump($getStudentCount_result);
@@ -79,10 +79,11 @@ else if ($msg_receiver_Type==2)    //2 means individual message sending to Staff
             }
             //$html_str=$html_str.'<option value="">Select Department </option>';    
             $html_str=$html_str.'<option value="0">All Departments </option>';    
-            while($row=mysqli_fetch_assoc($result))
+         
+            while($row=$result->fetch_assoc())
                 {
                   
-                           $html_str=$html_str.'<option value="' . $row["department_id"] . '">' . $row["department_name"] . ' Department</option>';
+                           $html_str=$html_str.'<option value="' . $row["Dept_Id"] . '">' . $row["Dept_Name"] . ' Department</option>';
                         
                 }
                

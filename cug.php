@@ -4,12 +4,10 @@ include 'dbobj.php';
 include 'errorLog.php';
 //include 'security.php';
 ?>
-<!doctype html>
-<html class="no-js" lang="">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Communication Group</title>
+    <title>AKKHOR | Admission Form</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -30,15 +28,24 @@ include 'errorLog.php';
     <link rel="stylesheet" href="css/select2.min.css">
     <!-- Date Picker CSS -->
     <link rel="stylesheet" href="css/datepicker.min.css">
-	<!-- Data Table CSS -->
+    <!-- Data Table CSS -->
     <link rel="stylesheet" href="css/jquery.dataTables.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
-	
-  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+<style> 
+.rectangle {
+  border-style: solid;
+  border-width: 1px;
+  border-color:grey;
+}
+</style>
 <body>
     <!-- Preloader Start Here -->
     <div id="preloader"></div>
@@ -50,217 +57,173 @@ include 'errorLog.php';
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-            <?php 
+             <?php 
             include 'includes/sidebar.php'; 
             ?>
-               
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
-			    <!-- Hot Links Area Start Here -->
-				<?php include ('includes/hot-link.php'); ?>
-                <!-- Hot Links Area End Here -->
                 <!-- Breadcubs Area Start Here -->
-                <div class="breadcrumbs-area">  
-                   <ul>
+                <div class="breadcrumbs-area">
+                    <ul>
                         <li>
-                            <a href="index.php">Home</a>
+                            <a href="index.html">Home</a>
                         </li>
-                        <li>Group Sms</li>
+                        <li>Close User Group</li>
                     </ul>
-				  	
                 </div>
                 <!-- Breadcubs Area End Here -->
-				<!--<div class="page-title-section">
-				  <i class="flaticon-mortarboard"></i>&nbsp;Admission Eqnuiry
-				</div>-->
-				
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
-                    <div class="card-body bg-skybluelight">
-                            <form class="new-added-form" action="test.php">
-                            <div class="row">   
-                                <div class="main-form-data-communication col-xl-6 col-lg-6 col-12">
-                                    <div class="col-xl-12 col-lg-12 col-12 form-group">
-                                            <label>Choose Unit Group Name *</label>
-                                            <input type="text" id="smsgroupname" name="smsgroupname" placeholder="" class="form-control"  required>
+                    <div class="card-body">
+                        <div class="heading-layout1">
+                            <div class="item-title aj-item-title">
+                                <h3 class="mb-4">Group Sms</h3>
+                            </div>
+                            
+                        </div>
+                        <form class="new-added-form aj-new-added-form new-aj-new-added-form" action="CUG2.php">
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                    <div class="form-group aj-form-group">
+                                        <label>  Choose Unit Group Name <span>*</span></label>
+                                        <input type="text" minlength="12" maxlength="12" id="smsgroupname" name="smsgroupname" placeholder="" class="form-control">
                                     </div>
-
-                                    <div class="col-xl-12 col-lg-12 col-12 form-group">
-                                            <label>&nbsp;</label>
-                                            <select class="select2" id="L1-Select" name="user_type" required onChange="getGroups4CUG(this.value);">
-                                                <option value="0">Select User Type</option>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                    <div class="form-group aj-form-group">
+                                        <select class="select2" id="L1-Select" name="user_type" required onChange="getGroups4CUG(this.value);">
+                                        <option value="0">Select User Type</option>
                                                     
-                                                <?php
-                                                    $query='select * from message_user_group_table where enabled=1' . ' and cug_enabled=1 and School_Id=' . $_SESSION["SCHOOLID"];
-                                                    $result=mysqli_query($dbhandle,$query);
-                                                    if(!$result)
-                                                        {
-                                                            //var_dump($getStudentCount_result);
-                                                            $error_msg=mysqli_error($dbhandle);
-                                                            $el=new LogMessage();
-                                                            $sql=$query;
-                                                            //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                                                            $el->write_log_message('Close User Group Creation ',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
-                                                            $_SESSION["MESSAGE"]="<h1>Database Error: Not able to Fetch user type value from user_type_master_table. Please try after some time.</h1>";
-                                                            $dbhandle->query("unlock tables");
-                                                            mysqli_rollback($dbhandle);
-                                                            //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
-                                                            $messsage='Error: Eearch Inquiry Not Saved.  Please consult application consultant.';
-                                                            //$str_end='</div>';
-                                                            //echo $str_start.$messsage.$str_end;
-                                                            //echo "";
-                                                            //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
-                                                        }
-                                                    while($row=mysqli_fetch_assoc($result))
-                                                        {
-                                                            $str='<option value="' . $row["utype_id"] . '">' .  $row["user_type"];
-                                                            echo $str;
-                                                        }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-xl-12 col-lg-12 col-12 form-group">
-                                            <label>&nbsp;</label>
-                                            <select class="select2" id="L2-Select" name="L2-Select" required onChange="getGroupList4CUG('L1-Select',this.value,'L3-Select','Select-level4-subdiv1');" >
-                                            </select>
-                                        </div>
-                                        <div class="col-xl-12 col-lg-12 col-12 form-group" id="Select-level3-div">
-                                            <label>&nbsp;</label>
-                                            <select class="select2" id="L3-Select" name="L3-Select"  onChange="getStuNumList4CUG(this.value);"  required>
-                                            </select>
-                                        </div>
+                                                    <?php
+                                                        $query='select * from message_user_group_table where enabled=1' . ' and cug_enabled=1 and School_Id=' . $_SESSION["SCHOOLID"];
+                                                        $result=mysqli_query($dbhandle,$query);
+                                                        if(!$result)
+                                                            {
+                                                                //var_dump($getStudentCount_result);
+                                                                $error_msg=mysqli_error($dbhandle);
+                                                                $el=new LogMessage();
+                                                                $sql=$query;
+                                                                //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                                                $el->write_log_message('Close User Group Creation ',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                                                                $_SESSION["MESSAGE"]="<h1>Database Error: Not able to Fetch user type value from user_type_master_table. Please try after some time.</h1>";
+                                                                $dbhandle->query("unlock tables");
+                                                                mysqli_rollback($dbhandle);
+                                                                //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
+                                                                $messsage='Error: Eearch Inquiry Not Saved.  Please consult application consultant.';
+                                                                //$str_end='</div>';
+                                                                //echo $str_start.$messsage.$str_end;
+                                                                //echo "";
+                                                                //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
+                                                            }
+                                                        while($row=mysqli_fetch_assoc($result))
+                                                            {
+                                                                $str='<option value="' . $row["utype_id"] . '">' .  $row["user_type"];
+                                                                echo $str;
+                                                            }
+                                                    ?>
+                                        </select>
                                     </div>
-
-                                    <div class="snap-area-visitor col-xl-6 col-lg-6 col-12 comm-messaage-send-section">
-                                        <div class="col-xl-12 col-lg-12 col-12 form-group">
-                                            <div class="tabular-section-detail groupsmsfirsttable comm-message 1st-tab-section" id="Select-level4-subdiv1">
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                    <div class="form-group aj-form-group">
+                                        <select class="select2" id="L2-Select" name="L2-Select" required onChange="getGroupList4CUG('L1-Select',this.value,'L3-Select','Select-level4-subdiv1');">
+                                        </select>
+                                    </div> 
+                                </div>  
+                                <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                    <div class="form-group aj-form-group">
+                                        <select class="select2" id="L3-Select" name="L3-Select"  onChange="getStuNumList4CUG(this.value);"  required>
+                                        </select>
+                                    </div> 
+                                </div>                       
+                            </div>
+                                <div class="row mt-5">
+                                    <div class="col-xl-5 col-lg-5 col-12 rectangle">
+                                        <div class="Individuals-cug">
+                                            <div class="Attendance-staff  aj-scroll-Attendance-staff groupsmsfirsttable" id="Select-level4-subdiv1">
                                                 <div class="table-responsive">
-                                                    <table class="table display data-table text-nowrap">
+                                                    <table class="table table-striped">
                                                         <thead>
                                                             <tr>
-                                                                <th>
-                                                                <div class="form-check">
+                                                                <th class="pt-3 pb-3"> 
+                                                                    <div class="form-check">
                                                                         <input type="checkbox" class="form-check-input checkAll">
-                                                                        <label class="form-check-label">Select Individuals</label>
-                                                                </div>
+                                                                        <label class="form-check-label text-white">Select Individuals</label>
+                                                                    </div>
                                                                 </th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
+                                                        <tbody class="top-position-ss2">
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" value="Test 1 Nursery 1" label="Test 1 Nursery 1"  name="groupsms">
+                                                                        <input type="checkbox" class="form-check-input">
                                                                         <label class="form-check-label">Test 1 Nursery</label>
                                                                     </div>
                                                                 </td>
-                                                                
-                                                                
-                                                                
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" value="Test 1 PlyaSchool" label="Test 1 PlyaSchool" name="groupsms">
-                                                                        <label class="form-check-label">Test 1 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" value="Test 2 Nursery" label="Test 2 Nursery" name="groupsms">
-                                                                        <label class="form-check-label">Test 2 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                                
-                                                                
-                                                                
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" value="Test 2 PlyaSchool" label="Test 2 PlyaSchool" name="groupsms">
-                                                                        <label class="form-check-label">Test 2 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                                
-                                                                
-                                                                
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" value="Test 3 Nursery" name="groupsms">
-                                                                        <label class="form-check-label">Test 3 Nursery</label>
-                                                                    </div>
-                                                                </td>
-                                                                
-                                                                
-                                                                
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input type="checkbox" class="form-check-input" value="Test 3 PlyaSchool" label="Test 3 PlyaSchool" name="groupsms">
-                                                                        <label class="form-check-label">Test 3 PlyaSchool</label>
-                                                                    </div>
-                                                                </td>
-                                                                
-                                                                
-                                                                
-                                                            </tr>
-                                                            
-                                                            
+                                                        </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-xl-12 col-lg-12 col-12 form-group btn-section groupsms">
-                                                <button type="button" class="get-values"><img src="img/download-new.png" style="width: 40px;"/></button>
-                                                <button type="button" class="delete-values"><img src="img/delete-new.png" style="width: 40px;"/></button>
-                                        </div>
-                                        
-                                        <div class="col-xl-12 col-lg-12 col-12 form-group">
-                                            <div class="tabular-section-detail groupsmssecondtable comm-message second-tab-section">
-                                                    <div class="table-responsive">
-                                                        <table class="table display data-table text-nowrap">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>
-                                                                    <div class="form-check">
-                                                                            <input type="checkbox" class="form-check-input checkAll">
-                                                                            <label class="form-check-label">Select Individuals</label>
-                                                                    </div>
-                                                                    </th>
-                                                                    
-                                                                    
-                                                                    
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="hiddenrow">
-                                                                <td>Test</td>
-                                                                </tr>
-                                                                
-                                                                
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-12">
+                                        <div class="Individuals-cug">
+                                            <div class="sec-icones-a">
+                                                <div class="text-center">
+                                                    <!--a href="javascript:void(0);" class="mb-4"><i class="fa fa-hand-o-right" style="color: green;" aria-hidden="true"></i></a>
+                                                    <br>
+                                                    <br>
+                                                    <a href="javascript:void(0);" class="mt-4"><i class="fa fa-times" style="color: red;" aria-hidden="true"></i></a>
+                                                    <br-->
+                                                    <button type="button" class="get-values"><i class="fa fa-hand-o-right" style="color: green;" aria-hidden="true"></i></button>
+                                                    <br>
+                                                    <br>
+                                                    <button type="button" class="delete-values"><i class="fa fa-times" style="color: red;" aria-hidden="true"></i></button>
                                                 </div>
+                                            </div>
                                         </div>
-                                        
-                                        <div class="col-xl-12 col-lg-12 col-12 form-group groupsmssubmit-btn-sec">
-                                            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark create" id="CheckselectedGroup">Create</button>
+                                    </div>
+                                    <div class="col-xl-5 col-lg-5 col-12 rectangle">
+                                        <div class="Individuals-cug">
+                                            <div class="Attendance-staff aj-scroll-Attendance-staff groupsmssecondtable" >
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="pt-3 pb-3"> 
+                                                                    <div class="form-check">
+                                                                        <input type="checkbox" class="form-check-input checkAll" id="checkAll">
+                                                                        <label class="form-check-label text-white">Select Individuals</label>
+                                                                    </div>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="top-position-ss2">
+                                                            <tr class="hiddenrow">
+                                                                <td>Test</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-12 text-right aj-mb-2">
+                                        <div class="form-group aj-form-group">
+                                            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Create</button>
+                                            
+                                        </div>                                    
                                     </div>
                                 </div>
-                        </form>
+                                
+                                
+                        </form> 
+                       
                     </div>
                 </div>
+
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
                     <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
@@ -271,7 +234,7 @@ include 'errorLog.php';
         <!-- Page Area End Here -->
     </div>
     <!-- jquery-->
-    <script src="js/jquery-3.3.1.min.js"></script>
+   <script src="js/jquery-3.3.1.min.js"></script>
     <!-- Plugins js -->
     <script src="js/plugins.js"></script>
     <!-- Popper js -->
@@ -284,15 +247,14 @@ include 'errorLog.php';
     <script src="js/datepicker.min.js"></script>
     <!-- Scroll Up Js -->
     <script src="js/jquery.scrollUp.min.js"></script>
-	<!-- Data Table Js -->
+    <!-- Data Table Js -->
     <script src="js/jquery.dataTables.min.js"></script>
-    <!-- Custom Js -->
+     <!-- Custom Js -->
     <script src="js/main.js"></script>
 	<script src="js/myscript.js"></script>
     <script src="js/ajax-function.js"></script>
-	<script src="js/app-functions.js"></script>
-
-
+    <script src="js/app-functions.js"></script>
+    
     <script>
         window.onload=function(){
             $("#unknownNo-div").hide();
@@ -349,7 +311,7 @@ include 'errorLog.php';
 			   
 				checkAll($(this).val());
                	if($dontmove != 1)	{		
-				$('.groupsmssecondtable table tbody').append('<tr><td><div class="form-check"><input type="checkbox" class="form-check-input" value="'+$(this).val()+'" name="groupsmsact[]"><label class="form-check-label">'+$pushlabel+'</label></div></td></tr>');
+				$('.groupsmssecondtable table tbody').append('<tr><td><div class="form-check"><input type="checkbox" class="form-check-input check-by-all" value="'+$(this).val()+'" name="groupsmsact[]"><label class="form-check-label">'+$pushlabel+'</label></div></td></tr>');
 				
 				}
 				
@@ -393,6 +355,11 @@ include 'errorLog.php';
 		   });	
 		});	
     });
+
+    $("#checkAll").click(function () {
+     $('.check-by-all').not(this).prop('checked', this.checked);
+ });
 </script>
 </body>
+
 </html>

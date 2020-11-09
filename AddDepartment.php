@@ -292,7 +292,7 @@ $schoolId=$_SESSION["SCHOOLID"];
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form" id="departmentform" method="post" action="AddDepartment2.php">
+                        <form class="new-added-form school-form aj-new-added-form" id="departmentform" method="post" action="AddDepartment_2.php">
                             <div class="row justify-content-center">
                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                     <div class="box-sedow">
@@ -305,11 +305,8 @@ $schoolId=$_SESSION["SCHOOLID"];
                                                     <label>Category <span>*</span></label>
                                                     <select class="select2" name="deptcat" id="deptcat">
                                                         <option value="">Please Select  Category</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                        <option value="4">Four</option>
-                                                        <option value="5">Five</option>
+                                                        <option value="Teaching">Teaching</option>
+                                                        <option value="Non-Teaching">Non-Teaching</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group aj-form-group">
@@ -364,8 +361,8 @@ $schoolId=$_SESSION["SCHOOLID"];
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">SwipeTouch Technologies</a> 2020. All rights reserved.
-                </footer>
+                    <div class="copyright">Powered by <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
+                </footer>             
             </div>
         </div>
         <!-- Page Area End Here -->

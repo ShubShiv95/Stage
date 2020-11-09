@@ -291,7 +291,7 @@ $schoolId=$_SESSION["SCHOOLID"];
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form"id="designationform" method="post" action="AddDesignation2.php" >
+                        <form class="new-added-form school-form aj-new-added-form"id="designationform" method="post" action="AddDesignation_2.php" >
                             <div class="row justify-content-center">
                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                     <div class="box-sedow">
@@ -366,9 +366,8 @@ $schoolId=$_SESSION["SCHOOLID"];
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">SwipeTouch Technologies</a> 2020. All rights reserved.
-                </footer>
-            </div>
+                    <div class="copyright">Powered by <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
+                </footer>             </div>
         </div>
         <!-- Page Area End Here -->
     </div>

@@ -148,7 +148,7 @@ if(!$execResult)
     $dbhandle->query("unlock tables");
     mysqli_rollback($dbhandle);
     $str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
-    $messsage='Error: Separtment Not Saved.  Please consult application consultant.';
+    $messsage='Error: Staff Not Saved.  Please consult application consultant.';
     $str_end='</div>';
     echo $str_start.$messsage.$str_end;
     die;

@@ -1,10 +1,21 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html class="no-js" lang="">
+<?php
+include 'dbobj.php';
+include 'errorLog.php';
+include 'security.php';
+$lid=$_SESSION["LOGINID"];
+$schoolId=$_SESSION["SCHOOLID"];
+
+?>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
+    <title>SWIFTCAMPUS | Update Staff Details</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -253,6 +264,11 @@
                         <li>View Staff </li>
                     </ul>
                 </div>
+				<?php 
+					if(isset($_SESSION['successmsg'])){
+					echo $_SESSION["successmsg"]; 
+					}
+				?>
                 <!-- Breadcubs Area End Here -->
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
@@ -310,270 +326,39 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="top-position-ss">
+												    <?php	
+														$sqlstaffdetails='select Staff_Id, Staff_Name, Contact_No, Login_Id, Role, Fathers_Or_Husband_Name, Enabled from staff_master_table where School_Id="'.$schoolId.'" order by Staff_Id ';
+														 $resultstaffdetails=mysqli_query($dbhandle,$sqlstaffdetails);
+														 while($row=mysqli_fetch_assoc($resultstaffdetails)) {
+													 ?>
                                                     <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
+                                                        <td style="width: 25%;"><?php echo $row["Staff_Name"]; ?></td>
+                                                        <td style="width: 15%;"><?php echo $row["Contact_No"]; ?></td>
+                                                        <td style="width: 15%;"><?php echo $row["Login_Id"]; ?></td>
+                                                        <td style="width: 10%;"><?php echo $row["Role"]; ?></td>
+                                                        <td style="width: 25%;"><?php echo $row["Fathers_Or_Husband_Name"]; ?></td>
                                                         <td style="text-align: center; width: 10%;"> 
 	                                                    	<div class="dropdown">
 				                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 				                                                    <span class="flaticon-more-button-of-three-dots"></span>
 				                                                </a>
 				                                                <div class="dropdown-menu dropdown-menu-right">
-				                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
+				                                                    <a class="dropdown-item" href="EditStaff.php?staffid=<?php echo $row["Staff_Id"]; ?>"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
 				                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
 				                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-				                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
+																	<?php if($row["Enabled"] ==1) { ?>
+				                                                    <a class="dropdown-item" href="DeactivateStaff2.php?staffid=<?php echo $row["Staff_Id"]; ?>" onclick="return confirm('sure to Deactivate ?')"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
+																	<?php } else { ?>
+																	<a class="dropdown-item" href="ActivateStaff2.php?staffid=<?php echo $row["Staff_Id"]; ?>" onclick="return confirm('sure to Activate ?')"><i style="color: green" class="fa fa-ban" aria-hidden="true"></i>Activate</a>
+																	<?php } ?>
 				                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
 				                                                </div>
 				                                            </div>
 				                                        </td>
 
                                                     </tr>
-                                                    <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
-                                                        <td style="text-align: center; width: 10%;"> 
-                                                            <div class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-                                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
-                                                        <td style="text-align: center; width: 10%;"> 
-                                                            <div class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-                                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
-                                                        <td style="text-align: center; width: 10%;"> 
-                                                            <div class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-                                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
-                                                        <td style="text-align: center; width: 10%;"> 
-                                                            <div class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-                                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
-                                                        <td style="text-align: center; width: 10%;"> 
-                                                            <div class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-                                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
-                                                        <td style="text-align: center; width: 10%;"> 
-                                                            <div class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-                                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
-                                                        <td style="text-align: center; width: 10%;"> 
-                                                            <div class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-                                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
-                                                        <td style="text-align: center; width: 10%;"> 
-                                                            <div class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-                                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
-                                                        <td style="text-align: center; width: 10%;"> 
-                                                            <div class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-                                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
-                                                        <td style="text-align: center; width: 10%;"> 
-                                                            <div class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-                                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 25%;">Mr. RAJAT ANSUL XALXO</td>
-                                                        <td style="width: 15%;">9876543210</td>
-                                                        <td style="width: 15%;">42810001</td>
-                                                        <td style="width: 10%;">admin</td>
-                                                        <td style="width: 25%;">Don Bosec</td>
-                                                        <td style="text-align: center; width: 10%;"> 
-                                                            <div class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
-                                                                    <a class="dropdown-item" href="#"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
-                                                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Massage</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
+													<?php } ?>  
+                                                    
                                                 </tbody>                                                
                                             </table>
                                         </div>
@@ -584,9 +369,8 @@
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
+                    <div class="copyright">Powered by <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
+                </footer> 
             </div>
         </div>
         <!-- Page Area End Here -->
@@ -611,7 +395,10 @@
         $('#opne-form-Promotion').click('.sibling-bs',function(){
              $('.tebal-promotion').slideToggle('slow');
             })
-    </script>  
+    </script> 
+<?php	
+unset($_SESSION['successmsg']); 
+?> 	
 </body>
 
 </html>

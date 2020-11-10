@@ -17,8 +17,6 @@
         {
             $classDropdownValue = '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>' . $classDropdownValue;
         }
-
-
     ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -87,8 +85,10 @@
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Application Entry</h3>
                             </div>
-                        <form class="new-added-form aj-new-added-form"  action="AdmissionAddForm_2.php" id="admitForm">
+                            
+                        <form class="new-added-form aj-new-added-form" method="post"  action="AdmissionAdd_1.php" id="newAdmission" enctype="multipart/form-data">
                             <div class="row">
+                                <input type="text" name="newStudentEntry" autofill="off" style="display: none;">
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>First Name (As Per Birth Certificate) <span>*</span></label>
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Middle Name</label>
-                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" class="form-control">
+                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" class="form-control" required="">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Last Name</label>
@@ -104,7 +104,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Class <span>*</span></label>
-                                        <select class="select2" name="studclassToApply" id="studclassToApply">
+                                        <select class="select2" name="studclassToApply" id="studclassToApply" required="">
                                         <option value="0">Select Class</option>
                                         <?php
                                             echo $classDropdownValue;
@@ -113,14 +113,14 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Section</label>
-                                        <select class="select2" name="f_Section" readonly>
+                                        <select class="select2" name="f_Section" required="" readonly>
                                             <option value="">Select</option>
                                          </select>
                                     </div>
 
                                    <div class="form-group aj-form-group">
                                         <label>Roll No.</label>
-                                        <select class="select2" name="f_Gender" readonly> 
+                                        <select class="select2" name="f_Gender" required="" readonly> 
                                         <option value="">Select </option>
                                         </select>
                                     </div>
@@ -139,7 +139,7 @@
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Date of Birth <span>*</span></label>
-                                        <input type="text" name="studentDOB" id="studentDOB" required="" placeholder="DD/MM/YYYY" class="form-control air-datepicker" data-position="bottom right">
+                                        <input type="text" name="studentDOB" id="studentDOB" required="" placeholder="DD/MM/YYYY" class="form-control air-datepicker" data-position="bottom right" autocomplete="off">
                                         <i class="far fa-calendar-alt"></i>
                                     </div>
 
@@ -251,17 +251,17 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Adhaar Card No.</label>
-                                        <input type="text" name="studAdharCardNo" id="studAdharCardNo" placeholder="" class="form-control">
+                                        <input type="text" name="studAdharCardNo" id="studAdharCardNo" placeholder="" class="form-control" maxlength="12" minlength="12">
                                     </div>
                                     
                                     <div class="form-group faj-form-group">
                                         <label class="text-dark-medium">Upload Student Photo ( JPEG Less Than  2MB)</label>
-                                        <div class="d-image-user">
-                                            <img src="img/avtar.png">
+                                        <div class="d-image-user" >
+                                            <img src="img/avtar.png" id="studentImageDisplay" style="width: 200px; height:125px;">
                                         </div>
                                             <div class="file-in">
                                                 <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-                                                <input type="file" name="studentPhoto" id="studentPhoto" class="form-control-file">
+                                                <input type="file" name="studentPhoto" id="studentPhoto" class="form-control-file" accept="image/jpg,image/jpeg">
                                             </div>
                                         </div>  
                                 </div>
@@ -571,7 +571,7 @@
 	                            	<div class="col-xl-4 col-lg-4 col-12 ">
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Adhaar  Card No.</label>
-	                                         <input type="text"  name="fatherAdharCardNo" id="fatherAdharCardNo" placeholder="" class="form-control">
+	                                         <input type="text"  name="fatherAdharCardNo" id="fatherAdharCardNo" placeholder="" class="form-control" minlength="12" maxlength="12">
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Alumni</label>
@@ -583,11 +583,11 @@
 	                                    <div class="form-group faj-form-group">
 	                                        <label class="text-dark-medium">Upload Father Photo ( JPEG Less Than 2MB)</label>
 	                                        <div class="d-image-user">
-	                                            <img src="img/avtar.png">
+	                                            <img src="img/avtar.png" id="fatherImageDisplay" style="width: 200px; height:125px;">
 	                                        </div>
 	                                        <div class="file-in">
 	                                            <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-	                                            <input type="file" name="fatherPhoto" id="fatherPhoto"  class="form-control-file">
+	                                            <input type="file" name="fatherPhoto" id="fatherPhoto"  class="form-control-file" accept="image/jpg,image/jpeg">
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -675,7 +675,7 @@
 	                            	<div class="col-xl-4 col-lg-4 col-12 ">
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Adhaar  Card No.</label>
-	                                         <input type="text" name="motherAdharCardNo" id="motherAdharCardNo" placeholder="" class="form-control">
+	                                         <input type="text" name="motherAdharCardNo" id="motherAdharCardNo" placeholder="" class="form-control" maxlength="12" minlength="12">
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Alumni</label>
@@ -688,11 +688,11 @@
 	                                    <div class="form-group faj-form-group">
 	                                        <label class="text-dark-medium">Upload Mother Photo ( JPEG Less Than 2MB)</label>
 	                                        <div class="d-image-user">
-	                                            <img src="img/avatar-female.png">
+	                                            <img src="img/avatar-female.png" id="motherImageDisplay" style="width: 200px; height:125px;">
 	                                        </div>
 	                                        <div class="file-in">
 	                                            <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-	                                            <input type="file" name="motherPhoto"  id="motherPhoto" class="form-control-file" >
+	                                            <input type="file" name="motherPhoto"  id="motherPhoto" class="form-control-file" accept="image/jpg,image/jpeg">
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -760,7 +760,7 @@
 			                                        </div>
 		                                            <div class="file-in">
 		                                                <span class="fa fa-pencil-alt" aria-hidden="true"></span>
-		                                                <input type="file" name="othersPhoto" id="othersPhoto" class="form-control-file">
+		                                                <input type="file" name="othersPhoto" id="othersPhoto" class="form-control-file" accept="image/jpg,image/jpeg">
 		                                            </div>
 		                                        </div>
 			                                </div>
@@ -919,8 +919,7 @@
                                 </div>
                                 
                             </div>
-                            <div class="footer-sec-aj">
-                            </div>
+                            <div class="footer-sec-aj mt-3" id="formOutput" style="display: none;">    </div>
                             
                             <div class="aaj-btn-chang-c">
                                     <button type="submit" class="aj-btn-a btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Submit</button>
@@ -981,7 +980,54 @@
             $("#studentAge").focusin(function(){
                 var dob = $('#studentDOB').val();
                 $("#studentAge").val(moment().diff(moment(dob, 'DD-MM-YYYY'), 'years'));              
-            });            
+            });  
+
+            $('#newAdmission').submit(function(e){
+                e.preventDefault();
+                $.ajax({
+                    url : $(this).attr('action'),
+                    method : $(this).attr('method'),
+                    data : new FormData(this),
+                    processData : false,
+                    contentType : false,
+                    success : function(data){
+                        $('#formOutput').fadeIn('slow');
+                        $('#formOutput').html(data);
+                        window.setTimeout(function(){
+                            $('.hide_time').fadeOut('slow');
+                        },3000);
+                    }
+                });
+            });
+
+            /* image preview */
+            $('#studentPhoto').change(function(){
+                var output = document.getElementById('studentImageDisplay');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function() 
+                {
+                    URL.revokeObjectURL(output.src);
+                }
+            });
+
+            $('#fatherPhoto').change(function(){
+                var output = document.getElementById('fatherImageDisplay');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function() 
+                {
+                    URL.revokeObjectURL(output.src);
+                }
+            });
+
+            $('#motherPhoto').change(function(){
+                var output = document.getElementById('motherImageDisplay');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function() 
+                {
+                    URL.revokeObjectURL(output.src);
+                }
+            });
+
         });
 	</script>
 </body>

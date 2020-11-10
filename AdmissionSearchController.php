@@ -2,7 +2,7 @@
     session_start();
     include 'dbobj.php';
     include 'security.php';
-    include 'errorLog.php';   
+    include 'errorLog.php';
     //include 'generate_sequence.php';
 
 
@@ -18,14 +18,14 @@
     $class = $_REQUEST["class"];
     $session = $_REQUEST["session"];
 
-    $selectAdmissionSql = "Select Admission_Id, First_Name, Last_Name, Gender, DOB, Father_Name, Mother_Name, Guardian_Name From admission_master_table Where Class_Id = ? and Session = ?";
+    $selectAdmissionSql = "Select Admission_Id, First_Name, Last_Name, Gender, date_format(DOB,'%d/%m/%Y') as DOB, Father_Name, Mother_Name, Guardian_Name From admission_master_table Where Class_Id = ? and Session = ?";
     $stmt=$dbhandle->prepare($selectAdmissionSql);
     $stmt->bind_param("ii", $class, $session);
 
     //echo $admission_Id;
 
     $execResult=$stmt->execute();
-    //echo $execResult . '<br>'; 
+    //echo $execResult . '<br>';
     echo $dbhandle->error;
     //
 
@@ -46,8 +46,8 @@ if(!$execResult)
     echo $str_start.$message.$str_end;
     die;
     //echo "";
-    //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';	
-    
+    //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';
+
 }
 
 $str_start='<div class="alert icon-alart bg-light-green2" role="alert"><i class="far fa-hand-point-right bg-light-green3"></i>';
@@ -55,7 +55,8 @@ $message='Resultset = ';
 $execResult=$stmt->execute();
 $result = $stmt->get_result();
 //echo $result;
-$htmlbody = '<div class="table-responsive"><table class="table table-bordered"><thead><tr><th>First Name</th><th>Last Name </th><th>Gender</th><th>DOB</th><th>Father Name </th><th>Mother Name</th><th>Guardian Name</th><th>Select Actions</th></tr></thead>';
+
+$htmlbody = '<div class="table-responsive"><table class="table table-bordered text-capitalize"><thead><tr><th>First Name</th><th>Last Name </th><th>Gender</th><th>DOB</th><th>Father Name </th><th>Mother Name</th><th>Guardian Name</th><th>Select Actions</th></tr></thead>';
 $htmlbody = $htmlbody . '<tbody>';
 while ($row = $result->fetch_assoc()) {
       $htmlbody = $htmlbody . '<tr>';
@@ -66,7 +67,7 @@ while ($row = $result->fetch_assoc()) {
       $htmlbody = $htmlbody . '<td>' . $row['Father_Name'] . '</td>';
       $htmlbody = $htmlbody . '<td>' . $row['Mother_Name'] . '</td>';
       $htmlbody = $htmlbody . '<td>' . $row['Guardian_Name'] . '</td>';
-      $htmlbody = $htmlbody . '<td>' . '<a href="AdmissionView.php?admission_Id=' . $row['Admission_Id'] . '"> Edit </a>'  . '/' . '<a href=""> View </a>' . '</td>';
+      $htmlbody = $htmlbody . '<td>' . '<a href="AdmissionView.php?admission_Id=' . $row['Admission_Id'] . '"> Edit </a>'  . '/' . '<a href="#" id=""> View </a>' . '</td>';
       $htmlbody = $htmlbody . '</tr>';
      //$message = $message . $row['First_Name'] ."<br>";
 }

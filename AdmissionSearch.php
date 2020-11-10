@@ -7,6 +7,14 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
+$classDropdownValue = "";
+$sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
+
+$result=mysqli_query($dbhandle,$sql);
+while($row=mysqli_fetch_assoc($result))
+{
+    $classDropdownValue = '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>' . $classDropdownValue;
+}
 ?>
 <head>
     <meta charset="utf-8">
@@ -49,8 +57,8 @@ include 'security.php';
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-            <?php 
-            include 'includes/sidebar.php'; 
+            <?php
+            include 'includes/sidebar.php';
             ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
@@ -87,8 +95,8 @@ include 'security.php';
                             </div>
                         </div> -->
                         <form class="new-added-form school-form aj-new-added-form" id="searchAddForm" name="searchAddForm">
-                            
-                            
+
+
                             <div class="row justify-content-center">
                                 <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
                                     <div class="brouser-image ">
@@ -103,7 +111,7 @@ include 'security.php';
                                                 <option value="2019-2020">2019-2020</option>
                                                 <option value="2020-2021">2020-2021</option>
                                                 </select>
-                                            </div> 
+                                            </div>
                                         </div>
 
                                         <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
@@ -111,39 +119,25 @@ include 'security.php';
                                                 <label>School Class <span>*</span></label>
                                                 <select class="select2" name="f_class" id="schoolClass" name="schoolClass">
                                                 <option value="">Select Class</option>
-                                                <option value="20">Nursery</option>
-                                                <option value="21">PREP</option>
-                                                <option value="22">KG1</option>
-                                                <option value="23">KG2</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="24">Misc</option>
+                                                <?php
+                                                    echo $classDropdownValue;
+                                                ?>
                                                 </select>
                                             </div>
-                                            
+
                                         </div>
 
                                     </div>
-                                   
+
                                     <div class="aaj-btn-chang-cbtn">
                                             <!-- <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button> -->
                                             <a  href="javascript:void()" id="fetchResult" name="fetchResult" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>
-                                           
-                                            
+
+
                                     </div>
-                                    
+
                                 </div>
-                               
+
                             </div>
                         </form>
 
@@ -151,7 +145,7 @@ include 'security.php';
                                     <h5 class="text-center">Search Result of Admission</h5>
                                     <div id="tablehere" name="tablehere" > </div>
                             </div>
-                            
+
                     </div>
                 </div>
                 <!-- Admit Form Area End Here -->
@@ -181,19 +175,19 @@ include 'security.php';
      <script type="text/javascript">
         $('#fetchResult').click('.sibling-bs',function(){
             callbackend();
-             $('.tebal-promotion').slideToggle('slow');
-            })
+             $('.tebal-promotion').fadeIn('slow');
+        });
     </script>
 
     <script type="text/javascript">
     var frm = $('#searchAddForm');
-    
+
     //$("#fetchResult").click(function(){
     function callbackend(){
         $class = $('#schoolClass').val();
         $session = $('#schoolSession').val();
-        var xmlhttp;    
-        
+        var xmlhttp;
+
         if (window.XMLHttpRequest){
             xmlhttp=new XMLHttpRequest();
             }
@@ -209,7 +203,7 @@ include 'security.php';
         }
         xmlhttp.open("GET", "./AdmissionSearchController.php?class=" + $class +"&session=" + $session, true);
         xmlhttp.send();
-           
+
     //});
     }
     </script>

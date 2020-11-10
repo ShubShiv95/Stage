@@ -16,7 +16,7 @@
             $schoolId=$_SESSION["SCHOOLID"];
             $admission_Id = $_REQUEST["admission_Id"];
 
-            $selectAdmissionSql = "Select * From admission_master_table Where Admission_Id = ?";
+            $selectAdmissionSql = "Select *, date_format(DOB,'%d/%m/%Y') as DOB From admission_master_table Where Admission_Id = ?";
             $stmt=$dbhandle->prepare($selectAdmissionSql);
             $stmt->bind_param("i", $admission_Id);
 
@@ -51,7 +51,6 @@
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     $stmt->close();
-
 
     $classDropdownValue = "";
     $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
@@ -170,12 +169,13 @@
                                 <h3 class="mb-4">Application Entry</h3>
                                 <h4>Admission Id : <?php echo $row['School_Admission_Id']  ?></h3>
                             </div>
-                        <form class="new-added-form aj-new-added-form"  action="AdmissionAddForm_3.php" id="admitForm">
+                        <form class="new-added-form aj-new-added-form"  action="AdmissionAddForm_3.php" id="admitForm" enctype="multipart/form-data">
                             <div class="row">
-                            <input type="text" name="admissionId" id="admissionId" placeholder="" required="" class="form-control" value='<?php echo $row['Admission_Id'];  ?>'  style="display: none;">                                <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
+                            <input type="text" name="admissionId" id="admissionId" placeholder="" required="" class="form-control" value='<?php echo $row['Admission_Id'];  ?>'  style="display: none;">
+                                <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>First Name (As Per Birth Certificate) <span>*</span></label>
-                                        
+
                                         <input type="text" name="studentFirstName" id="studentFirstName" placeholder="" required="" class="form-control" value='<?php echo $row['First_Name']  ?>'  >
                                     </div>
                                     <div class="form-group aj-form-group">
@@ -233,7 +233,7 @@
 
                                     <div class="form-group aj-form-group">
                                         <label>Age</label>
-                                        <input type="text" name="studentAge" id="studentAge" placeholder=""  ="true" class="form-control">
+                                        <input type="text" name="studentAge" id="studentAge" placeholder="" value="<?php echo $row['Age'] ?>"  class="form-control">
                                     </div>
 
                                     <div class="form-group aj-form-group">
@@ -373,7 +373,14 @@
                                     <div class="form-group faj-form-group">
                                         <label class="text-dark-medium">Upload Student Photo ( JPEG Less Than  2MB)</label>
                                         <div class="d-image-user">
-                                            <img src="img/avtar.png">
+                                            <?php
+                                                if(empty($row['Student_Image'])){
+                                                    echo '<img src="img/avtar.png">';
+                                                }
+                                                else{
+                                                    echo '<img src="./app_images/'.$row['Student_Image'].'" style="width: 200px; height:125px;">';
+                                                }
+                                            ?>
                                         </div>
                                             <div class="file-in">
                                                 <span class="fa fa-pencil-alt" aria-hidden="true"></span>
@@ -452,7 +459,7 @@
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Communication Address<span>*</span></label>
-                                        <textarea type="text" rows="4" name="commAddress" id="commAddress" required="" placeholder="" class="aj-form-control" value='<?php echo $row['Comm_Address'] ?>'  > </textarea>
+                                        <textarea type="text" rows="4" name="commAddress" id="commAddress" required="" placeholder="" class="aj-form-control"  ><?php echo $row['Comm_Address'] ?> </textarea>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
@@ -492,7 +499,7 @@
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Residential Address<span>*</span></label>
-                                        <textarea type="text" rows="4" name="raAddress"  id="raAddress" required="" placeholder="" class="aj-form-control" value='<?php echo $row['Resid_Address']?>'  > </textarea>
+                                        <textarea type="text" rows="4" name="raAddress"  id="raAddress" required="" placeholder="" class="aj-form-control"><?php echo $row['Resid_Address']?> </textarea>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
@@ -716,7 +723,14 @@
 	                                    <div class="form-group faj-form-group">
 	                                        <label class="text-dark-medium">Upload Father Photo ( JPEG Less Than 2MB)</label>
 	                                        <div class="d-image-user">
-	                                            <img src="img/avtar.png">
+                                            <?php
+                                                if(empty($row['Father_Image'])){
+                                                    echo '<img src="img/avtar.png">';
+                                                }
+                                                else{
+                                                    echo '<img src="./app_images/'.$row['Father_Image'].'" style="width: 200px; height:125px;">';
+                                                }
+                                            ?>
 	                                        </div>
 	                                        <div class="file-in">
 	                                            <span class="fa fa-pencil-alt" aria-hidden="true"></span>
@@ -732,7 +746,7 @@
 	                            	<div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
 	                            		<div class="form-group aj-form-group aj-form-group0">
 	                            			 <label> Mother's Name (As Per Birth Certificate)</label>
-                                            <input type="text" name="motherName" id="motherName" placeholder="" class="form-control">
+                                            <input type="text" name="motherName" id="motherName" placeholder="" class="form-control" value="<?php echo $row['Mother_Name'] ?>">
 	                                    </div>
 	                                    <div class="form-group aj-form-group">
 	                                        <label>Qualification</label>
@@ -830,7 +844,14 @@
 	                                    <div class="form-group faj-form-group">
 	                                        <label class="text-dark-medium">Upload Mother Photo ( JPEG Less Than 2MB)</label>
 	                                        <div class="d-image-user">
-	                                            <img src="img/avatar-female.png">
+                                            <?php
+                                                if(empty($row['Mother_Image'])){
+                                                    echo '<img src="img/avtar.png">';
+                                                }
+                                                else{
+                                                    echo '<img src="./app_images/'.$row['Mother_Image'].'" style="width: 200px; height:125px;">';
+                                                }
+                                            ?>
 	                                        </div>
 	                                        <div class="file-in">
 	                                            <span class="fa fa-pencil-alt" aria-hidden="true"></span>

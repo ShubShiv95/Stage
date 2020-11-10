@@ -204,7 +204,8 @@ include 'AdmissionModel.php';
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
                     <div class="copyright">Powered by <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
-                </footer>            </div>
+                </footer>            
+            </div>
         </div>
         <!-- Page Area End Here -->
     </div>

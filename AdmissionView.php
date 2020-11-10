@@ -107,7 +107,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>SWIFTCAMPUS | Admission Form View</title>
+    <title>SWIFTCAMPUS | Edit Admission</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -1133,9 +1133,8 @@
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
+                    <div class="copyright">Powered by <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
+                </footer>            
             </div>
         </div>
         <!-- Page Area End Here -->

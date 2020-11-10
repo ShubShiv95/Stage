@@ -11,7 +11,7 @@ include 'security.php';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
+    <title>SWIPETOUCH | Upload Assignment</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
@@ -115,9 +115,8 @@ include 'security.php';
                     </div>
                 </div>
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
+                    <div class="copyright">Powered by <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
+                </footer>            
             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+<?php session_start(); error_reporting(E_ALL ^ E_NOTICE);?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -120,11 +121,11 @@
                                     <div class="media-body space-sm">
                                         <div class="item-title">
                                             <a href="#">
-                                                <span class="item-name">Maria Zaman</span> 
-                                                <span class="item-time">18:30</span> 
-                                            </a>  
+                                                <span class="item-name">Maria Zaman</span>
+                                                <span class="item-time">18:30</span>
+                                            </a>
                                         </div>
-                                        <p>What is the reason of buy this item. 
+                                        <p>What is the reason of buy this item.
                                         Is it usefull for me.....</p>
                                     </div>
                                 </div>
@@ -135,11 +136,11 @@
                                     <div class="media-body space-sm">
                                         <div class="item-title">
                                             <a href="#">
-                                                <span class="item-name">Benny Roy</span> 
-                                                <span class="item-time">10:35</span> 
-                                            </a>  
+                                                <span class="item-name">Benny Roy</span>
+                                                <span class="item-time">10:35</span>
+                                            </a>
                                         </div>
-                                        <p>What is the reason of buy this item. 
+                                        <p>What is the reason of buy this item.
                                         Is it usefull for me.....</p>
                                     </div>
                                 </div>
@@ -150,11 +151,11 @@
                                     <div class="media-body space-sm">
                                         <div class="item-title">
                                             <a href="#">
-                                                <span class="item-name">Steven</span> 
-                                                <span class="item-time">02:35</span> 
-                                            </a>  
+                                                <span class="item-name">Steven</span>
+                                                <span class="item-time">02:35</span>
+                                            </a>
                                         </div>
-                                        <p>What is the reason of buy this item. 
+                                        <p>What is the reason of buy this item.
                                         Is it usefull for me.....</p>
                                     </div>
                                 </div>
@@ -165,11 +166,11 @@
                                     <div class="media-body space-sm">
                                         <div class="item-title">
                                             <a href="#">
-                                                <span class="item-name">Joshep Joe</span> 
-                                                <span class="item-time">12:35</span> 
-                                            </a>  
+                                                <span class="item-name">Joshep Joe</span>
+                                                <span class="item-time">12:35</span>
+                                            </a>
                                         </div>
-                                        <p>What is the reason of buy this item. 
+                                        <p>What is the reason of buy this item.
                                         Is it usefull for me.....</p>
                                     </div>
                                 </div>
@@ -220,7 +221,7 @@
                         </div>
                     </li>
                      <li class="navbar-item dropdown header-language">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" 
+                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button"
                         data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>EN</a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="#">English</a>
@@ -236,8 +237,8 @@
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-            <?php 
-            include 'includes/sidebar.php'; 
+            <?php
+            include 'includes/sidebar.php';
             ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
@@ -257,9 +258,9 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>All Staff Data</h3>
+                                <h3 id="display_status">All Staff Data</h3>
                             </div>
-                           
+
                         </div>
 
                         <form class="new-added-form school-form aj-new-added-form">
@@ -268,7 +269,7 @@
                                         <div class="form-group aj-form-group">
                                             <div class="form-group aj-form-group">
                                                 <label>Search by ID <span>*</span></label>
-                                                <input type="text"   placeholder="" class="form-control">
+                                                <input type="text"   placeholder="" class="form-control searchById">
                                             </div>
                                         </div>
                                     </div>
@@ -276,7 +277,7 @@
                                         <div class="form-group aj-form-group">
                                             <div class="form-group aj-form-group">
                                                 <label>Search by Name</label>
-                                                <input type="text"   placeholder="" class="form-control">
+                                                <input type="text"   placeholder="" class="form-control searchByName" >
                                             </div>
                                         </div>
                                     </div>
@@ -284,26 +285,51 @@
                                         <div class="form-group aj-form-group">
                                             <div class="form-group aj-form-group">
                                                 <label>Search by Phone</label>
-                                                <input type="text"   placeholder="" class="form-control">
+                                                <input type="text"   placeholder="" class="form-control searchByPhone">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                         <div class="text-right">
-                                        <!-- <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button> -->
+                                        <!-- <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button>
                                         <a  href="javascript:void(0);"  class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Search </a>
-                                        <button type="reset" class="aj-btn-a btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                                        <button type="reset" class="aj-btn-a btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>-->
                                 </div>
                                     </div>
 
                                 </div>
                             </form>
+                            <div class="item-title aj-item-title bg-warning mt-3">
+                              <div class="row">
+                                  <div class="col-md-6">
+                                    <h3 class="mb-4 p-2 ml-2"></h3>
+                                  </div>
+                                  <div class="col-md-6 pt-2 pb-2">
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                              
+                                          </div>
+                                          <div class="col-md-4">
+                                              
+                                          </div>
+                                          <div class="col-md-4">
+                                            <button class="btn btn-sm btn-danger pdf_export"><i class="fas fa-file-pdf fa-2x p-1"></i></button>
+                                            
+                                            <button class="btn btn-sm btn-success excel_export"><i class="fas fa-file-excel fa-2x p-1"></i></button>
+                                            
+                                            <button class="btn btn-sm btn-primary" onclick="window.print();"><i class="fas fa-print fa-2x p-1"></i></i></button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                            </div>
                         <div class="Attendance-staff  mt-5 aj-scroll-Attendance-staff">
-                            <div class="table-responsive">
-                                <table class="table display data-table text-nowrap">
+                            <div class="table-responsive" id="showStaffData">
+                            <!--    <table class="table display data-table text-nowrap data-table">
                                     <thead>
                                         <tr>
-                                            <th> 
+                                            <th>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input checkAll">
                                                     <label class="form-check-label">ID</label>
@@ -932,7 +958,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table>-->
                             </div>
                         </div>
                     </div>
@@ -959,7 +985,94 @@
     <script src="js/jquery.dataTables.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      var toLowerCase = "";
+      load_staff_data();
+      function load_staff_data() {
+        $.ajax({
+          type : 'get',
+          url : './ViewStaffList_1.php',
+          data : {'getStaffList':1},
+          success : function(data) {
+            $('#showStaffData').html(data);
+          }
+        });
+      }
 
+      function search_staff_data(id,name,phone) {
+          $('#showStaffData').html('');
+          $.ajax({
+            type : 'post',
+            url : './ViewStaffList_1.php',
+            data : {'searchStaffData':1,'id':id,'name':name,'phone':phone},
+            success : function(data) {
+              $('#showStaffData').html(data);
+            }
+          });
+      }
+
+      $('.searchById').keyup(function() {
+        var empId=$(this).val();
+        var empName=$('#searchByName').val();
+        var empPhone=$('#searchByPhone').val();
+          if (empId !="" ) {
+            empName = ""; empPhone = "";
+            search_staff_data(empId,empName,empPhone);
+          }else{
+            load_staff_data();
+          }
+      });
+      $('.searchByName').keyup(function() {
+        var empName=$(this).val();
+        var empId=$('#searchById').val();
+        var empPhone=$('#searchByPhone').val();
+        if (empName !==""){
+          empPhone = "";empId ==""
+          search_staff_data(empId,empName,empPhone);
+        }
+        else{
+          load_staff_data();
+        }
+      });
+      $('.searchByPhone').keyup(function() {
+          var empPhone=$(this).val();
+          var empName=$('#searchByName').val();
+          var empId=$('#searchById').val();
+        if (empPhone !=="") {
+            empName = "";empId ==""
+          search_staff_data(empId,empName,empPhone);
+        }else{
+          load_staff_data();
+        }
+      });
+
+      $(".excel_export").click(function(e) {
+        let file = new Blob([$('#showStaffData').html()], {type:"application/vnd.ms-excel"});
+        let url = URL.createObjectURL(file);
+        let a = $("<a />", {
+        href: url,
+        download: "staff_data.xls"}).appendTo("body").get(0).click();
+        e.preventDefault();
+    });
+
+    var doc = new jsPDF('l');
+    var specialElementHandlers = {
+        '#showStaffData': function (element, renderer) {
+            return true;
+        }
+    };  
+    $('.pdf_export').click(function () {
+        doc.fromHTML($('#showStaffData').html(), 5, 5, {
+            'width': 2500,
+                'elementHandlers': specialElementHandlers
+        });
+        doc.save('sample-file.pdf');
+    });
+        
+    });
+    </script>
 </body>
-
 </html>

@@ -237,6 +237,7 @@ function Grp_Communication_Call2(first_Select_id,second_select_value,next_dest_i
 			
 				
 					document.getElementById('Select-level4-subdiv1').innerHTML=xmlhttp.responseText;
+					//alert(xmlhttp.responseText);
 						
 				//document.getElementById('Select-level4-subdiv1').innerHTML=xmlhttp.responseText;
 			}

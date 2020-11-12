@@ -15,7 +15,7 @@ if($deptid>0){
 }
 
 
-$query="select employee_name,employee_id,sms_number,whatsapp_number,dept.dept_name from employee_master_table emp,department_master_table dept where " . $department . " and dept.dept_id=emp.dept_id and emp.enabled=1 and emp.school_id=" . $_SESSION["SCHOOLID"] . ' order by dept_name,employee_name';
+$query="select employee_name,employee_id,sms_contact_no as sms_number,whatsapp_contact_no as whatsapp_number,dept.dept_name from employee_master_table emp,department_master_table dept where " . $department . " and dept.dept_id=emp.dept_id and emp.enabled=1 and emp.school_id=" . $_SESSION["SCHOOLID"] . ' order by dept_name,employee_name';
 
 
 //echo $query;

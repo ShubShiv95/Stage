@@ -178,3 +178,57 @@ Module Name: 	Staff Add Form
 Message:	
 SQL:	
 File:	/opt/lampp/htdocs/stage/AddStaff2.php
+
+Date:	12-Nov-2020 10:42:19 AM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	/opt/lampp/htdocs/stage/admissionEnquiry2.php
+
+Date:	12-Nov-2020 10:45:15 AM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	/opt/lampp/htdocs/stage/admissionEnquiry2.php
+
+Date:	12-Nov-2020 10:45:46 AM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	/opt/lampp/htdocs/stage/admissionEnquiry2.php
+
+Date:	12-Nov-2020 10:48:46 AM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	/opt/lampp/htdocs/stage/admissionEnquiry2.php
+
+Date:	12-Nov-2020 11:29:32 AM	 By User:admin
+Module Name: 	Investment Payment
+Message:	
+SQL:	
+File:	/opt/lampp/htdocs/stage/admissionEnquiry2.php
+
+Date:	12-Nov-2020 11:43:17 AM	 By User:admin
+Module Name: 	Add Feedback Note
+Message:	Incorrect time value: '10:43 AM' for column `smserp`.`visitor_enquiry_table`.`in_time` at row 1
+SQL:	
+File:	/opt/lampp/htdocs/stage/VisitorEnquiry2.php
+
+Date:	12-Nov-2020 11:46:13 AM	 By User:admin
+Module Name: 	Add Feedback Note
+Message:	Incorrect time value: '10:46 AM' for column `smserp`.`visitor_enquiry_table`.`in_time` at row 1
+SQL:	
+File:	/opt/lampp/htdocs/stage/VisitorEnquiry2.php
+
+Date:	12-Nov-2020 11:50:15 AM	 By User:admin
+Module Name: 	Add Feedback Note
+Message:	Incorrect time value: '10:50 AM' for column `smserp`.`visitor_enquiry_table`.`in_time` at row 1
+SQL:	
+File:	/opt/lampp/htdocs/stage/VisitorEnquiry2.php
+
+Date:	12-Nov-2020 11:58:16 AM	 By User:admin
+Module Name: 	Add Feedback Note
+Message:	Incorrect time value: '10:58 AM' for column `smserp`.`visitor_enquiry_table`.`in_time` at row 1
+SQL:	
+File:	/opt/lampp/htdocs/stage/VisitorEnquiry2.php

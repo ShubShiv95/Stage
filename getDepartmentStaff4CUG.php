@@ -69,7 +69,7 @@ while($row=mysqli_fetch_assoc($result))
     $str= $str .  ' <tr>
                         <td>
                             <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="groupsms" value="' . $row["sms_contact_no"] . ';' . $row["whatsapp_contact_no"] . ";" . $row["employee_id"] . ';2" label="' . $row["employee_name"] . '">
+                            <input type="checkbox" class="form-check-input" name="groupsms" value="' . $row["sms_contact_no"] . ';' . $row["whatsapp_contact_no"] . ";" . $row["employee_id"] . ';2;' . $row["employee_name"] . '" label="' . $row["employee_name"] . '">
                                 <label class="form-check-label">' . $row["employee_name"] . '</label>
                             </div>
                         </td>

@@ -47,7 +47,7 @@ while($row=$result->fetch_assoc())
     $str= $str .  ' <tr>
     <td>
         <div class="form-check">
-        <input type="checkbox" class="form-check-input" name="groupsms" value="' . $row["sms_contact_no"] . ';' . $row["whatsapp_contact_no"] . ";" . $row["student_id"] . ';1" label="' . $row["student_name"] . '">
+        <input type="checkbox" class="form-check-input" name="groupsms" value="' . $row["sms_contact_no"] . ';' . $row["whatsapp_contact_no"] . ";" . $row["student_id"] . ';1;' . $row["student_name"] . '" label="' . $row["student_name"] . '">
             <label ' . (($label_colour_flag%2)==0 ? 'class="form-check-label">' : '>') . $row["student_name"] . '</label>
         </div>
     </td>

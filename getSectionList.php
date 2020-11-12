@@ -9,7 +9,7 @@ $query="select class_sec_id,section from class_section_table where class_id=" . 
 $result=mysqli_query($dbhandle,$query);
 //echo var_dump($result);
 //$str= '<label>Section *</label><select class="select2" name="secid" id="secid"  onchange="showstudent(this.value)"><option value="0">Select Section</option>';
-$str= '<option value="0">Select Section</option>';
+$str= '<option value="0" selected="selected">Select Section</option>';
 
 //echo $str;
 

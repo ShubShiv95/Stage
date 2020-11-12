@@ -19,12 +19,14 @@ else
     }	
     
 
-//code for access of page from the hosted web location only.
+/*
+ //code for access of page from the hosted web location only. For Cloud Location
 $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
 if($link!=$_SESSION["LINK"])
     {
 
         echo '<meta HTTP-EQUIV="Refresh" content="0; URL=signout.php">';
     }
+*/
 
 ?>

@@ -43,12 +43,16 @@ include 'security.php';
       height: 450px;
     }
     #picture_from_cam {
-      position: fixed;top: 0;right: 0;
+        position: absolute;
+        right: 0;
+        width: 100% !important;
+        text-align: center;
     }
     #picture_from_cam img {
       border: solid 1px #000;
-      width: 500px;
-      height: auto;
+        width: auto;
+        height: 174px;
+        margin: 0 auto;
     }
   </style>
    <script>
@@ -257,7 +261,7 @@ include 'security.php';
                                             <div class="box-web-cem" id="picture_from_cam"></div>   
                                         </div>
                                         <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
-                                             <button onclick="take_snapshot()" class="btn-fill-lg bg-blue-dark btn-hover-yellow take-snap  valid" >Take Snapshot</button>  
+                                             <button  type="button" onclick="take_snapshot()" class="btn-fill-lg bg-blue-dark btn-hover-yellow take-snap  valid" >Take Snapshot</button>  
                                              <input type="hidden" name="image" class="image-tag">
                                         </div>
                                 
@@ -296,7 +300,7 @@ include 'security.php';
                                             } 
                             ?>
                             <!--div class="row mt-5"-->
-                                <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                <!-- <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Visitor Type <span>*</span></label>
                                         <select class="select2" name="sd_class">
@@ -340,8 +344,8 @@ include 'security.php';
                                     <div class="form-group aj-form-group">
                                         <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Search</button>
                                     </div>
-                                </div>
-                            </div>
+                                </div> -->
+                            <!-- </div> -->
                         </form>
                         <div class="col-lg-12">
                             <div class="d-grid-a mt-5">

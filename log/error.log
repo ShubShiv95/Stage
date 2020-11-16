@@ -232,3 +232,21 @@ Module Name: 	Add Feedback Note
 Message:	Incorrect time value: '10:58 AM' for column `smserp`.`visitor_enquiry_table`.`in_time` at row 1
 SQL:	
 File:	/opt/lampp/htdocs/stage/VisitorEnquiry2.php
+
+Date:	16-Nov-2020 09:42:16 AM	 By User:
+Module Name: 	View Feedback Note
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by date_of_visit desc' at line 1
+SQL:	
+File:	/opt/lampp/htdocs/stage/VisitorSearch.php
+
+Date:	16-Nov-2020 09:42:16 AM	 By User:
+Module Name: 	Eearch Inquiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select * from visitor_type_master where enabled=1 and School_Id=
+File:	/opt/lampp/htdocs/stage/VisitorSearch.php
+
+Date:	16-Nov-2020 09:42:16 AM	 By User:
+Module Name: 	Eearch Inquiry
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select * from visit_purpose_master where enabled=1 and School_Id=
+File:	/opt/lampp/htdocs/stage/VisitorSearch.php

@@ -8,12 +8,12 @@ include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
 $classDropdownValue = "";
-$sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
+$sql='select cmt.Class_Id,cmt.class_name from class_master_table cmt where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by Class_No";
 
 $result=mysqli_query($dbhandle,$sql);
 while($row=mysqli_fetch_assoc($result))
 {
-    $classDropdownValue = '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>' . $classDropdownValue;
+    $classDropdownValue = '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . '</option>' . $classDropdownValue;
 }
 ?>
 <head>

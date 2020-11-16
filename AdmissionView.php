@@ -53,15 +53,15 @@
     $stmt->close();
 
     $classDropdownValue = "";
-    $sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
+    $sql='select cmt.Class_Id,cmt.class_name from class_master_table cmt where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by Class_No";
 
     $result=mysqli_query($dbhandle,$sql);
     while($classRow=mysqli_fetch_assoc($result))
     {
         if($row["Class_Id"] ==  $classRow["Class_Id"]){
-            $classDropdownValue = '<option selected value="' . $classRow["Class_Id"] . '">Class ' . $classRow["class_name"] . ' ' . $classRow["stream"] . '</option>' . $classDropdownValue;
+            $classDropdownValue = '<option selected value="' . $classRow["Class_Id"] . '">Class ' . $classRow["class_name"] . '</option>' . $classDropdownValue;
         } else{
-            $classDropdownValue = '<option value="' . $classRow["Class_Id"] . '">Class ' . $classRow["class_name"] . ' ' . $classRow["stream"] . '</option>' . $classDropdownValue;
+            $classDropdownValue = '<option value="' . $classRow["Class_Id"] . '">Class ' . $classRow["class_name"] .  '</option>' . $classDropdownValue;
         }
     }
 
@@ -70,9 +70,9 @@
     while($classRow_2=mysqli_fetch_assoc($result))
     {
         if($row["Prev_School_Class"] ==  $classRow_2["Class_Id"]){
-            $classDropdownValue_2 = '<option selected value="' . $classRow_2["Class_Id"] . '">Class ' . $classRow_2["class_name"] . ' ' . $classRow_2["stream"] . '</option>' . $classDropdownValue_2;
+            $classDropdownValue_2 = '<option selected value="' . $classRow_2["Class_Id"] . '">Class ' . $classRow_2["class_name"] . '</option>' . $classDropdownValue_2;
         } else{
-            $classDropdownValue_2 = '<option value="' . $classRow_2["Class_Id"] . '">Class ' . $classRow_2["class_name"] . ' ' . $classRow_2["stream"] . '</option>' . $classDropdownValue_2;
+            $classDropdownValue_2 = '<option value="' . $classRow_2["Class_Id"] . '">Class ' . $classRow_2["class_name"] .  '</option>' . $classDropdownValue_2;
         }
     }
 
@@ -82,9 +82,9 @@
     while($classRow_3=mysqli_fetch_assoc($result))
     {
         if($row["Sibling_1_Class"] ==  $classRow_3["Class_Id"]){
-            $classDropdownValue_3 = '<option selected value="' . $classRow_3["Class_Id"] . '">Class ' . $classRow_3["class_name"] . ' ' . $classRow_3["stream"] . '</option>' . $classDropdownValue_3;
+            $classDropdownValue_3 = '<option selected value="' . $classRow_3["Class_Id"] . '">Class ' . $classRow_3["class_name"] . '</option>' . $classDropdownValue_3;
         } else{
-            $classDropdownValue_3 = '<option value="' . $classRow_3["Class_Id"] . '">Class ' . $classRow_3["class_name"] . ' ' . $classRow_3["stream"] . '</option>' . $classDropdownValue_3;
+            $classDropdownValue_3 = '<option value="' . $classRow_3["Class_Id"] . '">Class ' . $classRow_3["class_name"] .  '</option>' . $classDropdownValue_3;
         }
     }
 
@@ -93,9 +93,9 @@
     while($classRow_4=mysqli_fetch_assoc($result))
     {
         if($row["Sibling_2_Class"] ==  $classRow_4["Class_Id"]){
-            $classDropdownValue_4 = '<option selected value="' . $classRow_4["Class_Id"] . '">Class ' . $classRow_4["class_name"] . ' ' . $classRow_4["stream"] . '</option>' . $classDropdownValue_4;
+            $classDropdownValue_4 = '<option selected value="' . $classRow_4["Class_Id"] . '">Class ' . $classRow_4["class_name"] . ' ' . '</option>' . $classDropdownValue_4;
         } else{
-            $classDropdownValue_4 = '<option value="' . $classRow_4["Class_Id"] . '">Class ' . $classRow_4["class_name"] . ' ' . $classRow_4["stream"] . '</option>' . $classDropdownValue_4;
+            $classDropdownValue_4 = '<option value="' . $classRow_4["Class_Id"] . '">Class ' . $classRow_4["class_name"] . ' ' . '</option>' . $classDropdownValue_4;
         }
     }
 

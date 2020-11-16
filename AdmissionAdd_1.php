@@ -209,20 +209,18 @@
         Mother_Name, Mother_Qualification, Mother_Occupation, Mother_Designation, Mother_Org_Name, Mother_Org_Add, Mother_City, Mother_State, Mother_Country, Mother_Pincode, Mother_Email,
         Mother_Contact_No, Mother_Annual_Income, Mother_Aadhar_Card, Mother_Alumni,
         Gurdian_Type, Guardian_Address, Guardian_Name, Guardian_Relation, Guardian_Contact_No, 
-        SMS_Contact_No, Whatsapp_Contact_No, Email_Id,
-        Doc_Upload_1, Doc_Upload_2, Doc_Upload_3, Doc_Upload_4, Doc_Upload_5, Doc_Upload_6, Doc_Upload_7, Doc_Upload_8) 
-        values(?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        SMS_Contact_No, Whatsapp_Contact_No, Email_Id) 
+        values(?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt=$dbhandle->prepare($insertAdmissionTableSql);
 
         echo $dbhandle->error;	
       
-
-        $stmt->bind_param("isissssississssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssissssssssssssssss",   
+        $stmt->bind_param("isissssississssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssissssssss",   
         $admId,$schoolAdmissionId,$schoolId,$session,$studentFirstName,$studentMiddleName,$studentLastName,$studclassToApply,$studentGender,$studentDOB,$studentAge,$studentSocialCat,$studDiscCat,$studLocality,$studAcademicSession,$studMotherTongue,$studReligion,$studNationality,$studBloodGroup,$studAdharCardNo,$studPrevSchoolName,$studMOI,$studBoard,$studClass,$commAddress,$commCountry,$commState,$commCityDist,$commPinCode,$commContactNo,$raAddress,$raCountry,$raState,$raCityDist,$raPinCode,$raContactNo,$sibling1StudId,$sibling1Class,$sibling1Section,$sibling1RollNo,$sibling2StudId,$sibling2Class,$sibling2Section,$sibling2RollNo,$fatherName,$fatherQual,$fatherOccupation,$fatherDesig,$fatherOrgName,$fatherOrgAdd,$fatherCity,$fatherState,
         $fatherCountry,$fatherPinCode,$fatherEmail,$fatherContactNo,$fatherAnnualIncome,$fatherAdharCardNo,$fatherAlumni,$motherName,$motherQual,$motherOccupation,$motherDesig,$motherOrgName,
         $motherOrgAdd,$motherCity,$motherState,$motherCountry,$motherPinCode,$motherEmail,$motherContactNo,
-        $motherAnnualIncome,$motherAdharCardNo,$motherAlumni,$otherType,$othersAddress,$othersName,$othersRelation,$othersMobileNo,$studSMSContactNo,$studWhatsAppContactNo,$studEmailAddress,$docUpload_1,$docUpload_2,$docUpload_3,$docUpload_4,$docUpload_5,$docUpload_6,$docUpload_7,$docUpload_8
+        $motherAnnualIncome,$motherAdharCardNo,$motherAlumni,$otherType,$othersAddress,$othersName,$othersRelation,$othersMobileNo,$studSMSContactNo,$studWhatsAppContactNo,$studEmailAddress
         );
 
         $execResult=$stmt->execute();

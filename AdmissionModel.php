@@ -11,8 +11,8 @@
     $GLOBAL_LANGUAGES =  array("Other"=>"Other","Telugu"=>"Telugu","Tamil"=>"Tamil","Punjabi"=>"Punjabi","Marathi"=>"Marathi","Malayalam"=>"Malayalam",
                                 "Kannada"=>"Kannada","Oriya"=>"Oriya","Gujrati"=>"Gujrati","English"=>"English","Bengali"=>"Bengali", "Hindi"=>"Hindi");
 
-    $GLOBAL_RELIGION =  array("Other"=>"Other","Sikh"=>"Sikh", "Muslim"=>"Muslim",
-                                "Jain"=>"Jain", "Hindu"=>"Hindu","Christian"=>"Christian", "Buddhist"=>"Buddhist");
+    $GLOBAL_RELIGION =  array("7"=>"Other","6"=>"Sikh", "5"=>"Muslim",
+                                "4"=>"Jain", "3"=>"Hindu","2"=>"Christian", "1"=>"Buddhist");
 
     $GLOBAL_BLOOD_GROUP =  array("O-Negative"=>"O-","O-Positive"=>"O+","B-Negative"=>"B-", "B-Positive"=>"B+",
                                 "AB-Negative"=>"AB-", "AB-Positive"=>"AB+","A-Negative"=>"A-", "A-Positive"=>"A+");

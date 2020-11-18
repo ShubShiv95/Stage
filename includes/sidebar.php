@@ -192,35 +192,18 @@
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-chat"></i><span>Communication</span></a>
                             <ul class="nav sub-group-menu">
-                                <!--li class="nav-item">
-                                    <a href="IndividualSMS-old.php" class="nav-link"><i class="fas fa-angle-right"></i>Individual SMS</a>
-                                </li-->
                                 <li class="nav-item">
                                     <a href="IndividualSMS.php" class="nav-link"><i class="fas fa-angle-right"></i>New Individual SMS</a>
                                 </li>
-                                <!--li class="nav-item">
-                                    <a href="GroupSMS-old.php" class="nav-link"><i class="fas fa-angle-right"></i>Group SMS</a>
-                                </li-->
                                 <li class="nav-item">
                                     <a href="GroupSMS.php" class="nav-link"><i class="fas fa-angle-right"></i>New Group SMS</a>
                                 </li>
-                                <!--li class="nav-item">
-                                    <a href="CUG.php" class="nav-link"><i class="fas fa-angle-right"></i>Close User Group</a>
-                                </li-->
                                 <li class="nav-item">
                                     <a href="CUG.php" class="nav-link"><i class="fas fa-angle-right"></i>Close User Group</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="Notices.php" class="nav-link"><i class="fas fa-angle-right"></i>Notices</a>
                                 </li>
-                                <!--li class="nav-item">
-                                    <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Recharge Media</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="samplecomm.php" class="nav-link"><i class="fas fa-angle-right"></i>Communication</a>
-                                </li-->
-								
-                                
                                 <li class="nav-item sidebar-nav-item">
 									<a href="#" class="nav-link"><span>Reports</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
 									    <ul class="nav sub-group-menu">

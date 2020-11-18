@@ -152,7 +152,7 @@
                             <a href="#" class="nav-link"><i class="flaticon-mortarboard"></i><span>Communication</span></a>
                             <ul class="nav sub-group-menu sub-group-active">
                                 <li class="nav-item">
-                                    <a href="IndividualSms.php" class="nav-link"><i class="fas fa-angle-right"></i>Individual Sms</a>
+                                    <a href="IndividualSMS.php" class="nav-link"><i class="fas fa-angle-right"></i>Individual Sms</a>
                                 </li>
 								<li class="nav-item">
                                     <a href="GroupSms.php" class="nav-link"><i class="fas fa-angle-right"></i>Group Sms</a>

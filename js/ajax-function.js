@@ -1,27 +1,27 @@
 function showsection(str)	//Function to get select option of section list for a class. Can be used in any other module.
 {
-var xmlhttp;    
-  //document.getElementById("studentdiv").innerHTML='<select name="sid" id="sid" disabled="disabled"><option value="0">Select Student</option></select>';
-  var element = document.getElementById("secid");			
-  
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("secid").innerHTML=xmlhttp.responseText;
-    //element.classList.add("select2");
-    }
-  }
-xmlhttp.open("GET","getSectionList.php?classid="+str,true);
-xmlhttp.send();
+	var xmlhttp;    
+	//document.getElementById("studentdiv").innerHTML='<select name="sid" id="sid" disabled="disabled"><option value="0">Select Student</option></select>';
+	var element = document.getElementById("secid");			
+	
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+	xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("secid").innerHTML=xmlhttp.responseText;
+		//element.classList.add("select2");
+		}
+	}
+	xmlhttp.open("GET","getSectionList.php?classid="+str,true);
+	xmlhttp.send();
 }
 
 	function showstudent(str)		//Function used to get selection option for student list. This is used in Addmission Enquiry and is deprecated in the module. Can be used in any other module.

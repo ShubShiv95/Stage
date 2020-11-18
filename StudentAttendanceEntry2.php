@@ -236,7 +236,7 @@ include 'sequenceGenerator.php';
                                                     <div class="new-added-form aj-new-added-form">
                                                         <div class="aaj-btn-chang-cbtn">
                                                             <?php echo '<a class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark mb-3" href="StudentAttendanceEdit.php?adt='.$adt.'&secid='.$secid.'&classid='.$classid .'&period='. $period .'&aid='.$aid.'">Edit Attendance  </a>';
-                                                            if($period==1 ){ echo '<a class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark" href="StudentAttendanceMsgPost.php?&aid='.$aid.'&flag=NEW">SEND SMS </a>';}?>
+                                                            if($period==1 ){ echo '<a class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark" href="StudentAttendanceSendSMS.php?&Attendance_Id='.$aid.'&flag=NEW">SEND SMS </a>';}?>
                                                         </div>
                                                     </div>       
                                         </div>                                    

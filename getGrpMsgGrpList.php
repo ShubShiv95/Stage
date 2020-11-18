@@ -11,7 +11,7 @@ if($msg_receiver_Type==1)   //Generate option for section list when selected use
     {
         //Adding Class Select controller.
       
-        $query='select Class_Id,class_name,class_no,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " order by next_class_id";
+        $query='select Class_Id,class_name,class_no from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " order by next_class_id";
         //echo $query;
         $result=mysqli_query($dbhandle,$query);
         if(!$result)
@@ -21,12 +21,12 @@ if($msg_receiver_Type==1)   //Generate option for section list when selected use
                 $el=new LogMessage();
                 $sql=$query;
                 //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                $el->write_log_message('Investment Payment',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                $el->write_log_message('Group SMS For Student',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
                 $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
                 $dbhandle->query("unlock tables");
                 mysqli_rollback($dbhandle);
                 //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
-                $messsage='Error: Admission Enquiry Not Saved.  Please consult application consultant.';
+                $messsage='Error: Not able to provide group list.  Please consult application consultant.';
                 //$str_end='</div>';
                 //echo $str_start.$messsage.$str_end;
                 //echo "";
@@ -114,7 +114,7 @@ else if ($msg_receiver_Type==3)    //Generate option for cug group selected in g
                 //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
             }
             //$html_str=$html_str.'<option value="">Select Department </option>';    
- 
+            $html_str='<option value="0" selected="selected">Select Group</option>';
             while($row=mysqli_fetch_assoc($result))
                 {
                   

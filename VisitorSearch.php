@@ -132,7 +132,7 @@ include 'security.php';
                                 //$getVisitorEnquiry_sql="select vet.*,date_format(vet.created_on,'%d-%m-%Y') as createdon,vtm.visitor_type as visitor_type,vpm.visitor_purpose as visit_purpose from visitor_enquiry_table vet, visitor_type_master vtm, visit_purpose_master vpm where vtm.vtid=vet.visitor_type_id and vpm.vpid=vet.visit_purpose_id and out_time is null or date_format(vet.created_on,'%d-%m-%y')=date_format(now(),'%d-%m-%y') and vet.school_id=" . $_SESSION["SCHOOLID"] . " order by date_of_visit desc";
                                 
                                 //Updated by removing condition "or date_format(vet.created_on,'%d-%m-%y')=date_format(now(),'%d-%m-%y')" from the above sql. 
-                                $getVisitorEnquiry_sql="select vet.*,date_format(vet.created_on,'%d-%m-%Y') as createdon,vtm.visitor_type as visitor_type,vpm.visitor_purpose as visit_purpose from visitor_enquiry_table vet, visitor_type_master vtm, visit_purpose_master vpm where vtm.vtid=vet.visitor_type_id and vpm.vpid=vet.visit_purpose_id and out_time is null  and vet.school_id=" . $_SESSION["SCHOOLID"] . " order by date_of_visit desc";
+                                $getVisitorEnquiry_sql="select vet.*,date_format(vet.created_on,'%d-%m-%Y') as createdon,vtm.visitor_type as visitor_type,vpm.visitor_purpose as visit_purpose from visitor_enquiry_table vet, visitor_type_master vtm, visit_purpose_master vpm where vtm.vt_id=vet.visitor_type_id and vpm.vp_id=vet.visit_purpose_id and out_time is null  and vet.school_id=" . $_SESSION["SCHOOLID"] . " order by date_of_visit desc";
                                 //echo $getVisitorEnquiry_sql;
                                 
                                 $getVisitorEnquiry_result=mysqli_query($dbhandle,$getVisitorEnquiry_sql);
@@ -182,7 +182,7 @@ include 'security.php';
                                                 }
                                             while($row=mysqli_fetch_assoc($result))
                                             {
-                                                $str='<option value="' . $row["vtid"] . '">Class ' . $row["Visitor_Type"];
+                                                $str='<option value="' . $row["VT_Id"] . '">Class ' . $row["Visitor_Type"];
                                                 echo $str;
                                             }
                                         ?>
@@ -217,7 +217,7 @@ include 'security.php';
                                                     }
                                                     while($row=mysqli_fetch_assoc($result))
                                                         {
-                                                            $str='<option value="' . $row["vpid"] . '">' . $row["visitor_purpose"] . '</option>';
+                                                            $str='<option value="' . $row["VP_Id"] . '">' . $row["Visitor_Purpose"] . '</option>';
                                                             echo $str;
                                                         }
                                             ?>

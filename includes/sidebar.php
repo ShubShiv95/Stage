@@ -119,7 +119,7 @@
                                     <a href="AdmissionEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Admission Eqnuiry</a>
                                 </li-->
                                 <li class="nav-item">
-                                    <a href="New-AdmissionEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Admission Eqnuiry</a>
+                                    <a href="AdmissionEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Admission Eqnuiry</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="FollowupEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Follow Up Eqnuiry</a>
@@ -129,11 +129,11 @@
                                     <a href="New-FollowupEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Follow Up Eqnuiry</a>
                                 </li-->
                                 <li class="nav-item">
-                                    <a href="https://stage.swiftcampus.com/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
+                                    <a href="http://localhost:8080/stage/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="https://stage.swiftcampus.com/New-VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Visitor</a>
-                                </li>
+                                <!--li class="nav-item">
+                                    <a href="http://localhost/stage/New-VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Visitor</a>
+                                </li-->
 								
                                 
                                 <li class="nav-item sidebar-nav-item">
@@ -192,15 +192,15 @@
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-chat"></i><span>Communication</span></a>
                             <ul class="nav sub-group-menu">
-                                <li class="nav-item">
+                                <!--li class="nav-item">
                                     <a href="IndividualSMS-old.php" class="nav-link"><i class="fas fa-angle-right"></i>Individual SMS</a>
-                                </li>
+                                </li-->
                                 <li class="nav-item">
                                     <a href="IndividualSMS.php" class="nav-link"><i class="fas fa-angle-right"></i>New Individual SMS</a>
                                 </li>
-                                <li class="nav-item">
+                                <!--li class="nav-item">
                                     <a href="GroupSMS-old.php" class="nav-link"><i class="fas fa-angle-right"></i>Group SMS</a>
-                                </li>
+                                </li-->
                                 <li class="nav-item">
                                     <a href="GroupSMS.php" class="nav-link"><i class="fas fa-angle-right"></i>New Group SMS</a>
                                 </li>

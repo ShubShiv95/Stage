@@ -2,7 +2,7 @@
 session_start();
 include 'dbobj.php';
 include 'errorLog.php';
-//include 'security.php';
+include 'security.php';
 ?>
 <head>
     <meta charset="utf-8">
@@ -81,17 +81,17 @@ include 'errorLog.php';
                             </div>
                             
                         </div>
-                        <form class="new-added-form aj-new-added-form new-aj-new-added-form" action="CUG2.php" id="cugform">
+                        <form class="new-added-form aj-new-added-form new-aj-new-added-form" action="CUG2.php">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>  Choose Unit Group Name <span>*</span></label>
-                                        <input type="text" minlength="12" maxlength="100" id="smsgroupname" name="smsgroupname" placeholder="" class="form-control" required>
+                                        <input type="text" minlength="12" maxlength="12" id="smsgroupname" name="smsgroupname" placeholder="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
-                                        <select class="select2" id="L1-Select" name="user_type"  onChange="getGroups4CUG(this.value);">
+                                        <select class="select2" id="L1-Select" name="user_type" required onChange="getGroups4CUG(this.value);">
                                         <option value="0">Select User Type</option>
                                                     
                                                     <?php
@@ -117,7 +117,7 @@ include 'errorLog.php';
                                                             }
                                                         while($row=mysqli_fetch_assoc($result))
                                                             {
-                                                                $str='<option value="' . $row["utype_id"] . '">' .  $row["user_type"];
+                                                                $str='<option value="' . $row["User_Type_Id"] . '">' .  $row["User_Type"];
                                                                 echo $str;
                                                             }
                                                     ?>
@@ -126,13 +126,13 @@ include 'errorLog.php';
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
-                                        <select class="select2" id="L2-Select" name="L2-Select"  onChange="getGroupList4CUG('L1-Select',this.value,'L3-Select','Select-level4-subdiv1');">
+                                        <select class="select2" id="L2-Select" name="L2-Select" required onChange="getGroupList4CUG('L1-Select',this.value,'L3-Select','Select-level4-subdiv1');">
                                         </select>
                                     </div> 
                                 </div>  
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
-                                        <select class="select2" id="L3-Select" name="L3-Select"  onChange="getStuNumList4CUG(this.value);">
+                                        <select class="select2" id="L3-Select" name="L3-Select"  onChange="getStuNumList4CUG(this.value);"  required>
                                         </select>
                                     </div> 
                                 </div>                       
@@ -213,7 +213,6 @@ include 'errorLog.php';
                                     <div class="col-xl-12 col-lg-12 col-12 text-right aj-mb-2">
                                         <div class="form-group aj-form-group">
                                             <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Create</button>
-                                            <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                             
                                         </div>                                    
                                     </div>
@@ -360,35 +359,6 @@ include 'errorLog.php';
     $("#checkAll").click(function () {
      $('.check-by-all').not(this).prop('checked', this.checked);
  });
-</script>
-<script type="text/javascript">
-    var frm = $('#cugform');
-
-    frm.submit(function (e) {
-        //alert(data);
-        e.preventDefault();
-
-        $.ajax({
-            type: frm.attr('method'),
-            url: frm.attr('action'),
-            data: frm.serialize(),
-            success: function (data) {
-                //console.log('Submission was successful.');
-                //console.log(data);
-                //alert(data);
-                //$('div#msgreply').html(data);
-                alert(data);
-                $('#cugform').trigger("reset");
-            },
-            error: function (data) {
-                //console.log('An error occurred.');
-                //console.log(data);
-                alert(data);
-                //$('div#msgreply').html(data);
-                
-            },
-        });
-    });
 </script>
 </body>
 

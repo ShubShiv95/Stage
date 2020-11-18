@@ -68,13 +68,13 @@ $insertAdmissionFollowupNote_sql="insert into admission_followup_note
             //echo $str_start.$messsage.$str_end;
             //die;
             //echo "unsecessful";
-            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=followupNote.php?aeid=' .$aeid . '">';
+            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=FollowupNote.php?aeid=' .$aeid . '">';
         }
     else
         {
             mysqli_commit($dbhandle);
             //echo "success";
-            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=followupNote.php?aeid=' .$aeid . '">';
+            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=FollowupNote.php?aeid=' .$aeid . '">';
         }    
 
 ?>

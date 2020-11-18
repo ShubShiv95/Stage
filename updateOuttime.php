@@ -10,7 +10,7 @@ $target_td=$_REQUEST["target_td"];
 
 
 
-$updateVisitorOuttime_sql="update visitor_enquiry_table set out_time=time_format('$outtime','%H:%i') where veid=$veid";
+$updateVisitorOuttime_sql="update visitor_enquiry_table set out_time=time_format('$outtime','%H:%i') where ve_id=$veid";
 //echo $updateVisitorOuttime_sql;
 $updateVisitorOuttime_result=$dbhandle->query($updateVisitorOuttime_sql);
 if(!$updateVisitorOuttime_result)
@@ -21,7 +21,7 @@ if(!$updateVisitorOuttime_result)
     }
 else    
     {    
-        $getVisitorOuttime_sql="select time_format(out_time,'%I:%i %p')  as outtime from visitor_enquiry_table where veid=$veid";
+        $getVisitorOuttime_sql="select time_format(out_time,'%I:%i %p')  as outtime from visitor_enquiry_table where ve_id=$veid";
         //echo $getVisitorOuttime_sql;
         if(!$updateVisitorOuttime_result=$dbhandle->query($getVisitorOuttime_sql))
             {

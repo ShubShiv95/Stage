@@ -57,7 +57,7 @@ include 'dbobj.php';
 	
     
      //Printing Class Information.
-     $query1="select cm.class_no classno,cm.class_name,cm.stream stream ,cs.section section from class_master_table cm,class_section_table cs where cm.class_id=cs.class_id and cs.class_sec_id=" . $secid . " and cs.enabled=1 and cs.school_id=" . $_SESSION["SCHOOLID"];
+     $query1="select cm.class_no classno,cm.class_name,cs.section section from class_master_table cm,class_section_table cs where cm.class_id=cs.class_id and cs.class_sec_id=" . $secid . " and cs.enabled=1 and cs.school_id=" . $_SESSION["SCHOOLID"];
      //echo $query;
      $result1=$dbhandle->query($query1);
      $row1=$result1->fetch_assoc();
@@ -264,7 +264,7 @@ include 'dbobj.php';
 				    */			
 			
 					$present=0;
-					$query2= "select smt.student_id,smt.first_name,smt.middle_name,smt.last_name,scd.rollno from student_master_table smt, student_class_details scd where scd.class_sec_id=" . $secid . " and scd.enabled=1 and smt.student_id=scd.student_id and scd.session='" . $_SESSION["SESSION"] . "' and scd.school_id=". $_SESSION["SCHOOLID"];
+					$query2= "select smt.student_id,smt.first_name,smt.middle_name,smt.last_name,scd.roll_no from student_master_table smt, student_class_details scd where scd.class_sec_id=" . $secid . " and scd.enabled=1 and smt.student_id=scd.student_id and scd.session='" . $_SESSION["SESSION"] . "' and scd.school_id=". $_SESSION["SCHOOLID"];
                     //$attendanceStudentList_row["first_name"]
                     //echo 'Second Section: ' . $query2;
                     $attendanceStudentList_result=$dbhandle->query($query2);
@@ -283,7 +283,7 @@ include 'dbobj.php';
                             {
                                 $count++;
                                 $name=$attendanceStudentList_row["first_name"] . ' '. $attendanceStudentList_row["middle_name"] . ' ' . $attendanceStudentList_row["last_name"];
-                                $str= $str .  '<tr><td>' . $attendanceStudentList_row["rollno"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["rollno"] .'" /></td><td>' . $name .'<input type="hidden" name="sname'.$count.'" value="'. $name .'" /></td><td><div class="row radio">';
+                                $str= $str .  '<tr><td>' . $attendanceStudentList_row["roll_no"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["roll_no"] .'" /></td><td>' . $name .'<input type="hidden" name="sname'.$count.'" value="'. $name .'" /></td>';
                                 /*
                                 $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                                 <div class="form-group aj-form-group">
@@ -305,15 +305,15 @@ include 'dbobj.php';
                                                     <span><input type="radio" class="gaurdian-bs" name="' . $count . '"  id="'. $count . 'absent"  value="ABSENT" onclick="calc_attendance();"/>&nbsp;Absent</span>
                                                 </div>
                                             </div> ';  */                            
-                                $str=$str . '<div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
-                                                <div class="form-group aj-form-group">';
+                                $str=$str . '<!--div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                                                <div class="form-group aj-form-group"-->';
                                                     
-                                $str=$str . '<table><tr><td><span><input checked type="radio" class="gaurdian-bs" name="' . $count . '" id="'. $count . 'present" value="PRESENT"  onclick="calc_attendance();"/>&nbsp;Present</span>
-                                <span><input  type="radio" class="gaurdian-bs" name="' . $count . '" id="'. $count . 'late"   value="LATE" onclick="calc_attendance();"/>&nbsp;Late</span><span><input  type="radio" class="gaurdian-bs" name="' . $count . '"  id="'. $count . 'halfday"  value= "HALFDAY" onclick="calc_attendance();"/>&nbsp;Half Day</span>
-                                <span><input type="radio" class="gaurdian-bs" name="' . $count . '"  id="'. $count . 'absent"  value="ABSENT" onclick="calc_attendance();"/>&nbsp;Absent</span></td></tr></table>
+                                $str=$str . '<td><!--div class="row radio"--><table width="100%"><tr><td><span><input checked type="radio" class="gaurdian-bs" name="' . $count . '" id="'. $count . 'present" value="PRESENT"  onclick="calc_attendance();"/>&nbsp;Present</span></td><td>
+                                <span><input  type="radio" class="gaurdian-bs" name="' . $count . '" id="'. $count . 'late"   value="LATE" onclick="calc_attendance();"/>&nbsp;Late</span></td><td><span><input  type="radio" class="gaurdian-bs" name="' . $count . '"  id="'. $count . 'halfday"  value= "HALFDAY" onclick="calc_attendance();"/>&nbsp;Half Day</span></td><td>
+                                <span><input type="radio" class="gaurdian-bs" name="' . $count . '"  id="'. $count . 'absent"  value="ABSENT" onclick="calc_attendance();"/>&nbsp;Absent</span></td></tr></table></td>
                                 
-                                       </div> ';                              
-                                $str=$str . '</div></td><td><textarea class="form-control attendance-textarea" name="remarks' . $count . '" id="reason' . $count . '" ' . '></textarea><input type="hidden" name="sid' . $count . '" value="' . $attendanceStudentList_row["student_id"] . '" /><!--input type="hidden" name="prev_attendance_status' . $count . '" /--></td></tr>';
+                                       <!--/div--> ';                              
+                                $str=$str . '<!--/div></td--><td><textarea class="form-control attendance-textarea" name="remarks' . $count . '" id="reason' . $count . '" ' . '></textarea><input type="hidden" name="sid' . $count . '" value="' . $attendanceStudentList_row["student_id"] . '" /><!--input type="hidden" name="prev_attendance_status' . $count . '" /--></td></tr>';
 
                                 $present=$present + 1;
 

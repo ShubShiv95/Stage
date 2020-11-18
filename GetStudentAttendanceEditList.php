@@ -17,7 +17,7 @@
 	$Date_format = "d/m/Y"; //Creating a Indian date format string variable.
     date_default_timezone_set('Asia/Kolkata');  //setting Indian time zone at application server level.
 
-	$query1="select cm.class_no classno,cm.class_name,cm.stream stream ,cs.section section from class_master_table cm,class_section_table cs where cm.class_id=cs.class_id and cs.class_sec_id=" . $secid . " and cs.enabled=1 and cs.school_id=" . $_SESSION["SCHOOLID"];
+	$query1="select cm.class_no classno,cm.class_name,cs.section section from class_master_table cm,class_section_table cs where cm.class_id=cs.class_id and cs.class_sec_id=" . $secid . " and cs.enabled=1 and cs.school_id=" . $_SESSION["SCHOOLID"];
 	//echo $query;
 	$result1=mysqli_query($dbhandle,$query1);
 	$row1=mysqli_fetch_assoc($result1);
@@ -53,7 +53,7 @@
 
         $present=0;
         //$attendanceStudentList_query= "select adt.student_id,smt.first_name,smt.middle_name,smt.last_name,smt.roll_number,adt.attendance_status,adt.attendance_remarks,adt.prev_attendance_status as prev_attendance_status, adt.prev_attendance_remarks as prev_attendance_remarks from attendance_details_table adt,student_master_table smt where adt.attendance_id=" . $row1["Attendance_id"] . " and smt.student_id=adt.student_id";
-        $attendanceStudentList_query= "select adt.student_id,smt.first_name,smt.middle_name,smt.last_name,scd.rollno,adt.attendance_status,adt.attendance_remarks,adt.prev_attendance_status as prev_attendance_status, adt.prev_attendance_remarks as prev_attendance_remarks from attendance_details_table adt,student_master_table smt,student_class_details scd where adt.attendance_id=" . $row1["Attendance_id"] . " and smt.student_id=adt.student_id and scd.student_id=smt.student_id";
+        $attendanceStudentList_query= "select adt.student_id,smt.first_name,smt.middle_name,smt.last_name,scd.roll_no,adt.attendance_status,adt.attendance_remarks,adt.prev_attendance_status as prev_attendance_status, adt.prev_attendance_remarks as prev_attendance_remarks from attendance_details_table adt,student_master_table smt,student_class_details scd where adt.attendance_id=" . $row1["Attendance_Id"] . " and smt.student_id=adt.student_id and scd.student_id=smt.student_id";
         //echo $attendanceStudentList_query;
         $attendanceStudentList_result=$dbhandle->query($attendanceStudentList_query);
 		$count=0;
@@ -62,7 +62,7 @@
                 $count++;
                 $name=$attendanceStudentList_row["first_name"] . ' ' . $attendanceStudentList_row["middle_name"] . ' ' . $attendanceStudentList_row["last_name"];
                                
-                $str= $str .  '<tr><td>' . $attendanceStudentList_row["rollno"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["rollno"] .'" /></td><td>' . $name . '<input type="hidden" name="sname'.$count.'" value="'. $name .'" /></td>';
+                $str= $str .  '<tr><td>' . $attendanceStudentList_row["roll_no"] . '<input type="hidden" name="rollno'.$count.'" value="'. $attendanceStudentList_row["roll_no"] .'" /></td><td>' . $name . '<input type="hidden" name="sname'.$count.'" value="'. $name .'" /></td>';
                                
                 $str=$str . '<td><div class="row radio">
                                     <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
@@ -97,32 +97,32 @@
                                         <h6>Present Number</h6>
                                     </div>
                                     <div class="input-box-in">
-                                        <input type="text" readonly="" class="redonly-form-control" value="'. $row1["total_present"] . '" name="presentno" id="presentno">
+                                        <input type="text" readonly="" class="redonly-form-control" value="'. $row1["Total_Present"] . '" name="presentno" id="presentno">
                                     </div>
                                     <div class="name-f">
                                         <h6>Late Number</h6>
                                     </div>
                                     <div class="input-box-in">
-                                        <input type="text" readonly="" class="redonly-form-control" value="'. $row1["total_late"] . '" name="lateno" id="lateno">
+                                        <input type="text" readonly="" class="redonly-form-control" value="'. $row1["Total_Late"] . '" name="lateno" id="lateno">
                                     </div>
                                     <div class="name-f">
                                         <h6>Half Day Number</h6>
                                     </div>
                                     <div class="input-box-in">
-                                        <input type="text" readonly="" class="redonly-form-control" value="'. $row1["total_halfday"] . '" name="halfdayno" id="halfdayno">
+                                        <input type="text" readonly="" class="redonly-form-control" value="'. $row1["Total_Halfday"] . '" name="halfdayno" id="halfdayno">
                                     </div>
                                     <div class="name-f">
                                         <h6>Abscent Number</h6>
                                     </div>
                                     <div class="input-box-in">
-                                        <input type="text" readonly="" class="redonly-form-control" value="'. $row1["total_absent"] . '" name="absentno" id="absentno">
+                                        <input type="text" readonly="" class="redonly-form-control" value="'. $row1["Total_Absent"] . '" name="absentno" id="absentno">
                                     </div>
                                     <input type="hidden" name="total_count" id="total_count" value="' . $count . '" readonly />
                                     <input type="hidden" name="adt" id="adt" value="'. $adt . '" readonly />
                                     <input type="hidden" name="classid" value="' . $classid . '" readonly />
                                     <input type="hidden" name="secid"  value="' . $secid . '" readonly />	
                                     <input type="hidden" name="period"  value="' .  $period . '" readonly />
-                                    <input type="hidden" name="aid"  value="' . $row1["Attendance_id"] . '" readonly />
+                                    <input type="hidden" name="aid"  value="' . $row1["Attendance_Id"] . '" readonly />
                                 </div>
                                 <div class="new-added-form aj-new-added-form">
                                     <div class="aaj-btn-chang-cbtn">

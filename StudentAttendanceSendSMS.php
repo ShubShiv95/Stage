@@ -4,6 +4,7 @@ include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
 include 'sequenceGenerator.php';
+require_once 'GlobalModel.php';
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -92,6 +93,69 @@ include 'sequenceGenerator.php';
                                         <h5 class="text-center">SMS Sent to Absent Student's Parent</h5>
                                                 <div>
                                                 <?php
+                                                    $aid=$_REQUEST["Attendance_Id"];
+                                                    //mysqli_autocommit($dbhandle,False);
+                                                    //Fetch Attendance Master Data
+                                                    $getAttendanceInfo_sql="select date_format(doa,'%d-%M-%Y') as doa,date_format(now(),'%d-%m-%Y') as curr_date,section,class_name,sms_status from class_section_table cst,class_master_table cmt,attendance_master_table amt where amt.Attendance_Id=$aid and cst.class_sec_id=amt.class_sec_id and cmt.class_id=cst.class_id ";
+                                                    //echo $getAttendanceInfo_sql;
+                                                    $getAttendanceInfo_result=$dbhandle->query($getAttendanceInfo_sql);
+
+                                                    if(!$getAttendanceInfo_result)
+                                                        {
+
+                                                            $error_msg=mysqli_error($dbhandle);
+                                                            $el=new LogMessage();
+                                                            $sql=$getAttendanceInfo_sql;
+                                                            //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                                            $el->write_log_message('Attendance SMS Send',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+                                                            $dbhandle->query("unlock tables");
+                                                            mysqli_rollback($dbhandle);
+                                                            $message='Error: Attendance SMS Failed to Create.  Please consult application consultant.';
+                                                            echo $message;
+                                                            die;
+                                                        }
+                                                    $getAttendanceInfo_row=$getAttendanceInfo_result->fetch_assoc();
+                                                     
+                                                    $Message_Id=sequence_number('message_master_table',$dbhandle);
+                                                    $Message_Category='Attendance';
+                                                    $Message_Title="Attendance Message Class " . $getAttendanceInfo_row["class_name"] . ' Section-' . $getAttendanceInfo_row["section"] . ' dated ' . $getAttendanceInfo_row["doa"] . '.';
+                                                    $Message_Date=$getAttendanceInfo_row["curr_date"];
+                                                    
+                                                    $Absent_Message=$GLOBAL_ATTENDANCE_SMS["Absent-SMS"];
+                                                    $Absent_Message=str_replace("#date#",$getAttendanceInfo_row["doa"],$Absent_Message); //Absent message without student name.
+                                                    $Present_Message=$GLOBAL_ATTENDANCE_SMS["Present-SMS"]; //Present message without student name.
+
+                                                    
+                                                    $putMessageMasterData_sql="insert into message_master_table(Message_Id,Message_Category,Message_Title,Message_Date,Message_Type,School_Id,Created_By) values($Message_Id,'$Message_Category','$Message_Title',str_to_date('$Message_Date','%d-%m-%Y'),'SMS'," . $_SESSION['SCHOOLID'] . ",'" . $_SESSION['LOGINID'] . "')";        
+
+                                                    $attendanceStudentList_sql= "select adt.student_id,smt.first_name,if(smt.gender='MALE','son','daughter') as gender,adt.attendance_status,adt.prev_attendance_status as prev_attendance_status from attendance_details_table adt,student_master_table smt where adt.attendance_id=" . $aid . " and smt.student_id=adt.student_id";
+                                                    echo $attendanceStudentList_sql;
+
+                                                    $attendanceStudentList_result=$dbhandle->query($attendanceStudentList_sql);
+                                                    $count=0;
+                                                    while($attendanceStudentList_row=$attendanceStudentList_result->fetch_assoc())
+                                                        {
+                                                              if($attendanceStudentList_row["attendance_status"]=='ABSENT')
+                                                                {
+                                                                    $Absent_Message=str_replace("#childname#",$attendanceStudentList_row["gender"] . ' ' . $attendanceStudentList_row["first_name"],$Absent_Message);
+                                                                    echo  '<BR>' . $Absent_Message . '<hr>';
+                                                                }
+                                                             
+                                                                
+                                                                if($getAttendanceInfo_row["sms_status"]==1) //send modified present sms to parene only if the previous sms sent operation has taken place. If no sms sent operation is done then no required to send any modified present sms.
+                                                                    {
+                                                                        
+                                                                        if($attendanceStudentList_row["attendance_status"]=='ABSENT' AND $attendanceStudentList_row["prev_attendance_status"]!='ABSENT')
+                                                                            {
+                                                                                $Present_Message=str_replace("#childname#",$attendanceStudentList_row["gender"] . ' ' . $attendanceStudentList_row["first_name"],$Present_Message);
+                                                                                echo  '<BR>' . $Absent_Message . '<hr>';
+                                                                            }  
+
+                                                                    }            
+                                                        }
+
+
+                                                    /*
                                                     //Collecting Attendance id for the attendance.
                                                     $aidlist=array();
                                                     $aidlist=$_REQUEST["pendingaid"];
@@ -147,7 +211,11 @@ include 'sequenceGenerator.php';
 
                                                             }   
 
-                                                        }    
+                                                        }  
+                                                        
+                                                        
+*/
+                                                        
                                                 ?>            
                                                 
                                                         

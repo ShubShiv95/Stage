@@ -36,9 +36,9 @@ include 'security.php';
                                                     }
                                                     while($row=$attendanceList_result->fetch_assoc())
                                                     {
-                                                        $attendanceList[$row["Class_Sec_id"]]["smsflag"]= $row["smsflag"];   
-                                                        $attendanceList[$row["Class_Sec_id"]]["attendance_status"]= $row["attendance_status"];   
-                                                        $attendanceList[$row["Class_Sec_id"]]["Attendance_id"]= $row["Attendance_id"];   
+                                                        $attendanceList[$row["Class_Sec_Id"]]["SMS_Flag"]= $row["SMS_Flag"];   
+                                                        $attendanceList[$row["Class_Sec_Id"]]["Attendance_Status"]= $row["Attendance_Status"];   
+                                                        $attendanceList[$row["Class_Sec_Id"]]["Attendance_Id"]= $row["Attendance_Id"];   
                                                     }
 
                                                     //fetching list of class and sections for a given date of preiod 1.
@@ -48,21 +48,21 @@ include 'security.php';
                                                     //echo $getclassSectionList_sql;
                                                     while($row1=$getclassSectionList_result->fetch_assoc()) 
                                                         {
-                                                            $indicatorHTML=$indicatorHTML. '<tr><td align="center">'. $row1["class_name"] . '</td><td><ul class="list-absent">';    
+                                                            $indicatorHTML=$indicatorHTML. '<tr><td align="center">'. $row1["Class_Name"] . '</td><td><ul class="list-absent">';    
                                                             
 
                                                         //$getAttendanceMsgStatus_sql='select smsflag,attendance_status,class_name,section,cst.class_sec_id as class_sec_id,cst.class_id as class_id from class_section_table cst,attendance_master_table amt
                                                         //$getAttendanceMsgStatus_sql='select smsflag,attendance_status,class_name,section,cst.class_sec_id as class_sec_id,cst.class_id as class_id from class_section_table cst full outer join attendance_master_table amt on cst.class_sec_id=amt.class_sec_id
                                                         //where cst.class_id='.$row1["class_id"] . " and doa=str_to_date('10/10/2020','%d/%m/%Y') and period=1 and cst.enabled=1";
-                                                        $getSectionList_sql='select class_sec_id,section from class_section_table where class_id='.$row1["class_id"] . " and enabled=1";
+                                                        $getSectionList_sql='select class_sec_id,section from class_section_table where class_id='.$row1["Class_Id"] . " and enabled=1";
                                                         //echo $getSectionList_sql . '<p>';
                                                         $getSectionList_result=$dbhandle->query($getSectionList_sql);
                                                         //print_r($getAttendanceMsgStatus_result);
                                                         while($row2=$getSectionList_result->fetch_assoc()) 
                                                             {      
-                                                                $attendance_status=(isset($attendanceList[$row2["class_sec_id"]])?$attendanceList[$row2["class_sec_id"]]["attendance_status"]:0);
-                                                                $smsflag=(isset($attendanceList[$row2["class_sec_id"]])?$attendanceList[$row2["class_sec_id"]]["smsflag"]:0);
-                                                                $Attendance_id=(isset($attendanceList[$row2["class_sec_id"]])?$attendanceList[$row2["class_sec_id"]]["Attendance_id"]:0);
+                                                                $attendance_status=(isset($attendanceList[$row2["class_sec_id"]])?$attendanceList[$row2["class_sec_id"]]["Attendance_Status"]:0);
+                                                                $smsflag=(isset($attendanceList[$row2["class_sec_id"]])?$attendanceList[$row2["class_sec_id"]]["SMS_Flag"]:0);
+                                                                $Attendance_id=(isset($attendanceList[$row2["class_sec_id"]])?$attendanceList[$row2["class_sec_id"]]["Attendance_Id"]:0);
                                                                 //$smsflag=$row2["smsflag"];
                                                                 //finding section circle symbol css as per the corresponding smsflag and attendance_status value for the section.
                                                                 if($attendance_status==0 and $smsflag==0)

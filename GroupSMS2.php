@@ -17,7 +17,7 @@ Step5: Commit the changes.
 
 // Step1 starts here.
 
-$User_TypeId=0;                     //Initialized with 0 value means this option is not selected.
+$userGroupid=0;                     //Initialized with 0 value means this option is not selected.
 $groupList=array();                 //Blank Array created.
 $messageTitle='';                   //Initialized with no string value.
 $composegMessage='';                //Initialized with no string value.
@@ -37,25 +37,34 @@ $messageTime=date('G:i');           //Initialized with current time value in hh2
 
     }
     else {
-            $User_TypeId=$_REQUEST['user_type'];
-    
+        $User_TypeId=$_REQUEST['user_type'];
+        //Second Variable Checking.
+        //if($User_TypeId<4) //checing the sub groups selected or not for fetching contact numbers.  
+          //  {
+                if(!isset($_REQUEST['msgGrpId']))
+                    {
+                        echo "No receiver contact group provided.  Please select message receiving group for sending group messages.";
+                        die;
+                    }
+
+                    
+                    else {
+                            $groupList=$_REQUEST['msgGrpId'];
+                    }
+            //}    
+    }
 
 
-            //Second Variable Checking.
-            if($User_TypeId<4) //checing the sub groups selected or not for fetching contact numbers.  
-                {
-                    if(!isset($_REQUEST['msgGrpId']))
-                        {
-                            echo "No receiver contact group provided.  Please select message receiving group for sending group messages.";
-                            die;
-                        }
+    //Second Variable Checking.
+    if(!isset($_REQUEST['msgGrpId'])) //checing the sub groups selected or not for fetching contact numbers.  
+        {
+            echo "No receiver contact group provided.  Please select message receiving group for sending group messages.";
+            die;
 
-                        
-                        else {
-                                $groupList=$_REQUEST['msgGrpId'];
-                        }
-                }        
-        }    
+    }
+    else {
+            $groupList=$_REQUEST['msgGrpId'];
+    }
 
     //Third Variable Checking.
     if(!isset($_REQUEST["messagetitle"]))   //Checking if the message title has been left blank and thus generating alert message.
@@ -143,13 +152,11 @@ $getContactDetails_sql='';
     if($User_TypeId==1)     //Designing SQL for Student Type Group Messaging.
         {
             $getContactDetails_sql="select smt.student_id,smt.sms_contact_no,whatsapp_contact_no from student_master_table smt, student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id in($GroupListStr) and scd.session='" . $_SESSION["SESSION"] . "' and scd.school_id=" . $_SESSION["SCHOOLID"] . " order by scd.class_sec_id";
-            echo "Student Group SMS created Successfully."; 
 
         }
     else if($User_TypeId==2)    //Designing SQL for Staff Type Group Messaging.
         {
             $getContactDetails_sql="select emt.employee_id,emt.sms_number,emt.whatsapp_number from employee_master_table emt where emt.dept_id in($GroupListStr) and emt.school_id=" . $_SESSION["SCHOOLID"] . " and emt.enabled=1 order by emt.dept_id";
-            echo "Staff Group SMS created Successfully."; 
         }    
     else if($User_TypeId==3)       //Designing SQL for CUG Type Group Messaging.
         {
@@ -167,10 +174,8 @@ $getContactDetails_sql='';
 //End of Step3.
 
 
-// Step4: processing above sql created.
-
-  /* to be used for next course of action
-
+// Step4:
+    echo $getContactDetails_sql;    
     $getContactDetails_result=$dbhandle->query($getContactDetails_sql);
     
     if(!$getContactDetails_result)
@@ -188,12 +193,8 @@ $getContactDetails_sql='';
     else
         echo "Group SMS created Successfully.";    //for testing printing messages here but contact list update in sms table is remainig.
 
-*/
+
 //End of Step4.
-
-
-
-
 
 /*commenting entire below block...
 userGroupid

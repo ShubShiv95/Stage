@@ -90,14 +90,12 @@ include 'security.php';
                         <form class="new-added-form aj-new-added-form new-aj-new-added-form" id="groupSmsForm" action="GroupSMS2.php" method="post">
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
-
                                     <div class="row">
                                             <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                         <div class="form-group aj-form-group">
                                             <label>Message To <span>*</span></label>
                                             <select class="select2" id="L1-Select" name="user_type" required onChange="GrpMsgGroupList(this.value);">
-                                                <option value="0">Select Visitor Type</option>
-                                                            
+                                                <option value="0">Select Type</option>
                                                             <?php
                                                                 $query='select * from message_user_group_table where enabled=1' . ' and group_select_enabled=1 and School_Id=' . $_SESSION["SCHOOLID"];
                                                                 $result=mysqli_query($dbhandle,$query);
@@ -121,7 +119,7 @@ include 'security.php';
                                                                     }
                                                                 while($row=mysqli_fetch_assoc($result))
                                                                 {
-                                                                    $str='<option value="' . $row["utype_id"] . '">' .  $row["user_type"];
+                                                                    $str='<option value="' . $row["User_Type_Id"] . '">' .  $row["User_Type"];
                                                                     echo $str;
                                                                 }
                                                             ?>
@@ -136,9 +134,9 @@ include 'security.php';
                                         </div>
                                     </div>
                                 </div>
-                                        <div class="Individuals-cug" id="Select-level4-subdiv1">
-                                            <div class="Attendance-staff aj-scroll-Attendance-staff" >
-                                                <div class="table-responsive">
+                                        <div class="Individuals-cug" id="main-div">
+                                            <div class="Attendance-staff aj-scroll-Attendance-staff  " >
+                                                <div class="table-responsive" id="Select-level4-subdiv1">
                                                     <table class="table table-striped">
                                                         <thead>
                                                             <tr>
@@ -151,26 +149,20 @@ include 'security.php';
                                                             </tr>
                                                         </thead>
                                                         <tbody class="top-position-ss2">
-                                                          
-                                                            
                                                         </tbody>
                                                     </table>
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>  
                                     <div class="col-xl-6 col-lg-6 col-12 aj-mb-2 ">
                                         <div class="form-group aj-form-group">
                                         <label>Title *</label>
                                         <input type="text" id="messagetitle" name="messagetitle" placeholder="" class="form-control">
                                         </div>
-                                    
                                         <div class="form-group aj-form-group">
                                             <label>Compose Message</label>
                                             <textarea type="text" rows="6" name="composemsg" required="" placeholder="" class="aj-form-control"> </textarea>
-
                                         </div>
                                         <div class="d-grid-ain" id="PrintCount-div">
                                             <h6><b>Character Count: </b><span >0</span></h6>
@@ -216,21 +208,17 @@ include 'security.php';
                                             </h6>
                                         </div>
                                          </div>
-
                                         <div class="col-xl-12 col-lg-12 col-12 text-right aj-mb-2">
                                             <div class="form-group aj-form-group">
                                             <button type="submit" id="sendmessage" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Create/Send</button>
-                                            <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>    
+                                                
                                             </div>                                    
                                         </div>  
                                     </div>  
                             </div>
-                            
                         </form>
-                        <div class="row"><div class="col-xl-12 col-lg-12" id="outputmsg"></div></div>
                     </div>
                 </div>
-
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
                     <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
@@ -263,44 +251,40 @@ include 'security.php';
     <script src="js/app-functions.js"></script>
     <script>
         window.onload=function(){
-            //$("#unknownNo-div").hide();
+            $("#unknownNo-div").hide();
             };
        // });
     </script>
     <script>    
-     
      $('#L1-Select').on('change', function(){
     	var demovalue = $(this).val(); 
     	if(demovalue ==1){
-			 //$("#Select-level2-div").show();
-             //$("#Select-level3-div").show();
+			 $("#Select-level2-div").show();
              //$('#Select-level4-subdiv1').show();
-             //$('#unknownNo-div').hide();
+             $('#main-div').show();
 			 
         }
         else if(demovalue ==2){
-            //$("#Select-level3-div").hide();
-            //$('#unknownNo-div').hide();
+            $("#Select-level2-div").show();
             //$('#Select-level4-subdiv1').show();
-            
-
+            $('#main-div').show();
         }
         else if(demovalue ==3){
-        
+            $("#Select-level2-div").show();
+             //$('#Select-level4-subdiv1').show();
+             $('#main-div').show();
         }
         else{
-            //$("#Select-level2-div").hide();
-             //$("#Select-level3-div").hide();
-             //$('#unknownNo-div').show();
-             $('#L2-Select').prop('required',false);
-             $('#Select-level4-subdiv1').empty();
-             
+                $("#Select-level2-div").hide();
+                $('#Select-level4-subdiv1').empty();
+                //$('#main-div').hide();
+            }     
 
-        }
+        
     });
     </script>
-
     <script>
+
     /*
     $('#myform').submit(function() {
             var techs = [];
@@ -308,9 +292,10 @@ include 'security.php';
                 techs.push($(this).val());
             });
             alert("My favourite techs are: " + techs.join(", "));
+            return true; // return false to cancel form action
          });
-         return true; // return false to cancel form action
-});*/
+        
+*/
 </script>
   
 
@@ -330,11 +315,8 @@ include 'security.php';
                 //console.log('Submission was successful.');
                 //console.log(data);
                 //alert(data);
-                //$('div#outputmsg').html(data);
+                //$('div#msgreply').html(data);
                 alert(data);
-                $('#groupSmsForm').trigger("reset");
-                $('#Select-level4-subdiv1').empty();
-
             },
             error: function (data) {
                 //console.log('An error occurred.');

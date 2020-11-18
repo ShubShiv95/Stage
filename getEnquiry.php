@@ -15,7 +15,7 @@ $_REQUEST["todate"];
 
 
 $condition_found=0;
-$query="select aet.*,cmt.class_name as class_name,mlt.location_name as location_name from admission_enquiry_table aet,class_master_table cmt,marketting_location_table mlt where cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and ";
+$query="select aet.*,mlt.location_name as location_name from admission_enquiry_table aet,marketting_location_table mlt where mlt.locationid=aet.locality_id and ";
 
 if($_REQUEST["enqtype"]=='All'){
 
@@ -38,7 +38,7 @@ if($_REQUEST["class"]=='All'){
 }    
 else{    
   //  if($condition_found==0){
-        $query=$query . "aet.class_id='" . $_REQUEST["class"] . " ' and ";
+        $query=$query . " aet.class='" . $_REQUEST["class"] . " ' and ";
   //      $condition_found++;
     }
    // else{
@@ -53,7 +53,7 @@ if($_REQUEST["session"]=='All'){
 }    
 else{    
   //  if($condition_found==0){
-        $query=$query . "aet.session='" . $_REQUEST["session"] . "' and ";
+        $query=$query . " aet.session='" . $_REQUEST["session"] . "' and ";
 //        $condition_found++;
     }
   //  else{
@@ -69,7 +69,7 @@ if($_REQUEST["locality"]=='All'){
 }    
 else{    
    // if($condition_found==0){
-        $query=$query . "aet.locality_id='" . $_REQUEST["locality"] . "' and ";
+        $query=$query . " aet.locality_id='" . $_REQUEST["locality"] . "' and ";
      //   $condition_found++;
     }
     //else{
@@ -93,15 +93,15 @@ if($_REQUEST["searchdate"]=='createdon'){
 if($_REQUEST["searchdate"]=='followup'){
 
   //  if($condition_found>0){
-        $query=$query . "followup_date between str_to_date('" . $_REQUEST["fromdate"] . "','%d/%m/%Y') and str_to_date('" . $_REQUEST["todate"] . "','%d/%m/%Y') and ";            
+        $query=$query . " followup_date between str_to_date('" . $_REQUEST["fromdate"] . "','%d/%m/%Y') and str_to_date('" . $_REQUEST["todate"] . "','%d/%m/%Y') and ";            
     }
   //  else{
     //    $query=$query . "where followup_date between str_to_date('" . $_REQUEST["fromdate"] . "','%d/%m/%Y') and str_to_date('" . $_REQUEST["todate"] . "','%d/%m/%Y')";            
       //  $condition_found++;
     //}  
 //}    
-$query=$query . "aet.school_id=" . $_SESSION["SCHOOLID"];
-//echo $query;
+$query=$query . " aet.school_id=" . $_SESSION["SCHOOLID"];
+echo $query;
 
 
 $result=mysqli_query($dbhandle,$query);
@@ -158,7 +158,7 @@ while($result_row=$result->fetch_assoc()){
 		<td>'. $result_row["MOBILE_NO"] . '</td>
 		<td>'. $result_row["STUDENT_NAME"] . '</td>
 		<td>'. $result_row["location_name"] . '</td>
-		<td>'. $result_row["class_name"] . '</td>
+		<td>'. $result_row["Class"] . '</td>
 		<td>'. $result_row["SESSION"] . '</td>
 		<td>'. $result_row["ENQUIRER_RELATION"] . '</td>
 		<td>'. $result_row["SIBLING"] . '</td>

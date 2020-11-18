@@ -97,39 +97,6 @@ if($usergrptype==1)   //1 means Group message sending to Students. So we will tr
                 echo $str;
 
 
-
-                    /*
-                                $html_str='<div class="table-responsive"><table class="table display data-table text-nowrap dataTable no-footer">
-                                <thead>
-                                    <tr>
-                                        <th> <label>Select Groups</label>
-                                            <!--div class="form-check">
-                                                <input type="checkbox" class="form-check-input checkAll">
-                                                <label class="form-check-label">Select All</label>
-                                            </div-->
-                                        </th>	
-                                    </tr>
-                                </thead>
-                                <tbody>';
-                                
-                                
-                                while($row=mysqli_fetch_assoc($result))
-                                {
-                                
-                                
-                                    $html_str= $html_str .  '<tr><td>
-                                                        <div class="form-check">
-                                                            <input type="checkbox" class="form-check-input" name="classsecid[]" value="' . $row["class_sec_id"].'">
-                                                            <label class="form-check-label"> Section ' . $row["section"] . '</label>
-                                                            </div>
-                                                        </td></tr>';
-                                
-                                
-                                }	
-                                    $html_str = $html_str . ' </tbody>
-                                    </table></div>';
-                                    echo $html_str;
-                                */
                  
     }
 else if ($usergrptype==2)    //2 means individual message sending to Staff.
@@ -203,16 +170,10 @@ else if ($usergrptype==2)    //2 means individual message sending to Staff.
 }
 else if ($usergrptype==3)    //3 means group message for cug groups.
     {
-
-
-       
-        
         $groupid=$usergrpid;
-
-
         $GroupMasterData_sql="select * from close_user_group_master where cug_id=$usergrpid";
         $GroupMasterData_result=$dbhandle->query($GroupMasterData_sql);
-        //echo $GroupDetails_sql;
+        echo $GroupMasterData_sql;
         if(!$GroupMasterData_result)
         {
             //var_dump($getStudentCount_result);
@@ -260,21 +221,49 @@ else if ($usergrptype==3)    //3 means group message for cug groups.
             //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';	
                                 
         }
+/*
+        $str='<div class="Attendance-staff aj-scroll-Attendance-staff" ><div class="table-responsive"><table class="table display data-table text-nowrap dataTable no-footer">
+        <thead>
+            <tr>
+                <th> <label>Select Departments</label>
+                    <!--div class="form-check">
+                        <input type="checkbox" class="form-check-input checkAll">
+                        <label class="form-check-label">Select All</label>
+                    </div-->
+                </th>	
+            </tr>
+        </thead>
+        <tbody>';
+
+*/
+
 
         $str='<div class="Attendance-staff aj-scroll-Attendance-staff" ><div class="table-responsive"><table class="table display data-table text-nowrap dataTable no-footer">
         <thead>
             <tr>
-                <th> 
-                    <div class="form-check">
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"  name="msgGrpId[]" value="' . $GroupMasterData_row["CUG_Id"] .  '">&nbsp; 
+                <th> <th> <label>Select Departments</label>
+                    <!--div class="form-check">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="form-check-input"  name="msgGrpId[]" value="' . $GroupMasterData_row["CUG_Id"] .  '">&nbsp; 
                         <label class="form-check-label">' . $GroupMasterData_row["CUG_Name"] .'</label>
-                    </div>
+                    </div-->
                 </th>	
             </tr>
         </thead>
         <tbody>';
        
-       
+
+        $str=$str . '<tr>    
+        <td>
+            <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="msgGrpId[]" value="' . $GroupMasterData_row["CUG_Id"] .  '">
+                <label><B>Group: ' . $GroupMasterData_row["CUG_Name"] .'</B></label>
+            </div>
+        </td>
+        
+
+    </tr>';
+
+  
         while($GetCUGDetails_row=$GetCUGDetails_result->fetch_assoc())
         {
 
@@ -289,5 +278,11 @@ else if ($usergrptype==3)    //3 means group message for cug groups.
         }	
             $str = $str . ' </tbody></table></div></div>';
             echo $str;
+
+
+
+
+
+            
 }
 ?>

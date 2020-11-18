@@ -7,6 +7,7 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
+require_once 'AdmissionModel.php';
 ?>
 <head>
     <meta charset="utf-8">
@@ -110,9 +111,9 @@ include 'security.php';
                                     <div class="form-group aj-form-group">
                                         <label>Applying For Class</label>
                                             <select class="select2" id="class" name="class">
-                                                <option value="All">All</option>
-                                                <?php
-                                            $query='select Class_Id,class_name,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
+                                            <option value="All">All </option>
+										<?php
+                                            $query='select Class_Id,class_name,class_no from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
                                             $result=mysqli_query($dbhandle,$query);
                                             if(!$result)
                                                 {
@@ -134,16 +135,27 @@ include 'security.php';
                                                 }
                                             while($row=mysqli_fetch_assoc($result))
                                             {
-                                            $str='<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"];
-                                            if($row["stream"]==1)
-                                            $str= $str . ' Science';
-                                            else if($row["stream"]==2)
-                                            $str= $str . ' Commerce';
-                                            else if($row["stream"]==3)
-                                            $str= $str . ' Arts';
-                                            $str=$str . '</option>';
+                                           
+                                                    
+                                                    if($row["class_no"]<11)
+                                                        {
+                                                            $str=$str.'<option value="' . $row["class_name"] . '">Class ' . $row["class_name"]. '</option>';
+                                                           
+                                                        }
+                                                    else
+                                                        {
+                                                            if($row["class_no"]==12)
+                                                                {
+                                                                    break;
+                                                                }
+                                                            $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Science"] . '">Class ' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Science"]. '</option>';
+                                                            $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Commerce"] . '">Class ' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Commerce"]. '</option>';
+                                                            $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Arts"] . '">Class ' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Arts"]. '</option>';
+                                                        }        
+                                                }    
+                                                
+                                            
                                             echo $str;
-                                        }
                                         ?>
                                             </select>
                                     </div>                                    

@@ -11,7 +11,7 @@ if($msg_receiver_Type==1)   //1 means individual message sending to Students.
     {
         //Adding Class Select controller.
       
-        $query='select Class_Id,class_name,class_no,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " order by next_class_id";
+        $query='select cmt.Class_Id,cmt.class_name,cmt.class_no from class_master_table cmt where cmt.enabled=1' . ' and cmt.School_Id=' . $_SESSION["SCHOOLID"] . " order by next_class_id";
         //echo $query;
         $result=mysqli_query($dbhandle,$query);
         if(!$result)

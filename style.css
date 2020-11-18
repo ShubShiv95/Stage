@@ -5920,7 +5920,7 @@ width: 96%;
     margin-right: 10px;
     padding-left: 20px;
 }
-.attendence-msg .list-absent li .red-a {
+.attendence-msg .list-absent li .green-circle {
     background: #4CAF50;
     border-radius: 50%;
     padding: 7px;
@@ -5928,7 +5928,7 @@ width: 96%;
     position: absolute;
     margin-left: -18px;
 }
-.attendence-msg .list-absent li .red-b {
+.attendence-msg .list-absent li .red-circle {
     background: #F44336;
     border-radius: 50%;
     padding: 7px;
@@ -5936,7 +5936,7 @@ width: 96%;
     position: absolute;
     margin-left: -18px;
 }
-.attendence-msg .list-absent li .red-c {
+.attendence-msg .list-absent li .orange-circle {
     background: #e68a13;
     border-radius: 50%;
     padding: 7px;

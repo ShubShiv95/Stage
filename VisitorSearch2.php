@@ -3,7 +3,8 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
-                            $getVisitorEnquiry_sql="select vet.*,date_format(vet.created_on,'%d-%m-%Y') as createdon,vtm.visitor_type as visitortype,vpm.visitor_purpose as visitpurpose from visitor_enquiry_table vet,visitor_type_master vtm,visit_purpose_master vpm where vtm.vtid=vet.visitor_type_id and vpm.vpid=vet.visit_purpose_id and "; 
+                            $getVisitorEnquiry_sql="select vet.*,date_format(vet.created_on,'%d-%m-%Y') as createdon,vtm.visitor_type as Visitor_Type,vpm.visitor_purpose as Visit_Purpose from visitor_enquiry_table vet,visitor_type_master vtm,visit_purpose_master vpm where vtm.vt_id=vet.visitor_type_id and vpm.vp_id=vet.visit_purpose_id and "; 
+                           
                             if($_REQUEST["visitortype"]=='0'){
 
                                 null;
@@ -23,7 +24,7 @@ include 'security.php';
                                 $getVisitorEnquiry_sql=$getVisitorEnquiry_sql . " vet.date_of_visit between str_to_date('" . $_REQUEST["fromdate"] . "','%d/%m/%Y') and str_to_date('" . $_REQUEST["todate"] . "','%d/%m/%Y') and ";            
 
                                 $getVisitorEnquiry_sql=$getVisitorEnquiry_sql . " vet.school_id=" . $_SESSION["SCHOOLID"] . " order by date_of_visit desc";
-                         
+                                //echo $getVisitorEnquiry_sql;
                             
                                 //$getVisitorEnquiry_sql="select *,date_format(vet.created_on,'%d-%m-%Y') as createdon from visitor_enquiry_table vet,visitor_type_master vtm,visit_purpose_master vpt where out_time is null or date_format(created_on,'%d-%m-%y')=date_format(now(),'%d-%m-%y') and school_id=" . $_SESSION["SCHOOLID"] . " order by date_of_visit desc";
                             //echo $getVisitorEnquiry_sql;
@@ -79,16 +80,16 @@ include 'security.php';
                                                                             <label class="form-check-label"></label>
                                                                         </div-->
                                                                     </td>
-                                                                    <td>' . $getVisitorEnquiry_row["visitor_name"] .  '</td>
-                                                                    <td>' . $getVisitorEnquiry_row["visitortype"] .  '</td>
-                                                                    <td>' . $getVisitorEnquiry_row["visitpurpose"] .  '</td>
-                                                                    <td>' . $getVisitorEnquiry_row["contact_no"] .  '</td>
-                                                                    <td>' . $getVisitorEnquiry_row["location"] .  '</td>
-                                                                    <td>' . $getVisitorEnquiry_row["no_of_person"] .  '</td>
-                                                                    <td>' . $getVisitorEnquiry_row["date_of_visit"] .  '</td>
-                                                                    <td>' . $getVisitorEnquiry_row["in_time"] .  '</td>
-                                                                    <td id="td_outtime'.$cnt.'">' . ($getVisitorEnquiry_row["out_time"]!="" ? $getVisitorEnquiry_row["out_time"] : '<input type="time" step="1" min='. "'1:00'" . " max='12:59' " . ' id="outtime' . $cnt . '" name="outtime" class="form-control"> <img src="img/update-icon.png" class="update" alt="update" onClick="outtime(' . "'outtime" . $cnt . "'," . $getVisitorEnquiry_row["veid"] .  ",'td_outtime" . $cnt ."'" . ');" />').' </td>
-                                                                    <td class="text-center"><img src="app_images/visitors/visitor' . $getVisitorEnquiry_row["veid"]. '.png" alt="visitor"></td>
+                                                                    <td>' . $getVisitorEnquiry_row["Visitor_Name"] .  '</td>
+                                                                    <td>' . $getVisitorEnquiry_row["Visitor_Type"] .  '</td>
+                                                                    <td>' . $getVisitorEnquiry_row["Visit_Purpose"] .  '</td>
+                                                                    <td>' . $getVisitorEnquiry_row["Contact_No"] .  '</td>
+                                                                    <td>' . $getVisitorEnquiry_row["Location"] .  '</td>
+                                                                    <td>' . $getVisitorEnquiry_row["No_Of_Person"] .  '</td>
+                                                                    <td>' . $getVisitorEnquiry_row["Date_Of_Visit"] .  '</td>
+                                                                    <td>' . $getVisitorEnquiry_row["In_Time"] .  '</td>
+                                                                    <td id="td_outtime'.$cnt.'">' . ($getVisitorEnquiry_row["Out_Time"]!="" ? $getVisitorEnquiry_row["Out_Time"] : '<input type="time" step="1" min='. "'1:00'" . " max='12:59' " . ' id="outtime' . $cnt . '" name="outtime" class="form-control"> <img src="img/update-icon.png" class="update" alt="update" onClick="outtime(' . "'outtime" . $cnt . "'," . $getVisitorEnquiry_row["VE_Id"] .  ",'td_outtime" . $cnt ."'" . ');" />').' </td>
+                                                                    <td class="text-center"><img src="app_images/visitors/visitor' . $getVisitorEnquiry_row["VE_Id"]. '.png" alt="visitor"></td>
                                                                 </tr>';
                                                             $cnt++;
                                                         }

@@ -9,7 +9,7 @@ include 'errorLog.php';
 $secid=$_REQUEST['secid'];
 
 
-$query="select smt.student_id,smt.first_name,smt.middle_name,smt.last_name,smt.sms_contact_no,smt.whatsapp_contact_no,smt.student_id from student_master_table smt,student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id=" . $secid . " and scd.session='" . $_SESSION["SESSION"] . "' and scd.enabled=1 and scd.school_id=" . $_SESSION["SCHOOLID"] . ' order by rollno';
+$query="select smt.student_id,smt.first_name,smt.middle_name,smt.last_name,smt.sms_contact_no,smt.whatsapp_contact_no from student_master_table smt,student_class_details scd where smt.student_id=scd.student_id and scd.class_sec_id=" . $secid . " and scd.session='" . $_SESSION["SESSION"] . "' and scd.enabled=1 and scd.school_id=" . $_SESSION["SCHOOLID"] . ' order by roll_no';
 
 
 //echo $query;

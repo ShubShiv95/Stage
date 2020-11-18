@@ -47,7 +47,7 @@ $insertAdmissionEnquiry_sql="insert into admission_enquiry_table
     MOBILE_NO,
     EMAIL_ID,
     LOCALITY_ID,
-    CLASS_ID,
+    CLASS,
     SESSION,
     LEAD_ID,
     FOLLOWUP_DATE,
@@ -64,7 +64,7 @@ $insertAdmissionEnquiry_sql="insert into admission_enquiry_table
 
 $stmt=$dbhandle->prepare($insertAdmissionEnquiry_sql);
 echo $dbhandle->error;	
-$stmt->bind_param('isssssiisisssisi',
+$stmt->bind_param('isssssississsisi',
     $aeid,
     $sname,
     $enqname,
@@ -99,7 +99,7 @@ if(!$execResult)
     $dbhandle->query("unlock tables");
     mysqli_rollback($dbhandle);
     $str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
-    $messsage='Error: Admission Enquiry Not Saved.  Please consult application consultant.';
+    $messsage='Error: Admission Enquiry Not Saved.';
     $str_end='</div>';
     echo $str_start.$messsage.$str_end;
     die;
@@ -108,11 +108,18 @@ if(!$execResult)
     
 }
 
+/*
 $str_start='<div class="alert icon-alart bg-light-green2" role="alert"><i class="far fa-hand-point-right bg-light-green3"></i>';
 $messsage='Admission Enquiry Saved.';
 $str_end='</div>';
 //echo $str_start.$messsage.$str_end;
 echo $messsage;
 
+*/
+
+$str_start='<div class="alert icon-alart bg-light-green2" role="alert"><i class="far fa-hand-point-right bg-light-green3"></i>Admission Enquiry Saved.</div>';
+echo $str_start;
+//$_SESSION["SUCCESSMSG"] = $str_start.$messsage.$str_end;
+//header("Location: AdmissionEnquiry.php");
 
 ?>

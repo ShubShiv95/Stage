@@ -77,7 +77,8 @@ include 'security.php';
                            
                             <?php
                                 $aeid=$_REQUEST["aeid"];
-                                $query="select aet.*,cmt.class_name as class_name,mlt.location_name as location_name,lst.lead_source_name as lead_source_name from admission_enquiry_table aet,class_master_table cmt,marketting_location_table mlt, lead_source_table lst where AEID=" . $_REQUEST["aeid"] . ' and cmt.class_id=aet.class_id and mlt.locationid=aet.locality_id and lst.leadid=aet.lead_id';
+                                $query="select date_format(aet.followup_date,'%d %M %Y') as Followup_Date,aet.*,mlt.location_name as location_name,lst.lead_source_name as lead_source_name from admission_enquiry_table aet,marketting_location_table mlt, lead_source_table lst where AEID=" . $_REQUEST["aeid"] . ' and mlt.locationid=aet.locality_id and lst.leadid=aet.lead_id';
+                                //echo $query;
                                 $result=mysqli_query($dbhandle,$query);
                                 if(!$result)
                                     {
@@ -100,7 +101,7 @@ include 'security.php';
                         </div>
                         <div class="new-added-form aj-new-added-form new-aj-new-added-form">
                             <div class="row ">
-                                <div class="col-xl-3 col-lg-3 col-12 aj-mb-2" style="background:cyan;">
+                                <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="detial-content-in-note">
                                         <h5><b>Student Name :</b></h5>
                                     </div>
@@ -136,7 +137,7 @@ include 'security.php';
                                     </div>
                                 </div><div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="detial-content-in-note">
-                                        <h5><?php echo $result_row["class_name"];?></h5>
+                                        <h5><?php echo $result_row["Class"];?></h5>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
@@ -191,16 +192,6 @@ include 'security.php';
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="detial-content-in-note">
-                                        <h5><b>Contact Number Verified  :</b></h5>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
-                                    <div class="detial-content-in-note">
-                                        <h5><?php echo $result_row["MOBILE_VERIFIED"];?></h5>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
-                                    <div class="detial-content-in-note">
                                         <h5><b>Locality :</b></h5>
                                     </div>
                                 </div>
@@ -226,7 +217,7 @@ include 'security.php';
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="detial-content-in-note">
-                                        <h5><?php echo $result_row["FOLLOWUP_DATE"];?></h5>
+                                        <h5><?php echo $result_row["Followup_Date"];?></h5>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
@@ -239,7 +230,6 @@ include 'security.php';
                                         <h5><?php echo $result_row["ENQUIRY_STATUS"];?></h5>
                                     </div>
                                 </div>
-                                
 
                                 <div class="col-xl-12 col-lg-12">
                                         <hr>
@@ -267,26 +257,26 @@ include 'security.php';
                                                             {  
                                                                 echo '  
                                                                         <div class="row">
-                                                                            <div class="col-xl-6 col-lg-6 col-12 aj-mb-2 ">
+                                                                            <div class="col-xl-2 col-lg-2 col-12 aj-mb-2 ">
                                                                                 <div class="detial-content-in-note">
-                                                                                    <h5><b>Created By: ' . $_SESSION["NAME"] . '</b></h5>
+                                                                                    <h5><b>Created By:</b></h5>
                                                                                 </div>
                                                                             </div>
-                                                                            <!--div class="col-xl-1 col-lg-1 col-12 aj-mb-2">
+                                                                            <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                                                                 <div class="detial-content-in-note">
-                                                                                    <h5></h5>
+                                                                                    <h5>' . $_SESSION["NAME"] . '</h5>
                                                                                 </div>
-                                                                            </div-->
-                                                                            <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
+                                                                            </div>
+                                                                            <div class="col-xl-2 col-lg-2 col-12 aj-mb-2">
                                                                                 <div class="detial-content-in-note text-right">
-                                                                                    <h5><b>Created On: '. $getFeedbackNote_row["note_date"] .'</b></h5>
+                                                                                    <h5><b>Created On:</b></h5>
                                                                                 </div>
                                                                             </div>
-                                                                            <!--div class="col-xl-1 col-lg-1 col-12 aj-mb-2 text-right">
+                                                                            <div class="col-xl-4 col-lg-4 col-12 aj-mb-2 text-right">
                                                                                 <div class="detial-content-in-note">
-                                                                                    <h5> </h5>
+                                                                                    <h5> '. $getFeedbackNote_row["note_date"] .'</h5>
                                                                                 </div>
-                                                                            </div-->
+                                                                            </div>
                                                                             <div class="col-lg-12 col-xl-12 col-12">
                                                                                 <div class="box-text-mag ">
                                                                                     <h6>' . $getFeedbackNote_row["NOTE"] . '</h6>
@@ -312,7 +302,7 @@ include 'security.php';
                                                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                                                     <div class="form-group aj-form-group">
                                                                             <label>Next Followup Date  <span>*</span></label>
-                                                                            <input type="text" autocomplete="off" id="followupdate" name="followupdate" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker" data-position="bottom right">
+                                                                            <input type="text" id="followupdate" name="followupdate" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker" data-position="bottom right" autocomplete="off">
                                                                         <i class="far fa-calendar-alt"></i>
                                                                         </div>                             
                                                                 </div>

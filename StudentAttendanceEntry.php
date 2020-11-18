@@ -91,7 +91,7 @@ include 'security.php';
                                                     <option value="0">Please Select Class *</option>
                                                     <?php
                                                         $str='';
-                                                        $query='select Class_Id,class_name,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
+                                                        $query='select Class_Id,class_name from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
                                                         $result=$dbhandle->query($query);
                                                         if(!$result)
                                                             {
@@ -363,7 +363,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("secid").innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("GET","getsectionList.php?classid="+str,true);
+xmlhttp.open("GET","getSectionList.php?classid="+str,true);
 xmlhttp.send();
 }
 </script>

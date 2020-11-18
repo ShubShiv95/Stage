@@ -9,8 +9,8 @@
     <div class="item-title">
         <h3>Attendence Sheet Of Class One: Section A, April 2019</h3>
     </div>
-</div>
-<div class="table-responsive sticky-div">
+    </div>
+    <div class="table-responsive sticky-div">
     <table class="table bs-table table-striped table-bordered text-nowrap tebal-form-in sticky-table">
         <thead>';    
 	$secid=$_GET["secid"];
@@ -84,7 +84,7 @@
 	//END OF STEP2: Formating month value.
 	
 	//STEP 3: Generating list of Students for the selected class section.	
-		$getStudentList_sql="select scd.student_id,smt.first_name as student_name,scd.rollno from student_class_details scd,student_master_table smt where scd.class_sec_id=" .  $secid . " and scd.enabled=1 and scd.school_id=" .  $_SESSION["SCHOOLID"] . " and scd.session='" . $_SESSION["SESSION"] . "' and smt.student_id=scd.student_id order by scd.rollno";
+		$getStudentList_sql="select scd.student_id,smt.first_name as student_name,scd.roll_no from student_class_details scd,student_master_table smt where scd.class_sec_id=" .  $secid . " and scd.enabled=1 and scd.school_id=" .  $_SESSION["SCHOOLID"] . " and scd.session='" . $_SESSION["SESSION"] . "' and smt.student_id=scd.student_id order by scd.roll_no";
 		//echo $getStudentList_sql;
 		$getStudentList_result=$dbhandle->query($getStudentList_sql);
 	//END OF STEP 3: 	Generating list of Students for the selected class section.

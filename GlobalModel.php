@@ -37,6 +37,6 @@
 
     //Created By Mithun Mukherjee//
     $GLOBAL_CLASS_STREAM=array("Science"=>"Science","Commerce"=>"Commerce","Arts"=>"Arts","General"=>"General");
-    $GLOBAL_ATTENDANCE_SMS=array("Absent-SMS"=>"Dear Parent sorry for the inconvenience your child #childname# is found to be absent on #date# in the school. Please take care of your child.","Present-SMS"=>"Dear Parent sorry for the inconvenience caused by attendance absent message. Glad to inform you that your child #childname# is present in school.");
+    $GLOBAL_ATTENDANCE_SMS=array("Absent-SMS"=>"Dear Parent your #childname# is found to be absent on #date# in the school. Please take care of your child.","Present-SMS"=>"Dear Parent sorry for the inconvenience caused by attendance absent message. Glad to inform you that your #childname# is present in school.");
     //End By Mithun Mukherjee Creations.
     ?>

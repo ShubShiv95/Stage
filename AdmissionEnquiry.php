@@ -7,7 +7,7 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
-include 'AdmissionModel.php';
+require_once 'AdmissionModel.php';
 ?>
 <head>
     <meta charset="utf-8">
@@ -60,19 +60,16 @@ include 'AdmissionModel.php';
                 <!-- Hot Links Area End Here -->
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Admission Eqnuiry</h3>
+                    <h3>Admission Enquiry</h3>
                    <ul>
                         <li>
                             <a href="index.php">Home</a>
                         </li>
-                        <li>Admission Eqnuiry</li>
+                        <li>Admission Enquiry</li>
                     </ul>
                 </div>
-                <div class="ui-alart-box">
-                            <div class="icon-color-alart" id="msgreply">
-                                
-                            </div>
-                </div>
+                
+                <div id="output-message"></div>
                 <!-- Breadcubs Area End Here -->
 				<!--<div class="page-title-section">
 				  <i class="flaticon-mortarboard"></i>&nbsp;Admission Eqnuiry
@@ -100,15 +97,15 @@ include 'AdmissionModel.php';
                                 </div>
                             </div> -->
                         </div>
-                        <form class="new-added-form aj-new-added-form new-aj-new-added-form"  id="admissionform" method="post" action="admissionEnquiry2.php">
-						    <input type="hidden" id="votp" name="votp" placeholder="" value="0" class="form-control" required>
+                        <form class="new-added-form aj-new-added-form new-aj-new-added-form"  id="admissionform" method="post" action="AdmissionEnquiry2.php">
+						<input type="hidden" id="votp" name="votp" placeholder="" value="0" class="form-control" required>
                             <div class="row">
 							
 							    
                                 <div class="col-xl-4 col-lg-4 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>Student Name <span>*</span></label>
-                                        <input type="text" id="sname" name="sname" placeholder="" class="form-control" onkeypress="lettersOnly(event);" required>
+                                        <input type="text" id="sname" name="sname" placeholder="" class="form-control" onkeypress="lettersOnly(event);" required onClick="togglediv();">
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-12 ">
@@ -123,22 +120,25 @@ include 'AdmissionModel.php';
                                     <div class="form-group aj-form-group">
                                         <label>Enquirer Relation <span>*</span></label>
                                         <select class="select2" id="enqrel" name="enqrel" required>
-                                            <option value="">Select Relation *</option>
                                             <?php
-                                                $string = "";
-                                                foreach($GLOBAL_OTHER_RELATION as $x=>$x_value)
+                                            $html='<option value="">Select Option Values *</option>';
+                                            foreach($GLOBAL_OTHER_RELATION as $key=>$value)
                                                 {
-                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
+                                                    $html=$html . '<option value="' . $key . '">' . $value . '</option>';
                                                 }
-                                                echo $string;
-                                        ?> 
+
+                                                echo $html;
+
+                                            ?>
+                                            
+                                            
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>Contact Number <span>*</span></label>
-                                        <input type="text" id="contactno" name="contactno" placeholder="" class="form-control" onkeypress="return isNumberKey(event);"  onkeyup="restrict_textlength('contactno','10');" required>
+                                        <input type="text" id="contactno" name="contactno" placeholder="" class="form-control" onkeypress="return isNumberKey(event);"  onkeyup="restrict_textlength('contactno','10');" required autocomplete="off">
                                     </div>
                                 </div>
 
@@ -150,7 +150,7 @@ include 'AdmissionModel.php';
                                         <select class="select2" id="classno" name="classno" required>
                                         <option value="">Please Select Class *</option>
 										<?php
-                                            $query='select Class_Id,class_name,stream from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
+                                            $query='select Class_Id,class_name,class_no from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
                                             $result=mysqli_query($dbhandle,$query);
                                             if(!$result)
                                                 {
@@ -170,18 +170,29 @@ include 'AdmissionModel.php';
                                                     //echo "";
                                                     //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
                                                 }
-                                            while($row=mysqli_fetch_assoc($result))
-                                            {
-                                            $str='<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"];
-                                            if($row["stream"]==1)
-                                            $str= $str . ' Science';
-                                            else if($row["stream"]==2)
-                                            $str= $str . ' Commerce';
-                                            else if($row["stream"]==3)
-                                            $str= $str . ' Arts';
-                                            $str=$str . '</option>';
+                                                while($row=mysqli_fetch_assoc($result))
+                                                {
+                                               
+                                                        
+                                                        if($row["class_no"]<11)
+                                                            {
+                                                                $str=$str.'<option value="' . $row["class_name"] . '">Class ' . $row["class_name"]. '</option>';
+                                                               
+                                                            }
+                                                        else
+                                                            {
+                                                                if($row["class_no"]==12)
+                                                                    {
+                                                                        break;
+                                                                    }
+                                                                $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Science"] . '">Class ' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Science"]. '</option>';
+                                                                $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Commerce"] . '">Class ' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Commerce"]. '</option>';
+                                                                $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Arts"] . '">Class ' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Arts"]. '</option>';
+                                                            }        
+                                                    }     
+                                                
+                                            
                                             echo $str;
-                                        }
                                         ?>
                                         </select>
                                     </div>
@@ -191,15 +202,9 @@ include 'AdmissionModel.php';
                                         <label>Applying for Session <span>*</span></label>
                                         <select class="select2" id="session" name="session" required>
                                             <option value="">Please Select Session *</option>
-                                            <?php
-                                                $string = "";
-                                                foreach($GLOBAL_SCHOOL_SESSION as $x=>$x_value)
-                                                {
-                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                }
-                                                echo $string;
-                                        ?> 
-                                           
+    										<option value="2020-2021">2020-2021</option>
+                                            <option value="2019-2020">2019-2020</option>
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -250,7 +255,7 @@ include 'AdmissionModel.php';
                                 <div class="col-xl-4 col-lg-4 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>Email ID</label>
-                                        <input type="email" id="email" name="email" placeholder="" class="form-control">
+                                        <input type="email" id="email" name="email" placeholder="" class="form-control" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-12">
@@ -292,8 +297,8 @@ include 'AdmissionModel.php';
                                     <div class="form-group aj-form-group">
 
                                     <label>Follow Up Date <span>*</span></label>
-                                    <input type="text" id="fdate" name="fdate" placeholder="dd/mm/yyyy" class="form-control air-datepicker future-date"
-                                        data-position='bottom right' required autocomplete="off">
+                                    <input type="text" id="fdate" name="fdate" placeholder="dd/mm/yyyy" class="form-control air-datepicker future-date" autocomplete="off"
+                                        data-position='bottom right' required>
                                     <i class="far fa-calendar-alt"></i>
                                 </div>
                                 </div>
@@ -376,7 +381,10 @@ include 'AdmissionModel.php';
                 //console.log(data);
                 //alert(data);
                 //$('div#msgreply').html(data);
-                alert(data);
+                //alert(data);
+                //$('div#msgreply').html(data);
+                $('div#output-message').html(data);
+  
                 $('#admissionform').trigger("reset");
             },
             error: function (data) {
@@ -384,7 +392,9 @@ include 'AdmissionModel.php';
                 //console.log(data);
                 //alert(data);
                 //$('div#msgreply').html(data);
-                alert(data);
+                //alert(data);
+                
+                $('div#output-message').html(data);
             },
         });
     });
@@ -441,7 +451,15 @@ function verifyOtp(){
     }
 
 }
-</script>                                        
+function togglediv()
+{
+    var x = document.getElementById("output-message");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } 
+}
+</script>  
+ 	                                      
 </body>
 
 </html>

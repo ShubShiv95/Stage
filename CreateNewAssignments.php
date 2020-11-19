@@ -8,12 +8,12 @@ include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
 $classDropdownValue = "";
-$sql='select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
+$sql='select cmt.Class_Id as Class_Id,cmt.class_name from class_master_table cmt where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " order by Class_Id ASC";
 
 $result=mysqli_query($dbhandle,$sql);
 while($row=mysqli_fetch_assoc($result))
 {
-    $classDropdownValue = '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>' . $classDropdownValue;
+    $classDropdownValue = $classDropdownValue .'<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' </option>' ;
 }
 
 $subjectDropdownValue = "";
@@ -29,7 +29,7 @@ while($rowSub=mysqli_fetch_assoc($resultSub))
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>SWIPETOUCH | Create Assignment</title>
+    <title>AKKHOR | Admission Form</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
@@ -87,6 +87,7 @@ while($rowSub=mysqli_fetch_assoc($resultSub))
                                                         <option value="">All </option>
                                                         <option value="Assignment">Assignment </option>
                                                         <option value="Project">Project </option>
+                                                        <option value="Home Work">Home Work</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -143,6 +144,16 @@ while($rowSub=mysqli_fetch_assoc($resultSub))
                                                          ?>
                                                     </select>
                                                 </div>
+                                                <div class="form-group aj-form-group">
+                                                    <label>Reference Type</label>
+                                                    <select class="select2" required="" name="reference_type">
+                                                        <option value="">Select One </option>
+                                                        <option value="Teacher">Teacher </option>
+                                                        <option value="Student">Student </option>
+                                                        <option value="Others">Others </option>
+                                                    </select>
+                                                </div>
+
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-12 aj-mb-2 mb-4 mt-2">
                                                 <div class="form-group aj-form-group">
@@ -177,8 +188,9 @@ while($rowSub=mysqli_fetch_assoc($resultSub))
                     </div>
                 </div>
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">Powered by <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
-                </footer>            
+                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
+                            href="#">PsdBosS</a></div>
+                </footer>
             </div>
         </div>
     </div>

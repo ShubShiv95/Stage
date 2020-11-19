@@ -369,7 +369,10 @@
                                         <a href="ViewAssignments.php" class="nav-link"><i class="fas fa-angle-right"></i>View Assignment</a>
                                 </li>
                                 <li class="nav-item">
-                                        <a href="UploadAssignments.php" class="nav-link"><i class="fas fa-angle-right"></i>Upload Assignment</a>
+                                    <a href="./StudentAssignmentSubmit.php" class="nav-link"><i class="fas fa-angle-right"></i>Submit Assignment</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a href="VerifyAssignments.php" class="nav-link"><i class="fas fa-angle-right"></i>Verify Assignments</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="exam-schedule.php" class="nav-link"><i class="fas fa-angle-right"></i>Settings</a>
@@ -378,7 +381,7 @@
                                     <a href="exam-grade.php" class="nav-link"><i class="fas fa-angle-right"></i>Reports</a>
                                 </li>
                             </ul>
-                        </li>                        
+                        </li>              
  
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Exam</span></a>

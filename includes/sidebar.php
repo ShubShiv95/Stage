@@ -76,40 +76,21 @@
 									<a href="#" class="nav-link"><span>Fee Settings</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
 									    <ul class="nav sub-group-menu">
                                             <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Fee Head</a>
+                                                <a href="CreateFeeHead.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Name</a>
                                             </li>
                                             <li class="nav-item">
-                                            <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Edit Fee Head</a>
+                                                <a href="CreateFeeTemplate.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Template</a>
                                             </li>
                                             <li class="nav-item">
-                                            <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Fee Template</a>
+                                                <a href="CreateFeeFromTemplate.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Fee Structure</a>
                                             </li>
                                             <li class="nav-item">
-                                            <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Edit Fee Template</a>
+                                                <a href="ViewFeeTemplate.php" class="nav-link"><i class="fas fa-angle-right"></i>View Fee Template</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Post Fee Template</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee  From Template</a>
-                                            </li>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Book List</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Subject</a>
-                                            </li>
+                                            
     									</ul>
                                 </li>
-                                
-                            </ul>
+                             </ul>
                          
                         </li>
 						<li class="nav-item sidebar-nav-item">

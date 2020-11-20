@@ -16,7 +16,7 @@
     $lid=$_SESSION["LOGINID"];
     $schoolId=$_SESSION["SCHOOLID"];
    
-    $deptcat = $_REQUEST["deptcat"];
+    //$deptcat = $_REQUEST["deptcat"];
     $deptname = $_REQUEST["deptname"];
     $deptremark = $_REQUEST["deptremark"];
 	
@@ -25,19 +25,16 @@
 
     
 	
-	$updateDeptTableSql = "UPDATE department_master_table SET Dept_Cat=?, Dept_Name=?, Remarks=? WHERE Dept_Id=?";
+	$updateDeptTableSql = "UPDATE department_master_table SET Dept_Name=?, Remarks=? WHERE Dept_Id=?";
     
 	$updateDeptTable_stmt=$dbhandle->prepare($updateDeptTableSql);
     echo $dbhandle->error;	
    
      
-    $updateDeptTable_stmt->bind_param("sssi",   
-    $deptcat,
+    $updateDeptTable_stmt->bind_param("ssi",   
 	$deptname,
     $deptremark,
     $deptid
-    
-    
     );
 
 

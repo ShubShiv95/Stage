@@ -295,8 +295,7 @@ $row=mysqli_fetch_assoc($resultdept);
                                             class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                 </div>
                             </div>
-                        </div> -->
-                        <form class="new-added-form school-form aj-new-added-form" id="departmentform" method="post" action="EditDepartment2.php">
+                        </div> --                        <form class="new-added-form school-form aj-new-added-form" id="departmentform" method="post" action="EditDepartment_2.php">
 						<input type="hidden" value="<?php echo $_REQUEST["deptid"];;?>" id="deptid" name="deptid" />
                             <div class="row justify-content-center">
                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
@@ -306,17 +305,14 @@ $row=mysqli_fetch_assoc($resultdept);
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
-                                                <div class="form-group aj-form-group">
+                                                <!-- <div class="form-group aj-form-group">
                                                     <label>Category <span>*</span></label>
                                                     <select class="select2" name="deptcat" id="deptcat" required>
                                                         <option value="">Please Select  Category</option>
-                                                        <option value="1" <?php if($row["Dept_Cat"]=="1"){echo "selected";} ?>>One</option>
-                                                        <option value="2" <?php if($row["Dept_Cat"]=="2"){echo "selected";} ?>>Two</option>
-                                                        <option value="3" <?php if($row["Dept_Cat"]=="3"){echo "selected";} ?>>Three</option>
-                                                        <option value="4" <?php if($row["Dept_Cat"]=="4"){echo "selected";} ?>>Four</option>
-                                                        <option value="5" <?php if($row["Dept_Cat"]=="5"){echo "selected";} ?>>Five</option>
+                                                        <option value="1" <?php if($row["Dept_Cat"]=="1"){echo "selected";} ?>>Teaching</option>
+                                                        <option value="2" <?php if($row["Dept_Cat"]=="2"){echo "selected";} ?>>Non-Teaching</option>
                                                     </select>
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group aj-form-group">
                                                     <label>Department   </label>
                                                     <input type="text" name="deptname" id="deptname" placeholder="" value="<?php echo $row["Dept_Name"]; ?>" class="form-control">
@@ -339,8 +335,7 @@ $row=mysqli_fetch_assoc($resultdept);
                                                     <thead>
                                                         <tr>
                                                             <th style="width: 20%">Edit </th>
-                                                            <th style="  text-align: left; ">Department Name </th>
-                                                            <th style="text-align: left;">Category</th>
+                                                            <th style="  text-align: center; ">Department Name </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="top-position-ss3">
@@ -352,7 +347,6 @@ $row=mysqli_fetch_assoc($resultdept);
                                                         <tr> 
                                                             <td style="width: 10%; text-align: center;"><a href="EditDepartment.php?deptid=<?php echo $row["Dept_Id"]; ?>"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
                                                             <td><?php echo $row["Dept_Name"]; ?></td>
-                                                            <td>Non Teaching</td>
                                                         </tr>
                                                     <?php } ?>  
                                                         

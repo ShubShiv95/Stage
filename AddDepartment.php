@@ -301,14 +301,14 @@ $schoolId=$_SESSION["SCHOOLID"];
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
-                                                <div class="form-group aj-form-group">
+                                                <!-- <div class="form-group aj-form-group">
                                                     <label>Category <span>*</span></label>
                                                     <select class="select2" name="deptcat" id="deptcat">
                                                         <option value="">Please Select  Category</option>
                                                         <option value="Teaching">Teaching</option>
                                                         <option value="Non-Teaching">Non-Teaching</option>
                                                     </select>
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group aj-form-group">
                                                     <label>Department   </label>
                                                     <input type="text" name="deptname" id="deptname" placeholder="" class="form-control">
@@ -330,9 +330,8 @@ $schoolId=$_SESSION["SCHOOLID"];
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th style="width: 20%">Edit </th>
-                                                            <th style="  text-align: left; ">Department Name </th>
-                                                            <th style="text-align: left;">Category</th>
+                                                            <th style="width: 20%; text-align: center;">Edit </th>
+                                                            <th style="  text-align: center; ">Department Name </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="top-position-ss3">
@@ -344,7 +343,6 @@ $schoolId=$_SESSION["SCHOOLID"];
                                                         <tr> 
                                                             <td style="width: 10%; text-align: center;"><a href="EditDepartment.php?deptid=<?php echo $row["Dept_Id"]; ?>"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
                                                             <td><?php echo $row["Dept_Name"]; ?></td>
-                                                            <td>Non Teaching</td>
                                                         </tr>
                                                     <?php } ?>  
                                                         

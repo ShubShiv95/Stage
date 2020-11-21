@@ -6,34 +6,41 @@ include 'dbobj.php';
 /*make a variable named $pageTitle */
 $pageTitle = "Verify Assignment";
 error_reporting(0);
-$subjectDropdownValue = "";
-$sqlSub = 'SELECT * FROM `subject_master_table` WHERE `School_Id` = ' . $_SESSION['SCHOOLID'] . ' AND `Enabled` = 1 ORDER BY `Subject_Name`';
-
-$resultSub = mysqli_query($dbhandle, $sqlSub);
-while ($rowSub = mysqli_fetch_assoc($resultSub)) {
-  $subjectDropdownValue = '<option value="' . $rowSub["Subject_Id"] . '">' . $rowSub["Subject_Name"] . ' </option>' . $subjectDropdownValue;
-}
 ?>
 <?php require_once './includes/header.php'; ?>
 <!-- start your UI here -->
 <div class="col-md-12">
   <div class="container row">
-    <div class="col-md-3 aj-md-2">
+    <div class="col-md-4 aj-mb-2">
       <div class="form-group aj-form-group">
         <label>Subject <span>*</span></label>
         <select class="select2" required="" id="subjectList">
-          <option value="">All </option>
-          <?php echo $subjectDropdownValue; ?>
+
         </select>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="form-group aj-form-group monthdiv" style="display: none;">
+    <div class="col-md-4 aj-mb-2">
+      <div class="form-group aj-form-group monthdiv">
         <label>Month</label>
-        <select class="select2" required="" id="monthList" >
-          <option value="">All </option>
+        <select class="select2" required="" id="monthList">
+          <option value="0">Select One </option>
+          <option value="1">January </option>
+          <option value="2">February </option>
+          <option value="3">March </option>
+          <option value="4">April </option>
+          <option value="5">May </option>
+          <option value="6">June </option>
+          <option value="7">July </option>
+          <option value="8">August </option>
+          <option value="9">September </option>
+          <option value="10">October </option>
+          <option value="11">November </option>
+          <option value="12">December </option>
         </select>
       </div>
+    </div>
+    <div class="col-md-4 aj-md-2">
+        <button class="btn btn-warning mt-5" id="searchData"><i class="fas fa-search"></i> Search</button>
     </div>
     <div class="col-md-12 assignment-list mt-3"></div>
   </div>
@@ -41,31 +48,19 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
 <?php require_once './includes/scripts.php'; ?>
 <!--- write own js scrip here --->
 <script type="text/javascript">
-
   $(document).ready(function() {
-    
-    loadMOnths();
-    function loadMOnths() {
-      $.ajax({
-        url: './CreateNewAssignments_1.php',
-        method: 'get',
-        data: {
-          'getMonths': 1
-        },
-        success: function(data) {
-          $('#monthList').html(data);
-        }
-      });
-    }
 
-    $('#subjectList').change(function(){
-      $('.monthdiv').show();
-    });
-
-    $(document).on('change','#monthList',function(){
-      var monthName = $(this).val();
+    $(document).on('click','#searchData',function(){
+      var monthName = $('#monthList').val();
       var subjectName = $('#subjectList').val();
-      $.ajax({
+      if (subjectName == '') {
+        alert("Please Select Subject")
+      }
+      else if(monthName == ''){
+        alert("Please Select Month");
+      }
+      else{
+        $.ajax({
         url: './StudentAssignmentSubmit_1.php',
         method: 'get',
         data: {
@@ -77,7 +72,34 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
           $('.assignment-list').html(data);
         }
       });
+      }
     });
+
+    /*
+      1. to fetch data from subject table just copy code from below functions.
+      2. keep object id as assignment_subject
+    */
+    getAllSubjects();
+
+    function getAllSubjects() {
+      $.ajax({
+        url: './universal_apis.php',
+        type: 'get',
+        data: {
+          'getAllSubjects': 1
+        },
+        dataType: 'json',
+        success: function(data) {
+          var subjectData = JSON.parse(JSON.stringify(data));
+          var html = '<option value="">Select Subject</option>';
+          for (let i = 0; i < subjectData.length; i++) {
+            const subjectRow = subjectData[i];
+            html += '<option value="' + subjectRow.Subject_Id + '">' + subjectRow.Subject_Name + '</option>';
+          }
+          $('#subjectList').html(html);
+        }
+      });
+    }
   });
 </script>
 <?php

@@ -9,7 +9,7 @@ if (isset($_REQUEST['getAssignmentPages'])) {
   $studentId = $_REQUEST['studentId'];
   $assignmentId = $_REQUEST['assignmentId'];
   
-  $query = "SELECT task_submit_file_table.* FROM task_submit_file_table INNER JOIN task_submit_table ON task_submit_table.Task_Submit_Id = task_submit_file_table.Task_Submit_Id WHERE task_submit_table.Task_Id = ? AND task_submit_table.Refference_Id = ? LIMIT 1 OFFSET ?";
+  $query = "select tsft.* FROM task_submit_file_table tsft, task_submit_table tst WHERE tst.Task_Submit_Id = tsft.Task_Submit_Id and tst.Task_Id= ? AND tsft.Updated_By = ? LIMIT 1 OFFSET ?";
   $queryPrepare = $dbhandle->prepare($query);
   $queryPrepare->bind_param("isi",$assignmentId,$studentId,$currentPage);
   $queryPrepare->execute();

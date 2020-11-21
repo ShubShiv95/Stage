@@ -7,11 +7,14 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
+if (empty($_GET['Assignment_id'])) {
+    echo '<script>alert("No Taks Found Create New Task");//window.location.href="./CreateNewAssignments.php"</script>';
+}
 ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>SWIPETOUCH | Upload Assignment</title>
+    <title>AKKHOR | Admission Form</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
@@ -115,8 +118,9 @@ include 'security.php';
                     </div>
                 </div>
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">Powered by <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
-                </footer>            
+                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
+                            href="#">PsdBosS</a></div>
+                </footer>
             </div>
         </div>
     </div>
@@ -173,6 +177,7 @@ include 'security.php';
         processData : false,
         success : function(data){
           $('.form_output').html(data);loadAssignments();
+          $('#upload_assignment_file')[0].reset();
         }
       });
     });

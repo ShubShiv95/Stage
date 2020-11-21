@@ -38,7 +38,7 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
           var htmlTable = '<table class="table table-response"><tr><th>Name</th><th>Total Pages</th><th>Submitted On</th><th>View Pages</th></tr>';
           for (let i = 0; i < submittedData.length; i++) {
             const fetchedData = submittedData[i];
-            htmlTable += '<tr><td>'+fetchedData.Employee_Name+'</td><td>'+fetchedData.Total_Pages+'</td><td>'+fetchedData.Updated_On+'</td><td><a href="./StudentMarkAssignmentSubmitted.php?assignmentId='+fetchedData.Task_Id+'&userId='+fetchedData.Refference_Id+'&totalPages='+fetchedData.Total_Pages+'" target="_blank" class="btn btn-link btn-primary text-primary"><i class="fas fa-eye"></i></a></td></tr>';
+            htmlTable += '<tr><td>'+fetchedData.first_name+' '+fetchedData.last_name+'</td><td>'+fetchedData.total_pages+'</td><td>'+fetchedData.Updated_On+'</td><td><a href="./StudentMarkAssignmentSubmitted.php?assignmentId='+fetchedData.Task_Id+'&userId='+fetchedData.Updated_By+'&totalPages='+fetchedData.total_pages+'" target="_blank" class="btn btn-link btn-primary text-primary"><i class="fas fa-eye"></i></a></td></tr>';
           }
           htmlTable += '</table>';
           $('.loadSData').html(htmlTable);

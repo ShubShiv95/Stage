@@ -1,5 +1,7 @@
 <?php
-session_start();
+session_start(); 
+
+//$_SESSION["USER_TYPE"] = 'Teacher';
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -7,23 +9,7 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
-$classDropdownValue = "";
-$sql='select cmt.Class_Id as Class_Id,cmt.class_name from class_master_table cmt where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " order by Class_Id ASC";
-
-$result = mysqli_query($dbhandle, $sql);
-while ($row = mysqli_fetch_assoc($result)) {
-    $classDropdownValue = $classDropdownValue .'<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' </option>' ;
-}
-
-$subjectDropdownValue = "";
-$sqlSub = 'SELECT * FROM `subject_master_table` WHERE `School_Id` = ' . $_SESSION['SCHOOLID'] . ' AND `Enabled` = 1 ORDER BY `Subject_Name`';
-
-$resultSub = mysqli_query($dbhandle, $sqlSub);
-while ($rowSub = mysqli_fetch_assoc($resultSub)) {
-    $subjectDropdownValue = $subjectDropdownValue . '<option value="' . $rowSub["Subject_Id"] . '">' . $rowSub["Subject_Name"] . ' </option>' ;
-}
 ?>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -69,55 +55,97 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title aj-item-title">
-                                <h3 class="mb-4">Daily Staff Attendance Report</h3><span id="test_data"></span>
+                                <h3 class="mb-4">Assignment Lists</h3><span id="test_data"></span>
                             </div>
 
                             <form class="new-added-form school-form aj-new-added-form">
                                 <div class="row justify-content-center">
-                                    <div class="col-xl-2 col-lg-4 col-12 aj-mb-2">
-                                        <div class="form-group aj-form-group">
-                                            <label>Class <span>*</span></label>
-                                            <select class="select2" required="" id="classList">
-                                                <option value="">All </option>
-                                                <?php echo $classDropdownValue; ?>
-                                            </select>
+                                    <?php
+                                    if ($_SESSION["USER_TYPE"] == 'Student' || $_SESSION["USER_TYPE"] == 'Parent') {
+                                        echo '                                                                <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
+                                            <div class="form-group aj-form-group">
+                                                <label>Subject <span>*</span></label>
+                                                    <select class="select2" required="" id="subjectList">
+                                                        <option value="">Select Subject </option>
+                                                    </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-2 col-lg-4 col-12 aj-mb-2">
-                                        <div class="form-group aj-form-group">
-                                            <label>Section </label>
-                                            <select class="select2" required="" id="sectionList">
-                                            </select>
+                                        <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
+                                            <div class="form-group aj-form-group">
+                                                <label>Month</label>
+                                                    <select class="select2" required="" id="monthList">
+                                                        <option value="0">Select Month </option>
+                                                        <option value="1">January </option>
+                                                        <option value="2">February </option>
+                                                        <option value="3">March </option>
+                                                        <option value="4">April </option>
+                                                        <option value="5">May </option>
+                                                        <option value="6">June </option>
+                                                        <option value="7">July </option>
+                                                        <option value="8">August </option>
+                                                        <option value="9">September </option>
+                                                        <option value="10">October </option>
+                                                        <option value="11">November </option>
+                                                        <option value="12">December </option>
+                                                    </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-2 col-lg-4 col-12 aj-mb-2">
-                                        <div class="form-group aj-form-group">
-                                            <label>Subject <span>*</span></label>
-                                            <select class="select2" required="" id="subjectList">
-                                                <option value="">All </option>
-                                                <?php echo $subjectDropdownValue; ?>
-                                            </select>
+                                        <div class="col-xl-4 col-lg-4 col-12 aj-mb-2 text-right">
+                                            <a href="javascript:void(0);" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark" id="searchAssignmentts">Search</a>
+                                        </div>';
+                                    } else {
+                                        echo '                                    
+                                        <div class="col-xl-2 col-lg-4 col-12 aj-mb-2">
+                                            <div class="form-group aj-form-group">
+                                                <label>Class <span>*</span></label>
+                                                <select class="select2" required="" id="classList">
+                                                    <option value="">All </option>
+                                                    <?php echo $classDropdownValue; ?>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-2 col-lg-4 col-12 aj-mb-2">
-                                        <div class="form-group aj-form-group">
-                                            <label>Month</label>
-                                            <select class="select2" required="" id="monthList">
-                                                <option value="">All </option>
-                                                <option value="">January </option>
-                                                <option value="">February </option>
-                                                <option value="">March </option>
-                                                <option value="">April </option>
-                                                <option value="">May </option>
-                                                <option value="">June </option>
-                                                <option value="">July </option>
-                                                <option value="">August </option>
-                                            </select>
+                                        <div class="col-xl-2 col-lg-4 col-12 aj-mb-2">
+                                            <div class="form-group aj-form-group">
+                                                <label>Section </label>
+                                                <select class="select2" required="" id="sectionList">
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-2 col-lg-2 col-12 aj-mb-2 text-right">
-                                        <a href="javascript:void(0);" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark" id="searchAssignmentts">Search</a>
-                                    </div>
+                                        <div class="col-xl-2 col-lg-4 col-12 aj-mb-2">
+                                            <div class="form-group aj-form-group">
+                                                <label>Subject <span>*</span></label>
+                                                <select class="select2" required="" id="subjectList">
+                                                    <option value="">Select Subject </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-2 col-lg-4 col-12 aj-mb-2">
+                                            <div class="form-group aj-form-group">
+                                                <label>Month</label>
+                                                <select class="select2" required="" id="monthList">
+                                                    <option value="0">Select Month </option>
+                                                    <option value="1">January </option>
+                                                    <option value="0">Select Month </option>
+                                                    <option value="1">January </option>
+                                                    <option value="2">February </option>
+                                                    <option value="3">March </option>
+                                                    <option value="4">April </option>
+                                                    <option value="5">May </option>
+                                                    <option value="6">June </option>
+                                                    <option value="7">July </option>
+                                                    <option value="8">August </option>
+                                                    <option value="9">September </option>
+                                                    <option value="10">October </option>
+                                                    <option value="11">November </option>
+                                                    <option value="12">December </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-2 col-lg-2 col-12 aj-mb-2 text-right">
+                                            <a href="javascript:void(0);" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark" id="searchAssignmentts">Search</a>
+                                        </div>';
+                                    }
+                                    ?>
                                     <div class="col-xl-10 col-lg-10 col-12 mt-5 assignment-list">
                                         <div class="cart-box-row">
                                             <div class="box-row">
@@ -126,7 +154,7 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
                                                     <p class="all-desc"> <span> Class: II</span> | <span> Uploaded by Montfort School </span> | <span> Created on 5May2020 </span></p>
                                                 </div>
                                                 <div class="right-content">
-                                                    <ul>
+                                                    <ul> 
                                                         <li><a href="javascript:void(0);" class="color-1"><i class="fa fa-picture-o" aria-hidden="true"></i></a></li>
                                                         <li><a href="javascript:void(0);" class="color-2"><i class="fa fa-video-camera" aria-hidden="true"></i></a></li>
                                                         <li><a href="javascript:void(0);" class="color-3"><i class="fa fa-file" aria-hidden="true"></i></a></li>
@@ -284,7 +312,7 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
             });
 
             $(document).ready(function() {
-                load_assignments();
+               /* load_assignments();
 
                 function load_assignments() {
                     $.ajax({
@@ -297,7 +325,7 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
                             $('.assignment-list').html(data);
                         }
                     });
-                }
+                }*/
 
                 $('#assignment_type').change(function() {
                     const assignment_type = $(this).val();
@@ -371,53 +399,117 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
                     }
                 });
 
-                loadMOnths();
 
-                function loadMOnths() {
+                $('#searchAssignmentts').click(function(e) {
+                    e.preventDefault();
+                    const userType = '<?php echo $_SESSION["USER_TYPE"]; ?>';
+                    if (userType == 'Student' || userType == 'Parent') {
+                        const monthNumber = $('#monthList').val();
+                        const subjectId = $('#subjectList').val();
+                        if (subjectId == '') {
+                            alert("Please Select Subject");
+                        } else if (monthNumber == '') {
+                            alert("Please Select Month")
+                        } else {
+                            $.ajax({
+                                url: './StudentAssignmentSubmit_1.php',
+                                method: 'get',
+                                data: {
+                                    'filterAssignment': 1,
+                                    'monthNumber': monthNumber,
+                                    'subjectId': subjectId
+                                },
+                                success: function(data) {
+                                    $('.assignment-list').html(data);
+                                }
+                            });
+                        }
+                    } else {
+                        const classId = $('#classList').val();
+                        const sectionId = $('#sectionList').val();
+                        const subjectId = $('#subjectList').val();
+                        const monthNumber = $('#monthList').val();
+                        if (classId == "") {
+                            alert("Please Select Class");
+                        } else if (sectionId == "") {
+                            alert("Please Select Section");
+                        } else if (subjectId == "") {
+                            alert("Please Select Subject");
+                        } else if (monthNumber == "") {
+                            alert("Please Select Month");
+                        } else {
+                            $('.assignment-list').html('');
+                            $.ajax({
+                                url: './CreateNewAssignments_1.php',
+                                method: 'get',
+                                data: {
+                                    'filterAssignment': 1,
+                                    'classId': classId,
+                                    'sectionId': sectionId,
+                                    'monthNumber': monthNumber,
+                                    'subjectId': subjectId
+                                },
+                                success: function(data) {
+                                    $('.assignment-list').html(data);
+                                }
+                            });
+                        }
+                    }
+
+                });
+
+                /*
+                1. to fetch data from class table just copy code from below functions.
+                2. keep object id as assignment_class
+            */
+
+                getAllClass();
+
+                function getAllClass() {
                     $.ajax({
-                        url: './CreateNewAssignments_1.php',
-                        method: 'get',
+                        url: './universal_apis.php',
+                        type: 'get',
                         data: {
-                            'getMonths': 1
+                            'getAllClass': 1
                         },
+                        dataType: 'json',
                         success: function(data) {
-                            $('#monthList').html(data);
+                            var classData = JSON.parse(JSON.stringify(data));
+                            var html = '<option value="">Select</option>';
+                            for (let i = 0; i < classData.length; i++) {
+                                const classRow = classData[i];
+                                html += '<option value="' + classRow.class_id + '">' + classRow.class_name + '</option>';
+                            }
+                            $('#classList').html(html);
                         }
                     });
                 }
 
-                $('#searchAssignmentts').click(function(e) {
-                    e.preventDefault();
-                    const classId = $('#classList').val();
-                    const sectionId = $('#sectionList').val();
-                    const subjectId = $('#subjectList').val();
-                    const monthNumber = $('#monthList').val();
-                    if (classId == "") {
-                        alert("Please Select Class");
-                    } else if (sectionId == "") {
-                        alert("Please Select Section");
-                    } else if (subjectId == "") {
-                        alert("Please Select Subject");
-                    } else if (monthNumber == "") {
-                        alert("Please Select Month");
-                    } else {
-                        $('.assignment-list').html('');
-                        $.ajax({
-                            url: './CreateNewAssignments_1.php',
-                            method: 'get',
-                            data: {
-                                'filterAssignment': 1,
-                                'classId': classId,
-                                'sectionId': sectionId,
-                                'monthNumber': monthNumber,
-                                'subjectId': subjectId
-                            },
-                            success: function(data) {
-                                $('.assignment-list').html(data);
+                /*
+                    1. to fetch data from subject table just copy code from below functions.
+                    2. keep object id as assignment_subject
+                */
+                getAllSubjects();
+
+                function getAllSubjects() {
+                    $.ajax({
+                        url: './universal_apis.php',
+                        type: 'get',
+                        data: {
+                            'getAllSubjects': 1
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            var subjectData = JSON.parse(JSON.stringify(data));
+                            var html = '<option value="">Select Subject</option>';
+                            for (let i = 0; i < subjectData.length; i++) {
+                                const subjectRow = subjectData[i];
+                                html += '<option value="' + subjectRow.Subject_Id + '">' + subjectRow.Subject_Name + '</option>';
                             }
-                        });
-                    }
-                });
+                            $('#subjectList').html(html);
+                        }
+                    });
+                }
             });
         </script>
 </body>

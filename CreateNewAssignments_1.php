@@ -7,19 +7,20 @@ require_once 'sequenceGenerator.php';
 
 if (isset($_REQUEST['assignment_sender'])){
   if (empty($_REQUEST['assignment_sender'])) {
+    mysqli_autocommit($dbhandle, false);
     /* generaing asssignment id */
     $tablename = 'task_master_table';
     $assignmentId = sequence_number($tablename,$dbhandle);
 
     $assignmentType = mysqli_real_escape_string($dbhandle,$_REQUEST['assignment_type']);
     $assignmentClass = mysqli_real_escape_string($dbhandle,$_REQUEST['assignment_class']);
-    $sname = mysqli_real_escape_string($dbhandle,$_REQUEST['sname']);
+    $taskTopic = mysqli_real_escape_string($dbhandle,$_REQUEST['sname']);
     $reference_type = $_REQUEST['reference_type'];
     $sections = $_POST['Present'];
     $description = mysqli_real_escape_string($dbhandle,$_REQUEST['description']);
     $assignment_subject = mysqli_real_escape_string($dbhandle,$_REQUEST['assignment_subject']);
     $submissible = mysqli_real_escape_string($dbhandle,$_REQUEST['submissible']);
-    $date_of_submision =$_REQUEST["date_of_submision"];
+    $date_of_submision = $_REQUEST["date_of_submision"];
     $updatedBy = $_SESSION["LOGINID"];
     $schoolId = $_SESSION["SCHOOLID"];
     $enabled = 1;
@@ -28,10 +29,7 @@ if (isset($_REQUEST['assignment_sender'])){
     if (empty($assignmentType)) {
       $formErrors[] = 'Please Select Assignment Type!';
     }
-    if (empty($assignmentClass)) {
-      $formErrors[] = 'Please Select Class!';
-    }
-    if (empty($sname)) {
+    if (empty($taskTopic)) {
       $formErrors[] = 'Please Type Topic!';
     }
     if (empty($sections)) {
@@ -46,11 +44,11 @@ if (isset($_REQUEST['assignment_sender'])){
     if (empty($submissible)) {
       $formErrors[] = 'Please Select Is Submissible!';
     }
-    if ($submissible == 'Yes' && empty($date_of_submision)) {
+    if (empty($date_of_submision)) {
       $formErrors[] = 'Please Select Last Submission Date!';
     }
-    else{
-      $submissible = $_REQUEST['submissible'];
+    if ($date_of_submision<=date('Y-m-d')) {
+      $formErrors[] = 'Date of Submission Cannot be Less Than or Equal to Today!';
     }
   //  echo $submissible.'DOS'.$date_of_submision;
     if (count($formErrors)>0) {
@@ -62,10 +60,25 @@ if (isset($_REQUEST['assignment_sender'])){
     }
     else{
       /* inserting data into table */
-      $assignmentQuery = "INSERT INTO task_master_table (Task_Id, Task_Name, Task_Type, Task_Desc, Is_Submmisable, Last_Submissable_Date, Subject_Id, Refference_Type,  School_Id, Updated_By) VALUES (?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?)";
+      $assignmentQuery = "INSERT INTO task_master_table (Task_Id, Task_Name, Task_Type, Task_Desc, Is_Submmisable, Last_Submissable_Date, Subject_Id, Refference_Type, School_Id, Updated_By) VALUES (?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?)";
       $assignmentQueryPrepare = $dbhandle->prepare($assignmentQuery);
-      $bindValues = $assignmentQueryPrepare->bind_param('isssssssss', $assignmentId, $sname, $assignmentType, $description, $submissible, $date_of_submision, $assignment_subject,$reference_type,$_SESSION["SCHOOLID"], $_SESSION["LOGINID"]);
-      $executeResult = $assignmentQueryPrepare->execute();
+      $bindValues = $assignmentQueryPrepare->bind_param('isssssssss', $assignmentId, $taskTopic, $assignmentType, $description, $submissible, $date_of_submision, $assignment_subject,$reference_type,$_SESSION["SCHOOLID"], $_SESSION["LOGINID"]);
+      if ($assignmentQueryPrepare->execute()) {
+        echo '<ul class="list-inline">
+        <li class="list-inline-item text-success"><strong>Success! Wait For File Upload</strong> Assignment Created Succcessfully.</li>
+      </ul><script>window.setTimeout(function(){window.location.href="UploadAssignments.php?Assignment_id='.$assignmentId.'&topic='.$taskTopic.'"},3000);</script>';
+      }else{
+        //var_dump($getStudentCount_result);
+        $error_msg = $assignmentQueryPrepare->error;
+        $el = new LogMessage();
+        $sql = $assignmentQuery;
+        //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+        $el->write_log_message('Student Create Assignment ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+        //$_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+        mysqli_rollback($dbhandle);
+        $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
+        die;
+      }
 
       /* insert into assignment section list */
       foreach ($sections as $section)
@@ -73,26 +86,35 @@ if (isset($_REQUEST['assignment_sender'])){
         $tablenameSec = 'task_allocation_list_table';
         $assignmentSectionId = sequence_number($tablenameSec,$dbhandle);
         $_SESSION['Assignment_id'] = $assignmentId;
-        $_SESSION['Assignment_Name'] = $sname;
-        $sectionQuery = "INSERT INTO task_allocation_list_table(TAL_Id, Task_Id, Allocation_Reference_Id, School_Id, Updated_By) VALUES (?,?,?,?,?)";
+        $_SESSION['Assignment_Name'] = $taskTopic;
+
+        $sectionQuery = "INSERT INTO task_allocation_list_table(TAL_Id, Task_Id, Allocated_Reff_Id, School_Id, Updated_By) VALUES (?,?,?,?,?)";
         $sectionQueryPrepare = $dbhandle->prepare($sectionQuery);
-        $bindSecVals = $sectionQueryPrepare->bind_param('iiiss', $assignmentSectionId, $assignmentId,$section ,$_SESSION["SCHOOLID"], $_SESSION["LOGINID"]);
-        $secExecRes = $sectionQueryPrepare->execute();
+
+        $bindSecVals = $sectionQueryPrepare->bind_param('iiiss', $assignmentSectionId, $assignmentId,
+        $section ,$_SESSION["SCHOOLID"], $_SESSION["LOGINID"]);
+
+        if(!$sectionQueryPrepare->execute()){
+          $error_msg = $sectionQueryPrepare->error;
+          $el = new LogMessage();
+          $sql = $sectionQuery;
+          //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+          $el->write_log_message('Student Create Assignment ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+          //$_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+          mysqli_rollback($dbhandle);
+          $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
+          die;
+        }
+        else{
+          echo '<ul class="list-inline">
+              <li class="list-inline-item text-success"><strong>Success! Added To Section</strong> Assignment Created Succcessfully.</li>
+            </ul>';
+        }
       }
 
-      if ($secExecRes == true) {
-        echo '<ul class="list-inline">
-              <li class="list-inline-item text-success"><strong>Success! Wait For File Upload</strong> Assignment Created Succcessfully.</li>
-            </ul><script>window.setTimeout(function(){window.location.href="UploadAssignments.php?Assignment_id='.$assignmentId.'&topic='.$sname.'"},2000);</script>';
-      }
-      else{
-        echo '<div class="alert alert-warning alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <strong>Alert </strong> Failed To Create.
-        </div>';
-      }
+      // must commit this to add data to database
+      mysqli_commit($dbhandle);
+
     }
   }
 }
@@ -189,6 +211,12 @@ if (isset($_REQUEST['getAssigns'])) {
 
 /* gat all assignments into view assignment file */
 if (isset($_REQUEST['getAllAssignments'])) {
+
+  /*
+
+  user wise UI dependes on session $_SESSION["USER_TYPE"];
+
+  */
   $queryAssignment = 'SELECT * FROM task_master_table WHERE Enabled = 1 AND School_Id = ?';
   $queryAssignmentPrepare = $dbhandle->prepare($queryAssignment);
   $queryAssignmentPrepare->bind_param("i",$_SESSION["SCHOOLID"]);
@@ -202,7 +230,7 @@ if (isset($_REQUEST['getAllAssignments'])) {
     $queryAssignmnetFilePrepare->bind_param("i",$row['Task_Id']);
     $queryAssignmnetFilePrepare->execute();
     $queryAssignmnetFileResult = $queryAssignmnetFilePrepare->get_result();
-   
+
     echo '<div class="cart-box-row">
             <div class="box-row">
                 <div class="left-content">
@@ -222,6 +250,8 @@ if (isset($_REQUEST['getAllAssignments'])) {
                           echo '<li><a href="./app_images/'.$rowF['Upload_Name'].'" target="_blank"  class="color-1"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i></a></li>';
                         }elseif (strtolower($fileType[1])=="doc"||"docx") {
                             echo '<li><a href="./app_images/'.$rowF['Upload_Name'].'" target="_blank"  class="color-2"><i class="fa fa-file-word-o" aria-hidden="true"></i></a></li>';
+                        }elseif (strtolower($fileType[1])=="pdf") {
+                          echo '<li><a href="./app_images/'.$rowF['Upload_Name'].'" target="_blank"  class="color-6"><i class="fa fa-file-pdf"></i></a></li>';
                         }elseif (strtolower($fileType[1])=="jpg"||"jpeg"||"png") {
                             echo '<li><a href="./app_images/'.$rowF['Upload_Name'].'" target="_blank"  class="color-3"><i class="fa fa-picture-o" aria-hidden="true"></i></a></li>';
                         }
@@ -238,12 +268,12 @@ if (isset($_REQUEST['getAllAssignments'])) {
                  echo'   </ul>
                 </div>
             </div>
-            <div class="content-descr"> 
+            <div class="content-descr">
                 <a href="javascript:void(0);" add="addin'.$i.'" class="color-8 hide-cl"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
                     <div class="content addin'.$i.'">
                     '.$row['Task_Desc'].'
                     </div>
-            </div>  
+            </div>
         </div>';
         $i=$i+1;
   }
@@ -265,7 +295,7 @@ if (isset($_REQUEST['getSection'])) {
     $querySectionPreapre->bind_param('s',$_REQUEST['classId']);
     $querySectionPreapre->execute();
     $resultSet = $querySectionPreapre->get_result();
-    
+
     while($row = $resultSet->fetch_assoc()){
       echo '<span><input type="checkbox" class="gaurdian-bs" name="Present[]" value="'.$row['Class_Sec_Id'].'"> '.$row['Section'].'</span>';
     }
@@ -297,14 +327,20 @@ if (isset($_REQUEST['getMonths'])) {
   }
 }
 
-/***** filter assignment *****/
+/***** filter assignment for teachers *****/
 if (isset($_REQUEST['filterAssignment'])) {
-  $sqlQuery = "SELECT task_master_table.* FROM task_master_table INNER JOIN task_allocation_list_table ON task_allocation_list_table.Task_Id = task_master_table.Task_Id WHERE task_master_table.Enabled = 1 AND task_allocation_list_table.Allocation_Reference_Id = ? AND task_master_table.Subject_Id = ? AND date_format(task_master_table.Updated_On,'%m/%Y') = ?";
+  $sectionId = $_REQUEST['sectionId']; $subjectId = $_REQUEST['subjectId']; $monthNum = $_REQUEST['monthNumber']; $currYear = $_SESSION["STARTYEAR"]; 
+
+  $sqlQuery = "SELECT tmt.* FROM task_master_table tmt, task_allocation_list_table talt WHERE tmt.Task_Id = talt.Task_Id AND tmt.Enabled = 1 AND talt.Allocated_Reff_Id = ? AND tmt.Subject_Id = ? AND MONTH(tmt.Updated_On) = ? AND YEAR(tmt.Updated_On) = ?";
   $sqlQueryprepare = $dbhandle->prepare($sqlQuery);
-  $sqlQueryprepare->bind_param("iis",$_REQUEST['sectionId'],$_REQUEST['subjectId'],$_REQUEST['monthNumber']);
+
+  $sqlQueryprepare->bind_param("iiii", $sectionId, $subjectId, $monthNum, $currYear);
+ 
   $sqlQueryprepare->execute();
+  
   $resultset = $sqlQueryprepare->get_result();
-  if ($sqlQueryprepare->num_rows()>0) {
+
+  if ($sqlQueryprepare->num_rows()<=1) {
     $i=1;
     while($row = $resultset->fetch_assoc()){
       $queryAssignmnetFile = "select * from task_file_upload where Enabled = 1 AND Task_Id = ?";
@@ -312,7 +348,7 @@ if (isset($_REQUEST['filterAssignment'])) {
       $queryAssignmnetFilePrepare->bind_param("i",$row['Task_Id']);
       $queryAssignmnetFilePrepare->execute();
       $queryAssignmnetFileResult = $queryAssignmnetFilePrepare->get_result();
-     
+
       echo '<div class="cart-box-row">
               <div class="box-row">
                   <div class="left-content">
@@ -328,38 +364,56 @@ if (isset($_REQUEST['filterAssignment'])) {
                         }
                         elseif ($rowF['Upload_Type']=="File") {
                           $fileType = explode('.',$rowF['Upload_Name']);
-                          if (strtolower($fileType[1])=="ppt"||"pptx") {
+                          
+                          if (strtolower($fileType[1])=="ppt"||strtolower($fileType[1])=="pptx") {
                             echo '<li><a href="./app_images/'.$rowF['Upload_Name'].'" target="_blank"  class="color-1"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i></a></li>';
-                          }elseif (strtolower($fileType[1])=="doc"||"docx") {
+                          }elseif (strtolower($fileType[1])=="doc"||strtolower($fileType[1])=="docx") {
                               echo '<li><a href="./app_images/'.$rowF['Upload_Name'].'" target="_blank"  class="color-2"><i class="fa fa-file-word-o" aria-hidden="true"></i></a></li>';
-                          }elseif (strtolower($fileType[1])=="jpg"||"jpeg"||"png") {
+                          }elseif (strtolower($fileType[1])=='jpg'||strtolower($fileType[1])=='jpeg'||strtolower($fileType[1])=='png') {
                               echo '<li><a href="./app_images/'.$rowF['Upload_Name'].'" target="_blank"  class="color-3"><i class="fa fa-picture-o" aria-hidden="true"></i></a></li>';
                           }
                           elseif (strtolower($fileType[1])=="mp4") {
                               echo '<li><a href="./app_images/'.$rowF['Upload_Name'].'" target="_blank"  class="color-4"><i class="fa fa-video-camera" aria-hidden="true"></i></a></li>';
                           }
+                          elseif (strtolower($fileType[1])=="pdf") {
+                            echo '<li><a href="./app_images/'.$rowF['Upload_Name'].'" target="_blank"  class="color-4"><i class="fas fa-file-pdf"></i></a></li>';
+                        }
                           else{
                             echo '<li><a href="./app_images/'.$rowF['Upload_Name'].'" target="_blank"  class="color-5"><i class="fa fa-file" aria-hidden="true"></i></a></li>';
                           }
                         }
                       }
-                      echo '<li><a href="#" id="'.$row['Task_Id'].'" class="color-5 uploadAssign"><i class="fa fa-upload" aria-hidden="true"></i></a></li>';
+
+                      if (date('Y-m-d',strtotime($row['Updated_On']))<=date('Y-m-d')) {
+                        echo '<li  class=" disabled"><a href="#" id="'.$row['Task_Id'].'" class="color-5 "><i class="fa fa-upload" aria-hidden="true"></i></a></li>';
+                      echo '<li class=" disabled" id="'.$row['Task_Id'].'"><a href="javascript:void(0);" class="color-7"><i class="fa fa-trash" aria-hidden="true"></i></a></li>';
+                      echo'   </ul>';
+                      $btnView = '<a href="StudentAssignmentSubmitted.php?assignmentId='.$row['Task_Id'].'" class="btn btn-link">View Assignments</a>';
+                      }
+                      else{
+                        echo '<li><a href="#" id="'.$row['Task_Id'].'" class="color-5 uploadAssign"><i class="fa fa-upload" aria-hidden="true"></i></a></li>';
                       echo '<li class="deleteAssign" id="'.$row['Task_Id'].'"><a href="javascript:void(0);" class="color-7"><i class="fa fa-trash" aria-hidden="true"></i></a></li>';
-                   echo'   </ul>
-                  </div>
+                      echo'   </ul>';
+                      }
+                      
+                  echo '</div>
               </div>
-              <div class="content-descr"> 
+              <div class="content-descr">
                   <a href="javascript:void(0);" add="addin'.$i.'" class="color-8 hide-cl"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
-                      <div class="content addin'.$i.'">
-                      '.$row['Task_Desc'].'
-                      </div>
-              </div>  
+                      <div class="content addin'.$i.'">';
+                      echo $row['Task_Desc'];
+                      if (date('Y-m-d',strtotime($row['Updated_On']))<=date('Y-m-d')) {
+                        echo '<div class="text-right">'; echo  $btnView.'</div>'  ;
+                      }
+                      echo '</div>
+              </div>
           </div>';
           $i=$i+1;
-     
+
     }
   }else{
-    echo '<h4 class="text-danger">No Record Found. Window is Refreshing...Wait</h4><script>window.setTimeout(function(){window.location.reload();},2000)</script>';
+    
+    //echo '<h4 class="text-danger">No Record Found. Window is Refreshing...Wait</h4><script>window.setTimeout(function(){window.location.reload();},2000)</script>';
   }
 
 }

@@ -7,12 +7,8 @@ require_once './includes/header.php';
 include 'dbobj.php';
 //include 'errorLog.php';
 include 'security.php';
-$subjectDropdownValue = "";
-$sqlSub = 'SELECT * FROM `subject_master_table` WHERE `School_Id` = ' . $_SESSION['SCHOOLID'] . ' AND `Enabled` = 1 ORDER BY `Subject_Name`';
-$resultSub = mysqli_query($dbhandle, $sqlSub);
-while ($rowSub = mysqli_fetch_assoc($resultSub)) {
-  $subjectDropdownValue = '<option value="' . $rowSub["Subject_Id"] . '">' . $rowSub["Subject_Name"] . ' </option>' . $subjectDropdownValue;
-}
+
+
 ?>
 <!-- start your UI here -->
 <div class="col-md-12">
@@ -21,30 +17,38 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
       <div class="heading-layout1">
         <div class="new-added-form school-form aj-new-added-form">
           <div class="row justify-content-center">
-            <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
+            <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
               <div class="form-group aj-form-group">
                 <label>Subject <span>*</span></label>
                 <select class="select2" required="" id="subjectList">
-                  <option value="">All </option>
-                  <?php echo $subjectDropdownValue; ?>
+
+
                 </select>
               </div>
             </div>
-            <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
-              <div class="form-group aj-form-group monthgrp" style="display: none;">
+            <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
+              <div class="form-group aj-form-group monthgrp">
                 <label>Month</label>
                 <select class="select2" required="" id="monthList">
-                  <option value="">All </option>
-                  <option value="">January </option>
-                  <option value="">February </option>
-                  <option value="">March </option>
-                  <option value="">April </option>
-                  <option value="">May </option>
-                  <option value="">June </option>
-                  <option value="">July </option>
-                  <option value="">August </option>
+                  <option value="">Select Month </option>
+                  <option value="1">January </option>
+                  <option value="2">February </option>
+                  <option value="3">March </option>
+                  <option value="4">April </option>
+                  <option value="5">May </option>
+                  <option value="6">June </option>
+                  <option value="7">July </option>
+                  <option value="8">August </option>
+                  <option value="9">September </option>
+                  <option value="10">October </option>
+                  <option value="11">November </option>
+                  <option value="12">December </option>
                 </select>
               </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
+
+              <button class="btn btn-warning" id="searchBtn"><i class="fas fa-search"></i> Search</button>
             </div>
             <div class="col-xl-12 col-lg-12 mt-2 col-12 aj-mb-2 assignment-list">
             </div>
@@ -76,42 +80,60 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
       $('.content').removeClass('active')
       $('.chang-togel').removeClass('chang-togel')
     });
-    
+
     $('#subjectList').change(function() {
       $('.monthgrp').fadeIn('slow');
     });
 
-    loadMOnths();
 
-    function loadMOnths() {
+    $(document).on('click', '#searchBtn', function() {
+      const monthNumber = $('#monthList').val();
+      const subjectId = $('#subjectList').val();
+      if (subjectId == '') {
+        alert("Please Select Subject");
+      } else if (monthNumber == '') {
+        alert("Please Select Month")
+      } else {
+        $.ajax({
+          url: './StudentAssignmentSubmit_1.php',
+          method: 'get',
+          data: {
+            'filterAssignment': 1,
+            'monthNumber': monthNumber,
+            'subjectId': subjectId
+          },
+          success: function(data) {
+            $('.assignment-list').html(data);
+          }
+        });
+      }
+    });
+
+    /*
+      1. to fetch data from subject table just copy code from below functions.
+      2. keep object id as assignment_subject
+    */
+    getAllSubjects();
+
+    function getAllSubjects() {
       $.ajax({
-        url: './CreateNewAssignments_1.php',
-        method: 'get',
+        url: './universal_apis.php',
+        type: 'get',
         data: {
-          'getMonths': 1
+          'getAllSubjects': 1
         },
+        dataType: 'json',
         success: function(data) {
-          $('#monthList').html(data);
+          var subjectData = JSON.parse(JSON.stringify(data));
+          var html = '<option value="">Select Subject</option>';
+          for (let i = 0; i < subjectData.length; i++) {
+            const subjectRow = subjectData[i];
+            html += '<option value="' + subjectRow.Subject_Id + '">' + subjectRow.Subject_Name + '</option>';
+          }
+          $('#subjectList').html(html);
         }
       });
     }
-
-    $(document).on('change', '#monthList', function() {
-      const monthNumber = $(this).val();
-      const subjectId = $('#subjectList').val();
-      $.ajax({
-        url: './StudentAssignmentSubmit_1.php',
-        method: 'get',
-        data: {
-          'filterAssignment': 1,
-          'monthNumber': monthNumber,
-          'subjectId': subjectId
-        },
-        success: function(data) {
-          $('.assignment-list').html(data);
-        }
-      });
-    });
   });
 </script>
 <?php

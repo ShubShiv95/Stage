@@ -185,6 +185,9 @@
                                 <li class="nav-item">
                                     <a href="Notices.php" class="nav-link"><i class="fas fa-angle-right"></i>Notices</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="NoticesView.php" class="nav-link"><i class="fas fa-angle-right"></i>View Notices</a>
+                                </li>
                                 <li class="nav-item sidebar-nav-item">
 									<a href="#" class="nav-link"><span>Reports</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
 									    <ul class="nav sub-group-menu">
@@ -248,9 +251,6 @@
 
                                 <li class="nav-item">
                                     <a href="AddStaff.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Staff</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="AddStaffDocument.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Staff Document</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="UpdateStaffDetails.php" class="nav-link"><i class="fas fa-angle-right"></i>Update Staff Details</a>

@@ -33,4 +33,17 @@ if (isset($_REQUEST['getAllSubjects'])) {
   echo json_encode($data);
 }
 
+/******** get all departments *********/
+if (isset($_REQUEST['getAllDepartments'])) {
+  $data = array();
+  $queryDepartment = 'SELECT * from department_master_table WHERE Enabled = 1 AND School_Id = ? ORDER BY Dept_Name';
+  $queryDepartmentPrepare = $dbhandle->prepare($queryDepartment);
+  $queryDepartmentPrepare->bind_param("s",$_SESSION["SCHOOLID"]);
+  $queryDepartmentPrepare->execute();
+  $resultSet = $queryDepartmentPrepare->get_result();
+  while ($rows = $resultSet->fetch_assoc()) {
+    $data[] = $rows;
+  }
+  echo json_encode($data);
+}
 ?>

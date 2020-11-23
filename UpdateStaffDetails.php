@@ -327,7 +327,7 @@ $schoolId=$_SESSION["SCHOOLID"];
                                                 </thead>
                                                 <tbody class="top-position-ss">
 												    <?php	
-														$sqlstaffdetails='select Staff_Id, Staff_Name, Contact_No, Login_Id, Role, Fathers_Or_Husband_Name, Enabled from staff_master_table where School_Id="'.$schoolId.'" order by Staff_Id ';
+														$sqlstaffdetails='select Staff_Id, Staff_Name, Contact_No, Login_Id, Role, Fathers_Or_Husband_Name, Enabled from staff_master_table where School_Id="'.$schoolId.'" order by Staff_Id';
 														 $resultstaffdetails=mysqli_query($dbhandle,$sqlstaffdetails);
 														 while($row=mysqli_fetch_assoc($resultstaffdetails)) {
 													 ?>
@@ -345,7 +345,7 @@ $schoolId=$_SESSION["SCHOOLID"];
 				                                                <div class="dropdown-menu dropdown-menu-right">
 				                                                    <a class="dropdown-item" href="EditStaff.php?staffid=<?php echo $row["Staff_Id"]; ?>"><i class="fa fa-pencil-alt" aria-hidden="true"></i>Edit</a>
 				                                                    <a class="dropdown-item" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Family Detail</a>
-				                                                    <a class="dropdown-item" href="#"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
+				                                                    <a class="dropdown-item" href="./AddStaffDocument.php?staff_id=<?php echo $row["Staff_Id"]; ?>&staff_name=<?php echo $row["Staff_Name"];?>"><i class="fa fa-upload" aria-hidden="true"></i> Document Upload</a>
 																	<?php if($row["Enabled"] ==1) { ?>
 				                                                    <a class="dropdown-item" href="DeactivateStaff2.php?staffid=<?php echo $row["Staff_Id"]; ?>" onclick="return confirm('sure to Deactivate ?')"><i style="color: red" class="fa fa-ban" aria-hidden="true"></i>Deactivate</a>
 																	<?php } else { ?>

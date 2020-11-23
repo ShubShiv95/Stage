@@ -1,326 +1,118 @@
-<!doctype html>
-<html class="no-js" lang="">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <!-- Normalize CSS -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/main.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="css/all.min.css">
-    <!-- Flaticon CSS -->
-    <link rel="stylesheet" href="fonts/flaticon.css">
-    <!-- Animate CSS -->
-    <link rel="stylesheet" href="css/animate.min.css">
-    <!-- Select 2 CSS -->
-    <link rel="stylesheet" href="css/select2.min.css">
-    <!-- Date Picker CSS -->
-    <link rel="stylesheet" href="css/datepicker.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Modernize js -->
-    <script src="js/modernizr-3.6.0.min.js"></script>
-</head>
-
-<body>
-    <!-- Preloader Start Here -->
-    <div id="preloader"></div>
-    <!-- Preloader End Here -->
-    <div id="wrapper" class="wrapper bg-ash">
-        <!-- Header Menu Area Start Here -->
-        <div class="navbar navbar-expand-md header-menu-one bg-light">
-            <div class="nav-bar-header-one">
-                <div class="header-logo">
-                    <a href="index.html">
-                        <img src="img/logo.png" alt="logo">
-                    </a>
-                </div>
-                  <div class="toggle-button sidebar-toggle">
-                    <button type="button" class="item-link">
-                        <span class="btn-icon-wrap">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
-                    </button>
-                </div>
-            </div>
-            <div class="d-md-none mobile-nav-bar">
-               <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar" aria-expanded="false">
-                    <i class="far fa-arrow-alt-circle-down"></i>
-                </button>
-                <button type="button" class="navbar-toggler sidebar-toggle-mobile">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-            <div class="header-main-menu collapse navbar-collapse" id="mobile-navbar">
-                <ul class="navbar-nav">
-                    <li class="navbar-item header-search-bar">
-                        <div class="input-group stylish-input-group">
-                            <span class="input-group-addon">
-                                <button type="submit">
-                                    <span class="flaticon-search" aria-hidden="true"></span>
-                                </button>
-                            </span>
-                            <input type="text" class="form-control" placeholder="Find Something . . .">
-                        </div>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="navbar-item dropdown header-admin">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <div class="admin-title">
-                                <h5 class="item-title">Stevne Zone</h5>
-                                <span>Admin</span>
-                            </div>
-                            <div class="admin-img">
-                                <img src="img/figure/admin.jpg" alt="Admin">
-                            </div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="item-header">
-                                <h6 class="item-title">Steven Zone</h6>
-                            </div>
-                            <div class="item-content">
-                                <ul class="settings-list">
-                                    <li><a href="#"><i class="flaticon-user"></i>My Profile</a></li>
-                                    <li><a href="#"><i class="flaticon-list"></i>Task</a></li>
-                                    <li><a href="#"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
-                                    <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                                    <li><a href="login.html"><i class="flaticon-turn-off"></i>Log Out</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="navbar-item dropdown header-message">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="far fa-envelope"></i>
-                            <div class="item-title d-md-none text-16 mg-l-10">Message</div>
-                            <span>5</span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="item-header">
-                                <h6 class="item-title">05 Message</h6>
-                            </div>
-                            <div class="item-content">
-                                <div class="media">
-                                    <div class="item-img bg-skyblue author-online">
-                                        <img src="img/figure/student11.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Maria Zaman</span> 
-                                                <span class="item-time">18:30</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-img bg-yellow author-online">
-                                        <img src="img/figure/student12.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Benny Roy</span> 
-                                                <span class="item-time">10:35</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-img bg-pink">
-                                        <img src="img/figure/student13.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Steven</span> 
-                                                <span class="item-time">02:35</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-img bg-violet-blue">
-                                        <img src="img/figure/student11.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Joshep Joe</span> 
-                                                <span class="item-time">12:35</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="navbar-item dropdown header-notification">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="far fa-bell"></i>
-                            <div class="item-title d-md-none text-16 mg-l-10">Notification</div>
-                            <span>8</span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="item-header">
-                                <h6 class="item-title">03 Notifiacations</h6>
-                            </div>
-                            <div class="item-content">
-                                <div class="media">
-                                    <div class="item-icon bg-skyblue">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="post-title">Complete Today Task</div>
-                                        <span>1 Mins ago</span>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-icon bg-orange">
-                                        <i class="fas fa-calendar-alt"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="post-title">Director Metting</div>
-                                        <span>20 Mins ago</span>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-icon bg-violet-blue">
-                                        <i class="fas fa-cogs"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="post-title">Update Password</div>
-                                        <span>45 Mins ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                     <li class="navbar-item dropdown header-language">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" 
-                        data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>EN</a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">English</a>
-                            <a class="dropdown-item" href="#">Spanish</a>
-                            <a class="dropdown-item" href="#">Franchis</a>
-                            <a class="dropdown-item" href="#">Chiness</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Header Menu Area End Here -->
-        <!-- Page Area Start Here -->
-        <div class="dashboard-page-one">
-            <!-- Sidebar Area Start Here -->
-             <?php 
-            include 'includes/sidebar.php'; 
-            ?>
-            <!-- Sidebar Area End Here -->
-            <div class="dashboard-content-one">
-                <!-- Breadcubs Area Start Here -->
-                <div class="breadcrumbs-area">
-                    <h3>Document</h3>
-                    <ul>
-                        <li>
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li>Document</li>
-                    </ul>
-                </div>
-                <!-- Breadcubs Area End Here -->
-                <!-- Admit Form Area Start Here -->
-                <div class="card height-auto">
-                    <div class="card-body">
-                        <div class="heading-layout1">
-                            <div class="item-title aj-item-title">
-                                <h3 class="mb-4">Document of MR. RAJAT ANSUL XALOX (ADMIN)</h3>
-                            </div>
-                            <form class="new-added-form school-form aj-new-added-form">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-5 col-lg-5 col-12 aj-mb-2">
-                                    <div class="box-sedow">
-                                        <div class="brouser-image ">
-                                            <h5 class="text-center">Document of MR. RAJAT ANSUL XALOX (ADMIN)</h5>
-                                        </div>
-                                        <div class="row justify-content-center">
-                                            <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
-                                                <div class="form-group aj-form-group">
-                                                    <label>Document  Name <span>*</span> </label>
-                                                    <input type="text" name="depar_department" placeholder="" class="form-control">
-                                                </div>
-                                                <div class="form-group aj-form-group">
-                                                    <label>Document  </label>
-                                                    <input type="file" name="depar_department" placeholder="" class="form-control">
-                                                </div>
-
-                                            </div>
-                                        </div>                                       
-                                        <div class="aaj-btn-chang-cbtn text-right">
-                                                <!-- <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button> -->
-                                                <a  href="javascript:void(0);"  class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Save </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                          </form>
+<?php
+session_start();
+$pageTitle = "Add Staff Documents";
+require_once './includes/header.php';
+?>
+<div class="container">
+  <div class="col-md-12 col-ld-12 col-12 shadow">
+    <div class="card height-auto">
+      <div class="card-body">
+        <div class="heading-layout1">
+          <form class="new-added-form school-form aj-new-added-form" id="staff_document_form" action="./AddStaffDocument_1.php" enctype="multipart/form-data" method="post">
+            <div class="row justify-content-center">
+              <div class="col-xl-5 col-lg-5 col-12 aj-mb-2">
+                <div class="box-sedow">
+                  <div class="brouser-image ">
+                    <h5 class="text-center staff_Name">Add Document of <?php echo $_REQUEST['staff_name']; ?></h5>
+                  </div>
+                  <div class="row justify-content-center">
+                    <input type="text" class="form-control d-none" name="document_sender">
+                    <input type="text" name="staff_id" id="staff_id" class="form-control d-none" value="<?php echo $_GET['staff_id']; ?>">
+                    <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
+                      <div class="form-group aj-form-group">
+                        <label>Document Name <span>*</span> </label>
+                        <input type="text" name="document_name" placeholder="" class="form-control">
+                      </div>
+                      <div class="form-group aj-form-group">
+                        <label>Document </label>
+                        <input type="file" name="document_file_name" placeholder="" class="form-control">
+                      </div>
                     </div>
+                  </div>
+                  <div class="aaj-btn-chang-cbtn text-right">
+                    <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button>
+                  </div>
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-12 form_output"></div>
                 </div>
-                <!-- Admit Form Area End Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
+              </div>
             </div>
+          </form>
         </div>
-        <!-- Page Area End Here -->
+      </div>
     </div>
-    <!-- jquery-->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
-    <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Select 2 Js -->
-    <script src="js/select2.min.js"></script>
-    <!-- Date Picker Js -->
-    <script src="js/datepicker.min.js"></script>
-    <!-- Scroll Up Js -->
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <!-- Custom Js -->
-    <script src="js/main.js"></script>
-     <script type="text/javascript">
-        $('#opne-form-Promotion').click('.sibling-bs',function(){
-             $('.tebal-promotion').slideToggle('slow');
-            })
-    </script>  
-</body>
+    <div class="col-xl-6 col-lg-6 col-md-6 offset-xl-3 offset-lg-3 offset-md-3 col-12 doc_viewer"></div>
+  </div>
+  <?php
+  require_once './includes/scripts.php';
+  ?>
+  <script type="text/javascript">
+    $(document).ready(function() {
 
-</html>
+      /* load staff document */
+      function load_staff_documents(staff_id) {
+        $.ajax({
+          url: './AddStaffDocument_1.php',
+          type: 'get',
+          data: {
+            'getStaffDocument': 1,
+            'staff_id': staff_id
+          },
+          dataType: 'json',
+          success: function(response) {
+            var doc_data = JSON.parse(JSON.stringify(response));
+            console.log(doc_data.length);
+            html_datas = '<table class="table table-responsive"><tr><th>Document Name</th><th>Action</th></tr>';
+            for (let i = 0; i < doc_data.length; i++) {
+              const act_data = doc_data[i];
+              console.log(act_data.Document_Name);
+              html_datas += '<tr><td>' + act_data.Document_Name + '</td><td><a class="btn btn-link btn-success" href="' + act_data.File_Path + '/' + act_data.File_Name + '" target="_blank"><i class="fas fa-eye"></i></a> <a href="#" class="btn btn-link btn-danger delete_document" id="' + act_data.Document_Id + '"><i class="fas fa-trash"></i></td></tr>';
+            }
+            html_datas += '</table>';
+            $('.doc_viewer').html(html_datas);
+          }
+        });
+      }
+      /* submit staff document form */
+      $(document).on('submit', '#staff_document_form', function(event) {
+        event.preventDefault();
+        const staff_id = "<?php echo $_GET['staff_id'] ?>";
+        $.ajax({
+          url: $(this).attr('action'),
+          type: $(this).attr('method'),
+          data: new FormData(this),
+          contentType: false,
+          processData: false,
+          success: function(data) {
+            $('.form_output').html(data);
+            $('#staff_document_form')[0].reset();
+            load_staff_documents(staff_id);
+          }
+        });
+      });
+
+      /* delete staff document */
+      $(document).on('click', '.delete_document', function(event) {
+          event.preventDefault();
+          if (confirm("Are You Sure To Delete")) {
+            var document_id = $(this).attr('id');
+            const staff_id = "<?php echo $_GET['staff_id'] ?>";
+            $.ajax({
+              url: './AddStaffDocument_1.php',
+              type: 'post',
+              data: {
+                'deleteStaffDocument': 1,
+                'document_id': document_id
+              },
+              success: function(data) {
+                $('.form_output').html(data);
+                load_staff_documents(staff_id);
+              }
+            });
+          }
+        });
+
+    });
+  </script>
+  <?php
+  include_once './includes/closebody.php';
+  ?>

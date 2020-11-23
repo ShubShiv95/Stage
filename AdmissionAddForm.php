@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Middle Name</label>
-                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" class="form-control" required="">
+                                        <input type="text" name="studentMiddleName" id="studentMiddleName" placeholder="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Last Name</label>
@@ -104,24 +104,20 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Class <span>*</span></label>
-                                        <select class="select2" name="studclassToApply" id="studclassToApply" required="">
+                                        <select class="select2" name="studclassToApply" id="studclassToApply">
                                         <option value="0">Select Class</option>
-                                        <?php
-                                            echo $classDropdownValue;
-                                        ?> 
+                                       
                                         </select>
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Section</label>
-                                        <select class="select2" name="f_Section" required="" readonly>
-                                            <option value="">Select</option>
-                                         </select>
+                                        <!-- <select class="select2" name="f_Section" required="" readonly=true>
+                                         </select> -->
                                     </div>
 
                                    <div class="form-group aj-form-group">
                                         <label>Roll No.</label>
                                         <select class="select2" name="f_Gender" required="" readonly> 
-                                        <option value="">Select </option>
                                         </select>
                                     </div>
                                     
@@ -150,7 +146,7 @@
 
                                     <div class="form-group aj-form-group">
                                         <label>Social Category <span>*</span></label>
-                                        <select class="select2" required="" name="studentSocialCat" id="studentSocialCat">
+                                        <select class="select2"  name="studentSocialCat" id="studentSocialCat">
                                             <?php
                                                 $string = "";
                                                 foreach($GLOBAL_SOCIAL_CAT as $x=>$x_value)
@@ -1029,6 +1025,25 @@
             });
 
         });
+
+        getAllClass();
+            function getAllClass(){
+                $.ajax({
+                    url : './universal_apis.php',
+                    type : 'get',
+                    data : {'getAllClass':1},
+                    dataType : 'json',
+                    success : function(data){
+                      var classData = JSON.parse(JSON.stringify(data));
+                      var html = '<option value="">Select</option>';
+                      for (let i = 0; i < classData.length; i++) {
+                          const classRow = classData[i];
+                          html += '<option value="'+classRow.Class_Id+'">'+classRow.Class_Name +'</option>';
+                      }
+                      $('#studclassToApply').html(html);
+                    }
+                });
+            }
 	</script>
 </body>
 

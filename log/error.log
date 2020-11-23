@@ -340,3 +340,9 @@ Module Name: 	Investment Payment
 Message:	
 SQL:	
 File:	/opt/lampp/htdocs/stage/AdmissionEnquiry2.php
+
+Date:	23-Nov-2020 08:12:09 AM	 By User:admin
+Module Name: 	Create Notice 
+Message:	Column 'Filename' cannot be null
+SQL:	INSERT INTO `notice_master_table`(`Notice_Id`, `Notice_Title`, `Notice_Type`, `Notice_Description`, `Filename`, `Filepath`, `Publish_In_Web`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?,?)
+File:	/opt/lampp/htdocs/stage/Notice_1.php

@@ -228,7 +228,7 @@ include 'security.php';
                       var html = '<option value="">Select</option>';
                       for (let i = 0; i < classData.length; i++) {
                           const classRow = classData[i];
-                          html += '<option value="'+classRow.Class_Id+'">'+classRow.Class_Name +'</option>';
+                          html += '<option value="'+classRow.class_id+'">'+classRow.class_name +'</option>';
                       }
                       $('#assignment_class').html(html);
                     }

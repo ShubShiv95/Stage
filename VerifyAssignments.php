@@ -10,7 +10,7 @@ error_reporting(0);
 <?php require_once './includes/header.php'; ?>
 <!-- start your UI here -->
 <div class="col-md-12">
-  <div class="container row">
+  <div class="container row new-added-form school-form aj-new-added-form">
     <div class="col-md-4 aj-mb-2">
       <div class="form-group aj-form-group">
         <label>Subject <span>*</span></label>

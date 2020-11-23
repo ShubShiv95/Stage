@@ -1,7 +1,6 @@
 <?php
 session_start(); 
-
-//$_SESSION["USER_TYPE"] = 'Teacher';
+//$_SESSION["USER_TYPE"];
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -147,7 +146,7 @@ include 'security.php';
                                     }
                                     ?>
                                     <div class="col-xl-10 col-lg-10 col-12 mt-5 assignment-list">
-                                        <div class="cart-box-row">
+                                        <!--<div class="cart-box-row">
                                             <div class="box-row">
                                                 <div class="left-content">
                                                     <h6>NEW SESSION STUDENT LIST</h6>
@@ -219,7 +218,7 @@ include 'security.php';
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </form>
@@ -312,20 +311,6 @@ include 'security.php';
             });
 
             $(document).ready(function() {
-               /* load_assignments();
-
-                function load_assignments() {
-                    $.ajax({
-                        url: './CreateNewAssignments_1.php',
-                        method: 'get',
-                        data: {
-                            'getAllAssignments': 1
-                        },
-                        success: function(data) {
-                            $('.assignment-list').html(data);
-                        }
-                    });
-                }*/
 
                 $('#assignment_type').change(function() {
                     const assignment_type = $(this).val();
@@ -359,9 +344,11 @@ include 'security.php';
                     $('#Assignment_id').val(assignment_id);
                     $('#modelAddAssign').fadeIn();
                 });
+
                 $('.close-mod').click(function() {
                     $('#modelAddAssign').fadeOut();
                 });
+
                 $(document).on('click', '.deleteAssign', function(e) {
                     e.preventDefault();
                     if (confirm("Are You Sure To Delete?")) {

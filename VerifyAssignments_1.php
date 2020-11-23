@@ -30,8 +30,49 @@ if(isset($_REQUEST['overWriteImage'])){
 
   $saveImage = file_put_contents('./app_images/student_assignment_uploads/'.$previousImage.'',$decodeImage);
   if($saveImage){
-    echo json_encode("Done");
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <strong>Success</strong> Image Saved.
+  </div>';
   }
 
+}
+
+/**** save remarks ****/
+if (isset($_REQUEST['save_remarks'])) {
+  $image_name = $_REQUEST['image_name'];
+  $remarks = $_REQUEST['message'];
+  $update_query = "UPDATE task_submit_file_table SET Task_Remarks = ? WHERE File_Name = ?";
+  $update_query_prepare = $dbhandle->prepare($update_query);
+  $update_query_prepare->bind_param("ss",$remarks,$image_name);
+  if ($update_query_prepare->execute()) {
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <strong>Success</strong> Remarks Saved.
+  </div>';
+  }
+}
+
+/* final submit */
+if(isset($_REQUEST['finsal_submit_asignment'])){
+  $assignmentId = $_REQUEST['assignmentId'];
+  $final_qieru = "UPDATE task_submit_table SET Is_Verified = 'Yes' WHERE Updated_By = ? AND Task_Id = ?";
+  $final_qieru_prepare = $dbhandle->prepare($final_qieru);
+  $final_qieru_prepare->bind_param("si",$_SESSION["USER_ID"],$assignmentId);
+  if($final_qieru_prepare->execute()){
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <strong>Success</strong> Assignment Saved As Final Submit.
+  </div>';
+  }
 }
 ?>

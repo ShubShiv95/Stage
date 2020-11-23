@@ -8,10 +8,10 @@ include_once './sequenceGenerator.php';
 /***** filter assignment for student *****/
 if (isset($_REQUEST['filterAssignment'])) {
   $userType = $_SESSION["USER_TYPE"];
-  $studentSection = $_SESSION["SECTION_ID"] ;
+  $studentSection = $_SESSION["SECTION_ID"];
   $currentYear = $_SESSION["STARTYEAR"];
   $today = date('Y-m-d');
-  $sqlQuery = "select tmt.* from task_master_table tmt, task_allocation_list_table tal WHERE tal.Allocated_Reff_Id=? AND tmt.Task_Id=tal.Task_Id AND month(tmt.Updated_On)=? and year(tmt.Updated_On)=? and tmt.Enabled=1 and tmt.Refference_type=? ";
+  $sqlQuery = "select tmt.* from task_master_table tmt, task_allocation_list_table tal WHERE tal.Allocated_Reff_Id=? AND tmt.Task_Id=tal.Task_Id AND month(tmt.Last_Submissable_Date)=? and year(tmt.Last_Submissable_Date)=? and tmt.Enabled=1 and tmt.Refference_type=? ";
   //echo $sqlQuery;
   $sqlQueryprepare = $dbhandle->prepare($sqlQuery);
   $sqlQueryprepare->bind_param("iiis", $studentSection, $_REQUEST['monthNumber'], $currentYear, $userType);
@@ -67,10 +67,10 @@ if (isset($_REQUEST['filterAssignment'])) {
                         ' . $row['Task_Desc'] . '
                         <div class="text-right">';
                         if (date('Y-m-d',strtotime($row['Updated_On']))<date('Y-m-d')) {
-                          echo '<a class="btn btn-link btn-primary disabled text-white" href="#">Upload Files</a>';
+                          echo '<a class="btn btn-link btn-primary disabled text-white" href="#">Submit Assignment</a>';
                         }
                         else{
-                          echo '<a class="btn btn-link btn-primary" href="./StudentAssignmentFileUpload.php?assignmentId=' . $row['Task_Id'] . '" target="_blank">Upload Files</a>';
+                          echo '<a class="btn btn-link btn-primary" href="./StudentAssignmentFileUpload.php?assignmentId=' . $row['Task_Id'] . '" target="_blank">Submit Assignment</a>';
                         }
                         echo '</div>
                         </div>
@@ -126,7 +126,7 @@ if (isset($_REQUEST['student_assignment_submitter'])) {
       // File info
       $fileName = basename($_FILES['document_name']['name']);
       $imageUploadPath = $uploadPath . $fileName;
-      $fileType = pathinfo($imageUploadPath, PATHINFO_EXTENSION);
+      $fileType = strtolower(pathinfo($imageUploadPath, PATHINFO_EXTENSION));
 
       // Allow certain file formats
       $allowTypes = array('jpg', 'png', 'jpeg');
@@ -201,10 +201,6 @@ if (isset($_REQUEST['student_assignment_submitter'])) {
         // save the image on the given filename
         imagepng($imgData, $resizedFilename);
         /* resize image end */
-
-
-
-
         $Reference_Id = '2';
         $isverified = 'No';
         $enabled = 1;
@@ -311,9 +307,9 @@ if (isset($_REQUEST['getStudentAssignment'])) {
   $assignment_id = $_REQUEST['assignment_id'];
   $user = $_SESSION['LOGINID'];
   $data = array();
-  $query_files = "SELECT task_submit_file_table.* FROM task_submit_file_table INNER JOIN task_submit_table ON task_submit_table.Task_Submit_Id = task_submit_file_table.Task_Submit_Id WHERE task_submit_file_table.Updated_By = ? AND task_submit_table.Task_Id = ? ORDER BY TSF_Id DESC";
+  $query_files = "SELECT tsft.* from task_submit_file_table tsft, task_submit_table tst WHERE tsft.Task_Submit_Id = tst.Task_Submit_Id and tsft.Updated_By = ? AND tst.Task_Id = ? and tsft.Enabled = 1 AND tsft.School_Id = ? ORDER BY tsft.TSF_Id DESC";
   $query_files_prepare = $dbhandle->prepare($query_files);
-  $query_files_prepare->bind_param("ii", $user, $assignment_id);
+  $query_files_prepare->bind_param("sii", $user, $assignment_id,$_SESSION["SCHOOLID"]);
   $query_files_prepare->execute();
   $resultQuery = $query_files_prepare->get_result();
   while ($rows = $resultQuery->fetch_assoc()) {
@@ -401,4 +397,16 @@ if (isset($_REQUEST['getSubmittedAsignment'])) {
     $data[] = $rows;
   }
   echo json_encode($data);
+}
+
+
+/* delete student submitte assignment */
+if (isset($_REQUEST['deleteAssiFile'])) {
+  $del_query = "UPDATE task_submit_file_table SET Enabled = 0 WHERE TSF_Id = ? AND School_Id = ?";
+  $del_query_prepare = $dbhandle->prepare($del_query);
+  $del_query_prepare->bind_param("ii",$_REQUEST['tsf_id'],$_SESSION["SCHOOLID"]);
+  if ($del_query_prepare->execute()) {
+    echo json_encode("success");
+  }
+
 }

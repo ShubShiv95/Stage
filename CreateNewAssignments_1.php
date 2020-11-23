@@ -413,7 +413,7 @@ if (isset($_REQUEST['filterAssignment'])) {
     }
   }else{
     
-    //echo '<h4 class="text-danger">No Record Found. Window is Refreshing...Wait</h4><script>window.setTimeout(function(){window.location.reload();},2000)</script>';
+    echo '<h4 class="text-danger">No Record Found. Window is Refreshing...Wait</h4><script>window.setTimeout(function(){window.location.reload();},2000)</script>';
   }
 
 }

@@ -106,13 +106,31 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
           var filehtml = '';
           assignmentFiles = JSON.parse(JSON.stringify(response));
           for (let index = 0; index < assignmentFiles.length; index++) {
+            
             const fileData = assignmentFiles[index];
-            filehtml += '<div class="card text-white shadow col-md-6"><img class="card-img-top w-100" src="./'+fileData.File_Path+fileData.File_Name+'" alt=""><div class="card-body"><p class="card-text">'+fileData.Task_Note+'</p></div></div>';
+            filehtml += '<div class="card text-white shadow col-md-6"><img class="card-img-top w-100" src="./'+fileData.File_Path+fileData.File_Name+'" alt=""><div class="card-body"><p class="card-text">'+fileData.Task_Note+'</p><button class="btn btn-danger btn-sm delete_image" id="'+fileData.TSF_Id+'"><i class="fas fa-trash"></i></button></div></div>';
           }
           $('.assignment-list').html(filehtml);
         }
       });
     }
+
+    // delete assignment
+    $(document).on('click','.delete_image',function(event){
+      event.preventDefault();
+      var tsf_id = $(this).attr('id');
+      if(confirm("Are You Sure To Delete?")){
+        $.ajax({
+        url : './StudentAssignmentSubmit_1.php',
+        type : 'post',
+        data : {'deleteAssiFile':1,'tsf_id':tsf_id},
+        success : function(data){
+          alert("Assignment Deleted")
+         show_student_assignments();
+        }
+      });
+      }
+    });
   });
 </script>
 <?php

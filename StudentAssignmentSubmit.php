@@ -7,8 +7,6 @@ require_once './includes/header.php';
 include 'dbobj.php';
 //include 'errorLog.php';
 include 'security.php';
-
-
 ?>
 <!-- start your UI here -->
 <div class="col-md-12">

@@ -123,7 +123,11 @@ require_once './includes/scripts.php';
                     var notice_html = '<div class="col-xl-10 col-lg-10 col-12 mt-5 assignment-list">';
                     for (let i = 0; i < notice_data.length; i++) {
                         const new_notice_el = notice_data[i];
-                        notice_html += '<div class="cart-box-row"><div class="box-row"><div class="left-content"><h6>' + new_notice_el.Notice_Title + '</h6><p class="all-desc"> <span>Created By ' + new_notice_el.Updated_By + ' </span> | <span> Created on ' + new_notice_el.Updated_On + ' </span></p></div><div class="right-content"><ul><li><a href="./' + new_notice_el.Filepath+'/'+new_notice_el.Filename + '" target="_blank" class="color-3"><i class="fa fa-file" aria-hidden="true"></i></a></li></ul></div></div><div class="content-descr"><a href="javascript:void(0);" add="addin'+i+'" class="color-8 hide-cl"><i class="fa fa-chevron-down" aria-hidden="true"></i></a><div class="content addin'+i+'">' + new_notice_el.Notice_Description + '</div></div></div>';
+                        notice_html += '<div class="cart-box-row"><div class="box-row"><div class="left-content"><h6>' + new_notice_el.Notice_Title + '</h6><p class="all-desc"> <span>Created By ' + new_notice_el.Updated_By + ' </span> | <span> Created on ' + new_notice_el.Updated_On + ' </span></p></div><div class="right-content">';
+                        if(new_notice_el.Filename != 'NULL'){
+                            notice_html +='<ul><li><a href="./' + new_notice_el.Filepath+'/'+new_notice_el.Filename + '" target="_blank" class="color-3"><i class="fa fa-file" aria-hidden="true"></i></a></li></ul>';
+                        }
+                        notice_html +='</div></div><div class="content-descr"><a href="javascript:void(0);" add="addin'+i+'" class="color-8 hide-cl"><i class="fa fa-chevron-down" aria-hidden="true"></i></a><div class="content addin'+i+'">' + new_notice_el.Notice_Description + '</div></div></div>';
                     }
                     notice_html += '</div>';
                     $('.notice_data').html(notice_html);

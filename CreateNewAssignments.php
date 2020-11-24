@@ -1,5 +1,8 @@
 <?php
 session_start();
+if ($_SESSION["USER_TYPE"] == 'Student' || $_SESSION["USER_TYPE"] == 'Parents') {
+    echo '<script>alert("You Donot Have Rights To Access This Page"); window.location.href="./dashboard.php"</script>';
+}
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -13,7 +16,7 @@ include 'security.php';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
+    <title>SWIFTCAMPUS | Create Assignment</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">

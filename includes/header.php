@@ -4,15 +4,19 @@
 include 'dbobj.php';
 include 'errorLog.php';
 //include 'security.php';
-$lid=$_SESSION["LOGINID"];
-$schoolId=$_SESSION["SCHOOLID"];
+$lid = $_SESSION["LOGINID"];
+$schoolId = $_SESSION["SCHOOLID"];
 ?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>SWIFTCAMPUS | Add Staff Form</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
     <!-- Normalize CSS -->
@@ -36,6 +40,10 @@ $schoolId=$_SESSION["SCHOOLID"];
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
+    <!-- Less CSS -->
+    <link rel="stylesheet/less" type="text/css" href="./css/style.less" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -44,39 +52,40 @@ $schoolId=$_SESSION["SCHOOLID"];
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
         <!-- Header Menu Area Start Here -->
-        <?php //session_start();  ?>
+        <?php //session_start();
+        ?>
         <div class="navbar navbar-expand-md header-menu-one bg-light">
-                <div class="nav-bar-header-one">
-                    <div class="header-logo">
-                        <a href="index.html">
-                            <img src="img/sidemenu-logo-black.jpg" alt="logo">
-                        </a>
-                    </div>
-                     <div class="toggle-button sidebar-toggle">
-                        <button type="button" class="item-link">
-                            <span class="btn-icon-wrap">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </span>
-                        </button>
-                    </div>
+            <div class="nav-bar-header-one">
+                <div class="header-logo">
+                    <a href="index.html">
+                        <img src="img/sidemenu-logo-black.jpg" alt="logo">
+                    </a>
                 </div>
-                <div class="d-md-none mobile-nav-bar">
-                   <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar" aria-expanded="false">
-                        <i class="far fa-arrow-alt-circle-down"></i>
-                    </button>
-                    <button type="button" class="navbar-toggler sidebar-toggle-mobile">
-                        <i class="fas fa-bars"></i>
+                <div class="toggle-button sidebar-toggle">
+                    <button type="button" class="item-link">
+                        <span class="btn-icon-wrap">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
                     </button>
                 </div>
-                <div class="header-main-menu collapse navbar-collapse" id="mobile-navbar">
-                    <ul class="navbar-nav left">
-                        <li class="navbar-item header-search-bar">
-                            <div class="admin-img">
-                                <img src="app_images/school_images/logo.jpeg" alt="Logo">
-                            </div>
-                            <!--div class="input-group stylish-input-group">
+            </div>
+            <div class="d-md-none mobile-nav-bar">
+                <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar" aria-expanded="false">
+                    <i class="far fa-arrow-alt-circle-down"></i>
+                </button>
+                <button type="button" class="navbar-toggler sidebar-toggle-mobile">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-main-menu collapse navbar-collapse" id="mobile-navbar">
+                <ul class="navbar-nav left">
+                    <li class="navbar-item header-search-bar">
+                        <div class="admin-img">
+                            <img src="app_images/school_images/logo.jpeg" alt="Logo">
+                        </div>
+                        <!--div class="input-group stylish-input-group">
                                 <span class="input-group-addon">
                                     <button type="submit">
                                         <span class="flaticon-search" aria-hidden="true"></span>
@@ -84,217 +93,212 @@ $schoolId=$_SESSION["SCHOOLID"];
                                 </span>
                                 <input type="text" class="form-control" placeholder="Find Something . . .">
                             </div-->
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav right">
-                        <li class="navbar-item dropdown header-admin">
-                            <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                aria-expanded="false">
-                                <div class="admin-title">
-                                    <h5 class="item-title"><?php echo $_SESSION["NAME"];?></h5>
-                                    <span>Admin</span>
-                                </div>
-                                <div class="admin-img">
-                                    <img src="app_images/profile/<?php echo $_SESSION["EMPID"];?>.jpg" alt="<?php echo $_SESSION["NAME"];?>" width="40" height="40">
-                                </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="item-header">
-                                    <h6 class="item-title"><?php echo $_SESSION["NAME"];?></h6>
-                                </div>
-                                <div class="item-content">
-                                    <ul class="settings-list">
-                                        <li><a href="#"><i class="flaticon-user"></i>My Profile</a></li>
-                                        <li><a href="#"><i class="flaticon-list"></i>Task</a></li>
-                                        <li><a href="#"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
-                                        <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                                        <li><a href="signout.php"><i class="flaticon-turn-off"></i>Log Out</a></li>
-                                    </ul>
-                                </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav right">
+                    <li class="navbar-item dropdown header-admin">
+                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <div class="admin-title">
+                                <h5 class="item-title"><?php echo $_SESSION["NAME"]; ?></h5>
+                                <span>Admin</span>
                             </div>
-                        </li>
+                            <div class="admin-img">
+                                <img src="app_images/profile/<?php echo $_SESSION["EMPID"]; ?>.jpg" alt="<?php echo $_SESSION["NAME"]; ?>" width="40" height="40">
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="item-header">
+                                <h6 class="item-title"><?php echo $_SESSION["NAME"]; ?></h6>
+                            </div>
+                            <div class="item-content">
+                                <ul class="settings-list">
+                                    <li><a href="#"><i class="flaticon-user"></i>My Profile</a></li>
+                                    <li><a href="#"><i class="flaticon-list"></i>Task</a></li>
+                                    <li><a href="#"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
+                                    <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
+                                    <li><a href="signout.php"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
 
-    <!--Theme Change Drop Down System -->
-    <li class="navbar-item dropdown header-notification">
-                            <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                aria-expanded="false">
-                                <!--i class="far fa-bell"></i-->
-                                <div class="item-title d-md-none text-16 mg-l-10">Notification</div>
-                                <img  src="img/theme-change-icon.png" width="40" height="40">
-                            </a>
+                    <!--Theme Change Drop Down System -->
+                    <li class="navbar-item dropdown header-notification">
+                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <!--i class="far fa-bell"></i-->
+                            <div class="item-title d-md-none text-16 mg-l-10">Notification</div>
+                            <img src="img/theme-change-icon.png" width="40" height="40">
+                        </a>
 
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="item-header">
-                                    <h6 class="item-title">Select Your Theme</h6>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="item-header">
+                                <h6 class="item-title">Select Your Theme</h6>
+                            </div>
+                            <div class="item-content">
+                                <div class="media">
+                                    <div class="item-icon bg-skyblue">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="media-body space-sm">
+                                        <div class="post-title">Clasical</div>
+
+                                    </div>
                                 </div>
-                                <div class="item-content">
-                                    <div class="media">
-                                        <div class="item-icon bg-skyblue">
-                                            <i class="fas fa-check"></i>
-                                        </div>
-                                        <div class="media-body space-sm">
-                                            <div class="post-title">Clasical</div>
-
-                                        </div>
+                                <div class="media">
+                                    <div class="item-icon bg-orange">
+                                        <i class="fas fa-calendar-alt"></i>
                                     </div>
-                                    <div class="media">
-                                        <div class="item-icon bg-orange">
-                                            <i class="fas fa-calendar-alt"></i>
-                                        </div>
-                                        <div class="media-body space-sm">
-                                            <div class="post-title">Education</div>
+                                    <div class="media-body space-sm">
+                                        <div class="post-title">Education</div>
 
-                                        </div>
                                     </div>
-                                    <div class="media">
-                                        <div class="item-icon bg-violet-blue">
-                                            <i class="fas fa-cogs"></i>
-                                        </div>
-                                        <div class="media-body space-sm">
-                                            <div class="post-title">Super Storm</div>
+                                </div>
+                                <div class="media">
+                                    <div class="item-icon bg-violet-blue">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                    <div class="media-body space-sm">
+                                        <div class="post-title">Super Storm</div>
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <!--End of Theme change system -->
+                        </div>
+                    </li>
+                    <!--End of Theme change system -->
 
 
-                        <li class="navbar-item dropdown header-message">
-                            <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="far fa-envelope"></i>
-                                <div class="item-title d-md-none text-16 mg-l-10">Message</div>
-                                <span>5</span>
-                            </a>
+                    <li class="navbar-item dropdown header-message">
+                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="far fa-envelope"></i>
+                            <div class="item-title d-md-none text-16 mg-l-10">Message</div>
+                            <span>5</span>
+                        </a>
 
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="item-header">
-                                    <h6 class="item-title">05 Message</h6>
-                                </div>
-                                <div class="item-content">
-                                    <div class="media">
-                                        <div class="item-img bg-skyblue author-online">
-                                            <!---img src="app_imges/profile/19.jpg" alt="img"-->
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="item-header">
+                                <h6 class="item-title">05 Message</h6>
+                            </div>
+                            <div class="item-content">
+                                <div class="media">
+                                    <div class="item-img bg-skyblue author-online">
+                                        <!---img src="app_imges/profile/19.jpg" alt="img"-->
+                                    </div>
+                                    <div class="media-body space-sm">
+                                        <div class="item-title">
+                                            <a href="#">
+                                                <span class="item-name">Maria Zaman</span>
+                                                <span class="item-time">18:30</span>
+                                            </a>
                                         </div>
-                                        <div class="media-body space-sm">
-                                            <div class="item-title">
-                                                <a href="#">
-                                                    <span class="item-name">Maria Zaman</span>
-                                                    <span class="item-time">18:30</span>
-                                                </a>
-                                            </div>
-                                            <p>What is the reason of buy this item.
+                                        <p>What is the reason of buy this item.
                                             Is it usefull for me.....</p>
-                                        </div>
                                     </div>
-                                    <div class="media">
-                                        <div class="item-img bg-yellow author-online">
-                                            <img src="img/figure/student12.png" alt="img">
-                                        </div>
-                                        <div class="media-body space-sm">
-                                            <div class="item-title">
-                                                <a href="#">
-                                                    <span class="item-name">Benny Roy</span>
-                                                    <span class="item-time">10:35</span>
-                                                </a>
-                                            </div>
-                                            <p>What is the reason of buy this item.
-                                            Is it usefull for me.....</p>
-                                        </div>
+                                </div>
+                                <div class="media">
+                                    <div class="item-img bg-yellow author-online">
+                                        <img src="img/figure/student12.png" alt="img">
                                     </div>
-                                    <div class="media">
-                                        <div class="item-img bg-pink">
-                                            <img src="img/figure/student13.png" alt="img">
+                                    <div class="media-body space-sm">
+                                        <div class="item-title">
+                                            <a href="#">
+                                                <span class="item-name">Benny Roy</span>
+                                                <span class="item-time">10:35</span>
+                                            </a>
                                         </div>
-                                        <div class="media-body space-sm">
-                                            <div class="item-title">
-                                                <a href="#">
-                                                    <span class="item-name">Steven</span>
-                                                    <span class="item-time">02:35</span>
-                                                </a>
-                                            </div>
-                                            <p>What is the reason of buy this item.
+                                        <p>What is the reason of buy this item.
                                             Is it usefull for me.....</p>
-                                        </div>
                                     </div>
-                                    <div class="media">
-                                        <div class="item-img bg-violet-blue">
-                                            <img src="img/figure/student11.png" alt="img">
+                                </div>
+                                <div class="media">
+                                    <div class="item-img bg-pink">
+                                        <img src="img/figure/student13.png" alt="img">
+                                    </div>
+                                    <div class="media-body space-sm">
+                                        <div class="item-title">
+                                            <a href="#">
+                                                <span class="item-name">Steven</span>
+                                                <span class="item-time">02:35</span>
+                                            </a>
                                         </div>
-                                        <div class="media-body space-sm">
-                                            <div class="item-title">
-                                                <a href="#">
-                                                    <span class="item-name">Joshep Joe</span>
-                                                    <span class="item-time">12:35</span>
-                                                </a>
-                                            </div>
-                                            <p>What is the reason of buy this item.
+                                        <p>What is the reason of buy this item.
                                             Is it usefull for me.....</p>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="item-img bg-violet-blue">
+                                        <img src="img/figure/student11.png" alt="img">
+                                    </div>
+                                    <div class="media-body space-sm">
+                                        <div class="item-title">
+                                            <a href="#">
+                                                <span class="item-name">Joshep Joe</span>
+                                                <span class="item-time">12:35</span>
+                                            </a>
                                         </div>
+                                        <p>What is the reason of buy this item.
+                                            Is it usefull for me.....</p>
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <li class="navbar-item dropdown header-notification">
-                            <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="far fa-bell"></i>
-                                <div class="item-title d-md-none text-16 mg-l-10">Notification</div>
-                                <span>8</span>
-                            </a>
+                        </div>
+                    </li>
+                    <li class="navbar-item dropdown header-notification">
+                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="far fa-bell"></i>
+                            <div class="item-title d-md-none text-16 mg-l-10">Notification</div>
+                            <span>8</span>
+                        </a>
 
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="item-header">
-                                    <h6 class="item-title">03 Notifiacations</h6>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="item-header">
+                                <h6 class="item-title">03 Notifiacations</h6>
+                            </div>
+                            <div class="item-content">
+                                <div class="media">
+                                    <div class="item-icon bg-skyblue">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="media-body space-sm">
+                                        <div class="post-title">Complete Today Task</div>
+                                        <span>1 Mins ago</span>
+                                    </div>
                                 </div>
-                                <div class="item-content">
-                                    <div class="media">
-                                        <div class="item-icon bg-skyblue">
-                                            <i class="fas fa-check"></i>
-                                        </div>
-                                        <div class="media-body space-sm">
-                                            <div class="post-title">Complete Today Task</div>
-                                            <span>1 Mins ago</span>
-                                        </div>
+                                <div class="media">
+                                    <div class="item-icon bg-orange">
+                                        <i class="fas fa-calendar-alt"></i>
                                     </div>
-                                    <div class="media">
-                                        <div class="item-icon bg-orange">
-                                            <i class="fas fa-calendar-alt"></i>
-                                        </div>
-                                        <div class="media-body space-sm">
-                                            <div class="post-title">Director Metting</div>
-                                            <span>20 Mins ago</span>
-                                        </div>
+                                    <div class="media-body space-sm">
+                                        <div class="post-title">Director Metting</div>
+                                        <span>20 Mins ago</span>
                                     </div>
-                                    <div class="media">
-                                        <div class="item-icon bg-violet-blue">
-                                            <i class="fas fa-cogs"></i>
-                                        </div>
-                                        <div class="media-body space-sm">
-                                            <div class="post-title">Update Password</div>
-                                            <span>45 Mins ago</span>
-                                        </div>
+                                </div>
+                                <div class="media">
+                                    <div class="item-icon bg-violet-blue">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                    <div class="media-body space-sm">
+                                        <div class="post-title">Update Password</div>
+                                        <span>45 Mins ago</span>
                                     </div>
                                 </div>
                             </div>
-                        </li>
+                        </div>
+                    </li>
 
 
 
-                         <li class="navbar-item dropdown header-language">
-                            <a class="navbar-nav-link dropdown-toggle" href="#" role="button"
-                            data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>Session 2020-2021</a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">2021-2022</a>
-                                <a class="dropdown-item" href="#">2020-2021</a>
-                                <a class="dropdown-item" href="#">2019-2020</a>
-                                <a class="dropdown-item" href="#">2018-2019</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                    <li class="navbar-item dropdown header-language">
+                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>Session 2020-2021</a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">2021-2022</a>
+                            <a class="dropdown-item" href="#">2020-2021</a>
+                            <a class="dropdown-item" href="#">2019-2020</a>
+                            <a class="dropdown-item" href="#">2018-2019</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
@@ -315,11 +319,11 @@ $schoolId=$_SESSION["SCHOOLID"];
                         <li><?php echo $pageTitle; ?></li>
                     </ul>
                 </div>
-				<?php
-					if(isset($_SESSION['successmsg'])){
-					echo $_SESSION["successmsg"];
-					}
-				?>
+                <?php
+                if (isset($_SESSION['successmsg'])) {
+                    echo $_SESSION["successmsg"];
+                }
+                ?>
                 <!-- Breadcubs Area End Here -->
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
@@ -327,8 +331,8 @@ $schoolId=$_SESSION["SCHOOLID"];
                         <div class="heading-layout1">
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4"><?php if (empty($bodyHeader)) {
-                                    echo "Lists";
-                                }else{
-                                    echo $bodyHeader;
-                                } ?></h3>
+                                                        echo "Lists";
+                                                    } else {
+                                                        echo $bodyHeader;
+                                                    } ?></h3>
                             </div>

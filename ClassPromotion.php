@@ -8,6 +8,7 @@ include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
 ?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -44,13 +45,13 @@ include 'security.php';
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
         <!-- Header Menu Area Start Here -->
-        <?php include ('includes/navbar.php') ?>
+        <?php include('includes/navbar.php') ?>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-            <?php 
-            include 'includes/sidebar.php'; 
+            <?php
+            include 'includes/sidebar.php';
             ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
@@ -86,43 +87,37 @@ include 'security.php';
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form">
-                            
-                            
-                            <div class="row justify-content-center">
-                                <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
-                                    <div class="brouser-image ">
-                                        <h5 class="text-center">Srudent Class Promotion</h5>
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
-                                            <div class="form-group aj-form-group">
-                                                <label>School Class <span>*</span></label>
-                                                <select class="select2" name="f_class">
-                                                    <option value="">Please Select  Class</option>
-                                                    <option value="3">One</option>
-                                                    <option value="3">Two</option>
-                                                    <option value="3">Three</option>
-                                                    <option value="3">Four</option>
-                                                    <option value="3">Five</option>
-                                                </select>
-                                            </div>
-                                            
+                            <form class="new-added-form school-form aj-new-added-form">
+
+
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
+                                        <div class="brouser-image ">
+                                            <h5 class="text-center">Srudent Class Promotion</h5>
                                         </div>
-                                        
-                                    </div>
-                                   
-                                    <div class="aaj-btn-chang-cbtn">
+                                        <div class="row justify-content-center">
+                                            <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
+                                                <div class="form-group aj-form-group">
+                                                    <label>School Class <span>*</span></label>
+                                                    <select class="select2 class_list" name="f_class">
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="aaj-btn-chang-cbtn">
                                             <!-- <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button> -->
-                                            <a  href="javascript:void(0);" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>
-                                           
-                                            
+                                            <a href="javascript:void(0);" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>
+
+
+                                        </div>
+
                                     </div>
-                                    
+
                                 </div>
-                               
-                            </div>
-                        </form>
+                            </form>
 
                             <div class="tebal-promotion" style="display: none;">
                                 <form class="new-added-form ">
@@ -148,12 +143,12 @@ include 'security.php';
                                                     <td>KG Student</td>
                                                     <td>
                                                         <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian" checked> Promoted</span>
+                                                            <span><input type="radio" class="gaurdian-bs" name="gaurdian" checked> Promoted</span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian" > Not Promoted</span>
+                                                            <span><input type="radio" class="gaurdian-bs" name="gaurdian"> Not Promoted</span>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -167,12 +162,12 @@ include 'security.php';
                                                     <td>KG Student</td>
                                                     <td>
                                                         <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian1" checked> Promoted</span>
+                                                            <span><input type="radio" class="gaurdian-bs" name="gaurdian1" checked> Promoted</span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian1" > Not Promoted</span>
+                                                            <span><input type="radio" class="gaurdian-bs" name="gaurdian1"> Not Promoted</span>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -186,12 +181,12 @@ include 'security.php';
                                                     <td>KG Student</td>
                                                     <td>
                                                         <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian2" checked> Promoted</span>
+                                                            <span><input type="radio" class="gaurdian-bs" name="gaurdian2" checked> Promoted</span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian2" > Not Promoted</span>
+                                                            <span><input type="radio" class="gaurdian-bs" name="gaurdian2"> Not Promoted</span>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -205,19 +200,19 @@ include 'security.php';
                                                     <td>KG Student</td>
                                                     <td>
                                                         <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian3" > Promoted</span>
+                                                            <span><input type="radio" class="gaurdian-bs" name="gaurdian3"> Promoted</span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian3" checked > Not Promoted</span>
+                                                            <span><input type="radio" class="gaurdian-bs" name="gaurdian3" checked> Not Promoted</span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <textarea class="form-control"></textarea>
                                                     </td>
                                                 </tr>
-                                            </tbody>                                                
+                                            </tbody>
                                         </table>
                                     </div>
 
@@ -237,47 +232,56 @@ include 'security.php';
                                             </div>
                                         </div>
                                         <div class="new-added-form aj-new-added-form">
-                                         <div class="aaj-btn-chang-cbtn">
-                                                 <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Promote Student </button>
-                                          </div>
-                                        </div>       
+                                            <div class="aaj-btn-chang-cbtn">
+                                                <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Promote Student </button>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </form>
                             </div>
-                            
+
+                        </div>
                     </div>
+                    <!-- Admit Form Area End Here -->
+                    <footer class="footer-wrap-layout1">
+                        <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
+                    </footer>
                 </div>
-                <!-- Admit Form Area End Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
             </div>
+            <!-- Page Area End Here -->
         </div>
-        <!-- Page Area End Here -->
-    </div>
-    <!-- jquery-->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
-    <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Select 2 Js -->
-    <script src="js/select2.min.js"></script>
-    <!-- Date Picker Js -->
-    <script src="js/datepicker.min.js"></script>
-    <!-- Scroll Up Js -->
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <!-- Custom Js -->
-    <script src="js/main.js"></script>
-     <script type="text/javascript">
-        $('#opne-form-Promotion').click('.sibling-bs',function(){
-             $('.tebal-promotion').slideToggle('slow');
-            })
-    </script>  
+        <!-- jquery-->
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <!-- Plugins js -->
+        <script src="js/plugins.js"></script>
+        <!-- Popper js -->
+        <script src="js/popper.min.js"></script>
+        <!-- Bootstrap js -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Select 2 Js -->
+        <script src="js/select2.min.js"></script>
+        <!-- Date Picker Js -->
+        <script src="js/datepicker.min.js"></script>
+        <!-- Scroll Up Js -->
+        <script src="js/jquery.scrollUp.min.js"></script>
+        <!-- Custom Js -->
+        <script src="js/main.js"></script>
+        <script type="text/javascript">
+            $('#opne-form-Promotion').click('.sibling-bs', function() {
+                $('.tebal-promotion').slideToggle('slow');
+            });
+
+            // get all classes through API
+            const url = "./universal_apis.php?getAllClass=1";
+            var html_class_d = '<option value="">Please Select Class</option>';
+            $.getJSON(url, function(data) {
+                $.each(data, function(key, value) {
+                    html_class_d += '<option value="' + value.Class_Id + '">' + value.Class_Name + '</option>';
+                });
+                 $('.class_list').append(html_class_d);
+            });
+        </script>
 </body>
 
 </html>

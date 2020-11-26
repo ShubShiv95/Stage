@@ -42,6 +42,11 @@ include 'security.php';
       width: 600px;
       height: 450px;
     }
+    #camContainer video {
+    width: 100% !important;
+    height: 172 !important;
+}
+
     #picture_from_cam {
         position: absolute;
         right: 0;
@@ -49,8 +54,8 @@ include 'security.php';
         text-align: center;
     }
     #picture_from_cam img {
-      border: solid 1px #000;
-        width: auto;
+      /*border: solid 1px #000;*/
+        max-width: 230px !important;
         height: 174px;
         margin: 0 auto;
     }
@@ -255,10 +260,10 @@ include 'security.php';
                                             </div>                                    
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
-                                            <div class="box-web-cem" id="camContainer"></div>   
+                                            <div class="box-web-cem" id="camContainer" style="border:unset;"></div>   
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
-                                            <div class="box-web-cem" id="picture_from_cam"></div>   
+                                            <div class="box-web-cem" id="picture_from_cam" style="border:unset;"></div>   
                                         </div>
                                         <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
                                              <button  type="button" onclick="take_snapshot()" class="btn-fill-lg bg-blue-dark btn-hover-yellow take-snap  valid" >Take Snapshot</button>  
@@ -455,7 +460,7 @@ include 'security.php';
     var data_uri;
     Webcam.set({
     width: 520,
-    height: 400,
+    height: 172,
     image_format: 'jpeg',
     jpeg_quality: 120
     });

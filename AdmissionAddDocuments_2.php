@@ -12,7 +12,6 @@
     
   if(isset($_POST['search_students'])){
     if(!(empty($_POST['student_id']))){
-
       $studentString = mysqli_real_escape_string($dbhandle,$_POST['student_id']);
       $studentString = "%".$studentString."%";
       $selectAdmissionSql = "Select Admission_Id, First_Name, Middle_Name, Last_Name, Gender, DOB, Father_Name, Mother_Name, Guardian_Name From admission_master_table Where Admission_id LIKE ?";
@@ -124,7 +123,7 @@
                 <strong>Alert!</strong> Document Already Submitted.
               </div>';
             }else {
-              $fileName = md5($_SESSION["EMPLOYEEID"].date('YmdHis')).'.'.$fileExtension;
+              $fileName = md5($_SESSION["USERID"].date('YmdHis')).'.'.$fileExtension;
               $targetPath = $fillePath.'/'.$fileName; 
               $fileSave = move_uploaded_file($_FILES['document_name']['tmp_name'],$targetPath);
              
@@ -178,7 +177,7 @@
 
   if (isset($_GET['getAllDocuments'])) {
     $studentId = $_GET['student_id'];
-    $selectDocumentSql = "SELECT * FROM `admission_master_documents` WHERE `Student_Id` = ?";
+    $selectDocumentSql = "SELECT * FROM `admission_master_documents` WHERE `Student_Id` = ? ORDER BY Doc_Id DESC";
     $stmt=$dbhandle->prepare($selectDocumentSql);
     $stmt->bind_param("i", $studentId);
     $execResult=$stmt->execute();

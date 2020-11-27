@@ -7,8 +7,8 @@ include_once './sequenceGenerator.php';
 
 /***** filter assignment for student *****/
 if (isset($_REQUEST['filterAssignment'])) {
-  $userType = $_SESSION["USER_TYPE"];
-  $studentSection = $_SESSION["SECTION_ID"];
+  $userType = $_SESSION["LOGINTYPE"];
+  $studentSection = $_SESSION["SECTIONID"];
   $currentYear = $_SESSION["STARTYEAR"];
   $today = date('Y-m-d');
   $sqlQuery = "select tmt.* from task_master_table tmt, task_allocation_list_table tal WHERE tal.Allocated_Reff_Id=? AND tmt.Task_Id=tal.Task_Id AND month(tmt.Last_Submissable_Date)=? and year(tmt.Last_Submissable_Date)=? and tmt.Enabled=1 and tmt.Refference_type=? ";
@@ -137,7 +137,7 @@ if (isset($_REQUEST['student_assignment_submitter'])) {
         // Compress size and upload image
         $compressedImage = compressImage($imageTemp, $imageUploadPath, 25);
 
-        $enc_Name = md5($_SESSION["EMPLOYEEID"] . 'A' . date('YmdHis')) . '.' . $fileType;
+        $enc_Name = md5($_SESSION["USERID"] . 'A' . date('YmdHis')) . '.' . $fileType;
         rename($uploadPath . '/' . $fileName, $uploadPath . '/' . $enc_Name);
 
         mysqli_autocommit($dbhandle, false);
@@ -206,6 +206,7 @@ if (isset($_REQUEST['student_assignment_submitter'])) {
         $enabled = 1;
         $task_id = $_REQUEST['assignmentId'];
 
+        // check duplicate entry of file submit table
         $searchTask = "SELECT * FROM `task_submit_table` WHERE `Task_Id` = ?";
         $searchTaskPrepare = $dbhandle->prepare($searchTask);
         $searchTaskPrepare->bind_param("i", $task_id);
@@ -225,7 +226,7 @@ if (isset($_REQUEST['student_assignment_submitter'])) {
             $task_id,
             $isverified,
             $_SESSION["SCHOOLID"],
-            $_SESSION["USER_ID"],
+            $_SESSION["USERID"],
             $enabled
           );
           $exec_task = $queryTaskPrepare->execute();
@@ -257,7 +258,7 @@ if (isset($_REQUEST['student_assignment_submitter'])) {
 
         $query = "INSERT INTO task_submit_file_table(TSF_Id, Task_Submit_Id, File_Path, Task_Note, Is_Verified, School_Id, Updated_By,Enabled,File_Name) VALUES (?,?,?,?,?,?,?,?,?)";
         $queryPrepare = $dbhandle->prepare($query);
-        $queryPrepare->bind_param("iisssisis", $TSF_Id, $Task_Submit_Id, $file_path, $_REQUEST['task_remarks'], $isverified, $_SESSION["SCHOOLID"], $_SESSION["USER_ID"], $enabled, $enc_Name);
+        $queryPrepare->bind_param("iisssisis", $TSF_Id, $Task_Submit_Id, $file_path, $_REQUEST['task_remarks'], $isverified, $_SESSION["SCHOOLID"], $_SESSION["USERID"], $enabled, $enc_Name);
         $exec_task_file = $queryPrepare->execute();
         if (!$exec_task_file) {
           //var_dump($getStudentCount_result);
@@ -305,11 +306,12 @@ if (isset($_REQUEST['student_assignment_submitter'])) {
 /** get stuednts file  **/
 if (isset($_REQUEST['getStudentAssignment'])) {
   $assignment_id = $_REQUEST['assignment_id'];
-  $user = $_SESSION['LOGINID'];
+  $user = $_SESSION['USERID'];
   $data = array();
-  $query_files = "SELECT tsft.* from task_submit_file_table tsft, task_submit_table tst WHERE tsft.Task_Submit_Id = tst.Task_Submit_Id and tsft.Updated_By = ? AND tst.Task_Id = ? and tsft.Enabled = 1 AND tsft.School_Id = ? ORDER BY tsft.TSF_Id DESC";
+  $query_files = "SELECT tsft.*, tst.Is_Verified from task_submit_file_table tsft, task_submit_table tst WHERE tsft.Task_Submit_Id = tst.Task_Submit_Id and tsft.Updated_By = ? AND tst.Task_Id = ? and tsft.Enabled = 1 AND tsft.School_Id = ? ORDER BY tsft.TSF_Id DESC";
   $query_files_prepare = $dbhandle->prepare($query_files);
   $query_files_prepare->bind_param("sii", $user, $assignment_id,$_SESSION["SCHOOLID"]);
+  
   $query_files_prepare->execute();
   $resultQuery = $query_files_prepare->get_result();
   while ($rows = $resultQuery->fetch_assoc()) {
@@ -383,14 +385,15 @@ if (isset($_REQUEST['filterAssignmentSubmit'])) {
 
 /**** get student submitted assignment ****/
 if (isset($_REQUEST['getSubmittedAsignment'])) {
-  $userId = $_SESSION["USER_ID"];
-  // student Id $_SESSION["USER_ID"]
+  $userId = $_SESSION["USERID"];
+  // student Id $_SESSION["USERID"]
   $assignmentId = $_REQUEST['assignmentId'];
   $isverified = 'No';
-  $querySubmitted = "SELECT tst.*, smt.first_name, smt.middle_name, smt.last_name, COUNT(tsft.TSF_Id) as total_pages FROM task_submit_table tst, student_master_table smt, task_submit_file_table tsft WHERE tst.Updated_By = smt.Student_Id AND tst.Task_Submit_Id = tsft.Task_Submit_Id AND smt.Student_Id = ? AND tst.Task_Id = ? and tst.Is_Verified = ?";
+  $querySubmitted = "SELECT tst.*, smt.First_Name, smt.Middle_Name, smt.Last_Name, COUNT(tsft.TSF_Id) as total_pages FROM task_submit_table tst, student_master_table smt, task_submit_file_table tsft WHERE tst.Updated_By = smt.Student_Id AND tst.Task_Submit_Id = tsft.Task_Submit_Id AND tst.Task_Id = ? and tst.Is_Verified = ?";
   $querySubmittedPrepare = $dbhandle->prepare($querySubmitted);
-  $querySubmittedPrepare->bind_param("sis", $userId, $assignmentId, $isverified);
+  $querySubmittedPrepare->bind_param("is", $assignmentId, $isverified);
   $querySubmittedPrepare->execute();
+  echo $querySubmittedPrepare->error;
   $result = $querySubmittedPrepare->get_result();
   $data = array();
   while ($rows = $result->fetch_assoc()) {

@@ -331,7 +331,7 @@ if (isset($_REQUEST['getMonths'])) {
 if (isset($_REQUEST['filterAssignment'])) {
   $sectionId = $_REQUEST['sectionId']; $subjectId = $_REQUEST['subjectId']; $monthNum = $_REQUEST['monthNumber']; $currYear = $_SESSION["STARTYEAR"]; 
 
-  $sqlQuery = "SELECT tmt.* FROM task_master_table tmt, task_allocation_list_table talt WHERE tmt.Task_Id = talt.Task_Id AND tmt.Enabled = 1 AND talt.Allocated_Reff_Id = ? AND tmt.Subject_Id = ? AND MONTH(tmt.Updated_On) = ? AND YEAR(tmt.Updated_On) = ?";
+  $sqlQuery = "SELECT tmt.* FROM task_master_table tmt, task_allocation_list_table talt WHERE tmt.Task_Id = talt.Task_Id AND tmt.Enabled = 1 AND talt.Allocated_Reff_Id = ? AND tmt.Subject_Id = ? AND MONTH(tmt.Last_Submissable_Date) = ? AND YEAR(tmt.Last_Submissable_Date) = ?";
   $sqlQueryprepare = $dbhandle->prepare($sqlQuery);
 
   $sqlQueryprepare->bind_param("iiii", $sectionId, $subjectId, $monthNum, $currYear);
@@ -360,7 +360,10 @@ if (isset($_REQUEST['filterAssignment'])) {
                       while($rowF = $queryAssignmnetFileResult->fetch_assoc())
                       {
                         if ($rowF['Upload_Type']=="Link") {
-                         echo '<li><a href="http://'.$rowF['Upload_Name'].'" target="_blank" class="color-6"><i class="fa fa-chain-broken" aria-hidden="true"></i></a></li>';
+                          $url=$rowF['Upload_Name'];
+                          $url_data = explode("//",$url);
+                          $new_url= $url_data[0].'://'.$url_data[1]; // to eliminate the problem of escaping semi-column due to bind vaiable insert operation
+                         echo '<li><a href="#" id="'.$url_data[0].'//'.$url_data[1].'" class="color-6 external_link"><i class="fa fa-chain-broken" aria-hidden="true"></i></a></li>';
                         }
                         elseif ($rowF['Upload_Type']=="File") {
                           $fileType = explode('.',$rowF['Upload_Name']);
@@ -384,11 +387,11 @@ if (isset($_REQUEST['filterAssignment'])) {
                         }
                       }
 
-                      if (date('Y-m-d',strtotime($row['Updated_On']))<=date('Y-m-d')) {
+                      if (date('Y-m-d',strtotime($row['Last_Submissable_Date']))<=date('Y-m-d')) {
                         echo '<li  class=" disabled"><a href="#" id="'.$row['Task_Id'].'" class="color-5 "><i class="fa fa-upload" aria-hidden="true"></i></a></li>';
                       echo '<li class=" disabled" id="'.$row['Task_Id'].'"><a href="javascript:void(0);" class="color-7"><i class="fa fa-trash" aria-hidden="true"></i></a></li>';
                       echo'   </ul>';
-                      $btnView = '<a href="StudentAssignmentSubmitted.php?assignmentId='.$row['Task_Id'].'" class="btn btn-link">View Assignments</a>';
+                      $btnView = '<a href="StudentAssignmentSubmitted.php?assignmentId='.$row['Task_Id'].'" class="btn btn-link">Verify Assignments</a>';
                       }
                       else{
                         echo '<li><a href="#" id="'.$row['Task_Id'].'" class="color-5 uploadAssign"><i class="fa fa-upload" aria-hidden="true"></i></a></li>';

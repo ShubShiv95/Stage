@@ -64,7 +64,7 @@
         </div>
         <div class="modal-body">
          <form action="" method="post" id="add_notes">
-            <input type="text" class="form-control form-group imageName" id="">
+            <input type="text" class="form-control form-group d-none imageName" id="">
             <textarea name="" id="message_texts" cols="30" rows="5" class="form-control form-group" placeholder="Write Notes Here"></textarea>
             <span id="remraks_output"></span>
          </form>
@@ -117,7 +117,7 @@
         const imageName = $(this).attr('id');
         const totalPages = "<?php echo $_GET['totalPages']; ?>";
         var currentPages = $('#currentPages').text();
-        var totalPages = $('#totalPages').text();
+        $('#totalPages').text(totalPages);
         html2canvas(document.getElementById('canvas')).then(function(canvasData) {
           const newImage = canvasData.toDataURL("image/jpeg", 0.9);
           $.ajax({
@@ -131,12 +131,11 @@
               'newImage': newImage
             },
             success: function(data) {
-              $('#form_output').html(data);
-              Cache.delete();
+              $('.form_output').html(data);
               const currentPage = $('#currentPages').text();
               loadPages(currentPage);
               window.setTimeout(function(){
-                $('.#form_output').html('');
+                $('.form_output').html('');
               },2000);
               if(currentPage == totalPages){
                 final_submit();
@@ -167,11 +166,11 @@
       nextPagebtn.addEventListener('click', gotoNextPage);
 
       function gotoNextPage() {
-        var currentPages = $('#currentPages').text();
-        var totalPages = $('#totalPages').text();
-
+        var currentPages = parseInt($('#currentPages').text());
+        var totalPages = parseInt($('#totalPages').text());
+        
         if (totalPages > currentPages) {
-          nextPage = parseInt(currentPages) + 1;
+          nextPage = currentPages + 1;
           $('#currentPages').text(nextPage);
           clearCanvas();
           loadPages(nextPage);

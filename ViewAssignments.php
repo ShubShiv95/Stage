@@ -1,6 +1,6 @@
 <?php
-session_start(); 
-//$_SESSION["USER_TYPE"];
+session_start();
+//$_SESSION["LOGINTYPE"];
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -9,6 +9,7 @@ include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
 ?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -60,8 +61,8 @@ include 'security.php';
                             <form class="new-added-form school-form aj-new-added-form">
                                 <div class="row justify-content-center">
                                     <?php
-                                    if ($_SESSION["USER_TYPE"] == 'Student' || $_SESSION["USER_TYPE"] == 'Parent') {
-                                        echo '                                                                <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
+                                    if ($_SESSION["LOGINTYPE"] == 'STUDENT' || $_SESSION["LOGINTYPE"] == 'PARENT') {
+                                        echo '<div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                             <div class="form-group aj-form-group">
                                                 <label>Subject <span>*</span></label>
                                                     <select class="select2" required="" id="subjectList">
@@ -389,7 +390,7 @@ include 'security.php';
 
                 $('#searchAssignmentts').click(function(e) {
                     e.preventDefault();
-                    const userType = '<?php echo $_SESSION["USER_TYPE"]; ?>';
+                    const userType = '<?php echo $_SESSION["LOGINTYPE"]; ?>';
                     if (userType == 'Student' || userType == 'Parent') {
                         const monthNumber = $('#monthList').val();
                         const subjectId = $('#subjectList').val();
@@ -445,6 +446,13 @@ include 'security.php';
 
                 });
 
+                // redirect user to an external link    
+                $(document).on('click','.external_link',function(){
+                    const url_link = $(this).attr('id');
+                    window.open(url_link);
+                });
+
+
                 /*
                 1. to fetch data from class table just copy code from below functions.
                 2. keep object id as assignment_class
@@ -465,7 +473,7 @@ include 'security.php';
                             var html = '<option value="">Select</option>';
                             for (let i = 0; i < classData.length; i++) {
                                 const classRow = classData[i];
-                                html += '<option value="' + classRow.class_id + '">' + classRow.class_name + '</option>';
+                                html += '<option value="' + classRow.Class_Id + '">' + classRow.Class_Name + '</option>';
                             }
                             $('#classList').html(html);
                         }

@@ -56,7 +56,7 @@ require_once 'AdmissionModel.php';
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
 			    <!-- Hot Links Area Start Here -->
-				<!-- <?php include ('includes/hot-link.php'); ?> -->
+				<?php include ('includes/hot-link.php'); ?> 
                 <!-- Hot Links Area End Here -->
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">

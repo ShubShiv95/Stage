@@ -1,283 +1,186 @@
 <?php
 session_start();
+$pageTitle = "Sudent's Promotion";
 ?>
 <!doctype html>
 <html class="no-js" lang="">
 <?php
-include 'dbobj.php';
-include 'errorLog.php';
-include 'security.php';
+include_once 'dbobj.php';
+include_once 'errorLog.php';
+include_once 'security.php';
+require_once './includes/header.php';
 ?>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <!-- Normalize CSS -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/main.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="css/all.min.css">
-    <!-- Flaticon CSS -->
-    <link rel="stylesheet" href="fonts/flaticon.css">
-    <!-- Animate CSS -->
-    <link rel="stylesheet" href="css/animate.min.css">
-    <!-- Select 2 CSS -->
-    <link rel="stylesheet" href="css/select2.min.css">
-    <!-- Date Picker CSS -->
-    <link rel="stylesheet" href="css/datepicker.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Modernize js -->
-    <script src="js/modernizr-3.6.0.min.js"></script>
-</head>
-
-<body>
-    <!-- Preloader Start Here -->
-    <div id="preloader"></div>
-    <!-- Preloader End Here -->
-    <div id="wrapper" class="wrapper bg-ash">
-        <!-- Header Menu Area Start Here -->
-        <?php include ('includes/navbar.php') ?>
-        <!-- Header Menu Area End Here -->
-        <!-- Page Area Start Here -->
-        <div class="dashboard-page-one">
-            <!-- Sidebar Area Start Here -->
-            <?php 
-            include 'includes/sidebar.php'; 
-            ?>
-            <!-- Sidebar Area End Here -->
-            <div class="dashboard-content-one">
-                <!-- Breadcubs Area Start Here -->
-                <div class="breadcrumbs-area">
-                    <h3>Students</h3>
-                    <ul>
-                        <li>
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li>Student Admit Form</li>
-                    </ul>
-                </div>
-                <!-- Breadcubs Area End Here -->
-                <!-- Admit Form Area Start Here -->
-                <div class="card height-auto">
-                    <div class="card-body">
-                        <div class="heading-layout1">
-                            <div class="item-title aj-item-title">
-                                <h3 class="mb-4">School</h3>
-                            </div>
-                            <!-- <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                    aria-expanded="false">...</a>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                </div>
-                            </div>
-                        </div> -->
-                        <form class="new-added-form school-form aj-new-added-form">
-                            
-                            
-                            <div class="row justify-content-center">
-                                <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
-                                    <div class="brouser-image ">
-                                        <h5 class="text-center">Srudent Class Promotion</h5>
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
-                                            <div class="form-group aj-form-group">
-                                                <label>School Class <span>*</span></label>
-                                                <select class="select2" name="f_class">
-                                                    <option value="">Please Select  Class</option>
-                                                    <option value="3">One</option>
-                                                    <option value="3">Two</option>
-                                                    <option value="3">Three</option>
-                                                    <option value="3">Four</option>
-                                                    <option value="3">Five</option>
-                                                </select>
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                    </div>
-                                   
-                                    <div class="aaj-btn-chang-cbtn">
-                                            <!-- <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button> -->
-                                            <a  href="javascript:void(0);" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>
-                                           
-                                            
-                                    </div>
-                                    
-                                </div>
-                               
-                            </div>
-                        </form>
-
-                            <div class="tebal-promotion" style="display: none;">
-                                <form class="new-added-form ">
-                                    <h5 class="text-center">Class Promotion for Students of K.G. 1 to K.G.2 </h5>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Serial No. </th>
-                                                    <th>Class </th>
-                                                    <th>Roll No.</th>
-                                                    <th>Student Name</th>
-                                                    <th>Promoted </th>
-                                                    <th>Not Promoted</th>
-                                                    <th>Non Promotion Reason</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>K.G. 1A</td>
-                                                    <td>1</td>
-                                                    <td>KG Student</td>
-                                                    <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian" checked> Promoted</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian" > Not Promoted</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control"></textarea>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>K.G. 1A</td>
-                                                    <td>2</td>
-                                                    <td>KG Student</td>
-                                                    <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian1" checked> Promoted</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian1" > Not Promoted</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control"></textarea>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>K.G. 1A</td>
-                                                    <td>3</td>
-                                                    <td>KG Student</td>
-                                                    <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian2" checked> Promoted</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian2" > Not Promoted</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control"></textarea>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>K.G. 1A</td>
-                                                    <td>4</td>
-                                                    <td>KG Student</td>
-                                                    <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian3" > Promoted</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                          <span><input type="radio" class="gaurdian-bs" name="gaurdian3" checked > Not Promoted</span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control"></textarea>
-                                                    </td>
-                                                </tr>
-                                            </tbody>                                                
-                                        </table>
-                                    </div>
-
-                                    <div class="inpuy-chang-box">
-                                        <div class="form-output">
-                                            <div class="name-f">
-                                                <h6>Present Number</h6>
-                                            </div>
-                                            <div class="input-box-in">
-                                                <input type="text" readonly="" class="redonly-form-control" value="3" name="">
-                                            </div>
-                                            <div class="name-f">
-                                                <h6>Abscent Number</h6>
-                                            </div>
-                                            <div class="input-box-in n-br">
-                                                <input type="text" readonly="" class="redonly-form-control" value="1" name="">
-                                            </div>
-                                        </div>
-                                        <div class="new-added-form aj-new-added-form">
-                                         <div class="aaj-btn-chang-cbtn">
-                                                 <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Promote Student </button>
-                                          </div>
-                                        </div>       
-                                    </div>
-
-                                </form>
-                            </div>
-                            
+<form class="new-added-form school-form aj-new-added-form">
+    <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
+            <div class="brouser-image ">
+                <h5 class="text-center">Student Class Promotion</h5>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
+                    <div class="form-group aj-form-group">
+                        <label>School Class <span>*</span></label>
+                        <select class="select2 class_list" name="f_class">
+                        </select>
                     </div>
                 </div>
-                <!-- Admit Form Area End Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
+            </div>
+            <div class="aaj-btn-chang-cbtn">
+                <a href="javascript:void(0);" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>
             </div>
         </div>
-        <!-- Page Area End Here -->
     </div>
-    <!-- jquery-->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
-    <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Select 2 Js -->
-    <script src="js/select2.min.js"></script>
-    <!-- Date Picker Js -->
-    <script src="js/datepicker.min.js"></script>
-    <!-- Scroll Up Js -->
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <!-- Custom Js -->
-    <script src="js/main.js"></script>
-     <script type="text/javascript">
-        $('#opne-form-Promotion').click('.sibling-bs',function(){
-             $('.tebal-promotion').slideToggle('slow');
-            })
-    </script>  
-</body>
+</form>
 
-</html>
+<div class="tebal-promotion" style="display: none;">
+    <form class="new-added-form" id="student_promotion" method="post" action="./ClassPromotion_1.php">
+        <h5 class="text-center class_details_prom">Class Promotion <span class="current_class"></span> To <span class="next_class"></span></h5>
+        <input type="text" class="d-none" name="student_prom_data_sender">
+        <div class="table-responsive" style="height:60vh; overflow:auto">
+            <table class="table table-bordered student_class_tbl">
+                <thead>
+                    <tr>
+                        <th>Serial No. </th>
+                        <th>Class </th>
+                        <th>Roll No.</th>
+                        <th>Student Name</th>
+                        <th>Promoted </th>
+                        <th>Not Promoted</th>
+                        <th>Non Promotion Reason</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="inpuy-chang-box">
+            <div class="form-output">
+                <div class="name-f">
+                    <h6>Promoted</h6>
+                </div>
+                <div class="input-box-in">
+                    <input type="text" readonly="" id="count_promoted" class="redonly-form-control" value="" name="">
+                </div>
+                <div class="name-f">
+                    <h6>Not Promoted</h6>
+                </div>
+                <div class="input-box-in n-br">
+                    <input type="text" readonly="" id="count_not_promoted" class="redonly-form-control" value="0" name="">
+                </div>
+            </div>
+            <div class="new-added-form aj-new-added-form">
+                <div class="aaj-btn-chang-cbtn">
+                    <button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Promote Student </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col-md-12"><span id="form_output"></span></div>
+<?php require_once './includes/scripts.php'; ?>
+<script type="text/javascript">
+    /* fetch students details class wise */
+    $('#opne-form-Promotion').click('.sibling-bs', function() {
+        $('.student_class_tbl').html('');
+        const class_id = $('.class_list').val();
+        if (class_id == '' || class_id == '0') {
+            alert("Please Select Class");
+        } else {
+            get_curr_class(class_id);
+            $.ajax({
+                url: './ClassPromotion_1.php',
+                type: 'get',
+                data: {
+                    "getStudentDetailsbyClass": 1,
+                    "class_id": class_id
+                },
+                dataType: 'json',
+                success: function(response) {
+                    var table_html = '<thead><tr><th>Serial No. </th><th>Class </th><th>Roll No.</th><th>Student Name</th><th>Promoted </th><th>Not Promoted</th><th>Remarks    </th></tr></thead><tbody><tbody><tr><td colspan="7"><h4 class="text-danger text-center">No Record Found!!!</h4></td></tr></tbody>';
+                    const stud_json = JSON.parse(JSON.stringify(response));
+                    if (stud_json == '') {
+                        table_html += '';
+                    } else 
+                    {
+                        table_html = '<thead><tr><th>Serial No. </th><th>Class </th><th>Roll No.</th><th>Student Name</th><th>Promoted </th><th>Not Promoted</th><th>Remarks</th></tr></thead><tbody><tr>';
+                        for (let i = 0; i < stud_json.length; i++) {
+                            sl = 1 + i;
+                            const data_json = stud_json[i];
+                            table_html += ' <tr>';
+                            table_html += '<td><input type="text" class="d-none" value="'+data_json.Student_Details_Id+'" name="student_details_id[]">' + sl + '</td>';
+                            table_html += '<td>' + data_json.Class_Name + '</td>';
+                            table_html += '<td>' + data_json.Roll_No + '</td>';
+                            if (data_json.Middle_Name == null || data_json.Middle_Name == NULL) {
+                                table_html += '<td>' + data_json.First_Name + ' ' + data_json.Last_Name + '</td>';
+                            } else {
+                                table_html += '<td>' + data_json.First_Name + ' ' + data_json.Middle_Name + ' ' + data_json.Last_Name + '</td>';
+                            }
+                            table_html += '<td><div class="radio"><span><input type="radio"class="gaurdian-bs promoted" checked name="promoted['+i+']" value="1" id="' + data_json.Student_Details_Id + '" > Promoted</span></div></td>';
+                            table_html += '<td><div class="radio"><span><input type="radio" class="gaurdian-bs not_promoted" name="promoted['+i+']" value="0" id="' + data_json.Student_Details_Id + '"> Not Promoted</span></div></td>';
+                            table_html += '<td><textarea class="form-control reason_not_promoted" name="student_remarks['+i+']" id="' + data_json.Student_Details_Id + '"></textarea></td>';
+                            table_html += '</tr>';
+                        }
+                        table_html += '</tbody>';
+                    }
+                    $('#count_promoted').val(stud_json.length);
+                    $('.student_class_tbl').append(table_html);
+                    $('.tebal-promotion').slideDown('slow');
+                }
+            });
+        }
+    });
+
+    // get curent class and next class by name
+    function get_curr_class(class_id) {
+        const url = "./universal_apis.php?getClassbyId=1&class_id=" + class_id + "";
+        $.getJSON(url, function(data) {
+            $('.current_class').html(data.Class_Name);
+            const next_url = "./universal_apis.php?getClassbyId=1&class_id=" + data.Next_Class_Id + "";
+            $.getJSON(next_url, function(next_data) {
+                $('.next_class').html(next_data.Class_Name);
+            });
+        });
+    }
+
+    // get all classes through API
+    const url = "./universal_apis.php?getAllClass=1";
+    var html_class_d = '<option value="">Please Select Class</option>';
+    $.getJSON(url, function(data) {
+        $.each(data, function(key, value) {
+            html_class_d += '<option value="' + value.Class_Id + '">' + value.Class_Name + '</option>';
+        });
+        $('.class_list').append(html_class_d);
+    });
+
+    // submit student promotion data
+    $('#student_promotion').submit(function(event){
+        event.preventDefault();
+        $.ajax({
+            url : $(this).attr('action'),
+            type : $(this).attr('method'),
+            data : $(this).serialize(),
+            success : function(data){
+                $('#form_output').html(data);
+                window.setTimeout(function(){$('#form_output').html('')},2000);
+                $('.tebal-promotion').fadeOut('slow');
+            }
+        });
+    });
+
+    // count not promoted
+    $(document).on('change','.not_promoted',function(){
+        var count_promoted = $('#count_promoted').val();
+        var count_not_promoted = $('#count_not_promoted').val();
+        var new_count = parseInt(count_promoted)-1;
+        var new_not_pr = parseInt(count_not_promoted)+1;
+        $('#count_promoted').val(new_count); $('#count_not_promoted').val(new_not_pr);
+    });
+
+    // count promoted
+    $(document).on('change','.promoted',function(){
+        var count_promoted = $('#count_promoted').val();
+        var count_not_promoted = $('#count_not_promoted').val();
+        var new_count = parseInt(count_promoted)+1;
+        var new_not_pr = parseInt(count_not_promoted)-1;
+        $('#count_promoted').val(new_count); $('#count_not_promoted').val(new_not_pr);
+    });
+</script>
+<?php include_once './includes/closebody.php'; ?>

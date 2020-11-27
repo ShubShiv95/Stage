@@ -76,12 +76,12 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
         processData : false,
         contentType : false,
         success : function(data){
+          show_student_assignments();
           $('#assignment_documents')[0].reset();
           uploadData = JSON.parse(JSON.stringify(data));
           var htmlD='';
           if(uploadData.status = "success"){
            htmlD += '<div class="alert alert-success alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Success!</strong> '+uploadData.message+'.</div>';
-          show_student_assignments();
           }
           else{
             htmlD += '<div class="alert alert-danger alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Success!</strong> '+uploadData.message+'.</div>';
@@ -89,7 +89,7 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
           $('.formoutput').html(htmlD);
           window.setTimeout(function(){
               $('.formoutput').fadeOut('slow');
-          },1500);
+          },3000);          
         }
       });
     });
@@ -106,9 +106,12 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
           var filehtml = '';
           assignmentFiles = JSON.parse(JSON.stringify(response));
           for (let index = 0; index < assignmentFiles.length; index++) {
-            
             const fileData = assignmentFiles[index];
-            filehtml += '<div class="card text-white shadow col-md-6"><img class="card-img-top w-100" src="./'+fileData.File_Path+fileData.File_Name+'" alt=""><div class="card-body"><p class="card-text">'+fileData.Task_Note+'</p><button class="btn btn-danger btn-sm delete_image" id="'+fileData.TSF_Id+'"><i class="fas fa-trash"></i></button></div></div>';
+            filehtml += '<div class="card text-white shadow col-md-6"><img class="card-img-top w-100" src="./'+fileData.File_Path+fileData.File_Name+'" alt=""><div class="card-body"><p class="card-text">'+fileData.Task_Note+'</p>';
+            if (fileData.Is_Verified == 'No') {
+              filehtml += '<button class="btn btn-danger delete_image" id="'+fileData.TSF_Id+'"><i class="fas fa-trash fa-2x"></i></button>';  
+            }
+            filehtml += '<p>'+fileData.Task_Remarks+'</p></div></div>';
           }
           $('.assignment-list').html(filehtml);
         }

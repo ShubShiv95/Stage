@@ -8,14 +8,6 @@
     include 'errorLog.php';
     include 'security.php';
     include 'AdmissionModel.php';
-
-    $classDropdownValue = "";
-    $sql = 'select cmt.Class_Id,cmt.class_name,cst.stream from class_master_table cmt,class_stream_table cst where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 and cst.stream_id=cmt.stream order by class_no,stream";
-
-    $result = mysqli_query($dbhandle, $sql);
-    while ($row = mysqli_fetch_assoc($result)) {
-      $classDropdownValue = '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . ' ' . $row["stream"] . '</option>' . $classDropdownValue;
-    }
     ?>
     <!doctype html>
     <html class="no-js" lang="">
@@ -86,8 +78,8 @@
 
                   <div class="col-md-4 offset-md-4 new-added-form aj-new-added-form">
                     <div class="form-group aj-form-group">
-                      <label>Search Students By Their StudentIds <span>*</span></label>
-                      <input type="text" name="studentIds" placeholder="Type Student Id Here" id="search_student_id" class="form-control border-success">
+                      <label>Search Students By Their ApplicationIds <span>*</span></label>
+                      <input type="text" name="studentIds" placeholder="Type Application Id Here" id="search_student_id" class="form-control border-success">
                     </div>
                     <div id="students_searched_data" style="display: none;"></div>
                   </div>
@@ -256,7 +248,8 @@
                             processData : false,
                             success : function(data){
                                 $('#form_output').html(data);
-                                load_documents(student_id)
+                                $('#admission_documents')[0].reset();
+                                load_documents(student_id);
                             }
                         });
                     }

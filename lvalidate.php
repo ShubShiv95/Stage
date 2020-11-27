@@ -2,6 +2,7 @@
 session_start();
 include 'crawlerBhashSMS.php';
 include 'dbobj.php';
+include 'errorLog.php';
 
 $lid = mysqli_real_escape_string($dbhandle,trim($_REQUEST['loginid']));
 $passwd = mysqli_real_escape_string($dbhandle,$_REQUEST['password']);
@@ -21,52 +22,164 @@ $passwd = mysql_real_escape_string($_POST['passwd'],$dbhandle);
 //$lid = mysql_real_escape_string(trim($_POST['loginid']), $dbhandle);
 //$passwd = mysql_real_escape_string($_POST['passwd'],$dbhandle);
 
-$query = "select * from employee_master_table where login_id='" . $lid . "' and enabled=1";
-//echo $query;
+$Login_Query = "select * from login_table where login_id='" . $lid . "' and enabled=1";
+echo $Login_Query;
 
 //select * from user_login where user_id='admin';
 //$result = mysqli_query($dbhandle,$query);   //mysqli_query just runs the query only without returning any extra properties.
-$result=$dbhandle->query($query);
-$row = $result->fetch_assoc();
+$Login_Query_Result=$dbhandle->query($Login_Query);
+$Login_Query_Row = $Login_Query_Result->fetch_assoc();
 //echo mysqli_num_rows($result);
-if(mysqli_num_rows($result) == 1)  // Checks if the userid exist in the database.
+if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in the database.
 {
-	if($row['login_enabled']==1)
+	if($Login_Query_Row['ENABLED']==1)
 	{
-	if($row['password']== sha1($passwd)) // check if the user password matches.
+	if($Login_Query_Row['PASSWORD']== sha1($passwd)) // check if the user password matches.
 		{
-			//23 June 2020 :: Disabling all financial year statements.
-			//$financialYear_sql = "select * from financial_year_table where enabled=1 and start_year=" . $_POST["fyear"];
-			//echo $financialYear_sql;
-			//$financialYear_result = mysqli_query($dbhandle,$financialYear_sql);
-			/*
-			if($financialYear_result)
-				$financialYear_row=mysqli_fetch_assoc($financialYear_result);
-			*/
-			//$_SESSION["SMSBALANCE"]=crawlerBhashSMS('CHECK_BALANCE');
-			$_SESSION["STATUS"]=$row["LOGIN_STATUS"];
-			$_SESSION["NAME"] = $row["Employee_Name"];
-			$_SESSION["LOGINID"] = $row["Login_id"];
-			$_SESSION["EMPLOYEEID"] = $row["Employee_Id"];
-			$_SESSION["STATUS"] = 1;
-			$_SESSION["EMPID"] = $row["Employee_Id"];
-			//$_SESSION["SCHOOLID"]= $row["School_Id"];
-			$_SESSION["SCHOOLID"]= 1;
-			$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST'];
-			//$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST']."/solvethemess/stage";
-			$_SESSION["LOGINGRADE"]= $row["login_grade"];
-			$_SESSION["FOOTER"]="SMS SCHOOL ERP COPYRIGHT 2020";
-			$_SESSION["LINK"]=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
-			$_SESSION["SESSION"]='2020-2021';
-			$_SESSION["STARTYEAR"]= 2020;
-			$_SESSION["ENDYEAR"]= 2021;
+			
+			//Listing All Sessions from school_master_table;
+			$Get_Session_List_Sql="select session from school_master_table";
+			$Get_Session_List_result=$dbhandle->query($Get_Session_List_Sql);
+			if(!$Get_Session_List_result)
+				{
+						$el=new LogMessage();
+						$sql=$Get_Session_List_Sql;
+						$error_msg="<h1>Database Error: Not able to fetch Session List.";
+						//$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+						$el->write_log_message('Login Process',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+						$_SESSION["MESSAGE"]=$error_msg;    
+						$dbhandle->query("unlock tables");
+						die;
+				}
+				$_SESSION["SESSIONLIST"]=NULL;
+				$count=1;
+				while($Get_Session_List_row=$Get_Session_List_result->fetch_assoc())
+					{
+						$_SESSION["SESSIONLIST"][$count]=$Get_Session_List_row["session"];
+						$count++;
+					}
 
-			// work only for lkg class	
-			$_SESSION["USER_ID"]='STUD202001';
-			$_SESSION["SECTION_ID"]='1';
-			$_SESSION["CLASS_ID"]='1';
-			$_SESSION["USER_TYPE"] = 'Student';
-			/*
+
+
+			
+			$Update_Login_Status_Sql="update login_table set login_status=1,login_time=now() where login_id='" . $lid . "'";
+			$Update_Login_Status_Result=$dbhandle->query($Update_Login_Status_Sql);
+			if($Update_Login_Status_Result==false)
+				{
+					$el=new LogMessage();
+					$sql=$Update_Login_Status_Sql;
+					$error_msg="<h1>Database Error: Not able to update login status after successful login.";
+					//$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+					$el->write_log_message('Login Process',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
+					$_SESSION["MESSAGE"]=$error_msg;    
+					$dbhandle->query("unlock tables");
+				}
+				
+
+			if($Login_Query_Row["LOGIN_TYPE"]=='STUDENT')
+				{
+					$Get_Student_Details_Sql="select * from student_master_table where student_reff_login_id='" . $lid . "' and enabled=1";
+					echo $Get_Student_Details_Sql;
+					$Get_Student_Details_Result=$dbhandle->query($Get_Student_Details_Sql);
+					$Get_Student_Details_Row=$Get_Student_Details_Result->fetch_assoc();
+					//Setting Session Variable.
+					$_SESSION["LOGINID"] = $Login_Query_Row["LOGIN_ID"];
+					$_SESSION["LOGINTYPE"]=$Login_Query_Row["LOGIN_TYPE"];
+					$_SESSION["STATUS"] = 1;
+					$_SESSION["USERID"]=$Get_Student_Details_Row["Student_Id"];  //WORKS FOR STUDENT ID IF TYPE IS STUDENT.
+					$_SESSION["SESSION"]=$Get_Student_Details_Row["Session"];
+					$_SESSION["STARTYEAR"]= $Get_Student_Details_Row["Session_Start_Year"];
+					$_SESSION["ENDYEAR"]= $Get_Student_Details_Row["Session_End_Year"];
+					$_SESSION["CLASSID"]=$Get_Student_Details_Row["Class_Id"];
+					$_SESSION["SECTIONID"]=$Get_Student_Details_Row["Class_Sec_Id"];
+					$_SESSION["NAME"] = $Get_Student_Details_Row["First_Name"] . ' ' . $Get_Student_Details_Row["Middle_Name"] . ' ' . $Get_Student_Details_Row["Last_Name"];
+					$_SESSION["PARENTID"]=$Get_Student_Details_Row["Parent_Reff_Login_Id"];
+					$_SESSION["SCHOOLID"]= $Get_Student_Details_Row["School_Id"];
+					//$_SESSION["SCHOOLID"]= 1;
+					$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST'];
+					//$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST']."/solvethemess/stage";
+					//$_SESSION["LOGINGRADE"]= $row["login_grade"];
+					$_SESSION["FOOTER"]="SMS SCHOOL ERP COPYRIGHT 2020";
+					$_SESSION["LINK"]=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
+					$_SESSION["LASTUPDATEON"]=$cur_time=date("Y-m-d H:i:s");
+					$_SESSION["INTERVAL"]='+120 minutes';
+				}
+			else if($Login_Query_Row["LOGIN_TYPE"]=='PARENT')
+			{
+				$Get_Parent_Details_Sql="select * from student_master_table where parent_reff_login_id='" . $lid . "' and enabled=1";
+				$Get_Parent_Details_Result=$dbhandle->query($Get_Parent_Details_Sql);
+				
+				$_SESSION["STUDENTLIST"]=NULL;
+				$count=1;
+				//Setting Session Variable.
+				while($Get_Parent_Details_Row=$Get_Parent_Details_Result->fetch_assoc())
+					{
+						if($count==1)	
+							{
+								$_SESSION["LOGINID"] = $Login_Query_Row["LOGIN_ID"];
+								$_SESSION["LOGINTYPE"]=$Login_Query_Row["LOGIN_TYPE"];
+								$_SESSION["STATUS"] = 1;
+								$_SESSION["USERID"]=$Get_Parent_Details_Row["Student_Id"];  //WORKS FOR STUDENT ID IF TYPE IS STUDENT.
+								$_SESSION["SESSION"]=$Get_Parent_Details_Row["Session"];
+								$_SESSION["STARTYEAR"]= $Get_Parent_Details_Row["Session_Start_Year"];
+								$_SESSION["ENDYEAR"]= $Get_Parent_Details_Row["Session_End_Year"];
+								$_SESSION["CLASSID"]=$Get_Parent_Details_Row["Class_Id"];
+								$_SESSION["SECTIONID"]=$Get_Parent_Details_Row["Class_Sec_Id"];
+								$_SESSION["NAME"] = $Get_Parent_Details_Row["Guardian_Name"];
+								$_SESSION["PARENTID"]=$Get_Parent_Details_Row["Parent_Reff_Login_Id"];
+								$_SESSION["SCHOOLID"]= $Get_Parent_Details_Row["School_Id"];
+								//$_SESSION["SCHOOLID"]= 1;
+								$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST'];
+								//$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST']."/solvethemess/stage";
+								//$_SESSION["LOGINGRADE"]= $row["login_grade"];
+								$_SESSION["FOOTER"]="SMS SCHOOL ERP COPYRIGHT 2020";
+								$_SESSION["LINK"]=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
+								$count++;
+								$_SESSION["STUDENTLIST"]["NAME"][$count]= $Get_Parent_Details_Row["First_Name"] . ' ' . $Get_Parent_Details_Row["Middle_Name"] . ' ' . $Get_Parent_Details_Row["Last_Name"];
+								$_SESSION["STUDENTLIST"]["STUDENTID"][$count]= $Get_Parent_Details_Row["Student_Id"];
+								$_SESSION["LASTUPDATEON"]=$cur_time=date("Y-m-d H:i:s");
+								$_SESSION["INTERVAL"]='+120 minutes';
+							}
+						else
+							{
+								$_SESSION["SIBLINGLIST"]["NAME"][$count]= $Get_Parent_Details_Row["First_Name"] . ' ' . $Get_Parent_Details_Row["Middle_Name"] . ' ' . $Get_Parent_Details_Row["Last_Name"];
+								$_SESSION["SIBLINGLIST"]["STUDENTID"][$count]= $Get_Parent_Details_Row["Student_Id"];
+								$count++;
+							}
+					
+					}		
+
+			}	
+			else if($Login_Query_Row["LOGIN_TYPE"]=='STAFF')
+			{
+				$Get_Staff_Details_Sql="select * from staff_master_table where staff_reff_login_id='" . $lid . "' and enabled=1";
+				//echo $Get_Staff_Details_Sql;
+				$Get_Staff_Details_Result=$dbhandle->query($Get_Staff_Details_Sql);
+				$Get_Staff_Details_Row=$Get_Staff_Details_Result->fetch_assoc();
+
+					$_SESSION["LOGINID"] = $Login_Query_Row["LOGIN_ID"];
+					$_SESSION["LOGINTYPE"]=$Login_Query_Row["LOGIN_TYPE"];
+					$_SESSION["STATUS"] = 1;
+					$_SESSION["USERID"]=$Get_Staff_Details_Row["Staff_Id"];  //WORKS FOR STUDENT ID IF TYPE IS STUDENT.
+					$_SESSION["SESSION"]=$Get_Staff_Details_Row["Default_Session"];
+					$_SESSION["STARTYEAR"]= $Get_Staff_Details_Row["Default_Start_Year"];
+					$_SESSION["ENDYEAR"]= $Get_Staff_Details_Row["Default_End_Year"];
+					//$_SESSION["CLASSID"]=$Get_Student_Details_Row["Class_Id"];
+					//$_SESSION["SECTIONID"]=$Get_Student_Details_Row["Class_Sec_Id"];
+					$_SESSION["NAME"] = $Get_Staff_Details_Row["Staff_Name"];
+					//$_SESSION["PARENTID"]=$Get_Student_Details_Row["Parent_Reff_Login_Id"];
+					$_SESSION["SCHOOLID"]= $Get_Staff_Details_Row["School_Id"];
+					//$_SESSION["SCHOOLID"]= 1;
+					$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST'];
+					//$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST']."/solvethemess/stage";
+					//$_SESSION["LOGINGRADE"]= $row["login_grade"];
+					$_SESSION["FOOTER"]="SMS SCHOOL ERP COPYRIGHT 2020";
+					$_SESSION["LINK"]=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
+					$_SESSION["LASTUPDATEON"]=$cur_time=date("Y-m-d H:i:s");
+					$_SESSION["INTERVAL"]='+120 minutes';
+			}
+
+		/*
 			$_SESSION["DISTRICTID"]= $financialYear_row["district_id"];
 			$_SESSION["STARTMONTH"]= $financialYear_row["start_month"];
 			$_SESSION["ENDMONTH"]= $financialYear_row["end_month"];
@@ -74,8 +187,6 @@ if(mysqli_num_rows($result) == 1)  // Checks if the userid exist in the database
 			$_SESSION["ENDYEAR"]= $financialYear_row["End_Year"];
 			$_SESSION["FINYEAR"]= $financialYear_row["Start_Year"] . '-' . $financialYear_row["End_Year"];
 			$_SESSION["SCHOOL"]=$row["school_name"] . ', ' . $row["area"] ;*/
-			$_SESSION["LASTUPDATEON"]=$cur_time=date("Y-m-d H:i:s");
-			$_SESSION["INTERVAL"]='+120 minutes';
 			//$_SESSION["GRADE"] = array();
 			//$_SESSION['PASSWORD']= $passwd;
 

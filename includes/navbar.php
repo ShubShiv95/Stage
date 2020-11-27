@@ -1,4 +1,4 @@
-    <?php //session_start();  ?>
+<?php //session_start();  ?>
     <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
                 <div class="header-logo">
@@ -46,11 +46,24 @@
                             aria-expanded="false">
                             <div class="admin-title">
                                 <h5 class="item-title"><?php echo $_SESSION["NAME"];?></h5>
-                                <span>Admin</span>
                             </div>
                             <div class="admin-img">
-                                <img src="app_images/profile/<?php echo $_SESSION["EMPID"];?>.jpg" alt="<?php echo $_SESSION["NAME"];?>" width="40" height="40">
+                                <img src="app_images/profile/<?php echo $_SESSION["LOGINID"];?>.jpg" alt="<?php echo $_SESSION["NAME"];?>" width="40" height="40">
                             </div>
+                            <?php
+                            /*if($_SESSION["LOGINTYPE"]=="PARENT")
+                            {
+                            echo '<div class="admin-img">Sibling';
+                            
+                            foreach($_SESSION["SIBLINGLIST"]["NAME"] as $name,$_SESSION["SIBLINGLIST"]["STUDENTID"] as $studentid)
+                                    {
+                                        echo '<a class="dropdown-item" href="#">' . $_SESSION["SIBLINGLIST"]["NAME"] . '</a>';
+                                        
+                                    }  
+                                    
+                            echo '</div>';
+                                }*/
+                            ?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="item-header">
@@ -241,10 +254,19 @@
                         <a class="navbar-nav-link dropdown-toggle" href="#" role="button" 
                         data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>Session 2020-2021</a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">2021-2022</a>
+                            <?php   
+                                
+                              
+                                foreach($_SESSION["SESSIONLIST"] as $value)
+                                    {
+                                        echo '<a class="dropdown-item" href="Reset_Session.php?sessionid=' . $value .  '">' . $value . '</a>';
+                                        
+                                    }   
+                            ?>
+                            <!--a class="dropdown-item" href="#">2021-2022</a>
                             <a class="dropdown-item" href="#">2020-2021</a>
                             <a class="dropdown-item" href="#">2019-2020</a>
-                            <a class="dropdown-item" href="#">2018-2019</a>
+                            <a class="dropdown-item" href="#">2018-2019</a-->
                         </div>
                     </li>
                 </ul>

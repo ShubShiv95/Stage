@@ -26,7 +26,7 @@ if(isset($_REQUEST['notice_sender']))
     if (empty($notice_type)) {
       $errors[] = 'Notice Type Cannot Be Empty.';
     }
-    if (empty(stripslashes(strip_tags($notice_details))) ) {
+    if (empty(stripslashes(strip_tags($notice_details)))) {
       $errors[] = 'Notice Details Cannot Be Empty.';
     }
     else{
@@ -145,14 +145,14 @@ if(isset($_REQUEST['notice_sender']))
 if (isset($_REQUEST['getAllNotices'])) 
 {
   $start_date =$_REQUEST['date_from']; $end_date = $_REQUEST['date_to'];
-  if ($_SESSION["USER_TYPE"] == 'Student') 
+  if ($_SESSION["LOGINTYPE"] == 'STUDENT') 
   {
-    $class_id = $_SESSION["CLASS_ID"];
+    $class_id = $_SESSION["CLASSID"];
     $student_query = "SELECT nmt.*, nlt.* FROM notice_master_table nmt, notice_list_table nlt WHERE nmt.Notice_Id = nlt.Notice_Id AND nmt.Enabled = 1 AND nlt.Reff_Id = ? AND nmt.School_Id = ?  AND DATE(nmt.Updated_On) BETWEEN str_to_date(?,'%d/%m/%Y') AND str_to_date(?,'%d/%m/%Y') AND nlt.Reff_Type !='DepartmentId' ";
     $notice_query_prepare = $dbhandle->prepare($student_query);
     $notice_query_prepare->bind_param("iiss",$class_id,$_SESSION["SCHOOLID"],$start_date,$end_date);
   }
-  else if($_SESSION["USER_TYPE"] == 'Teacher')
+  else if($_SESSION["LOGINTYPE"] == 'STAFF')
   {
     if ($_REQUEST['notice_to']=='ClassId') 
     {

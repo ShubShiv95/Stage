@@ -92,7 +92,7 @@
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>First Name (As Per Birth Certificate) <span>*</span></label>
-                                        <input type="text" name="studentFirstName" id="studentFirstName" placeholder="" required="" class="form-control">
+                                        <input type="text" name="studentFirstName" id="studentFirstName" placeholder=""  class="form-control" required="">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Middle Name</label>
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Last Name</label>
-                                        <input type="text" name="studentLastName" id="studentLastName=" placeholder="" required="" class="form-control">
+                                        <input type="text" name="studentLastName" id="studentLastName=" placeholder=""  class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Class <span>*</span></label>
@@ -111,19 +111,19 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Section</label>
-                                        <!-- <select class="select2" name="f_Section" required="" readonly=true>
+                                        <!-- <select class="select2" name="f_Section"  readonly=true>
                                          </select> -->
                                     </div>
 
                                    <div class="form-group aj-form-group">
                                         <label>Roll No.</label>
-                                        <select class="select2" name="f_Gender" required="" readonly> 
+                                        <select class="select2" name="f_Gender"  readonly> 
                                         </select>
                                     </div>
                                     
                                     <div class="form-group aj-form-group">
                                         <label>Gender <span>*</span></label>
-                                        <select class="select2" name="studentGender" id="studentGender" required="">
+                                        <select class="select2" name="studentGender" id="studentGender">
                                             <option value="">Please Select Gender </option>
                                             <option value="MALE">Male</option>
                                             <option value="FEMALE">Female</option>
@@ -135,7 +135,7 @@
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Date of Birth <span>*</span></label>
-                                        <input type="text" name="studentDOB" id="studentDOB" required="" placeholder="DD/MM/YYYY" class="form-control air-datepicker" data-position="bottom right" autocomplete="off">
+                                        <input type="text" name="studentDOB" id="studentDOB"  placeholder="DD/MM/YYYY" class="form-control air-datepicker" data-position="bottom right" autocomplete="off" required="">
                                         <i class="far fa-calendar-alt"></i>
                                     </div>
 
@@ -159,7 +159,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Discount Category <span>*</span></label>
-                                        <select class="select2" required="" name="studDiscCat" id="studDiscCat">
+                                        <select class="select2" name="studDiscCat" id="studDiscCat">
                                         <?php
                                                 $string = "";
                                                 foreach($GLOBAL_DISCOUNT_CAT as $x=>$x_value)
@@ -184,7 +184,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Academic Session <span>*</span></label>
-                                        <select class="select2" required="" name="studAcademicSession" id="studAcademicSession"> 
+                                        <select class="select2"  name="studAcademicSession" id="studAcademicSession"> 
                                         <?php
                                                 $string = "";
                                                 foreach($GLOBAL_SCHOOL_SESSION as $x=>$x_value)
@@ -197,7 +197,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Mother Tongue <span>*</span></label>
-                                        <select class="select2" required="" name="studMotherTongue" id="studMotherTongue" >
+                                        <select class="select2"  name="studMotherTongue" id="studMotherTongue" >
                                         <?php
                                                 $string = "";
                                                 foreach($GLOBAL_LANGUAGES as $x=>$x_value)
@@ -213,7 +213,7 @@
                                 <div class="col-xl-4 col-lg-4 col-12 ">
                                 	<div class="form-group aj-form-group">
                                         <label>Religion <span>*</span></label>
-                                        <select class="select2" required="" name="studReligion" id="studReligion">
+                                        <select class="select2"  name="studReligion" id="studReligion">
                                         <?php
                                                 $string = "";
                                                 foreach($GLOBAL_RELIGION as $x=>$x_value)
@@ -226,7 +226,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Nationality <span>*</span></label>
-                                        <select class="select2" required="" name="studNationality" id="studNationality">
+                                        <select class="select2"  name="studNationality" id="studNationality">
                                             <option value="">Select Nationality</option>
                                             <option selected value="INDIAN">Indian</option>
                                             <option value="OTHERS">Other</option>
@@ -274,7 +274,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
-                                        <label>Medium of Instrction</label>
+                                        <label>Medium of Instruction</label>
                                          <select class="select2" name="studMOI" id="studMOI">
                                          <?php
                                                 $string = "";
@@ -320,29 +320,29 @@
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Communication Address<span>*</span></label>
-                                        <textarea type="text" rows="4" name="commAddress" id="commAddress" required="" placeholder="" class="aj-form-control"> </textarea>
+                                        <textarea type="text" rows="4" name="commAddress" id="commAddress"  placeholder="" class="aj-form-control"> </textarea>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>City/ District<span>*</span></label>
-                                        <input type="text" name="commCityDist" id="commCityDist" required="" placeholder="" class="form-control">
+                                        <input type="text" name="commCityDist" id="commCityDist"  placeholder="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Pincode<span>*</span></label>
-                                        <input type="text" name="commPinCode" id="commPinCode" required="" placeholder="" class="form-control">
+                                        <input type="text" name="commPinCode" id="commPinCode"  placeholder="" class="form-control">
                                     </div>
                                     
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>State<span>*</span> </label>
-                                        <input type="text" name="commState" id="commState" required="" placeholder="" class="form-control">
+                                        <input type="text" name="commState" id="commState"  placeholder="" class="form-control">
 
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Contact No.<span>*</span></label>
-                                        <input type="text" name="commContactNo" id="commContactNo" required="" placeholder="" class="form-control">
+                                        <input type="text" name="commContactNo" id="commContactNo"  placeholder="" class="form-control">
                                     </div>
                                     
                                 </div>
@@ -360,30 +360,30 @@
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Residential Address<span>*</span></label>
-                                        <textarea type="text" rows="4" name="raAddress"  id="raAddress" required="" placeholder="" class="aj-form-control"> </textarea>
+                                        <textarea type="text" rows="4" name="raAddress"  id="raAddress"  placeholder="" class="aj-form-control"> </textarea>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label> City/ District <span>*</span></label>
-                                        <input type="text" name="raCityDist"  id="raCityDist" required="" placeholder="" class="form-control">
+                                        <input type="text" name="raCityDist"  id="raCityDist"  placeholder="" class="form-control">
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Pincode <span>*</span></label>
-                                        <input type="text" name="raPinCode" id="raPinCode" required="" placeholder="" class="form-control">
+                                        <input type="text" name="raPinCode" id="raPinCode"  placeholder="" class="form-control">
                                     </div>
                                     
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>State <span>*</span> </label>
-                                        <input type="text" name="raState" id="raState" required="" placeholder="" class="form-control">
+                                        <input type="text" name="raState" id="raState"  placeholder="" class="form-control">
 
                                         
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Contact No. <span>*</span></label>
-                                        <input type="text" name="raContactNo" id="raContactNo" required="" placeholder="" class="form-control">
+                                        <input type="text" name="raContactNo" id="raContactNo"  placeholder="" class="form-control">
                                     </div>
                                     
                                 </div>
@@ -427,9 +427,7 @@
                                 				<div class="form-group aj-form-group">
 			                                        <label>Class <span>*</span></label>
                                                     <select class="select2" name="sibling1Class"  id="sibling1Class">
-                                                    <?php
-                                                        echo $classDropdownValue;
-                                                    ?> 			                                
+                                                                    
                                                     </select>
 			                                    </div>
 			                                   
@@ -461,9 +459,6 @@
                                                 <div class="form-group aj-form-group">
                                                     <label>Class <span>*</span></label>
                                                     <select class="select2" name="sibling2Class"  id="sibling2Class">
-                                                    <?php
-                                                        echo $classDropdownValue;
-                                                    ?> 			                                
                                                     </select>
                                                 </div>                                              
                                             </div>
@@ -773,7 +768,7 @@
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>SMS Contact No. <span>*</span></label>
-                                        <input type="text" name="studSMSContactNo" id="studSMSContactNo" minlength="10" maxlength="10" required="" placeholder="" class="form-control">
+                                        <input type="text" name="studSMSContactNo" id="studSMSContactNo" minlength="10" maxlength="10"  placeholder="" class="form-control" required="">
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
@@ -789,7 +784,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="item-title aj-item-title f-aj-item-title">
+                            <!-- <div class="item-title aj-item-title f-aj-item-title">
                                 <h3 class="mb-4">Documents Submited</h3>
                             </div>
                             <div class="row">
@@ -914,7 +909,7 @@
                                         </div>
                                 </div>
                                 
-                            </div>
+                            </div> -->
                             <div class="footer-sec-aj mt-3" id="formOutput" style="display: none;">    </div>
                             
                             <div class="aaj-btn-chang-c">
@@ -1041,6 +1036,9 @@
                           html += '<option value="'+classRow.Class_Id+'">'+classRow.Class_Name +'</option>';
                       }
                       $('#studclassToApply').html(html);
+                      $('#studClass').html(html);     
+                      $('#sibling1Class').html(html); 
+                      $('#sibling2Class').html(html);               
                     }
                 });
             }

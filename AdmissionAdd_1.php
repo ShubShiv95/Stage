@@ -93,14 +93,14 @@
       $studSMSContactNo = mysqli_real_escape_string($dbhandle,$_POST["studSMSContactNo"]);
       $studWhatsAppContactNo = mysqli_real_escape_string($dbhandle,$_POST["studWhatsAppContactNo"]);
       $studEmailAddress = mysqli_real_escape_string($dbhandle,$_POST["studEmailAddress"]);
-      $docUpload_1 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_1"]);
-      $docUpload_2 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_2"]);
-      $docUpload_3 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_3"]);
-      $docUpload_4 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_4"]);
-      $docUpload_5 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_5"]);
-      $docUpload_6 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_6"]);
-      $docUpload_7 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_7"]);
-      $docUpload_8 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_8"]);
+      // $docUpload_1 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_1"]);
+      // $docUpload_2 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_2"]);
+      // $docUpload_3 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_3"]);
+      // $docUpload_4 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_4"]);
+      // $docUpload_5 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_5"]);
+      // $docUpload_6 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_6"]);
+      // $docUpload_7 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_7"]);
+      // $docUpload_8 = mysqli_real_escape_string($dbhandle,$_POST["docUpload_8"]);
 
       //School Configured Code, this will be dynamic
       $schoolCode = "DPS";
@@ -135,15 +135,15 @@
         $formErrors[] = 'Please Choose Date of Birth';
       }
       if (empty($studentAge)) {
-        $formErrors[] = 'Student Age Cannot Be Empty';
+       // $formErrors[] = 'Student Age Cannot Be Empty';
       }
       if (empty($studentSocialCat)) {
-        $formErrors[] = 'Please Select Social Category';
+       // $formErrors[] = 'Please Select Social Category';
       }
       /*if (empty($studLocality)) {
         $formErrors[] = 'Please Select Locality';
       }     */ 
-      if (empty($studLocality)) {
+      /*if (empty($studLocality)) {
         $formErrors[] = 'Please Select Locality';
       } 
       if (empty($studAcademicSession)) {
@@ -182,6 +182,7 @@
       if (empty($motherName) || empty($motherQual)|| empty($motherOccupation)) {
         $formErrors[] = 'Please Fill Mother Details Carefully';
       }
+      */
 
       /* display errors */
       if($formErrors>0){
@@ -200,7 +201,7 @@
         // data saving to database
         
         $insertAdmissionTableSql = "insert into admission_master_table
-        (Admission_Id, School_Admission_Id, School_Id, Session, First_Name, Middle_Name, Last_Name, Class_Id, Gender , DOB, Age, Social_Category, Discount_Category, Locality,
+        (Admission_Id, School_Admission_Id,	Is_Admited, School_Id, Session, First_Name, Middle_Name, Last_Name, Class_Id, Gender , DOB, Age, Social_Category, Discount_Category, Locality,
         Academic_Session, Mother_Tongue, Religion, Nationality, Blood_Group, Aadhar_No,  Prev_School_Name, Prev_School_Medium, Prev_School_Board, 
         Prev_School_Class, Comm_Address, Comm_Add_Country, Comm_Add_State, Comm_Add_City_Dist, Comm_Add_Pincode, Comm_Add_ContactNo, Resid_Address, Resid_Add_Country,
         Resid_Add_State, Resid_Add_City_Dist, Resid_Add_Pincode, Resid_Add_ContactNo, Sibling_1_Student_Id, Sibling_1_Class, Sibling_1_Section, Sibling_1_RollNo, 
@@ -210,16 +211,19 @@
         Mother_Contact_No, Mother_Annual_Income, Mother_Aadhar_Card, Mother_Alumni,
         Gurdian_Type, Guardian_Address, Guardian_Name, Guardian_Relation, Guardian_Contact_No, 
         SMS_Contact_No, Whatsapp_Contact_No, Email_Id) 
-        values(?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        values(?,?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt=$dbhandle->prepare($insertAdmissionTableSql);
 
         echo $dbhandle->error;	
-      
-        $stmt->bind_param("isissssississssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssissssssss",   
-        $admId,$schoolAdmissionId,$schoolId,$session,$studentFirstName,$studentMiddleName,$studentLastName,$studclassToApply,$studentGender,$studentDOB,$studentAge,$studentSocialCat,$studDiscCat,$studLocality,$studAcademicSession,$studMotherTongue,$studReligion,$studNationality,$studBloodGroup,$studAdharCardNo,$studPrevSchoolName,$studMOI,$studBoard,$studClass,$commAddress,$commCountry,$commState,$commCityDist,$commPinCode,$commContactNo,$raAddress,$raCountry,$raState,$raCityDist,$raPinCode,$raContactNo,$sibling1StudId,$sibling1Class,$sibling1Section,$sibling1RollNo,$sibling2StudId,$sibling2Class,$sibling2Section,$sibling2RollNo,$fatherName,$fatherQual,$fatherOccupation,$fatherDesig,$fatherOrgName,$fatherOrgAdd,$fatherCity,$fatherState,
-        $fatherCountry,$fatherPinCode,$fatherEmail,$fatherContactNo,$fatherAnnualIncome,$fatherAdharCardNo,$fatherAlumni,$motherName,$motherQual,$motherOccupation,$motherDesig,$motherOrgName,
-        $motherOrgAdd,$motherCity,$motherState,$motherCountry,$motherPinCode,$motherEmail,$motherContactNo,
+        $isAdmitted = "No";
+
+        $stmt->bind_param("ississssississssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssissssssss",   
+        $admId,$schoolAdmissionId,$isAdmitted,$schoolId,$session,$studentFirstName,$studentMiddleName,$studentLastName,$studclassToApply,$studentGender,$studentDOB,$studentAge,$studentSocialCat,$studDiscCat,$studLocality,
+        $studAcademicSession,$studMotherTongue,$studReligion,$studNationality,$studBloodGroup,$studAdharCardNo,$studPrevSchoolName,$studMOI,$studBoard,$studClass,$commAddress,$commCountry,$commState,$commCityDist,$commPinCode,
+        $commContactNo,$raAddress,$raCountry,$raState,$raCityDist,$raPinCode,$raContactNo,$sibling1StudId,$sibling1Class,$sibling1Section,$sibling1RollNo,$sibling2StudId,$sibling2Class,$sibling2Section,$sibling2RollNo,$fatherName,
+        $fatherQual,$fatherOccupation,$fatherDesig,$fatherOrgName,$fatherOrgAdd,$fatherCity,$fatherState,$fatherCountry,$fatherPinCode,$fatherEmail,$fatherContactNo,$fatherAnnualIncome,$fatherAdharCardNo,$fatherAlumni,$motherName,
+        $motherQual,$motherOccupation,$motherDesig,$motherOrgName,$motherOrgAdd,$motherCity,$motherState,$motherCountry,$motherPinCode,$motherEmail,$motherContactNo,
         $motherAnnualIncome,$motherAdharCardNo,$motherAlumni,$otherType,$othersAddress,$othersName,$othersRelation,$othersMobileNo,$studSMSContactNo,$studWhatsAppContactNo,$studEmailAddress
         );
 

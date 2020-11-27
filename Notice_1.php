@@ -29,10 +29,11 @@ if(isset($_REQUEST['notice_sender']))
     if (empty(stripslashes(strip_tags($notice_details)))) {
       $errors[] = 'Notice Details Cannot Be Empty.';
     }
-
+    else{
     // file updateion
     if (!empty($notice_attachment)) 
     {
+      
       $directory = 'notices';
       $dir_path = "./app_images/".$directory;
       $file_path = $dir_path;
@@ -137,7 +138,7 @@ if(isset($_REQUEST['notice_sender']))
     // commitment ends
     mysqli_commit($dbhandle);
   }
-
+  }
 }
 
 /*************** new notice request ***************/

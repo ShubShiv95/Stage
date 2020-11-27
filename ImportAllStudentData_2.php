@@ -187,7 +187,7 @@
       $IsTransSuccess = true;
       $errorAreaMessage = "";
 
-      $insertStudentClassTableSql = "insert into Student_Class_Details_New (Student_Details_Id, Student_Id, Class_Id, Class_No, Class_Sec_Id, Session,
+      $insertStudentClassTableSql = "insert into student_class_details (Student_Details_Id, Student_Id, Class_Id, Class_No, Class_Sec_Id, Session,
       Session_Start_Year, Session_End_Year, School_Id, Updated_By) values(?,?,?,?,?,?,?,?,?,?)";
       
       $insertStudentTableSql = "insert into student_master_table
@@ -215,7 +215,7 @@
           $IsTransSuccess = true;
 
           //########################   Below Block of SQL Gets Class ID from Class_Master Table  ###################################
-          $studentClassIdSql = "Select class_id as Class_Id from class_master_table where class_no='" . $studClassNo . "'" . "and School_Id = '" . $schoolId. "'" ;
+          $studentClassIdSql = "Select class_id as Class_Id from class_master_table where Class_Name='" . $studClassNo . "'" . "and School_Id = '" . $schoolId. "'" ;
           $studentClassIdSqlResult = $dbhandle->query($studentClassIdSql);
           $studClassIdResultSet = $studentClassIdSqlResult -> fetch_assoc();
           $studClassId = "";
@@ -247,7 +247,7 @@
 
          //Below Block of SQL calculates the Next value of Student_Class_detail index.
 
-          $studentClassDetIdCountSql = "Select count(Student_Details_Id) as studDetailId from Student_Class_Details_New where school_id='" . $schoolId. "'";
+          $studentClassDetIdCountSql = "Select count(Student_Details_Id) as studDetailId from student_class_details where school_id='" . $schoolId. "'";
           $studentClassDetCountResult = $dbhandle->query($studentClassDetIdCountSql);
     
           if($studentClassDetCountResult)

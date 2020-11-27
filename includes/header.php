@@ -1,9 +1,11 @@
 <!doctype html>
 <html class="no-js" lang="">
 <?php
+
 include_once 'dbobj.php';
 include_once 'errorLog.php';
 include_once 'security.php';
+
 $lid = $_SESSION["LOGINID"];
 $schoolId = $_SESSION["SCHOOLID"];
 ?>
@@ -47,6 +49,7 @@ $schoolId = $_SESSION["SCHOOLID"];
     <!-- Full Calender CSS -->
     <link rel="stylesheet" href="css/fullcalendar.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
 </head>
 
 <body>
@@ -58,6 +61,7 @@ $schoolId = $_SESSION["SCHOOLID"];
         <?php //session_start();
         ?>
         <?php require_once './includes/navbar.php'; ?>
+
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
@@ -94,3 +98,4 @@ $schoolId = $_SESSION["SCHOOLID"];
                                                         echo $bodyHeader;
                                                     } ?></h3>
                             </div>
+

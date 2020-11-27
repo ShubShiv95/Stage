@@ -4,7 +4,7 @@
 		//@ $dbhandle = new mysqli('localhost','easyschool_admin','easyschool_admin','easyschool'); // mysqli('hostname','databasse_user','database_user_password','database name') easyschool_admin/easyschool@admin
 		
 		//used in localhost for solvethemess/stage
-		@ $dbhandle = new mysqli('localhost','root','','smserp_new'); // mysqli('hostname','databasse_user','database_user_password','database name') easyschool_admin/easyschool@admin
+		@ $dbhandle = new mysqli('localhost','smserp_admin','smserp@admin','smserp'); // mysqli('hostname','databasse_user','database_user_password','database name') easyschool_admin/easyschool@admin
 		//--@$dbhandle = new mysqli('localhost','solvethe_stage','stage@2020','solvethe_stage'); 
 		
 		//used in stage.solvethemess.in cloud.

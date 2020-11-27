@@ -8,7 +8,7 @@
 			//@ $dbhandle = mysqli_connect('localhost','solvethe_smserp_admin','smserp@admin','solvethe_smserp'); // mysqli('hostname','databasse_user','database_user_password','database name')
 			
 			//Used in localhost
-			@ $dbhandle = new mysqli('localhost','root','','smserp_new'); // mysqli('hostname','databasse_user','database_user_password','database name') easyschool_admin/easyschool@admin
+			@ $dbhandle = new mysqli('localhost','smserp_admin','smserp@admin','smserp'); // mysqli('hostname','databasse_user','database_user_password','database name') easyschool_admin/easyschool@admin
 			//@ $dbhandle = new mysqli('localhost','solvethe_stage','stage@2020','solvethe_stage'); 
 
 			//used in demo.swiftcampus.com cloud.

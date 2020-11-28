@@ -391,7 +391,7 @@ include 'security.php';
                 $('#searchAssignmentts').click(function(e) {
                     e.preventDefault();
                     const userType = '<?php echo $_SESSION["LOGINTYPE"]; ?>';
-                    if (userType == 'Student' || userType == 'Parent') {
+                    if (userType == 'STUDENT' || userType == 'PARENT') {
                         const monthNumber = $('#monthList').val();
                         const subjectId = $('#subjectList').val();
                         if (subjectId == '') {

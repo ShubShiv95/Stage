@@ -70,7 +70,7 @@
          </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-sm" id="save_notes_btn">Save</button>
+          <button type="button" class="btn btn-primary btn-sm save_notes_btn" id="save_notes_btn">Save</button>
         </div>
       </div>
     </div>
@@ -103,6 +103,8 @@
             document.getElementById('canvas').style.backgroundImage = 'url(' + data.File_Path + data.File_Name + ')';
             var saveBtn = document.getElementsByClassName('saveDatatoServer')[0].setAttribute("id", data.File_Name);
             var saveBtn = document.getElementsByClassName('imageName')[0].setAttribute("id", data.File_Name);
+
+            var saveBtn = document.getElementsByClassName('save_notes_btn')[0].setAttribute("id", data.File_Name);
           }
         });
       }
@@ -115,7 +117,7 @@
         const studentId = "<?php echo $_GET['userId']; ?>";
         const assignmentId = "<?php echo $_GET['assignmentId']; ?>";
         const imageName = $(this).attr('id');
-        const totalPages = "<?php echo $_GET['totalPages']; ?>";
+        const totalPages = $('#totalPages').text();
         var currentPages = $('#currentPages').text();
         $('#totalPages').text(totalPages);
         html2canvas(document.getElementById('canvas')).then(function(canvasData) {
@@ -166,11 +168,11 @@
       nextPagebtn.addEventListener('click', gotoNextPage);
 
       function gotoNextPage() {
-        var currentPages = parseInt($('#currentPages').text());
-        var totalPages = parseInt($('#totalPages').text());
+        var currentPages = $('#currentPages').text();
+        var totalPages = $('#totalPages').text();
         
         if (totalPages > currentPages) {
-          nextPage = currentPages + 1;
+          nextPage = parseInt(currentPages) + 1;
           $('#currentPages').text(nextPage);
           clearCanvas();
           loadPages(nextPage);
@@ -187,15 +189,19 @@
         $('#notes_modal').fadeOut();
       });
 
-      $('#save_notes_btn').click(function(){
-        const image_name = $('#').attr('id');
-        const message = $('#message_texts').text();
+      $('.save_notes_btn').click(function(){
+        const image_name = $(this).attr('id');
+        const message = $('#message_texts').val();
         $.ajax({
           url : './VerifyAssignments_1.php',
           type : 'post',
           data : {'save_remarks':1,'image_name':image_name,'message':message},
           success : function(data){
             $('#remraks_output').html(data);
+            $('#message_texts').text('');
+            window.setTimeout(function(){
+             $('#remraks_output').html('');
+            },2000);
           }
         });
       });
@@ -203,10 +209,11 @@
       /* final submit */
       function final_submit(){
         const assignmentId = "<?php echo $_REQUEST['assignmentId'] ?>";
+        const user_id = "<?php echo $_REQUEST['userId'] ?>";
         $.ajax({
           url : './VerifyAssignments_1.php',
           type : 'post',
-          data : {'finsal_submit_asignment':1,'assignmentId':assignmentId},
+          data : {'finsal_submit_asignment':1,'assignmentId':assignmentId,'user_id':user_id},
           success : function(data){
             $('.form_output').html(data);
             window.setTimeout(function(){

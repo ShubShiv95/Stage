@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION["USER_TYPE"] == 'Student' || $_SESSION["USER_TYPE"] == 'Parents') {
+if ($_SESSION["LOGINTYPE"] == 'STUDENT' || $_SESSION["LOGINTYPE"] == 'PARENT') {
     echo '<script>alert("You Donot Have Rights To Access This Page"); window.location.href="./dashboard.php"</script>';
 }
 ?>
@@ -82,8 +82,8 @@ include 'security.php';
                                                 <div class="form-group aj-form-group">
                                                     <label>Class <span>*</span></label>
                                                     <select class="select2" required="" name="assignment_class" id="assignment_class">
-                                                        
-                                                        
+
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -214,26 +214,29 @@ include 'security.php';
                 }
             });
 
-             /*
+            /*
                 1. to fetch data from class table just copy code from below functions.
                 2. keep object id as assignment_class
             */
 
             getAllClass();
-            function getAllClass(){
+
+            function getAllClass() {
                 $.ajax({
-                    url : './universal_apis.php',
-                    type : 'get',
-                    data : {'getAllClass':1},
-                    dataType : 'json',
-                    success : function(data){
-                      var classData = JSON.parse(JSON.stringify(data));
-                      var html = '<option value="">Select</option>';
-                      for (let i = 0; i < classData.length; i++) {
-                          const classRow = classData[i];
-                          html += '<option value="'+classRow.Class_Id+'">'+classRow.Class_Name +'</option>';
-                      }
-                      $('#assignment_class').html(html);
+                    url: './universal_apis.php',
+                    type: 'get',
+                    data: {
+                        'getAllClass': 1
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        var classData = JSON.parse(JSON.stringify(data));
+                        var html = '<option value="">Select</option>';
+                        for (let i = 0; i < classData.length; i++) {
+                            const classRow = classData[i];
+                            html += '<option value="' + classRow.Class_Id + '">' + classRow.Class_Name + '</option>';
+                        }
+                        $('#assignment_class').html(html);
                     }
                 });
             }
@@ -243,20 +246,23 @@ include 'security.php';
                 2. keep object id as assignment_subject
             */
             getAllSubjects();
-            function getAllSubjects(){
+
+            function getAllSubjects() {
                 $.ajax({
-                    url : './universal_apis.php',
-                    type : 'get',
-                    data : {'getAllSubjects':1},
-                    dataType : 'json',
-                    success : function(data){
-                      var subjectData = JSON.parse(JSON.stringify(data));
-                      var html = '<option value="">Select Subject</option>';
-                      for (let i = 0; i < subjectData.length; i++) {
-                          const subjectRow = subjectData[i];
-                          html += '<option value="'+subjectRow.Subject_Id+'">'+subjectRow.Subject_Name +'</option>';
-                      }
-                      $('#assignment_subject').html(html);
+                    url: './universal_apis.php',
+                    type: 'get',
+                    data: {
+                        'getAllSubjects': 1
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        var subjectData = JSON.parse(JSON.stringify(data));
+                        var html = '<option value="">Select Subject</option>';
+                        for (let i = 0; i < subjectData.length; i++) {
+                            const subjectRow = subjectData[i];
+                            html += '<option value="' + subjectRow.Subject_Id + '">' + subjectRow.Subject_Name + '</option>';
+                        }
+                        $('#assignment_subject').html(html);
                     }
                 });
             }

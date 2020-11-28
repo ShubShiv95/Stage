@@ -39,7 +39,7 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
                   </div>
                 </div>
                 <div class="text-right mt-3">
-                  <button class="btn btn-primary btn-lg"><i class="fas fa-plus"></i> Upload Assignment</button>
+                  <button class="btn btn-primary btn-lg upload_btn"><i class="fas fa-plus"></i> Upload Assignment</button>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-12 aj-mb-2 mt-3 formoutput">
                  
@@ -108,8 +108,11 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
           for (let index = 0; index < assignmentFiles.length; index++) {
             const fileData = assignmentFiles[index];
             filehtml += '<div class="card text-white shadow col-md-6"><img class="card-img-top w-100" src="./'+fileData.File_Path+fileData.File_Name+'" alt=""><div class="card-body"><p class="card-text">'+fileData.Task_Note+'</p>';
-            if (fileData.Is_Verified == 'No') {
+            if (fileData.tstverified == 'No') {
               filehtml += '<button class="btn btn-danger delete_image" id="'+fileData.TSF_Id+'"><i class="fas fa-trash fa-2x"></i></button>';  
+            }
+            else{
+              $('.upload_btn').hide();
             }
             filehtml += '<p>'+fileData.Task_Remarks+'</p></div></div>';
           }

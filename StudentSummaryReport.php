@@ -17,13 +17,12 @@ require_once './includes/header.php';
         <div class="basic-tab">
             <ul class="nav nav-tabs" role="tablist">
                 <?php if ($_SESSION["LOGINTYPE"] != "STUDENT") {
-                echo 
-                '<li class="nav-item">
+                    echo
+                        '<li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-selected="true">Search Student</a>
                 </li>';
-                
                 } ?>
-                
+
                 <li class="nav-item">
                     <a class="nav-link nav_sec" data-toggle="tab" href="#tab2" role="tab" aria-selected="true">Details</a>
                 </li>
@@ -47,8 +46,8 @@ require_once './includes/header.php';
                 </li>
             </ul>
             <div class="tab-content">
-            <?php if ($_SESSION["LOGINTYPE"] != "STUDENT") {
-              echo  '<div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                <?php if ($_SESSION["LOGINTYPE"] != "STUDENT") {
+                    echo  '<div class="tab-pane fade show active" id="tab1" role="tabpanel">
                     <div class="studet-360-form">
                         <h3 class="text-center">Student Information</h3>
                         <div class="row">
@@ -105,7 +104,8 @@ require_once './includes/header.php';
                             </div>
                         </div>
                     </div>
-                </div>';}
+                </div>';
+                }
                 ?>
                 <div class="tab-pane fade show" id="tab2" role="tabpanel">
                     <div class="studet-360-form">
@@ -159,75 +159,31 @@ require_once './includes/header.php';
                         </div>
                     </div>
                 </div>
+                <!-- attendance system starts -->
                 <div class="tab-pane fade" id="tab3" role="tabpanel">
                     <div class="studet-360-form">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="content-fild">
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">First Name :</div>
-                                            <div class="content">Ajay</div>
+                            <div class="col-8 col-xl-8 col-8-xxxl offset-xl-2 offset-lg-2">
+                                <div class="card dashboard-card-four pd-b-20">
+                                    <div class="card-body">
+                                        <div class="heading-layout1">
+                                            <div class="item-title">
+                                                <h3>Student Attendance</h3>
+                                            </div>
+                                            <!-- 
+                                                I think it is extra elements of another page || commented by : meraj 
+                                            <div class="dropdown">
+                                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
+
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                                </div>
+                                            </div>-->
                                         </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Last Name :</div>
-                                            <div class="content">Kushwah</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Class :</div>
-                                            <div class="content">3</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Section :</div>
-                                            <div class="content">A</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Roll :</div>
-                                            <div class="content">#2909</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Gender :</div>
-                                            <div class="content">Male</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Mother Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Date Of Birth :</div>
-                                            <div class="content">January 31, 1990</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Occupation :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Religion :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Email :</div>
-                                            <div class="content">test@gmail.com</div>
+                                        <div class="calender-wrap">
+                                            <div id="fc-calender" class="fc-calender"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -235,6 +191,7 @@ require_once './includes/header.php';
                         </div>
                     </div>
                 </div>
+                <!-- attendance system Ends -->
                 <div class="tab-pane fade" id="tab4" role="tabpanel">
                     <div class="studet-360-form">
                         <div class="row">
@@ -620,14 +577,25 @@ require_once './includes/header.php';
     </div>
 </div>
 <style>
-    .content,.name{
+    .content,
+    .name {
         font-weight: bold;
+    }
+    .fc-basicWeek-button, .fc-month-button, .fc-basicDay-button{
+        display: none;
+    }
+    .fc-day-number{
+        font-size: 2.5rem!important; 
+    }
+    .fc-sun .fc-day-number{
+    color: #ff9800 !important;
     }
 </style>
 <?php require_once './includes/scripts.php'; ?>
 <script>
     $(document).ready(function() {
-
+        var dates = $('.fc-past').text();
+        console.log(dates);
         // get all classes through API
         const url = "./universal_apis.php?getAllClass=1";
         var html_class_d = '<option value="">Please Select Class</option>';
@@ -667,7 +635,7 @@ require_once './includes/header.php';
             var html_table = '';
             $.getJSON(url, function(data) {
                 $.each(data, function(key, value) {
-                    html_table += '<tr><td>' + value.First_Name + ' ' + value.Last_Name + '</td><td>' + value.Father_Name + '</td><td>' + value.DOB + '</td><td><button class="btn btn-warning load_student_data" id="' + value.Student_Id +'"><i class="fas fa-binoculars fa-2x"></i></button></td></tr>';
+                    html_table += '<tr><td>' + value.First_Name + ' ' + value.Last_Name + '</td><td>' + value.Father_Name + '</td><td>' + value.DOB + '</td><td><button class="btn btn-warning load_student_data" id="' + value.Student_Id + '"><i class="fas fa-binoculars fa-2x"></i></button></td></tr>';
                 });
                 $('.append_stud_data').html(html_table);
             });
@@ -681,28 +649,36 @@ require_once './includes/header.php';
         });
 
         // check if student is logged in show data automatically
-        const login_type = "<?php echo $_SESSION["LOGINTYPE"]; ?>"; const login_id = "<?php echo $_SESSION["USERID"]; ?>";
-        if(login_type == 'STUDENT' && login_id != ''){
+        const login_type = "<?php echo $_SESSION["LOGINTYPE"]; ?>";
+        const login_id = "<?php echo $_SESSION["USERID"]; ?>";
+        if (login_type == 'STUDENT' && login_id != '') {
             $('.nav_sec').addClass('active');
             $('#tab2').addClass('active');
             load_student_data(login_id);
         }
 
         // function to load student data 
-        function load_student_data(student_id){
+        function load_student_data(student_id) {
             var url = "./universal_apis.php?get_stud_details_by_name=1&search_type=1&stud_data=" + student_id + "";
             $.getJSON(url, function(data) {
                 $.each(data, function(key, value) {
-                   $('.first_name').text(value.First_Name);$('.last_name').text(value.Last_Name);
-                   $('.class').text(value.Class_Name);$('.section').text(value.Section);
-                   $('.roll').text(value.Roll_No);$('.gender').text(value.Gender);
-                   $('.father_name').text(value.Father_Name);$('.mother_name').text(value.Mother_Name);
-                   $('.dob').text(value.DOB);$('.father_occupation').text(value.Father_Occupation);
-                   $('.religion').text(value.Religion);$('.email').text(value.Email_Id);
-                   if(value.Student_Image != null){
-                        url = './app_images/AdmissionDocuments/'+value.Admission_Id+'_AdmissionDocs/'+value.Student_Image;
-                        $('.main_img').attr('src', url); $('.back_img').attr('src', url);
-                   }
+                    $('.first_name').text(value.First_Name);
+                    $('.last_name').text(value.Last_Name);
+                    $('.class').text(value.Class_Name);
+                    $('.section').text(value.Section);
+                    $('.roll').text(value.Roll_No);
+                    $('.gender').text(value.Gender);
+                    $('.father_name').text(value.Father_Name);
+                    $('.mother_name').text(value.Mother_Name);
+                    $('.dob').text(value.DOB);
+                    $('.father_occupation').text(value.Father_Occupation);
+                    $('.religion').text(value.Religion);
+                    $('.email').text(value.Email_Id);
+                    if (value.Student_Image != null) {
+                        url = './app_images/AdmissionDocuments/' + value.Admission_Id + '_AdmissionDocs/' + value.Student_Image;
+                        $('.main_img').attr('src', url);
+                        $('.back_img').attr('src', url);
+                    }
                 });
             });
         }

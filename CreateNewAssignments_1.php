@@ -199,7 +199,7 @@ if (isset($_REQUEST['getAssigns'])) {
     echo '<tbody class="top-position-ss"><tr>
           <td>'.$row['Upload_Type'].'</td>';
           if ($row['Upload_Type'] == 'Link') {
-            echo '<td><a href="http://'.$row['Upload_Name'].'" target="_blank">Click to View</a></td>';
+            echo '<td><a href="#" id="'.$row['Upload_Name'].'" class="ext_link" target="_blank">Click to View</a></td>';
           }
           else{
             echo '<td><a class="btn btn-success" target="_blank" href="./app_images/'.$row['Upload_Name'].'"><i class="fas fa-save"></i></a></td>';
@@ -386,8 +386,7 @@ if (isset($_REQUEST['filterAssignment'])) {
                           }
                         }
                       }
-
-                      if (date('Y-m-d',strtotime($row['Last_Submissable_Date']))<=date('Y-m-d')) {
+                      if (date('Y-m-d',strtotime($row['Last_Submissable_Date']))<date('Y-m-d')) {
                         echo '<li  class=" disabled"><a href="#" id="'.$row['Task_Id'].'" class="color-5 "><i class="fa fa-upload" aria-hidden="true"></i></a></li>';
                       echo '<li class=" disabled" id="'.$row['Task_Id'].'"><a href="javascript:void(0);" class="color-7"><i class="fa fa-trash" aria-hidden="true"></i></a></li>';
                       echo'   </ul>';
@@ -405,8 +404,9 @@ if (isset($_REQUEST['filterAssignment'])) {
                   <a href="javascript:void(0);" add="addin'.$i.'" class="color-8 hide-cl"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
                       <div class="content addin'.$i.'">';
                       echo $row['Task_Desc'];
-                      if (date('Y-m-d',strtotime($row['Updated_On']))<=date('Y-m-d')) {
-                        echo '<div class="text-right">'; echo  $btnView.'</div>'  ;
+                      if (date('Y-m-d',strtotime($row['Last_Submissable_Date']))<date('Y-m-d')) {
+                       $btnView = '<a href="StudentAssignmentSubmitted.php?assignmentId='.$row['Task_Id'].'" class="btn btn-link">Verify Assignments</a>';
+                        echo '<div class="text-right">'; echo  $btnView; echo'</div>'  ;
                       }
                       echo '</div>
               </div>

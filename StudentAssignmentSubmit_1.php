@@ -17,6 +17,7 @@ if (isset($_REQUEST['filterAssignment'])) {
   $sqlQueryprepare->bind_param("iiis", $studentSection, $_REQUEST['monthNumber'], $currentYear, $userType);
 
   $sqlQueryprepare->execute();
+  echo $sqlQueryprepare->error;
   $resultset = $sqlQueryprepare->get_result();
   if ($resultset->num_rows > 0) {
     $i = 1;
@@ -213,6 +214,7 @@ if (isset($_REQUEST['student_assignment_submitter'])) {
         $searchTaskPrepare->execute();
         $raskResult = $searchTaskPrepare->get_result();
         $rowTask = $raskResult->fetch_assoc();
+
         if (empty($rowTask['Task_Id'])) {
           $tablename = "task_submit_table";
           $Task_Submit_Id = sequence_number($tablename, $dbhandle);
@@ -308,7 +310,7 @@ if (isset($_REQUEST['getStudentAssignment'])) {
   $assignment_id = $_REQUEST['assignment_id'];
   $user = $_SESSION['USERID'];
   $data = array();
-  $query_files = "SELECT tsft.*, tst.Is_Verified from task_submit_file_table tsft, task_submit_table tst WHERE tsft.Task_Submit_Id = tst.Task_Submit_Id and tsft.Updated_By = ? AND tst.Task_Id = ? and tsft.Enabled = 1 AND tsft.School_Id = ? ORDER BY tsft.TSF_Id DESC";
+  $query_files = "SELECT tsft.*, tst.Is_Verified as tstverified from task_submit_file_table tsft, task_submit_table tst WHERE tsft.Task_Submit_Id = tst.Task_Submit_Id and tsft.Updated_By = ? AND tst.Task_Id = ? and tsft.Enabled = 1 AND tsft.School_Id = ? ORDER BY tsft.TSF_Id DESC";
   $query_files_prepare = $dbhandle->prepare($query_files);
   $query_files_prepare->bind_param("sii", $user, $assignment_id,$_SESSION["SCHOOLID"]);
   

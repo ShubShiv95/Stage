@@ -18,7 +18,7 @@ include 'security.php';
             <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
               <div class="form-group aj-form-group">
                 <label>Subject <span>*</span></label>
-                <select class="select2" required="" id="subjectList">
+                <select class="select2 col-12" required="" id="subjectList">
 
 
                 </select>
@@ -27,7 +27,7 @@ include 'security.php';
             <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
               <div class="form-group aj-form-group monthgrp">
                 <label>Month</label>
-                <select class="select2" required="" id="monthList">
+                <select class="select2 col-12" required="" id="monthList">
                   <option value="">Select Month </option>
                   <option value="1">January </option>
                   <option value="2">February </option>

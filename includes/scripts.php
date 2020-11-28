@@ -30,4 +30,6 @@
     <script src="js/Chart.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <!-- Date Picker Js -->
+    <script src="js/datepicker.min.js"></script>
 	<script src="js/myscript.js"></script>

@@ -396,10 +396,10 @@
     if ($("#student-doughnut-chart").length) {
 
       var doughnutChartData = {
-        labels: ["Female Students", "Male Students"],
+        labels: ["Female Staff", "Male Staff"],
         datasets: [{
           backgroundColor: ["#304ffe", "#ffa601"],
-          data: [45000, 105000],
+          data: [478, 765],
           label: "Total Students"
         }, ]
       };

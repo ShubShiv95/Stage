@@ -14,7 +14,7 @@ if (isset($_REQUEST['getStudentDetailsbyClass'])) {
   $result_set = $prom_query_prepare->get_result(); $data = array();
   while ($rows = $result_set->fetch_assoc()) {
     $data[] = $rows;
-  }
+  } 
   echo json_encode($data);
 }
 
@@ -35,7 +35,7 @@ if(isset($_REQUEST['student_prom_data_sender'])){
       $result_set = $get_details_query_prep->get_result();
       // student class master table details
       $rows_stdus = $result_set->fetch_assoc();
-      
+      print($_REQUEST['promoted'][$i]);
       // next year and next session
         // current Year
         $curr_year = $rows_stdus['Session_End_Year']; // session end year
@@ -43,11 +43,22 @@ if(isset($_REQUEST['student_prom_data_sender'])){
         $next_year = date($curr_year, strtotime('+1 years'));
         // next session
         $next_session = $curr_year.'-'.$next_year;
-
+      echo $rows_stdus['Class_Id'];
       // get same class details
       $class_details_query = "SELECT * FROM `class_master_table` WHERE `Class_Id` = ".$rows_stdus['Class_Id']." AND School_Id = ".$_SESSION["SCHOOLID"]."";
       $class_details_query_prep = $dbhandle->prepare($class_details_query);
-      $class_details_query_prep->execute();
+      if(!$class_details_query_prep->execute()){
+       $error_msg = $class_details_query_prep->error;
+        $el = new LogMessage();
+        $sql = $class_details_query;
+        //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+        $el->write_log_message('Student Promotion Class Search ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+        //$_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+        mysqli_rollback($dbhandle);
+        $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
+        die;
+      }
+
       $class_result_set = $class_details_query_prep->get_result();
       $class_row = $class_result_set->fetch_assoc();
 
@@ -90,7 +101,7 @@ if(isset($_REQUEST['student_prom_data_sender'])){
         $update_query = "UPDATE student_class_details SET Promoted = ?, Remarks = ? WHERE Student_Details_Id = ? AND School_Id = ?";
         $update_query_prepre = $dbhandle->prepare($update_query);
         $update_query_prepre->bind_param("isii",$_REQUEST['promoted'][$i], $student_remarks, $_REQUEST['student_details_id'][$i], $_SESSION["SCHOOLID"]);
-        $update_query_prepre->execute();
+       // $update_query_prepre->execute();
 
       // check if promoted
       if ($_REQUEST['promoted'][$i]==1) 

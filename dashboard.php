@@ -204,7 +204,7 @@ include 'security.php';
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Student's Attendance</h3>
+                                        <h3>SMS Wallet</h3>
                                     </div>
                                     <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -225,11 +225,11 @@ include 'security.php';
                                 </div>
                                 <div class="student-report">
                                     <div class="student-count pseudo-bg-blue">
-                                        <h4 class="item-title">Female Students</h4>
+                                        <h4 class="item-title">Female Staff</h4>
                                         <div class="item-number">478</div>
                                     </div>
                                     <div class="student-count pseudo-bg-yellow">
-                                        <h4 class="item-title">Male Students</h4>
+                                        <h4 class="item-title">Male Staff</h4>
                                         <div class="item-number">765</div>
                                     </div>
                                 </div>

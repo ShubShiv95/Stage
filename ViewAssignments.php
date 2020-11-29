@@ -447,7 +447,8 @@ include 'security.php';
                 });
 
                 // redirect user to an external link    
-                $(document).on('click','.external_link',function(){
+                $(document).on('click','.external_link',function(event){
+                    event.preventDefault();
                     const url_link = $(this).attr('id');
                     window.open(url_link);
                 });

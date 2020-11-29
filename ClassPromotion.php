@@ -12,7 +12,7 @@ require_once './includes/header.php';
 ?>
 <form class="new-added-form school-form aj-new-added-form">
     <div class="row justify-content-center">
-        <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
+        <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
             <div class="brouser-image ">
                 <h5 class="text-center">Student Class Promotion</h5>
             </div>
@@ -20,7 +20,7 @@ require_once './includes/header.php';
                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                     <div class="form-group aj-form-group">
                         <label>School Class <span>*</span></label>
-                        <select class="select2 class_list" name="f_class">
+                        <select class="select2 class_list col-12" name="f_class">
                         </select>
                     </div>
                 </div>
@@ -108,14 +108,14 @@ require_once './includes/header.php';
                             table_html += '<td><input type="text" class="d-none" value="'+data_json.Student_Details_Id+'" name="student_details_id[]">' + sl + '</td>';
                             table_html += '<td>' + data_json.Class_Name + '</td>';
                             table_html += '<td>' + data_json.Roll_No + '</td>';
-                            if (data_json.Middle_Name == null || data_json.Middle_Name == NULL) {
+                            if (data_json.Middle_Name == null) {
                                 table_html += '<td>' + data_json.First_Name + ' ' + data_json.Last_Name + '</td>';
                             } else {
                                 table_html += '<td>' + data_json.First_Name + ' ' + data_json.Middle_Name + ' ' + data_json.Last_Name + '</td>';
                             }
-                            table_html += '<td><div class="radio"><span><input type="radio"class="gaurdian-bs promoted" checked name="promoted['+i+']" value="1" id="' + data_json.Student_Details_Id + '" > Promoted</span></div></td>';
-                            table_html += '<td><div class="radio"><span><input type="radio" class="gaurdian-bs not_promoted" name="promoted['+i+']" value="0" id="' + data_json.Student_Details_Id + '"> Not Promoted</span></div></td>';
-                            table_html += '<td><textarea class="form-control reason_not_promoted" name="student_remarks['+i+']" id="' + data_json.Student_Details_Id + '"></textarea></td>';
+                            table_html += '<td><div class="radio"><span><input type="radio"class="gaurdian-bs promoted" checked name="promoted[]['+i+']" value="1" id="' + data_json.Student_Details_Id + '" > Promoted</span></div></td>';
+                            table_html += '<td><div class="radio"><span><input type="radio" class="gaurdian-bs not_promoted" name="promoted[]['+i+']" value="0" id="' + data_json.Student_Details_Id + '"> Not Promoted</span></div></td>';
+                            table_html += '<td><textarea class="form-control reason_not_promoted" name="student_remarks[]['+i+']" id="' + data_json.Student_Details_Id + '"></textarea></td>';
                             table_html += '</tr>';
                         }
                         table_html += '</tbody>';
@@ -159,8 +159,8 @@ require_once './includes/header.php';
             data : $(this).serialize(),
             success : function(data){
                 $('#form_output').html(data);
-                window.setTimeout(function(){$('#form_output').html('')},2000);
-                $('.tebal-promotion').fadeOut('slow');
+               // window.setTimeout(function(){$('#form_output').html('')},2000);
+               // $('.tebal-promotion').fadeOut('slow');
             }
         });
     });

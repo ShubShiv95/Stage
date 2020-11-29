@@ -331,7 +331,7 @@ if (isset($_REQUEST['getMonths'])) {
 if (isset($_REQUEST['filterAssignment'])) {
   $sectionId = $_REQUEST['sectionId']; $subjectId = $_REQUEST['subjectId']; $monthNum = $_REQUEST['monthNumber']; $currYear = $_SESSION["STARTYEAR"]; 
 
-  $sqlQuery = "SELECT tmt.* FROM task_master_table tmt, task_allocation_list_table talt WHERE tmt.Task_Id = talt.Task_Id AND tmt.Enabled = 1 AND talt.Allocated_Reff_Id = ? AND tmt.Subject_Id = ? AND MONTH(tmt.Last_Submissable_Date) = ? AND YEAR(tmt.Last_Submissable_Date) = ?";
+  $sqlQuery = "SELECT tmt.* FROM task_master_table tmt, task_allocation_list_table talt WHERE tmt.Task_Id = talt.Task_Id AND tmt.Enabled = 1 AND talt.Allocated_Reff_Id = ? AND tmt.Subject_Id = ? AND MONTH(tmt.Last_Submissable_Date) = ? AND YEAR(tmt.Last_Submissable_Date) = ? ORDER BY tmt.Task_Id DESC";
   $sqlQueryprepare = $dbhandle->prepare($sqlQuery);
 
   $sqlQueryprepare->bind_param("iiii", $sectionId, $subjectId, $monthNum, $currYear);
@@ -353,7 +353,7 @@ if (isset($_REQUEST['filterAssignment'])) {
               <div class="box-row">
                   <div class="left-content">
                       <h6 class="text-uppercase">'.$row['Task_Name'].'</h6>
-                      <p class="all-desc"> <span> Class: II</span> | <span> Uploaded by '.$row['Updated_By'].' </span> | <span> Created on '.$row['Updated_On'].'</span></p>
+                      <p class="all-desc"> <span> Class: II</span> | <span> Uploaded by '.$row['Updated_By'].' </span> | <span> Created on '.$row['Updated_On'].'</span>| <span> Last Date '.$row['Last_Submissable_Date'].' </span></p>
                   </div>
                   <div class="right-content">
                       <ul>';

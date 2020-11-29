@@ -11,7 +11,7 @@ if (isset($_REQUEST['filterAssignment'])) {
   $studentSection = $_SESSION["SECTIONID"];
   $currentYear = $_SESSION["STARTYEAR"];
   $today = date('Y-m-d');
-  $sqlQuery = "select tmt.* from task_master_table tmt, task_allocation_list_table tal WHERE tal.Allocated_Reff_Id=? AND tmt.Task_Id=tal.Task_Id AND month(tmt.Last_Submissable_Date)=? and year(tmt.Last_Submissable_Date)=? and tmt.Enabled=1 and tmt.Refference_type=? ";
+  $sqlQuery = "select tmt.* from task_master_table tmt, task_allocation_list_table tal WHERE tal.Allocated_Reff_Id=? AND tmt.Task_Id=tal.Task_Id AND month(tmt.Last_Submissable_Date)=? and year(tmt.Last_Submissable_Date)=? and tmt.Enabled=1 and tmt.Refference_type=? ORDER BY tmt.Task_Id DESC ";
   //echo $sqlQuery;
   $sqlQueryprepare = $dbhandle->prepare($sqlQuery);
   $sqlQueryprepare->bind_param("iiis", $studentSection, $_REQUEST['monthNumber'], $currentYear, $userType);
@@ -33,13 +33,13 @@ if (isset($_REQUEST['filterAssignment'])) {
                 <div class="box-row">
                     <div class="left-content">
                         <h6 class="text-uppercase"> ' . $row['Task_Name'] . '</h6>
-                        <p class="all-desc"> <span> Class: II</span> | <span> Uploaded by ' . $row['Updated_By'] . ' </span> | <span> Created on ' . $row['Updated_On'] . '</span></p>
+                        <p class="all-desc"> <span> Class: II</span> | <span> Uploaded by ' . $row['Updated_By'] . ' </span> | <span> Created on ' . $row['Updated_On'] . '</span>| <span> Last Date '.$row['Last_Submissable_Date'].' </span></p>
                     </div>
                     <div class="right-content">
                         <ul>';
       while ($rowF = $queryAssignmnetFileResult->fetch_assoc()) {
         if ($rowF['Upload_Type'] == "Link") {
-          echo '<li><a href="http://' . $rowF['Upload_Name'] . '" target="_blank" class="color-6"><i class="fa fa-chain-broken" aria-hidden="true"></i></a></li>';
+          echo '<li><a href="#" id="' . $rowF['Upload_Name'] . '" class="color-6 external_link"><i class="fa fa-chain-broken" aria-hidden="true"></i></a></li>';
         } elseif ($rowF['Upload_Type'] == "File") {
           $fileType = explode('.', $rowF['Upload_Name']);
           if (strtolower($fileType[1]) == "ppt" || "pptx") {
@@ -326,7 +326,7 @@ if (isset($_REQUEST['getStudentAssignment'])) {
 /***** filter assignment for teachers *****/
 if (isset($_REQUEST['filterAssignmentSubmit'])) {
   $currentYear = $_SESSION["STARTYEAR"];
-  $sqlQuery = "SELECT task_master_table.* FROM task_master_table WHERE task_master_table.Enabled = 1  AND task_master_table.Subject_Id = ? AND MONTH(task_master_table.Updated_On) = ? AND YEAR(task_master_table.Updated_On)=?";
+  $sqlQuery = "SELECT task_master_table.* FROM task_master_table WHERE task_master_table.Enabled = 1  AND task_master_table.Subject_Id = ? AND MONTH(task_master_table.Updated_On) = ? AND YEAR(task_master_table.Updated_On)=? ORDER BY task_master_table.Task_Id DESC ";
   $sqlQueryprepare = $dbhandle->prepare($sqlQuery);
   $sqlQueryprepare->bind_param("iii", $_REQUEST['subjectName'], $_REQUEST['monthName'], $currentYear);
   $sqlQueryprepare->execute();
@@ -345,13 +345,13 @@ if (isset($_REQUEST['filterAssignmentSubmit'])) {
               <div class="box-row">
                   <div class="left-content">
                       <h6 class="text-uppercase"> ' . $row['Task_Name'] . '</h6>
-                      <p class="all-desc"> <span> Class: II</span> | <span> Uploaded by ' . $row['Updated_By'] . ' </span> | <span> Created on ' . $row['Updated_On'] . '</span></p>
+                      <p class="all-desc"> <span> Class: II</span> | <span> Uploaded by ' . $row['Updated_By'] . ' </span> | <span> Created on ' . $row['Updated_On'] . '</span>| <span> Last Date '.$row['Last_Submissable_Date'].' </span></p>
                   </div>
                   <div class="right-content">
                       <ul>';
     while ($rowF = $queryAssignmnetFileResult->fetch_assoc()) {
       if ($rowF['Upload_Type'] == "Link") {
-        echo '<li><a href="http://' . $rowF['Upload_Name'] . '" target="_blank" class="color-6"><i class="fa fa-chain-broken" aria-hidden="true"></i></a></li>';
+        echo '<li><a id="' . $rowF['Upload_Name'] . '" href="#" class="color-6"><i class="fa fa-chain-broken external_link" aria-hidden="true"></i></a></li>';
       } elseif ($rowF['Upload_Type'] == "File") {
         $fileType = explode('.', $rowF['Upload_Name']);
         if (strtolower($fileType[1]) == "ppt" || "pptx") {

@@ -180,9 +180,9 @@
     if ($("#earning-line-chart").length) {
 
       var lineChartData = {
-        labels: ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", ""],
+        labels: [""],
         datasets: [{
-            data: [0, 5e4, 1e4, 5e4, 14e3, 7e4, 5e4, 75e3, 5e4],
+            data: [759],
             backgroundColor: '#ff0000',
             borderColor: '#ff0000',
             borderWidth: 1,
@@ -192,10 +192,10 @@
             pointHoverRadius: 6,
             pointHoverBorderWidth: 3,
             fill: 'origin',
-            label: "Total Collection"
+            label: "Total Present"
           },
           {
-            data: [0, 3e4, 2e4, 6e4, 7e4, 5e4, 5e4, 9e4, 8e4],
+            data: [1544],
             backgroundColor: '#417dfc',
             borderColor: '#417dfc',
             borderWidth: 1,
@@ -205,7 +205,34 @@
             pointHoverRadius: 6,
             pointHoverBorderWidth: 3,
             fill: 'origin',
-            label: "Fees Collection"
+            label: "Total Present"
+          }
+          ,
+          {
+            data: [1236],
+            backgroundColor: '#40dfcd',
+            borderColor: '#40dfcd',
+            borderWidth: 1,
+            pointRadius: 0,
+            pointBackgroundColor: '#304ffe',
+            pointBorderColor: '#ffffff',
+            pointHoverRadius: 6,
+            pointHoverBorderWidth: 3,
+            fill: 'origin',
+            label: "Present Boys"
+          },
+          {
+            data: [308],
+            backgroundColor: '#ffaa01',
+            borderColor: '#ffaa01',
+            borderWidth: 1,
+            pointRadius: 0,
+            pointBackgroundColor: '#304ffe',
+            pointBorderColor: '#ffffff',
+            pointHoverRadius: 6,
+            pointHoverBorderWidth: 3,
+            fill: 'origin',
+            label: "Present Girls"
           }
         ]
       };
@@ -240,7 +267,7 @@
               maxRotation: 0,
               fontColor: "#646464",
               fontSize: 16,
-              stepSize: 25000,
+              stepSize: 2303,
               padding: 20,
               callback: function (value) {
                 var ranges = [{
@@ -292,7 +319,7 @@
       };
       var earningCanvas = $("#earning-line-chart").get(0).getContext("2d");
       var earningChart = new Chart(earningCanvas, {
-        type: 'line',
+        type: 'bar',
         data: lineChartData,
         options: lineChartOptions
       });
@@ -304,11 +331,11 @@
     if ($("#expense-bar-chart").length) {
 
       var barChartData = {
-        labels: ["Jan", "Feb", "Mar"],
+        labels: ["Present", "Absent"],
         datasets: [{
           backgroundColor: ["#40dfcd", "#417dfc", "#ffaa01"],
-          data: [125000, 100000, 75000, 50000, 150000],
-          label: "Expenses (millions)"
+          data: [101, 5],
+          label: "Staff Attendance"
         }, ]
       };
       var barChartOptions = {
@@ -340,7 +367,7 @@
               autoSkip: false,
               fontColor: "#646464",
               fontSize: 14,
-              stepSize: 25000,
+              stepSize: 106,
               padding: 20,
               beginAtZero: true,
               callback: function (value) {
@@ -396,10 +423,10 @@
     if ($("#student-doughnut-chart").length) {
 
       var doughnutChartData = {
-        labels: ["Female Staff", "Male Staff"],
+        labels: ["Remain", "Used"],
         datasets: [{
           backgroundColor: ["#304ffe", "#ffa601"],
-          data: [478, 765],
+          data: [36541, 3459],
           label: "Total Students"
         }, ]
       };

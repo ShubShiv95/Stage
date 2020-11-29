@@ -20,7 +20,7 @@ if (isset($_REQUEST['assignment_sender'])){
     $description = mysqli_real_escape_string($dbhandle,$_REQUEST['description']);
     $assignment_subject = mysqli_real_escape_string($dbhandle,$_REQUEST['assignment_subject']);
     $submissible = mysqli_real_escape_string($dbhandle,$_REQUEST['submissible']);
-    $date_of_submision = $_REQUEST["date_of_submision"];
+    $date_of_submision =$_REQUEST["date_of_submision"];
     $updatedBy = $_SESSION["LOGINID"];
     $schoolId = $_SESSION["SCHOOLID"];
     $enabled = 1;
@@ -47,7 +47,7 @@ if (isset($_REQUEST['assignment_sender'])){
     if (empty($date_of_submision)) {
       $formErrors[] = 'Please Select Last Submission Date!';
     }
-    if ($date_of_submision<=date('Y-m-d')) {
+    if (strtotime($date_of_submision)<= strtotime(date('d/m/Y'))) {
       $formErrors[] = 'Date of Submission Cannot be Less Than or Equal to Today!';
     }
   //  echo $submissible.'DOS'.$date_of_submision;

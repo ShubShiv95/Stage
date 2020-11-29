@@ -1,12 +1,12 @@
 <?php
 session_start();
 /*make a variable named $pageTitle */
-$pageTitle = "View & Upload Assignment";
+$pageTitle = "View Submitted Assignment";
 $bodyHeader = "Assignments List";
 require_once './includes/header.php';
 include 'dbobj.php';
 //include 'errorLog.php';
-include 'security.php'; 
+include 'security.php';
 ?>
 <!-- start your UI here -->
 <div class="col-md-12">
@@ -68,22 +68,18 @@ include 'security.php';
       $(this).addClass('chang-togel');
       $(this).html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
       var add = $(this).attr('add')
-      $('.content').removeClass('active')
-
-
+      $('.content').removeClass('active');
       var par = $('.' + add).addClass('active');
     });
-    $(document).on('click', '.chang-togel', function() {
-      $(this).html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
-      $('.content').removeClass('active')
-      $('.chang-togel').removeClass('chang-togel')
-    });
+      $(document).on('click', '.chang-togel', function() {
+        $(this).html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
+        $('.content').removeClass('active')
+        $('.chang-togel').removeClass('chang-togel')
+      });
 
-    $('#subjectList').change(function() {
-      $('.monthgrp').fadeIn('slow');
-    });
-
-
+      $('#subjectList').change(function() {
+        $('.monthgrp').fadeIn('slow');
+      });
     $(document).on('click', '#searchBtn', function() {
       const monthNumber = $('#monthList').val();
       const subjectId = $('#subjectList').val();

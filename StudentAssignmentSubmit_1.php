@@ -71,7 +71,7 @@ if (isset($_REQUEST['filterAssignment'])) {
                           echo '<a class="btn btn-link btn-primary disabled text-white" href="#">Submit Assignment</a>';
                         }
                         else{
-                          echo '<a class="btn btn-link btn-primary" href="./StudentAssignmentFileUpload.php?assignmentId=' . $row['Task_Id'] . '" target="_blank">Submit Assignment</a>';
+                          echo '<a class="btn btn-link btn-primary" href="./StudentAssignmentFileUpload.php?assignmentId=' . $row['Task_Id'] . '" target="_blank">View Submitted Assignment</a>';
                         }
                         echo '</div>
                         </div>

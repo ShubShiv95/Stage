@@ -67,12 +67,7 @@ if (isset($_REQUEST['filterAssignment'])) {
                         <div class="content addin' . $i . '">
                         ' . $row['Task_Desc'] . '
                         <div class="text-right">';
-                        if (date('Y-m-d',strtotime($row['Updated_On']))<date('Y-m-d')) {
-                          echo '<a class="btn btn-link btn-primary disabled text-white" href="#">Submit Assignment</a>';
-                        }
-                        else{
                           echo '<a class="btn btn-link btn-primary" href="./StudentAssignmentFileUpload.php?assignmentId=' . $row['Task_Id'] . '" target="_blank">View Submitted Assignment</a>';
-                        }
                         echo '</div>
                         </div>
                 </div>

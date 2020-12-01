@@ -1,33 +1,28 @@
 <?php
 session_start();
 $pageTitle = "Sudent's Section Allocation";
-?>
-<!doctype html>
-<html class="no-js" lang="">
-<?php
+
 include_once 'dbobj.php';
 include_once 'errorLog.php';
 include_once 'security.php';
 require_once './includes/header.php';
 ?>
 <form class="new-added-form school-form aj-new-added-form">
-    <div class="row justify-content-center">
-        <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
-            <div class="brouser-image ">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
+            <div class="brouser-image text-center">
                 <h5 class="text-center">Student Section Allocation</h5>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
-                    <div class="form-group aj-form-group">
-                        <label>Select Class <span>*</span></label>
-                        <select class="select2 class_list" name="f_class">
-                        </select>
-                    </div>
-                </div>
+        </div>
+        <div class="col-xl-8 col-lg-8 col-6 aj-mb-2">
+            <div class="form-group aj-form-group">
+                <label>Select Class <span>*</span></label>
+                <select class="select2 class_list col-12" name="f_class">
+                </select>
             </div>
-            <div class="aaj-btn-chang-cbtn">
-                <a href="javascript:void(0);" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>
-            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-6 aj-mb-2">
+            <a href="javascript:void(0);" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>
         </div>
     </div>
 </form>
@@ -35,7 +30,7 @@ require_once './includes/header.php';
 <div class="tebal-promotion" style="display: none;">
     <form class="new-added-form ">
         <h5 class="text-center">Section Promotion <span class="current_class"></span> To <span class="next_class"></span></h5>
-        <div class="table-responsive" style="height:60vh;">
+        <div class="table-responsive" style="height:50vh;">
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -55,20 +50,8 @@ require_once './includes/header.php';
         </div>
 
         <div class="inpuy-chang-box">
-            <span class="text-center form_output"></span>
-            <div class="form-output">
-                <div class="name-f">
-                    <h6>Section A</h6>
-                </div>
-                <div class="input-box-in">
-                    <h5>32</h5>
-                </div>
-                <div class="name-f">
-                    <h6>Section B</h6>
-                </div>
-                <div class="input-box-in n-br">
-                    <h5>25</h5>
-                </div>
+            <span class="text-center forms_output"></span>
+            <div class="form-output text-center row">
             </div>
             <div class="new-added-form aj-new-added-form">
                 <div class="aaj-btn-chang-cbtn">
@@ -105,6 +88,7 @@ require_once './includes/header.php';
         } else {
             get_curr_class(class_id);
             get_class_w_sections(class_id);
+            count_sec_student(class_id);
         }
     });
 
@@ -125,6 +109,7 @@ require_once './includes/header.php';
     }
     // get sections by class id
     function get_sections(class_id, sec_id, Student_Details_Id) {
+        select_data = '';
         const sec_url = './universal_apis.php?getAllSections=1&class_id=' + class_id + '';
         var select_data = '<select class="form_control student_section" id="' + Student_Details_Id + '"><option value="">Select One</option>';
         $.getJSON(sec_url, function(response) {
@@ -137,6 +122,18 @@ require_once './includes/header.php';
             });
             select_data += '</select>';
             $('.student_section').html(select_data);
+        });
+    }
+
+    // count section wise student
+    function count_sec_student(class_id) {
+        const url = './ClassPromotion_1.php?get_count_sec_stud_data=1&class_id=' + class_id + '';
+        html_data = '';
+        $.getJSON(url, function(response) {
+            $.each(response, function(key, section) {
+                html_data += '<div class="col-4"><h6>Section ' + section.Section + '</h6></div><div class="col-2"><h5>' + section.total_stu + '</h5></div>';
+            });
+            $('.form-output').html(html_data);
         });
     }
 
@@ -157,7 +154,7 @@ require_once './includes/header.php';
     $(document).on('change', '.student_section', function() {
         const student_details_id = $(this).attr('id');
         const section_name = $(this).val();
-        $('.form_output').html('');
+        $('.forms_output').html('');
         if (section_name != '') {
             $.ajax({
                 url: './ClassPromotion_1.php',
@@ -168,7 +165,7 @@ require_once './includes/header.php';
                     'section_name': section_name
                 },
                 success: function(data) {
-                    $('.form_output').html(data);
+                    $('.forms_output').html(data);
                 }
             });
         }
@@ -180,23 +177,29 @@ require_once './includes/header.php';
         const student_details_id = $(this).attr('id');
         const stud_roll_no = $(this).text();
         const class_id = $('.class_list').val();
-         if(stud_roll_no !=""){
-             $.ajax({
-                 url : './ClassPromotion_1.php',
-                 type : 'post',
-                 data : {'update_st_roll':1,'student_details_id':student_details_id,'stud_roll_no':stud_roll_no,'class_id':class_id},
-                 dataType : 'json',
-                 success : function(data){
-                     json_data = JSON.parse(JSON.stringify(data));
-                    if(json_data['type']=="Error"){
-                        html_data = '<div class="alert alert-warning" role="alert"><strong>Alert </strong>Roll No Already Alloted To '+json_data['message']+'</div>'
-                    }else{
-                        html_data = '<div class="alert alert-success" role="alert"><strong>Alert </strong>'+json_data['message']+'</div>'
+        if (stud_roll_no != "") {
+            $.ajax({
+                url: './ClassPromotion_1.php',
+                type: 'post',
+                data: {
+                    'update_st_roll': 1,
+                    'student_details_id': student_details_id,
+                    'stud_roll_no': stud_roll_no,
+                    'class_id': class_id
+                },
+                dataType: 'json',
+                success: function(data) {
+                    html_data = '';
+                    json_data = JSON.parse(JSON.stringify(data));
+                    if (json_data['type'] == "Error") {
+                        html_data = '<div class="alert alert-warning" role="alert"><strong>Alert </strong>Roll No Already Alloted To ' + json_data['message'] + '</div>';
+                    } else if (json_data['type'] == "Success") {
+                        html_data = '<div class="alert alert-success" role="alert"><strong>Alert </strong>' + json_data['message'] + '</div>';
                     }
-                     $('.form_output').html(html_data);
-                 }
-             });
-         }
+                    $('.form_output').html(html_data);
+                }
+            });
+        }
     });
 </script>
 <?php include_once './includes/closebody.php'; ?>

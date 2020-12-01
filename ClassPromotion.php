@@ -1,10 +1,7 @@
 <?php
 session_start();
 $pageTitle = "Sudent's Promotion";
-?>
-<!doctype html>
-<html class="no-js" lang="">
-<?php
+
 include_once 'dbobj.php';
 include_once 'errorLog.php';
 include_once 'security.php';
@@ -105,7 +102,7 @@ require_once './includes/header.php';
                             sl = 1 + i;
                             const data_json = stud_json[i];
                             table_html += ' <tr>';
-                            table_html += '<td><input type="text" class="d-none" value="'+data_json.Student_Details_Id+'" name="student_details_id[]">' + sl + '</td>';
+                            table_html += '<td><input type="text" class="d-none" value="'+data_json.Session_End_Year+'" name="sesion_end_year"><input type="text" class="d-none" value="'+data_json.Student_Details_Id+'" name="student_details_id[]">' + sl + '</td>';
                             table_html += '<td>' + data_json.Class_Name + '</td>';
                             table_html += '<td>' + data_json.Roll_No + '</td>';
                             if (data_json.Middle_Name == null) {
@@ -113,9 +110,9 @@ require_once './includes/header.php';
                             } else {
                                 table_html += '<td>' + data_json.First_Name + ' ' + data_json.Middle_Name + ' ' + data_json.Last_Name + '</td>';
                             }
-                            table_html += '<td><div class="radio"><span><input type="radio"class="gaurdian-bs promoted" checked name="promoted[]['+i+']" value="1" id="' + data_json.Student_Details_Id + '" > Promoted</span></div></td>';
-                            table_html += '<td><div class="radio"><span><input type="radio" class="gaurdian-bs not_promoted" name="promoted[]['+i+']" value="0" id="' + data_json.Student_Details_Id + '"> Not Promoted</span></div></td>';
-                            table_html += '<td><textarea class="form-control reason_not_promoted" name="student_remarks[]['+i+']" id="' + data_json.Student_Details_Id + '"></textarea></td>';
+                            table_html += '<td><div class="radio"><span><input type="radio"class="gaurdian-bs promoted" checked name="promoted['+i+']" value="1" id="' + data_json.Student_Details_Id + '" > Promoted</span></div></td>';
+                            table_html += '<td><div class="radio"><span><input type="radio" class="gaurdian-bs not_promoted" name="promoted['+i+']" value="0" id="' + data_json.Student_Details_Id + '"> Not Promoted</span></div></td>';
+                            table_html += '<td><textarea class="form-control reason_not_promoted" name="student_remarks['+i+']" id="' + data_json.Student_Details_Id + '"></textarea></td>';
                             table_html += '</tr>';
                         }
                         table_html += '</tbody>';

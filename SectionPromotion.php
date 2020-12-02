@@ -107,6 +107,7 @@ require_once './includes/header.php';
             $('.students_data').append(table_html);
         });
     }
+
     // get sections by class id
     function get_sections(class_id, sec_id, Student_Details_Id) {
         select_data = '';
@@ -153,7 +154,7 @@ require_once './includes/header.php';
     // update section
     $(document).on('change', '.student_section', function() {
         const student_details_id = $(this).attr('id');
-        const section_name = $(this).val();
+        const section_name = $(this).val(); const class_id = $('.class_list').val();
         $('.forms_output').html('');
         if (section_name != '') {
             $.ajax({
@@ -166,6 +167,7 @@ require_once './includes/header.php';
                 },
                 success: function(data) {
                     $('.forms_output').html(data);
+                    count_sec_student(class_id)
                 }
             });
         }
@@ -173,7 +175,7 @@ require_once './includes/header.php';
 
     // update roll nos
     $(document).on('blur', '.student_roll_change', function() {
-        $('.form_output').html('');
+        $('.forms_output').html('');
         const student_details_id = $(this).attr('id');
         const stud_roll_no = $(this).text();
         const class_id = $('.class_list').val();
@@ -191,12 +193,13 @@ require_once './includes/header.php';
                 success: function(data) {
                     html_data = '';
                     json_data = JSON.parse(JSON.stringify(data));
+                    console.log(json_data['message']);
                     if (json_data['type'] == "Error") {
                         html_data = '<div class="alert alert-warning" role="alert"><strong>Alert </strong>Roll No Already Alloted To ' + json_data['message'] + '</div>';
                     } else if (json_data['type'] == "Success") {
                         html_data = '<div class="alert alert-success" role="alert"><strong>Alert </strong>' + json_data['message'] + '</div>';
                     }
-                    $('.form_output').html(html_data);
+                    $('.forms_output').html(html_data);
                 }
             });
         }

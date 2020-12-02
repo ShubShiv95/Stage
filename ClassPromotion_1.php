@@ -220,8 +220,7 @@ if(isset($_REQUEST['update_st_roll']))
   {
     $sect_row = $result_sr_sec->fetch_assoc();
     $data['type'] = 'Error';
-    $data ['message'] = 'Roll No Already Alloted To <span class="text-danger">'.$sect_row['Student_Id'].'</span>';
-    
+    $data ['message'] = 'Roll No Already Alloted To '.$sect_row['Student_Id'].'';
   }
  else
  {

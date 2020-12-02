@@ -8,7 +8,7 @@ include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
 if (empty($_GET['Assignment_id'])) {
-    echo '<script>alert("No Taks Found Create New Task");//window.location.href="./CreateNewAssignments.php"</script>';
+    echo '<script>alert("No Taks Found Create New Task");window.location.href="./CreateNewAssignments.php"</script>';
 }
 ?>
 <head>
@@ -191,6 +191,12 @@ if (empty($_GET['Assignment_id'])) {
         success : function(data){
           $('.getDatas').html(data);
         }
+      });
+
+      $(document).on('click','.ext_link',function(event){
+        event.preventDefault();
+        const ext_link = $(this).attr('id');
+        window.open(ext_link);
       });
     }
 </script>

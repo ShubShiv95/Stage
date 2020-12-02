@@ -93,7 +93,7 @@ $schoolId = $_SESSION["SCHOOLID"];
                         <div class="heading-layout1">
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4"><?php if (empty($bodyHeader)) {
-                                                        echo "Lists";
+                                                        echo $pageTitle;
                                                     } else {
                                                         echo $bodyHeader;
                                                     } ?></h3>

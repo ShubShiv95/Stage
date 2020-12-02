@@ -20,7 +20,7 @@ if (isset($_REQUEST['assignment_sender'])){
     $description = mysqli_real_escape_string($dbhandle,$_REQUEST['description']);
     $assignment_subject = mysqli_real_escape_string($dbhandle,$_REQUEST['assignment_subject']);
     $submissible = mysqli_real_escape_string($dbhandle,$_REQUEST['submissible']);
-    $date_of_submision = $_REQUEST["date_of_submision"];
+    $date_of_submision =$_REQUEST["date_of_submision"];
     $updatedBy = $_SESSION["LOGINID"];
     $schoolId = $_SESSION["SCHOOLID"];
     $enabled = 1;
@@ -47,7 +47,7 @@ if (isset($_REQUEST['assignment_sender'])){
     if (empty($date_of_submision)) {
       $formErrors[] = 'Please Select Last Submission Date!';
     }
-    if ($date_of_submision<=date('Y-m-d')) {
+    if (strtotime($date_of_submision)<= strtotime(date('d/m/Y'))) {
       $formErrors[] = 'Date of Submission Cannot be Less Than or Equal to Today!';
     }
   //  echo $submissible.'DOS'.$date_of_submision;
@@ -199,7 +199,7 @@ if (isset($_REQUEST['getAssigns'])) {
     echo '<tbody class="top-position-ss"><tr>
           <td>'.$row['Upload_Type'].'</td>';
           if ($row['Upload_Type'] == 'Link') {
-            echo '<td><a href="http://'.$row['Upload_Name'].'" target="_blank">Click to View</a></td>';
+            echo '<td><a href="#" id="'.$row['Upload_Name'].'" class="ext_link" target="_blank">Click to View</a></td>';
           }
           else{
             echo '<td><a class="btn btn-success" target="_blank" href="./app_images/'.$row['Upload_Name'].'"><i class="fas fa-save"></i></a></td>';
@@ -331,7 +331,7 @@ if (isset($_REQUEST['getMonths'])) {
 if (isset($_REQUEST['filterAssignment'])) {
   $sectionId = $_REQUEST['sectionId']; $subjectId = $_REQUEST['subjectId']; $monthNum = $_REQUEST['monthNumber']; $currYear = $_SESSION["STARTYEAR"]; 
 
-  $sqlQuery = "SELECT tmt.* FROM task_master_table tmt, task_allocation_list_table talt WHERE tmt.Task_Id = talt.Task_Id AND tmt.Enabled = 1 AND talt.Allocated_Reff_Id = ? AND tmt.Subject_Id = ? AND MONTH(tmt.Last_Submissable_Date) = ? AND YEAR(tmt.Last_Submissable_Date) = ?";
+  $sqlQuery = "SELECT tmt.* FROM task_master_table tmt, task_allocation_list_table talt WHERE tmt.Task_Id = talt.Task_Id AND tmt.Enabled = 1 AND talt.Allocated_Reff_Id = ? AND tmt.Subject_Id = ? AND MONTH(tmt.Last_Submissable_Date) = ? AND YEAR(tmt.Last_Submissable_Date) = ? ORDER BY tmt.Task_Id DESC";
   $sqlQueryprepare = $dbhandle->prepare($sqlQuery);
 
   $sqlQueryprepare->bind_param("iiii", $sectionId, $subjectId, $monthNum, $currYear);
@@ -353,7 +353,7 @@ if (isset($_REQUEST['filterAssignment'])) {
               <div class="box-row">
                   <div class="left-content">
                       <h6 class="text-uppercase">'.$row['Task_Name'].'</h6>
-                      <p class="all-desc"> <span> Class: II</span> | <span> Uploaded by '.$row['Updated_By'].' </span> | <span> Created on '.$row['Updated_On'].'</span></p>
+                      <p class="all-desc"> <span> Class: II</span> | <span> Uploaded by '.$row['Updated_By'].' </span> | <span> Created on '.$row['Updated_On'].'</span>| <span> Last Date '.$row['Last_Submissable_Date'].' </span></p>
                   </div>
                   <div class="right-content">
                       <ul>';
@@ -386,8 +386,7 @@ if (isset($_REQUEST['filterAssignment'])) {
                           }
                         }
                       }
-
-                      if (date('Y-m-d',strtotime($row['Last_Submissable_Date']))<=date('Y-m-d')) {
+                      if (date('Y-m-d',strtotime($row['Last_Submissable_Date']))<date('Y-m-d')) {
                         echo '<li  class=" disabled"><a href="#" id="'.$row['Task_Id'].'" class="color-5 "><i class="fa fa-upload" aria-hidden="true"></i></a></li>';
                       echo '<li class=" disabled" id="'.$row['Task_Id'].'"><a href="javascript:void(0);" class="color-7"><i class="fa fa-trash" aria-hidden="true"></i></a></li>';
                       echo'   </ul>';
@@ -405,8 +404,9 @@ if (isset($_REQUEST['filterAssignment'])) {
                   <a href="javascript:void(0);" add="addin'.$i.'" class="color-8 hide-cl"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
                       <div class="content addin'.$i.'">';
                       echo $row['Task_Desc'];
-                      if (date('Y-m-d',strtotime($row['Updated_On']))<=date('Y-m-d')) {
-                        echo '<div class="text-right">'; echo  $btnView.'</div>'  ;
+                      if (date('Y-m-d',strtotime($row['Last_Submissable_Date']))<date('Y-m-d')) {
+                       $btnView = '<a href="StudentAssignmentSubmitted.php?assignmentId='.$row['Task_Id'].'" class="btn btn-link">Verify Assignments</a>';
+                        echo '<div class="text-right">'; echo  $btnView; echo'</div>'  ;
                       }
                       echo '</div>
               </div>

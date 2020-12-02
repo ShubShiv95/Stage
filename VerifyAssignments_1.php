@@ -43,8 +43,8 @@ if(isset($_REQUEST['overWriteImage'])){
 
 /**** save remarks ****/
 if (isset($_REQUEST['save_remarks'])) {
-  $image_name = $_REQUEST['image_name'];
-  $remarks = $_REQUEST['message'];
+ echo $image_name = $_REQUEST['image_name'];
+ echo  $remarks = $_REQUEST['message'];
   $update_query = "UPDATE task_submit_file_table SET Task_Remarks = ? WHERE File_Name = ?";
   $update_query_prepare = $dbhandle->prepare($update_query);
   $update_query_prepare->bind_param("ss",$remarks,$image_name);
@@ -61,10 +61,10 @@ if (isset($_REQUEST['save_remarks'])) {
 
 /* final submit */
 if(isset($_REQUEST['finsal_submit_asignment'])){
-  $assignmentId = $_REQUEST['assignmentId'];
+  $assignmentId = $_REQUEST['assignmentId']; $user_id = $_REQUEST['user_id'];
   $final_qieru = "UPDATE task_submit_table SET Is_Verified = 'Yes' WHERE Updated_By = ? AND Task_Id = ?";
   $final_qieru_prepare = $dbhandle->prepare($final_qieru);
-  $final_qieru_prepare->bind_param("si",$_SESSION["USER_ID"],$assignmentId);
+  $final_qieru_prepare->bind_param("si",$user_id,$assignmentId);
   if($final_qieru_prepare->execute()){
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

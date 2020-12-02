@@ -391,7 +391,7 @@ include 'security.php';
                 $('#searchAssignmentts').click(function(e) {
                     e.preventDefault();
                     const userType = '<?php echo $_SESSION["LOGINTYPE"]; ?>';
-                    if (userType == 'Student' || userType == 'Parent') {
+                    if (userType == 'STUDENT' || userType == 'PARENT') {
                         const monthNumber = $('#monthList').val();
                         const subjectId = $('#subjectList').val();
                         if (subjectId == '') {
@@ -447,7 +447,8 @@ include 'security.php';
                 });
 
                 // redirect user to an external link    
-                $(document).on('click','.external_link',function(){
+                $(document).on('click','.external_link',function(event){
+                    event.preventDefault();
                     const url_link = $(this).attr('id');
                     window.open(url_link);
                 });

@@ -8,6 +8,7 @@ include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
 ?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -37,41 +38,41 @@ include 'security.php';
     <script src="js/modernizr-3.6.0.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script>
-    function demoFromHTML() {
-        var pdf = new jsPDF('p', 'pt', 'letter');
-        // source can be HTML-formatted string, or a reference
-        // to an actual DOM element from which the text will be scraped.
-		 source = $('#printpdf')[0];
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function demoFromHTML() {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            // source can be HTML-formatted string, or a reference
+            // to an actual DOM element from which the text will be scraped.
+            source = $('#printpdf')[0];
 
-        specialElementHandlers = {
-            '#bypassme': function (element, renderer) {
-                return true
-            }
-        };
-        margins = {
-            top: 80,
-            bottom: 60,
-            left: 40,
-            width: 522
-        };
-        // all coords and widths are in jsPDF instance's declared units
-        // 'inches' in this case
-        pdf.fromHTML(
-            source, // HTML string or DOM elem ref.
-            margins.left, // x coord
-            margins.top, { // y coord
-                'width': margins.width, // max width of content on PDF
-                'elementHandlers': specialElementHandlers
-            },
-            
-            function (dispose) {
-                pdf.save('Test.pdf');
-            }, margins
-        );
-    }
-</script>
+            specialElementHandlers = {
+                '#bypassme': function(element, renderer) {
+                    return true
+                }
+            };
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+            // all coords and widths are in jsPDF instance's declared units
+            // 'inches' in this case
+            pdf.fromHTML(
+                source, // HTML string or DOM elem ref.
+                margins.left, // x coord
+                margins.top, { // y coord
+                    'width': margins.width, // max width of content on PDF
+                    'elementHandlers': specialElementHandlers
+                },
+
+                function(dispose) {
+                    pdf.save('Test.pdf');
+                }, margins
+            );
+        }
+    </script>
 
 
 
@@ -82,32 +83,32 @@ include 'security.php';
     <div id="preloader"></div>
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
-       <!-- Header Menu Area Start Here -->
-        <?php include ('includes/navbar.php') ?>
+        <!-- Header Menu Area Start Here -->
+        <?php include('includes/navbar.php') ?>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-            <?php include ('includes/sidebar.php') ?>
+            <?php include('includes/sidebar.php') ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
-                
+
                 <!-- Breadcubs Area End Here -->
-				
-				<!-- Hot Links Area Start Here -->
-				<?php include ('includes/hot-link.php'); ?>
+
+                <!-- Hot Links Area Start Here -->
+                <?php include('includes/hot-link.php'); ?>
                 <!-- Hot Links Area End Here -->
                 <div class="breadcrumbs-area">
-                   <ul>
+                    <ul>
                         <li>
                             <a href="dashboard.php">Dashboard</a>
                         </li>
                     </ul>
-				 	
+
                 </div>
                 <!-- Dashboard Content Start Here -->
-               
+
 
                 <div class="row gutters-20" id="printpdf">
                     <div class="col-12 col-xl-8 col-6-xxxl">
@@ -115,36 +116,43 @@ include 'security.php';
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Earnings</h3>
+                                        <h3>Student Attendance</h3>
                                     </div>
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                            aria-expanded="false">...</a>
+                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
 
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="earning-report">
                                     <div class="item-content">
                                         <div class="single-item pseudo-bg-blue">
-                                            <h4>Total Collections</h4>
-                                            <span>75,000</span>
+                                            <h4>Present Student</h4>
+                                            <span>1544</span>
                                         </div>
                                         <div class="single-item pseudo-bg-red">
-                                            <h4>Fees Collection</h4>
-                                            <span>15,000</span>
+                                            <h4>Absent Students</h4>
+                                            <span>759</span>
+                                        </div>
+                                        <div class="single-item">
+                                            <h4>Total Student</h4>
+                                            <span>2303</span>
+                                        </div>
+                                        <div class="single-item pseudo-bg-Aquamarine">
+                                            <h4>Present Boys</h4>
+                                            <span>1236</span>
+                                        </div>
+                                        <div class="single-item pseudo-bg-yellow">
+                                            <h4>Present Girls</h4>
+                                            <span>308</span>
                                         </div>
                                     </div>
-                                    <div class="dropdown">
-                                        <a class="date-dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                            aria-expanded="false">Jan 20, 2019</a>
+                                    <div class="dropdown d-none">
+                                        <a class="date-dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Jan 20, 2019</a>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#">Jan 20, 2019</a>
                                             <a class="dropdown-item" href="#">Jan 20, 2021</a>
@@ -163,34 +171,26 @@ include 'security.php';
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Expenses</h3>
+                                        <h3>Staff Attendance</h3>
                                     </div>
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                            aria-expanded="false">...</a>
+                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
 
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="expense-report">
                                     <div class="monthly-expense pseudo-bg-Aquamarine">
-                                        <div class="expense-date">Jan 2019</div>
-                                        <div class="expense-amount"><span>$</span> 15,000</div>
+                                        <div class="expense-date">Present</div>
+                                        <div class="expense-amount"><span></span> 101</div>
                                     </div>
                                     <div class="monthly-expense pseudo-bg-blue">
-                                        <div class="expense-date">Feb 2019</div>
-                                        <div class="expense-amount"><span>$</span> 10,000</div>
-                                    </div>
-                                    <div class="monthly-expense pseudo-bg-yellow">
-                                        <div class="expense-date">Mar 2019</div>
-                                        <div class="expense-amount"><span>$</span> 8,000</div>
+                                        <div class="expense-date">Absent</div>
+                                        <div class="expense-amount"><span></span> 5</div>
                                     </div>
                                 </div>
                                 <div class="expense-chart-wrap">
@@ -204,19 +204,15 @@ include 'security.php';
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Student's Attendance</h3>
+                                        <h3>SMS Count</h3>
                                     </div>
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                            aria-expanded="false">...</a>
+                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
 
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                         </div>
                                     </div>
                                 </div>
@@ -225,12 +221,12 @@ include 'security.php';
                                 </div>
                                 <div class="student-report">
                                     <div class="student-count pseudo-bg-blue">
-                                        <h4 class="item-title">Female Students</h4>
-                                        <div class="item-number">478</div>
+                                        <h4 class="item-title">Remain</h4>
+                                        <div class="item-number">36541</div>
                                     </div>
                                     <div class="student-count pseudo-bg-yellow">
-                                        <h4 class="item-title">Male Students</h4>
-                                        <div class="item-number">765</div>
+                                        <h4 class="item-title">Used</h4>
+                                        <div class="item-number">3459</div>
                                     </div>
                                 </div>
                             </div>
@@ -244,16 +240,12 @@ include 'security.php';
                                         <h3>Event Calender</h3>
                                     </div>
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                            aria-expanded="false">...</a>
+                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
 
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                         </div>
                                     </div>
                                 </div>
@@ -271,53 +263,42 @@ include 'security.php';
                                         <h3>Website Traffic</h3>
                                     </div>
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                            aria-expanded="false">...</a>
+                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
 
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                         </div>
                                     </div>
                                 </div>
-                                <h6 class="traffic-title">Unique Visitors</h6>
-                                <div class="traffic-number">2,590</div>
+                                <h6 class="traffic-title">Application Login Traffic</h6>
+                                <div class="traffic-number">1,053</div>
                                 <div class="traffic-bar">
-                                    <div class="direct" data-toggle="tooltip" data-placement="top" title="Direct">
+                                    <div class="direct" data-toggle="tooltip" data-placement="top" title="Presnet App Login">
                                     </div>
-                                    <div class="search" data-toggle="tooltip" data-placement="top" title="Search">
+                                    <div class="search" data-toggle="tooltip" data-placement="top" title="Web. Logins">
                                     </div>
-                                    <div class="referrals" data-toggle="tooltip" data-placement="top" title="Referrals">
-                                    </div>
-                                    <div class="social" data-toggle="tooltip" data-placement="top" title="Social">
+                                    <div class="referrals" data-toggle="tooltip" data-placement="top" title="ERP Logins">
                                     </div>
                                 </div>
                                 <div class="traffic-table table-responsive">
                                     <table class="table">
                                         <tbody>
                                             <tr>
-                                                <td class="t-title pseudo-bg-Aquamarine">Direct</td>
-                                                <td>12,890</td>
+                                                <td class="t-title pseudo-bg-Aquamarine">Presnet App Login</td>
+                                                <td>640</td>
                                                 <td>50%</td>
                                             </tr>
                                             <tr>
-                                                <td class="t-title pseudo-bg-blue">Search</td>
-                                                <td>7,245</td>
+                                                <td class="t-title pseudo-bg-blue">Web. Logins</td>
+                                                <td>405</td>
                                                 <td>27%</td>
                                             </tr>
                                             <tr>
-                                                <td class="t-title pseudo-bg-yellow">Referrals</td>
-                                                <td>4,256</td>
+                                                <td class="t-title pseudo-bg-yellow">ERP Logins</td>
+                                                <td>8</td>
                                                 <td>8%</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="t-title pseudo-bg-red">Social</td>
-                                                <td>500</td>
-                                                <td>7%</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -333,51 +314,42 @@ include 'security.php';
                                         <h3>Notice Board</h3>
                                     </div>
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                            aria-expanded="false">...</a>
+                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
 
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="notice-box-wrap">
                                     <div class="notice-list">
-                                        <div class="post-date bg-skyblue">16 June, 2019</div>
+                                        <div class="post-date bg-skyblue">16 Jan, 2020</div>
                                         <h6 class="notice-title"><a href="#">Great School manag mene esom text of the
                                                 printing.</a></h6>
-                                        <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                        <div class="entry-meta"> Sanjay Goel / <span>10 months ago</span></div>
                                     </div>
                                     <div class="notice-list">
-                                        <div class="post-date bg-yellow">16 June, 2019</div>
+                                        <div class="post-date bg-yellow">11 Feb, 2020</div>
                                         <h6 class="notice-title"><a href="#">Great School manag printing.</a></h6>
-                                        <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                        <div class="entry-meta"> Vijay Khemka / <span>9 months ago</span></div>
                                     </div>
                                     <div class="notice-list">
-                                        <div class="post-date bg-pink">16 June, 2019</div>
+                                        <div class="post-date bg-pink">18 Mar, 2020</div>
                                         <h6 class="notice-title"><a href="#">Great School manag meneesom.</a></h6>
-                                        <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                        <div class="entry-meta"> Sanjana Tripathi / <span>8 months ago</span></div>
                                     </div>
                                     <div class="notice-list">
-                                        <div class="post-date bg-skyblue">16 June, 2019</div>
+                                        <div class="post-date bg-skyblue">19 Mar, 2020</div>
                                         <h6 class="notice-title"><a href="#">Great School manag mene esom text of the
                                                 printing.</a></h6>
-                                        <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                        <div class="entry-meta"> Gyanesh Mukherjee / <span>8 months ago</span></div>
                                     </div>
                                     <div class="notice-list">
-                                        <div class="post-date bg-yellow">16 June, 2019</div>
+                                        <div class="post-date bg-yellow">19 Mar, 2019</div>
                                         <h6 class="notice-title"><a href="#">Great School manag printing.</a></h6>
-                                        <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                                    </div>
-                                    <div class="notice-list">
-                                        <div class="post-date bg-pink">16 June, 2019</div>
-                                        <h6 class="notice-title"><a href="#">Great School manag meneesom.</a></h6>
-                                        <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                        <div class="entry-meta"> Neha Singh / <span>8 months ago</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -406,12 +378,12 @@ include 'security.php';
                         <div class="card dashboard-card-seven">
                             <div class="social-media bg-twitter hover-twitter">
                                 <div class="media media-none--lg">
-                                        <div class="social-icon">
+                                    <div class="social-icon">
                                         <i class="fab fa-twitter"></i>
-                                        </div>
-                                        <div class="media-body space-sm">
-                                            <h6 class="item-title">Follow us on twitter</h6>
-                                        </div>
+                                    </div>
+                                    <div class="media-body space-sm">
+                                        <h6 class="item-title">Follow us on twitter</h6>
+                                    </div>
                                 </div>
                                 <div class="social-like">1,11,000</div>
                             </div>
@@ -437,7 +409,7 @@ include 'security.php';
                             <div class="social-media bg-linkedin hover-linked">
                                 <div class="media media-none--lg">
                                     <div class="social-icon">
-                                    <i class="fab fa-linkedin-in"></i>
+                                        <i class="fab fa-linkedin-in"></i>
                                     </div>
                                     <div class="media-body space-sm">
                                         <h6 class="item-title">Follow us on linked</h6>
@@ -451,8 +423,7 @@ include 'security.php';
                 <!-- Social Media End Here -->
                 <!-- Footer Area Start Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
+                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
                 </footer>
                 <!-- Footer Area End Here -->
             </div>
@@ -481,8 +452,8 @@ include 'security.php';
     <script src="js/Chart.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
-	<script src="js/myscript.js"></script>
-	
+    <script src="js/myscript.js"></script>
+
 
 </body>
 

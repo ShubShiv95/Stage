@@ -5,20 +5,17 @@
 	$result=mysqli_query($dbhandle,'select start_month,end_month,start_year,end_year from school_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"]);
 	$row=mysqli_fetch_assoc($result);
     */
-    $HTMLString='<div class="heading-layout1">
-    <div class="item-title">
-        <h3>Attendence Sheet Of Class One: Section A, April 2019</h3>
-    </div>
-    </div>
-    <div class="table-responsive sticky-div">
-    <table class="table bs-table table-striped table-bordered text-nowrap tebal-form-in sticky-table">
-        <thead>';    
+    
 	$secid=$_GET["secid"];
 	$atnmonth=$_GET["month"];
 	$first_day='1';
 	$last_day=0;
 	$year=0;
 	$month=0;
+
+
+  
+		
 	//Formating Year value.
 	if($atnmonth >=4 and $atnmonth<=12)
 		{
@@ -82,6 +79,7 @@
 				$month=$atnmonth;
 			}	
 	//END OF STEP2: Formating month value.
+
 	
 	//STEP 3: Generating list of Students for the selected class section.	
 		$getStudentList_sql="select scd.student_id,smt.first_name as student_name,scd.roll_no from student_class_details scd,student_master_table smt where scd.class_sec_id=" .  $secid . " and scd.enabled=1 and scd.school_id=" .  $_SESSION["SCHOOLID"] . " and scd.session='" . $_SESSION["SESSION"] . "' and smt.student_id=scd.student_id order by scd.roll_no";
@@ -97,11 +95,22 @@
 	
 	
 	//Get the class number for finding holidays for the class 
-	$getClassNo_sql="select class_no from class_master_table cmt,class_section_table cst where cst.class_sec_id=" . $secid . " and cmt.class_id=cst.class_id and cst.school_id=" . $_SESSION["SCHOOLID"];
+	$getClassNo_sql="select class_no,class_name,section from class_master_table cmt,class_section_table cst where cst.class_sec_id=" . $secid . " and cmt.class_id=cst.class_id and cst.school_id=" . $_SESSION["SCHOOLID"];
 	//echo $getClassNo_sql;
 	$getClassNo_result=$dbhandle->query($getClassNo_sql);
 	$getClassNo_row=$getClassNo_result->fetch_assoc();
 	
+
+	$HTMLString='<div class="heading-layout1">
+    <div class="item-title">
+        <h3>Attendence Sheet Of Class ' . $getClassNo_row["class_name"] . ' : Section ' . $getClassNo_row["section"] . ' from ' . $start_date  . ' to ' . $end_date . '</h3>
+    </div>
+    </div>
+    <div class="table-responsive sticky-div">
+    <table class="table bs-table table-striped table-bordered text-nowrap tebal-form-in sticky-table">
+		<thead>';  
+	
+
 	//Get list of holidays for the selected month.
 
 	$getEventCalender_sql="select date_format(start_date,'%d-%m-%Y') as start_date,date_format(end_date,'%d-%m-%Y') as  end_date from event_calender_master where start_date between str_to_date('" . $start_date . "','%d-%m-%Y') and str_to_date('" . $end_date . "','%d-%m-%Y') and end_date between str_to_date('" . $start_date . "','%d-%m-%Y') and str_to_date('" . $end_date . "','%d-%m-%Y') and student_off=1 and ((" . $getClassNo_row["class_no"] . " between from_class_no and to_class_no) or (from_class_no=0 and to_class_no=0)) and school_id=" . $_SESSION["SCHOOLID"];

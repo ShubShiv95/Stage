@@ -81,12 +81,12 @@ include 'security.php';
                             </div>
                             
                         </div>
-                        <form class="new-added-form aj-new-added-form new-aj-new-added-form" action="CUG2.php">
+                        <form class="new-added-form aj-new-added-form new-aj-new-added-form" action="CUG2.php" id="frmcreatecug">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>  Choose Unit Group Name <span>*</span></label>
-                                        <input type="text" minlength="12" maxlength="12" id="smsgroupname" name="smsgroupname" placeholder="" class="form-control">
+                                        <input type="text" minlength="3" maxlength="100" id="smsgroupname" name="smsgroupname" placeholder="" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
@@ -212,7 +212,7 @@ include 'security.php';
                                     </div>
                                     <div class="col-xl-12 col-lg-12 col-12 text-right aj-mb-2">
                                         <div class="form-group aj-form-group">
-                                            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Create</button>
+                                            <button type="button" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" onclick="frm.submit();">Create</button>
                                             
                                         </div>                                    
                                     </div>
@@ -359,6 +359,40 @@ include 'security.php';
     $("#checkAll").click(function () {
      $('.check-by-all').not(this).prop('checked', this.checked);
  });
+</script>
+<script type="text/javascript">
+    var frm = $('#frmcreatecug');
+
+    frm.submit(function (e) {
+        //alert(data);
+        e.preventDefault();
+
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                //console.log('Submission was successful.');
+                //console.log(data);
+                //alert(data);
+                //$('div#msgreply').html(data);
+                alert(data);
+                //$('div#msgreply').html(data);
+                //$('div#output-message').html(data);
+  
+                //$('#admissionform').trigger("reset");
+            },
+            error: function (data) {
+                //console.log('An error occurred.');
+                //console.log(data);
+                //alert(data);
+                //$('div#msgreply').html(data);
+                //alert(data);
+                alert(data);
+                //$('div#output-message').html(data);
+            },
+        });
+    });
 </script>
 </body>
 

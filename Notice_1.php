@@ -26,7 +26,7 @@ if(isset($_REQUEST['notice_sender']))
     if (empty($notice_type)) {
       $errors[] = 'Notice Type Cannot Be Empty.';
     }
-    if (empty(stripslashes(strip_tags($notice_details)))) {
+    if (empty(stripslashes(strip_tags($notice_details))) ) {
       $errors[] = 'Notice Details Cannot Be Empty.';
     }
     else{

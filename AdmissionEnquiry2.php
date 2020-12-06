@@ -63,7 +63,7 @@ $insertAdmissionEnquiry_sql="insert into admission_enquiry_table
 //echo $insertAdmissionEnquiry_sql;
 
 $stmt=$dbhandle->prepare($insertAdmissionEnquiry_sql);
-echo $dbhandle->error;	
+//echo $dbhandle->error;	
 $stmt->bind_param('isssssississsisi',
     $aeid,
     $sname,

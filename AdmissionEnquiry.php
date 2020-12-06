@@ -12,7 +12,7 @@ require_once 'AdmissionModel.php';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
+    <title>SwipeTouch</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -56,14 +56,14 @@ require_once 'AdmissionModel.php';
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
 			    <!-- Hot Links Area Start Here -->
-				<?php include ('includes/hot-link.php'); ?> 
+				<?php include ('includes/hot-link.php'); ?>
                 <!-- Hot Links Area End Here -->
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Admission Enquiry</h3>
+                    <!--h3>Admission Enquiry</h3-->
                    <ul>
                         <li>
-                            <a href="index.php">Home</a>
+                            <a href="dashboard.php">Home</a>
                         </li>
                         <li>Admission Enquiry</li>
                     </ul>
@@ -176,7 +176,7 @@ require_once 'AdmissionModel.php';
                                                         
                                                         if($row["class_no"]<11)
                                                             {
-                                                                $str=$str.'<option value="' . $row["class_name"] . '">Class ' . $row["class_name"]. '</option>';
+                                                                $str=$str.'<option value="' . $row["class_name"] . '">' . $row["class_name"]. '</option>';
                                                                
                                                             }
                                                         else
@@ -185,9 +185,9 @@ require_once 'AdmissionModel.php';
                                                                     {
                                                                         break;
                                                                     }
-                                                                $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Science"] . '">Class ' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Science"]. '</option>';
-                                                                $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Commerce"] . '">Class ' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Commerce"]. '</option>';
-                                                                $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Arts"] . '">Class ' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Arts"]. '</option>';
+                                                                $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Science"] . '">' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Science"]. '</option>';
+                                                                $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Commerce"] . '">' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Commerce"]. '</option>';
+                                                                $str=$str.'<option value="' . $row["class_name"] . ' - ' . $GLOBAL_CLASS_STREAM["Arts"] . '">' . $row["class_name"]. ' - ' . $GLOBAL_CLASS_STREAM["Arts"]. '</option>';
                                                             }        
                                                     }     
                                                 

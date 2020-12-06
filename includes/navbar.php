@@ -1,9 +1,9 @@
-<?php //session_start();  ?>
+    <?php //session_start();  ?>
     <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
                 <div class="header-logo">
                     <a href="index.html">
-                        <img src="img/sidemenu-logo-black.jpg" alt="logo">
+                        <img src="img/swipetouch_allblue_logo7.png" alt="logo">
                     </a>
                 </div>
                  <div class="toggle-button sidebar-toggle">
@@ -46,12 +46,14 @@
                             aria-expanded="false">
                             <div class="admin-title">
                                 <h5 class="item-title"><?php echo $_SESSION["NAME"];?></h5>
+                                <span></span>
                             </div>
                             <div class="admin-img">
                                 <img src="app_images/profile/<?php echo $_SESSION["LOGINID"];?>.jpg" alt="<?php echo $_SESSION["NAME"];?>" width="40" height="40">
                             </div>
                             <?php
-                            /*if($_SESSION["LOGINTYPE"]=="PARENT")
+                            /*
+                            if($_SESSION["LOGINTYPE"]=="PARENT")
                             {
                             echo '<div class="admin-img">Sibling';
                             
@@ -62,7 +64,8 @@
                                     }  
                                     
                             echo '</div>';
-                                }*/
+                                }
+                                */
                             ?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

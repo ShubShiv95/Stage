@@ -99,12 +99,12 @@ $insertVisitorEnquiry_sql="insert into visitor_enquiry_table
             //echo $str_start.$messsage.$str_end;
             //die;
             //echo "unsecessful";
-            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=http://localhost:8080/stage/VisitorEnquiry.php">';
+            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=http://localhost/stage/VisitorEnquiry.php">';
         }
     else
         {
             mysqli_commit($dbhandle);
             //echo "success";
-            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=http://localhost:8080/stage/VisitorEnquiry.php">';
+            echo '<meta HTTP-EQUIV="Refresh" content="0; URL=http://localhost/stage/VisitorEnquiry.php">';
         }    
 ?>

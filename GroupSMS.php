@@ -66,6 +66,9 @@ include 'security.php';
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
+                <!-- Hot Links Area Start Here -->
+				<?php include ('includes/hot-link.php'); ?>
+                <!-- Hot Links Area End Here -->
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body">

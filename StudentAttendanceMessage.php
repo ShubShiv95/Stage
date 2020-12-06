@@ -11,7 +11,7 @@ include 'security.php';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
+    <title>SwipeTouch:Attendence Message</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -56,21 +56,24 @@ include 'security.php';
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Students</h3>
+                    <!--h3>Students</h3-->
                     <ul>
                         <li>
                             <a href="index.html">Home</a>
                         </li>
-                        <li>Student Attendence</li>
+                        <li>Attendence Message</li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
+                <!-- Hot Links Area Start Here -->
+				<?php include ('includes/hot-link.php'); ?>
+                <!-- Hot Links Area End Here -->
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title aj-item-title">
-                                <h3 class="mb-4">Student Attendence Message</h3>
+                                <h3 class="mb-4">Attendence Message</h3>
                             </div>
                             <!-- <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"

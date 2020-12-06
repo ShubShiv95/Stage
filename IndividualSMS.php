@@ -73,6 +73,7 @@ include 'security.php';
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Individual SMS</h3>
                             </div>
+                            <div id="msgreply"></div>
                             <!-- <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">...</a>
@@ -213,12 +214,12 @@ include 'security.php';
                                             <div class="row">
                                             <h6>
                                                 <div class="radio mr-5">
-                                                  <span><input type="checkbox" class="sibling-bs" id="smsmessage" name="smsmessage" value="1"> <b>SMS</b></span>
+                                                  <span><input type="radio" class="sibling-bs" id="message-type1" name="message-type" value="SMS"  checked="checked" > <b>SMS</b></span>
                                                 </div>
                                             </h6>
                                             <h6>
                                                 <div class="radio">
-                                                  <span><input type="checkbox" class="sibling-bs" id="whatsappmessage" name="whatsappmessage" value="1"> <b>What's App</b> </span>
+                                                  <span><input type="radio" class="sibling-bs" id="message-type2" name="message-type" value="Whatsapp"> <b>What's App</b> </span>
                                                 </div>
                                             </h6>
                                         </div>
@@ -357,7 +358,7 @@ include 'security.php';
                 //console.log('Submission was successful.');
                 //console.log(data);
                 //alert(data);
-                //$('div#msgreply').html(data);
+                $('div#msgreply').html(data);
                 alert(data);
                 $('#indMsgForm').trigger("reset");
             },

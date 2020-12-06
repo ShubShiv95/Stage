@@ -1558,7 +1558,8 @@ ul {
   box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
 }
 .nav-bar-header-one {
-  background: linear-gradient(to right, #ff9d01, #ffaa01);
+  /* background: linear-gradient(to right, #ff9d01, #ffaa01); */
+  background: linear-gradient(to right, #fbd53f, #fbd53f);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2190,7 +2191,7 @@ ul {
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item > .nav-link span {
   font-size: 16px;
-  color: #e0e6ec;
+  color: #ffffff;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -2205,12 +2206,13 @@ ul {
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item .sub-group-menu {
   display: none;
-  background-color: #051f3e;
+   /*background-color: #051f3e;*/
+   background-color: #44372a;
   padding: 10px 0;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item .sub-group-menu > .nav-item .nav-link {
   font-size: 14px;
-  color: #a3aab3;
+  color: #f5f5f5;
   padding: 8px 20px 8px 60px;
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -2220,7 +2222,8 @@ ul {
   margin-right: 10px;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item .sub-group-menu > .nav-item .nav-link:hover {
-  background-color: #042954;
+  /* background-color: #042954; */
+  background-color:#2b221a;
   color: #ffffff;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item .sub-group-menu > .nav-item .nav-link.menu-active {
@@ -3557,8 +3560,8 @@ ul {
 }
 /*=============== 6.6 Login Page ==================*/
 .login-page-wrap {
-  background-image: url('img/figure/login-bg.jpg');
-  background-repeat: no-repeat;
+  background-image: url('img/graphics_bg.jpg');
+  background-repeat: repeat;
   background-position: top;
   position: fixed;
   top: 0;
@@ -3922,7 +3925,7 @@ ul {
   }
 }
 .dashboard-card-one .card-body .earning-report .item-content .single-item span:after {
- /* content: "$";*/
+  /*content: "$";*/
   font-size: 16px;
   color: #646464;
   font-weight: 500;
@@ -4484,8 +4487,9 @@ ul {
   background-color: #997f75;
 }
 .sidebar-color {
-  background-color: #042954;
-}
+  /*background-color: #042954;*/
+  background-color: #2b2219;
+} 
 .bg-gradient-fb {
   background: -webkit-gradient(linear, left top, right top, from(#546ca9), to(#5c77bc));
   background: -webkit-linear-gradient(left, #546ca9, #5c77bc);

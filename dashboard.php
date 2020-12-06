@@ -73,9 +73,6 @@ include 'security.php';
             );
         }
     </script>
-
-
-
 </head>
 
 <body class="home">
@@ -130,13 +127,13 @@ include 'security.php';
                                 </div>
                                 <div class="earning-report">
                                     <div class="item-content">
-                                        <div class="single-item pseudo-bg-blue">
-                                            <h4>Present Student</h4>
-                                            <span>1544</span>
-                                        </div>
                                         <div class="single-item pseudo-bg-red">
                                             <h4>Absent Students</h4>
                                             <span>759</span>
+                                        </div>
+                                        <div class="single-item pseudo-bg-blue">
+                                            <h4>Present Student</h4>
+                                            <span>1544</span>
                                         </div>
                                         <div class="single-item">
                                             <h4>Total Student</h4>
@@ -288,17 +285,17 @@ include 'security.php';
                                             <tr>
                                                 <td class="t-title pseudo-bg-Aquamarine">Presnet App Login</td>
                                                 <td>640</td>
-                                                <td>50%</td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td class="t-title pseudo-bg-blue">Web. Logins</td>
                                                 <td>405</td>
-                                                <td>27%</td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td class="t-title pseudo-bg-yellow">ERP Logins</td>
                                                 <td>8</td>
-                                                <td>8%</td>
+                                                <td></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -358,7 +355,7 @@ include 'security.php';
                 </div>
                 <!-- Dashboard Content End Here -->
                 <!-- Social Media Start Here -->
-                <div class="row gutters-20">
+                <!--div class="row gutters-20">
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="card dashboard-card-seven">
                             <div class="social-media bg-fb hover-fb">
@@ -419,11 +416,13 @@ include 'security.php';
                             </div>
                         </div>
                     </div>
-                </div>
+                </div-->
                 <!-- Social Media End Here -->
                 <!-- Footer Area Start Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
+                    <div class="copyright">
+                        <?php if (isset($_SESSION["FOOTERNOTE"])) echo $_SESSION["FOOTERNOTE"];
+                        else echo 'Powered by  <a href="http://swipetouch.tech" target="_blank">SwipeTouch Technologies</a>'; ?></div>
                 </footer>
                 <!-- Footer Area End Here -->
             </div>

@@ -64,21 +64,24 @@ while($row=mysqli_fetch_assoc($result))
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Students</h3>
+                    <!--h3>Students</h3-->
                     <ul>
                         <li>
                             <a href="index.html">Home</a>
                         </li>
-                        <li>Student Admit Form</li>
+                        <li>Search Admission</li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
+                <!-- Hot Links Area Start Here -->
+				<?php include ('includes/hot-link.php'); ?>
+                <!-- Hot Links Area End Here -->
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title aj-item-title">
-                                <h3 class="mb-4">School</h3>
+                                <h3 class="mb-4">Search Admission</h3>
                             </div>
                             <!-- <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -100,7 +103,7 @@ while($row=mysqli_fetch_assoc($result))
                             <div class="row justify-content-center">
                                 <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
                                     <div class="brouser-image ">
-                                        <h5 class="text-center">Student Class Promotion</h5>
+                                        <!--h5 class="text-center">Search Admission</h5-->
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
@@ -150,7 +153,7 @@ while($row=mysqli_fetch_assoc($result))
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">Powered by  <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
+                    <div class="copyright"><?php if(isset($_SESSION["FOOTERNOTE"])) echo $_SESSION["FOOTERNOTE"]; else echo 'Powered by  <a href="http://swipetouch.tech">SwipeTouch Technologies</a>';?></div>
                 </footer>
             </div>
         </div>
@@ -172,6 +175,7 @@ while($row=mysqli_fetch_assoc($result))
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <script src="js/myscript.js"></script>
      <script type="text/javascript">
         $('#fetchResult').click('.sibling-bs',function(){
             callbackend();

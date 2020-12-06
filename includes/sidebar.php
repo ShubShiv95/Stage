@@ -110,7 +110,7 @@
                                     <a href="New-FollowupEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Follow Up Eqnuiry</a>
                                 </li-->
                                 <li class="nav-item">
-                                    <a href="http://localhost:8080/stage/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor</a>
+                                    <a href="http://localhost/stage/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor Entry</a>
                                 </li>
                                 <!--li class="nav-item">
                                     <a href="http://localhost/stage/New-VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>New Visitor</a>
@@ -300,13 +300,12 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="transport.php" class="nav-link"><i
-                                    class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Inventory</span></a>
-                        </li>
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Fee Management</span></a>
                             <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="FeeHead.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Head</a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="Fee_Collection.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Collection</a>
                                 </li>
@@ -324,6 +323,7 @@
                                 </li>
                             </ul>
                         </li>
+                
                         <!-- <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i
                                     class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Class</span></a>
@@ -357,7 +357,7 @@
                                         <a href="ViewAssignments.php" class="nav-link"><i class="fas fa-angle-right"></i>View Assignment</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="./StudentAssignmentSubmit.php" class="nav-link"><i class="fas fa-angle-right"></i>Submit Assignment</a>
+                                    <a href="./StudentAssignmentSubmit.php" class="nav-link"><i class="fas fa-angle-right"></i>Submited Assignment</a>
                                 </li>
                                 <li class="nav-item">
                                         <a href="VerifyAssignments.php" class="nav-link"><i class="fas fa-angle-right"></i>Verify Assignments</a>
@@ -388,61 +388,9 @@
                             <a href="transport.php" class="nav-link"><i
                                     class="flaticon-bus-side-view"></i><span>Transport</span></a>
                         </li>
-
+                       
                     
-                        <!-- <li class="nav-item">
-                            <a href="notice-board.php" class="nav-link"><i
-                                    class="flaticon-script"></i><span>Notice</span></a>
-                        </li> -->
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Account</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="all-fees.php" class="nav-link"><i class="fas fa-angle-right"></i>All Fees
-                                        Collection</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="all-expense.php" class="nav-link"><i
-                                            class="fas fa-angle-right"></i>Expenses</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="add-expense.php" class="nav-link"><i class="fas fa-angle-right"></i>Add
-                                        Expenses</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="hostel.php" class="nav-link"><i class="flaticon-bed"></i><span>Hostel</span></a>
-                        </li>                                           
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-menu-1"></i><span>UI Elements</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="notification-alart.php" class="nav-link"><i class="fas fa-angle-right"></i>Alart</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="button.php" class="nav-link"><i class="fas fa-angle-right"></i>Button</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="grid.php" class="nav-link"><i class="fas fa-angle-right"></i>Grid</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="modal.php" class="nav-link"><i class="fas fa-angle-right"></i>Modal</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="progress-bar.php" class="nav-link"><i class="fas fa-angle-right"></i>Progress Bar</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-tab.php" class="nav-link"><i class="fas fa-angle-right"></i>Tab</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-widget.php" class="nav-link"><i
-                                            class="fas fa-angle-right"></i>Widget</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        
+                     
                         <!--The end of the menu comented -->
                           <!--li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>

@@ -23,7 +23,7 @@ $passwd = mysql_real_escape_string($_POST['passwd'],$dbhandle);
 //$passwd = mysql_real_escape_string($_POST['passwd'],$dbhandle);
 
 $Login_Query = "select * from login_table where login_id='" . $lid . "' and enabled=1";
-echo $Login_Query;
+//echo $Login_Query;
 
 //select * from user_login where user_id='admin';
 //$result = mysqli_query($dbhandle,$query);   //mysqli_query just runs the query only without returning any extra properties.
@@ -103,6 +103,7 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 					$_SESSION["LINK"]=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
 					$_SESSION["LASTUPDATEON"]=$cur_time=date("Y-m-d H:i:s");
 					$_SESSION["INTERVAL"]='+120 minutes';
+					$_SESSION["FOOTERNOTE"]='Powered by  <a href="http://swipetouch.tech" target="_blank">SwipeTouch Technologies</a>';
 				}
 			else if($Login_Query_Row["LOGIN_TYPE"]=='PARENT')
 			{
@@ -139,6 +140,7 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 								$_SESSION["STUDENTLIST"]["STUDENTID"][$count]= $Get_Parent_Details_Row["Student_Id"];
 								$_SESSION["LASTUPDATEON"]=$cur_time=date("Y-m-d H:i:s");
 								$_SESSION["INTERVAL"]='+120 minutes';
+								$_SESSION["FOOTERNOTE"]='Powered by  <a href="http://swipetouch.tech" target="_blank">SwipeTouch Technologies</a>';
 							}
 						else
 							{
@@ -173,11 +175,16 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 					$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST'];
 					//$_SESSION["HOSTNAME"]=$_SERVER['HTTP_HOST']."/solvethemess/stage";
 					//$_SESSION["LOGINGRADE"]= $row["login_grade"];
+					$_SESSION["SMSBALANCE"]=20587;
 					$_SESSION["FOOTER"]="SMS SCHOOL ERP COPYRIGHT 2020";
 					$_SESSION["LINK"]=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
 					$_SESSION["LASTUPDATEON"]=$cur_time=date("Y-m-d H:i:s");
 					$_SESSION["INTERVAL"]='+120 minutes';
-			}
+					$_SESSION["FOOTERNOTE"]='Powered by  <a href="http://swipetouch.tech" target="_blank">SwipeTouch Technologies</a>';
+				
+							$_SESSION["SECTIONID"]=1;
+						
+				 	}		
 
 		/*
 			$_SESSION["DISTRICTID"]= $financialYear_row["district_id"];

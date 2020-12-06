@@ -59,7 +59,7 @@ include 'sequenceGenerator.php';
                             <li>
                                 <a href="index.html">Home</a>
                             </li>
-                            <li>Student Attendence</li>
+                            <li>Attendence Message</li>
                         </ul>
                     </div>
                     <!-- Breadcubs Area End Here -->
@@ -68,7 +68,7 @@ include 'sequenceGenerator.php';
                         <div class="card-body">
                             <div class="heading-layout1">
                                 <div class="item-title aj-item-title">
-                                    <h3 class="mb-4">Attendence</h3>
+                                    <h3 class="mb-4">Attendence Message </h3>
                                 </div>
                                 <!-- <div class="dropdown">
                                     <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -89,9 +89,16 @@ include 'sequenceGenerator.php';
                                 <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
                                     <form class="new-added-form school-form aj-new-added-form">
                                         <div class="tebal-promotion" >
-                                        <h5 class="text-center">SMS Sent to Absent Student's Parent</h5>
+                                        <h5 class="text-center">Pending SMS Sent to Absent Student's Parent</h5>
                                                 <div>
+
+
                                                 <?php
+
+                                                    /*commented for demo purpose...else the code is running..
+
+
+
                                                     //Collecting Attendance id for the attendance.
                                                     $aidlist=array();
                                                     $aidlist=$_REQUEST["pendingaid"];
@@ -148,6 +155,9 @@ include 'sequenceGenerator.php';
                                                             }   
 
                                                         }    
+
+
+                                                        */
                                                 ?>            
                                                 
                                                         

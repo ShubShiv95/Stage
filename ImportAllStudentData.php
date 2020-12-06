@@ -56,7 +56,7 @@ include 'errorLog.php';
             <div class="dashboard-content-one">
                 <!-- Breadcumbs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Students</h3>
+                    <!--h3>Students</h3-->
                     <ul>
                         <li>
                             <a href="index.html">Home</a>
@@ -68,7 +68,11 @@ include 'errorLog.php';
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body">
-                        
+                        <div class="heading-layout1">
+                            <div class="item-title aj-item-title">
+                                <h3 class="mb-4">Bulk Import Sudent Data</h3>
+                            </div>
+                        </div>
                         <form class="new-added-form school-form aj-new-added-form"  enctype="multipart/form-data" id="fileInputForm" name="fileInputForm" method="POST" action="">
                             
                             
@@ -139,7 +143,7 @@ include 'errorLog.php';
                 </div>    
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">Powered by  <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
+                    <div class="copyright"><?php if(isset($_SESSION["FOOTERNOTE"])) echo $_SESSION["FOOTERNOTE"]; else echo 'Powered by  <a href="http://swipetouch.tech" target="_blank">SwipeTouch Technologies</a>';?></div>
                 </footer>
             </div>
         </div>

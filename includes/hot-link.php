@@ -7,7 +7,7 @@
 	</div>
 	<div class="hot-links-sec-content col-xl-12">
                     <div class="col-xl-2 col-lg-6 col-12 partsec">
-					   <a href="#">
+					   <a href="GroupSMS.php">
                         <div class="dashboard-summery-one mg-b-20 bg-wild-strawberry">
                             <div class="row align-items-center">
                                 <div class="col-xl-4 col-sm-6 col-6 pd-ls">
@@ -17,7 +17,7 @@
                                 </div>
                                 <div class="col-xl-8 col-sm-6 col-6 pd-rs">
                                     <div class="item-content">
-                                        <div class="item-number">Students</div>
+                                        <a href="GroupSMS.php"><div class="item-number">Send SMS</div></a>
                                         <!-- <div class="item-title">Section</div> -->
                                     </div>
                                 </div>
@@ -25,27 +25,9 @@
                         </div>
 					  </a>
                     </div>
+ 
                     <div class="col-xl-2 col-lg-6 col-12 partsec">
-					   <a href="#">
-                        <div class="dashboard-summery-one mg-b-20 bg-violet-blue">
-                            <div class="row align-items-center">
-                                <div class="col-xl-4 col-sm-6 col-6 pd-ls">
-                                    <div class="item-icon bg-light-blue">
-                                        <i class="flaticon-multiple-users-silhouette text-blue"></i>
-                                    </div>
-                                </div>
-                                <div class="col-xl-8 col-sm-6 col-6 pd-rs">
-                                    <div class="item-content">
-                                        <div class="item-number">Teachers</div>
-                                        <!-- <div class="item-title">Section</div> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-					  </a>	
-                    </div>
-                    <div class="col-xl-2 col-lg-6 col-12 partsec">
-					 <a href="#">
+					 <a href="AdmissionEnquiry.php">
                         <div class="dashboard-summery-one mg-b-20 bg-mauvelous">
                             <div class="row align-items-center">
                                 <div class="col-xl-4 col-sm-6 col-6 pd-ls">
@@ -55,7 +37,7 @@
                                 </div>
                                 <div class="col-xl-8 col-sm-6 col-6 pd-rs">
                                     <div class="item-content">
-                                        <div class="item-number">Parents</div>
+                                    <a href="AdmissionEnquiry.php"><div class="item-number">Adm. Enquiry</div></a>
                                         <!-- <div class="item-title">Section</div> -->
                                     </div>
                                 </div>
@@ -64,7 +46,26 @@
 					 </a>	
                     </div>
                     <div class="col-xl-2 col-lg-6 col-12 partsec">
-					  <a href="#">
+					   <a href="FeeCollection.php">
+                        <div class="dashboard-summery-one mg-b-20 bg-violet-blue">
+                            <div class="row align-items-center">
+                                <div class="col-xl-4 col-sm-6 col-6 pd-ls">
+                                    <div class="item-icon bg-light-blue">
+                                        <i class="flaticon-multiple-users-silhouette text-blue"></i>
+                                    </div>
+                                </div>
+                                <div class="col-xl-8 col-sm-6 col-6 pd-rs">
+                                    <div class="item-content">
+                                    <a href="FeeCollection.php"><div class="item-number">Collect Fee</div></a>
+                                        <!-- <div class="item-title">Section</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					  </a>	
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-12 partsec">
+					  <a href="CreateNewAssignments.php">
                         <div class="dashboard-summery-one mg-b-20 bg-skyblue">
                             <div class="row align-items-center">
                                 <div class="col-xl-4 col-sm-6 col-6 pd-ls">
@@ -74,7 +75,7 @@
                                 </div>
                                 <div class="col-xl-8 col-sm-6 col-6 pd-rs">
                                     <div class="item-content">
-                                        <div class="item-number">Account</div>
+                                    <a href="CreateNewAssignments.php"><div class="item-number">Send Homework</div></a>
                                         <!-- <div class="item-title">Section</div> -->
                                     </div>
                                 </div>
@@ -83,7 +84,7 @@
 					 </a>	
                     </div>
 					<div class="col-xl-2 col-lg-6 col-12 partsec">
-					 <a href="#">
+					 <a href="Notices.php">
                         <div class="dashboard-summery-one mg-b-20 bg-orange">
                             <div class="row align-items-center">
                                 <div class="col-xl-4 col-sm-6 col-6 pd-ls">
@@ -93,7 +94,7 @@
                                 </div>
                                 <div class="col-xl-8 col-sm-6 col-6 pd-rs">
                                     <div class="item-content">
-                                        <div class="item-number">Attendence</div>
+                                    <a href="Notices.php"><div class="item-number">Send Notice</div></a>
                                         <!-- <div class="item-title">Section</div> -->
                                     </div>
                                 </div>
@@ -102,7 +103,7 @@
 					 </a>	
                     </div>
 					<div class="col-xl-2 col-lg-6 col-12 partsec">
-					 <a href="#">
+					 <a href="StudentAttendanceMessage.php">
                         <div class="dashboard-summery-one mg-b-20 bg-dodger-blue">
                             <div class="row align-items-center">
                                 <div class="col-xl-4 col-sm-6 col-6 pd-ls">
@@ -112,7 +113,7 @@
                                 </div>
                                 <div class="col-xl-8 col-sm-6 col-6 pd-rs">
                                     <div class="item-content">
-                                        <div class="item-number">Exam</div>
+                                    <a href="StudentAttendanceMessage.php"> <div class="item-number">Attendance SMS</div></a>
                                         <!-- <div class="item-title">Section</div> -->
                                     </div>
                                 </div>

@@ -7,7 +7,7 @@ include 'security.php';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Admission Form</title>
+    <title>SwipeTouch</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -112,15 +112,18 @@ include 'security.php';
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Eqnuiry</h3>
+                    <!--h3>Eqnuiry</h3-->
                     <ul>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="dashboard.php">Home</a>
                         </li>
                         <li>Visitor Eqnuiry</li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
+                <!-- Hot Links Area Start Here -->
+				<?php include ('includes/hot-link.php'); ?>
+                <!-- Hot Links Area End Here -->
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body">
@@ -351,7 +354,7 @@ include 'security.php';
                                     </div>
                                 </div> -->
                             <!-- </div> -->
-                        </form>
+                       
                         <div class="col-lg-12">
                             <div class="d-grid-a mt-5">
                                 <h6 class="text-left"><b>Total Visitors Found:</b> <span>48</span></h6>
@@ -408,7 +411,7 @@ include 'security.php';
                                                         <td>' . $getVisitorEnquiry_row["Date_Of_Visit"] .  '</td>
                                                         <td>' . $getVisitorEnquiry_row["In_Time"] .  '</td>
                                                         <!--td id="td_outtime'.$cnt.'">' . ($getVisitorEnquiry_row["Out_Time"]!="" ? $getVisitorEnquiry_row["Out_Time"] : '<input type="time" step="1" min='. "'1:00'" . " max='12:59' " . ' id="outtime' . $cnt . '" name="outtime" class="form-control"> <img src="img/update-icon.png" class="update" alt="update" onClick="outtime(' . "'outtime" . $cnt . "'," . $getVisitorEnquiry_row["VE_Id"] .  ",'td_outtime" . $cnt ."'" . ');">').' </td-->
-                                                        <td id="td_outtime'.$cnt.'">' . ($getVisitorEnquiry_row["Out_Time"]!="" ? $getVisitorEnquiry_row["Out_Time"] : '<input type="time" step="1" min='. "'1:00'" . " max='12:59' " . ' id="outtime' . $cnt . '" name="outtime" class="form-control"> <img src="img/update-icon.png" class="update" alt="update" onClick="outtime(' . "'outtime" . $cnt . "'," . $getVisitorEnquiry_row["VE_Id"] .  ",'td_outtime" . $cnt ."'" . ');" />').' </td>
+                                                        <td id="td_outtime'.$cnt.'">' . ($getVisitorEnquiry_row["Out_Time"]!="" ? $getVisitorEnquiry_row["Out_Time"] : '<input type="time" step="1" min='. "'1:00'" . " max='12:59' " . ' id="outtime' . $cnt . '" name="outtime" class="form-control" style="width:100px;"> <img src="img/update-icon-small.jpg" style="font-size:24px;"  onClick="outtime(' . "'outtime" . $cnt . "'," . $getVisitorEnquiry_row["VE_Id"] .  ",'td_outtime" . $cnt ."'" . ');" />').' </td>
 
                                                         <td class="text-center"><a href="app_images/visitors/visitor' . $getVisitorEnquiry_row["VE_Id"]. '.png"><img src="app_images/visitors/visitor' . $getVisitorEnquiry_row["VE_Id"]. '.png" alt="visitor"></a></td>
                                                         <td>Print <input type="hidden" id="printval' . $cnt . '" value=" ' . $str . '"> </td>

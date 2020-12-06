@@ -44,12 +44,7 @@ if($user_type==1 or $user_type==2)  //Executing for Student and Staff user type.
             }
 
 
-        if(!isset($_REQUEST["smsmessage"]) and !isset($_REQUEST["whatsappmessage"]))
-            {
 
-                echo "Selection Rquired :: Please provide at least any one message services from SMS and Whatsapp.";
-                die;
-            }
     }
 else
     {
@@ -82,15 +77,12 @@ $schoolid=$_SESSION['SCHOOLID'];
 $whatsappmessage=0;
 $smsmessage=0;
 
-if(isset($_REQUEST["smsmessage"]))
+if(isset($_REQUEST["message-type"]))
     {
-        $smsmessage=$_REQUEST["smsmessage"];
+        $messagetype=$_REQUEST["message-type"];
     }
 
-if(isset($_REQUEST["whatsappmessage"]))
-    {
-        $smsmessage=$_REQUEST["whatsappmessage"];
-    }
+
 
 
 $messagedate=date("d/m/Y");
@@ -137,8 +129,8 @@ $message_date_time="str_to_date('" . $messagedate . " " . $messagetime. "','%d/%
     mysqli_autocommit($dbhandle,FALSE);
 
     //Inserting Message master data into message_master_table.
-    
-    $putMessageMasterRow_sql="insert into message_master_table(mid,message_title,message,message_date,sms,whatsapp,school_id,created_by) values($mid,'$messagetitle','$composemsg',$message_date_time,$smsmessage,$whatsappmessage,$schoolid,'$loginid')";
+    $message_category='Communication';
+    $putMessageMasterRow_sql="insert into message_master_table(message_id,message_category,message_title,message,message_date,message_type,school_id,created_by) values($mid,'$message_category','$messagetitle','$composemsg',$message_date_time,'$messagetype',$schoolid,'$loginid')";
 
 
     $putMessageMasterRow_result=$dbhandle->query($putMessageMasterRow_sql);
@@ -165,32 +157,41 @@ $message_date_time="str_to_date('" . $messagedate . " " . $messagetime. "','%d/%
 if($user_type==1 or $user_type==2)  //Executing for Student and Staff user type.  
 {      
 
-
+    ////deciding corresponding index value as of type of contact number: 0 for sms and 1 for whatsapp type.
+    $ContactNumberTypeIndex=0;  
+    if($messagetype=='SMS')
+        {
+            $ContactNumberTypeIndex=0;
+        }
+    else if($messagetype=='Whatsapp')
+    {
+        $ContactNumberTypeIndex=1;
+    }   
+    //End of contact number type index value identification.
 
     foreach ($_REQUEST['mobileno'] as $selectedOption) 
         {
 
             $piece_value = explode(";", $selectedOption);
-            $sms_number=$piece_value[0];
-            $whatsapp_number=$piece_value[1];
+            
+            $mobile_number=$piece_value[$ContactNumberTypeIndex]; //decides for contact number SMS or Whatsapp.
+         
             $userid=$piece_value[2];
 
             $insertMessageDetails_sql="insert into message_details_table
-            (mid,
-            sms_number,
-            whatsapp_number,
+            (message_id,
+            mobile_number,
             delivery_status,
-            whatsapp_view_status,
+            view_status,
             user_type,
             user_id) 
-            values(?,?,?,0,0,?,?)";
+            values(?,?,0,0,?,?)";
         
             $insertMessageDetails_stmt=$dbhandle->prepare($insertMessageDetails_sql);
             //echo $dbhandle->error;	
-            $insertMessageDetails_stmt->bind_param('issis',
+            $insertMessageDetails_stmt->bind_param('isss',
             $mid,
-            $sms_number,
-            $whatsapp_number,
+            $mobile_number,
             $user_type,
             $userid);
             
@@ -240,32 +241,41 @@ else        //Processing for Other Numbers.
 {
     $otherNumbers=array();
     $otherNumbers=explode(';',$_REQUEST["unknownno"]);
+
+    ////deciding corresponding index value as of type of contact number: 0 for sms and 1 for whatsapp type.
+    $ContactNumberTypeIndex=0;  
+    if($messagetype=='SMS')
+        {
+            $ContactNumberTypeIndex=0;
+        }
+    else if($messagetype=='Whatsapp')
+    {
+        $ContactNumberTypeIndex=1;
+    }   
+    //End of contact number type index value identification.
+
     foreach($otherNumbers as $number)
         {
 
-            $sms_number=$number;
-            $whatsapp_number=$number;
+            $mobile_number=$piece_value[$ContactNumberTypeIndex]; //decides for contact number SMS or Whatsapp.
             $userid=$number;
 
             $insertMessageDetails_sql="insert into message_details_table
-            (mid,
-            sms_number,
-            whatsapp_number,
+            (message_id,
+            mobile_number,
             delivery_status,
-            whatsapp_view_status,
+            view_status,
             user_type,
             user_id) 
-            values(?,?,?,0,0,?,?)";
+            values(?,?,0,0,?,?)";
         
             $insertMessageDetails_stmt=$dbhandle->prepare($insertMessageDetails_sql);
             //echo $dbhandle->error;	
-            $insertMessageDetails_stmt->bind_param('issis',
+            $insertMessageDetails_stmt->bind_param('isss',
             $mid,
-            $sms_number,
-            $whatsapp_number,
+            $mobile_number,
             $user_type,
             $userid);
-            
             
             if($insertMessageDetails_stmt->execute())
                 {

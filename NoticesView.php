@@ -7,7 +7,7 @@ $pageTitle = "View Notices And Circular";
 $bodyHeader = "View Notice/Circular";
 require_once './includes/header.php';
 
-if ($_SESSION["LOGINTYPE"] != 'Student') {
+if ($_SESSION["LOGINTYPE"] != 'STUDENT') {
     echo '<div class="container-fluid new-added-form aj-new-added-form new-aj-new-added-form">
     <div class="row">
         <div class="col-lg-3 col-md-3 col-12">

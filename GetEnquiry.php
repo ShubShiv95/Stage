@@ -101,7 +101,7 @@ if($_REQUEST["searchdate"]=='followup'){
     //}  
 //}    
 $query=$query . " aet.school_id=" . $_SESSION["SCHOOLID"];
-echo $query;
+//echo $query;
 
 
 $result=mysqli_query($dbhandle,$query);

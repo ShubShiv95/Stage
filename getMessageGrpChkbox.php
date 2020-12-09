@@ -78,7 +78,7 @@ if($usergrptype==1)   //1 means Group message sending to Students. So we will tr
                     $str=$str . '</td></tr><tr>    
                                     <td>
                                         <div>
-                                            <label><B>' .($row["class_no"] > 0 ? 'Class' : '') .  $row["class_name"] .' </B></label>
+                                            <label><B>' .  $row["class_name"] .' </B></label>
                                         </div>
                                     </td>
                                     

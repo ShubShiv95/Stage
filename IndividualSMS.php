@@ -73,7 +73,7 @@ include 'security.php';
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Individual SMS</h3>
                             </div>
-                            <div id="msgreply"></div>
+                            <!--div id="msgreply"></div-->
                             <!-- <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">...</a>
@@ -358,7 +358,7 @@ include 'security.php';
                 //console.log('Submission was successful.');
                 //console.log(data);
                 //alert(data);
-                $('div#msgreply').html(data);
+                //$('div#msgreply').html(data);
                 alert(data);
                 $('#indMsgForm').trigger("reset");
             },

@@ -277,7 +277,7 @@ var xmlhttp;
 var classid=document.getElementById("classid").value;
 var secid=document.getElementById("secid").value;
 var adt=document.getElementById("adt").value;
-alert(adt);
+//alert(adt);
 var cperiod=document.getElementById("cperiod").value;
 
 if (classid==0 || secid==0 || adt=='')

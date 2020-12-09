@@ -138,7 +138,7 @@ require_once 'AdmissionModel.php';
                                 <div class="col-xl-4 col-lg-4 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>Contact Number <span>*</span></label>
-                                        <input type="text" id="contactno" name="contactno" placeholder="" class="form-control" onkeypress="return isNumberKey(event);"  onkeyup="restrict_textlength('contactno','10');" required autocomplete="off">
+                                        <input  id="contactno" name="contactno" placeholder="" class="form-control" maxlength="10" type="number"   required autocomplete="off">
                                     </div>
                                 </div>
 

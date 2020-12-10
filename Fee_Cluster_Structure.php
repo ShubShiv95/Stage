@@ -7,7 +7,17 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
+
+$query = "SELECT * FROM `instalment_master_table` WHERE School_Id = " . $_SESSION["SCHOOLID"] . " AND Enabled = 1 ORDER BY `Installment_Id`";
+$data = array();
+$query_prep = $dbhandle->prepare($query);
+$query_prep->execute();
+$result_set = $query_prep->get_result();
+while ($rows = $result_set->fetch_assoc()) {
+    $data[] = $rows;
+}
 ?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -36,6 +46,32 @@ include 'security.php';
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.3.2/css/fixedColumns.dataTables.min.css">
+    <style>
+        /* Ensure that the demo table scrolls */
+        th,
+        td {
+            white-space: nowrap;
+        }
+
+        td {
+            color: #000;
+        }
+
+        div.dataTables_wrapper {
+            width: 90%;
+            margin: 0 auto;
+            border: 1px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+
+
 </head>
 
 <body>
@@ -44,19 +80,20 @@ include 'security.php';
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
         <!-- Header Menu Area Start Here -->
-        <?php include ('includes/navbar.php') ?>
+        <?php include('includes/navbar.php') ?>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-            <?php 
-            include 'includes/sidebar.php'; 
+            <?php
+            include 'includes/sidebar.php';
             ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
+                <?php include('includes/hot-link.php'); ?>
                 <div class="breadcrumbs-area">
-                   
+
                     <ul>
                         <li>
                             <a href="index.html">Home</a>
@@ -72,253 +109,236 @@ include 'security.php';
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Fee cluster Structure</h3>
                             </div>
-                            <!-- <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                    aria-expanded="false">...</a>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                </div>
-                            </div>
-                        </div> -->
-                        <form class="new-added-form school-form aj-new-added-form" action="" method="post">
-                            
-                            <div class="" >
-                                <!--h5 class="text-center">Student Attendence Message</h5-->
-                                <div class="row justify-content-center mb-4">
+                            <form action="./FeeControl_1.php" method="post" id="cluster_form">
+                                <div class="row justify-content-center mb-4 new-added-form school-form aj-new-added-form">
+                                    <input type="text" name="cluster_sender" class="d-none" autocomplete="off">
                                     <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                         <div class="form-group aj-form-group">
                                             <label>Fee Cluster Name <span>*</span></label>
-                                            <input type="text" name="" placeholder="" required="" class="form-control">
-                                            <p class="mt-2 font-size-14 line-height-14">Example : Tuition Fee Or Admission Fee Or Computer Fee , etc</p>
+                                            <select class="select2 fee_cluster" id="fee_cluster_name" name="fee_cluster_name" required>
+                                                <option value="">-- SELECT Cluster --</option>
+                                            </select>
+                                            <p class="mt-2 font-size-14 line-height-14 f_msg">Example : Tuition Fee Or Admission Fee Or Computer Fee , etc</p>
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-lg-4 col-12">
                                         <div class="form-group aj-form-group">
                                             <label>Session *</label>
-                                            <select class="select2" name="f_academic_session"> 
+                                            <select class="select2"  id="f_academic_session" name="f_academic_session" required>
                                                 <option value="">-- SELECT Session --</option>
-                                                <option value="10">2015</option>
-                                                <option value="10">2016</option>
-                                                <option value="10">2017</option>
-                                                <option value="10">2018</option>
-                                                <option value="10">2019</option>
-                                                <option value="10">2020</option>
-                                                
+                                                <?php
+                                                /*$_SESSION["STARTYEAR"] = 2020;
+                                                $_SESSION["ENDYEAR"] = 2021;*/
+                                                $current_session = $_SESSION["STARTYEAR"] . '-' . $_SESSION["ENDYEAR"];
+                                                $next_session = $_SESSION["ENDYEAR"] . '-' . date($_SESSION["ENDYEAR"], strtotime('+1 years'));
+                                                echo '<option value="' . $current_session . '">' . $current_session . '</option>
+                                                    <option value="' . $next_session . '">' . $next_session . '</option>';
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
-                                        <div class="Attendance-staff  aj-scroll-Attendance-staff Fee-name">
-                                            <div class="table-responsive">
-                                                <table class="table display ">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 16%;">Fee Name </th>
-                                                            <th style="width: 12%;">Type</th>
-                                                            <th style="width: 5%;">Apr</th>
-                                                            <th style="width: 5%;">May</th>
-                                                            <th style="width: 5%;">Jun</th>
-                                                            <th style="width: 5%;">jul</th>
-                                                            <th style="width: 5%;">Aug</th>
-                                                            <th style="width: 5%;">Sep</th>
-                                                            <th style="width: 5%;">Oct</th>
-                                                            <th style="width: 5%;">Nov</th>
-                                                            <th style="width: 5%;">Dec</th>
-                                                            <th style="width: 5%;">Jan</th>
-                                                            <th style="width: 5%;">Feb</th>
-                                                            <th style="width: 5%;">Mar</th>
-                                                            <th style="width: 12%;">Total</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="top-position-ss">
-                                                        <tr>
-                                                            <td style="width: 16%;">Admission Fee</td>
-                                                            <td style="width: 12%;"><div class="form-group aj-form-group">
-                                                                    <select class="select2" name="f_blood_group">
-                                                                        <option value="1">1</option>
-                                                                        <option value="2">2</option>
-                                                                        <option value="5">3</option>
-                                                                        <option value="6">4</option>
-                                                                        <option value="3">5</option>
-                                                                        <option value="4">6</option>
-                                                                        <option value="7">7</option>
-                                                                        <option value="8">8</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 12%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 16%;">Tuition  Fee</td>
-                                                            <td style="width: 12%;"><div class="form-group aj-form-group">
-                                                                    <select class="select2" name="f_blood_group">
-                                                                        <option value="1">1</option>
-                                                                        <option value="2">2</option>
-                                                                        <option value="5">3</option>
-                                                                        <option value="6">4</option>
-                                                                        <option value="3">5</option>
-                                                                        <option value="4">6</option>
-                                                                        <option value="7">7</option>
-                                                                        <option value="8">8</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 12%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 16%;">Computer Fee</td>
-                                                            <td style="width: 12%;"><div class="form-group aj-form-group">
-                                                                    <select class="select2" name="f_blood_group">
-                                                                        <option value="1">1</option>
-                                                                        <option value="2">2</option>
-                                                                        <option value="5">3</option>
-                                                                        <option value="6">4</option>
-                                                                        <option value="3">5</option>
-                                                                        <option value="4">6</option>
-                                                                        <option value="7">7</option>
-                                                                        <option value="8">8</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 12%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 16%;">Biology Lab Fee</td>
-                                                            <td style="width: 12%;"><div class="form-group aj-form-group">
-                                                                    <select class="select2" name="f_blood_group">
-                                                                        <option value="1">1</option>
-                                                                        <option value="2">2</option>
-                                                                        <option value="5">3</option>
-                                                                        <option value="6">4</option>
-                                                                        <option value="3">5</option>
-                                                                        <option value="4">6</option>
-                                                                        <option value="7">7</option>
-                                                                        <option value="8">8</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 12%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 16%;">Physices Lab Fee</td>
-                                                            <td style="width: 12%;"><div class="form-group aj-form-group">
-                                                                    <select class="select2" name="f_blood_group">
-                                                                        <option value="1">1</option>
-                                                                        <option value="2">2</option>
-                                                                        <option value="5">3</option>
-                                                                        <option value="6">4</option>
-                                                                        <option value="3">5</option>
-                                                                        <option value="4">6</option>
-                                                                        <option value="7">7</option>
-                                                                        <option value="8">8</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 12%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="width: 28%;" colspan="2" >Total</td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 5%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                            <td style="width: 12%;"><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td>
-                                                        </tr>
-                                                        
-                                                    </tbody>                                                
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="col-lg-12 col-xl-12 col-12 text-right mt-3">
-                                        <button type="button" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit</button>
-                                    </div>  
-                                </div>
-                            </div>
-                        </form>
+                                    <div class="table-responsive" style="height: 50vh; overflow-x: auto;">
+                                        <table class="stripe row-border order-column ">
+                                            <thead class="month_head">
+                                                <tr>
+                                                    <?php foreach ($data as $head) {
+                                                        // echo '<th>'.$head['Installment_Name'].'</th>';
+                                                    } ?>
+                                                    <!--<th>Last name</th>
+                                                <th>Position</th>
+                                                <th>Office</th>
+                                                <th>Age</th>
+                                                <th>Start date</th>
+                                                <th>Salary</th>
+                                                <th>Extn.</th>
+                                                <th>E-mail</th>-->
+                                                </tr>
+                                            </thead>
+                                            <tbody class="fee_head_table">
+                                                <tr>
+                                                    <td>Shad</td>
+                                                    <td>Decker</td>
+                                                    <td>Regional Director</td>
+                                                    <td>Edinburgh</td>
+                                                    <td>51</td>
+                                                    <td>2008/11/13</td>
+                                                    <td>$183,000</td>
+                                                    <td>6373</td>
+                                                    <td>s.decker@datatables.net</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-12 text-right mt-3">
+                                        <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" name="submit">Save</button>
+                                    </div>
+                                    <div class="col-12 form_output"></div>
+                            </form>
+                            <div class="col-lg-12 col-md-12 col-12 row cluster_view pt-4" style="overflow: auto;">
 
-                            
-                            
+                                <table id="example1" class="stripe row-border order-column" style="width:100%; height:30vh">
+                                    <thead>
+
+                                        <tr>
+                                            <th>First name</th>
+                                            <th>Last name</th>
+                                            <th>Position</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Airi</td>
+                                            <td>Satou</td>
+                                            <td>Accountant</td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <!-- Admit Form Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
+                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
                 </footer>
             </div>
         </div>
@@ -345,7 +365,106 @@ include 'security.php';
     <script src="js/myscript.js"></script>
     <script src="js/webcam.min.js"></script>
     <script type="text/javascript" src="js/ajax-function.js"></script>
-  
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                scrollY: 300,
+                scrollX: true,
+                scrollCollapse: true,
+                paging: false,
+                fixedColumns: true
+            });
+        });
+        $(document).ready(function() {
+            $('#example1').DataTable({
+                scrollY: 300,
+                scrollX: true,
+                scrollCollapse: true,
+                paging: false,
+                fixedColumns: true
+            });
+            $(document).on('submit', '#cluster_form', function(event) {
+                event.preventDefault();
+                $.post($(this).attr('action'), $('form#cluster_form').serialize(), function(data) {
+                    $('.form_output').html(data);
+                    $('#cluster_form')[0].reset();
+                }, );
+            });
+            get_clusters();
+
+            function get_clusters() {
+                const url = "./universal_apis.php?get_all_clusters=1";
+                var html_data = '';
+                $.getJSON(url, function(data) {
+                    $.each(data, function(key, value) {
+                        html_data += '<option value="' + value.FC_Id + '">' + value.FC_Name + '</option>';
+                    });
+                    $('.fee_cluster').append(html_data);
+                });
+            }
+            load_fee_heads();
+            var i = 0;
+            j = 0;
+
+            function load_fee_heads() {
+                const url = "./universal_apis.php?get_all_fee_heads=1";
+                var html_data = '';
+                $.getJSON(url, function(data) {
+                    $.each(data, function(key, value) {
+                        html_data += '<tr><td>' + value.Fee_Head_Name + '<input type="text" name="fee_head_id[]" value="' + value.Fee_Head_Id + '" class="d-none"></td><td><div class="form-group aj-form-group"><select class="select2 col-12" name="installment_type[]" required><option value="0">Select</option><option value="12">Monthly</option><option value="6">Bi-Monthly</option><option value="4">Quarterly</option><option value="2">Half-Yearly</option></select></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][0]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="4"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][1]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="5"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][2]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="6"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][3]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="7"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][4]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="8"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][5]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="9"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][6]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="10"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][7]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="11"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][8]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="12"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][9]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="1"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][10]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="2"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][11]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="3"></div></td><td><div class="form-group aj-form-group"><input type="text" name="total[]" placeholder="" class="form-control total_val" value="0" id="month_total' + value.Fee_Head_Id + '"></div></td></tr>';
+                        i = i + 1;j = j + 1;
+                    });
+                    html_data += '<tr><td colspan="2" >Total</td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td></tr>';
+                    $('.fee_head_table').html(html_data);
+                });
+            }
+            $(document).on('blur', '.month_val', function() {
+                const row_id = $(this).attr('id');
+                const new_val = $(this).val();
+                var ground_total = $('#month_total' + row_id + '').val();
+                newground_total = parseInt(ground_total) + parseInt(new_val);
+                $('#month_total' + row_id + '').val(newground_total);
+            });
+            load_month_heads();
+
+            function load_month_heads() {
+                const url = "./universal_apis.php?get_all_months=1";
+                html_data = '';
+                $.getJSON(url, function(response) {
+                    html_data += '<tr><th>Fee Head</th><th>Installment Type</th>';
+                    $.each(response, function(key, value) {
+                        html_data += '<th>' + value.Installment_Name + '</th>';
+                    });
+                    html_data += '<th>Total</th>';
+                    html_data += '</tr>';
+                    $('.month_head').html(html_data);
+                });
+            }
+            $(document).on('change', '#f_academic_session', function() {
+                const cluster_name = $('#fee_cluster_name').val();
+                var cluster_session = $('#f_academic_session').val();   
+                var data = {'check_existing_fee':1,'cluster_name':cluster_name, 'cluster_session':cluster_session};
+                if(cluster_name==''){
+                    alert('Please Type Fee Cluster Name');
+                }
+                else if(cluster_session==''){
+                    alert("Please Select Session")
+                }else{
+                    $.post('./FeeControl_1.php', data, function(data) {
+                        $('.f_msg').html(data);show_fees_templt(cluster_name,cluster_session);
+                    });
+                }
+
+            });
+
+            function show_fees_templt(cluster_name,cluster_session){
+                data = {'get_clust_details':1,'cluster_name':cluster_name,'cluster_session':cluster_session};
+                $.get('./FeeControl_1.php', data, function(data) {
+                        $('.cluster_view').html(data);
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -8,6 +8,7 @@ include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
 ?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -44,19 +45,19 @@ include 'security.php';
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
         <!-- Header Menu Area Start Here -->
-        <?php include ('includes/navbar.php') ?>
+        <?php include('includes/navbar.php') ?>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-            <?php 
-            include 'includes/sidebar.php'; 
+            <?php
+            include 'includes/sidebar.php';
             ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                   
+
                     <ul>
                         <li>
                             <a href="index.html">Home</a>
@@ -72,134 +73,95 @@ include 'security.php';
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Fee cluster Structure</h3>
                             </div>
-                            <!-- <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                    aria-expanded="false">...</a>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                </div>
-                            </div>
-                        </div> -->
-                        <form class="new-added-form school-form aj-new-added-form" action="" method="post">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-10 col-lg-10 col-12 aj-mb-2">
-                                    <div class="" >
-                                        <!--h5 class="text-center">Student Attendence Message</h5-->
-                                        <div class="row  mb-4">
-                                            <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
-                                                <div class="form-group aj-form-group">
-                                                    <label>Fee Name <span>*</span></label>
-                                                    <input type="text" name="" placeholder="" required="" class="form-control">
-                                                    <p class="mt-2 font-size-14 line-height-14">Example : Tuition Fee Or Admission Fee Or Computer Fee , etc</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
-                                                <div class="form-group aj-form-group">
-                                                    <label>Fee Print Label <span>*</span></label>
-                                                    <input type="text" name="" placeholder="" required="" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4 col-lg-4 col-12">
-                                                <div class="form-group aj-form-group">
-                                                    <label>Select Fee Type</label>
-                                                    <select class="select2" name=""> 
-                                                        <option value="">-- Select Fee Type --</option>
-                                                        <option value="10">2015</option>
-                                                        <option value="10">2016</option>
-                                                        <option value="10">2017</option>
-                                                        <option value="10">2018</option>
-                                                        <option value="10">2019</option>
-                                                        <option value="10">2020</option>
-                                                        
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-8 col-lg-8 col-12">
-                                            <div class="form-group aj-form-group text-center">
-                                                <div class="row ml-3">
-                                                    <div class="radio">
-                                                    <span><input type="radio" class="sibling-bs" name="sibling" checked=""> <b>Refundable Fee Amount</b>  </span>
-                                                    </div>
-                                                    <div class="radio ml-5">
-                                                    <span><input type="radio" class="sibling-bs" name="sibling" > <b>Include In Tax Benifit Certificate</b></span>
+                            <form class="new-added-form school-form aj-new-added-form" action="./FeeControl_1.php" method="post" id="fee_header_form">
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-10 col-lg-10 col-12 aj-mb-2 form_output">
+                                    </div>
+                                    <div class="col-xl-10 col-lg-10 col-12 aj-mb-2">
+                                        <div class="">
+                                            <input type="text" name="fee_head_sender" class="d-none" autocomplete="off">
+                                            <div class="row  mb-4">
+                                                <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
+                                                    <div class="form-group aj-form-group">
+                                                        <label>Fee Name <span>*</span></label>
+                                                        <input type="text" name="fee_name" placeholder="" class="form-control">
+                                                        <p class="mt-2 font-size-14 line-height-14">Example : Tuition Fee Or Admission Fee Or Computer Fee , etc</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
+                                                    <div class="form-group aj-form-group">
+                                                        <label>Fee Print Label <span>*</span></label>
+                                                        <input type="text" name="fee_print_label" placeholder="" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-lg-4 col-12">
+                                                    <div class="form-group aj-form-group">
+                                                        <label>Select Fee Type</label>
+                                                        <select class="select2" name="fee_type">
+                                                            <option value="0">-- Select Fee Type --</option>
+                                                            <option value="Monthly">Monthly</option>
+                                                            <option value="Bi-Monthly">Bi-Monthly</option>
+                                                            <option value="Quarterly">Quarterly</option>
+                                                            <option value="Half-Yearly">Half-Yearly</option>
+                                                            <option value="Annually">Annually</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-8 col-lg-8 col-12">
 
-                                            <div class="form-group aj-form-group text-center">
-                                            <div class="row ml-3">
-                                                    <h6 >
-                                                        <div class="radio mr-5">
-                                                        <span><input type="checkbox" class="sibling-bs" name="sibling" checked=""> <b>Refundable Fee Amount</b></span>
+                                                    <div class="form-group aj-form-group text-center">
+                                                        <div class="row ml-3">
+                                                            <h6>
+                                                                <div class="radio mr-5">
+                                                                    <span><input type="checkbox" class="sibling-bs" name="ref_fee_amt" checked="" value="1"> <b>Refundable Fee Amount</b></span>
+                                                                </div>
+                                                            </h6>
+                                                            <h6>
+                                                                <div class="radio">
+                                                                    <span><input type="checkbox" class="sibling-bs" name="tax_benefit" value="1"> <b>Include In Tax Benifit Certificate</b></span>
+                                                                </div>
+                                                            </h6>
                                                         </div>
-                                                    </h6>
-                                                    <h6 >
-                                                        <div class="radio">
-                                                        <span><input type="checkbox" class="sibling-bs" name="sibling"> <b>Include In Tax Benifit Certificate</b></span>
-                                                        </div>
-                                                    </h6>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            </div>
-                                            <div class="col-lg-4 col-xl-4 col-12 text-right mb-5">
-                                                    <button type="button" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit</button>
-                                            </div>  
-                                        <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
-                                            <div class="Attendance-staff  aj-scroll-Attendance-staff">
-                                                <div class="table-responsive">
-                                                    <table class="table display ">
-                                                        <thead>
-                                                            <tr>
-                                                                <th style="width: 25%;">Available Fee Heads.  </th>
-                                                                <th style="width: 15%;">Print Label</th>
-                                                                <th style="width: 20%;">Fee Type </th>
-                                                                <th style="width: 15%;">Refundable </th>
-                                                                <th style="width: 15%;">Tax Benifit</th>
-                                                                <th style="width: 10%;">Discount</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody class="top-position-ss">
-                                                            <tr>
-                                                            <td style="width: 25%;">Admission Fee</td>
-                                                            <td style="width: 15%;">Tuition Fee</td>
-                                                            <td style="width: 20%;">Computer Fee</td>
-                                                            <td style="width: 15%;">Biology Fee</td>
-                                                            <td style="width: 15%;">Physices Fee</td>
-                                                            <td style="width: 10%;">Total Fee</td>
-                                                               
-                                                            </tr>
-                                                            
-                                                        </tbody>                                                
-                                                    </table>
+                                                <div class="col-lg-4 col-xl-4 col-12 text-right mb-5">
+                                                    <button type="submit" name="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit</button>
                                                 </div>
-                                            </div>
-                                        </div>  
-                                        
-                                        </div>
-                                    </div>                                    
+                            </form>
+                            <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
+                                <div class="Attendance-staff  aj-scroll-Attendance-staff">
+                                    <div class="table-responsive fee_head_data">
+                                        <table class="table display ">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 25%;">Available Fee Heads. </th>
+                                                    <th style="width: 15%;">Print Label</th>
+                                                    <th style="width: 20%;">Fee Type </th>
+                                                    <th style="width: 15%;">Refundable </th>
+                                                    <th style="width: 15%;">Tax Benifit</th>
+                                                    <th style="width: 10%;">Added By</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="top-position-ss">
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                               
                             </div>
-                        </form>
-
-                            
-                            
+                        </div>
                     </div>
                 </div>
-                <!-- Admit Form Area End Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
             </div>
+
         </div>
-        <!-- Page Area End Here -->
+    </div>
+    <!-- Admit Form Area End Here -->
+    <footer class="footer-wrap-layout1">
+        <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
+    </footer>
+    </div>
+    </div>
+    <!-- Page Area End Here -->
     </div>
     <!-- jquery-->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -222,7 +184,71 @@ include 'security.php';
     <script src="js/myscript.js"></script>
     <script src="js/webcam.min.js"></script>
     <script type="text/javascript" src="js/ajax-function.js"></script>
-  
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('submit', '#fee_header_form', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'post',
+                    data: $(this).serialize(),
+                    success: function(data) {
+                        $('.form_output').html(data);
+                        load_fee_head();
+                        window.setTimeout(function() {
+                            $('.form_output').html('');
+                        }, 5000);
+                        $('#fee_header_form')[0].reset();
+                    }
+                });
+            });
+            load_fee_head();
+
+            function load_fee_head() {
+                const fee_head_url = "./FeeControl_1.php?getall_feehead=1";
+                $.getJSON(fee_head_url, function(data) {
+                    html_data = '<table class="table display "><thead><tr><th style="width: 25%;">Available Fee Heads.  </th><th style="width: 15%;">Print Label</th><th style="width: 20%;">Fee Type </th><th style="width: 15%;">Refundable </th><th style="width: 15%;">Tax Benifit</th><th style="width: 10%;">Action</th></tr></thead><tbody class="top-position-ss">';
+                    $.each(data, function(key, value) {
+                        if (value.Refundable == 0) {
+                            Refundables = '<button type="button" class="btn btn-danger"><i class="fas fa-times fa-2x"></i></button>';
+                        } else {
+                            Refundables = '<button type="button" class="btn btn-success"><i class="fas fa-check fa-2x"></i></i></button>';
+                        }
+                        if (value.Tax_Benifit == 0) {
+                            Tax_Benifits = '<button type="button" class="btn btn-danger"><i class="fas fa-times fa-2x"></i></button>';
+                        } else {
+                            Tax_Benifits = '<button type="button" class="btn btn-success"><i class="fas fa-check fa-2x"></i></i></button>';
+                        }
+                        html_data += '<tr><td style="width: 25%;">' + value.Fee_Head_Name + '</td><td style="width: 15%;">' + value.Fee_Head_Type + '</td><td style="width: 20%;">' + value.Fee_Print_Lable + '</td><td style="width: 15%;">' + Refundables + '</td><td style="width: 15%;">' + Tax_Benifits + '</td><td style="width: 10%;"><button type="button" class="btn btn-danger delete_feehead_data" id="' + value.Fee_Head_Id + '"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button></td></tr>';
+                    });
+                    html_data += '<tbody>';
+                    $('.fee_head_data').html(html_data);
+                });
+            }
+            $(document).on('click', '.delete_feehead_data', function(event) {
+                event.preventDefault();
+                if (confirm("Are You Sure to Delete This Fee Head?")) {
+                    const fee_head_id = $(this).attr('id');
+                    $.ajax({
+                        url: './FeeControl_1.php',
+                        type: 'post',
+                        data: {
+                            'delete_fee_head': 1,
+                            'fee_head_id': fee_head_id
+                        },
+                        success: function(data) {
+                            $('.form_output').html(data);
+                            load_fee_head();
+                            window.setTimeout(function() {
+                                $('.form_output').html('');
+                            }, 3000)
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

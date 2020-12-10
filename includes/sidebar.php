@@ -47,7 +47,6 @@
                                             </li>
     									</ul>
                                 </li>
-
                                <li class="nav-item sidebar-nav-item">
 									<a href="#" class="nav-link"><span>Subject Settings</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
 									    <ul class="nav sub-group-menu">
@@ -155,7 +154,6 @@
                                         </li>
     									</ul>
                                 </li>
-
                                 
                                 <li class="nav-item sidebar-nav-item">
 									<a href="#" class="nav-link"><span>Reports</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
@@ -166,10 +164,19 @@
     									</ul>
                                 </li>
                                 
-
                               </ul>
                         </li>
-
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Online Class</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="OnlineClass.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Class</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="OnlineClassSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Search Class</a>
+                                </li>
+                              </ul>
+                        </li>                        
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-chat"></i><span>Communication</span></a>
                             <ul class="nav sub-group-menu">
@@ -224,13 +231,9 @@
                                 </li>
                             </ul>
                         </li>
-
-
                         <!--Removed Comment from here -->
  
-
                         
-
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-mortarboard"></i><span>Student Promotion</span></a>
                             <ul class="nav sub-group-menu">
@@ -243,12 +246,10 @@
                                 
                             </ul>
                         </li>
-
                         
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-multiple-users-silhouette"></i><span>Staff Management</span></a>
                             <ul class="nav sub-group-menu">
-
                                 <li class="nav-item">
                                     <a href="AddStaff.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Staff</a>
                                 </li>
@@ -258,7 +259,6 @@
                                 <li class="nav-item">
                                     <a href="ImportStaffAttendance.php" class="nav-link"><i class="fas fa-angle-right"></i>Import Staff Attendance</a>
                                 </li>
-
                                 <li class="nav-item">
                                     <a href="AddStaffAttendanceTiming.php" class="nav-link"><i class="fas fa-angle-right"></i>Update Staff Out Time</a>
                                 </li>
@@ -273,7 +273,6 @@
                                             </li>
     									</ul>
                                 </li>
-
                                 <li class="nav-item sidebar-nav-item">
 									<a href="#" class="nav-link"><span>Reports</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
 									    <ul class="nav sub-group-menu">
@@ -338,7 +337,6 @@
                                 </li>
                             </ul>
                         </li>
-
                         <li class="nav-item">
                             <a href="all-subject.php" class="nav-link"><i
                                     class="flaticon-open-book"></i><span>Subject</span></a>
@@ -456,4 +454,3 @@
                     </ul>
                 </div>
             </div>
- 

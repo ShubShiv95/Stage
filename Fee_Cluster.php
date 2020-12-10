@@ -8,6 +8,7 @@ include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
 ?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -44,19 +45,19 @@ include 'security.php';
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
         <!-- Header Menu Area Start Here -->
-        <?php include ('includes/navbar.php') ?>
+        <?php include('includes/navbar.php') ?>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-            <?php 
-            include 'includes/sidebar.php'; 
+            <?php
+            include 'includes/sidebar.php';
             ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                   
+
                     <ul>
                         <li>
                             <a href="index.html">Home</a>
@@ -86,199 +87,89 @@ include 'security.php';
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form" action="" method="post">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-10 col-lg-10 col-12 aj-mb-2">
-                                    <div class="" >
-                                        <!--h5 class="text-center">Student Attendence Message</h5-->
-                                        <div class="row justify-content-center mb-4">
-                                            <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
-                                                <div class="form-group aj-form-group">
-                                                    <label>Fee Cluster Name <span>*</span></label>
-                                                    <input type="text" name="" placeholder="" required="" class="form-control">
-                                                    <p class="mt-2  font-size-14 line-height-14">Example : Tuition Fee Or Admission Fee Or Computer Fee , etc</p>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
-                                                <div class="form-group aj-form-group">
-                                                    <label>Master Account</label>
-                                                    <select class="select2" name="f_academic_session"> 
-                                                        <option value="">-- Master Account --</option>
-                                                        <option value="1">The ABC Paathshala Account</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6 col-12    ">
-                                                <div class="form-group aj-form-group">
-                                                  <label>Select Applicable Class</label>
-                                                    <div class="chackbox-cl">
-                                                        <ul>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" checked=""> <b>KG-1</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>KG-2</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 1</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 2</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 3</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 4</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 5</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 6 </b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 7</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 8</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 9</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 10</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 11</b></span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="radio">
-                                                                    <span><input type="checkbox" class="sibling-bs" name="sibling" > <b>Class 12</b></span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
+                            <form class="new-added-form school-form aj-new-added-form" id="fee_cluster_form" action="./FeeControl_1.php" method="post">
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-10 col-lg-10 col-12 aj-mb-2">
+                                        <div class="">
+                                            <!--h5 class="text-center">Student Attendence Message</h5-->
+                                            <div class="row justify-content-center mb-4">
+                                                <input type="text" name="cluster_Sender" id="" autocomplete="off" class="d-none">
+                                                <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
+                                                    <div class="form-group aj-form-group">
+                                                        <label>Fee Cluster Name <span>*</span></label>
+                                                        <input type="text" id="cluster_name" name="cluster_name" placeholder="" class="form-control">
+                                                        <p class="mt-2  font-size-14 line-height-14 cluster_check">Example : Tuition Fee Or Admission Fee Or Computer Fee , etc</p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6 col-12 mb-3">
-                                                <div class="form-group aj-form-group">
-                                                    <label>Stream</label>
-                                                    <select class="select2" name="f_academic_session"> 
-                                                        <option value="">-- Stream --</option>
-                                                        <option value="Science">Science</option>
-                                                        <option value="Commerce">Commerce</option>
-                                                        <option value="Arts">Arts</option>
-                                                        <option value="General">General</option>
-                                                        
-                                                        
-                                                    </select>
+                                                <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
+                                                    <div class="form-group aj-form-group">
+                                                        <label>Master Account</label>
+                                                        <select class="select2 show_school" name="cluster_school_name">
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-12 col-xl-12 col-12 text-right mb-3">
-                                                    <button type="button" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit</button>
-                                            </div>
-                                        <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
-                                            <div class="Attendance-staff  aj-scroll-Attendance-staff">
-                                                <div class="table-responsive">
-                                                    <table class="table display ">
-                                                        <thead>
-                                                            <tr>
-                                                                <th style="width: 30%;">Fee Cluster  Name </th>
-                                                                <th style="width: 20%;">Class </th>
-                                                                <th style="width: 20%;">Stream</th>
-                                                                <th style="width: 30%;">School Account</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody class="top-position-ss">
-                                                            <tr>
-                                                                <td style="width: 30%;">Admission Fee</td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 30%;"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 30%;">Tuition  Fee</td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 30%;"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 30%;">Computer  Fee</td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 30%;"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 30%;">Biology Lab  Fee</td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 30%;"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 30%;">Physices Lab  Fee</td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 30%;"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 30%;">Total</td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 20%;"></td>
-                                                                <td style="width: 30%;"></td>
-                                                            </tr>
-                                                            
-                                                        </tbody>                                                
-                                                    </table>
+                                                <div class="col-xl-6 col-lg-6 col-12    ">
+                                                    <div class="form-group aj-form-group">
+                                                        <label>Select Applicable Class</label>
+                                                        <div class="chackbox-cl">
+                                                            <ul class="pop_class_names">
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>    
-                                        </div>
-                                    </div>                                    
-                                </div>
-                               
-                            </div>
-                        </form>
+                                                <div class="col-xl-6 col-lg-6 col-12 mb-3">
+                                                    <div class="form-group aj-form-group">
+                                                        <label>Stream</label>
+                                                        <select class="select2" name="fee_stream">
+                                                            <option value="">-- Stream --</option>
+                                                            <option value="Science">Science</option>
+                                                            <option value="Commerce">Commerce</option>
+                                                            <option value="Arts">Arts</option>
+                                                            <option value="General">General</option>
+                                                        </select>
+                                                        <p class="mt-2  font-size-14 line-height-14 text-primary">Note : Select General If Class Below Than 11</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-xl-12 col-12 text-right mb-3">
+                                                    <button type="submit" name="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit</button>
+                                                </div>
+                                                <div class="col-lg-12 col-xl-12 col-12 mb-3 form_output">
 
-                            
-                            
+                                                </div>
+                            </form>
+                            <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
+                                <div class="Attendance-staff  aj-scroll-Attendance-staff">
+                                    <div class="table-responsive ">
+                                        <table class="table display ">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 25%;">Fee Cluster Name </th>
+                                                    <th style="width: 20%;">Class </th>
+                                                    <th style="width: 20%;">Stream</th>
+                                                    <th style="width: 30%;">School Account</th>
+                                                    <th style="width: 5%;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="top-position-ss display_data">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- Admit Form Area End Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
             </div>
         </div>
-        <!-- Page Area End Here -->
+    </div>
+    <!-- Admit Form Area End Here -->
+    <footer class="footer-wrap-layout1">
+        <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
+    </footer>
+    </div>
+    </div>
+    <!-- Page Area End Here -->
     </div>
     <!-- jquery-->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -301,7 +192,15 @@ include 'security.php';
     <script src="js/myscript.js"></script>
     <script src="js/webcam.min.js"></script>
     <script type="text/javascript" src="js/ajax-function.js"></script>
-  
+    <script>
+        $(document).ready(function() {
+            get_all_schools();function get_all_schools() {const url = './universal_apis.php?get_school_name=1';html_data = '<option value="0">-- Master Account --</option>';$.getJSON(url, function(data){$.each(data, function(key, value){html_data += '<option value="' + value.school_id + '">' + value.school_name + '</option>';});$('.show_school').html(html_data); });}
+            get_all_class();function get_all_class() {const url = './universal_apis.php?getAllClass=1';var html_data = '';$.getJSON(url, function(data) {$.each(data, function(key, value) {html_data += '<li><div class="radio"><span><input type="checkbox" value="' + value.Class_Id + ',' + value.Class_No + '" class="sibling-bs class_name_checks" name="class_names[]"> <b>' + value.Class_Name + '</b></span></div></li>';});$('.pop_class_names').html(html_data);});}
+            $('#cluster_name').blur(function() {const cluster_name = $(this).val();$.ajax({url: './FeeControl_1.php',type: 'get',data: {'check_cluster_name': 1,'cluster_name': cluster_name},success: function(data) {$('.cluster_check').html(data);}});});$(document).on('submit', '#fee_cluster_form', function(event) {event.preventDefault();$.ajax({url: $(this).attr('action'),type: $(this).attr('method'),data: $(this).serialize(),success: function(data) {$('.form_output').html(data);get_cluster_list();}});});get_cluster_list();
+            function get_cluster_list() {const ulr = './FeeControl_1.php?get_all_clusters=1'; var html_data = '';$.getJSON(ulr, function(data) {$.each(data, function(key, value){html_data += '<tr><td style="width: 25%;">'+value.FC_Name+'</td><td style="width: 20%;">'+value.Class_Name+'</td><td style="width: 20%;">'+value.Stream+'</td><td style="width: 30%;">'+value.school_name+'</td><td style="width: 5%"><button class="btn btn-danger del_cluster" id="'+value.FCCL_Id+'"><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';});$('.display_data').html(html_data);});}
+            $(document).on('click','.del_cluster',function(event){event.preventDefault(); var cluster_class_id = $(this).attr('id');if(confirm("Are You Sure To Delete")){$.ajax({url : './FeeControl_1.php',type : 'post',data : {'delete_cluster_class':1,'cluster_class_id':cluster_class_id},success : function(data){$('.form_output').html(data);get_cluster_list(); window.setTimeout(function(){$('.form_output').html('');},3000)}});}});
+        });
+    </script>
 </body>
 
 </html>

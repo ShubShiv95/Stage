@@ -167,13 +167,13 @@
                               </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Online Class</span></a>
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Online Class Session</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="OnlineClass.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Class</a>
+                                    <a href="OnlineClass.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Session</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="OnlineClassSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Search Class</a>
+                                    <a href="OnlineClassSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Search Session</a>
                                 </li>
                               </ul>
                         </li>                        
@@ -306,7 +306,7 @@
                                     <a href="FeeHead.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Head</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="Fee_Collection.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Collection</a>
+                                    <a href="FeeCollection.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Collection</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="Fee_Cluster.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Cluster
@@ -317,7 +317,7 @@
                                        </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="Fee_Cluster_Structure.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Cluster Structure
+                                    <a href="FeeClusterStructure.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Cluster Structure
                                        </a>
                                 </li>
                             </ul>

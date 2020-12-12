@@ -267,7 +267,7 @@ if (isset($_REQUEST['consession_sender'])) {
                 $ins_det = "INSERT INTO `concession_detail_table`(`Concession_Detail_Id`, `Concession_Id`, `Fee_Head_Id`, `Concession_Percent`, `School_Id`,`Updated_By`) VALUES (?,?,?,?,?,?)";
                 $ins_det_prep = $dbhandle->prepare($ins_det);
                 for ($i=0; $i < $total_loops; $i++) { 
-                    if ($_REQUEST['consession'][$i]>0 && $_REQUEST['consession'][$i] <100) {
+                    if ($_REQUEST['consession'][$i]>=0 && $_REQUEST['consession'][$i] <=100) {
                         $concession_detail_id = sequence_number('concession_detail_table',$dbhandle);
                         $ins_det_prep->bind_param("iiiiis",$concession_detail_id,$concession_master_id,$_REQUEST['fee_head_id'][$i],$_REQUEST['consession'][$i],$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
                         $ins_det_ins = $ins_det_prep->execute();
@@ -361,31 +361,74 @@ if (isset($_REQUEST['check_existing_fee'])) {
 if (isset($_REQUEST['get_clust_details'])) 
 {
     $data = '';
-    $data .= '<table class="table"><thead><tr><th>Fee Head</th>';
+    $data .= '<table class="table"><thead><tr><th>Fee Head</th><th>Inst. Type</th>';
     $months_data = get_all_months($dbhandle);
     foreach ($months_data as $months) {
        $data.= '<th>'.$months['Installment_Name'].'</th>';
     }
-    $data .= '</tr></thead><tbody>';
-    $query = "SELECT  fcfl.* FROM fee_cluster_fee_list fcfl WHERE fcfl.FC_Id = ? AND fcfl.Session = ? AND fcfl.School_Id = ? AND fcfl.Enabled = 1 AND fcfl.Instalment_Id=? AND fcfl.Fee_Head_Id=?";
+    $data .= '<th class="text-right">Total Amt</th></tr></thead><tbody>';
+    $query = "SELECT  fcfl.*  FROM fee_cluster_fee_list fcfl WHERE fcfl.FC_Id = ? AND fcfl.Session = ? AND fcfl.School_Id = ? AND fcfl.Enabled = 1 AND fcfl.Instalment_Id=? AND fcfl.Fee_Head_Id=?";
     $query_prep = $dbhandle->prepare($query);
-    $query_fee_head = "SELECT DISTINCT fhlt.* FROM fee_head_list_table fhlt, fee_cluster_fee_list fcfl WHERE fcfl.Fee_Head_Id = fhlt.Fee_Head_Id AND fcfl.Session = ? AND fcfl.School_Id = ? AND fcfl.FC_Id = ?";
+    $query_fee_head = "SELECT DISTINCT fhlt.*, fcfl.Fee_Installment_Type FROM fee_head_list_table fhlt, fee_cluster_fee_list fcfl WHERE fcfl.Fee_Head_Id = fhlt.Fee_Head_Id AND fcfl.Session = ? AND fcfl.School_Id = ? AND fcfl.FC_Id = ?";
     $query_fee_head_prep = $dbhandle->prepare($query_fee_head);
     $query_fee_head_prep->bind_param("sii",$_REQUEST['cluster_session'],$_SESSION["SCHOOLID"],$_REQUEST['cluster_name']);
     $query_fee_head_prep->execute();
     $result_set_head = $query_fee_head_prep->get_result();
+    // total amount of months by fee head id
+    $query_ttl_monthc = "SELECT SUM(`Fee_Amount`) as total_amt FROM fee_cluster_fee_list WHERE FC_Id =? AND Session=? AND Fee_Head_Id = ?";
+    $query_ttl_month_prep = $dbhandle->prepare($query_ttl_monthc);
+
+    // sum of column according months
+    $query_ttl_month = "SELECT SUM(`Fee_Amount`) as total_amt_month FROM fee_cluster_fee_list WHERE FC_Id =? AND Session=? AND Instalment_Id = ?";
+    $query_ttl_monthw_prep = $dbhandle->prepare($query_ttl_month);    
+
     while($row_head = $result_set_head->fetch_assoc()){
-        $data.='<tr><td>'.$row_head['Fee_Head_Name'].'</td>';
+        $data.='<tr><td>'.$row_head['Fee_Head_Name'].'</td><td>';
+        if ($row_head['Fee_Installment_Type']==12) {
+           $fee_type = "Monthly";
+        }elseif($row_head['Fee_Installment_Type']==6){
+            $fee_type= "Bi-Monthly";
+        }
+        elseif($row_head['Fee_Installment_Type']==4){
+            $fee_type= "Quarterly";
+        }
+        elseif($row_head['Fee_Installment_Type']==2){
+            $fee_type= "Half-Yearly";
+        }
+        elseif($row_head['Fee_Installment_Type']==0){
+            $fee_type= "Not Defined";
+        }
+        $data.=''.$fee_type.'</td>';
         foreach ($months_data as $months) {
             $query_prep->bind_param("isiii",$_REQUEST['cluster_name'],$_REQUEST['cluster_session'],$_SESSION["SCHOOLID"],$months['Installment_Id'],$row_head['Fee_Head_Id']);
             $query_prep->execute();$result_set_fee = $query_prep->get_result();
             while ($row_fee = $result_set_fee->fetch_assoc()) {
-                $data.= '<td>'.$row_fee['Fee_Amount'].'</td>';  
+                $data.= '<td>'.$row_fee['Fee_Amount'].'</td>'; 
             }
+         }
+         $query_ttl_month_prep->bind_param("isi",$_REQUEST['cluster_name'],$_REQUEST['cluster_session'],$row_head['Fee_Head_Id']);
+         $query_ttl_month_prep->execute();
+         $result_amt = $query_ttl_month_prep->get_result();
+         while ($row_amt = $result_amt->fetch_assoc()) {
+            $data.='<td class="text-right">'.$row_amt['total_amt'].'</td>';
          }
         $data.='</tr>';
     }
-    $data .= '</tbody>';
+    $data .='<tr><td colspan="2" class="text-center" style="font-weight:bold">Total</td>';
+    foreach ($months_data as $months){
+        $query_ttl_monthw_prep->bind_param("isi",$_REQUEST['cluster_name'],$_REQUEST['cluster_session'],$months['Installment_Id']);
+        $query_ttl_monthw_prep->execute();
+        $result_amtw = $query_ttl_monthw_prep->get_result();  
+        $row_mttl = $result_amtw->fetch_assoc();      
+        $data.='<td>'.$row_mttl['total_amt_month'].'</td>';
+    }
+    $g_ttl = "SELECT SUM(Fee_Amount) as g_ttl FROM fee_cluster_fee_list WHERE FC_Id =? AND Session =? ";
+    $g_ttl_prep = $dbhandle->prepare($g_ttl);
+    $g_ttl_prep->bind_param("is",$_REQUEST['cluster_name'],$_REQUEST['cluster_session']);
+    $g_ttl_prep->execute(); 
+    $result_set_gttl = $g_ttl_prep->get_result();
+    $row_gttl = $result_set_gttl->fetch_assoc();
+    $data.='<td style="font-weight:bold;" class="text-right">'.$row_gttl['g_ttl'].'</td></tr></tbody>';
     echo $data;
 }
 ?>

@@ -7,15 +7,6 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
-
-$query = "SELECT * FROM `instalment_master_table` WHERE School_Id = " . $_SESSION["SCHOOLID"] . " AND Enabled = 1 ORDER BY `Installment_Id`";
-$data = array();
-$query_prep = $dbhandle->prepare($query);
-$query_prep->execute();
-$result_set = $query_prep->get_result();
-while ($rows = $result_set->fetch_assoc()) {
-    $data[] = $rows;
-}
 ?>
 
 <head>
@@ -108,10 +99,10 @@ while ($rows = $result_set->fetch_assoc()) {
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Online Class</h3>
                             </div>
-                            <form action="./FeeControl_1.php" method="post" id="cluster_form">
-                                <div class="row justify-content-center mb-4 new-added-form school-form aj-new-added-form">
+                            <form action="./OnlineClassControl_1.php" method="post" id="online_class_form">
+                                <div class="row justify-content-center mb-4 new-added-form school-form aj-new-added-form" >
                                     <input type="text" name="online_class_sender" class="d-none" autocomplete="off">
-                                    <input type="text" name="add_new_record" id="action" name="action" class="d-none">
+                                    <input type="text" value="add_new_record" id="action" name="action" class="d-none">
                                     <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                         <div class="form-group aj-form-group">
                                             <label>Class Name <span>*</span></label>
@@ -123,9 +114,9 @@ while ($rows = $result_set->fetch_assoc()) {
                                     <div class="col-xl-4 col-lg-4 col-12">
                                         <div class="form-group aj-form-group">
                                             <label>Section *</label>
-                                            <select class="select2 class_section" id="class_section" name="class_section" required>
-                                                <option value="">-- SELECT Section --</option>
-                                            </select>
+                                            <div class="box-scroll ">
+                                                <div class="radio class_section"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-lg-4 col-12">
@@ -155,6 +146,8 @@ while ($rows = $result_set->fetch_assoc()) {
                                             <label>Class Type</label>
                                             <select class="select2 class_type" id="class_type" name="class_type" required>
                                                 <option value="">-- SELECT Type --</option>
+                                                <option value="Zoom">Zoom</option>
+                                                <option value="Google-Meet">Google-Meet</option>
                                             </select>
                                         </div>
                                     </div>
@@ -174,7 +167,7 @@ while ($rows = $result_set->fetch_assoc()) {
                                     <div class="col-xl-4 col-lg-4 col-12 mt-5">
                                         <div class="form-group aj-form-group">
                                             <label>Start Time</label>
-                                            <input type="text" id="start_time" name="start_time" placeholder="" class="form-control">
+                                            <input type="time" id="start_time" name="start_time" placeholder="" class="form-control start_time">
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-lg-4 col-12 mt-5">
@@ -187,19 +180,19 @@ while ($rows = $result_set->fetch_assoc()) {
                                     <div class="col-xl-4 col-lg-4 col-12 mt-5">
                                         <div class="form-group aj-form-group">
                                             <label>End Time</label>
-                                            <input type="text" id="end_time" name="end_time" placeholder="" class="form-control">
+                                            <input type="time" id="end_time" name="end_time" placeholder="" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-lg-4 col-12 mt-5">
                                         <div class="form-group aj-form-group">
                                             <label>Duration</label>
-                                            <input type="text" id="duration" name="duration" placeholder="" class="form-control">
+                                            <input type="number" id="duration" name="duration" placeholder="" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-12 mt-5">
                                         <div class="form-group aj-form-group">
                                             <label>Description</label>
-                                            <textarea type="text" rows="4" name="commAddress" id="commAddress" placeholder="" class="aj-form-control"> </textarea>
+                                            <textarea type="text" rows="4" name="class_description" id="class_description" placeholder="" class="aj-form-control"> </textarea>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-12 mt-5 form_output">
@@ -209,58 +202,6 @@ while ($rows = $result_set->fetch_assoc()) {
                                         <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" name="submit">Save</button>
                                     </div>
                             </form>
-                        </div>
-                        <div class="container mt-5">
-                            <div class="col-lg-12">
-                                <div class="jumbotron jumbotron-fluid shadow" style="border: 1px solid orange;border-radius:10px;">
-                                    <div class="container">
-                                        <h4 class="display-4">Topic</h4>
-                                        <p class="lead">Description</p>
-                                        <hr class="my-2">
-                                        <div class="row">
-                                            <div class="col-md-6"><p>Class (Section) </p></div>
-                                            <div class="col-md-6"><p>Subject</p></div>
-                                            <div class="col-md-6"><p>Start Time</p></div>
-                                            <div class="col-md-6"><p>End Time</p></div>
-                                        </div>
-                                        <p class="lead">
-                                            <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Click To Join</a>
-                                        </p>
-                                        <div class="text-right">
-                                            <button class="btn btn-warning"><i class="fas fa-pencil-alt    "></i></button> 
-                                            <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--<div class="col-lg-12 table-responsive">
-                                <table class="table table-striped table-inverse">
-                                    <thead class="thead-inverse">
-                                        <tr>
-                                            <th>Topic</th>
-                                            <th>Class</th>
-                                            <th>Section</th>
-                                            <th>Subject</th>
-                                            <th>Start Date-Time</th>
-                                            <th>End Date-Time</th>
-                                            <th>Duration</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td scope="row">asd</td>
-                                                <td>asd</td>
-                                                <td>asd</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row">asd</td>
-                                                <td>asd</td>
-                                                <td>sda</td>
-                                            </tr>
-                                        </tbody>
-                                </table>
-                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -310,24 +251,47 @@ while ($rows = $result_set->fetch_assoc()) {
             get_subject();
 
             function get_subject() {
+                $('#subject_list').html('');
                 var url = "./universal_apis.php?getAllSubjects=1";
-                html_data = '<option value="">SELECT Subject</option>';
-                $.getJSON(url, function(response) {
-                    $.each(response, function(key, value) {
-                        html_data += '<option value="' + value.Subject_Id + '">' + value.Subject_Name + '</option>';
+                html_datas = '<option value="">SELECT Subject</option>';
+                $.getJSON(url, function(responsesub) {
+                    $.each(responsesub, function(key, value) {
+                        html_datas += '<option value="' + value.Subject_Id + '">' + value.Subject_Name + '</option>';
                     });
-                    $('.subject_list').html(html_data);
+                    $('.subject_list').html(html_datas);
                 });
             }
+
+            get_staff_list();
+            function get_staff_list() {
+                $('#staff_list').html('');
+                var url = "./universal_apis.php?get_all_staff_list=1";
+                html_datast = '<option value="">SELECT Staff</option>';
+                $.getJSON(url, function(responsestaff) {
+                    $.each(responsestaff, function(key, value) {
+                        html_datast += '<option value="' + value.Staff_Id+ '">' + value.Staff_Name + '</option>';
+                    });
+                    $('.staff_list').html(html_datast);
+                });
+            }
+
             $(document).on('change', '.class_name', function() {
                 var class_id = $(this).val();
                 var url = "./universal_apis.php?getAllSections=1&class_id=" + class_id + "";
-                html_data = '<option value="">-- SELECT Section --</option>';
+                html_data = '';
                 $.getJSON(url, function(response) {
                     $.each(response, function(key, value) {
-                        html_data += '<option value="' + value.Class_Sec_Id + '">' + value.Section + '</option>';
+                        html_data += '<span><input type="checkbox" class="gaurdian-bs" name="class_section[]" checked="" value="' + value.Class_Sec_Id + '"> ' + value.Section + '</span>';
                     });
                     $('.class_section').html(html_data);
+                });
+            });
+            $(document).on('submit','#online_class_form',function(event){
+                event.preventDefault();
+                var data = $(this).serialize();
+                $.post($(this).attr('action'),data,function(response){
+                    $('.form_output').html(response);
+                    //$('#online_class_form')[0].reset();
                 });
             });
         });

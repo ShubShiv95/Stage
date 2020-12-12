@@ -199,4 +199,18 @@ if (isset($_REQUEST['get_all_months'])) {
   }
   echo json_encode($data);
 }
+
+
+/*********** get all staff list from staff master table ***********/
+if (isset($_REQUEST['get_all_staff_list'])) {
+  $staff_query = "SELECT * FROM `staff_master_table` WHERE `School_Id` = ? AND Enabled = 1";
+  $staff_query_prep = $dbhandle->prepare($staff_query);
+  $staff_query_prep->bind_param("i",$_SESSION["SCHOOLID"]);
+  $staff_query_prep->execute();
+  $result_set = $staff_query_prep->get_result();$data=array();
+  while ($staffs = $result_set->fetch_assoc()) {
+   $data[] = $staffs;
+  }
+  echo json_encode($data);
+}
 ?>

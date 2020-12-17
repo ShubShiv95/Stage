@@ -7,15 +7,6 @@ session_start();
 include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
-
-$query = "SELECT * FROM `instalment_master_table` WHERE School_Id = " . $_SESSION["SCHOOLID"] . " AND Enabled = 1 ORDER BY `Installment_Id`";
-$data = array();
-$query_prep = $dbhandle->prepare($query);
-$query_prep->execute();
-$result_set = $query_prep->get_result();
-while ($rows = $result_set->fetch_assoc()) {
-    $data[] = $rows;
-}
 ?>
 
 <head>
@@ -130,7 +121,7 @@ while ($rows = $result_set->fetch_assoc()) {
                                                 /*$_SESSION["STARTYEAR"] = 2020;
                                                 $_SESSION["ENDYEAR"] = 2021;*/
                                                 $current_session = $_SESSION["STARTYEAR"] . '-' . $_SESSION["ENDYEAR"];
-                                                $next_session = $_SESSION["ENDYEAR"] . '-' . date($_SESSION["ENDYEAR"], strtotime('+1 years'));
+                                                $next_session = $_SESSION["ENDYEAR"] . '-' . date('Y',strtotime($_SESSION["ENDYEAR"])+(3600*24*365*2));
                                                 echo '<option value="' . $current_session . '">' . $current_session . '</option>
                                                     <option value="' . $next_session . '">' . $next_session . '</option>';
                                                 ?>
@@ -141,30 +132,11 @@ while ($rows = $result_set->fetch_assoc()) {
                                         <table class="stripe row-border order-column ">
                                             <thead class="month_head">
                                                 <tr>
-                                                    <?php foreach ($data as $head) {
-                                                        // echo '<th>'.$head['Installment_Name'].'</th>';
-                                                    } ?>
-                                                    <!--<th>Last name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                                <th>Extn.</th>
-                                                <th>E-mail</th>-->
                                                 </tr>
                                             </thead>
                                             <tbody class="fee_head_table">
                                                 <tr>
-                                                    <td>Shad</td>
-                                                    <td>Decker</td>
-                                                    <td>Regional Director</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>51</td>
-                                                    <td>2008/11/13</td>
-                                                    <td>$183,000</td>
-                                                    <td>6373</td>
-                                                    <td>s.decker@datatables.net</td>
+
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -269,6 +241,7 @@ while ($rows = $result_set->fetch_assoc()) {
                 newground_total = parseInt(ground_total) + parseInt(new_val);
                 $('#month_total' + row_id + '').val(newground_total);
             });
+
             load_month_heads();
 
             function load_month_heads() {
@@ -284,6 +257,7 @@ while ($rows = $result_set->fetch_assoc()) {
                     $('.month_head').html(html_data);
                 });
             }
+            
             $(document).on('change', '#f_academic_session', function() {
                 const cluster_name = $('#fee_cluster_name').val();
                 var cluster_session = $('#f_academic_session').val();   

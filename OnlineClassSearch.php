@@ -6,16 +6,7 @@ session_start();
 <?php
 include 'dbobj.php';
 include 'errorLog.php';
-include 'security.php';
-
-$query = "SELECT * FROM `instalment_master_table` WHERE School_Id = " . $_SESSION["SCHOOLID"] . " AND Enabled = 1 ORDER BY `Installment_Id`";
-$data = array();
-$query_prep = $dbhandle->prepare($query);
-$query_prep->execute();
-$result_set = $query_prep->get_result();
-while ($rows = $result_set->fetch_assoc()) {
-    $data[] = $rows;
-}
+include 'security.php'; 
 ?>
 
 <head>
@@ -136,14 +127,14 @@ while ($rows = $result_set->fetch_assoc()) {
                                     <div class="col-xl-2 col-lg-2 col-md-2 col-6 aj-mb-2">
                                         <div class="form-group aj-form-group">
                                             <label>Start Date <span>*</span></label>
-                                            <input type="text" id="start_date" name="start_date" placeholder="dd/mm/yyyy" class="form-control air-datepicker future-date" autocomplete="off" data-position='bottom right' required>
+                                            <input type="text" id="start_date" name="start_date" placeholder="dd/mm/yyyy" class="form-control air-datepicker" autocomplete="off" data-position='bottom right' required>
                                             <i class="far fa-calendar-alt"></i>
                                         </div>
                                     </div>
                                     <div class="col-xl-2 col-lg-2 col-md-2 col-6 aj-mb-2">
                                         <div class="form-group aj-form-group">
                                             <label>End Date <span>*</span></label>
-                                            <input type="text" id="end_date" name="end_date" placeholder="dd/mm/yyyy" class="form-control air-datepicker future-date" autocomplete="off" data-position='bottom right' required>
+                                            <input type="text" id="end_date" name="end_date" placeholder="dd/mm/yyyy" class="form-control air-datepicker" autocomplete="off" data-position='bottom right' required>
                                             <i class="far fa-calendar-alt"></i>
                                         </div>
                                     </div>
@@ -151,7 +142,7 @@ while ($rows = $result_set->fetch_assoc()) {
                                         <button type="button" id="search_class" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" name="submit">Search</button>
                                     </div>
                                     <div class="col-xl-12">
-                                        <div class="container mt-5">
+                                        <div class="container mt-5"><span id="test_data"></span>
                                             <div class="col-lg-12 display_search">
                                             </div>
                                         </div>
@@ -222,10 +213,10 @@ while ($rows = $result_set->fetch_assoc()) {
                     var subject_list = $('#subject_list').val();
                     var start_date = $('#start_date').val();
                     var end_date = $('#end_date').val();
-                    display_online_class(class_name, subject_list, start_date,end_date);
+                    display_online_class(class_name, subject_list, start_date, end_date);
                 });
 
-                function display_online_class(class_name, subject, start_date,end_date) {
+                function display_online_class(class_name, subject, start_date, end_date) {
                     var class_data = {
                         'display_online_class': 1,
                         'class': class_name,
@@ -235,6 +226,9 @@ while ($rows = $result_set->fetch_assoc()) {
                     };
                     $.get('./OnlineClassControl_1.php', class_data, function(rec_data) {
                         $('.display_search').html(rec_data);
+                        var set_id = $('.clock_timer').text();
+                        console.log(set_id);
+                        
                     });
                 }
 
@@ -242,9 +236,18 @@ while ($rows = $result_set->fetch_assoc()) {
                     event.preventDefault();
                     const url = $(this).attr('id');
                     const ocl_id = $(this).attr('res_id');
-                    var att_data = {'make_att':1,'ocl_id':ocl_id,url:url};
-                    $.post('./OnlineClassControl_1.php',att_data,function(){
-                        window.open(url);
+                    var current_time = "<?php date_default_timezone_set('Asia/Kolkata');
+                                        echo date('Y-m-d H:i:s'); ?>";
+                    /*if(){
+                        
+                    }*/
+                    var att_data = {
+                        'make_att': 1,
+                        'ocl_id': ocl_id,
+                        url: url
+                    };
+                    $.post('./OnlineClassControl_1.php', att_data, function(data) {
+                        window.open(data);
                     });
                 });
                 $(document).on('click', '.btn_delete', function(e) {
@@ -264,6 +267,17 @@ while ($rows = $result_set->fetch_assoc()) {
                         });
                     }
                 });
+
+
+                /*function check_tr_fl(set_id) {
+                    var data = {
+                        'set_id': set_id
+                    };
+                    $.get('./heart_bead.php', data, function(response) {
+                        $('#test_data').html(response);
+                    });
+                }*/
+
             });
         </script>
 </body>

@@ -18,7 +18,7 @@ function check_existing_structure($dbhandle,$cluster_name,$cluster_session,$scho
 
 /*********** get all  months *************/
 function get_all_months($dbhandle){
-    $query = "SELECT * FROM `instalment_master_table` ORDER BY Installment_Id";
+    $query = "SELECT * FROM `installment_master_table` ORDER BY Installment_Id";
     $query_prep = $dbhandle->prepare($query);
     $query_prep->execute();$data = array();
     $result_set = $query_prep->get_result();
@@ -243,8 +243,10 @@ if (isset($_REQUEST['delete_cluster_class'])) {
 }
 
 /******************* submit consession form *******************/
-if (isset($_REQUEST['consession_sender'])) {
-    if (empty($_REQUEST['consession_sender'])) {
+if (isset($_REQUEST['consession_sender'])) 
+{
+    if (empty($_REQUEST['consession_sender'])) 
+    {
         mysqli_autocommit($dbhandle, false);  
         $consession_name = $_REQUEST['consession_name'];
         $consession_session = $_REQUEST['consession_session'];
@@ -256,34 +258,54 @@ if (isset($_REQUEST['consession_sender'])) {
             echo '<p class="text-danger">Please Select Session</p>';
         }
         if (!empty($consession_name) && !empty($consession_session)) {
-            // inserting into master table
-            $concession_master_id = sequence_number('concession_master_table',$dbhandle);
-            $ins_query = "INSERT INTO `concession_master_table`(`Concession_Id`, `Concession_Name`, `School_Id`, `Updated_By`) VALUES (?,?,?,?)";
-            $ins_query_prep = $dbhandle->prepare($ins_query);
-            $ins_query_prep->bind_param("isis",$concession_master_id,$consession_name,$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
-            if ($ins_query_prep->execute()) {
-                // inserting into consession details
-                $total_loops = count($_REQUEST['consession']);
-                $ins_det = "INSERT INTO `concession_detail_table`(`Concession_Detail_Id`, `Concession_Id`, `Fee_Head_Id`, `Concession_Percent`, `School_Id`,`Updated_By`) VALUES (?,?,?,?,?,?)";
-                $ins_det_prep = $dbhandle->prepare($ins_det);
-                for ($i=0; $i < $total_loops; $i++) { 
-                    if ($_REQUEST['consession'][$i]>=0 && $_REQUEST['consession'][$i] <=100) {
-                        $concession_detail_id = sequence_number('concession_detail_table',$dbhandle);
-                        $ins_det_prep->bind_param("iiiiis",$concession_detail_id,$concession_master_id,$_REQUEST['fee_head_id'][$i],$_REQUEST['consession'][$i],$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
-                        $ins_det_ins = $ins_det_prep->execute();
+            // check existing concession fee name
+            $query_check_con = "SELECT * FROM `concession_master_table` WHERE `Concession_Name` = ? AND `School_Id` = ?";
+            $query_check_con_prep = $dbhandle->prepare($query_check_con);
+            $query_check_con_prep->bind_param("si",$_REQUEST['consession_name'],$_SESSION["SCHOOLID"]);
+            $query_check_con_prep->execute();
+            $result_conc = $query_check_con_prep->get_result();
+            $row_cons = $result_conc->fetch_assoc();
+            if ($result_conc->num_rows >0) 
+            {
+                echo '<p class="text-danger">Consession Already Existed With Same Name Try Another</p>';
+            }
+            else
+            {
+               // echo $row_cons['Concession_Id'];
+                // inserting into master table
+                $concession_master_id = sequence_number('concession_master_table',$dbhandle);
+                $ins_query = "INSERT INTO `concession_master_table`(`Concession_Id`, `Concession_Name`, `School_Id`, `Updated_By`) VALUES (?,?,?,?)";
+                $ins_query_prep = $dbhandle->prepare($ins_query);
+                $ins_query_prep->bind_param("isis",$concession_master_id,$consession_name,$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
+                if ($ins_query_prep->execute()) 
+                {
+                    // inserting into consession details
+                   $total_loops = count($_REQUEST['consession']);
+                    $ins_det = "INSERT INTO `concession_detail_table`(`Concession_Detail_Id`, `Concession_Id`, `Fee_Head_Id`, `Concession_Percent`, `School_Id`,`Updated_By`,`Session`) VALUES (?,?,?,?,?,?,?)";
+                    $ins_det_prep = $dbhandle->prepare($ins_det);
+                    for ($i=0; $i < $total_loops; $i++) { 
+                        if ($_REQUEST['consession'][$i]>=0 && $_REQUEST['consession'][$i] <=100) {
+                            $concession_detail_id = sequence_number('concession_detail_table',$dbhandle);
+                            $ins_det_prep->bind_param("iiiiiss",$concession_detail_id,$concession_master_id,$_REQUEST['fee_head_id'][$i],$_REQUEST['consession'][$i],$_SESSION["SCHOOLID"],$_SESSION["LOGINID"],$_REQUEST['consession_session']);
+                            $ins_det_ins = $ins_det_prep->execute();
+                        }
                     }
-                }
-                echo '<p class="text-success">Consession Has Been Saved Successfully</p>';
-            }else{
-                $error_msg = $ins_query_prep->error;
-                $el = new LogMessage();
-                $sql = $ins_query;
-                //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                $el->write_log_message('Consession Master ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
-                //$_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
-                mysqli_rollback($dbhandle);
-                $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
-                die;   
+                    if ($ins_det_ins) {
+                        echo '<p class="text-success">Consession Has Been Saved Successfully</p>';
+                    }
+                    else
+                    {
+                        $error_msg = $ins_query_prep->error;
+                        $el = new LogMessage();
+                        $sql = $ins_query;
+                        //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                        $el->write_log_message('Consession Master ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                        //$_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+                        mysqli_rollback($dbhandle);
+                        $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
+                        die; 
+                    }
+                }    
             }
         }
         mysqli_commit($dbhandle);
@@ -325,7 +347,7 @@ if (isset($_REQUEST['cluster_sender'])) {
          // total loop counting
         $total_loops_down =  count($_REQUEST['installment_type']);
         
-        $insert_query = "INSERT INTO `fee_cluster_fee_list`(`FCFL_Id`, `FC_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Instalment_Id`, `Fee_Amount`, `Session`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?,?)";
+        $insert_query = "INSERT INTO `fee_cluster_fee_list`(`FCFL_Id`, `FC_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Session`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?,?)";
         $insert_query_perp = $dbhandle->prepare($insert_query);
         for ($i=0; $i < $total_loops_down; $i++) 
         { 
@@ -367,7 +389,7 @@ if (isset($_REQUEST['get_clust_details']))
        $data.= '<th>'.$months['Installment_Name'].'</th>';
     }
     $data .= '<th class="text-right">Total Amt</th></tr></thead><tbody>';
-    $query = "SELECT  fcfl.*  FROM fee_cluster_fee_list fcfl WHERE fcfl.FC_Id = ? AND fcfl.Session = ? AND fcfl.School_Id = ? AND fcfl.Enabled = 1 AND fcfl.Instalment_Id=? AND fcfl.Fee_Head_Id=?";
+    $query = "SELECT  fcfl.*  FROM fee_cluster_fee_list fcfl WHERE fcfl.FC_Id = ? AND fcfl.Session = ? AND fcfl.School_Id = ? AND fcfl.Enabled = 1 AND fcfl.Installment_Id=? AND fcfl.Fee_Head_Id=?";
     $query_prep = $dbhandle->prepare($query);
     $query_fee_head = "SELECT DISTINCT fhlt.*, fcfl.Fee_Installment_Type FROM fee_head_list_table fhlt, fee_cluster_fee_list fcfl WHERE fcfl.Fee_Head_Id = fhlt.Fee_Head_Id AND fcfl.Session = ? AND fcfl.School_Id = ? AND fcfl.FC_Id = ?";
     $query_fee_head_prep = $dbhandle->prepare($query_fee_head);
@@ -379,7 +401,7 @@ if (isset($_REQUEST['get_clust_details']))
     $query_ttl_month_prep = $dbhandle->prepare($query_ttl_monthc);
 
     // sum of column according months
-    $query_ttl_month = "SELECT SUM(`Fee_Amount`) as total_amt_month FROM fee_cluster_fee_list WHERE FC_Id =? AND Session=? AND Instalment_Id = ?";
+    $query_ttl_month = "SELECT SUM(`Fee_Amount`) as total_amt_month FROM fee_cluster_fee_list WHERE FC_Id =? AND Session=? AND Installment_Id = ?";
     $query_ttl_monthw_prep = $dbhandle->prepare($query_ttl_month);    
 
     while($row_head = $result_set_head->fetch_assoc()){

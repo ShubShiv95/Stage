@@ -53,7 +53,7 @@ require_once './includes/header.php';
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="image">
-                                    <img src="img/avtar.png" class="pro-image main_img">
+                                    <img src="img/avtar.png" class="pro-image main_img w-75">
                                 </div>
                             </div>
                             <div class="col-lg-9 content-fild">
@@ -107,52 +107,119 @@ require_once './includes/header.php';
                 </div>';
                 }
                 ?>
-                <div class="tab-pane fade show" id="tab2" role="tabpanel">
+                <div class="tab-pane fade show" id="tab2" role="tabpanel" style="height: 40vh; overflow:auto; scroll:auto">
                     <div class="studet-360-form">
                         <h3 class="text-center">Student Information</h3>
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 text-center">
                                 <div class="image">
-                                    <img src="img/avtar.png" class="pro-image back_img">
+                                    <img src="img/avtar.png" class="pro-image back_img w-50">
                                 </div>
                             </div>
                             <div class="col-lg-9">
                                 <div class="content-fild row">
-                                    <div class="fild-row left col-6">
-                                        <div class="name">First Name : <span class="content first_name">Ajay</span></div>
+                                    <div class="fild-row left col-12 mt-3 border">
+                                        <div class="name">Name : <span class="content first_name">Ajay</span></div>
                                     </div>
-                                    <div class="fild-row right col-6">
-                                        <div class="name">Last Name : <span class="content last_name">Ajay</span></div>
-                                    </div>
-                                    <div class="fild-row left col-6">
-                                        <div class="name">Class : <span class="content class">Ajay</span></div>
-                                    </div>
-                                    <div class="fild-row right col-6">
-                                        <div class="name">Section : <span class="content section">Ajay</span></div>
-                                    </div>
-                                    <div class="fild-row left col-6">
-                                        <div class="name">Roll : <span class="content roll">Ajay</span></div>
-                                    </div>
-                                    <div class="fild-row right col-6">
-                                        <div class="name">Gender : <span class="content gender">Ajay</span></div>
-                                    </div>
-                                    <div class="fild-row left col-6">
-                                        <div class="name">Father Name : <span class="content father_name">Ajay</span></div>
-                                    </div>
-                                    <div class="fild-row left col-6">
-                                        <div class="name">Mother Name : <span class="content mother_name">Ajay</span></div>
-                                    </div>
-                                    <div class="fild-row left col-6">
+                                    <div class="fild-row left col-6 mt-3 border">
                                         <div class="name">Date Of Birth : <span class="content dob">Ajay</span></div>
                                     </div>
-                                    <div class="fild-row left col-6">
-                                        <div class="name">Father Occupation : <span class="content father_occupation">Ajay</span></div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Class : <span class="content class">Ajay</span></div>
                                     </div>
-                                    <div class="fild-row left col-6">
+                                    <div class="fild-row right col-6 mt-3 border">
+                                        <div class="name">Section : <span class="content section">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Roll : <span class="content roll">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row right col-6 mt-3 border">
+                                        <div class="name">Gender : <span class="content gender">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
                                         <div class="name">Religion : <span class="content religion">Ajay</span></div>
                                     </div>
-                                    <div class="fild-row left col-6">
-                                        <div class="name">Email : <span class="content email">Ajay</span></div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Category : <span class="content category">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Discount Category : <span class="content dis_category">Ajay</span></div>
+                                    </div>
+
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Session : <span class="content session">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Session Start : <span class="content session_st">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Session End : <span class="content session_en">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Mother Tongue : <span class="content mother_tongue">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Locality : <span class="content locality">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">AADHAR : <span class="content aadhar">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Blood Group : <span class="content b_group">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Nationality : <span class="content nationality">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Comm. Add. : <span class="content com_add">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Res. Add. : <span class="content res_add">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-12 mt-3 border" style="background-color: #ffae01!important;">
+                                        <div class="name">Father Name : <span class="content father_name">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Father Occupation : <span class="content father_occupation">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Father Qualification : <span class="content father_qualification">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Father Contact : <span class="content father_contact">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Father Email : <span class="content father_email">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-12 mt-3 border">
+                                        <div class="name">Father Add : <span class="content father_add">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-12 mt-3 border" style="background-color: #ffae01!important;">
+                                        <div class="name">Mother Name : <span class="content mother_name">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Mother Occupation : <span class="content mother_occupation">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Mother Qualification : <span class="content mother_qualification">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Mother Contact : <span class="content mother_contact">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-6 mt-3 border">
+                                        <div class="name">Mother Email : <span class="content mother_email">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-12 mt-3 border">
+                                        <div class="name">Mother Add : <span class="content mother_add">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-4 mt-3 border">
+                                        <div class="name">SMS Contact : <span class="content sms_contact">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-4 mt-3 border">
+                                        <div class="name">Whatsapp Contact : <span class="content whatsapp_contact">Ajay</span></div>
+                                    </div>
+                                    <div class="fild-row left col-4 mt-3 border">
+                                        <div class="name">Email : <span class="content email_add">Ajay</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -197,72 +264,6 @@ require_once './includes/header.php';
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="content-fild">
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">First Name :</div>
-                                            <div class="content">Ajay</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Last Name :</div>
-                                            <div class="content">Kushwah</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Class :</div>
-                                            <div class="content">3</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Section :</div>
-                                            <div class="content">A</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Roll :</div>
-                                            <div class="content">#2909</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Gender :</div>
-                                            <div class="content">Male</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Mother Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Date Of Birth :</div>
-                                            <div class="content">January 31, 1990</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Occupation :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Religion :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Email :</div>
-                                            <div class="content">test@gmail.com</div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -273,72 +274,6 @@ require_once './includes/header.php';
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="content-fild">
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">First Name :</div>
-                                            <div class="content">Ajay</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Last Name :</div>
-                                            <div class="content">Kushwah</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Class :</div>
-                                            <div class="content">3</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Section :</div>
-                                            <div class="content">A</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Roll :</div>
-                                            <div class="content">#2909</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Gender :</div>
-                                            <div class="content">Male</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Mother Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Date Of Birth :</div>
-                                            <div class="content">January 31, 1990</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Occupation :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Religion :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Email :</div>
-                                            <div class="content">test@gmail.com</div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -349,72 +284,6 @@ require_once './includes/header.php';
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="content-fild">
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">First Name :</div>
-                                            <div class="content">Ajay</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Last Name :</div>
-                                            <div class="content">Kushwah</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Class :</div>
-                                            <div class="content">3</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Section :</div>
-                                            <div class="content">A</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Roll :</div>
-                                            <div class="content">#2909</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Gender :</div>
-                                            <div class="content">Male</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Mother Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Date Of Birth :</div>
-                                            <div class="content">January 31, 1990</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Occupation :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Religion :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Email :</div>
-                                            <div class="content">test@gmail.com</div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -425,72 +294,6 @@ require_once './includes/header.php';
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="content-fild">
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">First Name :</div>
-                                            <div class="content">Ajay</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Last Name :</div>
-                                            <div class="content">Kushwah</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Class :</div>
-                                            <div class="content">3</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Section :</div>
-                                            <div class="content">A</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Roll :</div>
-                                            <div class="content">#2909</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Gender :</div>
-                                            <div class="content">Male</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Mother Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Date Of Birth :</div>
-                                            <div class="content">January 31, 1990</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Occupation :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Religion :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Email :</div>
-                                            <div class="content">test@gmail.com</div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -501,72 +304,6 @@ require_once './includes/header.php';
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="content-fild">
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">First Name :</div>
-                                            <div class="content">Ajay</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Last Name :</div>
-                                            <div class="content">Kushwah</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Class :</div>
-                                            <div class="content">3</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Section :</div>
-                                            <div class="content">A</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Roll :</div>
-                                            <div class="content">#2909</div>
-                                        </div>
-                                        <div class="fild-row right">
-                                            <div class="name pl-5">Gender :</div>
-                                            <div class="content">Male</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Mother Name :</div>
-                                            <div class="content">---</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Date Of Birth :</div>
-                                            <div class="content">January 31, 1990</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Father Occupation :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-2">
-                                        <div class="fild-row left">
-                                            <div class="name">Religion :</div>
-                                            <div class="content">Banker</div>
-                                        </div>
-                                    </div>
-                                    <div class="min-row color-1">
-                                        <div class="fild-row left">
-                                            <div class="name">Email :</div>
-                                            <div class="content">test@gmail.com</div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -581,21 +318,25 @@ require_once './includes/header.php';
     .name {
         font-weight: bold;
     }
-    .fc-basicWeek-button, .fc-month-button, .fc-basicDay-button{
+
+    .fc-basicWeek-button,
+    .fc-month-button,
+    .fc-basicDay-button {
         display: none;
     }
-    .fc-day-number{
-        font-size: 2.5rem!important; 
+
+    .fc-day-number {
+        font-size: 2.5rem !important;
     }
-    .fc-sun .fc-day-number{
-    color: #ff9800 !important;
+
+    .fc-sun .fc-day-number {
+        color: #ff9800 !important;
     }
 </style>
 <?php require_once './includes/scripts.php'; ?>
 <script>
     $(document).ready(function() {
         var dates = $('.fc-past').text();
-        console.log(dates);
         // get all classes through API
         const url = "./universal_apis.php?getAllClass=1";
         var html_class_d = '<option value="">Please Select Class</option>';
@@ -635,7 +376,12 @@ require_once './includes/header.php';
             var html_table = '';
             $.getJSON(url, function(data) {
                 $.each(data, function(key, value) {
-                    html_table += '<tr><td>' + value.First_Name + ' ' + value.Last_Name + '</td><td>' + value.Father_Name + '</td><td>' + value.DOB + '</td><td><button class="btn btn-warning load_student_data" id="' + value.Student_Id + '"><i class="fas fa-binoculars fa-2x"></i></button></td></tr>';
+                    if (value.Middle_Name == null) {
+                        var name_studs = value.First_Name + ' ' + value.Last_Name;
+                    } else {
+                        var name_studs = value.First_Name + ' ' + value.Middle_Name + ' ' + value.Last_Name;
+                    }
+                    html_table += '<tr><td>' + name_studs + '</td><td>' + value.Father_Name + '</td><td>' + value.DOB + '</td><td><button class="btn btn-warning load_student_data" id="' + value.Student_Id + '"><i class="fas fa-binoculars fa-2x"></i></button></td></tr>';
                 });
                 $('.append_stud_data').html(html_table);
             });
@@ -662,18 +408,49 @@ require_once './includes/header.php';
             var url = "./universal_apis.php?get_stud_details_by_name=1&search_type=1&stud_data=" + student_id + "";
             $.getJSON(url, function(data) {
                 $.each(data, function(key, value) {
-                    $('.first_name').text(value.First_Name);
-                    $('.last_name').text(value.Last_Name);
+                    if (value.Middle_Name == null) {
+                        var name_studs = value.First_Name + ' ' + value.Last_Name;
+                    } else {
+                        var name_studs = value.First_Name + ' ' + value.Middle_Name + ' ' + value.Last_Name;
+                    }
+                    $('.first_name').text(name_studs);
                     $('.class').text(value.Class_Name);
                     $('.section').text(value.Section);
                     $('.roll').text(value.Roll_No);
                     $('.gender').text(value.Gender);
                     $('.father_name').text(value.Father_Name);
                     $('.mother_name').text(value.Mother_Name);
+                    $('.dis_category').text(value.Discount_Category);
                     $('.dob').text(value.DOB);
                     $('.father_occupation').text(value.Father_Occupation);
                     $('.religion').text(value.Religion);
                     $('.email').text(value.Email_Id);
+                    $('.session').text(value.Session);
+                    $('.session_st').text(value.Session_Start_Year);
+                    $('.session_en').text(value.Session_End_Year);
+                    $('.tongue').text(value.Mother_Tongue);
+                    $('.tongue').text(value.Mother_Tongue);
+                    $('.locality').text(value.Locality);
+                    $('.aadhar').text(value.Aadhar_No);
+                    $('.b_group').text(value.Blood_Group);
+                    $('.nationality').text(value.Nationality);
+                    $('.com_add').text(value.Comm_Address + ', ' + value.Comm_Add_Country + ', ' + value.Comm_Add_State + ', ' + value.Comm_Add_City_Dist + ', ' + value.Comm_Add_Pincode + ', Contact :' + value.Comm_Add_ContactNo);
+                    $('.res_add').text(value.Resid_Address + ', ' + value.Resid_Add_Country + ', ' + value.Resid_Add_State + ', ' + value.Resid_Add_City_Dist + ', ' + value.Resid_Add_Pincode + ', Contact :' + value.Resid_Add_ContactNo);
+                    $('.father_name').text(value.Father_Name);
+                    $('.father_occupation').text(value.Father_Occupation);
+                    $('.father_qualification').text(value.Father_Qualification);
+                    $('.father_add').text(value.Father_Org_Name + ', ' + value.Father_Org_Add + ', ' + value.Father_City + ', ' + value.Father_State + ', ' + value.Father_Country + ', ' + value.Father_Pincode);
+                    $('.father_email').text(value.Father_Email);
+                    $('.father_contact').text(value.Father_Contact_No);
+                    $('.mother_name').text(value.Mother_Name);
+                    $('.mother_occupation').text(value.Mother_Occupation);
+                    $('.mother_qualification').text(value.Mother_Qualification);
+                    $('.mother_add').text(value.Mother_Org_Name + ', ' + value.Mother_Org_Add + ', ' + value.Mother_City + ', ' + value.Mother_State + ', ' + value.Mother_Country + ', ' + value.Mother_Pincode);
+                    $('.father_email').text(value.Mother_Email);
+                    $('.father_contact').text(value.Mother_Contact_No);
+                    $('.sms_contact').text(value.SMS_Contact_No);
+                    $('.whatsapp_contact').text(value.Whatsapp_Contact_No);
+                    $('.email_add').text(value.Email_Id);
                     if (value.Student_Image != null) {
                         url = './app_images/AdmissionDocuments/' + value.Admission_Id + '_AdmissionDocs/' + value.Student_Image;
                         $('.main_img').attr('src', url);

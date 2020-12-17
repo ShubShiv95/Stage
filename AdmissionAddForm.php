@@ -8,15 +8,7 @@
         include 'errorLog.php';
         include 'security.php';
         include 'AdmissionModel.php';
-
-        $classDropdownValue = "";
-        $sql='select cmt.Class_Id,cmt.class_name from class_master_table cmt where enabled=1 and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by Class_No";
-                                
-        $result=mysqli_query($dbhandle,$sql);                     
-        while($row=mysqli_fetch_assoc($result))
-        {
-            $classDropdownValue = '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . '</option>' . $classDropdownValue;
-        }
+        require_once './GlobalModel.php';
     ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -104,20 +96,26 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Class <span>*</span></label>
-                                        <select class="select2" name="studclassToApply" id="studclassToApply">
+                                        <select class="select2 studclassToApply" name="studclassToApply" id="studclassToApply">
                                         <option value="0">Select Class</option>
                                        
                                         </select>
                                     </div>
-                                    <div class="form-group aj-form-group">
+                                    <!--<div class="form-group aj-form-group">
                                         <label>Section</label>
-                                        <!-- <select class="select2" name="f_Section"  readonly=true>
-                                         </select> -->
-                                    </div>
+                                        <select class="select2" name="f_Section"  readonly=true>
+                                         </select>
+                                    </div>-->
 
                                    <div class="form-group aj-form-group">
-                                        <label>Roll No.</label>
+                                        <label>Stream</label>
                                         <select class="select2" name="f_Gender"  readonly> 
+                                            <option value="0">Select Stream</option>
+                                            <?php
+                                                foreach ($GLOBAL_CLASS_STREAM as $stream) {
+                                                    echo '<option value="'.$stream.'">'.$stream.'</option>';
+                                                }
+                                            ?>
                                         </select>
                                     </div>
                                     
@@ -159,15 +157,7 @@
                                     </div>
                                     <div class="form-group aj-form-group">
                                         <label>Discount Category <span>*</span></label>
-                                        <select class="select2" name="studDiscCat" id="studDiscCat">
-                                        <?php
-                                                $string = "";
-                                                foreach($GLOBAL_DISCOUNT_CAT as $x=>$x_value)
-                                                {
-                                                    $string =  '<option value="' . $x . '">' .$x_value .'</option>' . $string;
-                                                }
-                                                echo $string;
-                                        ?>      
+                                        <select class="select2" name="studDiscCat" id="studDiscCat">   
                                     </select>
                                     </div>
                                     <div class="form-group aj-form-group">
@@ -305,10 +295,7 @@
                                 <div class="col-xl-3 col-lg-3 col-12 ">
                                     <div class="form-group aj-form-group">
                                         <label>Class</label>
-                                        <select class="select2" name="studClass" id="studClass">
-                                        <?php
-                                            echo $classDropdownValue;
-                                         ?> 			                                
+                                        <select class="select2" name="studClass" id="studClass">		
                                        </select>
                                     </div>
                                 </div>
@@ -357,6 +344,7 @@
                                 <h3 class="mb-4">Residential Address</h3>
                             </div>
                             <div class="row">
+                                <div class="col-12 aj-mb-2"><p class="text-primary">Same As Communication Address <span><input type="checkbox" name="copy_address" id="copy_address"></span></p></div>
                                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                     <div class="form-group aj-form-group">
                                         <label>Residential Address<span>*</span></label>
@@ -699,10 +687,10 @@
                                         <!-- <span> Any Sibling in this School ?(Real brother/sister)</span> -->
                                         <div class="row-chang">
                                             <div class="radio">
-                                              <span><input type="radio" class="gaurdian-bs" name="gaurdian" checked>Father</span>
+                                              <span><input type="radio" class="gaurdian-f" name="gaurdian" checked>Father</span>
                                             </div>
                                             <div class="radio">
-                                              <span><input type="radio" class="gaurdian-bs" name="gaurdian">Mother</span>
+                                              <span><input type="radio" class="gaurdian-f" name="gaurdian">Mother</span>
                                             </div>
                                             <div class="radio">
                                               <span><input type="radio" class="gaurdian-bs" name="gaurdian">Others </span>
@@ -960,13 +948,15 @@
 	         var a= $('input[name="gaurdian"]:checked').val();
 	         var id = $(this).attr('id')
 	          if(a == 'on'){
-	            $('.active-div-aa').slideToggle('slow');
+	            $('.active-div-aa').slideDown('slow');
 	            
 	          }else{
-	            
+	            $('.active-div-aa').slideUp('slow');
 	          }
-	        })
-        
+	        });
+        $('.gaurdian-f').change(function(){
+            $('.active-div-aa').slideUp('slow');
+        });
         $(document).ready(function(){
             $("#studentAge").focusin(function(){
                 var dob = $('#studentDOB').val();
@@ -1022,26 +1012,60 @@
         });
 
         getAllClass();
-            function getAllClass(){
-                $.ajax({
-                    url : './universal_apis.php',
-                    type : 'get',
-                    data : {'getAllClass':1},
-                    dataType : 'json',
-                    success : function(data){
-                      var classData = JSON.parse(JSON.stringify(data));
-                      var html = '<option value="">Select</option>';
-                      for (let i = 0; i < classData.length; i++) {
+        function getAllClass(){
+            $.ajax({
+                url : './universal_apis.php',
+                type : 'get',
+                data : {'getAllClass':1},
+                dataType : 'json',
+                success : function(data){
+                    var classData = JSON.parse(JSON.stringify(data));
+                    var html = '<option value="">Select</option>';
+                    for (let i = 0; i < classData.length; i++) {
                           const classRow = classData[i];
                           html += '<option value="'+classRow.Class_Id+'">'+classRow.Class_Name +'</option>';
-                      }
-                      $('#studclassToApply').html(html);
-                      $('#studClass').html(html);     
-                      $('#sibling1Class').html(html); 
-                      $('#sibling2Class').html(html);               
                     }
+                    $('.studclassToApply').html(html);
+                    $('#studClass').html(html);     
+                    $('#sibling1Class').html(html); 
+                    $('#sibling2Class').html(html);               
+                }
+            });
+        }
+        get_discount();
+        function get_discount(){
+            var disc_data = '<option value="0">Select Discount Category</option>';
+            const discount_url = './universal_apis.php?get_all_discounts=1';
+            $.getJSON(discount_url, function(disc_resp){
+                $.each(disc_resp,function(key,value){
+                    disc_data += '<option value="'+value.Concession_Id+'">'+value.Concession_Name+'</option>';
                 });
+                $('#studDiscCat').html(disc_data);
+            });
+        }
+        $(document).on('click','#copy_address',function(){
+            const comm_add = $('#commAddress').val();
+            const comm_city = $('#commCityDist').val();
+            const comm_state = $('#commState').val();
+            const comm_country = $('#commCountry').val();
+            const comm_pin = $('#commPinCode').val();
+            const comm_contact = $('#commContactNo').val();
+            if($('#copy_address').is(':checked')){
+                $('#raAddress').val(comm_add);
+                $('#raCityDist').val(comm_city);
+                $('#raState').val(comm_state);
+                $('#raCountry').val(comm_country);
+                $('#raPinCode').val(comm_pin);
+                $('#raContactNo').val(comm_contact);
+            }else{
+                $('#raAddress').val('');
+                $('#raCityDist').val('');
+                $('#raState').val('');
+                $('#raCountry').val('');
+                $('#raPinCode').val('');
+                $('#raContactNo').val('');
             }
+        });
 	</script>
 </body>
 

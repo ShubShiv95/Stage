@@ -99,27 +99,12 @@ include 'security.php';
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Online Class </h3>
                             </div>
-                            <form action="./OnlineClassControl_1.php" method="post" id="online_class_form">
+                            <form action="./OnlineClassControl_1.php" method="post" id="online_class_edit_form">
                                 <div class="row justify-content-center mb-4 new-added-form school-form aj-new-added-form" >
                                     <input type="text" name="online_class_sender" class="d-none" autocomplete="off">
-                                    <input type="text" value="add_new_record" id="action" name="action" class="d-none">
-                                    <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
-                                        <div class="form-group aj-form-group">
-                                            <label>Class Name <span>*</span></label>
-                                            <select class="select2 class_name" id="class_name" name="class_name" required>
-                                                <option value="">SELECT Class</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-12">
-                                        <div class="form-group aj-form-group">
-                                            <label>Section *</label>
-                                            <div class="box-scroll ">
-                                                <div class="radio class_section"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-12">
+                                    <input type="text" name="set_id" value="<?php echo $_REQUEST['set_id']; ?>" class="d-none" autocomplete="off">
+                                    <input type="text" value="update_existing_record" id="action" name="action" class="d-none">
+                                    <div class="col-xl-4 col-lg-4 col-12 mt-5">
                                         <div class="form-group aj-form-group">
                                             <label>Subject</label>
                                             <select class="select2 subject_list" id="subject_list" name="subject_list" required>
@@ -229,18 +214,6 @@ include 'security.php';
     <script type="text/javascript" src="js/ajax-function.js"></script>
     <script>
         $(document).ready(function() {
-            get_class();
-
-            function get_class() {
-                var url = "./universal_apis.php?getAllClass=1";
-                html_data = '<option value="">SELECT Class</option>';
-                $.getJSON(url, function(response) {
-                    $.each(response, function(key, value) {
-                        html_data += '<option value="' + value.Class_Id + '">' + value.Class_Name + '</option>';
-                    });
-                    $('.class_name').html(html_data);
-                });
-            }
             get_subject();
 
             function get_subject() {
@@ -268,23 +241,12 @@ include 'security.php';
                 });
             }
 
-            $(document).on('change', '.class_name', function() {
-                var class_id = $(this).val();
-                var url = "./universal_apis.php?getAllSections=1&class_id=" + class_id + "";
-                html_data = '';
-                $.getJSON(url, function(response) {
-                    $.each(response, function(key, value) {
-                        html_data += '<span><input type="checkbox" class="gaurdian-bs" name="class_section[]" checked="" value="' + value.Class_Sec_Id + '"> ' + value.Section + '</span>';
-                    });
-                    $('.class_section').html(html_data);
-                });
-            });
-            $(document).on('submit','#online_class_form',function(event){
+            $(document).on('submit','#online_class_edit_form',function(event){
                 event.preventDefault();
                 var data = $(this).serialize();
                 $.post($(this).attr('action'),data,function(response){
                     $('.form_output').html(response);
-                    $('#online_class_form')[0].reset();
+                    $('#online_class_edit_form')[0].reset();
                 });
             });
 
@@ -303,6 +265,25 @@ include 'security.php';
                 var new_time = total_hours+':'+total_mins_ttl;
                 $('#end_time').val(new_time);
             });
+
+            load_online_class("<?php echo $_REQUEST['set_id']; ?>");
+            function load_online_class(online_class_set_id){
+                const url = "./OnlineClassControl_1.php?get_online_class_details=1&set_id="+online_class_set_id+""
+                $.getJSON(url,function(response){
+                    $('#subject_list').val(response.Subject_Id);
+                    $("select#staff_list").val(response.Staff_Id);
+                    $('#topic').val(response.Class_Topic);
+                    $('#class_description').val(response.Class_Description);
+                    $('#url').val(response.URL);
+                    date_form = response.Start_date.split(" ");
+                    $('#start_date').val(date_form[0]);
+                    $('#start_time').val(date_form[1]);
+                    date_to = response.End_Date.split(" ");
+                    $('#duration').val(response.Class_Duration);
+                    $('#end_time').val(date_to[1]);
+                    $("#class_type").val(response.Class_Type);
+                });
+            }
         });
     </script>
 </body>

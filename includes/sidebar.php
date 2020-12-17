@@ -34,13 +34,13 @@
 									<a href="#" class="nav-link"><span>Class Setting</span></a> <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
 									    <ul class="nav sub-group-menu">
                                             <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Class</a>
+                                                <a href="AddClass.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Class</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Configure Class</a>
+                                                <a href="ConfigureClass.php" class="nav-link"><i class="fas fa-angle-right"></i>Configure Class</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Section</a>
+                                                <a href="AddSection.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Section</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="VisitorSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Merge Section</a>
@@ -174,6 +174,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="OnlineClassSearch.php" class="nav-link"><i class="fas fa-angle-right"></i>Search Session</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="OnlineBlockStudents.php" class="nav-link"><i class="fas fa-angle-right"></i>Block Students</a>
                                 </li>
                               </ul>
                         </li>                        

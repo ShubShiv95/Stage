@@ -5,22 +5,28 @@
     include 'errorLog.php';
     //include 'generate_sequence.php';
 
-
     // Turn on all error reporting
     // Report all PHP errors (see changelog)
     error_reporting(E_ALL);
     //ini_set — Sets the value of a configuration option.Sets the value of the given configuration option. The configuration option will keep this new value during the script's execution, and will be restored at the script's ending.
     ini_set('display_errors', 1);
-
+    
     //starts here
     $lid=$_SESSION["LOGINID"];
     $schoolId=$_SESSION["SCHOOLID"];
     $class = $_REQUEST["class"];
     $session = $_REQUEST["session"];
-
-    $selectAdmissionSql = "Select Admission_Id, First_Name, Last_Name, Gender, date_format(DOB,'%d/%m/%Y') as DOB, Father_Name, Mother_Name, Guardian_Name From admission_master_table Where Class_Id = ? and Session = ?";
-    $stmt=$dbhandle->prepare($selectAdmissionSql);
-    $stmt->bind_param("ii", $class, $session);
+    $is_admitted = 'NO';
+    $admission_id = $_REQUEST['admission_id'];
+    if (!empty($admission_id)) {
+        $selectAdmissionSql = "Select Admission_Id, First_Name, Last_Name, Gender, date_format(DOB,'%d/%m/%Y') as DOB, Father_Name, Mother_Name, Guardian_Name From admission_master_table Where Admission_Id  = ? and Session = ? AND Is_Admited =? ";
+        $stmt=$dbhandle->prepare($selectAdmissionSql);
+        $stmt->bind_param("iis", $admission_id, $session,$is_admitted);
+    }elseif (!empty($class)) {
+        $selectAdmissionSql = "Select Admission_Id, First_Name, Last_Name, Gender, date_format(DOB,'%d/%m/%Y') as DOB, Father_Name, Mother_Name, Guardian_Name From admission_master_table Where Class_Id = ? and Session = ? AND Is_Admited =? ";
+        $stmt=$dbhandle->prepare($selectAdmissionSql);
+        $stmt->bind_param("iis", $class, $session,$is_admitted);
+    }
 
     //echo $admission_Id;
 
@@ -56,10 +62,11 @@ $execResult=$stmt->execute();
 $result = $stmt->get_result();
 //echo $result;
 
-$htmlbody = '<div class="table-responsive"><table class="table table-bordered text-capitalize"><thead><tr><th>First Name</th><th>Last Name </th><th>Gender</th><th>DOB</th><th>Father Name </th><th>Mother Name</th><th>Guardian Name</th><th>Select Actions</th></tr></thead>';
+$htmlbody = '<div class="table-responsive"><table class="table table-bordered text-capitalize"><thead><tr><th>Admission Id</th><th>First Name</th><th>Last Name </th><th>Gender</th><th>DOB</th><th>Father Name </th><th>Mother Name</th><th>Guardian Name</th><th>Select Actions</th></tr></thead>';
 $htmlbody = $htmlbody . '<tbody>';
 while ($row = $result->fetch_assoc()) {
       $htmlbody = $htmlbody . '<tr>';
+      $htmlbody = $htmlbody . '<td>' . $row['Admission_Id'] . '</td>';
       $htmlbody = $htmlbody . '<td>' . $row['First_Name'] . '</td>';
       $htmlbody = $htmlbody . '<td>' . $row['Last_Name'] . '</td>';
       $htmlbody = $htmlbody . '<td>' . $row['Gender'] . '</td>';
@@ -67,7 +74,7 @@ while ($row = $result->fetch_assoc()) {
       $htmlbody = $htmlbody . '<td>' . $row['Father_Name'] . '</td>';
       $htmlbody = $htmlbody . '<td>' . $row['Mother_Name'] . '</td>';
       $htmlbody = $htmlbody . '<td>' . $row['Guardian_Name'] . '</td>';
-      $htmlbody = $htmlbody . '<td>' . '<a href="AdmissionView.php?admission_Id=' . $row['Admission_Id'] . '"> Edit </a>'  . '/' . '<a href="#" id=""> View </a>' . '</td>';
+      $htmlbody = $htmlbody . '<td>' . '<a href="AdmissionView.php?admission_Id=' . $row['Admission_Id'] . '"> Edit </a>'  . '/' . '<a href="#" id=""> View </a> / <a href="./ConfirmAdmission.php?adminssion_id='.$row['Admission_Id'].'" id="" target="_new"> Enroll </a>'  . '</td>';
       $htmlbody = $htmlbody . '</tr>';
      //$message = $message . $row['First_Name'] ."<br>";
 }

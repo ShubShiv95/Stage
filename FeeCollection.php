@@ -164,13 +164,13 @@ include 'security.php';
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>Late Fee</label>
-                                                        <input type="text" name="late_fee" id="late_fee" placeholder="" required="" class="form-control" value="3000" readonly>
+                                                        <input type="text" name="late_fee" id="late_fee" placeholder="" required="" class="form-control" value="150" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>Re Admission Fee</label>
-                                                        <input type="text" name="readmission_fee" placeholder="" value="17770" id="readmission_fee" required="" class="form-control" readonly>
+                                                        <input type="text" name="readmission_fee" placeholder="" value="3000" id="readmission_fee" required="" class="form-control" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
@@ -202,11 +202,11 @@ include 'security.php';
                                                         </tr>
                                                         <tr>
                                                             <td class="cus-border">10325</td>
-                                                            <td class="cus-border text-center"><input type="checkbox" name="" value="680" id="bounce_1" class="cheque_bounce"></td>
+                                                            <td class="cus-border text-center"><input type="checkbox" name="" value="680" id="bounce1" class="inp_cheque_bounce check_checkbox_1"></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="cus-border">10325</td>
-                                                            <td class="cus-border  text-center"><input type="checkbox" name="" value="450" id="bounce_2" class="cheque_bounce"></td>
+                                                            <td class="cus-border  text-center"><input type="checkbox" name="" value="450" id="bounce2" class="inp_cheque_bounce check_checkbox_2"></td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -442,7 +442,6 @@ include 'security.php';
                         fee_list_html += '<tr><td style="width: 30%;">' + value.Installment_name + '</td><td style="width: 20%;">' + value.Net_Amount + '</td><td style="width: 15%;"><a href="javascript:void(0);" class="show_fee_details" data-toggle="modal" row_id="' + i + '" id="' + value.Installment_Id + '" data-target=".details">...</a></td><td style="width: 10%;"><div class="radio"><span><input type="checkbox" id="' + i + '" class="fee_month check_box_no' + i + '" name="fee_amt"></span><input type="number" class="d-none fee_amuont' + i + '" value="' + value.Net_Amount + '"></div></td></tr> ';
                         i = i + 1;
                     });
-                    $('.cheque_bounce').fadeIn();
                     $('.load_dyn_fee_data').html(fee_list_html);
                 });
             }
@@ -493,16 +492,15 @@ include 'security.php';
                         $(".check_box_no" + j).prop("checked", false);
                     }
                 }
-                due_total = parseInt(due_total) + parseInt(late_fee) + parseInt(cheque_bounce) + parseInt(readmission_fe);
+                due_total = parseInt(due_total) + parseInt(late_fee) + parseInt(readmission_fe);
                 count_balance_amount(due_total, discount_fee, paid_amount);
                 $('#due_amt').val(due_total);
             });
 
             // function to count balance
             function count_balance_amount(due_total, discount_fee, paid_amount) {
-                var balance = parseInt(due_total) - (parseInt(paid_amount) + parseInt(discount_fee));
+                var balance = (parseInt(due_total)) - (parseInt(paid_amount) + parseInt(discount_fee));
                 $('#amount_balance').val(balance);
-                // stop new add row from function
             }
 
             $(document).on('blur', '.amt_receiving', function() {
@@ -528,6 +526,7 @@ include 'security.php';
                 }
                 var discount_fee = $('#discount_fee').val();
                 var paid_amount = $('#paid_amt').val();
+                var cheque_bounce_amt = $('#cheque_bounce').val();
                 count_balance_amount(due_amt, discount_fee, paid_amount);
             });
 
@@ -562,6 +561,7 @@ include 'security.php';
                 }
 
             });
+
             $(document).on('click', '.load_student_data', function(event) {
                 event.preventDefault();
                 var student_id = $(this).attr('id');
@@ -570,7 +570,6 @@ include 'security.php';
                 load_student_data(student_id);
                 $('.populate_student_list').html('');
                 $('#student_name').val('');
-
             });
 
             // function to load student data  
@@ -604,7 +603,6 @@ include 'security.php';
                             url = './app_images/AdmissionDocuments/' + value.Admission_Id + '_AdmissionDocs/' + value.Student_Image;
                             $('.main_img').attr('src', url);
                         }
-                        $('.cheque_bounce').fadeIn();
                     });
                 });
             }
@@ -633,27 +631,40 @@ include 'security.php';
                 $('#amount_balance').val(balance);
             });
 
-            $(document).on('click', '.cheque_bounce', function() {
-                var amt_bounce = $(this).val();
-                var input_chq_bounce = $('#cheque_bounce').val();
+            $(document).on('click', '.inp_cheque_bounce', function() {
                 var btn_id = $(this).attr('id');
-                due_amt = $('#due_amt').val();
-                discount_fee = $('#discount_fee').val();
-                paid_amount = $('#paid_amt').val();
-                if ($(".cheque_bounce").is(':checked')) {
-                    var total_bounce = parseInt(amt_bounce) + parseInt(input_chq_bounce);
+                split_id = btn_id.split("bounce");
+               
+                var total_bounce = $("#cheque_bounce").val();
+                console.log(total_bounce);
+                var discount_fee = $('#discount_fee').val();
+                var paid_amount = $('#paid_amt').val();
+                if ($(".check_checkbox_"+split_id[1]).is(':checked'))
+                {
+                    var amt_bounce = $(this).val();
+                    // total amount bounce
+                    total_bounce = parseInt(total_bounce)+parseInt(amt_bounce);
+                    var due_amt = $('#due_amt').val();
+                    var due_amt = parseInt(due_amt)+parseInt(amt_bounce);
+                    $('#due_amt').val(due_amt);
                     $('#cheque_bounce').val(total_bounce);
-                    //$('#' + btn_id).hide();
-                    due_amt_total = parseInt(due_amt) + parseInt(total_bounce);
-
-                } else {
-                    var total_bounce = parseInt(amt_bounce) - parseInt(input_chq_bounce);
-                    $('#cheque_bounce').val(total_bounce);
-                    due_amt_total = parseInt(due_amt) - parseInt(input_chq_bounce);
+                    count_balance_amount(due_amt, discount_fee, paid_amount);
                 }
-                $('#due_amt').val(due_amt_total);
-                count_balance_amount(due_amt_total, discount_fee, paid_amount);
+                else
+                {
+                    var amt_bounce = $(this).val();
+                    // total amount bounce
+                    total_bounce = parseInt(total_bounce)-parseInt(amt_bounce);                    
+                    var due_amt = $('#due_amt').val();
+                    var due_amt = parseInt(due_amt)-parseInt(amt_bounce);
+                    $('#due_amt').val(due_amt);
+                    $('#cheque_bounce').val(total_bounce);
+                    count_balance_amount(due_amt, discount_fee, paid_amount);
+                }
+                $(".check_checkbox_"+split_id[1]).val(amt_bounce);
+               
             });
+
             $(document).on('blur', '.amount_receiving', function() {
                 var amount_receiving = $(this).val();
                 var row_id = $(this).attr('id');
@@ -668,6 +679,7 @@ include 'security.php';
                     $('#rec_amt' + split_value[1]).val(amount_receiving);
                 }
             });
+
             $(document).on('change', '.pmt_hide_elements', function() {
                 var pmt_hide_elements_id = $(this).attr('id');
                 split_value = pmt_hide_elements_id.split('payment_type');
@@ -687,9 +699,7 @@ include 'security.php';
                 window.open("FeeReceiptPrint.php?FeeId=5625");
             })
             
-            
             get_all_schools();
-
             function get_all_schools() {
                 const url = './universal_apis.php?get_school_name=1';
                 html_data = '<option value="0">-- Select School --</option>';

@@ -69,7 +69,7 @@ $schoolId = $_SESSION["SCHOOLID"];
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
-                <div class="breadcrumbs-area">
+               <!-- <div class="breadcrumbs-area">
                     <h3>Staff</h3>
                     <ul>
                         <li>
@@ -77,7 +77,7 @@ $schoolId = $_SESSION["SCHOOLID"];
                         </li>
                         <li><?php echo $pageTitle; ?></li>
                     </ul>
-                </div>
+                </div>-->
                 <?php
                 if (isset($_SESSION['successmsg'])) {
                     echo $_SESSION["successmsg"];

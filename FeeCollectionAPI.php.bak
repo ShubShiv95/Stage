@@ -1,0 +1,120 @@
+<?php
+$request_type=$_REQUEST["Parameter"];
+if($request_type=='CollectFee')
+    {
+  
+    $fee=array();
+    //Populating April Installment.
+    //[]=>installment_id
+    //[][details][]=>feeheadid
+    $fee[1]["details"]["1"]["feeheadid"]=1;
+    $fee[1]["details"]["1"]["name"]="Admission Fee";
+    $fee[1]["details"]["1"]["amount"]=5000;
+    $fee[1]["details"]["1"]["concession"]=1000;
+    $fee[1]["Installment_name"]="Apr";
+    $fee[1]["Installment_Id"]="4";
+    
+    $fee[1]["details"]["2"]["feeheadid"]=2;
+    $fee[1]["details"]["2"]["name"]="Tuition Fee";
+    $fee[1]["details"]["2"]["amount"]=2000;
+    $fee[1]["details"]["2"]["concession"]=500;
+    $fee[1]["Installment_name"]="Apr";
+    $fee[1]["Installment_Id"]="4";
+
+    $fee[1]["details"]["3"]["feehaeaid"]=3;
+    $fee[1]["details"]["3"]["name"]="Miscellaneous Fee";
+    $fee[1]["details"]["3"]["amount"]=1000;
+    $fee[1]["details"]["3"]["concession"]=0;
+    $fee[1]["Installment_name"]="Apr";
+    $fee[1]["Installment_Id"]="4";
+    $fee[1]["Net_Amount"]="6500";
+
+    //populating May Installment
+
+    $fee[2]["details"]["1"]["feeheadid"]=2;
+    $fee[2]["details"]["1"]["name"]="Tuition Fee";
+    $fee[2]["details"]["1"]["amount"]=2000;
+    $fee[2]["details"]["1"]["concession"]=500;
+    $fee[2]["Installment_name"]="May";
+    $fee[2]["Installment_Id"]="5";
+
+
+    $fee[2]["details"]["2"]["feehaeaid"]=3;
+    $fee[2]["details"]["2"]["name"]="Miscellaneous Fee";
+    $fee[2]["details"]["2"]["amount"]=1000;
+    $fee[2]["details"]["2"]["concession"]=0;
+    $fee[2]["Installment_name"]="May";
+    $fee[2]["Installment_Id"]="5";
+    $fee[2]["Net_Amount"]="2500";
+    //populating June Installment
+
+    $fee[3]["details"]["1"]["feeheadid"]=2;
+    $fee[3]["details"]["1"]["name"]="Tuition Fee";
+    $fee[3]["details"]["1"]["amount"]=2000;
+    $fee[3]["details"]["1"]["concession"]=500;
+    $fee[3]["Installment_name"]="June";
+    $fee[3]["Installment_Id"]="6";
+
+
+    $fee[3]["details"]["2"]["feehaeaid"]=3;
+    $fee[3]["details"]["2"]["name"]="Miscellaneous Fee";
+    $fee[3]["details"]["2"]["amount"]=1000;
+    $fee[3]["details"]["2"]["concession"]=0;
+    $fee[3]["Installment_name"]="June";
+    $fee[3]["Installment_Id"]="6";
+    $fee[3]["Net_Amount"]="2500";
+    //populating July Installment
+
+    $fee[4]["details"]["1"]["feeheadid"]=2;
+    $fee[4]["details"]["1"]["name"]="Tuition Fee";
+    $fee[4]["details"]["1"]["amount"]=2000;
+    $fee[4]["details"]["1"]["concession"]=500;
+    $fee[4]["Installment_name"]="July";
+    $fee[4]["Installment_Id"]="7";
+
+
+    $fee[4]["details"]["2"]["feehaeaid"]=3;
+    $fee[4]["details"]["2"]["name"]="Miscellaneous Fee";
+    $fee[4]["details"]["2"]["amount"]=1000;
+    $fee[4]["details"]["2"]["concession"]=0;
+    $fee[4]["Installment_name"]="July";
+    $fee[4]["Installment_Id"]="7";
+    $fee[4]["Net_Amount"]="2500";
+    
+    //populating August Installment
+    $fee[5]["details"]["1"]["feeheadid"]=2;
+    $fee[5]["details"]["1"]["name"]="Tuition Fee";
+    $fee[5]["details"]["1"]["amount"]=2000;
+    $fee[5]["details"]["1"]["concession"]=500;
+    $fee[5]["Installment_name"]="August";
+    $fee[5]["Installment_Id"]="8";
+
+    $fee[5]["details"]["2"]["feehaeaid"]=3;
+    $fee[5]["details"]["2"]["name"]="Miscellaneous Fee";
+    $fee[5]["details"]["2"]["amount"]=1000;
+    $fee[5]["details"]["2"]["concession"]=0;
+    $fee[5]["Installment_name"]="August";
+    $fee[5]["Installment_Id"]="8";
+    $fee[5]["Net_Amount"]="2500";
+    //populating September Installment
+    $fee[6]["details"]["1"]["feeheadid"]=2;
+    $fee[6]["details"]["1"]["name"]="Tuition Fee";
+    $fee[6]["details"]["1"]["amount"]=2000;
+    $fee[6]["details"]["1"]["concession"]=500;
+    $fee[6]["Installment_name"]="September";
+    $fee[6]["Installment_Id"]="9";
+
+    $fee[6]["details"]["2"]["feehaeaid"]=3;
+    $fee[6]["details"]["2"]["name"]="Miscellaneous Fee";
+    $fee[6]["details"]["2"]["amount"]=1000;
+    $fee[6]["details"]["2"]["concession"]=0;
+    $fee[6]["Installment_name"]="September";
+    $fee[6]["Installment_Id"]="9";
+    $fee[6]["Net_Amount"]="2500";
+   // $obj=json_encode($fee);
+   //echo "<pre>" . $obj . "</pre<br>";
+  header('Content-type: text/javascript');
+    echo json_encode($fee, JSON_PRETTY_PRINT);
+}
+
+?>

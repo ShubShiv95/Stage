@@ -3,6 +3,7 @@ session_start();
 include 'dbobj.php';
 include 'security.php';
 include 'errorLog.php';
+require_once './GlobalModel.php';
 ?>
 
 <!doctype html>
@@ -68,6 +69,19 @@ include 'errorLog.php';
                 <!-- Admit Form Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body">
+                    <table>
+                        <tr>
+                            <th style="padding:10px;" width="50%">
+                                <img src="./app_images/school_images/logo.jpeg" alt="" class="w-100 school_img">
+                            </th>
+                            <th class="text-right">
+                                <p class="mr-3 mt-2" style="font-size: 12px;">Date and Time : <?php echo date('d/m/Y H:i:s'); ?></p>
+                                <p class="mr-3 mt-2">Registration No : 13s/2020</p>
+                                <p class="mr-3 mt-2" style="font-size: 12px;">Bokaro Steel, City, Sector-4,Bokaro, Jharkhand, India 826004</p>   
+                            </th>
+                        </tr>
+
+                    </table>
                         <table>
                             <tr class="heading">
                                 <th colspan="6">Student Details</th>
@@ -75,17 +89,17 @@ include 'errorLog.php';
                             <tr>
                                 <th>Name</th>
                                 <td colspan="3" class="first_name">Md Meraj Alam</td>                              
-                                <th rowspan="6" colspan="2"  width="20%" class="image_th" width="20%"><img class="main_img" src="./img/avatar-female.png" width="200px" alt=""></th>
+                                <th rowspan="6" colspan="2"  width="20%" class="image_th" width="20%"><img class="main_img" src="./img/avatar_blank.png" width="200px" alt=""></th>
                             </tr>
                             <tr>
                                 <th>Student Id</th>
-                                <td class="student_id">5</td>                                  
+                                <td class="student_id"></td>                                  
                                 <th>Class</th>
-                                <td class="class">15</td>
+                                <td class="class"></td>
                             </tr>
                             <tr>
                                 <th>Section</th>
-                                <td class="section">15th Jan 2000</td>                                
+                                <td class="section">N.A.</td>                                
                                 <th>Roll No</th>
                                 <td class="roll">N.A.</td>
                             </tr>
@@ -143,7 +157,7 @@ include 'errorLog.php';
                             <tr>
                                 <th class="padd">Name</th><td class="father_name"></td>
                                 <th class="padd">Occupation</th><td class="father_occupation"></td>
-                                <th colspan="2" rowspan="5" style="text-align: center;"  width="20%"><img class="main_img" src="./img/avatar-female.png"  width="200px" alt=""></th>
+                                <th colspan="2" rowspan="5" style="text-align: center;"  width="20%"><img class="main_img" src="./img/avatar_blank.png"  width="200px" alt=""></th>
                             </tr>
                             <tr>
                                 <th>Designation</th><td class="father_desig"></td>
@@ -166,7 +180,7 @@ include 'errorLog.php';
                             <tr>
                                 <th class="padd">Name</th><td class="mother_name"></td>
                                 <th class="padd">Occupation</th><td class="mother_occupation"></td>
-                                <th colspan="2" rowspan="5" style="text-align: center;" width="20%"><img class="main_img" src="./img/avatar-female.png" alt=""></th>
+                                <th colspan="2" rowspan="5" style="text-align: center;" width="20%"><img class="main_img" src="./img/avatar_blank.png" alt=""></th>
                             </tr>
                             <tr>
                                 <th>Designation</th><td class="mother_desig"></td>
@@ -251,7 +265,7 @@ include 'errorLog.php';
         load_student_data(<?php echo $_REQUEST['student_id'] ?>);
         // function to load student data 
         function load_student_data(student_id) {
-            var url = "./universal_apis.php?get_stud_details_by_name=1&search_type=1&stud_data=" + student_id + "";
+            var url = "./universal_apis.php?admission_form_print=1&stud_data=" + student_id + "";
             $.getJSON(url, function(data) {
                 $.each(data, function(key, value) {
                     if (value.Middle_Name == null) {
@@ -259,6 +273,17 @@ include 'errorLog.php';
                     } else {
                         var name_studs = value.First_Name + ' ' + value.Middle_Name + ' ' + value.Last_Name;
                     }
+                    con_url = "./FeeControl_1.php?get_consessions=1&concession_id="+value.Discount_Category+"";
+                    $.getJSON(con_url,function(responce_conc){
+                        if(responce_conc.Concession_Name == null){
+                            dis_name = 'N.A.';
+                        }else{
+                            dis_name = responce_conc.Concession_Name;
+                        }
+                        $('.dis_category').text(dis_name);
+                    });
+                    var locality = <?php echo json_encode($GLOBAL_LOCALITY); ?>;
+                    st_locality = locality[value.Locality];
                     $('.first_name').text(name_studs);
                     $('.student_id').text(value.Student_Id)
                     $('.class').text(value.Class_Name);
@@ -269,7 +294,6 @@ include 'errorLog.php';
                     $('.gender').text(value.Gender);
                     $('.father_name').text(value.Father_Name);
                     $('.mother_name').text(value.Mother_Name);
-                    $('.dis_category').text(value.Discount_Category);
                     $('.dob').text(value.DOB);
                     $('.father_occupation').text(value.Father_Occupation);
                     $('.religion').text(value.Religion);
@@ -279,7 +303,7 @@ include 'errorLog.php';
                     $('.session_en').text(value.Session_End_Year);
                     $('.tongue').text(value.Mother_Tongue);
                     $('.tongue').text(value.Mother_Tongue);
-                    $('.locality').text(value.Locality);
+                    $('.locality').text(st_locality);
                     $('.aadhar').text(value.Aadhar_No);
                     $('.b_group').text(value.Blood_Group);
                     $('.nationality').text(value.Nationality);
@@ -311,6 +335,15 @@ include 'errorLog.php';
                 });
             });
         }
+
+        load_school_details();  
+        function load_school_details(){
+            school_url = './universal_apis.php?get_school_name_by_id=1';
+            $.getJSON(school_url,function(school_response){
+                console.log(school_response);
+            });
+        }
+       
     </script>
 </body>
 

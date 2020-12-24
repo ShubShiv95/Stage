@@ -4,7 +4,7 @@ include 'dbobj.php';
 include 'errorLog.php';
 include 'security.php';
 require_once 'sequenceGenerator.php';
-
+require_once './GlobalModel.php';
 /******* function to check existing fee cluster structure ********/
 function check_existing_structure($dbhandle,$cluster_name,$cluster_session,$school_id){
     $query_check = "SELECT COUNT(FCFL_Id) as total_rows FROM fee_cluster_fee_list WHERE FC_Id = ? AND Session = ? AND Enabled =1 AND School_Id = ?";
@@ -324,6 +324,20 @@ if (isset($_REQUEST['get_all_consessions'])) {
     echo json_encode($data);
 }
 
+
+/*********** get consession details by its id ************/
+if (isset($_REQUEST['get_consessions'])) {
+    $query = "SELECT cmt.* FROM concession_master_table cmt WHERE cmt.Enabled =1 AND cmt.School_Id = ? AND cmt.Concession_Id = ? ";
+    $query_prep = $dbhandle->prepare($query);
+    $query_prep->bind_param("ii",$_SESSION["SCHOOLID"],$_REQUEST['concession_id']);
+    $query_prep->execute();
+    $result_set = $query_prep->get_result();$data=array();
+    while ($rows = $result_set->fetch_assoc()) {
+        $data[] = $rows;
+    }
+    echo json_encode($data);
+}
+
 /******** delete consession ********/
 if(isset($_REQUEST['delete_consession'])){
     $query = "Update concession_detail_table SET Enabled = 0 WHERE Concession_Detail_Id = ?";
@@ -346,12 +360,14 @@ if (isset($_REQUEST['cluster_sender'])) {
     else{
          // total loop counting
         $total_loops_down =  count($_REQUEST['installment_type']);
+        // total installments
+        $months_data = get_all_months($dbhandle);
         
         $insert_query = "INSERT INTO `fee_cluster_fee_list`(`FCFL_Id`, `FC_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Session`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?,?)";
         $insert_query_perp = $dbhandle->prepare($insert_query);
         for ($i=0; $i < $total_loops_down; $i++) 
         { 
-            for ($j=0; $j < 12; $j++) 
+            for ($j=0; $j < count($months_data); $j++) 
             {   
                 $cluster_fee_id = sequence_number('fee_cluster_fee_list',$dbhandle);
                 $insert_query_perp->bind_param("iiiiiisis",$cluster_fee_id,$_REQUEST['fee_cluster_name'],$_REQUEST['fee_head_id'][$i],$_REQUEST['installment_type'][$i],$_REQUEST['inst_name'][$j],$_REQUEST[$i][$i][$j],$_REQUEST['f_academic_session'],$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
@@ -391,6 +407,7 @@ if (isset($_REQUEST['get_clust_details']))
     $data .= '<th class="text-right">Total Amt</th></tr></thead><tbody>';
     $query = "SELECT  fcfl.*  FROM fee_cluster_fee_list fcfl WHERE fcfl.FC_Id = ? AND fcfl.Session = ? AND fcfl.School_Id = ? AND fcfl.Enabled = 1 AND fcfl.Installment_Id=? AND fcfl.Fee_Head_Id=?";
     $query_prep = $dbhandle->prepare($query);
+
     $query_fee_head = "SELECT DISTINCT fhlt.*, fcfl.Fee_Installment_Type FROM fee_head_list_table fhlt, fee_cluster_fee_list fcfl WHERE fcfl.Fee_Head_Id = fhlt.Fee_Head_Id AND fcfl.Session = ? AND fcfl.School_Id = ? AND fcfl.FC_Id = ?";
     $query_fee_head_prep = $dbhandle->prepare($query_fee_head);
     $query_fee_head_prep->bind_param("sii",$_REQUEST['cluster_session'],$_SESSION["SCHOOLID"],$_REQUEST['cluster_name']);
@@ -452,5 +469,65 @@ if (isset($_REQUEST['get_clust_details']))
     $row_gttl = $result_set_gttl->fetch_assoc();
     $data.='<td style="font-weight:bold;" class="text-right">'.$row_gttl['g_ttl'].'</td></tr></tbody>';
     echo $data;
+}
+
+/***************** get cluster form (Load with full UI) *******************/
+if (isset($_REQUEST['get_cluster_form'])) {
+    $data = '';
+    $data .= '<table class="table" style="overflow-x:auto; width:125%; "><thead><tr><th style="border:1px solid #ffae01; padding:4px;">Fee Head</th><th style="border:1px solid #ffae01; padding:4px;">Inst. Type</th>';
+
+    // get all fee heads
+    $fee_heads = 'SELECT * FROM fee_head_list_table WHERE Enabled = 1 AND School_Id = ?';
+    $fee_heads_prep = $dbhandle->prepare($fee_heads);
+    $fee_heads_prep->bind_param("i",$_SESSION['SCHOOLID']);
+    $fee_heads_prep->execute();
+    $fee_head_rows = $fee_heads_prep->get_result();
+    
+    // get all months
+    $months_data = get_all_months($dbhandle);
+    
+    foreach ($months_data as $months) {
+       $data.= '<th class="text-center" style="border:1px solid #ffae01; padding:4px;">'.$months['Installment_Name'].'</th>';
+    }
+    $data .= '<th class="text-right" style="border:1px solid #ffae01; padding:4px;">Total<span id="total_installments" class="d-none">'.count($months_data).'</span><span id="total_heads" class="d-none">'.$fee_head_rows->num_rows.'</span></th></tr></thead><tbody><tr>';
+    // print fee head and its relevent inputs
+    $i=0; $k=0;
+    while($fee_rows = $fee_head_rows->fetch_assoc()){
+        $i=$i;$j=0;
+        $data .= '<th style="border:1px solid #ffae01; padding:4px;">'.$fee_rows['Fee_Head_Name'].'<input type="text" name="fee_head_id[]" value="' . $fee_rows['Fee_Head_Id'] . '" class="d-none"></th><td width="9%"><div class="form-group "><select class="select2 col-12" name="installment_type[]" required style="height:40px; width:100px;"><option value="0">Select One</option>';
+        foreach ($GLOBL_FEE_INSTALLMENT_TYPE as $key => $value) {
+            $data.= '<option value="'.$value.'">'.$key.'</option>';
+        }   
+        $data .='</select></div></td>';
+        foreach ($months_data as $months) {
+            $j=$j;
+            //id="'.$i.','.$j.'"
+            $data.= '<td><input type="number" class="form-control fee_amount" name="'.$i.'['.$i.']['.$j.']" id="i'.$i.$j.'" fee_head="'.$i.'" inst_id="'.$j.'" value="0" autocomplete="off" style="width:100px; font-size:2rem;height:40px; "><input type="text" name="inst_name[]" class="d-none" value="'.$months["Installment_Id"].'"></td>';
+            $j=$j+1;
+        }
+        $data .= '<td class="text-right" style="border:1px solid #ffae01; padding:4px;"><span class="total_amount" id="total'.$i.'">0</span></td></tr>';
+        $i=$i+1;
+    }
+    $data .= '<tr><td colspan="2" class="text-center" style="border:1px solid #ffae01; padding:4px; font-weight:bold">Total</td>'; 
+    foreach ($months_data as $months) {
+        $data.= '<td class="text-center" style="border:1px solid #ffae01; padding:4px;"><span id="fh_total'.$k.'">0</span></td>';
+        $k=$k+1;
+    }
+    $data .='<td class="text-right" style="border:1px solid #ffae01; padding:4px;"><span id="g_total">0</span></td></tr>';
+    $data .= '</tbody></table>';
+    echo $data;
+}
+
+/************** display unpaid amount of student **************/
+if (isset($_REQUEST['get_all_dues_fees'])) {
+    $query = "SELECT SUM(sflt.Fee_Amount)-SUM(sflt.Discount_Amount)+SUM(sflt.Late_Fee_Amount) AS net_total, sflt.Installment_Id, imt.Installment_Name FROM student_fee_list_table sflt, installment_master_table imt WHERE sflt.Installment_Id=imt.Installment_Id AND sflt.Student_Id = ? AND sflt.Session = ? AND sflt.Is_Paid = 0 GROUP BY sflt.Installment_Id";
+    $query_prep = $dbhandle->prepare($query);
+    $query_prep->bind_param("is",$_REQUEST['student_id'],$_SESSION["SESSION"]);
+    $query_prep->execute(); $data = array();
+    $result_set = $query_prep->get_result();
+        while ($row_fees = $result_set->fetch_assoc()) {
+            $data[] = $row_fees;
+        }
+    echo json_encode($data);
 }
 ?>

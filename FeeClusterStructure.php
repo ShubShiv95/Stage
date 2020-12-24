@@ -128,9 +128,10 @@ include 'security.php';
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="table-responsive" style="height: 50vh; overflow-x: auto;">
+                                    <div class="table-responsive" >
+                                    <div class="load_cluster_ui" style="height: 50vh; overflow-x: auto;"></div>
                                         <table class="stripe row-border order-column ">
-                                            <thead class="month_head">
+                                            <!--<thead class="month_head">
                                                 <tr>
                                                 </tr>
                                             </thead>
@@ -139,7 +140,7 @@ include 'security.php';
 
                                                 </tr>
                                             </tbody>
-                                        </table>
+                                        </table>-->
                                     </div>
                                     <div class="col-12 text-right mt-3">
                                         <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" name="submit">Save</button>
@@ -149,7 +150,6 @@ include 'security.php';
                             <div class="col-lg-12 col-md-12 col-12 row cluster_view pt-4" style="overflow: auto;">
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <!-- Admit Form Area End Here -->
@@ -201,9 +201,12 @@ include 'security.php';
             });
             $(document).on('submit', '#cluster_form', function(event) {
                 event.preventDefault();
+                const cluster_name = $('#fee_cluster_name').val();
+                var cluster_session = $('#f_academic_session').val();   
                 $.post($(this).attr('action'), $('form#cluster_form').serialize(), function(data) {
                     $('.form_output').html(data);
-                    $('#cluster_form')[0].reset();
+                    //$('#cluster_form')[0].reset();   
+                    show_fees_templt(cluster_name,cluster_session)
                 }, );
             });
             get_clusters();
@@ -218,46 +221,7 @@ include 'security.php';
                     $('.fee_cluster').append(html_data);
                 });
             }
-            load_fee_heads();
-            var i = 0;
-            j = 0;
 
-            function load_fee_heads() {
-                const url = "./universal_apis.php?get_all_fee_heads=1";
-                var html_data = '';
-                $.getJSON(url, function(data) {
-                    $.each(data, function(key, value) {
-                        html_data += '<tr><td>' + value.Fee_Head_Name + '<input type="text" name="fee_head_id[]" value="' + value.Fee_Head_Id + '" class="d-none"></td><td><div class="form-group aj-form-group"><select class="select2 col-12" name="installment_type[]" required><option value="0">Select</option><option value="12">Monthly</option><option value="6">Bi-Monthly</option><option value="4">Quarterly</option><option value="2">Half-Yearly</option></select></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][0]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="1"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][1]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="2"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][2]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="3"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][3]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="4"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][4]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="5"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][5]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="6"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][6]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="7"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][7]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="8"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][8]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="9"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][9]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="10"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][10]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="11"></div></td><td><div class="form-group aj-form-group"><input type="text" name="' + i + '[' + i + '][11]" placeholder="" class="form-control month_val" id="' + value.Fee_Head_Id + '"><input type="text" name="inst_name[]" class="d-none" value="12"></div></td><td><div class="form-group aj-form-group"><input type="text" name="total[]" placeholder="" class="form-control total_val" value="0" id="month_total' + value.Fee_Head_Id + '"></div></td></tr>';
-                        i = i + 1;j = j + 1;
-                    });
-                    html_data += '<tr><td colspan="2" >Total</td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td><td><div class="form-group aj-form-group"><input type="text" name="" placeholder="" class="form-control"></div></td></tr>';
-                    $('.fee_head_table').html(html_data);
-                });
-            }
-            $(document).on('blur', '.month_val', function() {
-                const row_id = $(this).attr('id');
-                const new_val = $(this).val();
-                var ground_total = $('#month_total' + row_id + '').val();
-                newground_total = parseInt(ground_total) + parseInt(new_val);
-                $('#month_total' + row_id + '').val(newground_total);
-            });
-
-            load_month_heads();
-
-            function load_month_heads() {
-                const url = "./universal_apis.php?get_all_months=1";
-                html_data = '';
-                $.getJSON(url, function(response) {
-                    html_data += '<tr><th>Fee Head</th><th>Installment Type</th>';
-                    $.each(response, function(key, value) {
-                        html_data += '<th>' + value.Installment_Name + '</th>';
-                    });
-                    html_data += '<th>Total</th>';
-                    html_data += '</tr>';
-                    $('.month_head').html(html_data);
-                });
-            }
-            
             $(document).on('change', '#f_academic_session', function() {
                 const cluster_name = $('#fee_cluster_name').val();
                 var cluster_session = $('#f_academic_session').val();   
@@ -272,13 +236,64 @@ include 'security.php';
                         $('.f_msg').html(data);show_fees_templt(cluster_name,cluster_session);
                     });
                 }
-
             });
 
             function show_fees_templt(cluster_name,cluster_session){
                 data = {'get_clust_details':1,'cluster_name':cluster_name,'cluster_session':cluster_session};
                 $.get('./FeeControl_1.php', data, function(data) {
                         $('.cluster_view').html(data);
+                });
+            }
+
+            // load fee cluster ui 
+            load_cluster_form();
+            function load_cluster_form(){
+                var fee_f_data = {'get_cluster_form':1};
+                $.get('./FeeControl_1.php',fee_f_data,function(response_fee){
+                    $('.load_cluster_ui').html(response_fee);
+                });
+            }
+
+            $(document).on('blur','.fee_amount',function(){
+                load_count_month_wise();
+                var fee_head = $(this).attr('fee_head');
+                var inst_id = $(this).attr('inst_id');
+                var fee_amt = $(this).val();
+                var total_installments = $('#total_installments').text();
+                var total_heads = $('#total_heads').text();
+                var month_wise_fee = 0; var head_wise_fee = 0;
+                console.log(fee_head+', '+inst_id);
+                for (let i = 0; i < total_installments; i++) {
+                    var fee_amount = $('#i'+fee_head+i).val();
+                    month_wise_fee = parseInt(month_wise_fee)+parseInt(fee_amount);
+                }
+                $('#total'+fee_head).text(month_wise_fee);
+                for (let j = 0; j < total_heads; j++) {
+                    var head_fee_amount = $('#i'+j+inst_id).val();
+                    head_wise_fee = parseInt(head_wise_fee)+parseInt(head_fee_amount);
+                }
+                $('#fh_total'+inst_id).text(head_wise_fee);
+            });
+            
+            function load_count_month_wise(){
+                const url_months = "./universal_apis.php?get_all_months=1";
+                const url_fee_heads = "./universal_apis.php?get_all_fee_heads=1";
+                var month_wise_total = 0;
+                $.getJSON(url_months, function(response) {
+                    var total_intalllments= response.length;
+                    $.getJSON(url_fee_heads, function(response_head) {
+                    var total_fee_heads = response_head.length;
+                    for (let i = 0; i < total_intalllments; i++) {
+                     for (let j = 0; j < total_fee_heads; j++) {
+                        var fee_amount = $('#i'+j+i).val();
+                        // counting g_total
+                        month_wise_total = parseInt(fee_amount)+parseInt(month_wise_total);
+                        // grand total
+                        $('#g_total').text(month_wise_total);
+                     }
+                    }
+                    });
+                    
                 });
             }
         });

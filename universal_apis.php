@@ -155,12 +155,11 @@ if (isset($_REQUEST['get_stud_details_by_name'])) {
     $student_query_prep->bind_param("si",$_REQUEST['stud_data'],$_SESSION["SCHOOLID"]);
   }elseif ($_REQUEST['search_type']=='2') {
     // search students by name
-    $name = explode(" ",$_REQUEST['stud_data']);
-    $fname =  '%'.$name[0].'%';
-    $lname =  '%'.$name[1].'%';
-    $student_query = "SELECT smt.*, cmt.Class_Name, cst.Section from student_master_table smt, student_class_details scd, class_master_table cmt, class_section_table cst WHERE smt.Student_Id = scd.Student_Id AND cmt.Class_Id = scd.Class_Id AND cst.Class_Sec_Id = scd.Class_Sec_Id AND scd.Promoted=0 and smt.Enabled = 1 AND smt.First_Name LIKE ? and smt.Last_Name LIKE ? AND smt.School_Id=?";
+    $fname =  '%'.$_REQUEST['stud_data'].'%';
+ 
+    $student_query = "SELECT smt.*, cmt.Class_Name, cst.Section from student_master_table smt, student_class_details scd, class_master_table cmt, class_section_table cst WHERE smt.Student_Id = scd.Student_Id AND cmt.Class_Id = scd.Class_Id AND cst.Class_Sec_Id = scd.Class_Sec_Id AND scd.Promoted=0 and smt.Enabled = 1 AND CONCAT(First_Name,Middle_Name,Last_Name) LIKE ? AND smt.School_Id=?";
     $student_query_prep = $dbhandle->prepare($student_query);
-    $student_query_prep->bind_param("ssi",$fname,$lname,$_SESSION["SCHOOLID"]);
+    $student_query_prep->bind_param("si",$fname,$_SESSION["SCHOOLID"]);
   }elseif ($_REQUEST['search_type']=='3') {
     // search by class
     $student_query = "SELECT smt.*, cmt.Class_Name, cst.Section from student_master_table smt, student_class_details scd, class_master_table cmt, class_section_table cst WHERE smt.Student_Id = scd.Student_Id AND cmt.Class_Id = scd.Class_Id AND cst.Class_Sec_Id = scd.Class_Sec_Id AND scd.Promoted=0 and smt.Enabled = 1 AND scd.Class_Id = ? AND smt.School_Id=?";
@@ -186,6 +185,17 @@ if (isset($_REQUEST['get_school_name'])) {
     $data[] = $rows; 
   }
   echo json_encode($data);
+}
+
+/********** get all school names *********/
+if (isset($_REQUEST['get_school_name_by_id'])) {
+  $query_school = "SELECT * FROM `school_master_table` WHERE `enabled` = 1 AND `School_Id` = ?";
+  $query_school_prep = $dbhandle->prepare($query_school);
+  $query_school_prep->bind_param("i",$_SESSION["SCHOOLID"]);
+  $query_school_prep->execute(); 
+  $result_set = $query_school_prep->get_result();
+  $rows = $result_set->fetch_assoc();
+  echo json_encode($rows);
 }
 
 /********** get all clusters **********/
@@ -275,6 +285,19 @@ if (isset($_REQUEST['fee_cluster_id_by_class'])) {
   $result_set = $query_prep->get_result();
   while ($rows = $result_set->fetch_assoc()) {
     $data[] = $rows;
+  }
+  echo json_encode($data);
+}
+
+/************** student data for admission form print *************/
+if(isset($_REQUEST['admission_form_print'])){
+  $student_query = "SELECT smt.*, cmt.Class_Name, scd.Stream from student_master_table smt, student_class_details scd, class_master_table cmt, class_section_table cst WHERE smt.Student_Id = scd.Student_Id AND cmt.Class_Id = scd.Class_Id AND scd.Promoted=0 and smt.Enabled = 1 AND smt.Student_Id = ? AND smt.School_Id=?";
+  $student_query_prep = $dbhandle->prepare($student_query);
+  $student_query_prep->bind_param("si",$_REQUEST['stud_data'],$_SESSION["SCHOOLID"]);
+  $student_query_prep->execute(); $data = array();
+  $result_set = $student_query_prep->get_result();
+  while ($row_student = $result_set->fetch_assoc()) {
+    $data[] = $row_student;
   }
   echo json_encode($data);
 }

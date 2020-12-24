@@ -1,0 +1,69 @@
+/************ custom css for print and download pdf ***************/
+@page {
+    size: A5;
+    size: landscape;
+    margin: 0;
+  }
+.custom-table{
+    border: 1px solid black!important;
+    width: 100%;
+    margin: 5px 0px 5px 0px;
+}
+.custom-table .cus-head{
+    background-color: darkgrey;
+    color: black;
+    text-align: center;
+}
+
+.custom-table tr, th, td{
+    border: 1px solid black;
+    padding: 3px;
+}
+
+.head-text-table{
+    font-weight: bold!important;
+    line-height: 0.4rem;
+    text-align: center;
+}
+
+.table-nbrdr{
+    border: 1px solid white;
+    width: 100%;
+    border-collapse: collapse !important;
+}
+.img-tbl{
+    width: 50%; 
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.img-tbl-logo{
+    width: 40%; 
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+}
+.head-brdr{
+    border-bottom:2px solid black ;
+}
+.cus-head-s{
+    background-color: darkgrey!important;
+    text-align: center;
+
+}
+.table-nbrdr td, .table-nbrdr th{
+    border: 1px solid white;
+}
+@media print {
+    html, body {
+        width: 101%;
+        height: 99;
+        page-break-after: avoid;
+        page-break-before: avoid;
+    }
+    .cus-head,.cus-head-s{
+        background-color: darkgrey!important;
+        -webkit-print-color-adjust: exact;
+    }
+}

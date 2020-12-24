@@ -233,24 +233,10 @@ require_once './includes/header.php';
                             <div class="col-8 col-xl-8 col-8-xxxl offset-xl-2 offset-lg-2">
                                 <div class="card dashboard-card-four pd-b-20">
                                     <div class="card-body">
-                                        <div class="heading-layout1">
-                                            <div class="item-title">
-                                                <h3>Student Attendance</h3>
+                                        <div class="card dashboard-card-one pd-b-20">
+                                            <div class="atttendence-chart-wrap">
+                                                <canvas id="atttendence-line-chart" width="1280" height="800"></canvas>
                                             </div>
-                                            <!-- 
-                                                I think it is extra elements of another page || commented by : meraj 
-                                            <div class="dropdown">
-                                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
-
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                                </div>
-                                            </div>-->
-                                        </div>
-                                        <div class="calender-wrap">
-                                            <div id="fc-calender" class="fc-calender"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -258,53 +244,53 @@ require_once './includes/header.php';
                         </div>
                     </div>
                 </div>
-                <!-- attendance system Ends -->
-                <div class="tab-pane fade" id="tab4" role="tabpanel">
-                    <div class="studet-360-form">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="content-fild">
-                                </div>
+            </div>
+            <!-- attendance system Ends -->
+            <div class="tab-pane fade" id="tab4" role="tabpanel">
+                <div class="studet-360-form">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="content-fild">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="tab5" role="tabpanel">
-                    <div class="studet-360-form">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="content-fild">
-                                </div>
+            </div>
+            <div class="tab-pane fade" id="tab5" role="tabpanel">
+                <div class="studet-360-form">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="content-fild">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="tab6" role="tabpanel">
-                    <div class="studet-360-form">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="content-fild">
-                                </div>
+            </div>
+            <div class="tab-pane fade" id="tab6" role="tabpanel">
+                <div class="studet-360-form">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="content-fild">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="tab7" role="tabpanel">
-                    <div class="studet-360-form">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="content-fild">
-                                </div>
+            </div>
+            <div class="tab-pane fade" id="tab7" role="tabpanel">
+                <div class="studet-360-form">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="content-fild">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="tab8" role="tabpanel">
-                    <div class="studet-360-form">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="content-fild">
-                                </div>
+            </div>
+            <div class="tab-pane fade" id="tab8" role="tabpanel">
+                <div class="studet-360-form">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="content-fild">
                             </div>
                         </div>
                     </div>
@@ -312,6 +298,7 @@ require_once './includes/header.php';
             </div>
         </div>
     </div>
+</div>
 </div>
 <style>
     .content,
@@ -457,6 +444,75 @@ require_once './includes/header.php';
                         $('.back_img').attr('src', url);
                     }
                 });
+            });
+        }
+
+        /********* attendence **********/
+        show_attendence();
+
+        function show_attendence() {
+            var bar_level = []; bar_data = [];
+            var url_attedence = "./universal_app_api2.php?Parameter=StudYearlyAttendance&StudentId=12345";
+            $.getJSON(url_attedence, function(att_response) {
+                $.each(att_response.month, function(key, value) {
+                    bar_level.push(value.month_name);
+                    bar_data.push(value.attendance_percent);
+                });
+                console.log(bar_level);
+                show_chart(bar_level,bar_data);
+            });
+        }
+        
+        function show_chart(bar_level,bar_data) {
+            console.log(bar_level+', '+bar_data);
+            var ctx = document.getElementById('atttendence-line-chart');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: bar_level,
+                    datasets: [{
+                        label: '# Start Month',
+                        data: bar_data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132)',
+                            'rgba(54, 162, 235)',
+                            'rgba(255, 206, 86)',
+                            'rgba(75, 192, 192)',
+                            'rgba(153, 102, 255)',
+                            'rgba(255, 159, 64)',
+                            'rgba(255, 99, 132)',
+                            'rgba(54, 162, 235)',
+                            'rgba(255, 206, 86)',
+                            'rgba(75, 192, 192)',
+                            'rgba(153, 102, 255)',
+                            'rgba(255, 159, 64)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
             });
         }
     });

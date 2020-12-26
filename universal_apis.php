@@ -200,7 +200,7 @@ if (isset($_REQUEST['get_school_name_by_id'])) {
 
 /********** get all clusters **********/
 if (isset($_REQUEST['get_all_clusters'])) {
-  $query = "SELECT * FROM `fee_cluster_table` WHERE `Enabled` = 1 AND `School_Id` = ".$_SESSION["SCHOOLID"]." ORDER BY FC_Name";$data=array();
+  $query = "SELECT * FROM `fee_group_table` WHERE `Enabled` = 1 AND `School_Id` = ".$_SESSION["SCHOOLID"]." AND Fee_Group_Type='Regular' ORDER BY FG_Name";$data=array();
   $query_prep = $dbhandle->prepare($query);
   $query_prep->execute();
   $result_set = $query_prep->get_result();
@@ -212,7 +212,7 @@ if (isset($_REQUEST['get_all_clusters'])) {
 
 /***** get all fee heads *****/
 if (isset($_REQUEST['get_all_fee_heads'])) {
-  $query = "SELECT * FROM `fee_head_list_table` WHERE `Enabled` =1 AND `School_Id` =".$_SESSION["SCHOOLID"]." ORDER BY `Fee_Head_Name`";$data=array();
+  $query = "SELECT * FROM `fee_head_table` WHERE `Enabled` =1 AND `School_Id` =".$_SESSION["SCHOOLID"]." AND Fee_Type='Regular' ORDER BY `Fee_Head_Name`";$data=array();
   $query_prep = $dbhandle->prepare($query);
   $query_prep->execute();
   $result_set = $query_prep->get_result();
@@ -277,7 +277,7 @@ if (isset($_REQUEST['get_admission_details'])) {
 
 /************** get fee cluster id by class 22 ***************/
 if (isset($_REQUEST['fee_cluster_id_by_class'])) {
-  $query = "SELECT * FROM `fee_cluster_class_list` WHERE `Class_Id` = ? AND Enabled = 1 AND School_Id = ? AND `Stream` = ?";
+  $query = "SELECT * FROM `fee_group_class_list` WHERE `Class_Id` = ? AND Enabled = 1 AND School_Id = ? AND `Stream` = ?";
   $data=array();
   $query_prep = $dbhandle->prepare($query);
   $query_prep->bind_param("iis",$_REQUEST['class_id'],$_SESSION["SCHOOLID"],$_REQUEST['stream']);

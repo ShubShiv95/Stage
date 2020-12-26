@@ -346,3 +346,9 @@ Module Name: 	Create Notice
 Message:	Column 'Filename' cannot be null
 SQL:	INSERT INTO `notice_master_table`(`Notice_Id`, `Notice_Title`, `Notice_Type`, `Notice_Description`, `Filename`, `Filepath`, `Publish_In_Web`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?,?)
 File:	/opt/lampp/htdocs/stage/Notice_1.php
+
+Date:	26-Dec-2020 08:08:06 PM	 By User:admin
+Module Name: 	Create Driver 
+Message:	No data supplied for parameters in prepared statement
+SQL:	INSERT INTO `transport_driver_table`(`Driver_Id`, `Staff_Id`, `Liscence_No`, `Remarks`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?)
+File:	F:\xampp\htdocs\stage\Transport_1.php

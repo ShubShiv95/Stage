@@ -105,9 +105,9 @@ include 'security.php';
                                     <input type="text" name="cluster_sender" class="d-none" autocomplete="off">
                                     <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
                                         <div class="form-group aj-form-group">
-                                            <label>Fee Cluster Name <span>*</span></label>
+                                            <label>Fee Group Name <span>*</span></label>
                                             <select class="select2 fee_cluster" id="fee_cluster_name" name="fee_cluster_name" required>
-                                                <option value="">-- SELECT Cluster --</option>
+                                                <option value="">-- SELECT Group --</option>
                                             </select>
                                             <p class="mt-2 font-size-14 line-height-14 f_msg">Example : Tuition Fee Or Admission Fee Or Computer Fee , etc</p>
                                         </div>
@@ -216,7 +216,7 @@ include 'security.php';
                 var html_data = '';
                 $.getJSON(url, function(data) {
                     $.each(data, function(key, value) {
-                        html_data += '<option value="' + value.FC_Id + '">' + value.FC_Name + '</option>';
+                        html_data += '<option value="' + value.FG_Id + '">' + value.FG_Name + '</option>';
                     });
                     $('.fee_cluster').append(html_data);
                 });

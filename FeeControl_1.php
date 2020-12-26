@@ -7,7 +7,7 @@ require_once 'sequenceGenerator.php';
 require_once './GlobalModel.php';
 /******* function to check existing fee cluster structure ********/
 function check_existing_structure($dbhandle,$cluster_name,$cluster_session,$school_id){
-    $query_check = "SELECT COUNT(FCFL_Id) as total_rows FROM fee_cluster_fee_list WHERE FC_Id = ? AND Session = ? AND Enabled =1 AND School_Id = ?";
+    $query_check = "SELECT COUNT(FS_Id) as total_rows FROM fee_structure_table WHERE FG_Id = ? AND Session = ? AND Enabled =1 AND School_Id = ?";
     $query_check_prep = $dbhandle->prepare($query_check);
     $query_check_prep->bind_param("isi",$cluster_name,$cluster_session,$school_id);
     $query_check_prep->execute();
@@ -60,10 +60,11 @@ if(isset($_REQUEST['fee_head_sender'])){
         }   
         elseif (!empty($fee_name) && !empty($fee_print_label) && !empty($fee_type)) {
             // saving data into database
-            $fhead_id = sequence_number('fee_head_list_table',$dbhandle);
-            $insert_query = "INSERT INTO `fee_head_list_table`(`Fee_Head_Id`, `Fee_Head_Name`, `Fee_Head_Type`, `Fee_Print_Lable`, `Refundable`, `Tax_Benifit`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?)";
+            $Regular='Regular'; //Assuming this controller is creating Regular fee type head only.
+            $fhead_id = sequence_number('fee_head_table',$dbhandle);
+            $insert_query = "INSERT INTO `fee_head_table`(`Fee_Head_Id`, `Fee_Head_Name`, `Fee_Head_Type`, `Fee_Type`,`Fee_Print_Lable`, `Refundable`, `Tax_Benifit`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?,?)";
             $insert_query_prepare = $dbhandle->prepare($insert_query);
-            $insert_query_prepare->bind_param("isssiiis",$fhead_id,$fee_name,$fee_type,$fee_print_label,$ref_fee_amt,$tax_benefit,$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
+            $insert_query_prepare->bind_param("issssiiis",$fhead_id,$fee_name,$fee_type,$Regular,$fee_print_label,$ref_fee_amt,$tax_benefit,$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
             if (!$insert_query_prepare->execute()) {
                 $error_msg = $insert_query_prepare->error;
                 $el = new LogMessage();
@@ -95,7 +96,7 @@ if(isset($_REQUEST['fee_head_sender'])){
 
 /*********** get all fee heads ***********/
 if (isset($_REQUEST['getall_feehead'])) {
-    $fee_head_query = "SELECT * FROM `fee_head_list_table` WHERE `Enabled` = 1 AND School_Id = ".$_SESSION["SCHOOLID"]." ORDER BY Fee_Head_Id DESC";
+    $fee_head_query = "SELECT * FROM `fee_head_table` WHERE `Enabled` = 1 AND School_Id = ".$_SESSION["SCHOOLID"]." and Fee_Type='Regular' ORDER BY Fee_Head_Id DESC";
     $fee_head_query_prepa = $dbhandle->prepare(($fee_head_query));
     $fee_head_query_prepa->execute();
     $result_set = $fee_head_query_prepa->get_result(); $data = array();
@@ -108,7 +109,7 @@ if (isset($_REQUEST['getall_feehead'])) {
 /********* delete fee head ********/
 if (isset($_REQUEST['delete_fee_head'])) {
     //fee_head_id
-    $query_del = "UPDATE fee_head_list_table SET Enabled = 0 WHERE Fee_Head_Id = ?";
+    $query_del = "UPDATE fee_head_table SET Enabled = 0 WHERE Fee_Head_Id = ?";
     $query_del_prepa = $dbhandle->prepare($query_del);
     $query_del_prepa->bind_param('i',$_REQUEST['fee_head_id']);
     if($query_del_prepa->execute()){
@@ -126,7 +127,7 @@ if (isset($_REQUEST['check_cluster_name'])) {
         echo '<p class="mt-2  font-size-14 line-height-14 text-danger">Please Type Cluster Name</p>';
     }else{
         $cluster_name = "'%".$_REQUEST['cluster_name']."%'";
-        $check_Query = "SELECT * FROM `fee_cluster_table` WHERE `FC_Name` LIKE $cluster_name AND `Enabled` = 1 AND `School_Id` = ".$_SESSION["SCHOOLID"]."";
+        $check_Query = "SELECT * FROM `fee_group_table` WHERE `FG_Name` LIKE $cluster_name AND Fee_Group_Type='Regular' AND `Enabled` = 1 AND `School_Id` = ".$_SESSION["SCHOOLID"]."";
         $check_Query_prepare = $dbhandle->prepare($check_Query);
         $result_set = $check_Query_prepare->get_result();
         if ($check_Query_prepare->num_rows >0) {
@@ -176,10 +177,13 @@ if (isset($_REQUEST['cluster_Sender'])) {
 
         if (!empty($_REQUEST['fee_stream']) && !empty($_REQUEST['cluster_name'])) {
             // one time insert into cluster_mster_table
-            $fcluster_id = sequence_number('fee_cluster_table',$dbhandle);
-            $ins_clus_query = "INSERT INTO `fee_cluster_table`(`FC_Id`, `FC_Name`, `School_Id`, `Updated_By`,`Enabled`) VALUES (?,?,?,?,?)"; $enabled = 1;
+            $fgroup_type='Regular';
+            $faccount_type='School-Fee'; //Here this is fixed as the other account type is created by configuration system before implementation.
+            $student_type='Existing'; //fixed with default value must changed with sending parameter as per requirement. This value is only valid till testing purpose. This must be changed with dynamic variable as per the post request made.
+            $fcluster_id = sequence_number('fee_group_table',$dbhandle);
+            $ins_clus_query = "INSERT INTO `fee_group_table`(`FG_Id`, `FG_Name`, `Fee_Group_Type`,`Fee_Account_Type`,`Student_Type`,`School_Id`, `Updated_By`,`Enabled`) VALUES (?,?,?,?,?,?,?,?)"; $enabled = 1;
             $ins_clus_query_prepate = $dbhandle->prepare($ins_clus_query);
-            $ins_clus_query_prepate->bind_param('isisi',$fcluster_id,$_REQUEST['cluster_name'],$_REQUEST['cluster_school_name'],$_SESSION["LOGINID"],$enabled);
+            $ins_clus_query_prepate->bind_param('issssisi',$fcluster_id,$_REQUEST['cluster_name'],$fgroup_type,$faccount_type,$student_type,$_REQUEST['cluster_school_name'],$_SESSION["LOGINID"],$enabled);
             if (!$ins_clus_query_prepate->execute()) {
                 $error_msg = $ins_clus_query_prepate->error;
                 $el = new LogMessage();
@@ -193,9 +197,9 @@ if (isset($_REQUEST['cluster_Sender'])) {
             }else{
                 $total_loops = count($_REQUEST['class_names']);
                 for ($i=0; $i < $total_loops; $i++) { 
-                    $cluster_class_id = sequence_number('fee_cluster_class_list',$dbhandle);
+                    $cluster_class_id = sequence_number('fee_group_class_list',$dbhandle);
                     $exp_data = explode(',',$_REQUEST['class_names'][$i]);
-                    $ins_clus_class_q = "INSERT INTO `fee_cluster_class_list`(`FCCL_Id`, `FC_Id`, `Class_Id`, `Stream`, `School_Id`,`Updated_By`) VALUES (?,?,?,?,?,?)";
+                    $ins_clus_class_q = "INSERT INTO `fee_group_class_list`(`FGCL_Id`, `FG_Id`, `Class_Id`, `Stream`, `School_Id`,`Updated_By`) VALUES (?,?,?,?,?,?)";
                     $ins_clus_class_q_prep = $dbhandle->prepare($ins_clus_class_q);
                     $ins_clus_class_q_prep->bind_param("iiisis",$cluster_class_id,$fcluster_id,$exp_data[0],$_REQUEST['fee_stream'],$_REQUEST['cluster_school_name'],$_SESSION["LOGINID"]);
                     if (!$ins_clus_class_q_prep->execute()) {
@@ -219,7 +223,7 @@ if (isset($_REQUEST['cluster_Sender'])) {
 
 /**** get all clusters ***/
 if (isset($_REQUEST['get_all_clusters'])) {
-    $cluster_query = "SELECT fct.*, fccl.*, cmt.Class_Name, smt.school_name FROM fee_cluster_table fct, fee_cluster_class_list fccl, class_master_table cmt, school_master_table smt WHERE fct.FC_Id = fccl.FC_Id AND fct.Enabled = 1 AND fccl.Enabled=1 AND fct.School_Id = ".$_SESSION["SCHOOLID"]." AND cmt.Class_Id = fccl.Class_Id  AND cmt.School_Id = smt.school_id ORDER BY fct.FC_Id DESC";
+    $cluster_query = "SELECT fgt.*, fgcl.*, cmt.Class_Name, smt.school_name FROM fee_group_table fgt, fee_group_class_list fgcl, class_master_table cmt, school_master_table smt WHERE fgt.FG_Id = fgcl.FG_Id AND fgt.Enabled = 1 AND fgcl.Enabled=1 AND fgt.School_Id = ".$_SESSION["SCHOOLID"]." AND cmt.Class_Id = fgcl.Class_Id  AND cmt.School_Id = smt.school_id AND fgt.Fee_Group_Type='Regular' ORDER BY fgt.FG_Id DESC";
     $cluster_query_prep = $dbhandle->prepare($cluster_query);
     $cluster_query_prep->execute();
     $result_set = $cluster_query_prep->get_result();$data = array();
@@ -232,7 +236,7 @@ if (isset($_REQUEST['get_all_clusters'])) {
 /* delete clusters */
 if (isset($_REQUEST['delete_cluster_class'])) {
     //cluster_class_id
-    $del_query = "UPDATE fee_cluster_class_list SET Enabled =0 WHERE FCCL_Id = ?";
+    $del_query = "UPDATE fee_group_class_list SET Enabled =0 WHERE FGCL_Id = ?";
     $del_query_prep = $dbhandle->prepare($del_query);
     $del_query_prep->bind_param("i",$_REQUEST['cluster_class_id']);
     if ($del_query_prep->execute()) {
@@ -314,7 +318,7 @@ if (isset($_REQUEST['consession_sender']))
 
 /*********** get consessions ************/
 if (isset($_REQUEST['get_all_consessions'])) {
-    $query = "SELECT cmt.*, cdt.Concession_Percent, cdt.Concession_Detail_Id,fhlt.Fee_Head_Name FROM concession_master_table cmt, concession_detail_table cdt, fee_head_list_table fhlt WHERE cmt.Concession_Id = cdt.Concession_Id AND fhlt.Fee_Head_Id = cdt.Fee_Head_Id AND cmt.Enabled =1 AND cdt.Enabled =1 AND cmt.School_Id = ".$_SESSION["SCHOOLID"]." ORDER BY cdt.Concession_Detail_Id DESC";
+    $query = "SELECT cmt.*, cdt.Concession_Percent, cdt.Concession_Detail_Id,fhlt.Fee_Head_Name FROM concession_master_table cmt, concession_detail_table cdt, fee_head_table fhlt WHERE cmt.Concession_Id = cdt.Concession_Id AND fhlt.Fee_Head_Id = cdt.Fee_Head_Id AND cmt.Enabled =1 AND cdt.Enabled =1 AND cmt.School_Id = ".$_SESSION["SCHOOLID"]." ORDER BY cdt.Concession_Detail_Id DESC";
     $query_prep = $dbhandle->prepare($query);
     $query_prep->execute();
     $result_set = $query_prep->get_result();$data=array();
@@ -363,13 +367,13 @@ if (isset($_REQUEST['cluster_sender'])) {
         // total installments
         $months_data = get_all_months($dbhandle);
         
-        $insert_query = "INSERT INTO `fee_cluster_fee_list`(`FCFL_Id`, `FC_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Session`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?,?)";
+        $insert_query = "INSERT INTO `fee_structure_table`(`FS_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Session`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?,?)";
         $insert_query_perp = $dbhandle->prepare($insert_query);
         for ($i=0; $i < $total_loops_down; $i++) 
         { 
             for ($j=0; $j < count($months_data); $j++) 
             {   
-                $cluster_fee_id = sequence_number('fee_cluster_fee_list',$dbhandle);
+                $cluster_fee_id = sequence_number('fee_structure_table',$dbhandle);
                 $insert_query_perp->bind_param("iiiiiisis",$cluster_fee_id,$_REQUEST['fee_cluster_name'],$_REQUEST['fee_head_id'][$i],$_REQUEST['installment_type'][$i],$_REQUEST['inst_name'][$j],$_REQUEST[$i][$i][$j],$_REQUEST['f_academic_session'],$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
                 $execute_Query = $insert_query_perp->execute();
             }    
@@ -405,20 +409,20 @@ if (isset($_REQUEST['get_clust_details']))
        $data.= '<th>'.$months['Installment_Name'].'</th>';
     }
     $data .= '<th class="text-right">Total Amt</th></tr></thead><tbody>';
-    $query = "SELECT  fcfl.*  FROM fee_cluster_fee_list fcfl WHERE fcfl.FC_Id = ? AND fcfl.Session = ? AND fcfl.School_Id = ? AND fcfl.Enabled = 1 AND fcfl.Installment_Id=? AND fcfl.Fee_Head_Id=?";
+    $query = "SELECT  fst.*  FROM fee_structure_table fst WHERE fst.FG_Id = ? AND fst.Session = ? AND fst.School_Id = ? AND fst.Enabled = 1 AND fst.Installment_Id=? AND fst.Fee_Head_Id=?";
     $query_prep = $dbhandle->prepare($query);
 
-    $query_fee_head = "SELECT DISTINCT fhlt.*, fcfl.Fee_Installment_Type FROM fee_head_list_table fhlt, fee_cluster_fee_list fcfl WHERE fcfl.Fee_Head_Id = fhlt.Fee_Head_Id AND fcfl.Session = ? AND fcfl.School_Id = ? AND fcfl.FC_Id = ?";
+    $query_fee_head = "SELECT DISTINCT fht.*, fst.Fee_Installment_Type FROM fee_head_table fht, fee_structure_table fst WHERE fht.Fee_Type='Regular' AND fst.Fee_Head_Id = fht.Fee_Head_Id AND fst.Session = ? AND fst.School_Id = ? AND fst.FG_Id = ?";
     $query_fee_head_prep = $dbhandle->prepare($query_fee_head);
     $query_fee_head_prep->bind_param("sii",$_REQUEST['cluster_session'],$_SESSION["SCHOOLID"],$_REQUEST['cluster_name']);
     $query_fee_head_prep->execute();
     $result_set_head = $query_fee_head_prep->get_result();
     // total amount of months by fee head id
-    $query_ttl_monthc = "SELECT SUM(`Fee_Amount`) as total_amt FROM fee_cluster_fee_list WHERE FC_Id =? AND Session=? AND Fee_Head_Id = ?";
+    $query_ttl_monthc = "SELECT SUM(`Fee_Amount`) as total_amt FROM fee_structure_table WHERE FG_Id =? AND Session=? AND Fee_Head_Id = ?";
     $query_ttl_month_prep = $dbhandle->prepare($query_ttl_monthc);
 
     // sum of column according months
-    $query_ttl_month = "SELECT SUM(`Fee_Amount`) as total_amt_month FROM fee_cluster_fee_list WHERE FC_Id =? AND Session=? AND Installment_Id = ?";
+    $query_ttl_month = "SELECT SUM(`Fee_Amount`) as total_amt_month FROM fee_structure_table WHERE FG_Id =? AND Session=? AND Installment_Id = ?";
     $query_ttl_monthw_prep = $dbhandle->prepare($query_ttl_month);    
 
     while($row_head = $result_set_head->fetch_assoc()){
@@ -461,7 +465,7 @@ if (isset($_REQUEST['get_clust_details']))
         $row_mttl = $result_amtw->fetch_assoc();      
         $data.='<td>'.$row_mttl['total_amt_month'].'</td>';
     }
-    $g_ttl = "SELECT SUM(Fee_Amount) as g_ttl FROM fee_cluster_fee_list WHERE FC_Id =? AND Session =? ";
+    $g_ttl = "SELECT SUM(Fee_Amount) as g_ttl FROM fee_structure_table WHERE FG_Id =? AND Session =? ";
     $g_ttl_prep = $dbhandle->prepare($g_ttl);
     $g_ttl_prep->bind_param("is",$_REQUEST['cluster_name'],$_REQUEST['cluster_session']);
     $g_ttl_prep->execute(); 
@@ -477,7 +481,7 @@ if (isset($_REQUEST['get_cluster_form'])) {
     $data .= '<table class="table" style="overflow-x:auto; width:125%; "><thead><tr><th style="border:1px solid #ffae01; padding:4px;">Fee Head</th><th style="border:1px solid #ffae01; padding:4px;">Inst. Type</th>';
 
     // get all fee heads
-    $fee_heads = 'SELECT * FROM fee_head_list_table WHERE Enabled = 1 AND School_Id = ?';
+    $fee_heads = 'SELECT * FROM fee_head_table WHERE Enabled = 1 AND School_Id = ? ' . "AND Fee_Type='Regular'"; //hiding the transport head. Showing rest of the fee heads.
     $fee_heads_prep = $dbhandle->prepare($fee_heads);
     $fee_heads_prep->bind_param("i",$_SESSION['SCHOOLID']);
     $fee_heads_prep->execute();

@@ -289,7 +289,7 @@
                                 <a href="./TransportAddDriver.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Driver</a>
                             </li>
                             <li class="nav-item">
-                                <a href="./TransportAddVehicle.php" class="nav-link"><i class="fas fa-angle-right"></i>Vehicle</a>
+                                <a href="./TransportAddVehicle.php" class="nav-link"><i class="fas fa-angle-right"></i>Vehicle Driver</a>
                             </li>  
                             <li class="nav-item">
                                 <a href="./TransportAddVehicleDetails.php" class="nav-link"><i class="fas fa-angle-right"></i>Vehicle Details</a>
@@ -301,12 +301,12 @@
                                 <a href="./TransportAssignStudent.php" class="nav-link"><i class="fas fa-angle-right"></i>Assign Student</a>
                             </li>
 
-                            <li class="nav-item">
+                           <!-- <li class="nav-item">
                                 <a href="./TransportDriver.php" class="nav-link"><i class="fas fa-angle-right"></i>Driver</a>
                             </li>
                             <li class="nav-item">
                                 <a href="./TransportAddDocType.php" class="nav-link"><i class="fas fa-angle-right"></i>Document Type</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </li>
                     <li class="nav-item sidebar-nav-item">

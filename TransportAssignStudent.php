@@ -59,17 +59,17 @@ include 'security.php';
                       </div>
                     </div>
                   </div>
-                  <div class="col-xl-12 col-lg-12 col-12 aj-mb-2 mt-3">
+                  <!--<div class="col-xl-12 col-lg-12 col-12 aj-mb-2 mt-3">
                     <div class="form-group aj-form-group">
-                      <label>Different Drop Vehicle</label>
+                      <label>Different Drop Stop</label>
                       <div class="row text-center">
                         <div class="col-4 mt-3"><input type="checkbox" name="differenct_drop_type"></div>
                       </div>
                     </div>
-                  </div>  
+                  </div>  -->
                   <div class="col-xl-4 col-lg-4 col-md-4 col-12 aj-mb-2 pt-3">
                     <div class="form-group aj-form-group">
-                      <label>Pickup Route <span>*</span></label>
+                      <label>Route <span>*</span></label>
                       <select class="select2 search_by col-12 form-group mb-4" name="search_by" id="search_by" name="schoolSession">
                         <option value="0">Select Section</option>
                         <option value="1">Class</option>
@@ -79,7 +79,7 @@ include 'security.php';
                   </div>  
                   <div class="col-xl-4 col-lg-4 col-md-4 col-12 aj-mb-2 pt-3">
                     <div class="form-group aj-form-group">
-                      <label>Pickup<span>*</span></label>
+                      <label>Stoppage<span>*</span></label>
                       <select class="select2 search_by col-12 form-group mb-4" name="search_by" id="search_by" name="schoolSession">
                         <option value="0">Select Section</option>
                         <option value="1">Class</option>
@@ -146,8 +146,5 @@ include 'security.php';
         </div>
       </div>
     </div>
-    <footer class="footer-wrap-layout1">
-      <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
-    </footer>
   </div>
 </div>

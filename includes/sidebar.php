@@ -272,20 +272,42 @@
             <li class="nav-item sidebar-nav-item  print-d-none">
                 <a href="#" class="nav-link"><i class="flaticon-bus-side-view"></i><span>Transport </span></a>
                 <ul class="nav sub-group-menu">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Route</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Stopage</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Driver</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Vehicle</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Transport Fee</a>
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><span>Settings</span></a>
+                        <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+                        <ul class="nav sub-group-menu">
+                            <li class="nav-item">
+                                <a href="./TransportAddPickup.php" class="nav-link"><i class="fas fa-angle-right"></i>Stopage</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./TransportRouteAddFee.php" class="nav-link"><i class="fas fa-angle-right"></i>Transport Fee</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./TransportRoute.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Route</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./TransportAddDriver.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Driver</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./TransportAddVehicle.php" class="nav-link"><i class="fas fa-angle-right"></i>Vehicle Driver</a>
+                            </li>  
+                            <li class="nav-item">
+                                <a href="./TransportAddVehicleDetails.php" class="nav-link"><i class="fas fa-angle-right"></i>Vehicle Details</a>
+                            </li>                                                        
+                            <li class="nav-item">
+                                <a href="./TransportAddVehicleDocument.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Vehicle Document</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./TransportAssignStudent.php" class="nav-link"><i class="fas fa-angle-right"></i>Assign Student</a>
+                            </li>
+
+                           <!-- <li class="nav-item">
+                                <a href="./TransportDriver.php" class="nav-link"><i class="fas fa-angle-right"></i>Driver</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./TransportAddDocType.php" class="nav-link"><i class="fas fa-angle-right"></i>Document Type</a>
+                            </li>-->
+                        </ul>
                     </li>
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><span>Messaging</span></a>
@@ -293,6 +315,9 @@
                         <ul class="nav sub-group-menu">
                             <li class="nav-item">
                                 <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Bus Wise</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="TrasnportSendMessagetoParent.php" class="nav-link"><i class="fas fa-angle-right"></i>Send Message To Parent</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Route Wise</a>
@@ -308,6 +333,15 @@
                         <ul class="nav sub-group-menu">
                             <li class="nav-item">
                                 <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Current Location</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./TransportViewAssignStudent.php" class="nav-link"><i class="fas fa-angle-right"></i>View Assign Students</a></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./TransportListDocuments.php" class="nav-link"><i class="fas fa-angle-right"></i>List Vehicle Documents</a></a>
+                            </li>
+                            <li  class="nav-item">
+                                <a href="./TransportListVehicle.php" class="nav-link"><i class="fas fa-angle-right"></i>List Vehicles</a></a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Bus Fare Report</a>

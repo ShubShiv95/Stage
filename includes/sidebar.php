@@ -191,21 +191,21 @@
                 <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Fee Management</span></a>
                 <ul class="nav sub-group-menu">
                     <li class="nav-item">
-                        <a href="FeeHead.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Head</a>
+                        <a href="FeeHead.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Head</a>
                     </li>
                     <li class="nav-item">
-                        <a href="FeeCollection.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Collection</a>
+                        <a href="FeeCollection.php" class="nav-link"><i class="fas fa-angle-right"></i>Collect Fee</a>
                     </li>
                     <li class="nav-item">
-                        <a href="Fee_Cluster.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Cluster
+                        <a href="Fee_Cluster.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Group
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="Fee_Concession.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Concession
+                        <a href="Fee_Concession.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Concession
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="FeeClusterStructure.php" class="nav-link"><i class="fas fa-angle-right"></i>Fee Cluster Structure
+                        <a href="FeeClusterStructure.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Structure
                         </a>
                     </li>
                 </ul>

@@ -352,3 +352,723 @@ Module Name: 	Create Driver
 Message:	No data supplied for parameters in prepared statement
 SQL:	INSERT INTO `transport_driver_table`(`Driver_Id`, `Staff_Id`, `Liscence_No`, `Remarks`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?)
 File:	F:\xampp\htdocs\stage\Transport_1.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,1, 0,'Unpaid',156/2018,'2020-2021',4,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,2, 0,'Unpaid',156/2018,'2020-2021',5,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,3, 0,'Unpaid',156/2018,'2020-2021',6,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,4, 0,'Unpaid',156/2018,'2020-2021',7,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,5, 0,'Unpaid',156/2018,'2020-2021',8,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,6, 0,'Unpaid',156/2018,'2020-2021',9,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,7, 0,'Unpaid',156/2018,'2020-2021',10,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,8, 0,'Unpaid',156/2018,'2020-2021',11,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,9, 0,'Unpaid',156/2018,'2020-2021',12,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,10, 0,'Unpaid',156/2018,'2020-2021',1,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,11, 0,'Unpaid',156/2018,'2020-2021',2,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	27-Dec-2020 11:59:41 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,12, 0,'Unpaid',156/2018,'2020-2021',3,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,1, 0,'Unpaid',156/2018,'2020-2021',4,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,2, 0,'Unpaid',156/2018,'2020-2021',5,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,3, 0,'Unpaid',156/2018,'2020-2021',6,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,4, 0,'Unpaid',156/2018,'2020-2021',7,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,5, 0,'Unpaid',156/2018,'2020-2021',8,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,6, 0,'Unpaid',156/2018,'2020-2021',9,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,7, 0,'Unpaid',156/2018,'2020-2021',10,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,8, 0,'Unpaid',156/2018,'2020-2021',11,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,9, 0,'Unpaid',156/2018,'2020-2021',12,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,10, 0,'Unpaid',156/2018,'2020-2021',1,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,11, 0,'Unpaid',156/2018,'2020-2021',2,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:02:31 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	Unknown column 'admin' in 'field list'
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,2,12, 0,'Unpaid',156/2018,'2020-2021',3,1,admin)
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,1,5000,5000,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,1,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,1,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,1,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,2,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,2,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,2,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,2,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,3,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,3,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,3,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,3,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,4,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,4,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,4,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,4,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,5,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,5,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,5,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,5,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,6,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,6,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,6,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,6,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,7,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,7,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,7,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,7,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,8,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,8,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,8,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,8,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,9,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,9,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,9,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:40 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,9,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,10,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,10,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,10,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,10,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,11,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,11,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,11,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,11,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,12,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,12,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,12,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:17:41 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,12,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:17 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,1,5000,5000,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:17 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,1,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:17 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,1,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:17 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,1,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:17 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,2,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:17 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,2,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:17 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,2,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:17 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,2,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:17 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,3,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,3,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,3,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,3,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,4,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,4,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,4,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,4,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,5,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,5,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,5,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,5,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,6,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,6,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,6,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,6,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,7,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,7,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,7,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,7,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,8,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,8,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,8,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,8,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,9,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,9,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,9,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,9,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,10,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,10,1000,500,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,10,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,10,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,11,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,11,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,11,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,11,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,1,1,12,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,2,2,12,0,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,3,2,12,700,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	28-Dec-2020 12:27:18 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
+SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,12,500,0,1,'1,'admin')
+File:	F:\xampp\htdocs\stage\FeeListCreation.php

@@ -424,21 +424,18 @@ if (isset($_REQUEST['get_clust_details']))
     // sum of column according months
     $query_ttl_month = "SELECT SUM(`Fee_Amount`) as total_amt_month FROM fee_structure_table WHERE FG_Id =? AND Session=? AND Installment_Id = ?";
     $query_ttl_monthw_prep = $dbhandle->prepare($query_ttl_month);    
-
+    $fee_type="Not Defined";
     while($row_head = $result_set_head->fetch_assoc()){
         $data.='<tr><td>'.$row_head['Fee_Head_Name'].'</td><td>';
-        if ($row_head['Fee_Installment_Type']==12) {
-           $fee_type = "Monthly";
-        }elseif($row_head['Fee_Installment_Type']==6){
-            $fee_type= "Bi-Monthly";
+        if ($row_head['Fee_Installment_Type']==1) {
+           $fee_type = "Annual";
+        }elseif($row_head['Fee_Installment_Type']==2){
+            $fee_type= "Installment";
         }
-        elseif($row_head['Fee_Installment_Type']==4){
-            $fee_type= "Quarterly";
+        elseif($row_head['Fee_Installment_Type']==3){
+            $fee_type= "Lifetime";
         }
-        elseif($row_head['Fee_Installment_Type']==2){
-            $fee_type= "Half-Yearly";
-        }
-        elseif($row_head['Fee_Installment_Type']==0){
+        else{
             $fee_type= "Not Defined";
         }
         $data.=''.$fee_type.'</td>';

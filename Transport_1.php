@@ -29,7 +29,7 @@ if(isset($_REQUEST['driver_form_sender'])){
             $driver_id = $assignmentId = sequence_number('transport_driver_table',$dbhandle);
             $query_insert = "INSERT INTO `transport_driver_table`(`Driver_Id`, `Staff_Id`, `Liscence_No`, `Remarks`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?)";
             $query_insert_prepare = $dbhandle->prepare($query_insert);
-            $query_insert_prepare->bind_param("iissisi",$driver_id,$_REQUEST['staff_name'],$_REQUEST['license_no'],$_REQUEST['driver_remarks'],$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
+            $query_insert_prepare->bind_param("iissis",$driver_id,$_REQUEST['staff_name'],$_REQUEST['license_no'],$_REQUEST['driver_remarks'],$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
             if ($query_insert_prepare->execute()) {
                 echo '<p class="text-success">Driver Added Successfully</p>';
             }

@@ -326,8 +326,9 @@ if (isset($_REQUEST['transport_cluster_Sender'])) {
 
 /**** get all clusters ***/
 if (isset($_REQUEST['get_all_clusters'])) {
-    $cluster_query = "SELECT fgt.*, fgcl.*, cmt.Class_Name, smt.school_name FROM fee_group_table fgt, fee_group_class_list fgcl, class_master_table cmt, school_master_table smt WHERE fgt.FG_Id = fgcl.FG_Id AND fgt.Enabled = 1 AND fgcl.Enabled=1 AND fgt.School_Id = ".$_SESSION["SCHOOLID"]." AND cmt.Class_Id = fgcl.Class_Id  AND cmt.School_Id = smt.school_id AND fgt.Fee_Group_Type='Regular' ORDER BY fgt.FG_Id DESC";
+    $cluster_query = "SELECT fgt.*, fgcl.*, cmt.Class_Name, smt.school_name FROM fee_group_table fgt, fee_group_class_list fgcl, class_master_table cmt, school_master_table smt WHERE fgt.FG_Id = fgcl.FG_Id AND fgt.Enabled = 1 AND fgcl.Enabled=1 AND fgt.School_Id = ? AND cmt.Class_Id = fgcl.Class_Id  AND cmt.School_Id = smt.school_id AND fgt.Fee_Group_Type=? ORDER BY fgt.FG_Id DESC";
     $cluster_query_prep = $dbhandle->prepare($cluster_query);
+    $cluster_query_prep->bind_param("is",$_SESSION["SCHOOLID"],$_REQUEST['fee_type']);
     $cluster_query_prep->execute();
     $result_set = $cluster_query_prep->get_result();$data = array();
     while ($rows = $result_set->fetch_assoc()) {

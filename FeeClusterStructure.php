@@ -98,12 +98,12 @@ include 'security.php';
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title aj-item-title">
-                                <h3 class="mb-4">Fee cluster Structure</h3>
+                                <h3 class="mb-4">Fee Structure</h3>
                             </div>
                             <form action="./FeeControl_1.php" method="post" id="cluster_form">
                                 <div class="row justify-content-center mb-4 new-added-form school-form aj-new-added-form">
                                     <input type="text" name="cluster_sender" class="d-none" autocomplete="off">
-                                    <div class="col-xl-4 col-lg-4 col-12 aj-mb-2">
+                                    <div class="col-xl-5 col-lg-5 col-12 aj-mb-2">
                                         <div class="form-group aj-form-group">
                                             <label>Fee Group Name <span>*</span></label>
                                             <select class="select2 fee_cluster" id="fee_cluster_name" name="fee_cluster_name" required>
@@ -112,7 +112,7 @@ include 'security.php';
                                             <p class="mt-2 font-size-14 line-height-14 f_msg">Example : Tuition Fee Or Admission Fee Or Computer Fee , etc</p>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4 col-lg-4 col-12">
+                                    <div class="col-xl-5 col-lg-5 col-12">
                                         <div class="form-group aj-form-group">
                                             <label>Session *</label>
                                             <select class="select2"  id="f_academic_session" name="f_academic_session" required>
@@ -129,7 +129,7 @@ include 'security.php';
                                         </div>
                                     </div>
                                     <div class="table-responsive" >
-                                    <div class="load_cluster_ui" style="height: 50vh; overflow-x: auto;"></div>
+                                    <div class="load_cluster_ui border border-primary" style="height: 50vh; overflow-x: auto;"></div>
                                         <table class="stripe row-border order-column ">
                                             <!--<thead class="month_head">
                                                 <tr>
@@ -216,7 +216,7 @@ include 'security.php';
                 var html_data = '';
                 $.getJSON(url, function(data) {
                     $.each(data, function(key, value) {
-                        html_data += '<option value="' + value.FG_Id + '">' + value.FG_Name + '</option>';
+                        html_data += '<option value="' + value.FG_Id + '">' + value.FG_Name+' ('+value.Student_Type+' Student) ' + '</option>';
                     });
                     $('.fee_cluster').append(html_data);
                 });

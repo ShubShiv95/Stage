@@ -125,7 +125,7 @@ include 'security.php';
 
                                                 </div>
                             </form>
-                            <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
+                            <div class="col-xl-12 col-lg-12 col-12 aj-mb-2  border border-primary">
                                 <div class="Attendance-staff  aj-scroll-Attendance-staff">
                                     <div class="table-responsive ">
                                         <table class="table display ">
@@ -133,7 +133,6 @@ include 'security.php';
                                                 <tr>
                                                     <th style="width: 25%;">Fee Cluster Name </th>
                                                     <th style="width: 20%;">Class </th>
-                                                    <th style="width: 20%;">Stream</th>
                                                     <th style="width: 30%;">School Account</th>
                                                     <th style="width: 5%;">Action</th>
                                                 </tr>
@@ -182,11 +181,89 @@ include 'security.php';
     <script type="text/javascript" src="js/ajax-function.js"></script>
     <script>
         $(document).ready(function() {
-            get_all_schools();function get_all_schools() {const url = './universal_apis.php?get_school_name=1';html_data = '<option value="0">-- Master Account --</option>';$.getJSON(url, function(data){$.each(data, function(key, value){html_data += '<option value="' + value.school_id + '">' + value.school_name + '</option>';});$('.show_school').html(html_data); });}
-            get_all_class();function get_all_class() {const url = './universal_apis.php?getAllClass=1';var html_data = '';$.getJSON(url, function(data) {$.each(data, function(key, value) {html_data += '<li><div class="radio"><span><input type="checkbox" value="' + value.Class_Id + ',' + value.Class_No + '" class="sibling-bs class_name_checks" name="class_names[]"> <b>' + value.Class_Name + '</b></span></div></li>';});$('.pop_class_names').html(html_data);});}
-            $('#cluster_name').blur(function() {const cluster_name = $(this).val();$.ajax({url: './FeeControl_1.php',type: 'get',data: {'check_cluster_name': 1,'cluster_name': cluster_name},success: function(data) {$('.cluster_check').html(data);}});});$(document).on('submit', '#fee_cluster_form', function(event) {event.preventDefault();$.ajax({url: $(this).attr('action'),type: $(this).attr('method'),data: $(this).serialize(),success: function(data) {$('.form_output').html(data);get_cluster_list();}});});get_cluster_list();
-            function get_cluster_list() {const ulr = './FeeControl_1.php?get_all_clusters=1'; var html_data = '';$.getJSON(ulr, function(data) {$.each(data, function(key, value){html_data += '<tr><td style="width: 25%;">'+value.FG_Name+'</td><td style="width: 20%;">'+value.Class_Name+'</td><td style="width: 20%;">'+value.Stream+'</td><td style="width: 30%;">'+value.school_name+'</td><td style="width: 5%"><button class="btn btn-danger del_cluster" id="'+value.FGCL_Id+'"><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';});$('.display_data').html(html_data);});}
-            $(document).on('click','.del_cluster',function(event){event.preventDefault(); var cluster_class_id = $(this).attr('id');if(confirm("Are You Sure To Delete")){$.ajax({url : './FeeControl_1.php',type : 'post',data : {'delete_cluster_class':1,'cluster_class_id':cluster_class_id},success : function(data){$('.form_output').html(data);get_cluster_list(); window.setTimeout(function(){$('.form_output').html('');},3000)}});}});
+            get_all_schools();
+
+            function get_all_schools() {
+                const url = './universal_apis.php?get_school_name=1';
+                html_data = '<option value="0">-- Master Account --</option>';
+                $.getJSON(url, function(data) {
+                    $.each(data, function(key, value) {
+                        html_data += '<option value="' + value.school_id + '">' + value.school_name + '</option>';
+                    });
+                    $('.show_school').html(html_data);
+                });
+            }
+            get_all_class();
+
+            function get_all_class() {
+                const url = './universal_apis.php?getAllClass=1';
+                var html_data = '';
+                $.getJSON(url, function(data) {
+                    $.each(data, function(key, value) {
+                        html_data += '<li><div class="radio"><span><input type="checkbox" value="' + value.Class_Id + ',' + value.Class_No + '" class="sibling-bs class_name_checks" name="class_names[]"> <b>' + value.Class_Name + '</b></span></div></li>';
+                    });
+                    $('.pop_class_names').html(html_data);
+                });
+            }
+            $('#cluster_name').blur(function() {
+                const cluster_name = $(this).val();
+                $.ajax({
+                    url: './FeeControl_1.php',
+                    type: 'get',
+                    data: {
+                        'check_cluster_name': 1,
+                        'cluster_name': cluster_name
+                    },
+                    success: function(data) {
+                        $('.cluster_check').html(data);
+                    }
+                });
+            });
+            $(document).on('submit', '#fee_cluster_form', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function(data) {
+                        $('.form_output').html(data);
+                        get_cluster_list();
+                    }
+                });
+            });
+            get_cluster_list();
+
+            function get_cluster_list() {
+                const ulr =  './FeeControl_1.php?get_all_clusters=1&fee_type=Transport';
+                var html_data = '';
+                $.getJSON(ulr, function(data) {
+                    $.each(data, function(key, value) {
+                        html_data += '<tr><td style="width: 25%;">' + value.FG_Name + '</td><td style="width: 20%;">' + value.Class_Name + '</td><td style="width: 30%;">' + value.school_name + '</td><td style="width: 5%"><button class="btn btn-danger del_cluster" id="' + value.FGCL_Id + '"><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
+                    });
+                    $('.display_data').html(html_data);
+                });
+            }
+            $(document).on('click', '.del_cluster', function(event) {
+                event.preventDefault();
+                var cluster_class_id = $(this).attr('id');
+                if (confirm("Are You Sure To Delete")) {
+                    $.ajax({
+                        url: './FeeControl_1.php',
+                        type: 'post',
+                        data: {
+                            'delete_cluster_class': 1,
+                            'cluster_class_id': cluster_class_id
+                        },
+                        success: function(data) {
+                            $('.form_output').html(data);
+                            get_cluster_list();
+                            window.setTimeout(function() {
+                                $('.form_output').html('');
+                            }, 3000)
+                        }
+                    });
+                }
+            });
         });
     </script>
 </body>

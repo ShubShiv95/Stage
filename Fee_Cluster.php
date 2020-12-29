@@ -140,7 +140,7 @@ include 'security.php';
                                                         </select>
                                                     </div>
                                                 </div>                                                
-                                                <div class="col-lg-12 col-xl-12 col-12 text-right mb-3">
+                                                <div class="col-lg-6 col-xl-6 col-12 text-right mb-3">
                                                     <button type="submit" name="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit</button>
                                                 </div>
                                                 <div class="col-lg-12 col-xl-12 col-12 mb-3 form_output">

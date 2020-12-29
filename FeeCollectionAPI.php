@@ -121,6 +121,7 @@ if($request_type=='CollectFee')
                         //$fee[$InstallmentId]["Installment_Id"]="$InstallmentId"; 
                         
                         $TotalInstAmount=0; //initialize total installment amount to zero.
+                        $LateFeeAmount=0;
                         $StudentFeeMaster_result=$StudentFeeMaster_prepare->execute();// listing student_fee_master rows for the installment.
                             if(!$StudentFeeMaster_result)
                                     {
@@ -138,6 +139,7 @@ if($request_type=='CollectFee')
                         while($StudentFeeMaster_row=$StudentFeeMaster_result_set->fetch_assoc())//Looping through each student_fee_master record.
                             {            
                                 $SFM_Id=$StudentFeeMaster_row["SFM_Id"];
+                                $LateFeeAmount=$LateFeeAmount+$StudentFeeMaster_row["Late_Fee_Amount"]; 
                                 if($StudentFeeMaster_row["Pay_Status"]=='Due')
                                     {
                                         $TotalInstAmount=$TotalInstAmount+$StudentFeeMaster_row["Due_Amount"];
@@ -147,7 +149,7 @@ if($request_type=='CollectFee')
                                         $fee[$InstallmentId]["details"]["Due"]["concession"]=0;
                                         continue;
                                     }
-                                    $TotalInstAmount=$TotalInstAmount+$StudentFeeMaster_row["Total_Amount"];  
+                                    $TotalInstAmount=$TotalInstAmount+$StudentFeeMaster_row["Total_Amount"]+$StudentFeeMaster_row["Late_Fee_Amount"];  
                                 $StudentFeeDetails_sql="select sfd.*,fht.Fee_Head_Name from student_fee_details sfd,fee_head_table fht where SFM_ID=? and fht.fee_head_id=sfd.fee_head_id";
                                 $StudentFeeDetails_prepare=$dbhandle->prepare($StudentFeeDetails_sql);
                                 $StudentFeeDetails_prepare->bind_param('i',$SFM_Id);
@@ -175,9 +177,12 @@ if($request_type=='CollectFee')
                                         $fee[$InstallmentId]["details"][$row["Fee_Head_Id"]]["amount"]=$row["Fee_Amount"];
                                         $fee[$InstallmentId]["details"][$row["Fee_Head_Id"]]["concession"]=$row["Concession_Amount"];
                                     }
+
+                                    //$fee[$InstallmentId]["Late_Fee"]=$StudentFeeMaster_row["Late_Fee_Amount"]; 
                             }
                             $fee[$InstallmentId]["Installment_name"]="$Installment_Name";
                             $fee[$InstallmentId]["Installment_Id"]="$InstallmentId"; 
+                            $fee[$InstallmentId]["Late_Fee"]=$LateFeeAmount;
                             $fee[$InstallmentId]["Net_Amount"]=$TotalInstAmount;    
                         
                           

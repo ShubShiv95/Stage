@@ -1094,10 +1094,91 @@ if($request_type=='StudMAttendance')
         $studentid=$_REQUEST["StudentId"];
         
         $data = array(
-                        "status"=>"200",
-                        "message"=>"success"
+                        "status"=>"500",
+                        "message"=>"failure"
                         ); 
                     header('Content-type: text/javascript');
                     echo json_encode($data, JSON_PRETTY_PRINT);
     }
-   
+ 
+    if($request_type=='MeetingList')
+    {
+        $studentid=$_REQUEST["StudentId"];
+        
+        $data = array(
+            "status"=>"200",
+            "message"=>"success",
+            "name" => "Ravi Kumar",
+            "class"=> "Class 5",
+            "section" => "A",
+            "roll_no" => "15",
+            "Meetings"=>array(
+                            array(
+                                    "topic"=>"Physics",  
+                                    "description"=>"Some Description about Physics",
+                                    "subject"=>"About Gravitation",
+                                    "teacher"=>"Mr. Ashish Kumar",
+                                    "class_start_date_time"=>"29/12/2020 | 08:15 pm",
+                                    "class_end_date_time"=>"29/12/2020 | 08:55 pm",
+                                    "Meeting_URL" => "https://zoom.us/j/92369077029?pwd=ZlY0TUFzVjZ1blptVkJEdVhud1ZDZz09"
+                            ),
+                            array(
+                                    "topic"=>"Chemistry",  
+                                    "description"=>"Some Description about Chemistry",
+                                    "subject"=>"Chemical Reaction",
+                                    "teacher"=>"Mrs. Sanjana Kumar",
+                                    "class_start_date_time"=>"30/12/2020 | 03:00 pm",
+                                    "class_end_date_time"=>"30/12/2020 | 04:00 pm",
+									"Meeting_URL" => "https://zoom.us/j/92369077029?pwd=ZlY0TUFzVjZ1blptVkJEdVhud1ZDZz"                                    
+                            ),
+                            array(
+                                    "topic"=>"Hindi",  
+                                    "description"=>"Some Description about Hindi",
+                                    "subject"=>"Premchandra",
+                                    "teacher"=>"Mrs. Pooja Sinha",
+                                    "class_start_date_time"=>"30/12/2020 | 03:00 pm",
+                                    "class_end_date_time"=>"30/12/2020 | 04:00 pm",
+									"Meeting_URL" => "https://zoom.us/j/92369077029?pwd=ZlY0TUFzVjZ1blptVkJEdVhud1ZDZz"                                    
+                            ),
+                            array(
+                                    "topic"=>"English",  
+                                    "description"=>"Some Description about English",
+                                    "subject"=>"Chemical Reaction",
+                                    "teacher"=>"Mrs. Sanjana Kumar",
+                                    "class_start_date_time"=>"31/12/2020 | 03:00 pm",
+                                    "class_end_date_time"=>"31/12/2020 | 04:00 pm",
+									"Meeting_URL" => "https://zoom.us/j/92369077029?pwd=ZlY0TUFzVjZ1blptVkJEdVhud1ZDZz"                                    
+                            ),
+                            array(
+                                    "topic"=>"Physics",  
+                                    "description"=>"Some Description about Physics",
+                                    "subject"=>"About Gravitation",
+                                    "teacher"=>"Mr. Ashish Kumar",
+                                    "class_start_date_time"=>"31/12/2020 | 08:15 pm",
+                                    "class_end_date_time"=>"31/12/2020 | 08:55 pm",
+                                    "Meeting_URL" => "" 
+                            )
+                        )
+            ); 
+        header('Content-type: text/javascript');
+        echo json_encode($data, JSON_PRETTY_PRINT);
+    }
+
+    if($request_type=='LoginAPI')
+        {
+            $studentid=$_REQUEST["StudentId"];
+            
+            $data = array(
+                            "status"=>"200",
+                            "message"=>"success",
+                            "student_Id" => "12345",
+                            "student_name" => "Riddhi Kumari",
+                            "class" => "5",
+                            "section" => "A",
+                            "roll_no" => "15",
+                            "image" => "http://stage.swiftcampus.com/app_images/profile/f70dec5e6f21734a156221c9db14ebec.jpg"
+                            ); 
+                    header('Content-type: text/javascript');
+                    echo json_encode($data, JSON_PRETTY_PRINT);
+        }
+

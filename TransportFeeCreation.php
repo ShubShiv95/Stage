@@ -7,7 +7,7 @@
 
 
     
-    function Add_Transport_Fee($dbhandle,$StudentId,$TFG_Id,$session,$StopageId)
+    function Add_Transport_Fee($dbhandle,$StudentId,$TFG_Id,$session,$StopageId,$ClassId)
     {
             $json='';
             $getStopageFee_sql="select * from transport_stopage_table where stopage_id=$StopageId";
@@ -21,7 +21,7 @@
                     //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                     $el->write_log_message('Student Transport stopage fee Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                     mysqli_rollback($dbhandle);
-                    $json=array("status"=>"failure","message"=>"Database Error: Not able to get stopage fare. Please try again later.");
+                    $json=array("status"=>"Error","message"=>"Database Error: Not able to get stopage fare. Please try again later.");
                     $json=json_encode($json);
                     return $json; 
                 }
@@ -70,7 +70,7 @@
                     //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                     $el->write_log_message('Student Transport Fee List Creation:Installment Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                     mysqli_rollback($dbhandle);
-                    $json=array("status"=>"failure","message"=>"Database Error: Not able to get installment information details. Please try again later.");
+                    $json=array("status"=>"Error","message"=>"Database Error: Not able to get installment information details. Please try again later.");
                     $json=json_encode($json);
                     return $json; 
                 }
@@ -90,7 +90,7 @@
                 $StudentFeeDetailsError=false;
                 while($InstallmentList_row=$InstallmentList_result->fetch_assoc()) //step1a.
                     {
-                        //$InstallmentId=$InstallmentList_row["Installment_Id"]; //fetching installment id.
+                        $InstallmentId=$InstallmentList_row["Installment_Id"]; //fetching installment id.
                         $result=$FeeClusterFeeList_prepare->execute();//step1b.
                         if(!$result){
                             //Database Error handling while fetching installment information.
@@ -100,7 +100,7 @@
                             //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                             $el->write_log_message('Student Transport Fee List Creation:Fee Structure Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                             mysqli_rollback($dbhandle);
-                            $json=array("status"=>"failure","message"=>"Database Error: Not able to get Transport Fee Structure information details. Please try again later.");
+                            $json=array("status"=>"Error","message"=>"Database Error: Not able to get Transport Fee Structure information details. Please try again later.");
                             $json=json_encode($json);
                             return $json; 
                         }
@@ -131,7 +131,7 @@
                             }
                         
                         $StudentFeeMaster_sql="INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES ($SFMId,$TFG_Id,$InstallmentId, $Installment_Amount,'Unpaid','$StudentId','$session'," . $InstallmentList_row["Installment_Month"] . "," . $_SESSION["SCHOOLID"] . ",'" . $_SESSION["LOGINID"] . "')";
-                        //echo $StudentFeeMaster_sql . '<br>';
+                        echo $StudentFeeMaster_sql . '<br>';
                         $StudentFeeMaster_result=$dbhandle->query($StudentFeeMaster_sql);
                         if(!$StudentFeeMaster_result)
                             {
@@ -142,11 +142,31 @@
                                     $el = new LogMessage();
                                     //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                                     $el->write_log_message('Student Transport Fee Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
-                                    //mysqli_rollback($dbhandle);
-                                    $StudentFeeDetailsError=true;
+                                    mysqli_rollback($dbhandle);
+                                    
                                     //die("Database Error. Please contact application support team.");
                             } 
                     }
+
+                    $UpdateStudentClassDetails_sql="update student_class_details set Transport_FG_Id=$TFG_Id where Session='$session' and Student_Id='$StudentId' and Class_id=$ClassId and School_Id=". $_SESSION["SCHOOLID"] . " and Enabled=1";
+                    //echo  $UpdateStudentClassDetails_sql;
+                    $UpdateStudentClassDetails_result=$dbhandle->query($UpdateStudentClassDetails_sql);
+                    if(!$UpdateStudentClassDetails_result)
+                        {
+                                    //echo 'master failed';
+                                    $error_msg = $dbhandle->error;
+                                    $sql=$UpdateStudentClassDetails_sql;
+                                    $el = new LogMessage();
+                                    //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                    $el->write_log_message('Student Fee Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                                    //mysqli_rollback($dbhandle);
+                                    $json=array("status"=>"Error","message"=>"Database Error: Not able to update fee group informatio to student class details section. Please try again later.");
+                                    $json=json_encode($json);
+                                    return $json;
+                        } 
+                var_dump($StudentFeeDetailsError);
+                var_dump($StudentFeeMasterError);        
+                        
                 if(!$StudentFeeMasterError and !$StudentFeeDetailsError)
                     {    
                         mysqli_commit($dbhandle);  
@@ -159,7 +179,7 @@
                     {
                         mysqli_rollback($dbhandle);  
                         //echo "Student Fee Generation Error..";  
-                        $json=array("status"=>"failure","message"=>"Some Error Occured. Failed to generate student Transport fee structure. Please try again.");
+                        $json=array("status"=>"Error","message"=>"Some Error Occured. Failed to generate student Transport fee structure. Please try again.");
                         $json=json_encode($json);
                         return $json; 
                     }                                            
@@ -185,7 +205,7 @@
                 //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                 $el->write_log_message('Student Fee Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                 mysqli_rollback($dbhandle);
-                $json=array("status"=>"failure","message"=>"Database Error: Not able to get Student class details. Please try again later.");
+                $json=array("status"=>"Error","message"=>"Database Error: Not able to get Student class details. Please try again later.");
                 $json=json_encode($json);
                 echo $json;     
             }
@@ -199,7 +219,7 @@
                 //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                 $el->write_log_message('Student Fee Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                 mysqli_rollback($dbhandle);
-                $json=array("status"=>"failure","message"=>"Student class record not found. Please try again.");
+                $json=array("status"=>"Error","message"=>"Student class record not found. Please try again.");
                 $json=json_encode($json);
                 echo $json;
             }
@@ -211,26 +231,26 @@
         //$Concession_Id=$StudentDetails_row["Concession_Id"]; 
 
  
-        //Finding Regular Fee Group Id.
-        $FeeClusterId_sql="SELECT FGT.FG_Id FROM fee_group_table fgt,fee_group_class_list fgct WHERE fgt.fg_id=fgct.fg_id AND fgt.student_type='$Student_Type' AND fgct.school_id=" . $_SESSION["SCHOOLID"] . " AND fgct.class_id=$Class_id AND fgct.stream='$Stream' AND fgt.Fee_Group_Type='Transport";
-        //echo $FeeClusterId_sql;
+        //Finding Transport Fee Group Id.
+        $FeeClusterId_sql="SELECT FGT.FG_Id FROM fee_group_table fgt WHERE fgt.student_type='$Student_Type' AND fgt.school_id=" . $_SESSION["SCHOOLID"] . " AND fgt.Fee_Group_Type='Transport'";
+        echo $FeeClusterId_sql;
         $FeeClusterId_result=$dbhandle->query($FeeClusterId_sql);
         if(!$FeeClusterId_result)
             {
                 //Databae error handling while fetching Fee Group Information.
                 $error_msg = "Transport Fee Cluster Id not found.";
-                $sql=$CommissionGroup_sql;
+                $sql=$FeeClusterId_sql;
                 $el = new LogMessage();
                 //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                 $el->write_log_message('Student Transport Fee List Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                 mysqli_rollback($dbhandle);
-                $json=array("status"=>"failure","message"=>"Database Error. Please try again.");
+                $json=array("status"=>"Error","message"=>"Database Error. Please try again.");
                 $json=json_encode($json);
                 echo $json;
             }
         //Fetching Regular Fee Group id information    
         $FeeClusterId_row=$FeeClusterId_result->fetch_assoc();
         $TFG_Id=$FeeClusterId_row["FG_Id"]; 
-        $Transport_result=Add_Transport_Fee($dbhandle,$StudentId,$TFG_Id,$session,$StopageId);
+        $Transport_result=Add_Transport_Fee($dbhandle,$StudentId,$TFG_Id,$session,$StopageId,$Class_id);
         echo $Transport_result;    
 ?>    

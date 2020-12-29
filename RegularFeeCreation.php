@@ -6,7 +6,7 @@
     require_once 'sequenceGenerator.php';
 
     
-    function Add_Regular_Fee($dbhandle,$StudentId,$Concession_Id,$RFG_Id,$session)
+    function Add_Regular_Fee($dbhandle,$StudentId,$Concession_Id,$RFG_Id,$session,$ClassId)
     {
             $json='';
             /*Fetching Concession details for the provided student's concession group id.*/
@@ -23,7 +23,7 @@
                         //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                         $el->write_log_message('Student Regular Fee List Creation: Concession Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                         mysqli_rollback($dbhandle);
-                        $json=array("success"=>"False","message"=>"Database Error: Not able to get student concession group details. Please try again later.");
+                        $json=array("status"=>"Error","message"=>"Database Error: Not able to get student concession group details. Please try again later.");
                         $json=json_encode($json);
                         return $json; 
                     }
@@ -48,7 +48,7 @@
                     //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                     $el->write_log_message('Student Fee List Creation:Installment Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                     mysqli_rollback($dbhandle);
-                    $json=array("success"=>"False","message"=>"Database Error: Not able to get installment information details. Please try again later.");
+                    $json=array("status"=>"Error","message"=>"Database Error: Not able to get installment information details. Please try again later.");
                     $json=json_encode($json);
                     return $json; 
                 }
@@ -64,8 +64,8 @@
                 $FeeClusterFeeList_prepare=$dbhandle->prepare($FeeClusterFeeList_sql);
                 $FeeClusterFeeList_prepare->bind_param('iis',$RFG_Id,$InstallmentId,$session);
                 //echo $FeeClusterFeeList_prepare->error;
-                $StudentFeeMasterError=false;
-                $StudentFeeDetailsError=false;
+                $StudentFeeMasterSuccess=true;
+                $StudentFeeDetailsSuccess=true;
                 while($InstallmentList_row=$InstallmentList_result->fetch_assoc()) //step1a.
                     {
                         $InstallmentId=$InstallmentList_row["Installment_Id"]; //fetching installment id.
@@ -78,7 +78,7 @@
                             //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                             $el->write_log_message('Student Fee List Creation:Fee Structure Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                             mysqli_rollback($dbhandle);
-                            $json=array("success"=>"False","message"=>"Database Error: Not able to get Fee Structure information details. Please try again later.");
+                            $json=array("status"=>"Error","message"=>"Database Error: Not able to get Fee Structure information details. Please try again later.");
                             $json=json_encode($json);
                             return $json; 
                         }
@@ -88,12 +88,12 @@
                         while($row = $result_set->fetch_assoc()) //step1c.
                             {
                                 //step1d.
-                                $SFD_Id = sequence_number('student_fee_list_table',$dbhandle);
+                                $SFD_Id = sequence_number('student_fee_details',$dbhandle);
                                 //Calculating Discount Amount.
                                 $Installment_Total_Amount= $Installment_Total_Amount+$row["Fee_Amount"];
                                 $ConcessionAmount= round($row["Fee_Amount"] * $ConcessionList[$row["Fee_Head_Id"]] / 100);
                                 $Installment_Total_Amount=$Installment_Total_Amount-$ConcessionAmount;
-                                $StudentFeeList_sql="INSERT INTO `student_fee_list_table`(`SFD_Id`,`SFM_Id`,`FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES ($SFD_Id,$SFMId,$RFG_Id," . $row["Fee_Head_Id"] . "," . $row["Fee_Installment_Type"] . "," . $row["Installment_Id"] . "," . $row["Fee_Amount"] . "," . $ConcessionAmount . ",$Concession_Id," . "1,'" . $_SESSION["LOGINID"]."')";
+                                $StudentFeeList_sql="INSERT INTO `student_fee_details`(`SFD_Id`,`SFM_Id`,`FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES ($SFD_Id,$SFMId,$RFG_Id," . $row["Fee_Head_Id"] . "," . $row["Fee_Installment_Type"] . "," . $row["Installment_Id"] . "," . $row["Fee_Amount"] . "," . $ConcessionAmount . ",$Concession_Id," . "1,'" . $_SESSION["LOGINID"]."')";
                                 //echo $StudentFeeList_sql . "<br>";
                                 $StudentFeeList_result=$dbhandle->query($StudentFeeList_sql);
                                 if(!$StudentFeeList_result)
@@ -104,34 +104,58 @@
                                         //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                                         $el->write_log_message('Student Fee List Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                                         mysqli_rollback($dbhandle);
-                                        $StudentFeeDetailsError=true;
-                                        //die("Database Error. Please contact application support team.");
+                                        $StudentFeeDetailsSuccess=false;
+                                        $json=array("status"=>"Error","message"=>"Database Error: Not able to save installment fee head wise information details. Please try again later.");
+                                        $json=json_encode($json);
+                                        return $json; 
 
                                     }
                             }
                         
-                        $StudentFeeMaster_sql="INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES ($SFMId,$RFG_Id,$InstallmentId, $Installment_Total_Amount,'Unpaid','$StudentId','$session'," . $InstallmentList_row["Installment_Month"] . "," . $_SESSION["SCHOOLID"] . ",'" . $_SESSION["LOGINID"] . "')";
+                            $StudentFeeMaster_sql="INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES ($SFMId,$RFG_Id,$InstallmentId, $Installment_Total_Amount,'Unpaid','$StudentId','$session'," . $InstallmentList_row["Installment_Month"] . "," . $_SESSION["SCHOOLID"] . ",'" . $_SESSION["LOGINID"] . "')";
                         //echo $StudentFeeMaster_sql . '<br>';
                         $StudentFeeMaster_result=$dbhandle->query($StudentFeeMaster_sql);
+                        
                         if(!$StudentFeeMaster_result)
                             {
                                     //echo 'master failed';
-                                    $StudentFeeMasterError=true;
+                                    $StudentFeeMasterSuccess=false;
                                     $error_msg = $dbhandle->error;
                                     $sql=$StudentFeeMaster_sql;
                                     $el = new LogMessage();
                                     //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                                     $el->write_log_message('Student Fee Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                                     //mysqli_rollback($dbhandle);
-                                    $StudentFeeDetailsError=true;
-                                    //die("Database Error. Please contact application support team.");
+                                    $StudentFeeDetailsSuccess=false;
+                                    $json=array("status"=>"Error","message"=>"Database Error: Not able to save installment fee master information. Please try again later.");
+                                    $json=json_encode($json);
+                                    return $json;
                             } 
                     }
-                if(!$StudentFeeMasterError and !$StudentFeeDetailsError)
+
+                $UpdateStudentClassDetails_sql="update student_class_details set Regular_FG_Id=$RFG_Id where Session=$session and Student_Id=$StudentId and Class_id=$ClassId and School_Id=". $_SESSION["SCHOOLID"] . " and Enabled=1";
+                $UpdateStudentClassDetails_result=$dbhandle->query($UpdateStudentClassDetails_sql);
+                if(!$UpdateStudentClassDetails_result)
+                    {
+                                //echo 'master failed';
+                                $StudentFeeMasterError=true;
+                                $error_msg = $dbhandle->error;
+                                $sql=$StudentFeeMaster_sql;
+                                $el = new LogMessage();
+                                //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                                $el->write_log_message('Student Fee Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                                //mysqli_rollback($dbhandle);
+                                $StudentFeeDetailsError=true;
+                                $json=array("status"=>"Error","message"=>"Database Error: Not able to update fee group informatio to student class details section. Please try again later.");
+                                $json=json_encode($json);
+                                return $json;
+                    } 
+
+                if($StudentFeeMasterSuccess and $StudentFeeDetailsSuccess)
                     {    
                         mysqli_commit($dbhandle);  
                         echo "Student Fee Generated Successfully.";  
-                        $json=array("success"=>"True","message"=>"Student School Fee Generated Successfully.");
+                        $json=array("status"=>"Success","message"=>"Student School Fee Generated Successfully.");
                         $json=json_encode($json);
                         return $json; 
                     }
@@ -139,13 +163,13 @@
                     {
                         mysqli_rollback($dbhandle);  
                         //echo "Student Fee Generation Error..";  
-                        $json=array("success"=>"False","message"=>"Some Error Occured. Failed to generate student fee structure. Please try again.");
+                        $json=array("status"=>"Error","message"=>"Some Error Occured. Failed to generate student fee structure. Please try again.");
                         $json=json_encode($json);
                         return $json; 
                     }                                            
     }
 
-
+    //Regular fee creation main section starts from here.//testing studentid=156/2018
         $json=''; //Json variable which will return to client request.   
         mysqli_autocommit($dbhandle,false);
         //Capturing request data.
@@ -164,7 +188,7 @@
                 //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                 $el->write_log_message('Student Fee Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                 mysqli_rollback($dbhandle);
-                $json=array("success"=>"False","message"=>"Database Error: Not able to get Student class details. Please try again later.");
+                $json=array("status"=>"Error","message"=>"Database Error: Not able to get Student class details. Please try again later.");
                 $json=json_encode($json);
                 echo $json;     
             }
@@ -178,7 +202,7 @@
                 //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                 $el->write_log_message('Student Fee Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                 mysqli_rollback($dbhandle);
-                $json=array("success"=>"False","message"=>"Student class record not found. Please try again.");
+                $json=array("status"=>"Error","message"=>"Student class record not found. Please try again.");
                 $json=json_encode($json);
                 echo $json;
             }
@@ -203,14 +227,14 @@
                 //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
                 $el->write_log_message('Student Fee List Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
                 mysqli_rollback($dbhandle);
-                $json=array("success"=>"False","message"=>"Database Error. Please try again.");
+                $json=array("status"=>"Error","message"=>"Database Error. Please try again.");
                 $json=json_encode($json);
                 echo $json;
             }
         //Fetching Regular Fee Group id information    
         $FeeClusterId_row=$FeeClusterId_result->fetch_assoc();
         $RFG_Id=$FeeClusterId_row["FG_Id"]; 
-        $Regular_result=Add_Regular_Fee($dbhandle,$StudentId,$Concession_Id,$RFG_Id,$session);
+        $Regular_result=Add_Regular_Fee($dbhandle,$StudentId,$Concession_Id,$RFG_Id,$session,$Class_id);
         echo $Regular_result;    
 
 

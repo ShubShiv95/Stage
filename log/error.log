@@ -1072,3 +1072,777 @@ Module Name: 	Student Fee List Creation
 Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'admin')' at line 1
 SQL:	INSERT INTO `student_fee_list_table`(`SFD_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES (1,2,5,2,12,500,0,1,'1,'admin')
 File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	29-Dec-2020 08:20:00 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	
+SQL:	select * from student_class_details where student_id='156/2018?session=2020-2021' and session='' and enabled=1
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	29-Dec-2020 08:20:00 PM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	29-Dec-2020 08:30:47 PM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	29-Dec-2020 08:40:25 PM	 By User:admin
+Module Name: 	Student Transport Fee List Creation 
+Message:	Transport Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:40:54 PM	 By User:admin
+Module Name: 	Student Transport Fee List Creation 
+Message:	Transport Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:41:25 PM	 By User:admin
+Module Name: 	Student Transport Fee List Creation 
+Message:	Transport Fee Cluster Id not found.
+SQL:	SELECT FGT.FG_Id FROM fee_group_table fgt,fee_group_class_list fgct WHERE fgt.fg_id=fgct.fg_id AND fgt.student_type='Existing' AND fgct.school_id=1 AND fgct.class_id=2 AND fgct.stream='GENERAL' AND fgt.Fee_Group_Type='Transport
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:03 PM	 By User:admin
+Module Name: 	Student Transport Fee List Creation 
+Message:	Transport Fee Cluster Id not found.
+SQL:	SELECT FGT.FG_Id FROM fee_group_table fgt,fee_group_class_list fgct WHERE fgt.fg_id=fgct.fg_id AND fgt.student_type='Existing' AND fgct.school_id=1 AND fgct.class_id=2 AND fgct.stream='GENERAL' AND fgt.Fee_Group_Type='Transport
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',5,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',5,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',6,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',6,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',7,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',7,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',8,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',8,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',9,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',9,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',10,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',10,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',11,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',11,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',12,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',12,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',1,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',1,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',2,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',2,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ', 0,'Unpaid','156/2018','2020-2021',3,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',3,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:42:18 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'where Session=2020-2021 and Student_Id=156/2018 and Class_id=2 and School_Id=...' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,,, 0,'Unpaid','156/2018','2020-2021',3,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:44:18 PM	 By User:admin
+Module Name: 	Student Transport Fee List Creation 
+Message:	Transport Fee Cluster Id not found.
+SQL:	SELECT FGT.FG_Id FROM fee_group_table fgt WHERE fgt.student_type='Existing' AND fgct.school_id=1 AND fgt.Fee_Group_Type='Transport'
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',5,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',5,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',6,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',6,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',7,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',7,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',8,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',8,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',9,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',9,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',10,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',10,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',11,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',11,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',12,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',12,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',1,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',1,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',2,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',2,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:45:15 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',3,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',3,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',5,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',5,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',6,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',6,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',7,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',7,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',8,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',8,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',9,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',9,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',10,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',10,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',11,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',11,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',12,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',12,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',1,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',1,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',2,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',2,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:46:45 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',3,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',3,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',5,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',5,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',6,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',6,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',7,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',7,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',8,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',8,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',9,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',9,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',10,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',10,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',11,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',11,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',12,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',12,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',1,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',1,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',2,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',2,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:49:26 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',3,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',3,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',5,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',5,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',6,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',6,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',7,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',7,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',8,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',8,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',9,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',9,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',10,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',10,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',11,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',11,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',12,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',12,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',1,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',1,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',2,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',2,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:01 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',3,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',3,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',5,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',5,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',6,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',6,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',7,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',7,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',8,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',8,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',9,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',9,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',10,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',10,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',11,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',11,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',12,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',12,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',1,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',1,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',2,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',2,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:51:31 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',3,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',3,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',5,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',5,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',6,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',6,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',7,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',7,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',8,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',8,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',9,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',9,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',10,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',10,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',11,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',11,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',12,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',12,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',1,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',1,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',2,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',2,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:56:46 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',3,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',3,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',5,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',5,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',6,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',6,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',7,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',7,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',8,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',8,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',9,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',9,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',10,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',10,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',11,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',11,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',12,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',12,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',1,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',1,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',2,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',2,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:14 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',3,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',3,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',5,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',5,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',6,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',6,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',7,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',7,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',8,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',8,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',9,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',9,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',10,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',10,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',11,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',11,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',12,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',12,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',1,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',1,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',2,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',2,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:37 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',3,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',3,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',5,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',5,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',6,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',6,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',7,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',7,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',8,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',8,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',9,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',9,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',10,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',10,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',11,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',11,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',12,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',12,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',1,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',1,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',2,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',2,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	29-Dec-2020 08:57:59 PM	 By User:admin
+Module Name: 	Student Transport Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 0,'Unpaid','156/2018','2020-2021',3,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (13,11,, 0,'Unpaid','156/2018','2020-2021',3,1,'admin')
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php

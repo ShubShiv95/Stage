@@ -5,11 +5,12 @@ include 'errorLog.php';
 include 'security.php';
 require_once 'sequenceGenerator.php';
 require_once './GlobalModel.php';
+
 /******* function to check existing fee cluster structure ********/
-function check_existing_structure($dbhandle,$cluster_name,$cluster_session,$school_id){
-    $query_check = "SELECT COUNT(FS_Id) as total_rows FROM fee_structure_table WHERE FG_Id = ? AND Session = ? AND Enabled =1 AND School_Id = ?";
+function check_existing_structure($dbhandle,$cluster_name,$school_id,$session){
+    $query_check = "SELECT COUNT(FS_Id) as total_rows FROM fee_structure_table  WHERE FG_Id = ? AND School_Id = ? AND Session = ?";
     $query_check_prep = $dbhandle->prepare($query_check);
-    $query_check_prep->bind_param("isi",$cluster_name,$cluster_session,$school_id);
+    $query_check_prep->bind_param("iis",$cluster_name,$school_id,$session);
     $query_check_prep->execute();
     $result_set = $query_check_prep->get_result();
     $row_count = $result_set->fetch_assoc();
@@ -28,13 +29,13 @@ function get_all_months($dbhandle){
     return $data;
 }
 
-/**  receive form data  **/
+/**  receive form data fee head  **/
 if(isset($_REQUEST['fee_head_sender'])){
     mysqli_autocommit($dbhandle, false);
     if (empty($_REQUEST['fee_head_sender'])) { 
         $html_data = array();
        $fee_name = $_REQUEST['fee_name'];
-       $fee_type = $_REQUEST['fee_type'];
+       $fee_type = 'Monthly';
        $fee_print_label = $_REQUEST['fee_print_label'];
 
        if (!isset($_REQUEST['ref_fee_amt'])) {
@@ -59,29 +60,37 @@ if(isset($_REQUEST['fee_head_sender'])){
             $html_data []= '<a href="#" class="list-group-item list-group-item-action text-danger">3. Please Select Fee Type</a>';
         }   
         elseif (!empty($fee_name) && !empty($fee_print_label) && !empty($fee_type)) {
-            // saving data into database
-            $Regular='Regular'; //Assuming this controller is creating Regular fee type head only.
-            $fhead_id = sequence_number('fee_head_table',$dbhandle);
-            $insert_query = "INSERT INTO `fee_head_table`(`Fee_Head_Id`, `Fee_Head_Name`, `Fee_Head_Type`, `Fee_Type`,`Fee_Print_Lable`, `Refundable`, `Tax_Benifit`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?,?)";
-            $insert_query_prepare = $dbhandle->prepare($insert_query);
-            $insert_query_prepare->bind_param("issssiiis",$fhead_id,$fee_name,$fee_type,$Regular,$fee_print_label,$ref_fee_amt,$tax_benefit,$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
-            if (!$insert_query_prepare->execute()) {
-                $error_msg = $insert_query_prepare->error;
-                $el = new LogMessage();
-                $sql = $insert_query;
-                //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                $el->write_log_message('Fee Header ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
-                //$_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
-                mysqli_rollback($dbhandle);
-                $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
-                die;
-                $html_data []= '<a href="#" class="list-group-item list-group-item-action text-danger">Failed To Save!!!</a>';
-                
+            // check existed transport fee head
+            $query_check = "SELECT COUNT(Fee_Head_Id) FROM `fee_head_table` WHERE `Fee_Type` = 'Transport' AND School_Id = ".$_SESSION["SCHOOLID"]."";
+            $query_check_prep = $dbhandle->prepare($query_check);
+            $query_check_prep->execute();
+            $row_query = $query_check_prep->get_result();
+            if($row_query->num_rows>0){
+                $html_data []= '<a href="#" class="list-group-item list-group-item-action text-danger">Transport Fee Head Already Existed Use This!!!</a>';
+            }else{
+                // saving data into database
+                //$Regular='Regular'; //Assuming this controller is creating Regular fee type head only.
+                $fhead_id = sequence_number('fee_head_table',$dbhandle);
+                $insert_query = "INSERT INTO `fee_head_table`(`Fee_Head_Id`, `Fee_Head_Name`, `Fee_Head_Type`, `Fee_Type`,`Fee_Print_Lable`, `Refundable`, `Tax_Benifit`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?,?)";
+                $insert_query_prepare = $dbhandle->prepare($insert_query);
+                $insert_query_prepare->bind_param("issssiiis",$fhead_id,$fee_name,$fee_type,$_REQUEST['fee_type_choosen'],$fee_print_label,$ref_fee_amt,$tax_benefit,$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
+                if (!$insert_query_prepare->execute()) {
+                    $error_msg = $insert_query_prepare->error;
+                    $el = new LogMessage();
+                    $sql = $insert_query;
+                    //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                    $el->write_log_message('Fee Header ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                    //$_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+                    mysqli_rollback($dbhandle);
+                    $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
+                    die;
+                    $html_data []= '<a href="#" class="list-group-item list-group-item-action text-danger">Failed To Save!!!</a>';
+                    
+                }
+                else{
+                    $html_data []= '<a href="#" class="list-group-item list-group-item-action text-success">Fee Head Data Has Been Saved Successfully!!!</a>';
+                }
             }
-            else{
-                $html_data []= '<a href="#" class="list-group-item list-group-item-action text-success">Fee Head Data Has Been Saved Successfully!!!</a>';
-            }
-            
         }     
     }
     
@@ -96,7 +105,7 @@ if(isset($_REQUEST['fee_head_sender'])){
 
 /*********** get all fee heads ***********/
 if (isset($_REQUEST['getall_feehead'])) {
-    $fee_head_query = "SELECT * FROM `fee_head_table` WHERE `Enabled` = 1 AND School_Id = ".$_SESSION["SCHOOLID"]." and Fee_Type='Regular' ORDER BY Fee_Head_Id DESC";
+    $fee_head_query = "SELECT * FROM `fee_head_table` WHERE `Enabled` = 1 AND School_Id = ".$_SESSION["SCHOOLID"]." ORDER BY Fee_Head_Id DESC";
     $fee_head_query_prepa = $dbhandle->prepare(($fee_head_query));
     $fee_head_query_prepa->execute();
     $result_set = $fee_head_query_prepa->get_result(); $data = array();
@@ -138,7 +147,7 @@ if (isset($_REQUEST['check_cluster_name'])) {
     }
 }
 
-/* save cluster name */
+/* save fee group name as regular */
 if (isset($_REQUEST['cluster_Sender'])) {
   
     if (empty($_REQUEST['cluster_Sender'])) {
@@ -156,6 +165,9 @@ if (isset($_REQUEST['cluster_Sender'])) {
         if (empty($_REQUEST['fee_stream'])) {
             echo '<p class="text-danger">Please Select Cluster Fee Stream</p>';
         }  
+        if(empty($_REQUEST['student_type'])){
+            echo '<p class="text-danger">Please Select Student Type</p>';
+        }
         mysqli_autocommit($dbhandle, false);
         // entry query      
         for ($i=0; $i < $total_loops; $i++) { 
@@ -176,15 +188,106 @@ if (isset($_REQUEST['cluster_Sender'])) {
         }
 
         if (!empty($_REQUEST['fee_stream']) && !empty($_REQUEST['cluster_name'])) {
+            // check fee cluster data
+            $query_search = "SELECT COUNT(FG_Id) FROM fee_group_table WHERE Student_Type = ? AND FG_Name = ? AND School_Id = ?";
+            $query_search_prep = $dbhandle->prepare($query_search);
+            $query_search_prep->bind_param("ssi",$_REQUEST['student_type'],$cluster_name,$_SESSION["SCHOOLID"]);
+            $query_search_prep->execute();
+            $result_set = $query_search_prep->get_result();
+            if($result_set->num_rows>0)
+            {
+                echo '<p class="text-danger">Fee Grroup Already Existed Try Another</p>';
+            }
+            else
+            {
+                // one time insert into cluster_mster_table
+                $fgroup_type='Regular';
+                $faccount_type='School-Fee'; //Here this is fixed as the other account type is created by configuration system before implementation.
+                $student_type=$_REQUEST['student_type']; //fixed with default value must changed with sending parameter as per requirement. This value is only valid till testing purpose. This must be changed with dynamic variable as per the post request made.
+                $fcluster_id = sequence_number('fee_group_table',$dbhandle);
+                $ins_clus_query = "INSERT INTO `fee_group_table`(`FG_Id`, `FG_Name`, `Fee_Group_Type`,`Fee_Account_Type`,`Student_Type`,`School_Id`, `Updated_By`,`Enabled`) VALUES (?,?,?,?,?,?,?,?)"; $enabled = 1;
+                $ins_clus_query_prepate = $dbhandle->prepare($ins_clus_query);
+                $ins_clus_query_prepate->bind_param('issssisi',$fcluster_id,$_REQUEST['cluster_name'],$fgroup_type,$faccount_type,$student_type,$_REQUEST['cluster_school_name'],$_SESSION["LOGINID"],$enabled);
+                if (!$ins_clus_query_prepate->execute()) {
+                    $error_msg = $ins_clus_query_prepate->error;
+                    $el = new LogMessage();
+                    $sql = $ins_clus_query;
+                    //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                    $el->write_log_message('Cluster Master ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                    //$_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+                    mysqli_rollback($dbhandle);
+                    $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
+                    die;
+                }else{
+                    $total_loops = count($_REQUEST['class_names']);
+                    for ($i=0; $i < $total_loops; $i++) { 
+                        $cluster_class_id = sequence_number('fee_group_class_list',$dbhandle);
+                        $exp_data = explode(',',$_REQUEST['class_names'][$i]);
+                        $ins_clus_class_q = "INSERT INTO `fee_group_class_list`(`FGCL_Id`, `FG_Id`, `Class_Id`, `Stream`, `School_Id`,`Updated_By`) VALUES (?,?,?,?,?,?)";
+                        $ins_clus_class_q_prep = $dbhandle->prepare($ins_clus_class_q);
+                        $ins_clus_class_q_prep->bind_param("iiisis",$cluster_class_id,$fcluster_id,$exp_data[0],$_REQUEST['fee_stream'],$_REQUEST['cluster_school_name'],$_SESSION["LOGINID"]);
+                        if (!$ins_clus_class_q_prep->execute()) {
+                            $error_msg = $ins_clus_class_q_prep->error;
+                            $el = new LogMessage();
+                            $sql = $ins_clus_class_q;
+                            //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                            $el->write_log_message('Cluster Msster ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                            //$_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+                            mysqli_rollback($dbhandle);
+                            $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
+                            die; 
+                        }
+                    }
+                    echo '<p class="text-success">Data Has Been Saved Successfully</p>';
+                }
+            }
+        }
+        mysqli_commit($dbhandle);
+    }
+}
+
+/* save fee group name as transport */
+if (isset($_REQUEST['transport_cluster_Sender'])) {
+  
+    if (empty($_REQUEST['cluster_Sender'])) {
+        $cluster_name  = $_REQUEST['cluster_name'];
+        $cluster_school_name = $_REQUEST['cluster_school_name'];
+        if (empty($_REQUEST['cluster_name'])) {
+            echo '<p class="text-danger">Cluster Name Cannot Be Blank</p>';
+        }
+        if (empty($_REQUEST['cluster_school_name'])) {
+            echo '<p class="text-danger">Please Select Cluster School</p>';
+        }
+        if(empty($_REQUEST['student_type'])){
+            echo '<p class="text-danger">Please Select Student Type</p>';
+        }
+        mysqli_autocommit($dbhandle, false);
+
+        if (!empty($_REQUEST['cluster_school_name']) && !empty($_REQUEST['cluster_name']) && !empty($_REQUEST['student_type'])) {
+            // check fee cluster data
+            $query_search = "SELECT COUNT(FG_Id) AS total_row FROM fee_group_table WHERE Student_Type = ? AND FG_Name = ? AND School_Id = ?";
+            $query_search_prep = $dbhandle->prepare($query_search);
+            $query_search_prep->bind_param("ssi",$_REQUEST['student_type'],$cluster_name,$_SESSION["SCHOOLID"]);
+            $query_search_prep->execute();
+            $result_set = $query_search_prep->get_result();
+            echo var_dump($result_set->num_rows);
+            $row_Exist = $result_set->fetch_assoc();
+            if($row_Exist['total_row']>0)
+            {
+                echo '<p class="text-danger">Fee Grroup Already Existed Try Another</p>';
+            }
+            else
+            {            
             // one time insert into cluster_mster_table
-            $fgroup_type='Regular';
-            $faccount_type='School-Fee'; //Here this is fixed as the other account type is created by configuration system before implementation.
-            $student_type='Existing'; //fixed with default value must changed with sending parameter as per requirement. This value is only valid till testing purpose. This must be changed with dynamic variable as per the post request made.
+            $fgroup_type='Transport';
+            $faccount_type='Transport-Fee'; //Here this is fixed as the other account type is created by configuration system before implementation.
+            $student_type=$_REQUEST['student_type']; //fixed with default value must changed with sending parameter as per requirement. This value is only valid till testing purpose. This must be changed with dynamic variable as per the post request made.
             $fcluster_id = sequence_number('fee_group_table',$dbhandle);
             $ins_clus_query = "INSERT INTO `fee_group_table`(`FG_Id`, `FG_Name`, `Fee_Group_Type`,`Fee_Account_Type`,`Student_Type`,`School_Id`, `Updated_By`,`Enabled`) VALUES (?,?,?,?,?,?,?,?)"; $enabled = 1;
             $ins_clus_query_prepate = $dbhandle->prepare($ins_clus_query);
             $ins_clus_query_prepate->bind_param('issssisi',$fcluster_id,$_REQUEST['cluster_name'],$fgroup_type,$faccount_type,$student_type,$_REQUEST['cluster_school_name'],$_SESSION["LOGINID"],$enabled);
-            if (!$ins_clus_query_prepate->execute()) {
+            if (!$ins_clus_query_prepate->execute()) 
+            {
                 $error_msg = $ins_clus_query_prepate->error;
                 $el = new LogMessage();
                 $sql = $ins_clus_query;
@@ -194,14 +297,14 @@ if (isset($_REQUEST['cluster_Sender'])) {
                 mysqli_rollback($dbhandle);
                 $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
                 die;
-            }else{
-                $total_loops = count($_REQUEST['class_names']);
-                for ($i=0; $i < $total_loops; $i++) { 
+            }
+            else
+            {
+                    $class_id = $fee_stream = 'NULL';
                     $cluster_class_id = sequence_number('fee_group_class_list',$dbhandle);
-                    $exp_data = explode(',',$_REQUEST['class_names'][$i]);
                     $ins_clus_class_q = "INSERT INTO `fee_group_class_list`(`FGCL_Id`, `FG_Id`, `Class_Id`, `Stream`, `School_Id`,`Updated_By`) VALUES (?,?,?,?,?,?)";
                     $ins_clus_class_q_prep = $dbhandle->prepare($ins_clus_class_q);
-                    $ins_clus_class_q_prep->bind_param("iiisis",$cluster_class_id,$fcluster_id,$exp_data[0],$_REQUEST['fee_stream'],$_REQUEST['cluster_school_name'],$_SESSION["LOGINID"]);
+                    $ins_clus_class_q_prep->bind_param("iiisis",$cluster_class_id,$fcluster_id,$class_id,$fee_stream,$_REQUEST['cluster_school_name'],$_SESSION["LOGINID"]);
                     if (!$ins_clus_class_q_prep->execute()) {
                         $error_msg = $ins_clus_class_q_prep->error;
                         $el = new LogMessage();
@@ -213,7 +316,7 @@ if (isset($_REQUEST['cluster_Sender'])) {
                         $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
                         die; 
                     }
-                }
+            }
                 echo '<p class="text-success">Data Has Been Saved Successfully</p>';
             }
         }
@@ -353,13 +456,13 @@ if(isset($_REQUEST['delete_consession'])){
 
 }
 
-/********** submit cluster data **********/
+/********** submit Fee Structure data as regular fee **********/
 if (isset($_REQUEST['cluster_sender'])) {
     mysqli_autocommit($dbhandle, false);  
     // check existing records
-    $fee_data = check_existing_structure($dbhandle,$_REQUEST['fee_cluster_name'],$_REQUEST['f_academic_session'],$_SESSION["SCHOOLID"]);
+    $fee_data = check_existing_structure($dbhandle,$_REQUEST['fee_cluster_name'],$_SESSION["SCHOOLID"],$_REQUEST['f_academic_session']);
     if ($fee_data['total_rows']>0) {
-        echo '<p class="text-danger">Record Existing For This Session Please Donot Proceed</p>';  die;
+        echo '<p class="text-danger">Record Existing For This Strucure Please Donot Proceed</p>';
     }
     else{
          // total loop counting
@@ -388,9 +491,43 @@ if (isset($_REQUEST['cluster_sender'])) {
     mysqli_commit($dbhandle);
 }
 
+/********** submit Fee Structure data as transport fee **********/
+if (isset($_REQUEST['transport_cluster_sender'])) {
+    mysqli_autocommit($dbhandle, false);  
+    // check existing records
+    $fee_data = check_existing_structure($dbhandle,$_REQUEST['fee_cluster_name'],$_SESSION["SCHOOLID"],$_REQUEST['f_academic_session']);
+    if ($fee_data['total_rows']>0) {
+        echo '<p class="text-danger">Record Existing For This Strucure Please Donot Proceed</p>';  die;
+    }
+    else{
+         // total loop counting
+        $total_loops_down =  count($_REQUEST['installment_type']);
+        // total installments
+        $months_data = get_all_months($dbhandle);
+        
+        $insert_query = "INSERT INTO `fee_structure_table`(`FS_Id`, `FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Session`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?,?,?)";
+        $insert_query_perp = $dbhandle->prepare($insert_query);
+        for ($i=0; $i < $total_loops_down; $i++) 
+        { 
+            for ($j=0; $j < count($months_data); $j++) 
+            {   
+                $cluster_fee_id = sequence_number('fee_structure_table',$dbhandle);
+                $insert_query_perp->bind_param("iiiiiisis",$cluster_fee_id,$_REQUEST['fee_cluster_name'],$_REQUEST['fee_head_id'][$i],$_REQUEST['installment_type'][$i],$_REQUEST['inst_name'][$j],$_REQUEST[$i][$i][$j],$_REQUEST['f_academic_session'],$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
+                $execute_Query = $insert_query_perp->execute();
+            }    
+        }
+        if ($execute_Query) {
+            echo '<p class="text-success">Data Has Been Inserted Successfully!!!</p>';
+        }
+        else{
+            echo '<p class="text-danger">Failed to Save!!!</p>';
+        }  
+    }
+    mysqli_commit($dbhandle);
+}
 /******* check existing fee details *******/
 if (isset($_REQUEST['check_existing_fee'])) {
-    $fee_data = check_existing_structure($dbhandle,$_REQUEST['cluster_name'],$_REQUEST['cluster_session'],$_SESSION["SCHOOLID"]);
+    $fee_data = check_existing_structure($dbhandle,$_REQUEST['cluster_name'],$_SESSION["SCHOOLID"],$_REQUEST['cluster_session']);
     if ($fee_data['total_rows']>0) {
         echo '<p class="text-danger">Record Existed For This Session Please Donot Proceed</p>';  
     }
@@ -478,9 +615,9 @@ if (isset($_REQUEST['get_cluster_form'])) {
     $data .= '<table class="table" style="overflow-x:auto; width:125%; "><thead><tr><th style="border:1px solid #ffae01; padding:4px;">Fee Head</th><th style="border:1px solid #ffae01; padding:4px;">Inst. Type</th>';
 
     // get all fee heads
-    $fee_heads = 'SELECT * FROM fee_head_table WHERE Enabled = 1 AND School_Id = ? ' . "AND Fee_Type='Regular'"; //hiding the transport head. Showing rest of the fee heads.
+    $fee_heads = 'SELECT * FROM fee_head_table WHERE Enabled = 1 AND School_Id = ? AND Fee_Type=?'; //hiding the transport head. Showing rest of the fee heads.
     $fee_heads_prep = $dbhandle->prepare($fee_heads);
-    $fee_heads_prep->bind_param("i",$_SESSION['SCHOOLID']);
+    $fee_heads_prep->bind_param("is",$_SESSION['SCHOOLID'],$_REQUEST['structure_type']);
     $fee_heads_prep->execute();
     $fee_head_rows = $fee_heads_prep->get_result();
     

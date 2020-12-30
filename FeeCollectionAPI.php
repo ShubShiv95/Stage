@@ -9,6 +9,23 @@
 $request_type=$_REQUEST["Parameter"];
 $StudentId=$_REQUEST["studentid"];
 $SessionId=$_SESSION["SESSION"];
+$ac_type=$_REQUEST["ac_type"];
+$schoolid=$_REQUEST["school_id"];
+$FG_Type='';
+if($ac_type=='SchoolFee')
+    {
+        $FG_Type="'Regular'";
+    }
+else if($ac_type=='BusFee')
+    {
+        $FG_Type="'Transport'";
+    }
+else if($ac_type=='SchoolBusFee')
+    {
+        $FG_Type="'Regular','Transport'";
+    }
+
+
 
 if($request_type=='CollectFee')
     {
@@ -106,7 +123,10 @@ if($request_type=='CollectFee')
                 //step 1d. Insert Fee_Cluster_fee_fee_structure_tableList row information with other installment and discount information to the student_fee_list_table.
                 
                 /*Sql to fetch fee lsit items from fee_structure_table month wise or installment wise and inserting rows in student_fee_list_table for the selected fee cluster data installment id wise or month wise. */
-                $StudentFeeMaster_sql="select * from student_fee_master where installment_id=? and session=? and student_id=? and Pay_Status!='Paid'";
+                $StudentFeeMaster_sql="select sfm.*,fgt.Fee_Group_Type from student_fee_master sfm,fee_group_table fgt where installment_id=? and session=? and student_id=? and Pay_Status!='Paid' and fgt.FG_Id=sfm.FG_Id and fgt.School_Id=sfm.School_Id and sfm.school_id=$schoolid and fgt.Fee_Group_Type in($FG_Type)";
+                
+                //$StudentFeeMaster_sql="select sfm.*,fgt.Fee_Group_Type from student_fee_master sfm,fee_group_table fgt where installment_id=? and session=? and student_id=? and Pay_Status!='Paid' and fgt.FG_Id=sfm.FG_Id";
+                //echo $StudentFeeMaster_sql;
                 $StudentFeeMaster_prepare=$dbhandle->prepare($StudentFeeMaster_sql);
                 $StudentFeeMaster_prepare->bind_param('iss',$InstallmentId,$SessionId,$StudentId);
                 
@@ -142,11 +162,15 @@ if($request_type=='CollectFee')
                                 $LateFeeAmount=$LateFeeAmount+$StudentFeeMaster_row["Late_Fee_Amount"]; 
                                 if($StudentFeeMaster_row["Pay_Status"]=='Due')
                                     {
-                                        $TotalInstAmount=$TotalInstAmount+$StudentFeeMaster_row["Due_Amount"];
-                                        $fee[$InstallmentId]["details"]["Due"]["feeheadid"]=0; //Treading this as due fee head id.
-                                        $fee[$InstallmentId]["details"]["Due"]["name"]="Due";
-                                        $fee[$InstallmentId]["details"]["Due"]["amount"]=$StudentFeeMaster_row["Due_Amount"];
-                                        $fee[$InstallmentId]["details"]["Due"]["concession"]=0;
+                                        $TotalInstAmount=$StudentFeeMaster_row["Due_Amount"];
+                                        $fee[$InstallmentId]["details"][1]["feeheadid"]=0; //Treading this as due fee head id.
+                                        $fee[$InstallmentId]["details"][1]["feename"]="Due";
+                                        $fee[$InstallmentId]["details"][1]["amount"]=$StudentFeeMaster_row["Due_Amount"];
+                                        $fee[$InstallmentId]["details"][1]["concession"]=0;
+                                        $fee[$InstallmentId]["Installment_name"]="$Installment_Name";
+                                        $fee[$InstallmentId]["Installment_Id"]="$InstallmentId"; 
+                                        $fee[$InstallmentId]["Late_Fee"]=$LateFeeAmount;
+                                        $fee[$InstallmentId]["Net_Amount"]=$TotalInstAmount; 
                                         continue;
                                     }
                                     $TotalInstAmount=$TotalInstAmount+$StudentFeeMaster_row["Total_Amount"]+$StudentFeeMaster_row["Late_Fee_Amount"];  
@@ -172,10 +196,13 @@ if($request_type=='CollectFee')
                                 $StudentFeeDetails_result_set = $StudentFeeDetails_prepare->get_result(); //    
                                 while($row = $StudentFeeDetails_result_set->fetch_assoc()) // Looping through each SFM_ID to fetch student_fee_details rows.
                                     {
+                                        //if(!empty($row["Fee_Amount"]))
+                                        //{
                                         $fee[$InstallmentId]["details"][$row["Fee_Head_Id"]]["feeheadid"]=$row["Fee_Head_Id"];
-                                        $fee[$InstallmentId]["details"][$row["Fee_Head_Id"]]["name"]=$row["Fee_Head_Name"];
+                                        $fee[$InstallmentId]["details"][$row["Fee_Head_Id"]]["feename"]=$row["Fee_Head_Name"];
                                         $fee[$InstallmentId]["details"][$row["Fee_Head_Id"]]["amount"]=$row["Fee_Amount"];
                                         $fee[$InstallmentId]["details"][$row["Fee_Head_Id"]]["concession"]=$row["Concession_Amount"];
+                                        //}
                                     }
 
                                     //$fee[$InstallmentId]["Late_Fee"]=$StudentFeeMaster_row["Late_Fee_Amount"]; 

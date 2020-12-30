@@ -150,7 +150,7 @@ if (isset($_REQUEST['get_all_students_by_student_id'])) {
 if (isset($_REQUEST['get_stud_details_by_name'])) {
   if ($_REQUEST['search_type']=='1') {
     // search students by id
-    $student_query = "SELECT smt.*, cmt.Class_Name, cst.Section, scd.Stream from student_master_table smt, student_class_details scd, class_master_table cmt, class_section_table cst WHERE smt.Student_Id = scd.Student_Id AND cmt.Class_Id = scd.Class_Id AND cst.Class_Sec_Id = scd.Class_Sec_Id AND scd.Promoted=0 and smt.Enabled = 1 AND smt.Student_Id = ? AND smt.School_Id=?";
+    $student_query = "SELECT smt.*, cmt.Class_Name, cst.Section, scd.Stream,scd.Concession_Id from student_master_table smt, student_class_details scd, class_master_table cmt, class_section_table cst WHERE smt.Student_Id = scd.Student_Id AND cmt.Class_Id = scd.Class_Id AND cst.Class_Sec_Id = scd.Class_Sec_Id AND scd.Promoted=0 and smt.Enabled = 1 AND smt.Student_Id = ? AND smt.School_Id=?";
     $student_query_prep = $dbhandle->prepare($student_query);
     $student_query_prep->bind_param("si",$_REQUEST['stud_data'],$_SESSION["SCHOOLID"]);
   }elseif ($_REQUEST['search_type']=='2') {

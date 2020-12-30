@@ -150,7 +150,7 @@ if (isset($_REQUEST['get_all_students_by_student_id'])) {
 if (isset($_REQUEST['get_stud_details_by_name'])) {
   if ($_REQUEST['search_type']=='1') {
     // search students by id
-    $student_query = "SELECT smt.*, cmt.Class_Name, cst.Section, scd.Stream from student_master_table smt, student_class_details scd, class_master_table cmt, class_section_table cst WHERE smt.Student_Id = scd.Student_Id AND cmt.Class_Id = scd.Class_Id AND cst.Class_Sec_Id = scd.Class_Sec_Id AND scd.Promoted=0 and smt.Enabled = 1 AND smt.Student_Id = ? AND smt.School_Id=?";
+    $student_query = "SELECT smt.*, cmt.Class_Name, cst.Section, scd.Stream,scd.Concession_Id from student_master_table smt, student_class_details scd, class_master_table cmt, class_section_table cst WHERE smt.Student_Id = scd.Student_Id AND cmt.Class_Id = scd.Class_Id AND cst.Class_Sec_Id = scd.Class_Sec_Id AND scd.Promoted=0 and smt.Enabled = 1 AND smt.Student_Id = ? AND smt.School_Id=?";
     $student_query_prep = $dbhandle->prepare($student_query);
     $student_query_prep->bind_param("si",$_REQUEST['stud_data'],$_SESSION["SCHOOLID"]);
   }elseif ($_REQUEST['search_type']=='2') {
@@ -200,8 +200,9 @@ if (isset($_REQUEST['get_school_name_by_id'])) {
 
 /********** get all clusters **********/
 if (isset($_REQUEST['get_all_clusters'])) {
-  $query = "SELECT * FROM `fee_group_table` WHERE `Enabled` = 1 AND `School_Id` = ".$_SESSION["SCHOOLID"]." AND Fee_Group_Type='Regular' ORDER BY FG_Name";$data=array();
+  $query = "SELECT * FROM `fee_group_table` WHERE `Enabled` = 1 AND `School_Id` = ? AND Fee_Group_Type=? ORDER BY FG_Name";$data=array();
   $query_prep = $dbhandle->prepare($query);
+  $query_prep->bind_param("is",$_SESSION["SCHOOLID"],$_REQUEST['group_type']);
   $query_prep->execute();
   $result_set = $query_prep->get_result();
   while ($rows = $result_set->fetch_assoc()) {
@@ -264,9 +265,10 @@ if (isset($_REQUEST['get_all_discounts'])) {
 
 /*************** admission details from admission master table ***************/
 if (isset($_REQUEST['get_admission_details'])) {
-  $query = "SELECT amt.*, cmt.Class_Name, conmt.Concession_Name FROM admission_master_table amt, class_master_table cmt, concession_master_table conmt WHERE amt.Class_Id = cmt.Class_Id AND conmt.Concession_Id = amt.Discount_Category AND amt.Admission_Id = ".$_REQUEST["admission_id"]." ";
+  $query = "SELECT amt.*, cmt.Class_Name, conmt.Concession_Name FROM admission_master_table amt, class_master_table cmt, concession_master_table conmt WHERE amt.Class_Id = cmt.Class_Id AND conmt.Concession_Id = amt.Discount_Category AND amt.Admission_Id = ? ";
   $data=array();
   $query_prep = $dbhandle->prepare($query);
+  $query_prep->bind_param("i",$_REQUEST["admission_id"]);
   $query_prep->execute();
   $result_set = $query_prep->get_result();
   while ($rows = $result_set->fetch_assoc()) {

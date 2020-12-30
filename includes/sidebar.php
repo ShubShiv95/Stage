@@ -310,6 +310,18 @@
                         </ul>
                     </li>
                     <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><span>Fee Settings</span></a>
+                        <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+                        <ul class="nav sub-group-menu">
+                            <li class="nav-item">
+                                <a href="./TransportGroup.php" class="nav-link"><i class="fas fa-angle-right"></i>Group</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./TransportStructure.php" class="nav-link"><i class="fas fa-angle-right"></i>Structure</a>
+                            </li>
+                        </ul>
+                    </li>                    
+                    <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><span>Messaging</span></a>
                         <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
                         <ul class="nav sub-group-menu">

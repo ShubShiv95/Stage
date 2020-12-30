@@ -73,8 +73,8 @@ include 'security.php';
                             <div class="row justify-content-center">
                                 <div class="col-xl-3 col-lg-3 col-12 aj-md-2">
                                     <div class="col-xl-12 col-lg-12 aj-md-2">
-                                        <div class="container-img" style="width:150px; margin-left: auto;margin-right: auto;height:150px;">
-                                            <img class="main_img" src="" alt="" >
+                                        <div class="container-img" style="width:150px; margin-left: auto;margin-right: auto;">
+                                            <img class="main_img" src="./app_images/profile/2f331201bf8661ea89b2e293676d5d51.jpg" alt="">
                                         </div>
 
                                     </div>
@@ -131,12 +131,9 @@ include 'security.php';
                                         <div class="col-lg-4 col-md-4">
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
-                                                    <div class="Attendance-staff  aj-scroll-Attendance-staff border border-primary" style="height: 38vh; overflow-x:auto;">
-                                                    <div class="table-responsive text-center">
-                                                            <table class="table display" style="font-size: 1.5rem; width:100%">
-                                                              <tr style="background-color: #ffae01!important;"><th style="width: 30%;">Inst. Name </th><th style="width: 25%;">Due Amt</th><th style="width: 20%;">Details</th><th style="width: 25%;">Select</th></tr>
-                                                              <tbody class="load_dyn_fee_data">
-                                                              </tbody>
+                                                    <div class="Attendance-staff  aj-scroll-Attendance-staff" style="height: 38vh; overflow-x:auto;">
+                                                        <div class="table-responsive text-center">
+                                                            <table class="table display load_dyn_fee_data" style="font-size: 1.5rem;">
                                                             </table>
                                                         </div>
                                                     </div>
@@ -151,23 +148,23 @@ include 'security.php';
                                                     <div class="form-group aj-form-group">
                                                         <label>School Name </label>
                                                         <select class="select2 show_school" name="name">
+                                                            <option value="">-- School --</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-12 col-lg-12 col-12 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>A/C Type </label>
-                                                        <select class="select2 account_type" name="ac_type" id="account_type">
-                                                            <option value="SchoolBusFee">School and Bus Fee</option>
-                                                            <option value="SchoolFee">School Fee</option>
-                                                            <option value="BusFee">Bus Fee</option>
+                                                        <select class="select2" name="name">
+                                                            <option value="">-- School --</option>
+
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>Late Fee</label>
-                                                        <input type="text" name="late_fee" id="late_fee" placeholder="" required="" class="form-control" value="0" readonly>
+                                                        <input type="text" name="late_fee" id="late_fee" placeholder="" required="" class="form-control" value="150" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
@@ -218,7 +215,7 @@ include 'security.php';
                                         <!-- third Row ends -->
                                     </div>
                                 </div>
-                                <div class="col-lg-9 border border-primary" style="overflow-y:auto; height:16vh;">
+                                <div class="col-lg-9" style="overflow-y:auto; height:16vh;">
                                     <table style="width:100%;">
                                         <thead>
                                             <tr style="background-color: #ffae01!important;">
@@ -388,6 +385,8 @@ include 'security.php';
 
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -429,24 +428,18 @@ include 'security.php';
         }
 
         $(document).ready(function() {
-            function load_fee_details(student_id) {
+            load_fee_details();
+
+            function load_fee_details() {
                 $('.load_dyn_fee_data').html('');
-                var ac_type = $('.account_type').val();
-                var school_id = $('.show_school').val();
-                const fee_url = "./FeeCollectionAPI.php?Parameter=CollectFee&studentid="+student_id+"&ac_type="+ac_type+"&school_id="+school_id+"";
-                var fee_list_html = '';
+                const fee_url = "./FeeCollectionAPI.php?Parameter=CollectFee";
+                var fee_list_html = '<tr style="background-color: #ffae01!important;"><th style="width: 25%;">Inst. Name </th><th style="width: 25%;">Due Amt</th><th style="width: 25%;">Details</th><th style="width: 25%;">Select</th></tr>';
                 var i = 1;
                 $.getJSON(fee_url, function(response_fee) {
                     total_datas_in_fees = Object.keys(response_fee).length;
                     $('.total_json_row').text(total_datas_in_fees);
                     $.each(response_fee, function(key, value) {
-                      if (value.Late_Fee==null) {
-                        var late_fees = 0;
-                      }
-                      else{
-                        late_fees = value.Late_Fee;
-                      }
-                        fee_list_html += '<tr><td style="width: 30%;">' + value.Installment_name + '</td><td style="width: 20%;">' + value.Net_Amount + '</td><td style="width: 15%;"><a href="javascript:void(0);" class="show_fee_details" data-toggle="modal" row_id="' + i + '" id="' + value.Installment_Id + '" stud_id="'+student_id+'" data-target=".details">...</a></td><td style="width: 10%;"><div class="radio"><span><input type="checkbox" id="' + i + '" class="fee_month check_box_no' + i + '" name="fee_amt"></span><input type="number" class="d-none fee_amuont' + i + '" value="' + value.Net_Amount + '"><input class="d-none late_fee_amt'+i+'" value="'+late_fees+'"></div></td></tr> ';
+                        fee_list_html += '<tr><td style="width: 30%;">' + value.Installment_name + '</td><td style="width: 20%;">' + value.Net_Amount + '</td><td style="width: 15%;"><a href="javascript:void(0);" class="show_fee_details" data-toggle="modal" row_id="' + i + '" id="' + value.Installment_Id + '" data-target=".details">...</a></td><td style="width: 10%;"><div class="radio"><span><input type="checkbox" id="' + i + '" class="fee_month check_box_no' + i + '" name="fee_amt"></span><input type="number" class="d-none fee_amuont' + i + '" value="' + value.Net_Amount + '"></div></td></tr> ';
                         i = i + 1;
                     });
                     $('.load_dyn_fee_data').html(fee_list_html);
@@ -456,21 +449,17 @@ include 'security.php';
                 event.preventDefault();
                 $('.modal_table').html('');
                 var inst_id = $(this).attr('id');
-                row_no = $(this).attr('row_id');
-                var student_id = $(this).attr('stud_id');
-                var ac_type = $('.account_type').val();
-                var school_id = $('.show_school').val();
-                const fee_url = "./FeeCollectionAPI.php?Parameter=CollectFee&studentid="+student_id+"&ac_type="+ac_type+"&school_id="+school_id+"";
+                row_no = $(this).attr('row_id')
+                const fee_url = "./FeeCollectionAPI.php?Parameter=CollectFee";
                 var fee_table_html = '<thead><tr><th style="width: 40%;">Fee Type </th><th style="width: 20%;">Amount </th><th style="width: 20%;">Con Amt </th><th style="width: 20%;">Net Total</th></tr></thead><tbody class="top-position-ss ">';
                 $.getJSON(fee_url, function(response_details_view) {
                     var json_data = JSON.parse(JSON.stringify(response_details_view));
                     total_datas_in_json = Object.keys(response_details_view).length;
                     total_datas_in_fees = Object.keys(json_data[row_no].details).length;
+                    console.log(total_datas_in_fees);
                     for (let i = 1; i <= total_datas_in_fees; i++) {
                         var json_fee_data = json_data[row_no].details[i];
-                        if (parseInt(json_fee_data.amount)>0) {
-                          fee_table_html += '<tr><td style="width: 40%;">' + json_fee_data.feename + '</td><td style="width: 20%;">' + json_fee_data.amount + '</td><td style="width: 20%;">' + json_fee_data.concession + '</td><td style="width: 20%;">' + (parseInt(json_fee_data.amount) - (parseInt(json_fee_data.concession))) + '</td></tr>';
-                        }
+                        fee_table_html += '<tr><td style="width: 40%;">' + json_fee_data.name + '</td><td style="width: 20%;">' + json_fee_data.amount + '</td><td style="width: 20%;">' + json_fee_data.concession + '</td><td style="width: 20%;">' + (parseInt(json_fee_data.amount) - (parseInt(json_fee_data.concession))) + '</td></tr>';
                     }
                     fee_table_html += '</tbody> ';
                     $('.modal_table').html(fee_table_html);
@@ -480,7 +469,7 @@ include 'security.php';
             $(document).on('click', '.fee_month', function() {
                 var check_id = $(this).attr('id');
                 var due_total = 0;
-                var fee_amt = ''; var late_fee =total_late_fee= 0;
+                var fee_amt = '';
                 var total_json_row = $('.total_json_row').text();
                 var discount_fee = $('#discount_fee').val();
                 var paid_amount = $('#paid_amt').val();
@@ -492,28 +481,18 @@ include 'security.php';
                     for (let i = check_id; i >= 1; i--) {
                         $(".check_box_no" + i).prop("checked", true);
                         fee_amt = $('.fee_amuont' + i).val();
-                        late_fee = $('.late_fee_amt'+i).val();
-                        total_late_fee = parseInt(total_late_fee)+parseInt(late_fee);
                         due_total = parseInt(due_total) + parseInt(fee_amt);
                     }
-                    $('#late_fee').val(total_late_fee);
-                }
-                else
-                {
-                    for (let j = parseInt(check_id); j <= parseInt(total_json_row); j++)
-                    {
-                        $(".check_box_no" + parseInt(j)).prop("checked", false);
+                } else {
+                    for (let k = 1; k < check_id; k++) {
+                        fee_amt = $('.fee_amuont' + k).val();
+                        due_total = parseInt(due_total) + parseInt(fee_amt);
                     }
-                    for (let k = 1; k <= check_id; k++)
-                    {
-                          fee_amt = $('.fee_amuont' + k).val();
-                          late_fee = $('.late_fee_amt' + k).val();
-                          total_late_fee = parseInt(total_late_fee)+parseInt(late_fee);
-                          due_total = parseInt(due_total) + parseInt(fee_amt);
+                    for (let j = check_id; j <= total_json_row; j++) {
+                        $(".check_box_no" + j).prop("checked", false);
                     }
                 }
-                $('#late_fee').val(total_late_fee);
-                due_total = parseInt(due_total) + parseInt(total_late_fee) + parseInt(readmission_fe);
+                due_total = parseInt(due_total) + parseInt(late_fee) + parseInt(readmission_fe);
                 count_balance_amount(due_total, discount_fee, paid_amount);
                 $('#due_amt').val(due_total);
             });
@@ -554,7 +533,6 @@ include 'security.php';
             $(document).on('click', '#name_search_btn', function(event) {
                 event.preventDefault();
                 $('.serach_student').fadeIn('slow');
-                $('#student_name').focus();
             });
             $(document).on('click', '.close_st_mod', function() {
                 $('.serach_student').fadeOut('slow');
@@ -575,7 +553,7 @@ include 'security.php';
                             } else {
                                 var name_studs = value.First_Name + ' ' + value.Middle_Name + ' ' + value.Last_Name;
                             }
-                            html_table += '<tr><td>' + name_studs + '</td><td>' + value.Father_Name + '</td><td>' + value.DOB + '</td><td>' + value.Class_Name + ' (' + value.Section + ')</td><td><button class="btn btn-warning load_student_data" id="' + value.Student_Id + '"><i class="fa fa-arrow-left text-white" aria-hidden="true"></i></button></td></tr>';
+                            html_table += '<tr><td>' + name_studs + '</td><td>' + value.Father_Name + '</td><td>' + value.DOB + '</td><td>' + value.Class_Name + ' (' + value.Section + ')</td><td><button class="btn btn-warning load_student_data" id="' + value.Student_Id + '"><i class="fa fa-arrow-left text-white" aria-hidden="true"></i></button></td></tr>'; /*<td>' + Class_Name + ' (' + Section + ')</td> */
                         });
                         html_table += '</table>';
                         $('.populate_student_list').html(html_table);
@@ -592,15 +570,14 @@ include 'security.php';
                 load_student_data(student_id);
                 $('.populate_student_list').html('');
                 $('#student_name').val('');
-                load_fee_details(student_id);
             });
 
-            // function to load student data
+            // function to load student data  
             function load_student_data(student_id) {
                 var url = "./universal_apis.php?get_stud_details_by_name=1&search_type=1&stud_data=" + student_id + "";
                 $.getJSON(url, function(data) {
                     $.each(data, function(key, value) {
-                        url_conc = "./FeeControl_1.php?get_consessions=1&concession_id="+value.Concession_Id+"";
+                        url_conc = "./FeeControl_1.php?get_consessions=1&concession_id="+value.Discount_Category+"";
                         $.getJSON(url_conc,function(cons_resp){
                             $.each(cons_resp,function(key,value){
                                 $('.student_concession').val(value.Concession_Name);
@@ -623,8 +600,7 @@ include 'security.php';
                         $('.st_mother_name').val(value.Mother_Name);
                         $('.student_class').val(value.Class_Name);
                         if (value.Student_Image != null) {
-                            //url = './app_images/AdmissionDocuments/' + value.Admission_Id + '_AdmissionDocs/' + value.Student_Image;
-                            url = './app_images/profile/'  + value.Student_Image;
+                            url = './app_images/AdmissionDocuments/' + value.Admission_Id + '_AdmissionDocs/' + value.Student_Image;
                             $('.main_img').attr('src', url);
                         }
                     });
@@ -658,7 +634,7 @@ include 'security.php';
             $(document).on('click', '.inp_cheque_bounce', function() {
                 var btn_id = $(this).attr('id');
                 split_id = btn_id.split("bounce");
-
+               
                 var total_bounce = $("#cheque_bounce").val();
                 console.log(total_bounce);
                 var discount_fee = $('#discount_fee').val();
@@ -678,7 +654,7 @@ include 'security.php';
                 {
                     var amt_bounce = $(this).val();
                     // total amount bounce
-                    total_bounce = parseInt(total_bounce)-parseInt(amt_bounce);
+                    total_bounce = parseInt(total_bounce)-parseInt(amt_bounce);                    
                     var due_amt = $('#due_amt').val();
                     var due_amt = parseInt(due_amt)-parseInt(amt_bounce);
                     $('#due_amt').val(due_amt);
@@ -686,7 +662,7 @@ include 'security.php';
                     count_balance_amount(due_amt, discount_fee, paid_amount);
                 }
                 $(".check_checkbox_"+split_id[1]).val(amt_bounce);
-
+               
             });
 
             $(document).on('blur', '.amount_receiving', function() {
@@ -722,11 +698,11 @@ include 'security.php';
             $(document).on('click', '.submit_btn', function() {
                 window.open("FeeReceiptPrint.php?FeeId=5625");
             })
-
+            
             get_all_schools();
             function get_all_schools() {
                 const url = './universal_apis.php?get_school_name=1';
-                html_data = '';
+                html_data = '<option value="0">-- Select School --</option>';
                 $.getJSON(url, function(data) {
                     $.each(data, function(key, value) {
                         html_data += '<option value="' + value.school_id + '">' + value.school_name + '</option>';

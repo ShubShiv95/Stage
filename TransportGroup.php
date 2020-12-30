@@ -71,7 +71,7 @@ include 'security.php';
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title aj-item-title">
-                                <h3 class="mb-4">Fee cluster Structure</h3>
+                                <h3 class="mb-4">Transport Group</h3>
                             </div>
                             <!-- <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -93,7 +93,7 @@ include 'security.php';
                                         <div class="">
                                             <!--h5 class="text-center">Student Attendence Message</h5-->
                                             <div class="row justify-content-center mb-4">
-                                                <input type="text" name="cluster_Sender" id="" autocomplete="off" class="d-none">
+                                                <input type="text" name="transport_cluster_Sender" id="" autocomplete="off" class="d-none">
                                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                                     <div class="form-group aj-form-group">
                                                         <label>Fee Cluster Name <span>*</span></label>
@@ -106,28 +106,6 @@ include 'security.php';
                                                         <label>Master Account</label>
                                                         <select class="select2 show_school" name="cluster_school_name">
                                                         </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-12    ">
-                                                    <div class="form-group aj-form-group">
-                                                        <label>Select Applicable Class</label>
-                                                        <div class="chackbox-cl">
-                                                            <ul class="pop_class_names">
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-12 mb-3">
-                                                    <div class="form-group aj-form-group">
-                                                        <label>Stream</label>
-                                                        <select class="select2" name="fee_stream">
-                                                            <option value="">-- Stream --</option>
-                                                            <option value="Science">Science</option>
-                                                            <option value="Commerce">Commerce</option>
-                                                            <option value="Arts">Arts</option>
-                                                            <option value="General">General</option>
-                                                        </select>
-                                                        <p class="mt-2  font-size-14 line-height-14 text-primary">Note : Select General If Class Below Than 11</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-12 mb-3">
@@ -147,7 +125,7 @@ include 'security.php';
 
                                                 </div>
                             </form>
-                            <div class="col-xl-12 col-lg-12 col-12 aj-mb-2 border border-primary">
+                            <div class="col-xl-12 col-lg-12 col-12 aj-mb-2  border border-primary">
                                 <div class="Attendance-staff  aj-scroll-Attendance-staff">
                                     <div class="table-responsive ">
                                         <table class="table display ">
@@ -155,7 +133,6 @@ include 'security.php';
                                                 <tr>
                                                     <th style="width: 25%;">Fee Cluster Name </th>
                                                     <th style="width: 20%;">Class </th>
-                                                    <th style="width: 20%;">Stream</th>
                                                     <th style="width: 30%;">School Account</th>
                                                     <th style="width: 5%;">Action</th>
                                                 </tr>
@@ -257,11 +234,11 @@ include 'security.php';
             get_cluster_list();
 
             function get_cluster_list() {
-                const ulr = './FeeControl_1.php?get_all_clusters=1&fee_type=Regular';
+                const ulr =  './FeeControl_1.php?get_all_clusters=1&fee_type=Transport';
                 var html_data = '';
                 $.getJSON(ulr, function(data) {
                     $.each(data, function(key, value) {
-                        html_data += '<tr><td style="width: 25%;">' + value.FG_Name + '</td><td style="width: 20%;">' + value.Class_Name + '</td><td style="width: 20%;">' + value.Stream + '</td><td style="width: 30%;">' + value.school_name + '</td><td style="width: 5%"><button class="btn btn-danger del_cluster" id="' + value.FGCL_Id + '"><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
+                        html_data += '<tr><td style="width: 25%;">' + value.FG_Name + '</td><td style="width: 20%;">' + value.Class_Name + '</td><td style="width: 30%;">' + value.school_name + '</td><td style="width: 5%"><button class="btn btn-danger del_cluster" id="' + value.FGCL_Id + '"><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
                     });
                     $('.display_data').html(html_data);
                 });

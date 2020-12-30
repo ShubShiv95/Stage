@@ -95,15 +95,23 @@ include 'security.php';
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-lg-4 col-12">
-                                                    <div class="form-group aj-form-group">
-                                                        <label>Select Fee Type</label>
+                                                    <!--<div class="form-group aj-form-group">
+                                                        <label>Select Fee Chargable</label>
                                                         <select class="select2" name="fee_type">
-                                                            <option value="0">-- Select Fee Type --</option>
+                                                            <option value="0">-- Select Chargable --</option>
                                                             <option value="Monthly">Monthly</option>
                                                             <option value="Bi-Monthly">Bi-Monthly</option>
                                                             <option value="Quarterly">Quarterly</option>
                                                             <option value="Half-Yearly">Half-Yearly</option>
                                                             <option value="Annually">Annually</option>
+                                                        </select>
+                                                    </div>-->
+                                                    <div class="form-group aj-form-group">
+                                                        <label>Select Fee Type</label>
+                                                        <select class="select2" name="fee_type_choosen">
+                                                            <option value="0">-- Select Fee Type --</option>
+                                                            <option value="Regular">Regular</option>
+                                                            <option value="Transport">Transport</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -124,25 +132,28 @@ include 'security.php';
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-xl-4 col-12 text-right mb-5">
+                                                <div class="col-lg-4 col-xl-4 col-12 mb-5">
+
+                                                </div>
+                                                <div class="col-lg-12 col-xl-12 col-12 text-right mb-5">
                                                     <button type="submit" name="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit</button>
                                                 </div>
                             </form>
-                            <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
-                                <div class="Attendance-staff  aj-scroll-Attendance-staff">
-                                    <div class="table-responsive fee_head_data">
-                                        <table class="table display ">
-                                            <thead>
+                            <div class="col-xl-12 col-lg-12 col-12">
+                                <div class="">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-inverse text-center">
+                                            <thead class="thead-inverse">
                                                 <tr>
-                                                    <th style="width: 25%;">Available Fee Heads. </th>
-                                                    <th style="width: 15%;">Print Label</th>
-                                                    <th style="width: 20%;">Fee Type </th>
-                                                    <th style="width: 15%;">Refundable </th>
-                                                    <th style="width: 15%;">Tax Benifit</th>
-                                                    <th style="width: 10%;">Added By</th>
+                                                    <th>Available Fee Heads. </th>
+                                                    <th>Print Label</th>
+                                                    <th>Fee Type </th>
+                                                    <th>Refundable </th>
+                                                    <th>Tax Benifit</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="top-position-ss">
+                                            <tbody class="fee_head_data">
                                             </tbody>
                                         </table>
                                     </div>
@@ -196,10 +207,10 @@ include 'security.php';
                     success: function(data) {
                         $('.form_output').html(data);
                         load_fee_head();
-                        window.setTimeout(function() {
-                            $('.form_output').html('');
-                        }, 5000);
-                        $('#fee_header_form')[0].reset();
+                        /* window.setTimeout(function() {
+                             $('.form_output').html('');
+                         }, 5000);*/
+                        //$('#fee_header_form')[0].reset();
                     }
                 });
             });
@@ -208,21 +219,20 @@ include 'security.php';
             function load_fee_head() {
                 const fee_head_url = "./FeeControl_1.php?getall_feehead=1";
                 $.getJSON(fee_head_url, function(data) {
-                    html_data = '<table class="table display "><thead><tr><th style="width: 25%;">Available Fee Heads.  </th><th style="width: 15%;">Print Label</th><th style="width: 20%;">Fee Type </th><th style="width: 15%;">Refundable </th><th style="width: 15%;">Tax Benifit</th><th style="width: 10%;">Action</th></tr></thead><tbody class="top-position-ss">';
+                    html_data = '';
                     $.each(data, function(key, value) {
                         if (value.Refundable == 0) {
-                            Refundables = '<button type="button" class="btn btn-danger"><i class="fas fa-times fa-2x"></i></button>';
+                            Refundables = '<button type="button" class="btn btn-danger"><i class="fas fa-times"></i></button>';
                         } else {
-                            Refundables = '<button type="button" class="btn btn-success"><i class="fas fa-check fa-2x"></i></i></button>';
+                            Refundables = '<button type="button" class="btn btn-success"><i class="fas fa-check"></i></i></button>';
                         }
                         if (value.Tax_Benifit == 0) {
-                            Tax_Benifits = '<button type="button" class="btn btn-danger"><i class="fas fa-times fa-2x"></i></button>';
+                            Tax_Benifits = '<button type="button" class="btn btn-danger"><i class="fas fa-times"></i></button>';
                         } else {
-                            Tax_Benifits = '<button type="button" class="btn btn-success"><i class="fas fa-check fa-2x"></i></i></button>';
+                            Tax_Benifits = '<button type="button" class="btn btn-success"><i class="fas fa-check"></i></i></button>';
                         }
-                        html_data += '<tr><td style="width: 25%;">' + value.Fee_Head_Name + '</td><td style="width: 15%;">' + value.Fee_Head_Type + '</td><td style="width: 20%;">' + value.Fee_Print_Lable + '</td><td style="width: 15%;">' + Refundables + '</td><td style="width: 15%;">' + Tax_Benifits + '</td><td style="width: 10%;"><button type="button" class="btn btn-danger delete_feehead_data" id="' + value.Fee_Head_Id + '"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button></td></tr>';
+                        html_data += '<tr><td >' + value.Fee_Head_Name + '</td><td >' + value.Fee_Print_Lable + '</td><td >' + value.Fee_Type + '</td><td >' + Refundables + '</td><td >' + Tax_Benifits + '</td><td ><button type="button" class="btn btn-danger delete_feehead_data" id="' + value.Fee_Head_Id + '"><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
                     });
-                    html_data += '<tbody>';
                     $('.fee_head_data').html(html_data);
                 });
             }

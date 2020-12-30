@@ -102,7 +102,7 @@ include 'security.php';
                             </div>
                             <form action="./FeeControl_1.php" method="post" id="cluster_form">
                                 <div class="row justify-content-center mb-4 new-added-form school-form aj-new-added-form">
-                                    <input type="text" name="cluster_sender" class="d-none" autocomplete="off">
+                                    <input type="text" name="transport_cluster_sender" class="d-none" autocomplete="off">
                                     <div class="col-xl-5 col-lg-5 col-12 aj-mb-2">
                                         <div class="form-group aj-form-group">
                                             <label>Fee Group Name <span>*</span></label>
@@ -206,17 +206,17 @@ include 'security.php';
                 $.post($(this).attr('action'), $('form#cluster_form').serialize(), function(data) {
                     $('.form_output').html(data);
                     //$('#cluster_form')[0].reset();   
-                    show_fees_templt(cluster_name,cluster_session,'Regular')
+                    show_fees_templt(cluster_name,cluster_session)
                 }, );
             });
             get_clusters();
 
             function get_clusters() {
-                const url = "./universal_apis.php?get_all_clusters=1&group_type=Regular";
+                const url = "./universal_apis.php?get_all_clusters=1&group_type=Transport";
                 var html_data = '';
                 $.getJSON(url, function(data) {
                     $.each(data, function(key, value) {
-                        html_data += '<option value="' + value.FG_Id + '">' + value.FG_Name+' ('+value.Student_Type+' Student) ' + '</option>';
+                        html_data += '<option value="' + value.FG_Id + '">' + value.FG_Name + '</option>';
                     });
                     $('.fee_cluster').append(html_data);
                 });
@@ -233,13 +233,13 @@ include 'security.php';
                     alert("Please Select Session")
                 }else{
                     $.post('./FeeControl_1.php', data, function(data) {
-                        $('.f_msg').html(data);show_fees_templt(cluster_name,cluster_session,'Regular');
+                        $('.f_msg').html(data);show_fees_templt(cluster_name,cluster_session);
                     });
                 }
             });
 
-            function show_fees_templt(cluster_name,cluster_session,structure_type){
-                data = {'get_clust_details':1,'cluster_name':cluster_name,'cluster_session':cluster_session,'structure_type':structure_type};
+            function show_fees_templt(cluster_name,cluster_session){
+                data = {'get_clust_details':1,'cluster_name':cluster_name,'cluster_session':cluster_session,structure_type:'structure_type'};
                 $.get('./FeeControl_1.php', data, function(response) {
                         $('.cluster_view').html(response);
                 });
@@ -248,7 +248,7 @@ include 'security.php';
             // load fee cluster ui 
             load_cluster_form();
             function load_cluster_form(){
-                var fee_f_data = {'get_cluster_form':1,'structure_type':'Regular'};
+                var fee_f_data = {'get_cluster_form':1,'structure_type':'Transport'};
                 $.get('./FeeControl_1.php',fee_f_data,function(response_fee){
                     $('.load_cluster_ui').html(response_fee);
                 });

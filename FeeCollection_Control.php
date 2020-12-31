@@ -68,7 +68,7 @@ if (isset($_REQUEST['collect_fee_sender'])) {
             // bank name
           echo  $bank_name = $_REQUEST['bank_name'][$i].'<br>';
 
-            // amoount receiving
+            // amount receiving
           echo  $amount_receiving = $_REQUEST['amount_receiving'][$i].'<br>';
 
             // amount with taxes / net amount

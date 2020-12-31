@@ -417,14 +417,16 @@ include 'security.php';
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+    <!------- ******** -------->
     <script>
-        function adddRowRow(e, balance) {
+        function adddRowRow(e) {
             if (e.keyCode == 13) {
+                e.preventDefault();
                 var total_rows = $('#total_rows').text();
                 var new_row_no = parseInt(total_rows) + 1;
                 $('#total_rows').text(new_row_no);
                 $(this).attr('add', 1);
-                var cnt = '<tr><td ><div class="form-group aj-form-group"><select  id="payment_type' + new_row_no + '" class="payment_type' + new_row_no + ' pmt_hide_elements" name="payment_type[]"><option value="0">-- Select --</option><option value="1">-- Cash --</option><option value="2">-- Cheque --</option><option value="3">-- CC --</option><option value="4">-- DD --</option></select></div></td><td ><div class="form-group aj-form-group"><input type="number" name="instrument_no[]" placeholder="" required="" class="form-control instrument_no' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="date" name="payment_date[]" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><select class="bank_neme' + new_row_no + '" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;"><option value="0">Select Bank</option><option value="3">Bank Of Baroda</option><option value="1">Indian Overseas Bank</option><option value="2">State Bank Of Maharashtra</option></select></td><td><input type="number" name="amount_receiving[]" id="amount_receiving' + new_row_no + '" placeholder="" required="" class="form-control amount_receiving dyn_inp" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="number" name="amt_incl_taxex[]" placeholder="" required="" class="form-control dyn_inp on-chang amt_receiving" value="0" id="rec_amt' + new_row_no + '" onkeypress="adddRowRow(event)" add="1" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></div></td></tr>';
+                var cnt = '<tr><td ><div class="form-group aj-form-group"><select  id="payment_type' + new_row_no + '" class="payment_type' + new_row_no + ' pmt_hide_elements" name="payment_type[]"><option value="0">-- Select --</option><option value="1">-- Cash --</option><option value="2">-- Cheque --</option><option value="3">-- CC --</option><option value="4">-- DD --</option></select></div></td><td ><div class="form-group aj-form-group"><input type="number" name="instrument_no[]" placeholder="" required="" class="form-control instrument_no' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="date" name="payment_date[]" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><select class="bank_neme' + new_row_no + '" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;"><option value="0">Select Bank</option><option value="3">Bank Of Baroda</option><option value="1">Indian Overseas Bank</option><option value="2">State Bank Of Maharashtra</option></select></td><td><input type="number" name="amount_receiving[]" id="amount_receiving' + new_row_no + '" placeholder="" required="" class="form-control amount_receiving dyn_inp" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="number" name="amt_incl_taxex[]" placeholder="" required="" class="form-control dyn_inp on-chang amt_receiving" value="0" id="rec_amt' + new_row_no + '" onkeypress="adddRowRow(event)" add="'+new_row_no+'" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></div></td></tr>';
                 $('#dContecnt').append(cnt);
             }
         }
@@ -666,7 +668,6 @@ include 'security.php';
                 split_id = btn_id.split("bounce");
 
                 var total_bounce = $("#cheque_bounce").val();
-                console.log(total_bounce);
                 var discount_fee = $('#discount_fee').val();
                 var paid_amount = $('#paid_amt').val();
                 if ($(".check_checkbox_"+split_id[1]).is(':checked'))
@@ -700,7 +701,6 @@ include 'security.php';
                 var row_id = $(this).attr('id');
                 var split_value = row_id.split('amount_receiving');
                 var payment_type = $('.payment_type' + split_value[1]).val();
-                console.log(payment_type + ', ' + amount_receiving);
                 if (payment_type == 3) {
                     var percent_amt = ((parseInt(amount_receiving) * 2) / 100);
                     var net_amt = parseInt(percent_amt) + parseInt(amount_receiving);
@@ -713,7 +713,6 @@ include 'security.php';
             $(document).on('change', '.pmt_hide_elements', function() {
                 var pmt_hide_elements_id = $(this).attr('id');
                 split_value = pmt_hide_elements_id.split('payment_type');
-                console.log(split_value[1]);
                 if ($(this).val() == 1) {
                     $('.insttument_date' + split_value[1]).prop('disabled', true);
                     $('.bank_name' + split_value[1]).prop('disabled', true);
@@ -723,7 +722,6 @@ include 'security.php';
                     $('.bank_name' + split_value[1]).prop('disabled', false);
                     $('.instrument_no' + split_value[1]).prop('disabled', false);
                 }
-                console.log('.instrument_no' + split_value[1]);
             });
 
             get_all_schools();

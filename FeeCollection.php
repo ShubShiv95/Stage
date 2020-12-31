@@ -466,11 +466,11 @@ include 'security.php';
                     var json_data = JSON.parse(JSON.stringify(response_details_view));
                     total_datas_in_json = Object.keys(response_details_view).length;
                     total_datas_in_fees = Object.keys(json_data[row_no].details).length;
-                    for (let i = 1; i <= total_datas_in_fees; i++) {
+                    for (let i = 1; i <= parseInt(total_datas_in_fees); i++) {
                         var json_fee_data = json_data[row_no].details[i];
-                        if (parseInt(json_fee_data.amount)>0) {
-                          fee_table_html += '<tr><td style="width: 40%;">' + json_fee_data.feename + '</td><td style="width: 20%;">' + json_fee_data.amount + '</td><td style="width: 20%;">' + json_fee_data.concession + '</td><td style="width: 20%;">' + (parseInt(json_fee_data.amount) - (parseInt(json_fee_data.concession))) + '</td></tr>';
-                        }
+                        //if (parseInt(json_fee_data.amount)>0) {
+                          fee_table_html += '<tr><td style="width: 40%;">' + json_fee_data.feename + '</td><td style="width: 20%;">' + parseInt(json_fee_data.amount) + '</td><td style="width: 20%;">' + parseInt(json_fee_data.concession) + '</td><td style="width: 20%;">' + (parseInt(json_fee_data.amount) - (parseInt(json_fee_data.concession))) + '</td></tr>';
+                        //}
                     }
                     fee_table_html += '</tbody> ';
                     $('.modal_table').html(fee_table_html);

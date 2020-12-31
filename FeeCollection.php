@@ -69,7 +69,8 @@ include 'security.php';
                             </div>
 
                         </div>
-                        <form class="new-added-form aj-new-added-form Fee-collection" action="" method="post">
+                        <form class="new-added-form aj-new-added-form Fee-collection" id="fee_collection_form" action="./FeeCollection_Control.php" method="post">
+                        <input type="text" name="collect_fee_sender" id="" class="d-none" autocomplete="off">
                             <div class="row justify-content-center">
                                 <div class="col-xl-3 col-lg-3 col-12 aj-md-2">
                                     <div class="col-xl-12 col-lg-12 aj-md-2">
@@ -93,7 +94,7 @@ include 'security.php';
                                             <div class="row">
                                                 <div class="form-group aj-form-group col-xl-10 col-lg-10 col-md-10 col-10">
                                                     <label>Student Id <span>*</span></label>
-                                                    <input type="text" name="student_id" id="student_id" placeholder="" required="" class="form-control">
+                                                    <input type="text" name="student_id" id="student_id" placeholder="" required="" class="form-control" autocomplete="off">
                                                 </div>
                                                 <div class="col-xl-2 col-lg-2 col-2">
                                                     <button class="btn btn-warning btn-lg mt-1" type="button" id="name_search_btn"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -101,7 +102,7 @@ include 'security.php';
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-12 form-group">
                                                     <div class="form-group aj-form-group">
                                                         <label>Student Name <span>*</span></label>
-                                                        <input type="text" name="student_id" id="student_id" placeholder="" value="" required="" class="form-control first_name" readonly>
+                                                        <input type="text" name="student_name" id="student_id" placeholder="" value="" required="" class="form-control first_name" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="form-group aj-form-group col-xl-12 col-lg-12 col-md-12 col-12">
@@ -150,7 +151,7 @@ include 'security.php';
                                                 <div class="col-xl-12 col-lg-12 col-12 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>School Name </label>
-                                                        <select class="select2 show_school" name="name">
+                                                        <select class="select2 show_school" name="school_name">
                                                         </select>
                                                     </div>
                                                 </div>
@@ -191,7 +192,7 @@ include 'security.php';
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2">
                                                     <div class="form-group aj-form-group">
                                                         <label>Excess Amount</label>
-                                                        <textarea type="text" rows="4" name="ra_address" required="" placeholder="" class="aj-form-control"> </textarea>
+                                                        <textarea type="text" rows="4" name="excess_amt" required="" placeholder="" class="aj-form-control"> </textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2" style="overflow-y: auto; height:10vh">
@@ -234,7 +235,7 @@ include 'security.php';
                                             <tr>
                                                 <td style="width: 5%;">
                                                     <div class="form-group aj-form-group mt-2">
-                                                        <select id="payment_type1" class="payment_type1 pmt_hide_elements" name="payment_type">
+                                                        <select id="payment_type1" class="payment_type1 pmt_hide_elements" name="payment_type[]">
                                                             <option value="0">-- Select --</option>
                                                             <option value="1">-- Cash --</option>
                                                             <option value="2">-- Cheque --</option>
@@ -244,13 +245,13 @@ include 'security.php';
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <input type="number" name="" placeholder="" required="" class="form-control instrument_no1 " style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
+                                                    <input type="number" name="instrument_no[]" placeholder="" required="" class="form-control instrument_no1 " style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
                                                 </td>
                                                 <td>
-                                                    <input type="date" name="" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date1" data-position="bottom right" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
+                                                    <input type="date" name="payment_date[]" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date1" data-position="bottom right" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
                                                 </td>
                                                 <td style="width: 10%;">
-                                                    <select class="bank_name1" name="" style="height:38px; border: 1px solid #ffae01!important;">
+                                                    <select class="bank_name1" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;">
                                                         <option value="0">Select Bank</option>
                                                         <option value="3">Bank Of Baroda</option>
                                                         <option value="1">Indian Overseas Bank</option>
@@ -258,10 +259,10 @@ include 'security.php';
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="number" name="amount_receiving" id="amount_receiving1" placeholder="" required="" class="form-control amount_receiving" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
+                                                    <input type="number" name="amount_receiving[]" id="amount_receiving1" placeholder="" required="" class="form-control amount_receiving" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
                                                 </td>
                                                 <td>
-                                                    <input type="number" name="net_amount" placeholder="" required="" id="rec_amt1" class="form-control on-chang amt_receiving" add="1" value="0" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
+                                                    <input type="number" name="amt_incl_taxex[]" placeholder="" required="" id="rec_amt1" class="form-control on-chang amt_receiving" add="1" value="0" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -278,7 +279,7 @@ include 'security.php';
                                         <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                             <div class="form-group aj-form-group">
                                                 <label>Service</label>
-                                                <input type="number" name="" placeholder="" readonly="" required="" class="form-control">
+                                                <input type="number" name="services" placeholder="" readonly="" required="" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-12 aj-mb-2 mt-3">
@@ -298,8 +299,8 @@ include 'security.php';
                                 <div class="col-lg-8 col-xl-8 col-12 mt-3 form_output text-right">
                                 </div>
                                 <div class="col-lg-4 col-xl-4 col-12 mt-3 text-right">
-                                    <button type="button" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark submit_btn">Save</button>
-                                    <button type="button" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Receipt Detail</button>
+                                    <button type="submit" name="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark submit_btn">Save Payment</button>
+                                    <!--<button type="button" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Receipt Detail</button>-->
                                 </div>
                             </div>
                     </div>
@@ -380,7 +381,7 @@ include 'security.php';
                                             <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" id="search_data">Search</button>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 mt-2 table-responsive populate_student_list">
+                                    <div class="col-12 col-md-12 mt-2 table-responsive populate_student_list form_output">
                                     </div>
                                 </div>
                             </form>
@@ -423,7 +424,7 @@ include 'security.php';
                 var new_row_no = parseInt(total_rows) + 1;
                 $('#total_rows').text(new_row_no);
                 $(this).attr('add', 1);
-                var cnt = '<tr><td ><div class="form-group aj-form-group"><select  id="payment_type' + new_row_no + '" class="payment_type' + new_row_no + ' pmt_hide_elements" name="payment_type"><option value="0">-- Select --</option><option value="1">-- Cash --</option><option value="2">-- Cheque --</option><option value="3">-- CC --</option><option value="4">-- DD --</option></select></div></td><td ><div class="form-group aj-form-group"><input type="number" name="" placeholder="" required="" class="form-control instrument_no' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="date" name="" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><select class="bank_neme' + new_row_no + '" name="" style="height:38px; border: 1px solid #ffae01!important;"><option value="0">Select Bank</option><option value="3">Bank Of Baroda</option><option value="1">Indian Overseas Bank</option><option value="2">State Bank Of Maharashtra</option></select></td><td><input type="number" name="amount_receiving" id="amount_receiving' + new_row_no + '" placeholder="" required="" class="form-control amount_receiving dyn_inp" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="number" name="" placeholder="" required="" class="form-control dyn_inp on-chang amt_receiving" value="0" id="rec_amt' + new_row_no + '" onkeypress="adddRowRow(event)" add="1" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></div></td></tr>';
+                var cnt = '<tr><td ><div class="form-group aj-form-group"><select  id="payment_type' + new_row_no + '" class="payment_type' + new_row_no + ' pmt_hide_elements" name="payment_type[]"><option value="0">-- Select --</option><option value="1">-- Cash --</option><option value="2">-- Cheque --</option><option value="3">-- CC --</option><option value="4">-- DD --</option></select></div></td><td ><div class="form-group aj-form-group"><input type="number" name="instrument_no[]" placeholder="" required="" class="form-control instrument_no' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="date" name="payment_date[]" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><select class="bank_neme' + new_row_no + '" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;"><option value="0">Select Bank</option><option value="3">Bank Of Baroda</option><option value="1">Indian Overseas Bank</option><option value="2">State Bank Of Maharashtra</option></select></td><td><input type="number" name="amount_receiving[]" id="amount_receiving' + new_row_no + '" placeholder="" required="" class="form-control amount_receiving dyn_inp" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="number" name="amt_incl_taxex[]" placeholder="" required="" class="form-control dyn_inp on-chang amt_receiving" value="0" id="rec_amt' + new_row_no + '" onkeypress="adddRowRow(event)" add="1" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></div></td></tr>';
                 $('#dContecnt').append(cnt);
             }
         }
@@ -446,7 +447,7 @@ include 'security.php';
                       else{
                         late_fees = value.Late_Fee;
                       }
-                        fee_list_html += '<tr><td style="width: 30%;">' + value.Installment_name + '</td><td style="width: 20%;">' + value.Net_Amount + '</td><td style="width: 15%;"><a href="javascript:void(0);" class="show_fee_details" data-toggle="modal" row_id="' + i + '" id="' + value.Installment_Id + '" stud_id="'+student_id+'" data-target=".details">...</a></td><td style="width: 10%;"><div class="radio"><span><input type="checkbox" id="' + i + '" class="fee_month check_box_no' + i + '" name="fee_amt"></span><input type="number" class="d-none fee_amuont' + i + '" value="' + value.Net_Amount + '"><input class="d-none late_fee_amt'+i+'" value="'+late_fees+'"></div></td></tr> ';
+                        fee_list_html += '<tr><td style="width: 30%;">' + value.Installment_name + '</td><td style="width: 20%;">' + value.Net_Amount + '</td><td style="width: 15%;"><a href="javascript:void(0);" class="show_fee_details" data-toggle="modal" row_id="' + i + '" id="' + value.Installment_Id + '" stud_id="'+student_id+'" data-target=".details">...</a></td><td style="width: 10%;"><div class="radio"><span><input type="checkbox" id="' + i + '" value="' + value.Installment_Id + ',' + value.Net_Amount + '" class="fee_month check_box_no' + i + '" name="fee_amt[]"></span><input type="number" class="d-none fee_amuont' + i + '" value="' + value.Net_Amount + '"><input class="d-none late_fee_amt'+i+'" value="'+late_fees+'"></div></td></tr> ';
                         i = i + 1;
                     });
                     $('.load_dyn_fee_data').html(fee_list_html);
@@ -633,18 +634,23 @@ include 'security.php';
 
             $(document).on('blur', '#student_id', function() {
                 var student_id = $(this).val();
-                load_student_data(student_id);
+                if(student_id != ''){
+                    load_student_data(student_id);
+                    load_fee_details(student_id);
+                }
             });
             $(document).on('click', '.btn_sibling_1', function(ev) {
                 ev.preventDefault();
                 var student_id = $(this).attr('id');
                 load_student_data(student_id);
+                load_fee_details(student_id);
                 $('#student_id').val(student_id);
             });
             $(document).on('click', '.btn_sibling_2', function(ev) {
                 ev.preventDefault();
                 var student_id = $(this).attr('id');
                 load_student_data(student_id);
+                load_fee_details(student_id);
                 $('#student_id').val(student_id);
             });
             $('#discount_fee').change(function() {
@@ -719,9 +725,6 @@ include 'security.php';
                 }
                 console.log('.instrument_no' + split_value[1]);
             });
-            $(document).on('click', '.submit_btn', function() {
-                window.open("FeeReceiptPrint.php?FeeId=5625");
-            })
 
             get_all_schools();
             function get_all_schools() {
@@ -734,6 +737,18 @@ include 'security.php';
                     $('.show_school').html(html_data);
                 });
             }
+
+            // submitting form data
+            $(document).on('submit','#fee_collection_form',function(event){
+                event.preventDefault();
+                
+                var form_data = $(this).serialize();
+                $.post($(this).attr('action'),form_data,function(fee_response){
+                    
+                    $('.form_output').html(fee_response);
+                    //window.open("FeeReceiptPrint.php?FeeId=5625"); 156/2018
+                });
+            });
         });
     </script>
 

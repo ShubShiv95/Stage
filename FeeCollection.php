@@ -74,7 +74,7 @@ include 'security.php';
                             <div class="row justify-content-center">
                                 <div class="col-xl-3 col-lg-3 col-12 aj-md-2">
                                     <div class="col-xl-12 col-lg-12 aj-md-2">
-                                        <div class="container-img" style="width:150px; margin-left: auto;margin-right: auto;height:150px;">
+                                        <div class="container-img shadow" style="width:150px; margin-left: auto;margin-right: auto;height:150px;">
                                             <img class="main_img" src="" alt="" >
                                         </div>
 
@@ -132,7 +132,7 @@ include 'security.php';
                                         <div class="col-lg-4 col-md-4">
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
-                                                    <div class="Attendance-staff  aj-scroll-Attendance-staff border border-primary" style="height: 38vh; overflow-x:auto;">
+                                                    <div class="Attendance-staff  aj-scroll-Attendance-staff " style="height: 38vh; overflow-x:auto;">
                                                     <div class="table-responsive text-center">
                                                             <table class="table display" style="font-size: 1.5rem; width:100%">
                                                               <tr style="background-color: #ffae01!important;"><th style="width: 30%;">Inst. Name </th><th style="width: 25%;">Due Amt</th><th style="width: 20%;">Details</th><th style="width: 25%;">Select</th></tr>
@@ -173,10 +173,22 @@ include 'security.php';
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
                                                     <div class="form-group aj-form-group">
-                                                        <label>Re Admission Fee</label>
-                                                        <input type="text" name="readmission_fee" placeholder="" value="3000" id="readmission_fee" required="" class="form-control" readonly>
+                                                        <label>Re Adm. Fee</label>
+                                                        <input type="text" name="readmission_fee" placeholder="" value="0" id="readmission_fee" required="" class="form-control">
                                                     </div>
                                                 </div>
+                                                <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
+                                                    <div class="form-group aj-form-group">
+                                                    <label>Adv. Amount</label>
+                                                        <input type="text" name="excess_amt" id="advance_fee" value="275" placeholder="" required="" class="form-control" value="0" readonly>
+                                                    </div>
+                                                </div>    
+                                                <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
+                                                    <div class="form-group aj-form-group">
+                                                        <label>On Demand Fee</label>
+                                                        <input type="text" value="500" name="student_fine" id="fine_fee" placeholder="" required="" class="form-control" value="0" readonly>
+                                                    </div>
+                                                </div>                                            
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>Discount Fee</label>
@@ -189,27 +201,24 @@ include 'security.php';
                                                         <input type="text" id="cheque_bounce" name="cheque_bounce" placeholder="" required="" value="0" class="form-control" readonly>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-6 col-lg-6 col-6 aj-mb-2">
-                                                    <div class="form-group aj-form-group">
-                                                        <label>Excess Amount</label>
-                                                        <textarea type="text" rows="4" name="excess_amt" required="" placeholder="" class="aj-form-control"> </textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-6 aj-mb-2" style="overflow-y: auto; height:10vh">
+                                                <div class="col-xl-12 col-lg-12 col-6 aj-mb-2" style="overflow-y: auto; height:10vh">
                                                     <table class="text-center" style="border: 1px solid #ffae01!important; width:100%">
                                                         <tr>
-                                                            <th colspan="2">Chq. Bounce Chg.</th>
+                                                            <th colspan="3">Cheque Bounce</th>
                                                         </tr>
                                                         <tr>
                                                             <th class="cus-border">Chq. No</th>
+                                                            <th  class="cus-border text-center">Bounce Chg.</th>
                                                             <th class="cus-border text-center">Select</th>
                                                         </tr>
                                                         <tr>
                                                             <td class="cus-border">10325</td>
+                                                            <td class="cus-border">200</td>
                                                             <td class="cus-border text-center"><input type="checkbox" name="" value="680" id="bounce1" class="inp_cheque_bounce check_checkbox_1"></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="cus-border">10325</td>
+                                                            <td class="cus-border">200</td>
                                                             <td class="cus-border  text-center"><input type="checkbox" name="" value="450" id="bounce2" class="inp_cheque_bounce check_checkbox_2"></td>
                                                         </tr>
                                                     </table>
@@ -219,8 +228,8 @@ include 'security.php';
                                         <!-- third Row ends -->
                                     </div>
                                 </div>
-                                <div class="col-lg-9 border border-primary" style="overflow-y:auto; height:16vh;">
-                                    <table style="width:100%;">
+                                <div class="col-lg-9" style="overflow-y:auto; height:16vh; ">
+                                    <table style="width:100%; ">
                                         <thead>
                                             <tr style="background-color: #ffae01!important;">
                                                 <th>Paymode </th>
@@ -259,10 +268,10 @@ include 'security.php';
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="number" name="amount_receiving[]" id="amount_receiving1" placeholder="" required="" class="form-control amount_receiving" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
+                                                    <input type="number" name="amount_receiving[]" id="amount_receiving1" placeholder="" required="" class="form-control amt_receiving" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
                                                 </td>
                                                 <td>
-                                                    <input type="number" name="amt_incl_taxex[]" placeholder="" required="" id="rec_amt1" class="form-control on-chang amt_receiving" add="1" value="0" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
+                                                    <input type="number" name="amt_incl_taxex[]" placeholder="" required="" id="rec_amt1" class="form-control on-chang amt_receiving_all_taxex" add="1" value="0" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -426,7 +435,7 @@ include 'security.php';
                 var new_row_no = parseInt(total_rows) + 1;
                 $('#total_rows').text(new_row_no);
                 $(this).attr('add', 1);
-                var cnt = '<tr><td ><div class="form-group aj-form-group"><select  id="payment_type' + new_row_no + '" class="payment_type' + new_row_no + ' pmt_hide_elements" name="payment_type[]"><option value="0">-- Select --</option><option value="1">-- Cash --</option><option value="2">-- Cheque --</option><option value="3">-- CC --</option><option value="4">-- DD --</option></select></div></td><td ><div class="form-group aj-form-group"><input type="number" name="instrument_no[]" placeholder="" required="" class="form-control instrument_no' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="date" name="payment_date[]" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><select class="bank_neme' + new_row_no + '" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;"><option value="0">Select Bank</option><option value="3">Bank Of Baroda</option><option value="1">Indian Overseas Bank</option><option value="2">State Bank Of Maharashtra</option></select></td><td><input type="number" name="amount_receiving[]" id="amount_receiving' + new_row_no + '" placeholder="" required="" class="form-control amount_receiving dyn_inp" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="number" name="amt_incl_taxex[]" placeholder="" required="" class="form-control dyn_inp on-chang amt_receiving" value="0" id="rec_amt' + new_row_no + '" onkeypress="adddRowRow(event)" add="'+new_row_no+'" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></div></td></tr>';
+                var cnt = '<tr><td ><div class="form-group aj-form-group"><select  id="payment_type' + new_row_no + '" class="payment_type' + new_row_no + ' pmt_hide_elements" name="payment_type[]"><option value="0">-- Select --</option><option value="1">-- Cash --</option><option value="2">-- Cheque --</option><option value="3">-- CC --</option><option value="4">-- DD --</option></select></div></td><td ><div class="form-group aj-form-group"><input type="number" name="instrument_no[]" placeholder="" required="" class="form-control instrument_no' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="date" name="payment_date[]" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><select class="bank_neme' + new_row_no + '" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;"><option value="0">Select Bank</option><option value="3">Bank Of Baroda</option><option value="1">Indian Overseas Bank</option><option value="2">State Bank Of Maharashtra</option></select></td><td><input type="number" name="amount_receiving[]" id="amount_receiving' + new_row_no + '" placeholder="" required="" class="form-control amt_receiving dyn_inp" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="number" name="amt_incl_taxex[]" placeholder="" required="" class="form-control dyn_inp on-chang amt_receiving_all_taxex" value="0" id="rec_amt' + new_row_no + '" onkeypress="adddRowRow(event)" add="'+new_row_no+'" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></div></td></tr>';
                 $('#dContecnt').append(cnt);
             }
         }
@@ -507,7 +516,7 @@ include 'security.php';
                     {
                         $(".check_box_no" + parseInt(j)).prop("checked", false);
                     }
-                    for (let k = 1; k <= check_id; k++)
+                    for (let k = 1; k <= (parseInt(check_id)-1); k++)
                     {
                           fee_amt = $('.fee_amuont' + k).val();
                           late_fee = $('.late_fee_amt' + k).val();
@@ -516,14 +525,17 @@ include 'security.php';
                     }
                 }
                 $('#late_fee').val(total_late_fee);
-                due_total = parseInt(due_total) + parseInt(total_late_fee) + parseInt(readmission_fe);
+                var stud_fine = $('#fine_fee').val();
+                var prev_execess_amt = $('#advance_fee').val();
+                due_total = parseInt(due_total) + parseInt(total_late_fee) + parseInt(readmission_fe)+parseInt(stud_fine);
+                paid_amount = parseInt(paid_amount)+parseInt(prev_execess_amt);
                 count_balance_amount(due_total, discount_fee, paid_amount);
                 $('#due_amt').val(due_total);
             });
 
             // function to count balance
             function count_balance_amount(due_total, discount_fee, paid_amount) {
-                var balance = (parseInt(due_total)) - (parseInt(paid_amount) + parseInt(discount_fee));
+                    var balance = (parseInt(due_total)) - (parseInt(paid_amount) + parseInt(discount_fee));    
                 $('#amount_balance').val(balance);
             }
 
@@ -533,6 +545,7 @@ include 'security.php';
                 var rec_amt_ttl = 0;
                 var id_inp = $(this).attr('id');
                 var split_id = id_inp.split('rec_amt');
+                var prev_execess_amt = $('#advance_fee').val();
                 if (split_id[1] > 1) {
                     for (let i = pr_total; i >= 1; i--) {
                         var net_amt = $('#rec_amt' + i).val();
@@ -549,9 +562,9 @@ include 'security.php';
                     $('#paid_amt').val(0);
                 }
                 var discount_fee = $('#discount_fee').val();
-                var paid_amount = $('#paid_amt').val();
+                var paid_amount_ttl = parseInt(rec_amt_ttl)+parseInt(prev_execess_amt);
                 var cheque_bounce_amt = $('#cheque_bounce').val();
-                count_balance_amount(due_amt, discount_fee, paid_amount);
+                count_balance_amount(due_amt, discount_fee, paid_amount_ttl);
             });
 
             $(document).on('click', '#name_search_btn', function(event) {
@@ -655,21 +668,15 @@ include 'security.php';
                 load_fee_details(student_id);
                 $('#student_id').val(student_id);
             });
-            $('#discount_fee').change(function() {
-                var discount_fee = $(this).val();
-                var due = $('#due_amt').val();
-                var paid_amt = $('#paid_amt').val();
-                var balance = parseInt(due) - parseInt(paid_amt) - parseInt(discount_fee);
-                $('#amount_balance').val(balance);
-            });
 
             $(document).on('click', '.inp_cheque_bounce', function() {
                 var btn_id = $(this).attr('id');
                 split_id = btn_id.split("bounce");
 
                 var total_bounce = $("#cheque_bounce").val();
-                var discount_fee = $('#discount_fee').val();
-                var paid_amount = $('#paid_amt').val();
+                var discount_fee = 0;
+                var prev_execess_amt = $('#advance_fee').val();
+                var paid_amount = parseInt($('#paid_amt').val())+parseInt(prev_execess_amt);  
                 if ($(".check_checkbox_"+split_id[1]).is(':checked'))
                 {
                     var amt_bounce = $(this).val();
@@ -696,11 +703,13 @@ include 'security.php';
 
             });
 
-            $(document).on('blur', '.amount_receiving', function() {
+            $(document).on('focusin','.amt_receiving',function(){
+                var prev_amt = $(this).val();
+                $(document).on('focusout', '.amt_receiving', function() {
                 var amount_receiving = $(this).val();
                 var row_id = $(this).attr('id');
                 var split_value = row_id.split('amount_receiving');
-                var payment_type = $('.payment_type' + split_value[1]).val();
+                var payment_type = $('.payment_type'+split_value[1]).val();
                 if (payment_type == 3) {
                     var percent_amt = ((parseInt(amount_receiving) * 2) / 100);
                     var net_amt = parseInt(percent_amt) + parseInt(amount_receiving);
@@ -708,19 +717,33 @@ include 'security.php';
                 } else {
                     $('#rec_amt' + split_value[1]).val(amount_receiving);
                 }
+                var total_paid_amt=paid_amt =0;
+                var prev_execess_amt = $('#advance_fee').val();
+                for (let i = 1; i <= split_value[1]; i++) {
+                    paid_amount = $('#amount_receiving'+i).val();
+                    total_paid_amt =parseInt(paid_amount)+parseInt(total_paid_amt);
+                }
+                var due_amt = $('#due_amt').val();
+                $('#paid_amt').val(total_paid_amt); 
+                var dis_amt = 0;
+                total_paid_amt = parseInt(total_paid_amt)+parseInt(prev_execess_amt);
+                count_balance_amount(due_amt, dis_amt, total_paid_amt);
+                });
             });
-
             $(document).on('change', '.pmt_hide_elements', function() {
                 var pmt_hide_elements_id = $(this).attr('id');
                 split_value = pmt_hide_elements_id.split('payment_type');
                 if ($(this).val() == 1) {
-                    $('.insttument_date' + split_value[1]).prop('disabled', true);
+                    /*$('.insttument_date' + split_value[1]).prop('disabled', true);
                     $('.bank_name' + split_value[1]).prop('disabled', true);
-                    $('.instrument_no' + split_value[1]).prop('disabled', true);
+                    $('.instrument_no' + split_value[1]).prop('disabled', true);*/
+                    $('.insttument_date' + split_value[1]).attr('readonly', true);
+                    $('.bank_name' + split_value[1]).attr('readonly', true);
+                    $('.instrument_no' + split_value[1]).attr('readonly', true);
                 } else {
-                    $('.insttument_date' + split_value[1]).prop('disabled', false);
-                    $('.bank_name' + split_value[1]).prop('disabled', false);
-                    $('.instrument_no' + split_value[1]).prop('disabled', false);
+                    $('.insttument_date' + split_value[1]).prop('readonly', false);
+                    $('.bank_name' + split_value[1]).prop('readonly', false);
+                    $('.instrument_no' + split_value[1]).prop('readonly', false);
                 }
             });
 
@@ -747,6 +770,35 @@ include 'security.php';
                     //window.open("FeeReceiptPrint.php?FeeId=5625"); 156/2018
                 });
             });
+
+            $('#readmission_fee').focusin(function(){
+                var prev_readm_fee = $(this).val();
+                var due_amt = $('#due_amt').val();
+                var prev_execess_amt = $('#advance_fee').val();
+                $('#readmission_fee').focusout(function(){
+                var readmission_fee = $(this).val();
+                var discount_fee = 0;
+                var paid_amount = parseInt($('#paid_amt').val())+parseInt(prev_execess_amt);  
+                due_amt = (parseInt(due_amt)-parseInt(prev_readm_fee))+parseInt(readmission_fee);
+                $('#due_amt').val(due_amt);
+                count_balance_amount(due_amt, discount_fee, paid_amount);
+                });
+            });
+
+            $('#discount_fee').focusin(function(){
+                var prev_dis_fee = $(this).val();
+                var due_amt = $('#due_amt').val();
+                var prev_execess_amt = $('#advance_fee').val();
+                $('#discount_fee').focusout(function(){
+                var curr_dis_fee = $(this).val();
+                var paid_amount = parseInt($('#paid_amt').val())+parseInt(prev_execess_amt);      
+                dis_amt = parseInt(curr_dis_fee)-parseInt(prev_dis_fee);
+                count_balance_amount(due_amt, dis_amt, paid_amount);
+                due_amt = (parseInt(due_amt)-parseInt(dis_amt));
+                $('#due_amt').val(due_amt);
+                });
+            });
+
         });
     </script>
 

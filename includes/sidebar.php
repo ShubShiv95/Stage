@@ -256,6 +256,35 @@
 
 
             <li class="nav-item sidebar-nav-item  print-d-none">
+                <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Time Table</span></a>
+                <ul class="nav sub-group-menu">
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><span>Add Time Table</span></a>
+                        <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+                        <ul class="nav sub-group-menu">
+                            <li class="nav-item">
+                                <a href="AddClassTimeTable.php" class="nav-link"><i class="fas fa-angle-right"></i>Class Time Table</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="AddTeacherTimeTable.php" class="nav-link"><i class="fas fa-angle-right"></i>Teacher's Time Table</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><span>View Time Table</span></a>
+                        <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+                        <ul class="nav sub-group-menu">
+                        <li class="nav-item">
+                                <a href="ViewClassTimeTable.php" class="nav-link"><i class="fas fa-angle-right"></i>Class Time Table</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="ViewTeacherTimeTable.php" class="nav-link"><i class="fas fa-angle-right"></i>Teacher's Time Table</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item sidebar-nav-item  print-d-none">
                 <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Exam</span></a>
                 <ul class="nav sub-group-menu">
                     <li class="nav-item">

@@ -102,7 +102,7 @@ include 'security.php';
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-12 form-group">
                                                     <div class="form-group aj-form-group">
                                                         <label>Student Name <span>*</span></label>
-                                                        <input type="text" name="student_name" id="student_id" placeholder="" value="" required="" class="form-control first_name" readonly>
+                                                        <input type="text" name="student_name_dispkay" id="student_name_dispkay" placeholder="" value="" required="" class="form-control first_name" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="form-group aj-form-group col-xl-12 col-lg-12 col-md-12 col-12">
@@ -373,7 +373,7 @@ include 'security.php';
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title">Fee Head Fixed</h6>
+                    <h6 class="modal-title">Search Student</h6>
                     <button type="button" class="close close_st_mod" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -401,6 +401,40 @@ include 'security.php';
             </div>
         </div>
     </div>
+
+    <div class="modal show_late_fee">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Late Fee</h6>
+                    <button type="button" class="close close_late_fee_mod" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="model-tebal-in">
+                        <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
+                            <h4>Edit Late Fee</h4><span class="max_late_fee_rows d-none"></span>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-12 aj-mb-2 table-responsive">
+                            <table class="table table-striped table-inverse">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th>Month</th>
+                                        <th>Late Fee</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="load_late_fee">
+                                        <tr>
+                                            <td scope="row"></td>
+                                            <td></td>   
+                                        </tr>
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
     <style>
         .cus-border {
             border: 1px solid #ffae01 !important;
@@ -441,6 +475,7 @@ include 'security.php';
         }
 
         $(document).ready(function() {
+            $('#student_id').focusin();
             function load_fee_details(student_id) {
                 $('.load_dyn_fee_data').html('');
                 var ac_type = $('.account_type').val();
@@ -799,6 +834,61 @@ include 'security.php';
                 });
             });
 
+            $(document).on('click','#late_fee',function(){
+                $('.show_late_fee').fadeIn();
+                show_late_fee_into_modal();
+            });
+            $(document).on('click','.close_late_fee_mod',function(){
+                $('.show_late_fee').fadeOut();
+            });
+
+            function show_late_fee_into_modal() {
+                var student_id = $('#student_id').val();
+                $('.load_late_fee').html('');
+                var ac_type = $('.account_type').val();
+                var school_id = $('.show_school').val();
+                const fee_url = "./FeeCollectionAPI.php?Parameter=CollectFee&studentid="+student_id+"&ac_type="+ac_type+"&school_id="+school_id+"";
+                var fee_list_html = '';
+               
+                $.getJSON(fee_url, function(response_fee) {
+                    total_datas_in_fees = Object.keys(response_fee).length;
+                    $('.total_json_row').text(total_datas_in_fees);
+                    var i = 1;
+                    $.each(response_fee, function(key, value) {
+                      if (value.Late_Fee>0) {
+                        var late_fees = value.Late_Fee;
+                        fee_list_html += `<tr>
+                                            <td scope="row">${value.Installment_name}</td>
+                                            <td ><input serial_no="${i}" id="${value.Installment_Id}" type="number" value="${late_fees}" class="d-block edit_late_fee_data late_fee_amt_no_${i}"></td>
+                                        </tr>`;
+                        $('.max_late_fee_rows').text(i);
+                        i = i + 1;
+                      }
+                    });
+                    $('.load_late_fee').html(fee_list_html);
+                });
+            }   
+
+            $(document).on('blur','.edit_late_fee_data',function(){
+                if (confirm("Are You Sure To Update")) {
+                    var student_id = $('#student_id').val();
+                    var installment_id = $(this).attr('id');    
+                    var serial_no =$(this).attr('serial_no');
+                    var total_late_fee= due_amt= dis_amt= paid_amount= 0;
+                    var max_late_fee_rows = $('.max_late_fee_rows').text()
+                    // update fee table and load fee data again
+                    
+                    for (let i = 1; i <= parseInt(max_late_fee_rows); i++) {
+                        var late_fee_amt = $('.late_fee_amt_no_'+i).val();
+                        total_late_fee = late_fee_amt;
+                        total_late_fee = parseInt(total_late_fee)+parseInt(late_fee_amt);
+                        console.log('.late_fee_amt_no_'+i +', '+total_late_fee);
+                    }
+                  //  console.log(late_fee_amt);
+                    $('#late_fee').val(total_late_fee);
+                    count_balance_amount(due_amt, dis_amt, paid_amount);
+                }
+            });
         });
     </script>
 

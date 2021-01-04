@@ -1,4 +1,5 @@
 <?php
+require_once './dbhandle.php';
 $request_type=$_REQUEST["Parameter"];
 if($request_type=='StudMAttendance')
     {
@@ -982,12 +983,13 @@ if($request_type=='StudMAttendance')
     if($request_type=='StudYearlyAttendance')
     {
         $studentid=$_REQUEST["StudentId"];
-        
-        $data = array(
+
+       $data = array(
                         "status"=>"200",
                         "message"=>"success",
                         //new array here
                         "month"=>array(
+
                                         array(
                                                 "month_no"=>"12",  
                                                 "month_name"=>"December",
@@ -1034,7 +1036,7 @@ if($request_type=='StudMAttendance')
                                                 "attendance_percent"=>"25"
                                         ) 
                                     )
-                        ); 
+                        );
                     header('Content-type: text/javascript');
                     echo json_encode($data, JSON_PRETTY_PRINT);
     }
@@ -1094,8 +1096,8 @@ if($request_type=='StudMAttendance')
         $studentid=$_REQUEST["StudentId"];
         
         $data = array(
-                        "status"=>"500",
-                        "message"=>"failure"
+                        "status"=>"200",
+                        "message"=>"success"
                         ); 
                     header('Content-type: text/javascript');
                     echo json_encode($data, JSON_PRETTY_PRINT);
@@ -1166,7 +1168,8 @@ if($request_type=='StudMAttendance')
 
     if($request_type=='LoginAPI')
         {
-            $studentid=$_REQUEST["StudentId"];
+        $userId=$_REQUEST["user_id"];
+        $password=$_REQUEST["password"];
             
             $data = array(
                             "status"=>"200",

@@ -229,7 +229,23 @@ if($request_type=='CollectFee')
                         echo json_encode($fee, JSON_PRETTY_PRINT);
                                                      
     }   
-
+    if($request_type=='CollectOtherAmounts')
+    {
+          $result=array();
+          
+          $result["ReeAdmFee"]=1000;
+          $result["AdjustedAmount"]=600;
+          $result["ODF"]=300;
+          $result["Discount"]=0;
+          $result["Cheque"][1]["ReceptNo"]='2020/12';
+          $result["Cheque"][1]["ChequeNo"]='254789';
+          $result["Cheque"][1]["BCharges"]=200;
+          $result["Cheque"][2]["ReceptNo"]='2020/13';
+          $result["Cheque"][2]["ChequeNo"]='658749';
+          $result["Cheque"][2]["BCharges"]=200;
+          header('Content-type: text/javascript');
+          echo json_encode($result, JSON_PRETTY_PRINT);
+    }
     if($request_type=='CollectFee2')
     {
         

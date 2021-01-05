@@ -180,13 +180,13 @@ include 'security.php';
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
                                                     <div class="form-group aj-form-group">
                                                     <label>Adv. Amount</label>
-                                                        <input type="text" name="excess_amt" id="advance_fee" value="275" placeholder="" required="" class="form-control" value="0" readonly>
+                                                        <input type="text" name="excess_amt" id="advance_fee"  placeholder="" required="" class="form-control" value="0" readonly>
                                                     </div>
                                                 </div>    
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>On Demand Fee</label>
-                                                        <input type="text" value="500" name="student_fine" id="fine_fee" placeholder="" required="" class="form-control" value="0" readonly>
+                                                        <input type="text" name="student_fine" id="fine_fee" placeholder="" required="" class="form-control" value="0" readonly>
                                                     </div>
                                                 </div>                                            
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">

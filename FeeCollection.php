@@ -202,25 +202,8 @@ include 'security.php';
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-12 col-lg-12 col-6 aj-mb-2" style="overflow-y: auto; height:10vh">
-                                                    <table class="text-center" style="border: 1px solid #ffae01!important; width:100%">
-                                                        <tr>
-                                                            <th colspan="3">Cheque Bounce</th>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="cus-border">Chq. No</th>
-                                                            <th  class="cus-border text-center">Bounce Chg.</th>
-                                                            <th class="cus-border text-center">Select</th>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="cus-border">10325</td>
-                                                            <td class="cus-border">200</td>
-                                                            <td class="cus-border text-center"><input type="checkbox" name="" value="680" id="bounce1" class="inp_cheque_bounce check_checkbox_1"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="cus-border">10325</td>
-                                                            <td class="cus-border">200</td>
-                                                            <td class="cus-border  text-center"><input type="checkbox" name="" value="450" id="bounce2" class="inp_cheque_bounce check_checkbox_2"></td>
-                                                        </tr>
+                                                    <table class="text-center chq_bounce_table" style="border: 1px solid #ffae01!important; width:100%">
+    
                                                     </table>
                                                 </div>
                                             </div>
@@ -244,7 +227,7 @@ include 'security.php';
                                             <tr>
                                                 <td style="width: 5%;">
                                                     <div class="form-group aj-form-group mt-2">
-                                                        <select id="payment_type1" class="payment_type1 pmt_hide_elements" name="payment_type[]">
+                                                        <select id="payment_type1" class="payment_type1 pmt_hide_elements pay_modes" name="payment_type[]">
                                                             <option value="0">-- Select --</option>
                                                             <option value="1">-- Cash --</option>
                                                             <option value="2">-- Cheque --</option>
@@ -260,11 +243,7 @@ include 'security.php';
                                                     <input type="date" name="payment_date[]" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date1" data-position="bottom right" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
                                                 </td>
                                                 <td style="width: 10%;">
-                                                    <select class="bank_name1" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;">
-                                                        <option value="0">Select Bank</option>
-                                                        <option value="3">Bank Of Baroda</option>
-                                                        <option value="1">Indian Overseas Bank</option>
-                                                        <option value="2">State Bank Of Maharashtra</option>
+                                                    <select id="bank_neme1" class="bank_name1" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;">
                                                     </select>
                                                 </td>
                                                 <td>
@@ -303,6 +282,11 @@ include 'security.php';
                                                 <input type="number" name="amount_balance" id="amount_balance" placeholder="" readonly="" required="" class="form-control">
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-xl-12 col-12 form_output  text-right">
+                                    <div class="row">
+                                    <div class="col-12"><input type="checkbox" name="bal_amt_as_adv" id=""> <label>Keep Balance Amount As Advance</label></div>  
                                     </div>
                                 </div>
                                 <div class="col-lg-8 col-xl-8 col-12 mt-3 form_output text-right">
@@ -469,11 +453,42 @@ include 'security.php';
                 var new_row_no = parseInt(total_rows) + 1;
                 $('#total_rows').text(new_row_no);
                 $(this).attr('add', 1);
-                var cnt = '<tr><td ><div class="form-group aj-form-group"><select  id="payment_type' + new_row_no + '" class="payment_type' + new_row_no + ' pmt_hide_elements" name="payment_type[]"><option value="0">-- Select --</option><option value="1">-- Cash --</option><option value="2">-- Cheque --</option><option value="3">-- CC --</option><option value="4">-- DD --</option></select></div></td><td ><div class="form-group aj-form-group"><input type="number" name="instrument_no[]" placeholder="" required="" class="form-control instrument_no' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="date" name="payment_date[]" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><select class="bank_neme' + new_row_no + '" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;"><option value="0">Select Bank</option><option value="3">Bank Of Baroda</option><option value="1">Indian Overseas Bank</option><option value="2">State Bank Of Maharashtra</option></select></td><td><input type="number" name="amount_receiving[]" id="amount_receiving' + new_row_no + '" placeholder="" required="" class="form-control amt_receiving dyn_inp" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="number" name="amt_incl_taxex[]" placeholder="" required="" class="form-control dyn_inp on-chang amt_receiving_all_taxex" value="0" id="rec_amt' + new_row_no + '" onkeypress="adddRowRow(event)" add="'+new_row_no+'" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></div></td></tr>';
+                var cnt = '<tr><td ><div class="form-group aj-form-group"><select  id="payment_type' + new_row_no + '" class="payment_type' + new_row_no + ' pmt_hide_elements pay_modes" name="payment_type[]"></select></div></td><td ><div class="form-group aj-form-group"><input type="number" name="instrument_no[]" placeholder="" required="" class="form-control instrument_no' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="date" name="payment_date[]" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><select id="bank_neme' + new_row_no + '"" class="bank_name' + new_row_no + '" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;"><option value="0">Select Bank</option><option value="3">Bank Of Baroda</option><option value="1">Indian Overseas Bank</option><option value="2">State Bank Of Maharashtra</option></select></td><td><input type="number" name="amount_receiving[]" id="amount_receiving' + new_row_no + '" placeholder="" required="" class="form-control amt_receiving dyn_inp" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="number" name="amt_incl_taxex[]" placeholder="" required="" class="form-control dyn_inp on-chang amt_receiving_all_taxex" value="0" id="rec_amt' + new_row_no + '" onkeypress="adddRowRow(event)" add="'+new_row_no+'" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></div></td></tr>';
                 $('#dContecnt').append(cnt);
+                get_pmt_modes(new_row_no);  
+                get_all_banks(new_row_no);
             }
         }
 
+        // get payment modes
+        get_pmt_modes(1);
+        function get_pmt_modes(pmt_no){
+            modes_html = '';
+            modes_html += '<option value="0">Choose Mode</option>';
+            const modes_url = "universal_apis.php?get_payment_modes=1";
+            $.getJSON(modes_url,function(modes_resp){
+                var i=1;
+                $.each(modes_resp,function(key,value){
+                    var pmt_mode_val = value.Paymode_Id+","+value.Service_Percent;
+                    modes_html += `<option value="${pmt_mode_val}" >${value.Paymode_Nane}</option>`;
+                    i=i+1;
+                });
+                $('.payment_type'+pmt_no).html(modes_html);
+            });
+        }
+        // get payment modes
+        get_all_banks(1);
+        function get_all_banks(serial_no){
+            banks_html = '';
+            banks_html += '<option value="0">Choose Bank</option>';
+            const banks_url = "universal_apis.php?get_all_banks=1";
+            $.getJSON(banks_url,function(bank_resp){
+                $.each(bank_resp,function(key,value){
+                    banks_html += `<option value="${value.bank_id}" >${value.bank_name}</option>`;
+                });
+                $('.bank_name'+serial_no).html(banks_html);
+            });
+        }        
         $(document).ready(function() {
             $('#student_id').focusin();
             function load_fee_details(student_id) {
@@ -534,6 +549,8 @@ include 'security.php';
                 var late_fee = $('#late_fee').val();
                 var cheque_bounce = $('#cheque_bounce').val();
                 var readmission_fe = $('#readmission_fee').val();
+                // fine / challan #cheque_bounce
+                var on_demand_fee = $('fine_fee').val();
 
                 if ($(".check_box_no" + check_id).is(':checked')) {
                     for (let i = check_id; i >= 1; i--) {
@@ -562,7 +579,7 @@ include 'security.php';
                 $('#late_fee').val(total_late_fee);
                 var stud_fine = $('#fine_fee').val();
                 var prev_execess_amt = $('#advance_fee').val();
-                due_total = parseInt(due_total) + parseInt(total_late_fee) + parseInt(readmission_fe)+parseInt(stud_fine);
+                due_total = parseInt(due_total) + parseInt(total_late_fee) + parseInt(readmission_fe)+parseInt(stud_fine)+parseInt(cheque_bounce);
                 paid_amount = parseInt(paid_amount)+parseInt(prev_execess_amt);
                 count_balance_amount(due_total, discount_fee, paid_amount);
                 $('#due_amt').val(due_total);
@@ -581,7 +598,7 @@ include 'security.php';
                 var id_inp = $(this).attr('id');
                 var split_id = id_inp.split('rec_amt');
                 var prev_execess_amt = $('#advance_fee').val();
-                if (split_id[1] > 1) {
+                if (split_id[1] > 1) { 
                     for (let i = pr_total; i >= 1; i--) {
                         var net_amt = $('#rec_amt' + i).val();
                         rec_amt_ttl = parseInt(rec_amt_ttl) + parseInt(net_amt);
@@ -643,6 +660,9 @@ include 'security.php';
                 load_student_data(student_id);
                 $('.populate_student_list').html('');
                 $('#student_name').val('');
+                school_id = $('.show_school').val();
+                ac_type = $('.account_type').val();
+                get_other_amounts(student_id,school_id,ac_type);
                 load_fee_details(student_id);
             });
 
@@ -687,6 +707,9 @@ include 'security.php';
                 if(student_id != ''){
                     load_student_data(student_id);
                     load_fee_details(student_id);
+                    school_id = $('.show_school').val();
+                    ac_type = $('.account_type').val();
+                    get_other_amounts(student_id,school_id,ac_type);
                 }
             });
             $(document).on('click', '.btn_sibling_1', function(ev) {
@@ -695,6 +718,9 @@ include 'security.php';
                 load_student_data(student_id);
                 load_fee_details(student_id);
                 $('#student_id').val(student_id);
+                school_id = $('.show_school').val();
+                ac_type = $('.account_type').val();
+                get_other_amounts(student_id,school_id,ac_type);
             });
             $(document).on('click', '.btn_sibling_2', function(ev) {
                 ev.preventDefault();
@@ -702,6 +728,9 @@ include 'security.php';
                 load_student_data(student_id);
                 load_fee_details(student_id);
                 $('#student_id').val(student_id);
+                school_id = $('.show_school').val();
+                ac_type = $('.account_type').val();
+                get_other_amounts(student_id,school_id,ac_type);
             });
 
             $(document).on('click', '.inp_cheque_bounce', function() {
@@ -738,6 +767,7 @@ include 'security.php';
 
             });
 
+            // adding service charges
             $(document).on('focusin','.amt_receiving',function(){
                 var prev_amt = $(this).val();
                 $(document).on('focusout', '.amt_receiving', function() {
@@ -745,7 +775,8 @@ include 'security.php';
                 var row_id = $(this).attr('id');
                 var split_value = row_id.split('amount_receiving');
                 var payment_type = $('.payment_type'+split_value[1]).val();
-                if (payment_type == 3) {
+                var payment_chrg_arr = payment_type.split(',');
+                if (payment_chrg_arr[0] == 1) {
                     var percent_amt = ((parseInt(amount_receiving) * 2) / 100);
                     var net_amt = parseInt(percent_amt) + parseInt(amount_receiving);
                     $('#rec_amt' + split_value[1]).val(net_amt);
@@ -765,19 +796,21 @@ include 'security.php';
                 count_balance_amount(due_amt, dis_amt, total_paid_amt);
                 });
             });
+
+            // disable /  enable elements of inputs of CC/DD/Cheque Cash_Id always taken as 1
             $(document).on('change', '.pmt_hide_elements', function() {
                 var pmt_hide_elements_id = $(this).attr('id');
+                var combined_vals = $(this).val();
+                var cash_id = combined_vals.split(',');
                 split_value = pmt_hide_elements_id.split('payment_type');
-                if ($(this).val() == 1) {
-                    /*$('.insttument_date' + split_value[1]).prop('disabled', true);
-                    $('.bank_name' + split_value[1]).prop('disabled', true);
-                    $('.instrument_no' + split_value[1]).prop('disabled', true);*/
+                if (cash_id[0]== 1) {
                     $('.insttument_date' + split_value[1]).attr('readonly', true);
-                    $('.bank_name' + split_value[1]).attr('readonly', true);
+                    $('#bank_neme' + split_value[1]).hide();
                     $('.instrument_no' + split_value[1]).attr('readonly', true);
+                    console.log('.bank_name'+split_value[1]);
                 } else {
                     $('.insttument_date' + split_value[1]).prop('readonly', false);
-                    $('.bank_name' + split_value[1]).prop('readonly', false);
+                    $('#bank_neme' + split_value[1]).show();
                     $('.instrument_no' + split_value[1]).prop('readonly', false);
                 }
             });
@@ -859,7 +892,7 @@ include 'security.php';
                         var late_fees = value.Late_Fee;
                         fee_list_html += `<tr>
                                             <td scope="row">${value.Installment_name}</td>
-                                            <td ><input serial_no="${i}" id="${value.Installment_Id}" type="number" value="${late_fees}" class="d-block edit_late_fee_data late_fee_amt_no_${i}"></td>
+                                            <td ><input serial_no="${i}" id="${value.Installment_Id}" type="number" readonly value="${late_fees}" class="d-block edit_late_fee_data late_fee_amt_no_${i}"></td>
                                         </tr>`;
                         $('.max_late_fee_rows').text(i);
                         i = i + 1;
@@ -882,13 +915,42 @@ include 'security.php';
                         var late_fee_amt = $('.late_fee_amt_no_'+i).val();
                         total_late_fee = late_fee_amt;
                         total_late_fee = parseInt(total_late_fee)+parseInt(late_fee_amt);
-                        console.log('.late_fee_amt_no_'+i +', '+total_late_fee);
                     }
-                  //  console.log(late_fee_amt);
                     $('#late_fee').val(total_late_fee);
                     count_balance_amount(due_amt, dis_amt, paid_amount);
                 }
             });
+
+            // getting other amounts like bounce/fine etc
+            function get_other_amounts(student_id,school_id,ac_type){
+                $('.chq_bounce_table').html('');
+                chq_tbl = `<tr>
+                            <th colspan="3">Cheque Bounce Charges</th>
+                        </tr>
+                        <tr>
+                            <th class="cus-border">Rec. No</th>
+                            <th class="cus-border">Chq. No</th>
+                            <th  class="cus-border text-center">Amt.</th>
+                        </tr>`;
+                const other_Fee_url = "FeeCollectionAPI.php?Parameter=CollectOtherAmounts&studentid="+student_id+"&ac_type="+school_id+"&school_id="+ac_type+"";
+                $.getJSON(other_Fee_url, function(oth_fee_resp){
+                    $('#advance_fee').val(oth_fee_resp.AdjustedAmount);
+                    $('#readmission_fee').val(oth_fee_resp.ReeAdmFee);
+                    $('#fine_fee').val(oth_fee_resp.ODF);
+                    $('#discount_fee').val(oth_fee_resp.Discount);
+                    var total_bounce_chg = 0;
+                    $.each(oth_fee_resp.Cheque, function(key, value){
+                        total_bounce_chg = total_bounce_chg + value.BCharges;
+                        chq_tbl += `<tr>
+                            <td class="cus-border">${value.ReceptNo}</td>
+                            <td class="cus-border">${value.ChequeNo}</td>
+                            <td class="cus-border">${value.BCharges}</td>
+                        </tr>`;
+                    });
+                    $('#cheque_bounce').val(total_bounce_chg);
+                    $('.chq_bounce_table').html(chq_tbl);
+                });
+            }
         });
     </script>
 

@@ -173,7 +173,7 @@ include 'security.php';
                                                 <div class="col-xl-6 col-lg-6 col-12 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>Pay Date <span>*</span></label>
-                                                        <input type="text" name="date_of_receipt" placeholder="DD/MM/YYYY" class="form-control air-datepicker" data-position="bottom right" autocomplete="off" required="">
+                                                        <input type="text" name="date_of_receipt" placeholder="DD/MM/YYYY" value="<?php echo date('Y-m-d') ?>" class="form-control air-datepicker" data-position="bottom right" autocomplete="off" required="">
                                                         <i class="far fa-calendar-alt"></i>
                                                     </div>
                                                 </div>
@@ -292,7 +292,7 @@ include 'security.php';
                                         <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                             <div class="form-group aj-form-group">
                                                 <label>Service</label>
-                                                <input type="number" value="0" name="services" placeholder="" readonly="" required="" class="form-control">
+                                                <input type="number" value="0" id="services" name="services" placeholder="" readonly="" required="" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-12 aj-mb-2 mt-3">
@@ -325,6 +325,8 @@ include 'security.php';
                 </div>
                 </form>
                 <span id="total_rows" class="d-none">1</span>
+                <span class="total_due_amount_month_wise d-none" id="total_due_amount_month_wise"></span>
+                <span class="total_other_amount d-none" id="total_other_amount"></span>
                 <span class="total_json_row d-none"></span>
             </div>
         </div>
@@ -410,8 +412,6 @@ include 'security.php';
             </div>
         </div>
     </div>
-<script>
-  $(".alert").alert();
 </script>
     <style>
         .cus-border {
@@ -541,7 +541,7 @@ include 'security.php';
                 var fee_amt = '';
                 var late_fee = total_late_fee = 0;
                 var total_json_row = $('.total_json_row').text();
-                var discount_fee = $('#discount_fee').val();
+                var discount_fee =0;
                 var paid_amount = $('#paid_amt').val();
                 var late_fee = $('#late_fee').val();
                 var cheque_bounce = $('#cheque_bounce').val();
@@ -556,6 +556,7 @@ include 'security.php';
                         late_fee = $('.late_fee_amt' + i).val();
                         total_late_fee = parseInt(total_late_fee) + parseInt(late_fee);
                         due_total = parseInt(due_total) + parseInt(fee_amt);
+                        $('.total_due_amount_month_wise').text(due_total);
                     }
                     $('#late_fee').val(total_late_fee);
                 } else {
@@ -567,16 +568,18 @@ include 'security.php';
                         late_fee = $('.late_fee_amt' + k).val();
                         total_late_fee = parseInt(total_late_fee) + parseInt(late_fee);
                         due_total = parseInt(due_total) + parseInt(fee_amt);
+                        $('.total_due_amount_month_wise').text(due_total);
                     }
                 }
                 $('#late_fee').val(total_late_fee);
                 var stud_fine = $('#fine_fee').val();
                 var prev_execess_amt = $('#advance_fee').val();
-                due_total = parseInt(due_total) + parseInt(total_late_fee) + parseInt(readmission_fe) + parseInt(stud_fine) + parseInt(cheque_bounce);
+                due_total = parseInt(due_total) + parseInt(readmission_fe) + parseInt(stud_fine) + parseInt(cheque_bounce);
                 paid_amount = parseInt(paid_amount) + parseInt(prev_execess_amt);
                 count_balance_amount(due_total, discount_fee, paid_amount);
                 $('#due_amt').val(due_total);
             });
+            
 
             // function to count balance
             function count_balance_amount(due_total, discount_fee, paid_amount) {
@@ -731,7 +734,7 @@ include 'security.php';
                 split_id = btn_id.split("bounce");
 
                 var total_bounce = $("#cheque_bounce").val();
-                var discount_fee = 0;
+                var discount_fee = $('#discount_fee').val();
                 var prev_execess_amt = $('#advance_fee').val();
                 var paid_amount = parseInt($('#paid_amt').val()) + parseInt(prev_execess_amt);
                 if ($(".check_checkbox_" + split_id[1]).is(':checked')) {
@@ -775,10 +778,16 @@ include 'security.php';
                     }
                     var total_paid_amt = paid_amt = 0;
                     var prev_execess_amt = $('#advance_fee').val();
+                    var services_amt = 0;
                     for (let i = 1; i <= split_value[1]; i++) {
                         paid_amount = $('#amount_receiving' + i).val();
                         total_paid_amt = parseInt(paid_amount) + parseInt(total_paid_amt);
+                        var amt_incl_taxes = $('#rec_amt'+i).val();
+                        var amt_receiving = $('#amount_receiving'+i).val();
+                        var services = parseInt(amt_incl_taxes)-parseInt(amt_receiving);
+                        services_amt = parseInt(services_amt) + parseInt(services);
                     }
+                    $('#services').val(services_amt);
                     var due_amt = $('#due_amt').val();
                     $('#paid_amt').val(total_paid_amt);
                     var dis_amt = 0;
@@ -797,7 +806,6 @@ include 'security.php';
                     $('.insttument_date' + split_value[1]).attr('readonly', true);
                     $('#bank_neme' + split_value[1]).hide();
                     $('.instrument_no' + split_value[1]).attr('readonly', true);
-                    console.log('.bank_name' + split_value[1]);
                 } else {
                     $('.insttument_date' + split_value[1]).prop('readonly', false);
                     $('#bank_neme' + split_value[1]).show();
@@ -838,6 +846,22 @@ include 'security.php';
                 }
             });
 
+            // addition of late fee
+            $(document).on('focusin','#late_fee',function(){
+                var pre_late_fee = $('#late_fee').val();
+                $(document).on('focusout','#late_fee',function(){
+                    var post_late_fee = $('#late_fee').val();
+                    var due_total = $('#due_amt').val();
+                    var new_late_fee = parseInt(pre_late_fee) - parseInt(post_late_fee);
+                    var prev_execess_amt = $('#advance_fee').val();
+                    due_total = parseInt(due_total) - parseInt(pre_late_fee) + parseInt(post_late_fee);
+                    var discount_fee = $('#discount_fee').val(); 
+                    var paid_amount = parseInt($('#paid_amt').val()) + parseInt(prev_execess_amt);
+                    $('#due_amt').val(due_total);
+                    count_balance_amount(due_total, discount_fee, paid_amount);
+                });
+            });
+            // readmission fee
             $('#readmission_fee').focusin(function() {
                 var prev_readm_fee = $(this).val();
                 var due_amt = $('#due_amt').val();
@@ -851,7 +875,7 @@ include 'security.php';
                     count_balance_amount(due_amt, discount_fee, paid_amount);
                 });
             });
-
+            // discount fee
             $('#discount_fee').focusin(function() {
                 var prev_dis_fee = $(this).val();
                 var due_amt = $('#due_amt').val();

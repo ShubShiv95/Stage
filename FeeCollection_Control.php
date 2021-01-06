@@ -9,7 +9,13 @@ if (isset($_REQUEST['collect_fee_sender'])) {
         // school name
        echo "school name ".$school_name = $_REQUEST['school_name'].'<br>';
 
-        // account type
+      // payment date
+       echo "Payment Date".$date_of_receipt=$_REQUEST['date_of_receipt'].'<br>';
+
+      // student session
+       echo "Session".$school_session=$_REQUEST['school_session'].'<br>';
+
+      // account type
       echo  "account type ".$ac_type = $_REQUEST['ac_type'].'<br>';
 
         // late fee total
@@ -44,8 +50,8 @@ if (isset($_REQUEST['collect_fee_sender'])) {
         for ($j=0; $j < $total_fee_ids; $j++) { 
             $explode_data = explode(',',$_REQUEST['fee_amt'][$j]);
 
-            // fee head id
-          echo  "fee head id ".$feehead_id = $explode_data[0].'<br>';
+            // installment Id
+          echo  "installment id ".$feehead_id = $explode_data[0].'<br>';
 
             // fee amount (installment)
            echo "fee amount (due) ".$monthly_fee_amt = $explode_data[1].'<br>';

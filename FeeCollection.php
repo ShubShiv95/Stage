@@ -172,7 +172,7 @@ include 'security.php';
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-12 mb-4">
                                                     <div class="form-group aj-form-group">
-                                                        <label>Date of Rect. <span>*</span></label>
+                                                        <label>Pay Date <span>*</span></label>
                                                         <input type="text" name="date_of_receipt" placeholder="DD/MM/YYYY" class="form-control air-datepicker" data-position="bottom right" autocomplete="off" required="">
                                                         <i class="far fa-calendar-alt"></i>
                                                     </div>
@@ -180,18 +180,20 @@ include 'security.php';
                                                 <div class="col-xl-6 col-lg-6 col-12 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>Session <span>*</span></label>
-                                                        <select class="select2" name="studentGender" id="studentGender">
-                                                            <option value="">Select Session </option>
-                                                            <option value="MALE">Current</option>
-                                                            <option value="FEMALE">Previous</option>
-                                                            <option value="OTHER">Next</option>
+                                                        <select class="select2" name="school_session" id="school_session">
+                                                        <?php
+                                                        $current_session = $_SESSION["STARTYEAR"] . '-' . $_SESSION["ENDYEAR"];
+                                                        $next_session = $_SESSION["ENDYEAR"] . '-' . date('Y', strtotime($_SESSION["ENDYEAR"]) + (3600 * 24 * 365));
+                                                        echo '<option value="' . $current_session . '">' . $current_session . '</option>
+                                                                <option value="' . $next_session . '">' . $next_session . '</option>';
+                                                        ?>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>Late Fee</label>
-                                                        <input type="text" name="late_fee" id="late_fee" placeholder="" required="" class="form-control" value="0" readonly>
+                                                        <input type="text" name="late_fee" id="late_fee" placeholder="" required="" class="form-control" value="0">
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
@@ -214,13 +216,13 @@ include 'security.php';
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
                                                     <div class="form-group aj-form-group">
-                                                        <label>Discount Fee</label>
+                                                        <label>Discount</label>
                                                         <input type="text" name="discount_fee" id="discount_fee" placeholder="" required="" class="form-control" value="0">
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-6 aj-mb-2 mb-4">
                                                     <div class="form-group aj-form-group">
-                                                        <label>Chq Bounce</label>
+                                                        <label>Chq Bounce Chg.</label>
                                                         <input type="text" id="cheque_bounce" name="cheque_bounce" placeholder="" required="" value="0" class="form-control" readonly>
                                                     </div>
                                                 </div>
@@ -307,12 +309,12 @@ include 'security.php';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-xl-12 col-12 form_output  text-right">
+                                <!--<div class="col-lg-12 col-xl-12 col-12 form_output  text-right">
                                     <div class="row">
                                         <div class="col-12"><input type="checkbox" name="bal_amt_as_adv" id=""> <label>Keep Balance Amount As Advance</label></div>
                                     </div>
-                                </div>
-                                <div class="col-lg-8 col-xl-8 col-12 mt-3 form_output text-right">
+                                </div>-->
+                                <div class="col-lg-8 col-xl-8 col-12 mt-3 form_output">
                                 </div>
                                 <div class="col-lg-4 col-xl-4 col-12 mt-3 text-right">
                                     <button type="submit" name="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark submit_btn">Save Payment</button>
@@ -408,40 +410,9 @@ include 'security.php';
             </div>
         </div>
     </div>
-
-    <div class="modal show_late_fee">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title">Late Fee</h6>
-                    <button type="button" class="close close_late_fee_mod" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="model-tebal-in">
-                        <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
-                            <h4>Edit Late Fee</h4><span class="max_late_fee_rows d-none"></span>
-                        </div>
-                        <div class="col-xl-12 col-lg-12 col-12 aj-mb-2 table-responsive">
-                            <table class="table table-striped table-inverse">
-                                <thead class="thead-inverse">
-                                    <tr>
-                                        <th>Month</th>
-                                        <th>Late Fee</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="load_late_fee">
-                                    <tr>
-                                        <td scope="row"></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<script>
+  $(".alert").alert();
+</script>
     <style>
         .cus-border {
             border: 1px solid #ffae01 !important;
@@ -795,8 +766,8 @@ include 'security.php';
                     var split_value = row_id.split('amount_receiving');
                     var payment_type = $('.payment_type' + split_value[1]).val();
                     var payment_chrg_arr = payment_type.split(',');
-                    if (payment_chrg_arr[0] == 1) {
-                        var percent_amt = ((parseInt(amount_receiving) * 2) / 100);
+                    if (payment_chrg_arr[0] == 3 || payment_chrg_arr[0] == 4) {
+                        var percent_amt = ((parseInt(amount_receiving) * parseInt(payment_chrg_arr[1])) / 100);
                         var net_amt = parseInt(percent_amt) + parseInt(amount_receiving);
                         $('#rec_amt' + split_value[1]).val(net_amt);
                     } else {
@@ -850,13 +821,21 @@ include 'security.php';
             // submitting form data
             $(document).on('submit', '#fee_collection_form', function(event) {
                 event.preventDefault();
-
-                var form_data = $(this).serialize();
-                $.post($(this).attr('action'), form_data, function(fee_response) {
-
-                    $('.form_output').html(fee_response);
-                    //window.open("FeeReceiptPrint.php?FeeId=5625"); 156/2018
-                });
+                $('.form_output').html('');
+                var amount_balance = $('#amount_balance').val();
+                if(amount_balance<=0)
+                {
+                    var form_data = $(this).serialize();
+                    $.post($(this).attr('action'), form_data, function(fee_response) {
+                        $('.form_output').html(fee_response);
+                        window.open("FeeReceiptPrint.php?FeeId=5625");
+                    });
+                }
+                else
+                {
+                    var html_alert = `<div class="alert alert-danger alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Alert</strong> Form Cannot Be Submitted When Balance Is More Than Zero.</div>`;
+                    $('.form_output').html(html_alert);
+                }
             });
 
             $('#readmission_fee').focusin(function() {
@@ -885,14 +864,6 @@ include 'security.php';
                     due_amt = (parseInt(due_amt) - parseInt(dis_amt));
                     $('#due_amt').val(due_amt);
                 });
-            });
-
-            $(document).on('click', '#late_fee', function() {
-                $('.show_late_fee').fadeIn();
-                show_late_fee_into_modal();
-            });
-            $(document).on('click', '.close_late_fee_mod', function() {
-                $('.show_late_fee').fadeOut();
             });
 
             function show_late_fee_into_modal() {

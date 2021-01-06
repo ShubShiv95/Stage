@@ -2,7 +2,7 @@
     session_start();
     include 'dbobj.php';
     include 'errorLog.php';
-    //include 'security.php';
+    
     require_once 'sequenceGenerator.php';
 
 
@@ -158,8 +158,6 @@ if($request_type=='CollectFee')
                                 }
                         $StudentFeeMaster_result_set = $StudentFeeMaster_prepare->get_result(); 
                         $counter=1; 
-
-
                         while($StudentFeeMaster_row=$StudentFeeMaster_result_set->fetch_assoc())//Looping through each student_fee_master record.
                             {            
                                 $SFM_Id=$StudentFeeMaster_row["SFM_Id"];
@@ -167,15 +165,7 @@ if($request_type=='CollectFee')
                                 if($StudentFeeMaster_row["Pay_Status"]=='Due')
                                     {
                                         $TotalInstAmount=$StudentFeeMaster_row["Due_Amount"];
-/*
-                                        $fee[$InstallmentId](array("details"[0]["feename"]="Due";
-                                        $fee[$InstallmentId]["details"][0]["amount"]=$StudentFeeMaster_row["Due_Amount"];
-                                        $fee[$InstallmentId]["details"][0]["concession"]=0;
-                                        $fee[$InstallmentId]["Installment_name"]="$Installment_Name";
-                                        $fee[$InstallmentId]["Installment_Id"]="$InstallmentId"; 
-                                        $fee[$InstallmentId]["Late_Fee"]=$LateFeeAmount;
-                                        $fee[$InstallmentId]["Net_Amount"]=$TotalInstAmount; 
-  */                                      
+                                        $fee[$InstallmentId]["details"][0]["feeheadid"]=0; //Treading this as due fee head id.
                                         $fee[$InstallmentId]["details"][0]["feename"]="Due";
                                         $fee[$InstallmentId]["details"][0]["amount"]=$StudentFeeMaster_row["Due_Amount"];
                                         $fee[$InstallmentId]["details"][0]["concession"]=0;
@@ -183,7 +173,6 @@ if($request_type=='CollectFee')
                                         $fee[$InstallmentId]["Installment_Id"]="$InstallmentId"; 
                                         $fee[$InstallmentId]["Late_Fee"]=$LateFeeAmount;
                                         $fee[$InstallmentId]["Net_Amount"]=$TotalInstAmount; 
-                                        
                                         continue;
                                     }
                                     $TotalInstAmount=$TotalInstAmount+$StudentFeeMaster_row["Total_Amount"]+$StudentFeeMaster_row["Late_Fee_Amount"];  
@@ -213,36 +202,11 @@ if($request_type=='CollectFee')
                                     {
                                         if($row["Fee_Amount"]>0)
                                         {
-                                            /*
-                                            $fee[$InstallmentId]["details"=>array($counter=>"feeheadid"=>$row["Fee_Head_Id"])];
-                                            $fee[$InstallmentId]["details"=>array($counter=>"feename"=>$row["Fee_Head_Name"])];
-                                            $fee[$InstallmentId]["details"=>array($counter=>"amount"=>$row["Fee_Amount"])];
-                                            $fee[$InstallmentId]["details"=>array($counter=>"concession"=>$row["Concession_Amount"])];
-                                                   
-                                            $fee=array(
-                                                $InstallmentId => array(
-                                                    "details"[$counter] => array(
-                                                         
-                                                            "feeheadid" => $row["Fee_Head_Id"],
-                                                            "feename" => $row["Fee_Head_Name"],
-                                                            "amount" => $row["Fee_Amount"],
-                                                            "concession" => $row["Concession_Amount"]
-                                                        
-                                                    )
-                                                )
-                                            );
-/*
                                         $fee[$InstallmentId]["details"][$counter]["feeheadid"]=$row["Fee_Head_Id"];
                                         $fee[$InstallmentId]["details"][$counter]["feename"]=$row["Fee_Head_Name"];
                                         $fee[$InstallmentId]["details"][$counter]["amount"]=$row["Fee_Amount"];
                                         $fee[$InstallmentId]["details"][$counter]["concession"]=$row["Concession_Amount"];
-                                        */
-                                        $fee[$InstallmentId]["details"][$counter]["feeheadid"]=$row["Fee_Head_Id"];
-                                        $fee[$InstallmentId]["details"][$counter]["feename"]=$row["Fee_Head_Name"];
-                                        $fee[$InstallmentId]["details"][$counter]["amount"]=$row["Fee_Amount"];
-                                        $fee[$InstallmentId]["details"][$counter]["concession"]=$row["Concession_Amount"];
-                                       
-                                        // echo $counter;
+                                       // echo $counter;
                                        // echo  '<br>' . $row["Fee_Head_Id"] . '<br>';
                                        // echo $row["Fee_Head_Name"]. '<br>';
                                        //echo $row["Fee_Amount"]. '<br>';
@@ -263,25 +227,6 @@ if($request_type=='CollectFee')
                     }
                         header('Content-type: text/javascript');
                         echo json_encode($fee, JSON_PRETTY_PRINT);
-                        //echo json_encode($fee);
                                                      
-    }
-    if($request_type=='CollectOtherAmounts')
-    {
-          $result=array();
-          
-          $result["ReeAdmFee"]=1000;
-          $result["AdjustedAmount"]=600;
-          $result["ODF"]=300;
-          $result["Discount"]=0;
-          $result["Cheque"][1]["ReceptNo"]='2020/12';
-          $result["Cheque"][1]["ChequeNo"]='254789';
-          $result["Cheque"][1]["BCharges"]=200;
-          $result["Cheque"][2]["ReceptNo"]='2020/13';
-          $result["Cheque"][2]["ChequeNo"]='658749';
-          $result["Cheque"][2]["BCharges"]=200;
-          header('Content-type: text/javascript');
-          echo json_encode($result, JSON_PRETTY_PRINT);
-           
-    }
+    }   
 ?>

@@ -69,7 +69,7 @@ include 'security.php';
                             </div>
 
                         </div>
-                        <form class="new-added-form aj-new-added-form Fee-collection" id="fee_collection_form" action="./FeeCollection_Control.php" method="post">
+                        <form class="new-added-form aj-new-added-form Fee-collection" id="fee_collection_form" action="./FeeCollection2.php" method="post">
                             <input type="text" name="collect_fee_sender" id="" class="d-none" autocomplete="off">
                             <div class="row justify-content-center">
                                 <div class="col-xl-3 col-lg-3 col-12 aj-md-2">

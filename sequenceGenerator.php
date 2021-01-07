@@ -13,7 +13,7 @@
 		}
 	else
 		{
-			echo "Database Error: Not able to create Template Id. Please try after some time.";
+			echo "Database Error: Not able to create Unique Id. Please try after some time.";
 			die();
 			return false;
 		}

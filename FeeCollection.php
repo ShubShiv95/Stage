@@ -947,7 +947,7 @@ include 'security.php';
                             <th class="cus-border">Chq. No</th>
                             <th  class="cus-border text-center">Amt.</th>
                         </tr>`;
-                const other_Fee_url = "FeeCollectionAPI.php?Parameter=CollectOtherAmounts&studentid=" + student_id + "&ac_type=" + school_id + "&school_id=" + ac_type + "";
+                const other_Fee_url = "FeeCollectionAPI.php?Parameter=CollectOtherAmounts&studentid=" + student_id + "&ac_type=" + ac_type + "&school_id="  + school_id +"";
                 $.getJSON(other_Fee_url, function(oth_fee_resp) {
                     $('#advance_fee').val(oth_fee_resp.AdjustedAmount);
                     $('#readmission_fee').val(oth_fee_resp.ReeAdmFee);

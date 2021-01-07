@@ -23,6 +23,9 @@ if (isset($_REQUEST['collect_fee_sender'])) {
 
         // readmission fee
       echo  "readmission fee ".$readmission_fee = $_REQUEST['readmission_fee'].'<br>';
+        
+        // Ondemand fee
+      echo  "Ondemand fee ".$readmission_fee = $_REQUEST['student_fine'].'<br>';
 
         // dicount amount
       echo  "dicount amoun ".$discount_amt = $_REQUEST['discount_fee'].'<br>';

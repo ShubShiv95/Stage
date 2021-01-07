@@ -123,7 +123,7 @@ if($request_type=='CollectFee')
                 //step 1d. Insert Fee_Cluster_fee_fee_structure_tableList row information with other installment and discount information to the student_fee_list_table.
                 
                 /*Sql to fetch fee lsit items from fee_structure_table month wise or installment wise and inserting rows in student_fee_list_table for the selected fee cluster data installment id wise or month wise. */
-                $StudentFeeMaster_sql="select sfm.*,fgt.Fee_Group_Type from student_fee_master sfm,fee_group_table fgt where installment_id=? and session=? and student_id=? and Pay_Status!='Paid' and fgt.FG_Id=sfm.FG_Id and fgt.School_Id=sfm.School_Id and sfm.school_id=$schoolid and fgt.Fee_Group_Type in($FG_Type)";
+                $StudentFeeMaster_sql="select sfm.*,fgt.Fee_Group_Type from student_fee_master sfm,fee_group_table fgt where installment_id=? and session=? and student_id=? and sfm.Pay_Status='Unpaid' and fgt.FG_Id=sfm.FG_Id and fgt.School_Id=sfm.School_Id and sfm.school_id=$schoolid and fgt.Fee_Group_Type in($FG_Type)";
                 //echo $StudentFeeMaster_sql;
 
                 //$StudentFeeMaster_sql="select sfm.*,fgt.Fee_Group_Type from student_fee_master sfm,fee_group_table fgt where installment_id=? and session=? and student_id=? and Pay_Status!='Paid' and fgt.FG_Id=sfm.FG_Id";
@@ -157,11 +157,17 @@ if($request_type=='CollectFee')
                                     return $json; 
                                 }
                         $StudentFeeMaster_result_set = $StudentFeeMaster_prepare->get_result(); 
-                        $counter=1; 
+                        $counter=1;
+                        if($StudentFeeMaster_result_set->num_rows==0)
+                                {
+                                    continue;
+                                }
                         while($StudentFeeMaster_row=$StudentFeeMaster_result_set->fetch_assoc())//Looping through each student_fee_master record.
                             {            
                                 $SFM_Id=$StudentFeeMaster_row["SFM_Id"];
                                 $LateFeeAmount=$LateFeeAmount+$StudentFeeMaster_row["Late_Fee_Amount"]; 
+                                
+                                /* The Due is deprecated.  Now the Pay Status only works for Paid and Unpaid.
                                 if($StudentFeeMaster_row["Pay_Status"]=='Due')
                                     {
                                         $TotalInstAmount=$StudentFeeMaster_row["Due_Amount"];
@@ -175,6 +181,7 @@ if($request_type=='CollectFee')
                                         $fee[$InstallmentId]["Net_Amount"]=$TotalInstAmount; 
                                         continue;
                                     }
+                                    */
                                     $TotalInstAmount=$TotalInstAmount+$StudentFeeMaster_row["Total_Amount"]+$StudentFeeMaster_row["Late_Fee_Amount"];  
                                 $StudentFeeDetails_sql="select sfd.*,fht.Fee_Head_Name from student_fee_details sfd,fee_head_table fht where SFM_ID=? and fht.fee_head_id=sfd.fee_head_id";
                                // echo $StudentFeeDetails_sql;
@@ -234,7 +241,17 @@ if($request_type=='CollectFee')
           $result=array();
           
           $result["ReeAdmFee"]=1000;
-          $result["AdjustedAmount"]=600;
+          $GetAdvanceAmount="select * from fee_advance_table where student_id='$StudentId' and adjusted=0 and school_id=$schoolid";
+          //echo $GetAdvanceAmount;
+          $GetAdvanceAmountResult=$dbhandle->query($GetAdvanceAmount);
+          if(!$GetAdvanceAmountResult)
+            {
+                die;
+            }
+           $row=$GetAdvanceAmountResult->fetch_assoc();
+
+          $result["AdjustedAmount"]=$row["Advance_Amount"];
+
           $result["ODF"]=300;
           $result["Discount"]=0;
           $result["Cheque"][1]["ReceptNo"]='2020/12';

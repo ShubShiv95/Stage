@@ -173,7 +173,7 @@ include 'security.php';
                                                 <div class="col-xl-6 col-lg-6 col-12 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>Pay Date <span>*</span></label>
-                                                        <input type="text" name="date_of_receipt" placeholder="DD/MM/YYYY" value="<?php echo date('Y-m-d') ?>" class="form-control air-datepicker" data-position="bottom right" autocomplete="off" required="">
+                                                        <input type="text" name="date_of_receipt" placeholder="DD/MM/YYYY" value="<?php echo date('Y-m-d') ?>" class="form-control pay_date air-datepicker" data-position="bottom right" autocomplete="off" required="">
                                                         <i class="far fa-calendar-alt"></i>
                                                     </div>
                                                 </div>
@@ -181,12 +181,12 @@ include 'security.php';
                                                     <div class="form-group aj-form-group">
                                                         <label>Session <span>*</span></label>
                                                         <select class="select2" name="school_session" id="school_session">
-                                                        <?php
-                                                        $current_session = $_SESSION["STARTYEAR"] . '-' . $_SESSION["ENDYEAR"];
-                                                        $next_session = $_SESSION["ENDYEAR"] . '-' . date('Y', strtotime($_SESSION["ENDYEAR"]) + (3600 * 24 * 365));
-                                                        echo '<option value="' . $current_session . '">' . $current_session . '</option>
+                                                            <?php
+                                                            $current_session = $_SESSION["STARTYEAR"] . '-' . $_SESSION["ENDYEAR"];
+                                                            $next_session = $_SESSION["ENDYEAR"] . '-' . date('Y', strtotime($_SESSION["ENDYEAR"]) + (3600 * 24 * 365));
+                                                            echo '<option value="' . $current_session . '">' . $current_session . '</option>
                                                                 <option value="' . $next_session . '">' . $next_session . '</option>';
-                                                        ?>
+                                                            ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -272,7 +272,7 @@ include 'security.php';
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="number" name="amount_receiving[]" id="amount_receiving1" placeholder="" required="" class="form-control amt_receiving" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
+                                                    <input type="number" name="amount_receiving[]" id="amount_receiving1" placeholder="" value="0" required="" class="form-control amt_receiving" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
                                                 </td>
                                                 <td>
                                                     <input type="number" name="amt_incl_taxex[]" placeholder="" required="" id="rec_amt1" class="form-control on-chang amt_receiving_all_taxex" add="1" value="0" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem">
@@ -412,7 +412,7 @@ include 'security.php';
             </div>
         </div>
     </div>
-</script>
+    </script>
     <style>
         .cus-border {
             border: 1px solid #ffae01 !important;
@@ -447,7 +447,7 @@ include 'security.php';
                 var new_row_no = parseInt(total_rows) + 1;
                 $('#total_rows').text(new_row_no);
                 $(this).attr('add', 1);
-                var cnt = '<tr><td ><div class="form-group aj-form-group"><select  id="payment_type' + new_row_no + '" class="payment_type' + new_row_no + ' pmt_hide_elements pay_modes" name="payment_type[]"></select></div></td><td ><div class="form-group aj-form-group"><input type="number" name="instrument_no[]" placeholder="" required="" class="form-control instrument_no' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="date" name="payment_date[]" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><select id="bank_neme' + new_row_no + '"" class="bank_name' + new_row_no + '" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;"><option value="0">Select Bank</option><option value="3">Bank Of Baroda</option><option value="1">Indian Overseas Bank</option><option value="2">State Bank Of Maharashtra</option></select></td><td><input type="number" name="amount_receiving[]" id="amount_receiving' + new_row_no + '" placeholder="" required="" class="form-control amt_receiving dyn_inp" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="number" name="amt_incl_taxex[]" placeholder="" required="" class="form-control dyn_inp on-chang amt_receiving_all_taxex" value="0" id="rec_amt' + new_row_no + '" onkeypress="adddRowRow(event)" add="' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></div></td></tr>';
+                var cnt = '<tr><td ><div class="form-group aj-form-group"><select  id="payment_type' + new_row_no + '" class="payment_type' + new_row_no + ' pmt_hide_elements pay_modes" name="payment_type[]"></select></div></td><td ><div class="form-group aj-form-group"><input type="number" name="instrument_no[]" placeholder="" required="" class="form-control instrument_no' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="date" name="payment_date[]" required="" placeholder="dd/mm/yyyy" class="form-control insttument_date' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><select id="bank_neme' + new_row_no + '"" class="bank_name' + new_row_no + '" name="bank_name[]" style="height:38px; border: 1px solid #ffae01!important;"><option value="0">Select Bank</option><option value="3">Bank Of Baroda</option><option value="1">Indian Overseas Bank</option><option value="2">State Bank Of Maharashtra</option></select></td><td><input type="number" name="amount_receiving[]" value="0" id="amount_receiving' + new_row_no + '" placeholder="" required="" class="form-control amt_receiving dyn_inp" onkeypress="adddRowRow(event)" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></td><td ><input type="number" name="amt_incl_taxex[]" placeholder="" required="" class="form-control dyn_inp on-chang amt_receiving_all_taxex" value="0" id="rec_amt' + new_row_no + '" onkeypress="adddRowRow(event)" add="' + new_row_no + '" style="height:38px; border: 1px solid #ffae01!important;font-size:1.5rem"></div></td></tr>';
                 $('#dContecnt').append(cnt);
                 get_pmt_modes(new_row_no);
                 get_all_banks(new_row_no);
@@ -541,7 +541,7 @@ include 'security.php';
                 var fee_amt = '';
                 var late_fee = total_late_fee = 0;
                 var total_json_row = $('.total_json_row').text();
-                var discount_fee =0;
+                var discount_fee = 0;
                 var paid_amount = $('#paid_amt').val();
                 var late_fee = $('#late_fee').val();
                 var cheque_bounce = $('#cheque_bounce').val();
@@ -579,7 +579,7 @@ include 'security.php';
                 count_balance_amount(due_total, discount_fee, paid_amount);
                 $('#due_amt').val(due_total);
             });
-            
+
 
             // function to count balance
             function count_balance_amount(due_total, discount_fee, paid_amount) {
@@ -782,9 +782,9 @@ include 'security.php';
                     for (let i = 1; i <= split_value[1]; i++) {
                         paid_amount = $('#amount_receiving' + i).val();
                         total_paid_amt = parseInt(paid_amount) + parseInt(total_paid_amt);
-                        var amt_incl_taxes = $('#rec_amt'+i).val();
-                        var amt_receiving = $('#amount_receiving'+i).val();
-                        var services = parseInt(amt_incl_taxes)-parseInt(amt_receiving);
+                        var amt_incl_taxes = $('#rec_amt' + i).val();
+                        var amt_receiving = $('#amount_receiving' + i).val();
+                        var services = parseInt(amt_incl_taxes) - parseInt(amt_receiving);
                         services_amt = parseInt(services_amt) + parseInt(services);
                     }
                     $('#services').val(services_amt);
@@ -806,10 +806,14 @@ include 'security.php';
                     $('.insttument_date' + split_value[1]).attr('readonly', true);
                     $('#bank_neme' + split_value[1]).hide();
                     $('.instrument_no' + split_value[1]).attr('readonly', true);
+                    $('#amount_receiving' + split_value[1]).val(0);
+                    $('#rec_amt' + split_value[1]).val(0);
                 } else {
                     $('.insttument_date' + split_value[1]).prop('readonly', false);
                     $('#bank_neme' + split_value[1]).show();
                     $('.instrument_no' + split_value[1]).prop('readonly', false);
+                    $('#amount_receiving' + split_value[1]).val(0);
+                    $('#rec_amt' + split_value[1]).val(0);
                 }
             });
 
@@ -831,31 +835,28 @@ include 'security.php';
                 event.preventDefault();
                 $('.form_output').html('');
                 var amount_balance = $('#amount_balance').val();
-                if(amount_balance<=0)
-                {
+                if (amount_balance <= 0) {
                     var form_data = $(this).serialize();
                     $.post($(this).attr('action'), form_data, function(fee_response) {
                         $('.form_output').html(fee_response);
                         window.open("FeeReceiptPrint.php?FeeId=5625");
                     });
-                }
-                else
-                {
+                } else {
                     var html_alert = `<div class="alert alert-danger alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Alert</strong> Form Cannot Be Submitted When Balance Is More Than Zero.</div>`;
                     $('.form_output').html(html_alert);
                 }
             });
 
             // addition of late fee
-            $(document).on('focusin','#late_fee',function(){
+            $(document).on('focusin', '#late_fee', function() {
                 var pre_late_fee = $('#late_fee').val();
-                $(document).on('focusout','#late_fee',function(){
+                $(document).on('focusout', '#late_fee', function() {
                     var post_late_fee = $('#late_fee').val();
                     var due_total = $('#due_amt').val();
                     var new_late_fee = parseInt(pre_late_fee) - parseInt(post_late_fee);
                     var prev_execess_amt = $('#advance_fee').val();
                     due_total = parseInt(due_total) - parseInt(pre_late_fee) + parseInt(post_late_fee);
-                    var discount_fee = $('#discount_fee').val(); 
+                    var discount_fee = $('#discount_fee').val();
                     var paid_amount = parseInt($('#paid_amt').val()) + parseInt(prev_execess_amt);
                     $('#due_amt').val(due_total);
                     count_balance_amount(due_total, discount_fee, paid_amount);
@@ -947,7 +948,7 @@ include 'security.php';
                             <th class="cus-border">Chq. No</th>
                             <th  class="cus-border text-center">Amt.</th>
                         </tr>`;
-                const other_Fee_url = "FeeCollectionAPI.php?Parameter=CollectOtherAmounts&studentid=" + student_id + "&ac_type=" + ac_type + "&school_id="  + school_id +"";
+                const other_Fee_url = "FeeCollectionAPI.php?Parameter=CollectOtherAmounts&studentid=" + student_id + "&ac_type=" + ac_type + "&school_id=" + school_id + "";
                 $.getJSON(other_Fee_url, function(oth_fee_resp) {
                     $('#advance_fee').val(oth_fee_resp.AdjustedAmount);
                     $('#readmission_fee').val(oth_fee_resp.ReeAdmFee);
@@ -964,11 +965,30 @@ include 'security.php';
                     });
                     $('#cheque_bounce').val(total_bounce_chg);
                     $('.chq_bounce_table').html(chq_tbl);
-                    var due_total = parseInt(total_bounce_chg)+parseInt(oth_fee_resp.ReeAdmFee)+parseInt(oth_fee_resp.ODF);
-                    var balance_total = parseInt(total_bounce_chg)+parseInt(oth_fee_resp.ReeAdmFee)+parseInt(oth_fee_resp.ODF)- (parseInt(oth_fee_resp.AdjustedAmount)+parseInt(oth_fee_resp.Discount));
-                    $('#due_amt').val(due_total); $('#amount_balance').val(balance_total);
+                    var due_total = parseInt(total_bounce_chg) + parseInt(oth_fee_resp.ReeAdmFee) + parseInt(oth_fee_resp.ODF);
+                    var balance_total = parseInt(total_bounce_chg) + parseInt(oth_fee_resp.ReeAdmFee) + parseInt(oth_fee_resp.ODF) - (parseInt(oth_fee_resp.AdjustedAmount) + parseInt(oth_fee_resp.Discount));
+                    $('#due_amt').val(due_total);
+                    $('#amount_balance').val(balance_total);
                 });
             }
+
+            /******** reset form *********/
+            function reset_form() {
+                $('#fee_collection_form')[0].reset();
+                $('.load_dyn_fee_data').html('');
+            }
+            $(document).on('focusin', '#student_id', function() {
+                reset_form();
+            });
+            $(document).on('change', '.show_school', function() {
+                reset_form();
+            });
+            $(document).on('change', '.account_type', function() {
+                reset_form();
+            });
+            $(document).on('change', '.pay_date', function() {
+                reset_form();
+            });
         });
     </script>
 

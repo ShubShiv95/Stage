@@ -2,13 +2,13 @@
     session_start();
     include 'dbobj.php';
     include 'errorLog.php';
-    include 'security.php';
+   // include 'security.php';
     require_once 'sequenceGenerator.php';
 
 
 $request_type=$_REQUEST["Parameter"];
 $StudentId=$_REQUEST["studentid"];
-$SessionId=$_SESSION["SESSION"];
+$SessionId=$_REQUEST["session"];
 $ac_type=$_REQUEST["ac_type"];
 $schoolid=$_REQUEST["school_id"];
 $FG_Type='';
@@ -236,225 +236,134 @@ if($request_type=='CollectFee')
                         echo json_encode($fee, JSON_PRETTY_PRINT);
                                                      
     }   
+
+
     if($request_type=='CollectOtherAmounts')
     {
-          $result=array();
+        $OtherFee["advancefee"]=0;
+        $OtherFee["ODF"]=0;
+        $OtherFee["Discount"]=0;
+        $OtherFee["readmfee"]=0;
+        $OtherFee["Cheque"][1]["ReceptNo"]='2020/12';
+        $OtherFee["Cheque"][1]["ChequeNo"]='254789';
+        $OtherFee["Cheque"][1]["BCharges"]=400;
+        $OtherFee["Cheque"][2]["ReceptNo"]='2020/13';
+        $OtherFee["Cheque"][2]["ChequeNo"]='658749';
+        $OtherFee["Cheque"][2]["BCharges"]=500;
           
-          $result["ReeAdmFee"]=1000;
+          
+        // Advance Fee Information starts here.
           $GetAdvanceAmount="select * from fee_advance_table where student_id='$StudentId' and adjusted=0 and school_id=$schoolid";
           //echo $GetAdvanceAmount;
           $GetAdvanceAmountResult=$dbhandle->query($GetAdvanceAmount);
           if(!$GetAdvanceAmountResult)
             {
-                die;
+                $error_msg = $dbhandle->error;
+                $sql=$GetAdvanceAmount;
+                $el = new LogMessage();
+                //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                $el->write_log_message('Student Other Fee List Creation: Advance Fee Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                mysqli_rollback($dbhandle);
+                $json=array("status"=>"Error","message"=>"Database Error: Not able to get student advance fee detail information. Please try again later.");
+                $json=json_encode($json);
+                return $json; 
             }
-           $row=$GetAdvanceAmountResult->fetch_assoc();
+        $AdvanceAmount=0;    
+        while($row=$GetAdvanceAmountResult->fetch_assoc())
+            {
+              
+                //$OtherFee["advancefee"]=array("amount"=>$row["Advance_Amount"]);
+                $AdvanceAmount=$AdvanceAmount+$row["Advance_Amount"];
+            }    
+            $OtherFee["advancefee"]=$AdvanceAmount;
 
-          $result["AdjustedAmount"]=$row["Advance_Amount"];
+        //End of Advance Fee Adjustment Information.
 
-          $result["ODF"]=300;
-          $result["Discount"]=0;
-          $result["Cheque"][1]["ReceptNo"]='2020/12';
-          $result["Cheque"][1]["ChequeNo"]='254789';
-          $result["Cheque"][1]["BCharges"]=200;
-          $result["Cheque"][2]["ReceptNo"]='2020/13';
-          $result["Cheque"][2]["ChequeNo"]='658749';
-          $result["Cheque"][2]["BCharges"]=200;
-          header('Content-type: text/javascript');
-          echo json_encode($result, JSON_PRETTY_PRINT);
-    }
-    if($request_type=='CollectFee2')
-    {
+       //Readmission fee Calculation Starts here.
+      
+       //fetching list of unpaid regular fee records for the student with installment month number and current month value. 
+        $GetUnpaidFeeList_sql="select sfm.*,imt.installment_month,month(now()) as current_month from student_fee_master sfm,fee_group_table fgt,installment_master_table imt where sfm.student_id='$StudentId'  and sfm.school_id=$schoolid and sfm.session='$SessionId' and fgt.fg_id=sfm.fg_id and fgt.fee_group_type='Regular' and sfm.pay_status='Unpaid' and imt.installment_id=sfm.installment_id order by sfm.installment_id asc";
+        //echo $StudentFeeMaster_sql;
+
+
+          $GetUnpaidFeeList_Result=$dbhandle->query($GetUnpaidFeeList_sql);
+          if(!$GetUnpaidFeeList_Result)
+            {
+                $error_msg = $dbhandle->error;
+                $sql=$GetAdvanceAmount;
+                $el = new LogMessage();
+                //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                $el->write_log_message('Student Fee List Creation: Unpaid Fee Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                mysqli_rollback($dbhandle);
+                $json=array("status"=>"Error","message"=>"Database Error: Not able to get student unpaid fee master table information. Please try again later.");
+                $json=json_encode($json);
+                return $json; 
+            }
         
+            $CountUnpaidMonths=0;
+            $ReadmissionMonthLimit=6; //for testing the value is static.  This value can be taken from customized configuration readmission month limit value as per school requirement.
+            $ReadmFeeAmount=5000;
+        while($row=$GetUnpaidFeeList_Result->fetch_assoc())
+            {
+                if($row["current_month"]>=1 and $row["current_month"]<=3  and $row["installment_month"]>=4 and $row["installment_month"]<=12   )
+                    {
+                        //unpaid month count increments if for the fetch record the installment month is between april and december and current month value between january and march.
+                        $CountUnpaidMonths++;
+                        continue;
+                    }
+                
+                if(($row["current_month"]>=1 and $row["current_month"]<=3)  and ($row["installment_month"]>=1 and $row["installment_month"]<=3) and $row["installment_month"]<=$row["current_month"])
+                    {
+                        //if the both the installment month and current month value both belongs to same year and installment month is lower than equal to current month then increment unpaid month counter. In between January to March.
+                        $CountUnpaidMonths++;
+                        continue;
 
+                    }    
 
-            $fee=array();    $json='';
-  
-    //Populating April Installment.
-    //[]=>installment_id
-    //[][details][]=>feeheadid
-	
-	//April
-    $fee[1]["details"]["1"]["feeheadid"]=1;
-    $fee[1]["details"]["1"]["name"]="Admission Fee";
-    $fee[1]["details"]["1"]["amount"]=5000;
-    $fee[1]["details"]["1"]["concession"]=1000;
-    //$fee[1]["Installment_name"]="Apr";
-    //$fee[1]["Installment_Id"]="4";
+                    if(($row["current_month"]<=12 and $row["current_month"]>=4)  and ($row["installment_month"]<=12 and $row["installment_month"]>=4) and $row["installment_month"]<=$row["current_month"])
+                    {
+                        //if the both the installment month and current month value both belongs to same year and installment month is lower than equal to current month then increment unpaid month counter. In between April to december.
+                        $CountUnpaidMonths++;
+                        continue;
+
+                    }      
+
+               
+            }
+        if($CountUnpaidMonths>=$ReadmissionMonthLimit)
+            {
+            
+                $OtherFee["readmfee"]=$ReadmFeeAmount;
+            }    
+            
+        //End of Readmission fee Calculation
+
+        // On Demand Fee Information starts here.
+        $GetAdvanceAmount="select NULLIF(sum(amount),0) odf_amount from fee_on_demand where student_id='$StudentId' and pay_status='Unpaid' and school_id=$schoolid  and session='$SessionId'";
+        //echo $GetAdvanceAmount;
+        $GetAdvanceAmountResult=$dbhandle->query($GetAdvanceAmount);
+        if(!$GetAdvanceAmountResult)
+          {
+              $error_msg = $dbhandle->error;
+              $sql=$GetAdvanceAmount;
+              $el = new LogMessage();
+              //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+              $el->write_log_message('Student Other Fee List Creation: Advance Fee Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+              mysqli_rollback($dbhandle);
+              $json=array("status"=>"Error","message"=>"Database Error: Not able to get student advance fee detail information. Please try again later.");
+              $json=json_encode($json);
+              return $json; 
+          }
     
-    $fee[1]["details"]["2"]["feeheadid"]=2;
-    $fee[1]["details"]["2"]["name"]="Tuition Fee";
-    $fee[1]["details"]["2"]["amount"]=2000;
-    $fee[1]["details"]["2"]["concession"]=500;
-    //$fee[1]["Installment_name"]="Apr";
-    //$fee[1]["Installment_Id"]="4";
+        $row=$GetAdvanceAmountResult->fetch_assoc();
+        if($row["odf_amount"]!='')
+            {$OtherFee["ODF"]=$row["odf_amount"];}
 
-    $fee[1]["details"]["3"]["feehaeaid"]=3;
-    $fee[1]["details"]["3"]["name"]="Miscellaneous Fee";
-    $fee[1]["details"]["3"]["amount"]=1000;
-    $fee[1]["details"]["3"]["concession"]=0;
+      //End of Advance Fee Adjustment Information.
 
-	//$fee[1]["Installment_name"]="Apr";
-    //$fee[1]["Installment_Id"]="4";
+       
+        header('Content-type: text/javascript');
+        echo json_encode($OtherFee, JSON_PRETTY_PRINT);
+    }
    
-	
-	$fee[1]["details"]["4"]["feeheadid"]=4;
-    $fee[1]["details"]["4"]["name"]="Transport Fee";
-    $fee[1]["details"]["4"]["amount"]=350;
-    $fee[1]["details"]["4"]["concession"]=0;
-	//$fee[1]["Installment_name"]="Apr";
-    //$fee[1]["Installment_Id"]="4";
-	
-	$fee[1]["Installment_name"]="Apr";
-    $fee[1]["Installment_Id"]="4";
-    $fee[1]["Net_Amount"]="6850";
-    
-
-    //populating May Installment
-
-//May
-    $fee[2]["details"]["1"]["feeheadid"]=2;
-    $fee[2]["details"]["1"]["name"]="Tuition Fee";
-    $fee[2]["details"]["1"]["amount"]=2000;
-    $fee[2]["details"]["1"]["concession"]=500;
-    //$fee[2]["Installment_name"]="May";
-    //$fee[2]["Installment_Id"]="5";
-
-
-    $fee[2]["details"]["2"]["feehaeaid"]=3;
-    $fee[2]["details"]["2"]["name"]="Miscellaneous Fee";
-    $fee[2]["details"]["2"]["amount"]=1000;
-    $fee[2]["details"]["2"]["concession"]=0;
-    //$fee[2]["Installment_name"]="May";
-    //$fee[2]["Installment_Id"]="5";
-	
-	$fee[2]["details"]["3"]["feeheadid"]=4;
-    $fee[2]["details"]["3"]["name"]="Transport Fee";
-    $fee[2]["details"]["3"]["amount"]=350;
-    $fee[2]["details"]["3"]["concession"]=0;
-	//$fee[2]["Installment_name"]="May";
-    //$fee[2]["Installment_Id"]="5";
-	
-	$fee[2]["Installment_name"]="May";
-    $fee[2]["Installment_Id"]="5";
-    $fee[2]["Net_Amount"]="2850";
-    //populating June Installment
-//June
-    $fee[3]["details"]["1"]["feeheadid"]=2;
-    $fee[3]["details"]["1"]["name"]="Tuition Fee";
-    $fee[3]["details"]["1"]["amount"]=2000;
-    $fee[3]["details"]["1"]["concession"]=500;
-    //$fee[3]["Installment_name"]="June";
-    //$fee[3]["Installment_Id"]="6";
-
-
-    $fee[3]["details"]["2"]["feehaeaid"]=3;
-    $fee[3]["details"]["2"]["name"]="Miscellaneous Fee";
-    $fee[3]["details"]["2"]["amount"]=1000;
-    $fee[3]["details"]["2"]["concession"]=0;
-    //$fee[3]["Installment_name"]="June";
-    //$fee[3]["Installment_Id"]="6";
-	
-	$fee[3]["details"]["3"]["feeheadid"]=4;
-    $fee[3]["details"]["3"]["name"]="Transport Fee";
-    $fee[3]["details"]["3"]["amount"]=350;
-    $fee[3]["details"]["3"]["concession"]=0;
-	//$fee[3]["Installment_name"]="June";
-    //$fee[3]["Installment_Id"]="6";
-	
-	$fee[3]["Installment_name"]="June";
-    $fee[3]["Installment_Id"]="6";
-    $fee[3]["Net_Amount"]="2850";
-
-    //populating July Installment
-//July
-    $fee[4]["details"]["1"]["feeheadid"]=2;
-    $fee[4]["details"]["1"]["name"]="Tuition Fee";
-    $fee[4]["details"]["1"]["amount"]=2000;
-    $fee[4]["details"]["1"]["concession"]=500;
-    //$fee[4]["Installment_name"]="July";
-    //$fee[4]["Installment_Id"]="7";
-
-
-    $fee[4]["details"]["2"]["feehaeaid"]=3;
-    $fee[4]["details"]["2"]["name"]="Miscellaneous Fee";
-    $fee[4]["details"]["2"]["amount"]=1000;
-    $fee[4]["details"]["2"]["concession"]=0;
-    //$fee[4]["Installment_name"]="July";
-    //$fee[4]["Installment_Id"]="7";
-	
-	$fee[4]["details"]["3"]["feeheadid"]=4;
-    $fee[4]["details"]["3"]["name"]="Transport Fee";
-    $fee[4]["details"]["3"]["amount"]=350;
-    $fee[4]["details"]["3"]["concession"]=0;
-	//$fee[4]["Installment_name"]="July";
-   // $fee[4]["Installment_Id"]="7";
-
-
-	$fee[4]["Installment_name"]="July";
-    $fee[4]["Installment_Id"]="7";
-    $fee[4]["Net_Amount"]="2850";
-
-//August
-
-    
-    //populating August Installment
-    $fee[5]["details"]["1"]["feeheadid"]=2;
-    $fee[5]["details"]["1"]["name"]="Tuition Fee";
-    $fee[5]["details"]["1"]["amount"]=2000;
-    $fee[5]["details"]["1"]["concession"]=500;
-    //$fee[5]["Installment_name"]="August";
-    //$fee[5]["Installment_Id"]="8";
-
-    $fee[5]["details"]["2"]["feehaeaid"]=3;
-    $fee[5]["details"]["2"]["name"]="Miscellaneous Fee";
-    $fee[5]["details"]["2"]["amount"]=1000;
-    $fee[5]["details"]["2"]["concession"]=0;
-    //$fee[5]["Installment_name"]="August";
-    //$fee[5]["Installment_Id"]="8";
-	
-    $fee[5]["details"]["3"]["feeheadid"]=4;
-    $fee[5]["details"]["3"]["name"]="Transport Fee";
-    $fee[5]["details"]["3"]["amount"]=350;
-    $fee[5]["details"]["3"]["concession"]=0;
-	//$fee[5]["Installment_name"]="August";
-    //$fee[5]["Installment_Id"]="8";
-	
-	$fee[5]["Installment_name"]="August";
-    $fee[5]["Installment_Id"]="8";
-    $fee[5]["Net_Amount"]="2850";
-  
-	
-    //populating September Installment
-    $fee[6]["details"]["1"]["feeheadid"]=2;
-    $fee[6]["details"]["1"]["name"]="Tuition Fee";
-    $fee[6]["details"]["1"]["amount"]=2000;
-    $fee[6]["details"]["1"]["concession"]=500;
-    //$fee[6]["Installment_name"]="September";
-    //$fee[6]["Installment_Id"]="9";
-
-    $fee[6]["details"]["2"]["feehaeaid"]=3;
-    $fee[6]["details"]["2"]["name"]="Miscellaneous Fee";
-    $fee[6]["details"]["2"]["amount"]=1000;
-    $fee[6]["details"]["2"]["concession"]=0;
-    //$fee[6]["Installment_name"]="September";
-    //$fee[6]["Installment_Id"]="9";
-	
-	$fee[6]["details"]["3"]["feeheadid"]=4;
-    $fee[6]["details"]["3"]["name"]="Transport Fee";
-    $fee[6]["details"]["3"]["amount"]=350;
-    $fee[6]["details"]["3"]["concession"]=0;
-	//$fee[6]["Installment_name"]="September";
-    //$fee[6]["Installment_Id"]="9";
-	
-	$fee[6]["Installment_name"]="September";
-    $fee[6]["Installment_Id"]="9";
-    $fee[6]["Net_Amount"]="2850";
-	
-   // $obj=json_encode($fee);
-   //echo "<pre>" . $obj . "</pre<br>";
-  header('Content-type: text/javascript');
-    echo json_encode($fee, JSON_PRETTY_PRINT);
-}
-
 ?>

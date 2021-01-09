@@ -261,7 +261,9 @@ $schoolId=$_SESSION["SCHOOLID"];
                         <li>
                             <a href="dashboard.php">Home</a>
                         </li>
-                        <li>Class Time Table</li>
+
+                        <li>Teacher's Time Table</li>
+
                     </ul>
                 </div>
 				<?php 
@@ -275,7 +277,9 @@ $schoolId=$_SESSION["SCHOOLID"];
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title aj-item-title">
-                                <h3 class="mb-4">Add Class Time Table</h3>
+
+                                <h3 class="mb-4">Add Teacher's Time Table</h3>
+
                             </div>
                             <!-- <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -291,7 +295,9 @@ $schoolId=$_SESSION["SCHOOLID"];
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form"id="designationform" method="post" action="AddDesignation_2.php" >
+
+                        <form class="new-added-form school-form aj-new-added-form" id="add_teacher_timetable" method="post" action="AddTeacherTimeTable2.php" enctype="multipart/form-data">
+
                             <div class="row justify-content-center">
                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                     <div class="box-sedow">
@@ -300,7 +306,9 @@ $schoolId=$_SESSION["SCHOOLID"];
                                             <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
                                                 <div class="form-group aj-form-group">
                                                     <label>Select  Teacher <span>*</span></label>
-                                                    <select class="select2" name="desi_department" required>
+
+                                                    <select class="select2" name="teacher_id" required>
+
                                                         <option value="">Select  Teacher</option>
 													<?php	
 													 $sqldept="select Staff_Id, Staff_Name from staff_master_table where Enabled=1 and School_Id=".$_SESSION["SCHOOLID"]. " and category='Teaching' order by Staff_Name";
@@ -320,7 +328,9 @@ $schoolId=$_SESSION["SCHOOLID"];
                                             </div>
                                         </div>                                       
                                         <div class="aaj-btn-chang-cbtn text-right">
-                                                <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button> 
+
+                                                <button type="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark" name="submit">Submit </button> 
+
                                                 <!-- <a  href="javascript:void(0);"  class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>-->
                                         </div>
                                     
@@ -337,7 +347,9 @@ $schoolId=$_SESSION["SCHOOLID"];
                                                 </thead>
                                                 <tbody class="top-position-ss3">
 												<?php	
-                                                     $sqldesc="select ttt.Teacher_Routine_Id,smt.Staff_Name from teacher_time_table ttt,staff_master_table smt where  ttt.Enabled=1 and ttt.School_Id=" . $_SESSION["SCHOOLID"] . " and ttt.Session='" . $_SESSION["SESSION"]. "' AND smt.staff_id=ttt.staff_id  order by smt.staff_name";
+
+                                                     $sqldesc="select ttt.Teacher_Routine_Id,smt.Staff_Name from teacher_time_table ttt,staff_master_table smt where  ttt.Enabled=1 and ttt.School_Id=" . $_SESSION["SCHOOLID"] . " and ttt.Session='" . $_SESSION["SESSION"]. "' AND smt.staff_id=ttt.staff_id  order by ttt.teacher_routine_id desc";
+
                                                      
                                                      $resultdesc=mysqli_query($dbhandle,$sqldesc);
                                                      while($row=mysqli_fetch_assoc($resultdesc)) {
@@ -345,9 +357,11 @@ $schoolId=$_SESSION["SCHOOLID"];
 													 
 												?>
                                                     <tr>
-                                                        <td style="text-align: center; width:10%;"><a href="#?descid=<?php echo $row["Teacher_Routine_Id"]; ?>"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
+
+                                                        <td style="text-align: center; width:10%;"><a href="EditTeacherTimeTablef.php?Teachertimetableid=<?php echo $row["Teacher_Routine_Id"] ; ?>"><!--<?php echo $row["Teacher_Routine_Id"]; ?>--><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
                                                         <td><?php echo $row["Staff_Name"]; ?></td>
-                                                        <td><?php echo '';?></td>
+                                                        <td><?php echo 'Hello';?></td>
+
                                                     
                                                     </tr>
                                                  <?php } ?>  
@@ -387,7 +401,9 @@ $schoolId=$_SESSION["SCHOOLID"];
      <script type="text/javascript">
         $('#opne-form-Promotion').click('.sibling-bs',function(){
              $('.tebal-promotion').slideToggle('slow');
-            })
+
+            });
+
     </script> 
 <?php    
 unset($_SESSION['successmsg']); 

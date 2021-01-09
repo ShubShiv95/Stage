@@ -264,13 +264,19 @@ $schoolId=$_SESSION["SCHOOLID"];
                         <li>Class Time Table</li>
                     </ul>
                 </div>
-				<?php 
+
+                <?php 
+        
 					if(isset($_SESSION['successmsg'])){
 					echo $_SESSION["successmsg"]; 
-
-        }
-                    
-
+                    }
+                    $displayroutineid="select * from class_time_table ctt where ctt.Enabled=1 and ctt.School_Id=? and ctt.Class_Routine_Id=? ";
+                    $displayroutineid_prep=$dbhandle->prepare($displayroutineid);
+                    $displayroutineid_prep->bind_param("ii",$_SESSION["SCHOOLID"],$_REQUEST['Routineid']);
+                    $displayroutineid_prep->execute();
+                    $result_set= $displayroutineid_prep->get_result();
+                   $row_routine=$result_set->fetch_assoc();
+                   
 				?>
                 <!-- Breadcubs Area End Here -->
                 <!-- Admit Form Area Start Here -->
@@ -294,22 +300,21 @@ $schoolId=$_SESSION["SCHOOLID"];
                                 </div>
                             </div>
                         </div> -->
-
-                        <form class="new-added-form school-form aj-new-added-form"id="designationform" method="post" action="AddClassTimeTable1.php" enctype="multipart/form-data">
+                        <form class="new-added-form school-form aj-new-added-form"id="designationform" method="post" action="EditClassTimeTable1.php" enctype="multipart/form-data">
                              <div class="row justify-content-center">
-
                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                     <div class="box-sedow">
-                                        
+                                    <div class="form-group aj-form-group">
+                                                    <label class="ml-4">Routineid</label>
+                                                    <input type="number" readonly value="<?php echo $_REQUEST['Routineid'] ?>" name="class_routine_id" placeholder="" class="form-control">
+                                                </div>
                                         <div class="row justify-content-center">
-                                            <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
+                                        <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
                                                 <div class="form-group aj-form-group">
                                                     <label>Select Class <span>*</span></label>
                                                     <select class="select2" required name="classid" id="classid" onchange="showsection(this.value)">
                                                     <!--option value="">Please Select Class *</option-->
-
                                                     <option value="0">Please Select Class </option>
-
                                                         <?php
                                                         $str='';
                                                         $query='select Class_Id,class_name from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
@@ -334,12 +339,21 @@ $schoolId=$_SESSION["SCHOOLID"];
                                                             }
                                                         while($row=$result->fetch_assoc())
                                                         {
-                                                            echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . '</option>';
-                                                            
+                                                          if ( $row_routine['class_id']== $row["Class_Id"]) {echo '<option value="' . $row["Class_Id"] . '" selected="selected">Class ' . $row["class_name"] . '</option>';
+                                                          }
+                                                          else 
+                                                          {
+                                                            echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . '</option>';                                                            
+                                                          }
+       
                                                         }
+
+                                                        
+                                                    
+                                                        
                                                         //echo $str;
                                                     ?>  
-                                                    </select>
+                                               </select>
                                                 </div>
                                                 <div class="form-group aj-form-group">
                                                 <label>Select Section</label>
@@ -347,7 +361,6 @@ $schoolId=$_SESSION["SCHOOLID"];
                                                     <option value="">Please Select Section *</option>
                                                 </select>
                                                 </div>
-
                                                <!-- <div class="form-group aj-form-group">
                                                     <label>Select  Teacher <span>*</span></label>
                                                     <select class="select2" name="desi_department" required>
@@ -355,54 +368,21 @@ $schoolId=$_SESSION["SCHOOLID"];
 													
                                                     </select>
                                                     
-                                                </div> -->                                               
+                                                </div>  -->                                              
                                                 <div class="form-group aj-form-group">
                                                     <label class="ml-4">PDF Files only</label>
+                                                    <input type="text" value="<?php echo $row_routine['filename ']; ?>" name="previous_file" class="d-none">
                                                     <input type="file" name="class_routine" placeholder="" class="form-control">
-
                                                 </div>
                                             </div>
                                         </div>                                       
                                         <div class="aaj-btn-chang-cbtn text-right">
-
                                                 <button type="submit" name="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button> 
                                                 <!-- <a  href="javascript:void(0);"  class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>-->
                                         </div>
                                     
-                                    <div class="">
-
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-
-                                                        <th >Edit </th>
-                                                        <th>Class </th>
-                                                        <th>Section</th>
-                                                        <th>View Routine</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-												<?php
-                                                $sqldesc="select ctt.Class_Routine_Id, cmt.Class_Name,cst.Section, ctt.filename from class_time_table ctt,class_master_table cmt,class_section_table cst where ctt.Enabled=1 and ctt.School_Id=? and ctt.Session=? and cst.class_sec_id=ctt.class_sec_id and cmt.class_id=cst.class_id order by ctt.Class_Routine_Id desc";
-                                                $query_prep = $dbhandle->prepare($sqldesc);
-                                                $query_prep->bind_param("is",$_SESSION["SCHOOLID"],$_SESSION["SESSION"]);
-                                                $query_prep->execute();
-                                                $result_set = $query_prep->get_result();
-                                                while($row_routine = $result_set->fetch_assoc()){
-												?>
-                                                    <tr>
-                                                        <td ><a href="./EditClassTimeTable.php?Routineid=<?php echo $row_routine["Class_Routine_Id"]; ?>"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a></td>
-                                                        <td><?php echo $row_routine["Class_Name"]; ?></td>
-                                                        <td><?php echo $row_routine["Section"]; ?></td>
-                                                        <td> <a href="./app_images/class_timetable/<?php echo $row_routine["filename"]; ?>" target="_blank">click to View</a> </td>
-                                                    </tr>
-                                                 <?php } ?> 
-                                                 </tbody>
-
-                                            </table>
-                                        </div>
-                                    </div>
+                                    
+                                    
                                 </div>
                                 </div>
                             </div>

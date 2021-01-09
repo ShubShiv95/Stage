@@ -82,8 +82,6 @@ include 'security.php';
                                                 <div class="form-group aj-form-group">
                                                     <label>Class <span>*</span></label>
                                                     <select class="select2" required="" name="assignment_class" id="assignment_class">
-
-
                                                     </select>
                                                 </div>
                                             </div>

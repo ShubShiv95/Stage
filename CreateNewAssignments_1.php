@@ -335,14 +335,15 @@ if (isset($_REQUEST['filterAssignment'])) {
   $sqlQueryprepare = $dbhandle->prepare($sqlQuery);
 
   $sqlQueryprepare->bind_param("iiii", $sectionId, $subjectId, $monthNum, $currYear);
- 
+  //echo "SELECT tmt.* FROM task_master_table tmt, task_allocation_list_table talt WHERE tmt.Task_Id = talt.Task_Id AND tmt.Enabled = 1 AND talt.Allocated_Reff_Id = ".$sectionId." AND tmt.Subject_Id = ".$subjectId." AND MONTH(tmt.Last_Submissable_Date) = ".$monthNum." AND YEAR(tmt.Last_Submissable_Date) = ".$currYear." ORDER BY tmt.Task_Id DESC";
   $sqlQueryprepare->execute();
-  
+ 
   $resultset = $sqlQueryprepare->get_result();
-
-  if ($sqlQueryprepare->num_rows()<=1) {
+  if ($resultset->num_rows>0) {
     $i=1;
+    
     while($row = $resultset->fetch_assoc()){
+      
       $queryAssignmnetFile = "select * from task_file_upload where Enabled = 1 AND Task_Id = ?";
       $queryAssignmnetFilePrepare = $dbhandle->prepare($queryAssignmnetFile);
       $queryAssignmnetFilePrepare->bind_param("i",$row['Task_Id']);
@@ -367,7 +368,6 @@ if (isset($_REQUEST['filterAssignment'])) {
                         }
                         elseif ($rowF['Upload_Type']=="File") {
                           $fileType = explode('.',$rowF['Upload_Name']);
-                          
                           if (strtolower($fileType[1])=="ppt"||strtolower($fileType[1])=="pptx") {
                             echo '<li><a href="./app_images/'.$rowF['Upload_Name'].'" target="_blank"  class="color-1"><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i></a></li>';
                           }elseif (strtolower($fileType[1])=="doc"||strtolower($fileType[1])=="docx") {

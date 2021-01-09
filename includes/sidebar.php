@@ -408,6 +408,28 @@
                 </ul>
             </li>
             <li class="nav-item sidebar-nav-item  print-d-none">
+                <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Syllabus</span></a>
+                <ul class="nav sub-group-menu">
+                    <li class="nav-item">
+                        <a href="SyllabusClass.php" class="nav-link"><i class="fas fa-angle-right"></i>Class Syllabus</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="SyllabusTeacher.php" class="nav-link"><i class="fas fa-angle-right"></i>Teaacher Syllabus</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item sidebar-nav-item  print-d-none">
+                <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Time Table</span></a>
+                <ul class="nav sub-group-menu">
+                    <li class="nav-item">
+                        <a href="AddClassTimeTable.php" class="nav-link"><i class="fas fa-angle-right"></i>Class Time Table</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="AddTeacherTimeTable.php" class="nav-link"><i class="fas fa-angle-right"></i>Teaacher Time Table</a>
+                    </li>
+                </ul>
+            </li>            
+            <li class="nav-item sidebar-nav-item  print-d-none">
                 <a href="#" class="nav-link"><i class="flaticon-checklist"></i><span>Master Settings</span></a>
                 <ul class="nav sub-group-menu">
 

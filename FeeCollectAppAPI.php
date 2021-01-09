@@ -1,9 +1,10 @@
 <?php
-    session_start();
+    ini_set('max_execution_time', '0');
+    //session_start();
     include 'dbobj.php';
     include 'errorLog.php';
-   // include 'security.php';
-    require_once 'sequenceGenerator.php';
+    //include 'security.php';
+    //require_once 'sequenceGenerator.php';
 
 
 $request_type=$_REQUEST["Parameter"];
@@ -25,7 +26,7 @@ else if($ac_type=='SchoolBusFee')
         $FG_Type="'Regular','Transport'";
     }
 
-//echo $FG_Type;
+
 
 if($request_type=='CollectFee')
     {
@@ -72,7 +73,7 @@ if($request_type=='CollectFee')
                     $sql=$InstallmentList_sql;
                     $el = new LogMessage();
                     //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                    $el->write_log_message('Student Fee List Creation:Installment Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                    $el->write_log_message('Student Fee List Creation:Installment Fetch Error from Parent App. ', $error_msg, $sql, __FILE__, 'Parent App');
                     mysqli_rollback($dbhandle);
                     $json=array("status"=>"Error","message"=>"Database Error: Not able to get installment information details. Please try again later.");
                     $json=json_encode($json);
@@ -123,9 +124,8 @@ if($request_type=='CollectFee')
                 //step 1d. Insert Fee_Cluster_fee_fee_structure_tableList row information with other installment and discount information to the student_fee_list_table.
                 
                 /*Sql to fetch fee lsit items from fee_structure_table month wise or installment wise and inserting rows in student_fee_list_table for the selected fee cluster data installment id wise or month wise. */
-                $StudentFeeMaster_sql="select sfm.*,fgt.Fee_Group_Type from student_fee_master sfm,fee_group_table fgt where installment_id=? and session=? and student_id=? and sfm.Pay_Status='Unpaid' and fgt.FG_Id=sfm.FG_Id and fgt.School_Id=sfm.School_Id and sfm.school_id=$schoolid and fgt.Fee_Group_Type in($FG_Type)";
-                //echo $StudentFeeMaster_sql;
-
+                $StudentFeeMaster_sql="select sfm.*,fgt.fee_group_type from student_fee_master sfm,fee_group_table fgt where Installment_Id=? and Session=? and Student_id=? and Pay_Status='Unpaid' and fgt.FG_Id=sfm.FG_Id and fgt.School_Id=sfm.School_Id and sfm.school_id=$schoolid and fgt.Fee_Group_Type in($FG_Type)";
+              
                 //$StudentFeeMaster_sql="select sfm.*,fgt.Fee_Group_Type from student_fee_master sfm,fee_group_table fgt where installment_id=? and session=? and student_id=? and Pay_Status!='Paid' and fgt.FG_Id=sfm.FG_Id";
                 //echo $StudentFeeMaster_sql;
                 $StudentFeeMaster_prepare=$dbhandle->prepare($StudentFeeMaster_sql);
@@ -133,10 +133,11 @@ if($request_type=='CollectFee')
                 
                 while($InstallmentList_row=$InstallmentList_result->fetch_assoc()) //Looping through each Installment.
                     {
+                       //echo "Running inside installment change section  for the Installment id: $InstallmentId \n";
                         //Creating Installment variables.
                         $InstallmentId=$InstallmentList_row["Installment_Id"]; //fetching installment id.
                         $Installment_Name=$InstallmentList_row["Installment_Name"]; //fetching installment id.
-
+                        //echo "select sfm.*,fgt.fee_group_type from student_fee_master sfm,fee_group_table fgt where installment_id=$InstallmentId and session='$SessionId' and Student_id='$StudentId' and Pay_Status='Unpaid' and fgt.FG_Id=sfm.FG_Id and fgt.School_Id=sfm.School_Id and sfm.school_id=$schoolid and fgt.Fee_Group_Type in($FG_Type)" . '<br>';
                         //Creating jsons Installment entries.
                         //$fee[$InstallmentId]["Installment_name"]="$Installment_Name";
                         //$fee[$InstallmentId]["Installment_Id"]="$InstallmentId"; 
@@ -144,112 +145,125 @@ if($request_type=='CollectFee')
                         $TotalInstAmount=0; //initialize total installment amount to zero.
                         $LateFeeAmount=0;
                         $StudentFeeMaster_result=$StudentFeeMaster_prepare->execute();// listing student_fee_master rows for the installment.
+                        //echo "Student Fee master Data installment wise.";
+                        //var_dump($StudentFeeMaster_result);
+
                             if(!$StudentFeeMaster_result)
-                                    {
+                                {
                                     $error_msg = $dbhandle->error;
                                     $sql=$StudentFeeMaster_sql;
                                     $el = new LogMessage();
                                     //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                                    $el->write_log_message('Student Fee List Creation:Fee Structure Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                                    $el->write_log_message('Student Fee List Creation:Fee Structure Fetch Error From Parent App. ', $error_msg, $sql, __FILE__, 'Parent App');
                                     mysqli_rollback($dbhandle);
                                     $json=array("status"=>"Error","message"=>"Database Error: Not able to get Fee Structure information details. Please try again later.");
                                     $json=json_encode($json);
                                     return $json; 
                                 }
                         $StudentFeeMaster_result_set = $StudentFeeMaster_prepare->get_result(); 
-                        $counter=1;
-                        if($StudentFeeMaster_result_set->num_rows==0)
-                                {
-                                    continue;
-                                }
+                        
                         while($StudentFeeMaster_row=$StudentFeeMaster_result_set->fetch_assoc())//Looping through each student_fee_master record.
                             {            
+                                //echo "This is Student Fee Master Table section installment wise. \n";
                                 $SFM_Id=$StudentFeeMaster_row["SFM_Id"];
                                 $LateFeeAmount=$LateFeeAmount+$StudentFeeMaster_row["Late_Fee_Amount"]; 
-                                
-                                /* The Due is deprecated.  Now the Pay Status only works for Paid and Unpaid.
+                           
+                                /*
                                 if($StudentFeeMaster_row["Pay_Status"]=='Due')
                                     {
                                         $TotalInstAmount=$StudentFeeMaster_row["Due_Amount"];
-                                        $fee[$InstallmentId]["details"][0]["feeheadid"]=0; //Treading this as due fee head id.
-                                        $fee[$InstallmentId]["details"][0]["feename"]="Due";
-                                        $fee[$InstallmentId]["details"][0]["amount"]=$StudentFeeMaster_row["Due_Amount"];
-                                        $fee[$InstallmentId]["details"][0]["concession"]=0;
+                                        $fee[$InstallmentId]["details"][1]["feeheadid"]=0; //Treading this as due fee head id.
+                                        $fee[$InstallmentId]["details"][1]["feename"]="Due";
+                                        $fee[$InstallmentId]["details"][1]["amount"]=$StudentFeeMaster_row["Due_Amount"];
+                                        $fee[$InstallmentId]["details"][1]["concession"]=0;
                                         $fee[$InstallmentId]["Installment_name"]="$Installment_Name";
                                         $fee[$InstallmentId]["Installment_Id"]="$InstallmentId"; 
                                         $fee[$InstallmentId]["Late_Fee"]=$LateFeeAmount;
                                         $fee[$InstallmentId]["Net_Amount"]=$TotalInstAmount; 
                                         continue;
                                     }
-                                    */
-                                    $TotalInstAmount=$TotalInstAmount+$StudentFeeMaster_row["Total_Amount"]+$StudentFeeMaster_row["Late_Fee_Amount"];  
+                                   */ 
+                                $TotalInstAmount=$TotalInstAmount+$StudentFeeMaster_row["Total_Amount"];+$StudentFeeMaster_row["Late_Fee_Amount"];  
                                 $StudentFeeDetails_sql="select sfd.*,fht.Fee_Head_Name from student_fee_details sfd,fee_head_table fht where SFM_ID=? and fht.fee_head_id=sfd.fee_head_id";
-                               // echo $StudentFeeDetails_sql;
                                 $StudentFeeDetails_prepare=$dbhandle->prepare($StudentFeeDetails_sql);
                                 $StudentFeeDetails_prepare->bind_param('i',$SFM_Id);
                                 
                                 $StudentFeeDetails_result=$StudentFeeDetails_prepare->execute();// Fetching Student_fee_details rows for the student_fee_master id.
-                                
+                                //echo "Student Fee Details Data";
+                                //var_dump($StudentFeeDetails_result);
                                     if(!$StudentFeeDetails_result)
                                             {
                                                 $error_msg = $dbhandle->error;
                                                 $sql=$StudentFeeDetails_sql;
                                                 $el = new LogMessage();
                                                 //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                                                $el->write_log_message('Student Fee List Creation:Fee Structure Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                                                $el->write_log_message('Student Fee List Creation:Fee Structure Fetch Error from Parent App. ', $error_msg, $sql, __FILE__, 'Parent App');
                                                 mysqli_rollback($dbhandle);
                                                 $json=array("status"=>"Error","message"=>"Database Error: Not able to get Fee Structure information details. Please try again later.");
                                                 $json=json_encode($json);
                                                 return $json; 
                                             }    
                                            // echo $StudentFeeDetails_prepare->error;
-                                $StudentFeeDetails_result_set = $StudentFeeDetails_prepare->get_result(); //  
-                                 
+                                $StudentFeeDetails_result_set = $StudentFeeDetails_prepare->get_result(); //
+                                //echo '<br>'."select sfd.*,fht.Fee_Head_Name from student_fee_details sfd,fee_head_table fht where SFM_Id=$SFM_Id and fht.Fee_Head_Id=sfd.fee_head_id";
+                                
                                 while($row = $StudentFeeDetails_result_set->fetch_assoc()) // Looping through each SFM_ID to fetch student_fee_details rows.
                                     {
+                                        //echo "This is fee details section for the installment of Student Fee master table \n";
                                         if($row["Fee_Amount"]>0)
                                         {
-                                        $fee[$InstallmentId]["details"][$counter]["feeheadid"]=$row["Fee_Head_Id"];
-                                        $fee[$InstallmentId]["details"][$counter]["feename"]=$row["Fee_Head_Name"];
-                                        $fee[$InstallmentId]["details"][$counter]["amount"]=$row["Fee_Amount"];
-                                        $fee[$InstallmentId]["details"][$counter]["concession"]=$row["Concession_Amount"];
-                                       // echo $counter;
-                                       // echo  '<br>' . $row["Fee_Head_Id"] . '<br>';
-                                       // echo $row["Fee_Head_Name"]. '<br>';
-                                       //echo $row["Fee_Amount"]. '<br>';
-                                       // echo $row["Concession_Amount"]. '<br>';
+                                        //$fee[$InstallmentId]["details"][$row["Fee_Head_Id"]]["feeheadid"]=$row["Fee_Head_Id"];
+                                        /* First Sample*/
+                                        $fee[$InstallmentId]["details"][]=
+                                        array("feeheadid"=>$row["Fee_Head_Id"],
+                                        "feename"=>$row["Fee_Head_Name"],
+                                        "amount"=>$row["Fee_Amount"],
+                                        "concession"=>$row["Concession_Amount"]);
                                         
-                                        $counter++;
+                                        
+                                        /* Second Sample   
+                                        $fee[$InstallmentId]["details"][]=
+                                        array("feeheadid"=>$row["Fee_Head_Id"],
+                                        "feename"=>$row["Fee_Head_Name"],
+                                        "amount"=>$row["Fee_Amount"],
+                                        "concession"=>$row["Concession_Amount"]);
+                                         */       
+                                        //$fee[$InstallmentId]["details"][]["feename"]=$row["Fee_Head_Name"];
+                                        //$fee[$InstallmentId]["details"][]["amount"]=$row["Fee_Amount"];
+                                        //$fee[$InstallmentId]["details"][]["concession"]=$row["Concession_Amount"];
+                                        //echo "details section";
                                         }
+
                                     }
 
                                     //$fee[$InstallmentId]["Late_Fee"]=$StudentFeeMaster_row["Late_Fee_Amount"]; 
                             }
-                            $fee[$InstallmentId]["Installment_name"]="$Installment_Name";
-                            $fee[$InstallmentId]["Installment_Id"]="$InstallmentId"; 
-                            $fee[$InstallmentId]["Late_Fee"]=$LateFeeAmount;
-                            $fee[$InstallmentId]["Net_Amount"]=$TotalInstAmount;    
-                            $counter=0;
+
+                            
+                            if($TotalInstAmount>0)
+                            {
+                                $fee[$InstallmentId]["Installment_name"]="$Installment_Name";
+                                $fee[$InstallmentId]["Installment_Id"]="$InstallmentId"; 
+                                $fee[$InstallmentId]["Late_Fee"]=$LateFeeAmount;
+                                $fee[$InstallmentId]["Net_Amount"]=$TotalInstAmount;    
+                            }
+                            //echo "Master section";
                           
                     }
-                        header('Content-type: text/javascript');
-                        echo json_encode($fee, JSON_PRETTY_PRINT);
+                    //var_dump($fee);
+                    header('Content-type: text/javascript');
+                    echo json_encode($fee, JSON_PRETTY_PRINT);
+                    
                                                      
     }   
 
-
-    if($request_type=='CollectOtherAmounts')
+    if($request_type=='CollectOtherFee')
     {
         $OtherFee["advancefee"]=0;
-        $OtherFee["ODF"]=0;
         $OtherFee["Discount"]=0;
+        $OtherFee["ODF"]=0;
         $OtherFee["readmfee"]=0;
-        $OtherFee["Cheque"][1]["ReceptNo"]='2020/12';
-        $OtherFee["Cheque"][1]["ChequeNo"]='254789';
-        $OtherFee["Cheque"][1]["BCharges"]=400;
-        $OtherFee["Cheque"][2]["ReceptNo"]='2020/13';
-        $OtherFee["Cheque"][2]["ChequeNo"]='658749';
-        $OtherFee["Cheque"][2]["BCharges"]=500;
+        $OtherFee["ChequeBounce"]=800;
           
           
         // Advance Fee Information starts here.
@@ -365,5 +379,6 @@ if($request_type=='CollectFee')
         header('Content-type: text/javascript');
         echo json_encode($OtherFee, JSON_PRETTY_PRINT);
     }
-   
+
+    
 ?>

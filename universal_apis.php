@@ -303,4 +303,32 @@ if(isset($_REQUEST['admission_form_print'])){
   }
   echo json_encode($data);
 }
+
+/*********** get payment modes ***********/
+if (isset($_REQUEST['get_payment_modes'])) {
+  $pmode_q = "SELECT * FROM `paymode_master_table` WHERE Enabled = 1 ORDER BY `Paymode_Nane`";
+  $pmode_q_prep = $dbhandle->prepare($pmode_q);
+  $pmode_q_prep->execute(); $data = array();
+  $result_set = $pmode_q_prep->get_result();
+  while ($row_modes = $result_set->fetch_assoc()) {
+    $data[] = $row_modes;
+  }
+  echo json_encode($data);
+}
+
+/********* get all bank name *********/
+if (isset($_REQUEST['get_all_banks'])) {
+  $bank_q = "SELECT * FROM `bank_master_table` WHERE Enabled = 1 ORDER BY Bank_Name";
+  $bank_q_prep = $dbhandle->prepare($bank_q);
+  $bank_q_prep->execute(); 
+  $result_set = $bank_q_prep->get_result();
+  $data = array(); $i=0;
+  while($bank_row = $result_set->fetch_assoc()){
+    $data[$i]['bank_name'] = $bank_row['Bank_Name'];
+    $data[$i]['bank_id'] = $bank_row['Bank_Id'];
+    $i++;
+  }
+  echo json_encode($data);
+}
+
 ?>

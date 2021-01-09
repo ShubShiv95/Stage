@@ -131,7 +131,7 @@ include 'security.php';
                                         </div>
                                         <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                                             <div class="form-group aj-form-group">
-                                                <label>Select Section</label>
+                                                <label>Select Period</label>
                                                 <select class="select2" name="cperiod" id="cperiod" required>
                                                     <option value="1">Period 1</option>
                                                     <option value="2">Period 2</option>

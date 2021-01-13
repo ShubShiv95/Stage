@@ -11,8 +11,8 @@
    $file = $_FILES['file']['tmp_name'];
    $fileHandle = fopen($file, "r");
    $counter = 0;
-   
-   $htmlbody = '<div class="table-responsive"><table class="table table-bordered"><th>Student Id</th><th>School ID</th><th>Session</th><th>Session Start Year</th><th>Session End Year</th><th>First Name</th><th>Middle Name</th><th>Last Name </th><th>Class Id</th><th>Class Sec</th><th>Gender</th><th>DOB</th><th>Discount Category</th><th>Father Name</th><th>Mother Name</th><th>Guardian Name</th><th>SMS ContactNo</th></tr></thead>';
+   $isFieldMissing[] = true; //dummy data
+   $htmlbody = '<div class="table-responsive"><table class="table table-bordered"><th>Student Id</th><th>School ID</th><th>Session</th><th>Session Start Year</th><th>Session End Year</th><th>First Name</th><th>Middle Name</th><th>Last Name </th><th>Class Id</th><th>Class Sec</th><th>Roll No.</th><th>Gender</th><th>DOB</th><th>Discount Category</th><th>Father Name</th><th>Mother Name</th><th>Guardian Name</th><th>SMS ContactNo</th></tr></thead>';
    $htmlbody = $htmlbody . '<tbody>';
 
    
@@ -25,8 +25,7 @@
          $counter++;
          continue;
       }
-      $sec_counter = 0;
-      $isFieldMissing[] = true; //dummy data
+      $sec_counter = 0;    
 
       $htmlbody = $htmlbody . '<tr>';
 
@@ -44,7 +43,7 @@
       }else {
          $htmlbody = $htmlbody . '<td>' . $studentId . '</td>';
       }
-      
+
       $isFieldMissing[] = ($isMandatory && empty($studentId) || $isDuplicate > 0) ? false : true ; 
 
       
@@ -114,54 +113,60 @@
                      : $htmlbody . '<td>' . $section . '</td>';
       $isFieldMissing[] = ($isMandatory && empty($section)) ? false : true ; 
 
-
       $dataArray[$counter][10] = $filesop[10];
-      $gender = $filesop[10];
+      $rollNo = $filesop[10];
+      $isMandatory = array_search("Roll_No",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
+      $htmlbody = ($isMandatory && empty($rollNo)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
+                     : $htmlbody . '<td>' . $rollNo . '</td>';
+      $isFieldMissing[] = ($isMandatory && empty($rollNo)) ? false : true ; 
+
+      $dataArray[$counter][11] = $filesop[11];
+      $gender = $filesop[11];
       $isMandatory = array_search("Gender",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
       $htmlbody = ($isMandatory && empty($gender)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
                      : $htmlbody . '<td>' . $gender . '</td>';
       $isFieldMissing[] = ($isMandatory && empty($gender)) ? false : true ; 
 
 
-      $dataArray[$counter][11] = $filesop[11];
-      $dob = $filesop[11];
+      $dataArray[$counter][12] = $filesop[12];
+      $dob = $filesop[12];
       $isMandatory = array_search("DOB",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
       $htmlbody = ($isMandatory && empty($dob)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
                      : $htmlbody . '<td>' . $dob . '</td>';
       $isFieldMissing[] = ($isMandatory && empty($dob)) ? false : true ; 
 
 
-      $dataArray[$counter][12] = $filesop[12];
-      $discCat = $filesop[12];
+      $dataArray[$counter][13] = $filesop[13];
+      $discCat = $filesop[13];
       $isMandatory = array_search("Discount_Category",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
       $htmlbody = ($isMandatory && empty($discCat)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
                      : $htmlbody . '<td>' . $discCat . '</td>';
       $isFieldMissing[] = ($isMandatory && empty($discCat)) ? false : true ; 
   
-      $dataArray[$counter][13] = $filesop[13];
-      $fatherName = $filesop[13];
+      $dataArray[$counter][14] = $filesop[14];
+      $fatherName = $filesop[14];
       $isMandatory = array_search("Father_Name",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
       $htmlbody = ($isMandatory && empty($fatherName)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
                      : $htmlbody . '<td>' . $fatherName . '</td>';
       $isFieldMissing[] = ($isMandatory && empty($fatherName)) ? false : true ; 
       
 
-      $dataArray[$counter][14] = $filesop[14];
-      $motherName = $filesop[14];
+      $dataArray[$counter][15] = $filesop[15];
+      $motherName = $filesop[15];
       $isMandatory = array_search("Mother_Name",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
       $htmlbody = ($isMandatory && empty($motherName)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
                      : $htmlbody . '<td>' . $motherName . '</td>';
       $isFieldMissing[] = ($isMandatory && empty($motherName)) ? false : true ; 
 
-      $dataArray[$counter][15] = $filesop[15];
-      $guardianName = $filesop[15];
+      $dataArray[$counter][16] = $filesop[16];
+      $guardianName = $filesop[16];
       $isMandatory = array_search("Guardian_Name",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
       $htmlbody = ($isMandatory && empty($guardianName)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
                      : $htmlbody . '<td>' . $guardianName . '</td>';
       $isFieldMissing[] = ($isMandatory && empty($guardianName)) ? false : true ; 
 
-      $dataArray[$counter][16] = $filesop[16];
-      $smsContactNo = $filesop[16];
+      $dataArray[$counter][17] = $filesop[17];
+      $smsContactNo = $filesop[17];
       $isMandatory = array_search("SMS_Contact_No",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
       $htmlbody = ($isMandatory && empty($smsContactNo)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
                      : $htmlbody . '<td>' . $smsContactNo . '</td>';
@@ -174,7 +179,6 @@
    
    $htmlbody = $htmlbody . '</tbody></table></div>';
   
-
    //########################   If Block in case of validation fails for the CSV file and it will highlight them  ###################################
    if(array_search(false,$isFieldMissing)!=""){
       echo $htmlbody; 
@@ -187,8 +191,8 @@
       $IsTransSuccess = true;
       $errorAreaMessage = "";
 
-      $insertStudentClassTableSql = "insert into student_class_details (Student_Details_Id, Student_Id, Class_Id, Class_No, Class_Sec_Id, Session,
-      Session_Start_Year, Session_End_Year, School_Id, Updated_By) values(?,?,?,?,?,?,?,?,?,?)";
+      $insertStudentClassTableSql = "insert into student_class_details (Student_Details_Id, Student_Id, Class_Id, Class_No, Class_Sec_Id, Roll_No, Session,
+      Session_Start_Year, Session_End_Year, School_Id, Updated_By) values(?,?,?,?,?,?,?,?,?,?,?)";
       
       $insertStudentTableSql = "insert into student_master_table
       (Student_Id, School_Id, Session, Session_Start_Year, Session_End_Year, First_Name, Middle_Name, Last_Name, Class_Id, Class_Sec_Id, Gender, DOB, Discount_Category, Father_Name,
@@ -209,9 +213,9 @@
           }
 
           $tempArray = explode("|", $datarow);  
-
           $studClassNo = $tempArray[9];
           $schoolId = $tempArray[2];
+          $rollNo = $tempArray[11];
           $IsTransSuccess = true;
 
           //########################   Below Block of SQL Gets Class ID from Class_Master Table  ###################################
@@ -255,16 +259,16 @@
              $getStudCountRow = $studentClassDetCountResult -> fetch_assoc();
              $student_Detail_Id = ($getStudCountRow["studDetailId"] + 1);
           }  
-         
-
+                   
           $stmt = $dbhandle -> prepare($insertStudentClassTableSql);
     
-          $stmt->bind_param("isiiisiiis",   
+          $stmt->bind_param("isiiiisiiis",   
           $student_Detail_Id,
           $tempArray[1],
           $studClassId,
           $studClassNo,
           $studSecsId,
+          $rollNo,
           $tempArray[3],
           $tempArray[4],
           $tempArray[5],
@@ -281,8 +285,7 @@
          //########################   Below Block of SQL updates Student_Master_Table   ###################################
 
           $stmt2 = $dbhandle -> prepare($insertStudentTableSql);
-
-
+    
           $stmt2->bind_param("sisiisssiississsss",   
           $tempArray[1],
           $schoolId,
@@ -294,13 +297,13 @@
           $tempArray[8],
           $studClassId,
           $studSecsId,
-          $tempArray[11],
           $tempArray[12],
           $tempArray[13],
           $tempArray[14],
           $tempArray[15],
           $tempArray[16],
           $tempArray[17],
+          $tempArray[18],
           $updatedBy          
          );
             

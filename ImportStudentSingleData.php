@@ -107,12 +107,12 @@ include 'AdmissionModel.php';
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
-                                                        <div class="form-group aj-form-group">
+                                                        <!-- <div class="form-group aj-form-group">
                                                             <label>School Name <span>*</span></label>
                                                             <select class="select2" name="f_class">
                                                                 <option value="3">ABC PAATHSALA</option>
                                                             </select>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="form-group text-center">
                                                             <label>Download Excel Format</label>
                                                             <br>
@@ -153,16 +153,16 @@ include 'AdmissionModel.php';
                                                 </h6>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
+                                                <!-- <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                                     <div class="form-group aj-form-group">
                                                         <label>School Name <span>*</span></label>
                                                         <select class="select2" name="f_class">
                                                             <option value="3">ABC PAATHSALA</option>
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
-                                                    <div class="form-group aj-form-group">
+                                                    <!-- <div class="form-group aj-form-group">
                                                         <label>Student Column Name<span>*</span></label>
                                                         <select class="select2" name="colName2" id="colName2">
                                                             <?php
@@ -174,7 +174,7 @@ include 'AdmissionModel.php';
                                                                 echo $string;
                                                             ?>                                                          
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label>Import Excel</label>
                                                         <input type="file" name="file" id="file" name="s_l_name" placeholder="" class="form-control">

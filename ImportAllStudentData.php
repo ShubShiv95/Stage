@@ -89,17 +89,17 @@ include 'errorLog.php';
                                     </div>
                                     <div class="row">
                                         <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
-                                            <div class="form-group aj-form-group">
+                                            <!-- <div class="form-group aj-form-group">
                                                 <label>School Name <span>*</span></label>
                                                 <select class="select2" name="f_class" required>
                                                     <option value="">Please Select School Name</option>
                                                     <option value="1">The ABC PAATHSHALA</option>
                                                 </select>
-                                            </div>
+                                            </div> -->
                                             <div class="form-group text-center">
                                                 <label>Download Excel Format</label>
                                                 <br>
-                                                <a href="formats/test.xls" download><img src="img/aj-img/excel.png" width="80"></a>
+                                                <a href="./app_images/Student_Bulk_Import_Sample.csv" download><img src="img/aj-img/excel.png" width="80"></a>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
@@ -109,7 +109,7 @@ include 'errorLog.php';
                                                 <input type="file" name="file" id="file" placeholder="" class="form-control" accept=".csv" required="">
                                             </div>
                                         </div>
-                                        <div class="row justify-content-center">
+                                        <!-- <div class="row justify-content-center">
                                                 <div class="form-group aj-form-group text-center mt-2">
                                                     <div class="row-chang">
                                                     <span class="mt-2">Import Type:</span>
@@ -121,12 +121,11 @@ include 'errorLog.php';
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                      </div>
                                     <div class="aaj-btn-chang-cbtn">
                                             <button  type="button" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark" name="importBtn" id="importBtn">Import </button>
-                                            <button type="reset" class="aj-btn-a1 btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
-                                            
+                                            <button type="reset" class="aj-btn-a1 btn-fill-lg bg-blue-dark btn-hover-yellow" onClick="window.location.reload(true)">Reset</button>                                           
                                     </div>
                                 </div>
                                
@@ -136,7 +135,6 @@ include 'errorLog.php';
                         </form>
 
                         <div class="tebal-promotion" style="overflow-x: scroll;overflow-y: scroll; height:500px">
-                                    <h5 class="text-center">Search Result of Admission</h5>
                                     <div id="dynamicContent" name="dynamicContent" > </div>
                         </div>
                     </div>

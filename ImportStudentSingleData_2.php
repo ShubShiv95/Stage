@@ -23,7 +23,7 @@ $setData = '';
 }  
 
 header("Content-type: application/octet-stream");  
-header("Content-Disposition: attachment; filename=User_Detail.xls");  
+header("Content-Disposition: attachment; filename=Bulk_Student_Single_Column_Update.xls");  
 header("Pragma: no-cache");  
 header("Expires: 0");  
 

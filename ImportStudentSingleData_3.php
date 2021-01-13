@@ -14,9 +14,9 @@
    $columnName = "";
    $isSuccess = true;
    $finalMsg = "";
-
+   $fileparsed = false;
    while(($filesop = fgetcsv($fileHandle,10000,',')) !== false) {
-      
+   $fileparsed = true;
     if($counter == 0){
         $counter++;
         $columnName = $filesop[6];
@@ -25,7 +25,7 @@
      $valueTobeUpdated = $filesop[6];
      $studentId = $filesop[0];
      $updateQuery = "update student_master_table set $columnName = '" . $valueTobeUpdated . "' where Student_Id = '" . $studentId . "'";
-
+     $finalMsg= $finalMsg ."--" . $updateQuery;
      $resultupdated = $dbhandle->query($updateQuery);
      
      if($resultupdated != 1){
@@ -36,7 +36,8 @@
      $counter++;
    }
 
-   if($isSuccess){
+
+   if($isSuccess && $fileparsed){
     mysqli_commit($dbhandle);
     $finalMsg =  "Data Updated into the system successfully.";
    }else {

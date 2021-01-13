@@ -33,8 +33,11 @@
 
     $GLOBAL_ADMISSION_FIELD_IS_MANDATORY = array("na","Student_Id",  "School_Id", "Session", "First_Name","Class_Id", "DOB", "SMS_Contact_No");
 
-    $GLOBAL_SINGLE_BULK_ENTRY_DROPDOWN = array("Whatsapp_Contact_No"=>"Whatsapp Number", "Email_Id"=>"Email Address", "SMS_Contact_No"=>"Contact Number", "Birth_Cert"=>"Birth Certificate", "Aadhar"=>"Aadhar");
-
+    $GLOBAL_SINGLE_BULK_ENTRY_DROPDOWN = array("School_Adm_No"=>"School Admission No","Session"=>"Session", "Session_Start_Year"=>"Session Start Year", "Session_End_Year"=>"Session End Year",
+    "First_Name"=>"First Name","Middle_Name" => "Middle Name", "Last_Name"=> "Last Name", "DOB"=>"DOB","Age"=>"Age",
+    "Social_Category"=>"Social Category", "Discount_Category"=>"Discount Category", "Locality"=>"Locality",
+    "Mother_Tongue"=>"Mother Tongue", "Religion"=>"Religion", "Nationality"=>"Nationality", "Blood_Group"=>"Blood Group","Comm_Address"=>"Comm Address", "Comm_Address_ContactNo" =>"Comm Address Contact No",
+    "Resid_Address"=>"Resid Address", "Resid_Add_ContactNo" => "Resid Add Contact No","Whatsapp_Contact_No"=>"Whatsapp Number", "Email_Id"=>"Email Address", "SMS_Contact_No"=>"Contact Number", "Aadhar_No"=>"Aadhar");
     //Created By Mithun Mukherjee//
     $GLOBAL_CLASS_STREAM=array("Science"=>"Science","Commerce"=>"Commerce","Arts"=>"Arts","General"=>"General");
     $GLOBAL_ATTENDANCE_SMS=array("Absent-SMS"=>"Dear Parent sorry for the inconvenience your child #childname# is found to be absent on #date# in the school. Please take care of your child.","Present-SMS"=>"Dear Parent sorry for the inconvenience caused by attendance absent message. Glad to inform you that your child #childname# is present in school.");

@@ -71,7 +71,7 @@ if($request_type=='CollectFee')
                 //echo $StudentFeeMaster_sql;
                 $StudentFeeMaster_prepare=$dbhandle->prepare($StudentFeeMaster_sql);
                 $StudentFeeMaster_prepare->bind_param('iss',$InstallmentId,$SessionId,$StudentId);
-                
+                $firstindex=1;
                 while($InstallmentList_row=$InstallmentList_result->fetch_assoc()) //Looping through each Installment.
                     {
                         //Creating Installment variables.
@@ -150,15 +150,15 @@ if($request_type=='CollectFee')
                                     {
                                         if($row["Fee_Amount"]>0)
                                         {
-                                        $fee[$InstallmentId]["details"][$counter]["feeheadid"]=$row["Fee_Head_Id"];
-                                        $fee[$InstallmentId]["details"][$counter]["feename"]=$row["Fee_Head_Name"];
-                                        $fee[$InstallmentId]["details"][$counter]["amount"]=$row["Fee_Amount"];
-                                        $fee[$InstallmentId]["details"][$counter]["concession"]=$row["Concession_Amount"];
-                                       // echo $counter;
-                                       // echo  '<br>' . $row["Fee_Head_Id"] . '<br>';
-                                       // echo $row["Fee_Head_Name"]. '<br>';
-                                       //echo $row["Fee_Amount"]. '<br>';
-                                       // echo $row["Concession_Amount"]. '<br>';
+                                        // $fee[$InstallmentId]["details"][$counter]["feeheadid"]=$row["Fee_Head_Id"];
+                                        // $fee[$InstallmentId]["details"][$counter]["feename"]=$row["Fee_Head_Name"];
+                                        // $fee[$InstallmentId]["details"][$counter]["amount"]=$row["Fee_Amount"];
+                                        // $fee[$InstallmentId]["details"][$counter]["concession"]=$row["Concession_Amount"];
+                                        $fee[$firstindex]["details"][$counter]["feeheadid"]=$row["Fee_Head_Id"];
+                                        $fee[$firstindex]["details"][$counter]["feename"]=$row["Fee_Head_Name"];
+                                        $fee[$firstindex]["details"][$counter]["amount"]=$row["Fee_Amount"];
+                                        $fee[$firstindex]["details"][$counter]["concession"]=$row["Concession_Amount"];
+                                     
                                         
                                         $counter++;
                                         }
@@ -166,11 +166,16 @@ if($request_type=='CollectFee')
 
                                     //$fee[$InstallmentId]["Late_Fee"]=$StudentFeeMaster_row["Late_Fee_Amount"]; 
                             }
-                            $fee[$InstallmentId]["Installment_name"]="$Installment_Name";
-                            $fee[$InstallmentId]["Installment_Id"]="$InstallmentId"; 
-                            $fee[$InstallmentId]["Late_Fee"]=$LateFeeAmount;
-                            $fee[$InstallmentId]["Net_Amount"]=$TotalInstAmount;    
+                            // $fee[$InstallmentId]["Installment_name"]="$Installment_Name";
+                            // $fee[$InstallmentId]["Installment_Id"]="$InstallmentId"; 
+                            // $fee[$InstallmentId]["Late_Fee"]=$LateFeeAmount;
+                            // $fee[$InstallmentId]["Net_Amount"]=$TotalInstAmount;    
+                            $fee[$firstindex]["Installment_name"]="$Installment_Name";
+                            $fee[$firstindex]["Installment_Id"]="$InstallmentId"; 
+                            $fee[$firstindex]["Late_Fee"]=$LateFeeAmount;
+                            $fee[$firstindex]["Net_Amount"]=$TotalInstAmount;    
                             $counter=0;
+                            $firstindex++;
                           
                     }
                         header('Content-type: text/javascript');

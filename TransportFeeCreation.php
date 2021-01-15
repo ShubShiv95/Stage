@@ -223,8 +223,21 @@
                 $json=json_encode($json);
                 echo $json;
             }
+        
+            
         //Fetching Student class and concession group information.    
         $StudentDetails_row=$StudentDetails_result->fetch_assoc();
+        
+        if($StudentDetails_row["Transport_FG_Id"]!=0)
+            {
+                //Exception for multiple active student class session data in student_class_details. Which should not done because of application logic.
+                $message="Student Id $StudentId has been assigned with the Transport fee structure earlier.  To Update with new stopage location go to Stopage Update Operation.";
+                $json=array("status"=>"Error","message"=>$message);
+                $json=json_encode($json);
+                echo $json;
+                die;
+            }
+
         $Class_id=$StudentDetails_row["Class_Id"];
         $Stream=$StudentDetails_row["Stream"];
         $Student_Type=$StudentDetails_row["Student_Type"];

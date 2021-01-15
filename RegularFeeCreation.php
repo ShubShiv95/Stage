@@ -2,16 +2,16 @@
     session_start();
     include 'dbobj.php';
     include 'errorLog.php';
-    include 'security.php';
+    //include 'security.php';
     require_once 'sequenceGenerator.php';
 
     
-    function Add_Regular_Fee($dbhandle,$StudentId,$Concession_Id,$RFG_Id,$session,$ClassId)
+    function Add_Regular_Fee($dbhandle,$StudentId,$Concession_Id,$RFG_Id,$session,$ClassId,$SchoolId,$LoginId)
     {
             $json='';
             /*Fetching Concession details for the provided student's concession group id.*/
             /*Concession List array creation*/
-                $ConcessionGroup_sql="select * from concession_detail_table where concession_id=$Concession_Id and enabled=1 and session='$session' and school_id=" . $_SESSION["SCHOOLID"];
+                $ConcessionGroup_sql="select * from concession_detail_table where concession_id=$Concession_Id and enabled=1 and session='$session' and school_id=" . $SchoolId;
                 //echo $ConcessionGroup_sql . '<br>';
                 $ConcessionGroup_result=$dbhandle->query($ConcessionGroup_sql);
                 if(!$ConcessionGroup_result)
@@ -93,7 +93,7 @@
                                 $Installment_Total_Amount= $Installment_Total_Amount+$row["Fee_Amount"];
                                 $ConcessionAmount= round($row["Fee_Amount"] * $ConcessionList[$row["Fee_Head_Id"]] / 100);
                                 $Installment_Total_Amount=$Installment_Total_Amount-$ConcessionAmount;
-                                $StudentFeeList_sql="INSERT INTO `student_fee_details`(`SFD_Id`,`SFM_Id`,`FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES ($SFD_Id,$SFMId,$RFG_Id," . $row["Fee_Head_Id"] . "," . $row["Fee_Installment_Type"] . "," . $row["Installment_Id"] . "," . $row["Fee_Amount"] . "," . $ConcessionAmount . ",$Concession_Id," . "1,'" . $_SESSION["LOGINID"]."')";
+                                $StudentFeeList_sql="INSERT INTO `student_fee_details`(`SFD_Id`,`SFM_Id`,`FG_Id`, `Fee_Head_Id`, `Fee_Installment_Type`, `Installment_Id`, `Fee_Amount`, `Concession_Amount`, `Concession_Id`,  `Enabled`, `Updated_By`) VALUES ($SFD_Id,$SFMId,$RFG_Id," . $row["Fee_Head_Id"] . "," . $row["Fee_Installment_Type"] . "," . $row["Installment_Id"] . "," . $row["Fee_Amount"] . "," . $ConcessionAmount . ",$Concession_Id," . "1,'" . $LoginId."')";
                                 //echo $StudentFeeList_sql . "<br>";
                                 $StudentFeeList_result=$dbhandle->query($StudentFeeList_sql);
                                 if(!$StudentFeeList_result)
@@ -112,7 +112,7 @@
                                     }
                             }
                         
-                        $StudentFeeMaster_sql="INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES ($SFMId,$RFG_Id,$InstallmentId, $Installment_Total_Amount,'Unpaid','$StudentId','$session'," . $InstallmentList_row["Installment_Month"] . "," . $_SESSION["SCHOOLID"] . ",'" . $_SESSION["LOGINID"] . "')";
+                        $StudentFeeMaster_sql="INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES ($SFMId,$RFG_Id,$InstallmentId, $Installment_Total_Amount,'Unpaid','$StudentId','$session'," . $InstallmentList_row["Installment_Month"] . "," . $SchoolId . ",'" . $LoginId . "')";
                         //echo $StudentFeeMaster_sql . '<br>';
                         $StudentFeeMaster_result=$dbhandle->query($StudentFeeMaster_sql);
                         
@@ -124,7 +124,7 @@
                                     $sql=$StudentFeeMaster_sql;
                                     $el = new LogMessage();
                                     //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                                    $el->write_log_message('Student Fee Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                                    $el->write_log_message('Student Fee Creation ', $error_msg, $sql, __FILE__, $LoginId);
                                     //mysqli_rollback($dbhandle);
                                     $StudentFeeDetailsSuccess=false;
                                     $json=array("status"=>"Error","message"=>"Database Error: Not able to save installment fee master information. Please try again later.");
@@ -133,8 +133,10 @@
                             } 
                     }
 
-                $UpdateStudentClassDetails_sql="update student_class_details set Regular_FG_Id=$RFG_Id where Session=$session and Student_Id=$StudentId and Class_id=$ClassId and School_Id=". $_SESSION["SCHOOLID"] . " and Enabled=1";
+                $UpdateStudentClassDetails_sql="update student_class_details set Regular_FG_Id=$RFG_Id where Session='$session' and Student_Id='$StudentId' and Class_id=$ClassId and School_Id=". $SchoolId . " and Enabled=1";
+                echo $UpdateStudentClassDetails_sql;
                 $UpdateStudentClassDetails_result=$dbhandle->query($UpdateStudentClassDetails_sql);
+                echo "Update student class details:" . var_dump($UpdateStudentClassDetails_sql);
                 if(!$UpdateStudentClassDetails_result)
                     {
                                 //echo 'master failed';
@@ -150,7 +152,8 @@
                                 $json=json_encode($json);
                                 return $json;
                     } 
-
+                
+                echo "Master success" . var_dump($StudentFeeMasterSuccess) . "  --  Details Success: " . var_dump($StudentFeeDetailsSuccess);    
                 if($StudentFeeMasterSuccess and $StudentFeeDetailsSuccess)
                     {    
                         mysqli_commit($dbhandle);  
@@ -169,12 +172,18 @@
                     }                                            
     }
 
+
+
+    //Main Function starts from here.
     //Regular fee creation main section starts from here.//testing studentid=156/2018
         $json=''; //Json variable which will return to client request.   
         mysqli_autocommit($dbhandle,false);
         //Capturing request data.
         $StudentId=$_REQUEST["studentid"];  //SAMPLE STUDENT ID.
         $session=$_REQUEST["session"];      
+        $SchoolId=$_REQUEST["schoolid"];
+        $LoginId=$_REQUEST["loginid"];
+
         //Fetching Student_Id class information for the sessoin.
         $StudentDetails_sql="select * from student_class_details where student_id='$StudentId' and session='$session' and enabled=1";
         //echo $StudentDetails_sql . '<br>';
@@ -200,7 +209,7 @@
                 $sql=$StudentDetails_sql;
                 $el = new LogMessage();
                 //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                $el->write_log_message('Student Fee Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                $el->write_log_message('Student Fee Creation ', $error_msg, $sql, __FILE__, $loginid);
                 mysqli_rollback($dbhandle);
                 $json=array("status"=>"Error","message"=>"Student class record not found. Please try again.");
                 $json=json_encode($json);
@@ -226,6 +235,8 @@
         $Student_Type=$StudentDetails_row["Student_Type"];
         $Concession_Id=$StudentDetails_row["Concession_Id"]; 
         
+
+        
         if($StudentDetails_row["Regular_FG_Id"]!=0)
             {
                 //Exception for multiple active student class session data in student_class_details. Which should not done because of application logic.
@@ -234,7 +245,6 @@
                 $json=json_encode($json);
                 echo $json;
                 die;
-                
             }
 
         if($Concession_Id=='')
@@ -249,17 +259,17 @@
         }        
  
         //Finding Regular Fee Group Id.
-        $FeeClusterId_sql="SELECT FGT.FG_Id FROM fee_group_table fgt,fee_group_class_list fgct WHERE fgt.fg_id=fgct.fg_id AND fgt.student_type='$Student_Type' AND fgct.school_id=" . $_SESSION["SCHOOLID"] . " AND fgct.class_id=$Class_id AND fgct.stream='$Stream'";
-        echo $FeeClusterId_sql;
+        $FeeClusterId_sql="SELECT FGT.FG_Id FROM fee_group_table fgt,fee_group_class_list fgct WHERE fgt.fg_id=fgct.fg_id AND fgt.student_type='$Student_Type' AND fgct.school_id=" . $SchoolId . " AND fgct.class_id=$Class_id AND fgct.stream='$Stream'";
+        //echo $FeeClusterId_sql;
         $FeeClusterId_result=$dbhandle->query($FeeClusterId_sql);
         if(!$FeeClusterId_result)
             {
                 //Databae error handling while fetching Fee Group Information.
                 $error_msg = "Regular Fee Cluster Id not found.";
-                $sql=$CommissionGroup_sql;
+                $sql=$FeeClusterId_sql;
                 $el = new LogMessage();
                 //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                $el->write_log_message('Student Fee List Creation ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                $el->write_log_message('Student Fee List Creation ', $error_msg, $sql, __FILE__, $LoginId);
                 mysqli_rollback($dbhandle);
                 $json=array("status"=>"Error","message"=>"Database Error. Please try again.");
                 $json=json_encode($json);
@@ -268,7 +278,8 @@
         //Fetching Regular Fee Group id information    
         $FeeClusterId_row=$FeeClusterId_result->fetch_assoc();
         $RFG_Id=$FeeClusterId_row["FG_Id"]; 
-        $json=Add_Regular_Fee($dbhandle,$StudentId,$Concession_Id,$RFG_Id,$session,$Class_id);
+        $json=Add_Regular_Fee($dbhandle,$StudentId,$Concession_Id,$RFG_Id,$session,$Class_id,$SchoolId,$LoginId);
+
         echo $json;    
 
 

@@ -70,3 +70,213 @@ Module Name: 	Student Fee Creation
 Message:	
 SQL:	select * from student_class_details where student_id='120/2018?session=2020-2021' and session='' and enabled=1
 File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	15-Jan-2021 10:48:10 PM	 By User:admin
+Module Name: 	Student Transport stopage fee Fetch Error. 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select * from transport_stopage_table where stopage_id=
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	15-Jan-2021 11:04:21 PM	 By User:admin
+Module Name: 	Student Transport stopage fee Fetch Error. 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQL:	select * from transport_stopage_table where stopage_id=
+File:	F:\xampp\htdocs\stage\TransportFeeCreation.php
+
+Date:	15-Jan-2021 11:06:51 PM	 By User:admin
+Module Name: 	Student Class Details 
+Message:	Duplicate entry '69' for key 'PRIMARY'
+SQL:	INSERT INTO `student_class_details`(`Student_Details_Id`, `Student_Id`, `Class_Id`, `Class_No`, `Stream`, `Session`, `Session_Start_Year`, `Session_End_Year`, `Updated_By`,`School_Id`,`Student_Type`,`Concession_Id`) VALUES (?,?,?,?,?,?,?,?,?,?,'New',?)
+File:	F:\xampp\htdocs\stage\AdmissionAdd_1.php
+
+Date:	15-Jan-2021 11:07:09 PM	 By User:admin
+Module Name: 	Student Class Details 
+Message:	Duplicate entry '69' for key 'PRIMARY'
+SQL:	INSERT INTO `student_class_details`(`Student_Details_Id`, `Student_Id`, `Class_Id`, `Class_No`, `Stream`, `Session`, `Session_Start_Year`, `Session_End_Year`, `Updated_By`,`School_Id`,`Student_Type`,`Concession_Id`) VALUES (?,?,?,?,?,?,?,?,?,?,'New',?)
+File:	F:\xampp\htdocs\stage\AdmissionAdd_1.php
+
+Date:	15-Jan-2021 11:15:26 PM	 By User:admin
+Module Name: 	Student Class Details 
+Message:	Duplicate entry '69' for key 'PRIMARY'
+SQL:	INSERT INTO `student_class_details`(`Student_Details_Id`, `Student_Id`, `Class_Id`, `Class_No`, `Stream`, `Session`, `Session_Start_Year`, `Session_End_Year`, `Updated_By`,`School_Id`,`Student_Type`,`Concession_Id`) VALUES (?,?,?,?,?,?,?,?,?,?,'New',?)
+File:	F:\xampp\htdocs\stage\AdmissionAdd_1.php
+
+Date:	15-Jan-2021 11:22:45 PM	 By User:admin
+Module Name: 	Student Class Details 
+Message:	Duplicate entry '69' for key 'PRIMARY'
+SQL:	INSERT INTO `student_class_details`(`Student_Details_Id`, `Student_Id`, `Class_Id`, `Class_No`, `Stream`, `Session`, `Session_Start_Year`, `Session_End_Year`, `Updated_By`,`School_Id`,`Student_Type`,`Concession_Id`) VALUES (?,?,?,?,?,?,?,?,?,?,'New',?)
+File:	F:\xampp\htdocs\stage\AdmissionAdd_1.php
+
+Date:	15-Jan-2021 11:24:13 PM	 By User:admin
+Module Name: 	Student Class Details 
+Message:	Duplicate entry '69' for key 'PRIMARY'
+SQL:	INSERT INTO `student_class_details`(`Student_Details_Id`, `Student_Id`, `Class_Id`, `Class_No`, `Stream`, `Session`, `Session_Start_Year`, `Session_End_Year`, `Updated_By`,`School_Id`,`Student_Type`,`Concession_Id`) VALUES (?,?,?,?,?,?,?,?,?,?,'New',?)
+File:	F:\xampp\htdocs\stage\AdmissionAdd_1.php
+
+Date:	15-Jan-2021 11:38:57 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '1, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,,1, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:00:19 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '1, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,,1, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:00:23 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:01:05 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:02:21 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:02:24 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:02:35 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:02:47 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:03:05 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:15:36 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:15:49 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:15:50 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:16:23 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:16:39 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:17:44 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	SELECT FGT.FG_Id FROM fee_group_table fgt,fee_group_class_list fgct WHERE fgt.fg_id=fgct.fg_id AND fgt.student_type='New' AND fgct.school_id= AND fgct.class_id=2 AND fgct.stream='GENERAL'
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:19:07 AM	 By User:
+Module Name: 	Student Fee List Creation 
+Message:	Regular Fee Cluster Id not found.
+SQL:	SELECT FGT.FG_Id FROM fee_group_table fgt,fee_group_class_list fgct WHERE fgt.fg_id=fgct.fg_id AND fgt.student_type='New' AND fgct.school_id= AND fgct.class_id=2 AND fgct.stream='GENERAL'
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:19:45 AM	 By User:
+Module Name: 	Student Fee Creation 
+Message:	
+SQL:	select * from student_class_details where student_id='156/2018' and session='2020-2021?schoolid=1' and enabled=1
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:21:04 AM	 By User:
+Module Name: 	Student Fee Creation 
+Message:	
+SQL:	select * from student_class_details where student_id='156/2018' and session='2020-2021?schoolid=1' and enabled=1
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:22:48 AM	 By User:
+Module Name: 	Student Fee Creation 
+Message:	
+SQL:	select * from student_class_details where student_id='156/2018' and session='2020-2021?schoolid=1' and enabled=1
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:22:50 AM	 By User:
+Module Name: 	Student Fee Creation 
+Message:	
+SQL:	select * from student_class_details where student_id='156/2018' and session='2020-2021?schoolid=1' and enabled=1
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:22:50 AM	 By User:
+Module Name: 	Student Fee Creation 
+Message:	
+SQL:	select * from student_class_details where student_id='156/2018' and session='2020-2021?schoolid=1' and enabled=1
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:22:50 AM	 By User:
+Module Name: 	Student Fee Creation 
+Message:	
+SQL:	select * from student_class_details where student_id='156/2018' and session='2020-2021?schoolid=1' and enabled=1
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:22:51 AM	 By User:
+Module Name: 	Student Fee Creation 
+Message:	
+SQL:	select * from student_class_details where student_id='156/2018' and session='2020-2021?schoolid=1' and enabled=1
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:23:37 AM	 By User:
+Module Name: 	Student Fee Creation 
+Message:	
+SQL:	select * from student_class_details where student_id='156/2018' and session='2020-2021?schoolid=1' and enabled=1
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:23:39 AM	 By User:
+Module Name: 	Student Fee Creation 
+Message:	
+SQL:	select * from student_class_details where student_id='156/2018' and session='2020-2021?schoolid=1' and enabled=1
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:24:32 AM	 By User:
+Module Name: 	Student Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '1, 0,'Unpaid','156/2018','2020-2021',4,1,'')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,,1, 0,'Unpaid','156/2018','2020-2021',4,1,'')
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:24:56 AM	 By User:
+Module Name: 	Student Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '1, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,,1, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	16-Jan-2021 12:25:37 AM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '1, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')' at line 1
+SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (1,,1, 0,'Unpaid','156/2018','2020-2021',4,1,'admin')
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php

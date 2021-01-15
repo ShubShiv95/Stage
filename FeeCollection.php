@@ -156,14 +156,14 @@ include 'security.php';
                                                 <div class="col-xl-12 col-lg-12 col-12 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>School Name </label>
-                                                        <select class="select2 show_school" name="school_name">
+                                                        <select class="select2 show_school" name="school_name" id="show_school" >
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-12 col-lg-12 col-12 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>A/C Type </label>
-                                                        <select class="select2 account_type" name="ac_type" id="account_type">
+                                                        <select class="select2 account_type col-12" name="ac_type" id="account_type">
                                                             <option value="SchoolBusFee">School and Bus Fee</option>
                                                             <option value="SchoolFee">School Fee</option>
                                                             <option value="BusFee">Bus Fee</option>
@@ -173,7 +173,7 @@ include 'security.php';
                                                 <div class="col-xl-6 col-lg-6 col-12 mb-4">
                                                     <div class="form-group aj-form-group">
                                                         <label>Pay Date <span>*</span></label>
-                                                        <input type="text" name="date_of_receipt" placeholder="DD/MM/YYYY" value="<?php echo date('Y-m-d') ?>" class="form-control pay_date air-datepicker" data-position="bottom right" autocomplete="off" required="">
+                                                        <input type="text" name="date_of_receipt" placeholder="DD/MM/YYYY" value="<?php echo date('Y-m-d') ?>" class="form-control pay_date air-datepicker" id="pay_date" data-position="bottom right" autocomplete="off" required="">
                                                         <i class="far fa-calendar-alt"></i>
                                                     </div>
                                                 </div>
@@ -490,9 +490,11 @@ include 'security.php';
 
             function load_fee_details(student_id) {
                 $('.load_dyn_fee_data').html('');
-                var ac_type = $('.account_type').val();
+                var ac_type = $("#account_type").val(); //$('.account_type').val();
+                alert(ac_type);
                 var school_id = $('.show_school').val();
-                const fee_url = "./FeeCollectionAPI.php?Parameter=CollectFee&studentid=" + student_id + "&ac_type=" + ac_type + "&school_id=" + school_id + "";
+                var curr_session = $('#school_session').val();
+                const fee_url = "./FeeCollectionAPI.php?Parameter=CollectFee&studentid=" + student_id + "&ac_type=" + ac_type + "&school_id=" + school_id + "&session="+curr_session+"";
                 var fee_list_html = '';
                 var i = 1;
                 $.getJSON(fee_url, function(response_fee) {
@@ -518,7 +520,8 @@ include 'security.php';
                 var student_id = $(this).attr('stud_id');
                 var ac_type = $('.account_type').val();
                 var school_id = $('.show_school').val();
-                const fee_url = "./FeeCollectionAPI.php?Parameter=CollectFee&studentid=" + student_id + "&ac_type=" + ac_type + "&school_id=" + school_id + "";
+                var curr_session = $('#school_session').val();
+                const fee_url = "./FeeCollectionAPI.php?Parameter=CollectFee&studentid=" + student_id + "&ac_type=" + ac_type + "&school_id=" + school_id + "&session="+curr_session+"";
                 var fee_table_html = '<thead><tr><th style="width: 40%;">Fee Type </th><th style="width: 20%;">Amount </th><th style="width: 20%;">Con Amt </th><th style="width: 20%;">Net Total</th></tr></thead><tbody class="top-position-ss ">';
                 $.getJSON(fee_url, function(response_details_view) {
                     var json_data = JSON.parse(JSON.stringify(response_details_view));
@@ -839,7 +842,8 @@ include 'security.php';
                     var form_data = $(this).serialize();
                     $.post($(this).attr('action'), form_data, function(fee_response) {
                         $('.form_output').html(fee_response);
-                        window.open("FeeReceiptPrint.php?FeeId=5625");
+                        window.open("FeeReceiptPrint.php?receipt_id=5625");
+                        reset_form();
                     });
                 } else {
                     var html_alert = `<div class="alert alert-danger alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Alert</strong> Form Cannot Be Submitted When Balance Is More Than Zero.</div>`;
@@ -948,7 +952,8 @@ include 'security.php';
                             <th class="cus-border">Chq. No</th>
                             <th  class="cus-border text-center">Amt.</th>
                         </tr>`;
-                const other_Fee_url = "FeeCollectionAPI.php?Parameter=CollectOtherAmounts&studentid=" + student_id + "&ac_type=" + ac_type + "&school_id=" + school_id + "";
+                        var curr_session = $('#school_session').val();                   
+                const other_Fee_url = "FeeCollectionAPI.php?Parameter=CollectOtherAmounts&studentid=" + student_id + "&ac_type=" + ac_type + "&school_id=" + school_id + "&session="+curr_session+"";
                 $.getJSON(other_Fee_url, function(oth_fee_resp) {
                     $('#advance_fee').val(oth_fee_resp.AdjustedAmount);
                     $('#readmission_fee').val(oth_fee_resp.ReeAdmFee);
@@ -974,19 +979,22 @@ include 'security.php';
 
             /******** reset form *********/
             function reset_form() {
-                $('#fee_collection_form')[0].reset();
                 $('.load_dyn_fee_data').html('');
+                $('.chq_bounce_table').html('');
+                $('.main_img').attr('src', '');
             }
             $(document).on('focusin', '#student_id', function() {
                 reset_form();
             });
-            $(document).on('change', '.show_school', function() {
+            $(document).on('change','.account_type',function(){
+                reset_form();
+                var value_dd = $(this).val();
+                console.log(value_dd);
+            });
+            $(document).on('focusout', '#pay_date', function() {
                 reset_form();
             });
-            $(document).on('change', '.account_type', function() {
-                reset_form();
-            });
-            $(document).on('change', '.pay_date', function() {
+            $(document).on('focusout', '#school_session', function() {
                 reset_form();
             });
         });

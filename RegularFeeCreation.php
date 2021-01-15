@@ -112,7 +112,7 @@
                                     }
                             }
                         
-                            $StudentFeeMaster_sql="INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES ($SFMId,$RFG_Id,$InstallmentId, $Installment_Total_Amount,'Unpaid','$StudentId','$session'," . $InstallmentList_row["Installment_Month"] . "," . $_SESSION["SCHOOLID"] . ",'" . $_SESSION["LOGINID"] . "')";
+                        $StudentFeeMaster_sql="INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES ($SFMId,$RFG_Id,$InstallmentId, $Installment_Total_Amount,'Unpaid','$StudentId','$session'," . $InstallmentList_row["Installment_Month"] . "," . $_SESSION["SCHOOLID"] . ",'" . $_SESSION["LOGINID"] . "')";
                         //echo $StudentFeeMaster_sql . '<br>';
                         $StudentFeeMaster_result=$dbhandle->query($StudentFeeMaster_sql);
                         
@@ -206,17 +206,51 @@
                 $json=json_encode($json);
                 echo $json;
             }
+        
+            if($StudentDetails_result->num_rows>1)
+            {
+                //Exception for multiple active student class session data in student_class_details. Which should not done because of application logic.
+                $message="Student Id $StudentId has ambiguous class session data found activated. Please deactivate the older sessions first and then create the Fee Structure.";
+                $json=array("status"=>"Error","message"=>$message);
+                $json=json_encode($json);
+                echo $json;
+                die;
+            }
+         
+
+
         //Fetching Student class and concession group information.    
         $StudentDetails_row=$StudentDetails_result->fetch_assoc();
         $Class_id=$StudentDetails_row["Class_Id"];
         $Stream=$StudentDetails_row["Stream"];
         $Student_Type=$StudentDetails_row["Student_Type"];
         $Concession_Id=$StudentDetails_row["Concession_Id"]; 
+        
+        if($StudentDetails_row["Regular_FG_Id"]!=0)
+            {
+                //Exception for multiple active student class session data in student_class_details. Which should not done because of application logic.
+                $message="Student Id $StudentId has been assigned with the fee structure earlier.  No action Required.";
+                $json=array("status"=>"Error","message"=>$message);
+                $json=json_encode($json);
+                echo $json;
+                die;
+                
+            }
 
+        if($Concession_Id=='')
+        {
+            //No Concession Group Defined. Pick the default Concession Group and apply the fee Strucure.
+            $message="NO Concession group defined for the Student Id: $StudentId.  Please define the concession group for the student first then apply Fee System.";
+            $json=array("status"=>"Error","message"=>$message);
+            $json=json_encode($json);
+            echo $json;
+            die;
+
+        }        
  
         //Finding Regular Fee Group Id.
         $FeeClusterId_sql="SELECT FGT.FG_Id FROM fee_group_table fgt,fee_group_class_list fgct WHERE fgt.fg_id=fgct.fg_id AND fgt.student_type='$Student_Type' AND fgct.school_id=" . $_SESSION["SCHOOLID"] . " AND fgct.class_id=$Class_id AND fgct.stream='$Stream'";
-        //echo $FeeClusterId_sql;
+        echo $FeeClusterId_sql;
         $FeeClusterId_result=$dbhandle->query($FeeClusterId_sql);
         if(!$FeeClusterId_result)
             {
@@ -234,8 +268,8 @@
         //Fetching Regular Fee Group id information    
         $FeeClusterId_row=$FeeClusterId_result->fetch_assoc();
         $RFG_Id=$FeeClusterId_row["FG_Id"]; 
-        $Regular_result=Add_Regular_Fee($dbhandle,$StudentId,$Concession_Id,$RFG_Id,$session,$Class_id);
-        echo $Regular_result;    
+        $json=Add_Regular_Fee($dbhandle,$StudentId,$Concession_Id,$RFG_Id,$session,$Class_id);
+        echo $json;    
 
 
 ?>

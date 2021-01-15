@@ -4,8 +4,8 @@ include 'crawlerBhashSMS.php';
 include 'dbobj.php';
 include 'errorLog.php';
 
-$lid = mysqli_real_escape_string($dbhandle,trim($_REQUEST['loginid']));
-$passwd = mysqli_real_escape_string($dbhandle,$_REQUEST['password']);
+$lid = mysqli_real_escape_string($dbhandle,trim($_POST['loginid']));
+$passwd = mysqli_real_escape_string($dbhandle,$_POST['password']);
 /*
 @ $dbhandle = mysql_connect('localhost','dsc_user','dscuser','dsc'); // mysqli('hostname','databasse_user','database_user_password','database name')
 
@@ -154,7 +154,7 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 			}	
 			else if($Login_Query_Row["LOGIN_TYPE"]=='STAFF')
 			{
-				$Get_Staff_Details_Sql="select * from staff_master_table where staff_reff_login_id='" . $lid . "' and enabled=1";
+				$Get_Staff_Details_Sql="select * from staff_master_table where login_id='" . $lid . "' and enabled=1";
 				//echo $Get_Staff_Details_Sql;
 				$Get_Staff_Details_Result=$dbhandle->query($Get_Staff_Details_Sql);
 				$Get_Staff_Details_Row=$Get_Staff_Details_Result->fetch_assoc();
@@ -244,7 +244,12 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 		else
 		{
 			$_SESSION["ERRORNO"]=3;  //redirection at incorrect password.
-			echo 'incorrect password';
+			echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>Warning</strong> Use Correct Password 
+			</div>';
 			//echo '<meta HTTP-EQUIV="Refresh" content="0; URL=sessionerror.php">';
 			exit;
 		}
@@ -252,7 +257,12 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 	else
 	{
 		$_SESSION["ERRORNO"]=2;   //redirection at disabled loginid.
-		echo 'disabled login';
+		echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong>Warning</strong> Your Annount Is Disabled
+			</div>';
 		//echo '<meta HTTP-EQUIV="Refresh" content="0; URL=sessionerror.php">';
 		exit;
 	}
@@ -260,8 +270,17 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 else
 {
 	$_SESSION["ERRORNO"]=1;    //redirection at incorrect loginid.
-	echo $lid;
+	echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+	<strong>Warning</strong> Invalid User Name
+  </div>';
 	//echo '<meta HTTP-EQUIV="Refresh" content="0; URL=sessionerror.php">';
 	exit;
 }
 ?>
+
+<script>
+  $(".alert").alert();
+</script>

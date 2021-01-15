@@ -4,10 +4,6 @@ session_start();
 $pageTitle = "Transport  Add Route Fee";
 $bodyHeader = "Transport Add Route Fee";
 require_once './includes/header.php';
-include 'dbobj.php';
-//include 'errorLog.php';
-include 'security.php';
-
 ?>
 <!-- start your UI here -->
 <div class="col-md-12">
@@ -57,7 +53,7 @@ include 'security.php';
                             <th>Route</th>
                             <th>Charges</th>
                             <th>Charges</th>
-                            <th>ACtion</th>
+                            <th>Action</th>
                             <th>Status</th>
                           </tr>
                           </thead>
@@ -113,6 +109,7 @@ include 'security.php';
     function display_routes_fee(){
       var driver_html = '';
       var driver_url = './Transport_1.php?get_routes_fee=1';
+      var status_enb = '';
       $.getJSON(driver_url,function(driver_resp){
         $.each(driver_resp,function(key, value){
           if(value.Enabled==1){

@@ -78,6 +78,7 @@
                                 <li><a href="#"><i class="flaticon-list"></i>Task</a></li>
                                 <li><a href="#"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
                                 <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
+                                <li><a href="#" id="change_pwd"><i class="fa fa-key" aria-hidden="true"></i>Change Password</a></li>
                                 <li><a href="signout.php"><i class="flaticon-turn-off"></i>Log Out</a></li>
                             </ul>
                         </div>
@@ -269,3 +270,76 @@
             </ul>
         </div>
     </div>
+
+<!-- change password modal -->
+    <div class="modal change_pwd_modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Change Password</h6>
+                <button type="button" class="close close_pwd_modal" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="model-tebal-in">
+                    <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
+                        <form class="new-added-form aj-new-added-form Fee-collection" action="./change_password_1.php" method="POST" id="change_password_form">
+                            <div class="Attendance-staff  aj-scroll-Attendance-staff">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 aj-mb-2 mt-3 ml-1 row">
+                                    <div class="form-group aj-form-group col-xl-12 col-lg-12 col-12">
+                                        <label>Current Password</label>
+                                        <input type="text" class="d-none" name="password_sender">
+                                        <input type="password" id="current_password" name="current_password" placeholder="" autocomplete="off" required="" class="form-control">
+                                    </div>
+                                    <div class="form-group aj-form-group col-xl-12 col-lg-12 col-12">
+                                        <label>New Password</label>
+                                        <input type="password" id="new_password" name="new_password" placeholder="" autocomplete="off" required="" class="form-control">
+                                    </div>
+                                    <div class="form-group aj-form-group col-xl-12 col-lg-12 col-12">
+                                        <label>Re-Type Password</label>
+                                        <input type="password" id="re_password" name="re_password" placeholder="" autocomplete="off" required="" class="form-control">
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-1 aj-mb-2">
+                                        <button type="submit" name="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark float-right" id="search_data">Change Password</button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12 mt-2 table-responsive populate_student_list form_output">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript">
+    $(document).on('click', '#change_pwd', function(event) {
+        event.preventDefault();
+        $('.change_pwd_modal').fadeIn('slow');
+    });
+    $(document).on('click','.close_pwd_modal',function(event){
+        event.preventDefault();
+        $('.change_pwd_modal').fadeOut('slow');
+    });
+    $(document).on('submit','#change_password_form',function(event){
+        event.preventDefault();
+        current_pwd = $('#current_password').val();
+        $('.form_output').html('');
+        var form_data = $(this).serialize();
+        if(current_pwd!=''){
+            $.post($(this).attr('action'),form_data,function(reset_resp){
+                $('.form_output').html(reset_resp);
+            });
+        }
+    });
+    $(document).on('blur','#re_password',function(){
+        var new_pwd = $('#new_password').val();
+        var re_pwd = $(this).val();
+        if(re_pwd != new_pwd){
+            alert("Password Not Matched With New Password");
+            $(this).val('');
+        }
+    });
+
+</script>

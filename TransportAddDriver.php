@@ -116,6 +116,20 @@ include 'security.php';
         $('.load_drivers').html(driver_html);
       });
     }
+
+    $(document).on('click','.btn_edit',function(){
+      var driver_id =  $(this).attr('id');
+    });
+
+    $(document).on('click','.btn_delete',function(){
+      var driver_id =  $(this).attr('id');
+      form_data = {'delete_driver':1,'driver_id':driver_id};
+      if(confirm("Are You Sure to Delete?")){
+        $.post('./Transport_1.php',form_data,function(driver_del_res){
+          $('.formoutput').html(driver_del_res);
+        });
+      }
+    });    
   });
 </script>
 <?php

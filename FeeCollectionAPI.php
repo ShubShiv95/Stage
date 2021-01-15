@@ -29,32 +29,7 @@ else if($ac_type=='SchoolBusFee')
 
 if($request_type=='CollectFee')
     {
-        
-
-
             $fee=array();
-
-            /*
-            $StudentFeeIds_sql="select * from student_class_details where student_id='$Student_Id' and session='" . $_SESSION["SESSIONID"] . "' and enabled=1";
-            $StudentFeeIds_result=$dbhandle->query($StudentFeeIds_sql);
-            if(!$StudentFeeIds_result)
-                {
-                    //Database Error handling while fetching Student Fee Group Ids.
-                    $error_msg = $dbhandle->error;
-                    $sql=$StudentFeeIds_sql;
-                    $el = new LogMessage();
-                    //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                    $el->write_log_message('Student Fee Group Fetch Error:Database Error handling while fetching Student Fee Group Ids. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
-                    mysqli_rollback($dbhandle);
-                    $json=array("status"=>"error","message"=>"Database Error: Not able to get stopage fare. Please try again later.");
-                    $json=json_encode($json);
-                    return $json; 
-                }
-            $StudentFeeIds_row=$StudentFeeIds_result->fetch_assoc();    
-            $FG_Id=$StudentFeeIds_row["Regular_FG_Id"];
-            $TFG_Id=$StudentFeeIds_row["Transport_FG_Id"];
-             */
-
             $json='';
             /*Fetching Concession details for the provided student's concession group id.*/
             /*Concession List array creation*/
@@ -81,42 +56,8 @@ if($request_type=='CollectFee')
 
                 $InstallmentId=null;
 
-                /*//April
-    $fee[1]["details"]["1"]["feeheadid"]=1;
-    $fee[1]["details"]["1"]["name"]="Admission Fee";
-    $fee[1]["details"]["1"]["amount"]=5000;
-    $fee[1]["details"]["1"]["concession"]=1000;
-    //$fee[1]["Installment_name"]="Apr";
-    //$fee[1]["Installment_Id"]="4";
-    
-    $fee[1]["details"]["2"]["feeheadid"]=2;
-    $fee[1]["details"]["2"]["name"]="Tuition Fee";
-    $fee[1]["details"]["2"]["amount"]=2000;
-    $fee[1]["details"]["2"]["concession"]=500;
-    //$fee[1]["Installment_name"]="Apr";
-    //$fee[1]["Installment_Id"]="4";
-
-    $fee[1]["details"]["3"]["feehaeaid"]=3;
-    $fee[1]["details"]["3"]["name"]="Miscellaneous Fee";
-    $fee[1]["details"]["3"]["amount"]=1000;
-    $fee[1]["details"]["3"]["concession"]=0;
-
-	//$fee[1]["Installment_name"]="Apr";
-    //$fee[1]["Installment_Id"]="4";
+             
    
-	
-	$fee[1]["details"]["4"]["feeheadid"]=4;
-    $fee[1]["details"]["4"]["name"]="Transport Fee";
-    $fee[1]["details"]["4"]["amount"]=350;
-    $fee[1]["details"]["4"]["concession"]=0;
-	//$fee[1]["Installment_name"]="Apr";
-    //$fee[1]["Installment_Id"]="4";
-	
-	$fee[1]["Installment_name"]="Apr";
-    $fee[1]["Installment_Id"]="4";
-    $fee[1]["Net_Amount"]="6850";
-    
-    */
                 //step 1a. Looping installment id wise. 
                 //step 1b. Selecting fee_structure_table table for the installment id. 
                 //step 1c. Looping for the fee_structure_table records. 
@@ -240,10 +181,10 @@ if($request_type=='CollectFee')
 
     if($request_type=='CollectOtherAmounts')
     {
-        $OtherFee["advancefee"]=0;
+        $OtherFee["AdjustedAmount"]=0;
         $OtherFee["ODF"]=0;
         $OtherFee["Discount"]=0;
-        $OtherFee["readmfee"]=0;
+        $OtherFee["ReeAdmFee"]=0;
         $OtherFee["Cheque"][1]["ReceptNo"]='2020/12';
         $OtherFee["Cheque"][1]["ChequeNo"]='254789';
         $OtherFee["Cheque"][1]["BCharges"]=400;
@@ -275,7 +216,7 @@ if($request_type=='CollectFee')
                 //$OtherFee["advancefee"]=array("amount"=>$row["Advance_Amount"]);
                 $AdvanceAmount=$AdvanceAmount+$row["Advance_Amount"];
             }    
-            $OtherFee["advancefee"]=$AdvanceAmount;
+            $OtherFee["AdjustedAmount"]=$AdvanceAmount;
 
         //End of Advance Fee Adjustment Information.
 
@@ -333,7 +274,7 @@ if($request_type=='CollectFee')
         if($CountUnpaidMonths>=$ReadmissionMonthLimit)
             {
             
-                $OtherFee["readmfee"]=$ReadmFeeAmount;
+                $OtherFee["ReeAdmFee"]=$ReadmFeeAmount;
             }    
             
         //End of Readmission fee Calculation
@@ -366,4 +307,191 @@ if($request_type=='CollectFee')
         echo json_encode($OtherFee, JSON_PRETTY_PRINT);
     }
    
+// if($request_type=='ViewFeeSummary')
+//     {
+//         $fee=array();
+//         $json='';
+      
+//         /* Creating Installment List.*/
+//         $InstallmentList_sql="select installment_id,installment_name from installment_master_table order by installment_id";
+//         $InstallmentList_result=$dbhandle->query($InstallmentList_sql);
+//         if(!$InstallmentList_result)
+//         {
+//             //Database Error handling while fetching installment information.
+//             $error_msg = $dbhandle->error;
+//             $sql=$InstallmentList_sql;
+//             $el = new LogMessage();
+//             //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+//             $el->write_log_message('Student Fee List Creation:Installment Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+//             mysqli_rollback($dbhandle);
+//             $json=array("status"=>"Error","message"=>"Database Error: Not able to get installment information details. Please try again later.");
+//             $json=json_encode($json);
+//             return $json; 
+//         }
+
+//         $InstallmentId=null;
+//         $InstallmentName=null;
+//         $StudentFeeSummary_sql="select fht.fee_head_name,sfdt.fee_amount,sfmt.pay_status from student_fee_master sfmt, student_fee_details sfdt,installment_master_table imt,fee_head_table fht WHERE sfmt.student_id='$StudentId' AND sfdt.sfm_id=sfmt.sfm_id AND fht.fee_head_id=sfdt.fee_head_id AND sfdt.installment_id=imt.installment_id AND imt.installment_id=?";
+//         //echo $StudentFeeSummary_sql;
+
+//         //$StudentFeeMaster_sql="select sfm.*,fgt.Fee_Group_Type from student_fee_master sfm,fee_group_table fgt where installment_id=? and session=? and student_id=? and Pay_Status!='Paid' and fgt.FG_Id=sfm.FG_Id";
+//         //echo $StudentFeeMaster_sql;
+//         $StudentFeeSummary_prepare=$dbhandle->prepare($StudentFeeSummary_sql);
+//         $StudentFeeSummary_prepare->bind_param('i',$InstallmentId);
+//         //var_dump($StudentFeeSummary_prepare);      
+//         while($InstallmentList_row=$InstallmentList_result->fetch_assoc()) //Looping through each Installment.
+//             {
+//                 $InstallmentId=$InstallmentList_row["installment_id"];
+//                 $InstallmentName=$InstallmentList_row["installment_name"];
+                
+//                 $StudentFeeSummary_result=$StudentFeeSummary_prepare->execute();// listing student_fee_master rows for the installment.
+//                 //var_dump($StudentFeeSummary_result);
+//                 if(!$StudentFeeSummary_result)
+//                     {
+//                         $error_msg = $dbhandle->error;
+//                         $sql=$StudentFeeMaster_sql;
+//                         $el = new LogMessage();
+//                         //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+//                         $el->write_log_message('Student Fee List Creation:Fee Structure Fetch Error. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+//                         mysqli_rollback($dbhandle);
+//                         $json=array("status"=>"Error","message"=>"Database Error: Not able to get Fee Structure information details. Please try again later.");
+//                         $json=json_encode($json);
+//                         return $json; 
+//                     }
+//                 $StudentFeeSummary_result_set = $StudentFeeSummary_prepare->get_result(); 
+//                 $counter=1;
+//                 $paystatus='paid';
+//                 while($StudentFeeSummary_row=$StudentFeeSummary_result_set->fetch_assoc())//Looping through each student_fee_master record.
+//                     {
+
+//                         $fee[$InstallmentName]["monthname"]=$InstallmentName;
+//                         while($StudentFeeSummary_row=$StudentFeeSummary_result_set->fetch_assoc())//Looping through each student_fee_master record.
+//                             {   
+//                                 $amount=$StudentFeeSummary_row["fee_amount"]=''?0:$StudentFeeSummary_row["fee_amount"];
+//                                 /*$fee[]=   array("$InstallmentName"=>
+//                                             array(
+//                                                     "Name"=>$StudentFeeSummary_row["fee_head_name"],
+//                                                     "Amount"=>$amount
+//                                                 )
+//                                             );*/
+//                                 $fee[$InstallmentName]["details"][]=array(
+//                                                     "Name"=>$StudentFeeSummary_row["fee_head_name"],
+//                                                     "Amount"=>$amount,"Status"=>$StudentFeeSummary_row["pay_status"])
+//                                 ;          
+//                             }
+                            
+
+//                     }
+           
+            
+//             }
+//             //var_dump($fee);
+//             header('Content-type: text/javascript');
+//             echo json_encode($fee, JSON_PRETTY_PRINT);
+
+
+//     }
+   
+    if($request_type=='ViewFeeSummary')
+    {
+        $fee=array();
+        $json='';
+      
+        /* Creating Installment List.*/
+        
+        $StudentClassDetailsSql="select * from student_class_details where student_id=? and session=? and school_id=?";
+        $SCD_prepare=$dbhandle->prepare($StudentClassDetailsSql);
+        $SCD_prepare->bind_param('ssi',$StudentId,$SessionId,$schoolid);
+        $SCD_result=$SCD_prepare->execute();
+        if(!$SCD_result)
+                    {
+                        $error_msg = $dbhandle->error;
+                        $sql=$StudentFeeMaster_sql;
+                        $el = new LogMessage();
+                        //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                        $el->write_log_message('Student Class Details Fetch Error: Not able to fetch student class details and fee groups. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                        mysqli_rollback($dbhandle);
+                        $json=array("status"=>"Error","message"=>"Database Error:  Not able to fetch student class details and fee groups. Please try again later.");
+                        $json=json_encode($json);
+                        return $json; 
+                    }
+        $SCD_result_set = $SCD_prepare->get_result(); 
+       
+       
+        $SCD_row=$SCD_result_set->fetch_assoc();
+        $RegularFGId=$SCD_row["Regular_FG_Id"];
+        $TransportFGId=$SCD_row["Transport_FG_Id"];            
+        
+        
+        //Generating json data for Regular Fee grup id
+        $RegularFeeSql="select sfmt.*,imt.installment_name from student_fee_master sfmt,installment_master_table imt where sfmt.student_id=? and sfmt.fg_id=? and sfmt.session=? and sfmt.school_id=? and imt.installment_id=sfmt.installment_id order by sfmt.installment_id";
+      
+        $RF_prepare=$dbhandle->prepare($RegularFeeSql); 
+        $RF_prepare->bind_param('sisi',$StudentId,$RegularFGId,$SessionId,$schoolid);
+         $RF_result=$RF_prepare->execute();
+        
+        if(!$RF_result)
+                    {
+                        $error_msg = $dbhandle->error;
+                        $sql=$StudentFeeMaster_sql;
+                        $el = new LogMessage();
+                        //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                        $el->write_log_message('Student Regular Fee Fetch Error: Not able to fetch student Regular Fee Data. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                        mysqli_rollback($dbhandle);
+                        $json=array("status"=>"Error","message"=>"Database Error:  tudent Regular Fee Fetch Error: Not able to fetch student Regular Fee Data. Please try again later.");
+                        $json=json_encode($json);
+                        return $json; 
+                    }
+        $RF_result_set = $RF_prepare->get_result(); 
+        //var_dump($RF_result_set);
+        while($RF_result_row=$RF_result_set->fetch_assoc())
+            {
+                //var_dump($RF_result_row). '<br>';
+                $fee["School_Fee"][]=array(
+                    "Month"=>$RF_result_row["installment_name"],
+                    "Fee_Amount"=>$RF_result_row["Total_Amount"],
+                    "Pay_Status"=>$RF_result_row["Pay_Status"]);
+
+            }
+
+
+        //Generating json data for Transport Fee grup id
+        $RegularFeeSql="select sfmt.*,imt.installment_name from student_fee_master sfmt,installment_master_table imt where sfmt.student_id=? and sfmt.fg_id=? and sfmt.session=? and sfmt.school_id=? and imt.installment_id=sfmt.installment_id order by sfmt.installment_id";
+      
+        $RF_prepare=$dbhandle->prepare($RegularFeeSql); 
+        $RF_prepare->bind_param('sisi',$StudentId,$TransportFGId,$SessionId,$schoolid);
+         $RF_result=$RF_prepare->execute();
+        
+        if(!$RF_result)
+                    {
+                        $error_msg = $dbhandle->error;
+                        $sql=$StudentFeeMaster_sql;
+                        $el = new LogMessage();
+                        //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                        $el->write_log_message('Student Regular Fee Fetch Error: Not able to fetch student Regular Fee Data. ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                        mysqli_rollback($dbhandle);
+                        $json=array("status"=>"Error","message"=>"Database Error:  tudent Regular Fee Fetch Error: Not able to fetch student Regular Fee Data. Please try again later.");
+                        $json=json_encode($json);
+                        return $json; 
+                    }
+        $RF_result_set = $RF_prepare->get_result(); 
+        //var_dump($RF_result_set);
+        while($RF_result_row=$RF_result_set->fetch_assoc())
+            {
+                //var_dump($RF_result_row). '<br>';
+                $fee["Bus_Fee"][]=array(
+                    "Month"=>$RF_result_row["installment_name"],
+                    "Fee_Amount"=>$RF_result_row["Total_Amount"],
+                    "Pay_Status"=>$RF_result_row["Pay_Status"]);
+
+            }    
+            header('Content-type: text/javascript');
+            echo json_encode($fee, JSON_PRETTY_PRINT);
+
+
+    }
+  
+
+
+
 ?>

@@ -38,7 +38,7 @@
                 <div class="item-logo">
                     <img src="img/login-logo.JPG" alt="logo">
                 </div>
-                <form action="lvalidate.php" class="login-form" method="post" id="login_form">
+                <form action="lvalidate.php" class="login-form" method="post">
                     <div class="form-group">
                         <label>Username</label>
                         <input type="text" placeholder="Enter usrename" class="form-control" name="loginid" method="post">
@@ -48,8 +48,6 @@
                         <label>Password</label>
                         <input type="password" placeholder="Enter password" class="form-control" name="password">
                         <i class="fas fa-lock"></i>
-                    </div>
-                    <div class="form-group form_output">
                     </div>
                     <div class="form-group d-flex align-items-center justify-content-between">
                         <div class="form-check">
@@ -88,16 +86,7 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(document).on('submit','#login_form',function(event){
-                event.preventDefault();
-                $.post($(this).attr('action'),$(this).serialize(),function(log_response){
-                    $('.form_output').html(log_response);
-                });
-            });
-        });
-    </script>
+   
 </body>
 
 </html>

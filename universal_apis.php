@@ -122,9 +122,22 @@ if (isset($_REQUEST['getStudentDetailsbyId'])) {
 
 /**************** get all students data by class **************/
 if (isset($_REQUEST['get_all_students_by_class'])) {
-  $student_query = "SELECT * FROM `student_master_table` WHERE `Class_Id` =?";
+  $student_query = "SELECT * FROM `student_master_table` WHERE `Class_Id` =? AND `Enabled` = 1 AND School_Id = ?";
   $student_query_prep = $dbhandle->prepare($student_query);
-  $student_query_prep->bind_param("i",$_REQUEST["class_id"]);
+  $student_query_prep->bind_param("ii",$_REQUEST["class_id"],$_SESSION["SCHOOLID"]);
+  $student_query_prep->execute();
+  $result_set = $student_query_prep->get_result(); $data =array();
+  while($rows = $result_set->fetch_assoc()){
+    $data[] = $rows;
+  }
+  echo json_encode($data); 
+}
+
+/**************** get all students data by class and section **************/
+if (isset($_REQUEST['get_all_students_by_class_section'])) {
+  $student_query = "SELECT * FROM `student_master_table` WHERE `Class_Id` =? AND `Class_Sec_Id` = ? AND `Enabled` = 1 AND School_Id = ?";
+  $student_query_prep = $dbhandle->prepare($student_query);
+  $student_query_prep->bind_param("iii",$_REQUEST["class_id"],$_REQUEST['sec_id'],$_SESSION["SCHOOLID"]);
   $student_query_prep->execute();
   $result_set = $student_query_prep->get_result(); $data =array();
   while($rows = $result_set->fetch_assoc()){
@@ -135,9 +148,9 @@ if (isset($_REQUEST['get_all_students_by_class'])) {
 
 /**************** get all students data by id only student_master_table **************/
 if (isset($_REQUEST['get_all_students_by_student_id'])) {
-  $student_query = "SELECT * FROM `student_master_table` WHERE `Student_Id` =?";
+  $student_query = "SELECT * FROM `student_master_table` WHERE `Student_Id` =? AND `Enabled` = 1 AND School_Id = ?";
   $student_query_prep = $dbhandle->prepare($student_query);
-  $student_query_prep->bind_param("i",$_REQUEST["student_id"]);
+  $student_query_prep->bind_param("i",$_REQUEST["student_id"],$_SESSION["SCHOOLID"]);
   $student_query_prep->execute();
   $result_set = $student_query_prep->get_result(); $data =array();
   while($rows = $result_set->fetch_assoc()){

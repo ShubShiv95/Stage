@@ -72,7 +72,7 @@ $schoolId = $_SESSION["SCHOOLID"];
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
-               <!-- <div class="breadcrumbs-area">
+                <!-- <div class="breadcrumbs-area">
                     <h3>Staff</h3>
                     <ul>
                         <li>
@@ -98,4 +98,3 @@ $schoolId = $_SESSION["SCHOOLID"];
                                                         echo $bodyHeader;
                                                     } ?></h3>
                             </div>
-

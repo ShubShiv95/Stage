@@ -108,7 +108,7 @@ include 'security.php';
       post_data = $(this).serialize();
       $.post($(this).attr('action'), post_data, function(form_output) {
         $('.formoutput').html(form_output);
-        display_routes_fee();
+        display_veh_drivers();
         window.setTimeout(function() {
           $('.formoutput').html('');
         }, 3000)

@@ -258,11 +258,37 @@ include 'security.php';
           } else if (value.Is_Enabled == 0) {
             status_enb = '<span class="text-danger">Disabled</span>';
           }
-          stoppage_html += '<tr><td  scope="row">' + value.Route_Name + '</td><td>' + value.Stopage_Name + '</td><td>' + value.Stopage_No + '</td><td>' + value.Stopage_Address + '</td><td>' + value.Distance + '</td></td><td>' + value.Pickup_Time + '</td></td><td>' + value.Drop_Time + '</td></td><td>' + value.Charges + '</td></td><td><button class="btn btn-warning btn_edit" id="' + value.TRCT_Id + '"><i class="fa fa-pencil" aria-hidden="true"></i></button> <button class="btn btn-danger btn_delete" id="' + value.TRCT_Id + '"><i class="fa fa-trash" aria-hidden="true"></i></button></td><td>' + status + '</td></tr>';
+          stoppage_html += '<tr><td  scope="row">' + value.Route_Name + '</td><td>' + value.Stopage_Name + '</td><td>' + value.Stopage_No + '</td><td>' + value.Stopage_Address + '</td><td>' + value.Distance + '</td></td><td>' + value.Pickup_Time + '</td></td><td>' + value.Drop_Time + '</td></td><td>' + value.Charges + '</td></td><td><button class="btn btn-warning btn_edit" id="' + value.Stopage_Id + '"><i class="fa fa-pencil" aria-hidden="true"></i></button> <button class="btn btn-danger btn_delete" id="' + value.Stopage_Id + '"><i class="fa fa-trash" aria-hidden="true"></i></button></td><td>' + status + '</td></tr>';
         });
         $('.load_stoppage_fees').html(stoppage_html);
       });
     }
+
+    $(document).on('click', '.btn_delete', function() {
+      if (confirm("Are You Sure To Delete?")) {
+        var stoppage_id = $(this).attr('id');
+        var data_send = {
+          delete_stoppage: 1,
+          stoppage_id: stoppage_id
+        };
+        const stop_url = './Transport_1.php';
+        $.post(stop_url, data_send, function(response_stop) {
+          $('.formoutput').html(response_stop);
+        });
+      }
+    });
+
+    $(document).on('click', '.btn_edit', function() {
+      var stoppage_id = $(this).attr('id');
+      var data_send = {
+        edit_stoppage: 1,
+        stoppage_id: stoppage_id
+      };
+      const stop_url = './Transport_1.php';
+      $.post(stop_url, data_send, function(response_stop) {
+        $('.formoutput').html(response_stop);
+      });
+    });
   });
 </script>
 <?php

@@ -10,3 +10,63 @@ Module Name: 	Fee Payment Entry Error at Cashier End :  Fee_Advance_Table table 
 Message:	No data supplied for parameters in prepared statement
 SQL:	INSERT INTO fee_advance_table(FA_Id, Student_Id, Advance_Amount, Advance_Date, Source_Recept_No, School_Id, Updated_By) VALUES (?,?,?, str_to_date(?,'%Y-%m-%d'),?,?,?)
 File:	F:\xampp\htdocs\stage\FeeCollection2.php
+
+Date:	11-Jan-2021 07:29:33 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	Not able to get Fee Cluster Id Information.
+SQL:	
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	11-Jan-2021 07:30:23 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	Not able to get Fee Cluster Id Information.
+SQL:	select FC_Id from fee_cluster_class_list where Class_Id=16 and Stream='General' and enabled=1 and school_id=1
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	11-Jan-2021 07:53:39 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	Not able to get Fee Cluster Id Information.
+SQL:	select FC_Id from fee_cluster_class_list where Class_Id=16 and Stream='General' and enabled=1 and school_id=1
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	11-Jan-2021 07:54:35 AM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	Not able to get Fee Cluster Id Information.
+SQL:	select FC_Id from fee_group_class_list where Class_Id=16 and Stream='General' and enabled=1 and school_id=1
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	11-Jan-2021 09:16:48 PM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	Not able to get Student Class details.
+SQL:	
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	11-Jan-2021 09:21:26 PM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	Not able to get Fee Cluster Id Information.
+SQL:	select FG_Id from fee_group_class_list where Class_Id=2 and Stream='GENERAL' and Student_Type='Existing' enabled=1 and school_id=1
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	11-Jan-2021 09:23:41 PM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	Not able to get Fee Cluster Id Information.
+SQL:	select FG_Id from fee_group_class_list where Class_Id=2 and Stream='GENERAL' and Student_Type='Existing' enabled=1 and school_id=1
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	11-Jan-2021 10:31:01 PM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	Not able to get Fee Cluster Id Information.
+SQL:	select fgcl.FG_Id from fee_group_table fgt,fee_group_class_list fgcl where Class_Id=2 and Stream='GENERAL' and fgt.fg_id=fgcl.fg_id and fgt.Student_Type='Existing' enabled=1 and school_id=1
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	11-Jan-2021 10:32:30 PM	 By User:admin
+Module Name: 	Student Fee List Creation 
+Message:	Not able to get Fee Cluster Id Information.
+SQL:	select fgcl.FG_Id from fee_group_table fgt,fee_group_class_list fgcl where Class_Id=2 and Stream='GENERAL' and fgt.fg_id=fgcl.fg_id and fgt.Student_Type='Existing' and enabled=1 and school_id=1
+File:	F:\xampp\htdocs\stage\FeeListCreation.php
+
+Date:	11-Jan-2021 11:32:36 PM	 By User:admin
+Module Name: 	Student Fee Creation 
+Message:	
+SQL:	select * from student_class_details where student_id='120/2018?session=2020-2021' and session='' and enabled=1
+File:	F:\xampp\htdocs\stage\RegularFeeCreation.php

@@ -349,6 +349,10 @@ require_once './GlobalModel.php';
             });
         }
        
+        window.setTimeout(function(){
+            window.print();
+        },1000);
+
     </script>
 </body>
 

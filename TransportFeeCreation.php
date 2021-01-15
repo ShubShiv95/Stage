@@ -131,7 +131,7 @@
                             }
                         
                         $StudentFeeMaster_sql="INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES ($SFMId,$TFG_Id,$InstallmentId, $Installment_Amount,'Unpaid','$StudentId','$session'," . $InstallmentList_row["Installment_Month"] . "," . $_SESSION["SCHOOLID"] . ",'" . $_SESSION["LOGINID"] . "')";
-                        echo $StudentFeeMaster_sql . '<br>';
+                        //echo $StudentFeeMaster_sql . '<br>';
                         $StudentFeeMaster_result=$dbhandle->query($StudentFeeMaster_sql);
                         if(!$StudentFeeMaster_result)
                             {
@@ -164,8 +164,8 @@
                                     $json=json_encode($json);
                                     return $json;
                         } 
-                var_dump($StudentFeeDetailsError);
-                var_dump($StudentFeeMasterError);        
+                //var_dump($StudentFeeDetailsError);
+                //var_dump($StudentFeeMasterError);        
                         
                 if(!$StudentFeeMasterError and !$StudentFeeDetailsError)
                     {    
@@ -233,7 +233,7 @@
  
         //Finding Transport Fee Group Id.
         $FeeClusterId_sql="SELECT FGT.FG_Id FROM fee_group_table fgt WHERE fgt.student_type='$Student_Type' AND fgt.school_id=" . $_SESSION["SCHOOLID"] . " AND fgt.Fee_Group_Type='Transport'";
-        echo $FeeClusterId_sql;
+        //echo $FeeClusterId_sql;
         $FeeClusterId_result=$dbhandle->query($FeeClusterId_sql);
         if(!$FeeClusterId_result)
             {

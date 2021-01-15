@@ -5,7 +5,7 @@ include 'errorLog.php';
 include 'security.php';
 require_once 'sequenceGenerator.php';
 
-/*********** sving driver name ************/
+/*********** saving driver name ************/
 if(isset($_REQUEST['driver_form_sender'])){
     if (empty($_REQUEST['driver_form_sender'])){
     mysqli_autocommit($dbhandle, false);
@@ -63,6 +63,13 @@ if (isset($_REQUEST['get_drivers'])) {
         $data[] = $row_driver;
     }
     echo json_encode($data);
+}
+
+// edit driver details
+
+// delete driver
+if (isset($_REQUEST['delete_driver'])) {
+    
 }
 
 /********************** route controllers ************************/
@@ -157,9 +164,10 @@ if (isset($_REQUEST['route_fee_Sender'])){
                     $enable_fee = 1;
                 }
                 $route_fee_id = $assignmentId = sequence_number('transport_route_charge_table',$dbhandle);
-                $query_insert = "INSERT INTO `transport_route_charge_table`(`TRCT_Id`,`Route_Id`, `Charges`, `Session`, `School_Id`, `Updated_By`,`Is_Enabled`) VALUES (?,?,?,?,?,?,?)";
+                $query_insert = "INSERT INTO `transport_route_charge_table`(`TRCT_Id`, `Route_Id`, `Charges`, `Session`, `Enabled`, `School_Id`, `Updated_By`) VALUES (?,?,?,?,?,?,?)";
                 $query_insert_prepare = $dbhandle->prepare($query_insert);
-                $query_insert_prepare->bind_param("iiiiisi",$route_fee_id,$_REQUEST['route_name'],$_REQUEST['route_amount'],$_SESSION["SESSION"],$_SESSION["SCHOOLID"],$_SESSION["LOGINID"],$enable_fee);
+                $query_insert_prepare->bind_param("iiiiiis",$route_fee_id,$_REQUEST['route_name'],$_REQUEST['route_amount'],$_SESSION["SESSION"],$_SESSION["SCHOOLID"],$enable_fee,$_SESSION["LOGINID"]);
+               
                 if ($query_insert_prepare->execute()) {
                     echo '<p class="text-success">Route Fee Added Successfully</p>';
                 }
@@ -439,4 +447,369 @@ if (isset($_REQUEST['get_vehicle_drivers'])) {
     echo json_encode($data);
 }
 
+/*************** vehicle document controller *****************/
+// add vehicle document
+if (isset($_REQUEST['vehicle_doc_adder'])) {
+    if (empty($_REQUEST['vehicle_doc_adder'])) {
+        /*
+            $_REQUEST['vehicle_name'];
+            $_REQUEST['vehicle_doc_type'];
+            $_REQUEST['is_validity_applicable'];
+            $_REQUEST['valid_till'];
+            $_FILES['vehicle_doc_name']['name'];
+        */
+        if (empty($_REQUEST['is_validity_applicable'])) {
+            $validity = '0000-00-00';
+        }
+        else{
+            $validity = $_REQUEST['valid_till'];
+        }
+        // form validation
+        if (empty($_REQUEST['vehicle_name'])) {
+           echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>Alert!</strong> Please Select Vehicle.
+                </div>';
+        }
+        else if(empty($_REQUEST['vehicle_doc_type'])){
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>Alert!</strong> Document Type.
+                </div>';
+        }
+        elseif (empty($_FILES["vehicle_doc_name"]["name"])) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>Alert!</strong> Please Choose Document.
+                </div>';
+        }  
+        else if (!empty($_REQUEST['is_validity_applicable']) && empty($_REQUEST['valid_till'])) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong>Alert!</strong> Please Select Validity Date.
+            </div>';
+        } 
+        else if (empty($_REQUEST['is_validity_applicable']) && !empty($_REQUEST['valid_till'])) {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong>Alert!</strong> Please Check Is Validity Applicable.
+            </div>';
+        }
+        else{
+            $document_id = sequence_number('transport_vehicle_document', $dbhandle);
+            // add new record
+            if ($_REQUEST['action']=="add_new_vehicle_document") {
+                // saving files to server
+                $directory="./app_images/vehicle_documents";
+                if (!file_exists($directory)) {
+                    mkdir($directory, 0777, true);
+                }
+                $allowed_image_extension = array("jpg", "jpeg", "pdf");
+                $file_extension = strtolower(pathinfo($_FILES['vehicle_doc_name']['name'], PATHINFO_EXTENSION));
+                if (!in_array($file_extension, $allowed_image_extension)) {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>Alert!</strong> Only (.pdf, .jpeg, .jpg) Allowed.
+                            </div>';
+                }
+                else
+                {
+                    $file_name = md5($document_id . date('YmdHis')) . '.' . $file_extension;
+                    $target_path = $directory.'/'.$file_name;
+                    if (move_uploaded_file($_FILES['vehicle_doc_name']['tmp_name'], $target_path)) 
+                    {   
+                        // saving data to database
+                        mysqli_autocommit($dbhandle, false);
+                        $query = "INSERT INTO `transport_vehicle_document`(`Vehicle_Doc_Id`, `Vehicle_Id`, `Document_Type_Id`, `Filename`, `Valid_Date`,`School_Id`, `Updated_By`) VALUES (?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?)";
+                        $query_prep = $dbhandle->prepare($query);
+                        $query_prep->bind_param("iisssis",$document_id,$_REQUEST['vehicle_name'],$_REQUEST['vehicle_doc_type'],$file_name,$validity,$_SESSION["SCHOOLID"], $_SESSION["LOGINID"]);
+                        if ($query_prep->execute()) {
+                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>Alert!</strong> Document Saved Successfully.
+                            </div>';
+                        }
+                        else
+                        {
+                            $error_msg = $query_prep->error;
+                            $el = new LogMessage();
+                            $sql = $query;
+                            //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                            $el->write_log_message('Add Vehicle Documents ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                            //$_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+                            mysqli_rollback($dbhandle);
+                            $statusMsg = 'Error: Document Saving.  Please consult application consultant.';
+                            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>Alert!</strong> '.$statusMsg.'.
+                            </div>';
+                            die;
+                        }
+                        mysqli_commit($dbhandle);   
+                    }
+                    else
+                    {
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>Alert!</strong> Failed to Upload File.
+                            </div>';
+                    }
+                }
+            }
+            // update existing record
+            if ($_REQUEST['action']=="update_existing_vehicle_document") {
+                
+            }
+        }
+    }
+}
+
+// get all vehicle documents
+if (isset($_REQUEST['get_vehicle_doc'])) {
+    $query = "SELECT tvd.*, tvt.Vehicle_Reg_No FROM transport_vehicle_document tvd, transport_vehicle_table tvt WHERE tvt.Vehicle_Id = tvd.Vehicle_Id AND tvd.Enabled =1 AND tvd.School_Id = ? ORDER BY tvd.Vehicle_Doc_Id DESC LIMIT 20";
+    $query_prep = $dbhandle->prepare($query);
+    $query_prep->bind_param("i",$_SESSION["SCHOOLID"]);
+    $query_prep->execute(); $data = array();
+    $result_set = $query_prep->get_result();
+    while ($row = $result_set->fetch_assoc()) {
+        $data[] = $row;
+    }
+    echo json_encode($data);   
+}
+
+/****************** assign students controller ****************/
+
+// assign students
+if (isset($_REQUEST['student_asignee'])) {
+    if (empty($_REQUEST['student_asignee'])) {
+        $data =array();
+        if (empty($_REQUEST['student_class'])) {
+            $data['message'][] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>Alert!</strong> Please Select Class.
+                            </div>';
+        }
+
+        if (empty($_REQUEST['student_section'])) {
+            $data['message'][] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong>Alert!</strong> Please Select Section.
+            </div>';
+        }
+
+        if (empty($_REQUEST['student_id'])) {
+            $data['message'][] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong>Alert!</strong> Please Select Student.
+            </div>';
+        }
+
+        if (empty($_REQUEST['pickup_type'])) {
+            $data['message'][] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong>Alert!</strong> Please Choose Atleast One Pickup Type.
+            </div>';
+        }
+        else
+        {
+            if ($_REQUEST['pickup_type'] =="Both" && empty($_REQUEST['stoppage_id']) && empty($_REQUEST['drop_stoppage'])) {
+                $data['message'][] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>Alert!</strong> Please Select Both Stoppages.
+                </div>';
+            }
+            elseif ($_REQUEST['pickup_type'] =="PickupOnly" && empty($_REQUEST['stoppage_id'])) {
+                $data['message'][] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>Alert!</strong> Please Select Pickup Stoppage.
+                </div>';
+            }
+            elseif ($_REQUEST['pickup_type'] =="DropOnly" && empty($_REQUEST['drop_stoppage'])) {
+                $data['message'][] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>Alert!</strong> Please Select Drop Stoppage.
+                </div>';
+            }
+        }
+        if (count($data['message'])<1) {
+            // pickup type $_REQUEST['pickup_type'] 
+            $query_check = "SELECT COUNT(TSM_Id) as total_row FROM `transport_student_map_table` WHERE `Student_Id` =? AND `Session` = ?";
+            $query_check_prep = $dbhandle->prepare($query_check);
+            $query_check_prep->bind_param("is",$_REQUEST['student_id'],$_SESSION['SESSION']);
+            $query_check_prep->execute();
+            $result_set = $query_check_prep->get_result();
+            $row_check_data = $result_set->fetch_assoc();
+            if ($row_check_data['total_row']>0) {
+                $data['message'][] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>Alert!</strong> Student Details Existed For This Session.
+                </div>';
+            }
+            else
+            {
+                mysqli_autocommit($dbhandle, false);
+                // save record into database
+                $tsm_id = sequence_number('transport_student_map_table', $dbhandle);
+                $query_ins = "INSERT INTO `transport_student_map_table`(`TSM_Id`, `Student_Id`, `Session`, `Pickup_Stopage_Id`, `Drop_Stopage_Id`, `Updated_By`) VALUES (?,?,?,?,?,?)";
+                $query_ins_prep = $dbhandle->prepare($query_ins);
+                $query_ins_prep->bind_param("iisiis",$tsm_id,$_REQUEST['student_id'],$_SESSION['SESSION'],$_REQUEST['stoppage_id'],$_REQUEST['drop_stoppage'],$_SESSION["LOGINID"]);
+                if ($query_ins_prep->execute()) {
+                    $data['message'][] = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>Success!</strong> Student Route Assigned Successfully.
+                    </div>';
+                    }
+                    else
+                    {
+                        $error_msg = $query_ins_prep->error;
+                        $el = new LogMessage();
+                        $sql = $query_ins;
+                        //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                        $el->write_log_message('Student Assign Route ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                        //$_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+                        mysqli_rollback($dbhandle);
+                        $statusMsg = 'Error: Document Saving.  Please consult application consultant.';
+                        $data['message'][]= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>Alert!</strong> '.$statusMsg.'.
+                        </div>';
+                        die;
+                    }
+                    mysqli_commit($dbhandle);                      
+            }
+        }
+
+        foreach ($data['message'] as $message) {
+            echo $message;
+        }
+    }
+}
+
+/*************** universal apis for transport ***************/
+
+// get all routes
+if (isset($_REQUEST['api_call'])) {
+    
+    // get all routes
+    /*
+        parameters : school_id=1
+        api link = ./Transport_1.php?api_call=get_all_routes&school_id=1
+    */
+    if ($_REQUEST['api_call']=='get_all_routes') 
+    {
+        $query = "SELECT * FROM `transport_route_table` WHERE `Enabled` =1 AND School_Id = ? ORDER BY `Route_Name`";
+        $query_prep = $dbhandle->prepare($query);
+        $query_prep->bind_param("i",$_REQUEST['school_id']);
+        $query_prep->execute();
+        $result_set = $query_prep->get_result();
+        while($row = $result_set->fetch_assoc()){
+            $data[] = array(
+                "id" => $row['Route_Id'],
+                "name"    =>  $row['Route_Name']
+            );
+        }
+        echo json_encode($data, JSON_PRETTY_PRINT);
+    }
+
+    // get all stoppages 
+        /*
+        parameters : school_id=1, route_id=6
+
+        api link = ./Transport_1.php?api_call=get_all_stops&school_id=1&route_id=6
+    */
+    if ($_REQUEST['api_call']=='get_all_stops') 
+    {
+        $query = "SELECT * FROM `transport_stopage_table` WHERE Enabled = 1 AND School_Id = ? AND Route_Id = ? ORDER BY Stopage_Name";
+        $query_prep = $dbhandle->prepare($query);
+        $query_prep->bind_param("ii",$_REQUEST['school_id'],$_REQUEST['route_id']);
+        $query_prep->execute();
+        $result_set = $query_prep->get_result();
+        while($row = $result_set->fetch_assoc()){
+            $data[] = array(
+                "id" => $row['Stopage_Id'],
+                "name"    =>  $row['Stopage_Name']
+            );
+        }
+        echo json_encode($data, JSON_PRETTY_PRINT);
+    }
+
+        // get all route vehicles
+        /*
+        parameters : school_id=1, route_id=6
+
+        api link = ./Transport_1.php?api_call=get_all_vehicles&school_id=1&route_id=6
+    */
+    if ($_REQUEST['api_call']=='get_all_vehicles') 
+    {
+        $query = "SELECT * FROM `transport_vehicle_table` WHERE `Route_Id` = ? AND Enabled =1 AND School_Id = ? ORDER BY `Vehicle_Reg_No`";
+        $query_prep = $dbhandle->prepare($query);
+        $query_prep->bind_param("ii",$_REQUEST['route_id'],$_REQUEST['school_id']);
+        $query_prep->execute();
+        $result_set = $query_prep->get_result();
+        while($row = $result_set->fetch_assoc()){
+            $data[] = array(
+                "id" => $row['Vehicle_Id'],
+                "name"    =>  $row['Vehicle_Reg_No']
+            );
+        }
+        echo json_encode($data, JSON_PRETTY_PRINT);
+    }
+}
 ?>

@@ -6,7 +6,7 @@ $student_id_gen='156/2018';
 //echo $url;
 //$domain = $_SERVER['HTTP_HOST'];
 //$prefix = $_SERVER['HTTP'] ? 'http://' : 'https://';
-$relative = 'http://localhost/stage/RegularFeeCreation.php?studentid='.$student_id_gen.'&session=2020-2021&schoolid=1&loginid=admin';
+$relative = 'http://localhost/stage/RegularFeeCreation.php?studentid='.$student_id_gen.'&session='.$session . '&schoolid='.$schoolid.'&loginid='. $loginid;
 //echo $prefix.$domain.$relative;
 $curl=curl_init($relative);
 curl_setopt($curl,CURLOPT_URL,$relative);

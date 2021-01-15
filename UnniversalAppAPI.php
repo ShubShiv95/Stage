@@ -8,11 +8,22 @@ if ($parameter=='getAllclass') {
   $queryClassPrepare = $dbhandle->prepare($queryClass);
   $queryClassPrepare->bind_param("i",$_REQUEST['school_id']);
   $queryClassPrepare->execute();
-  $resultSet = $queryClassPrepare->get_result(); $data = array();
+  $resultSet = $queryClassPrepare->get_result(); 
+  $data = array(
+    "status"  =>  "200",
+    "message" =>  "success",
+    "data"    =>  array()
+  );
+
   while($rows = $resultSet->fetch_assoc()){
-    $data[] = $rows;
+    $data["data"][] = array(
+      "class_id"  =>  $rows['Class_Id'],
+      "class_name" =>  $rows['Class_Name'],
+      "class_number" =>  $rows['Class_No'],
+      "next_class_id" =>  $rows['Next_Class_Id']
+    );
   }
-  echo json_encode($data);
+  echo json_encode($data, JSON_PRETTY_PRINT);
 }
 
 /************* get all subjects ************/
@@ -21,11 +32,19 @@ if ($parameter=='getAllsubject') {
   $querySubjectPrepare = $dbhandle->prepare($querySubject);
   $querySubjectPrepare->bind_param("i",$_REQUEST['school_id']);
   $querySubjectPrepare->execute();
-  $resultSet = $querySubjectPrepare->get_result(); $data = array();
+  $resultSet = $querySubjectPrepare->get_result(); 
+  $data = array(
+    "status"  =>  "200",
+    "type"    =>  "success",
+    "subjects"  =>  array()
+  );
   while($rows = $resultSet->fetch_assoc()){
-    $data[] = $rows;
+    $data["subjects"][] = array(
+      "subject_id"  => $rows['Subject_Id'],
+      "subject_name"  =>  $rows['Subject_Name']
+    );
   }
-  echo json_encode($data);
+  echo json_encode($data, JSON_PRETTY_PRINT);
 }
 
 /************** get sections by class id **************/
@@ -39,11 +58,20 @@ if ($parameter=='getAllsectionbyClass') {
   $sec_query_prepare = $dbhandle->prepare($sec_query);
   $sec_query_prepare->bind_param("ii",$_REQUEST['school_id'],$_REQUEST['class_id']);
   $sec_query_prepare->execute();
-  $result_set = $sec_query_prepare->get_result(); $data = array();
+  $result_set = $sec_query_prepare->get_result();
+  $data = array(
+    "status"  =>  "200",
+    "type"    =>  "success",
+    "sections"  =>  array()
+  );
   while ($sec_rows = $result_set->fetch_assoc()) {
-    $data[] = $sec_rows;
+    $data["sections"][] = array(
+      "section_id"  => $sec_rows['Class_Sec_Id'],
+      "section"  =>  $sec_rows['Section'],
+      "stream"  =>  $sec_rows['Stream']
+    );
   }
-  echo json_encode($data);
+  echo json_encode($data, JSON_PRETTY_PRINT);
 }
 
 }

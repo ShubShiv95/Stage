@@ -90,7 +90,7 @@ include 'security.php';
                                                         <option value="">-- SELECT Session --</option>
                                                         <?php
                                                         $current_session = $_SESSION["STARTYEAR"] . '-' . $_SESSION["ENDYEAR"];
-                                                        $next_session = $_SESSION["ENDYEAR"] . '-' . date('Y', strtotime($_SESSION["ENDYEAR"]) + (3600 * 24 * 365 * 2));
+                                                        $next_session = $_SESSION["ENDYEAR"] . '-' . date('Y', strtotime($_SESSION["ENDYEAR"]) + (3600 * 24 * 365));
                                                         echo '<option value="' . $current_session . '">' . $current_session . '</option>
                                                                 <option value="' . $next_session . '">' . $next_session . '</option>';
                                                         ?>

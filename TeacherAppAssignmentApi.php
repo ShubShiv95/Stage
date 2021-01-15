@@ -2,7 +2,6 @@
 include './dbhandle.php';
 include 'errorLog.php';
 require_once './sequenceGenerator.php';
-require_once './file_handler.php';
 if (isset($_REQUEST['assignment'])) {
   /************ create new assignment ***********/
   if ($_REQUEST['assignment'] == 'create') {
@@ -147,7 +146,7 @@ if (isset($_REQUEST['assignment'])) {
           field name : task_file
       2. Task Id
           field name : task_id
-      3. Upload Type Link| File
+      3. Upload Type Link | File
           field name : task_type
       4. School Id
           field name : school_id
@@ -242,7 +241,7 @@ if (isset($_REQUEST['assignment'])) {
     2. subjectId = subject id
     3. monthNumber = number of month
     4. start_year = year of asignment
-    http://stage.swiftcampus.com/TeacherAppAssignmentApi.php?assignment=teacher_view&&LOGINTYPE=Teacher&SECTIONID=3&STARTYEAR=2020&monthNumber=11 
+    http://stage.swiftcampus.com/TeacherAppAssignmentApi.php?assignment=teacher_view&LOGINTYPE=Teacher&sectionId=3&start_year=2020&monthNumber=11&subjectId=1
 
     ///// response ////
     {
@@ -294,25 +293,24 @@ if (isset($_REQUEST['assignment'])) {
         "type"      =>  "Success",
         "message"   =>  "Assignment Fetched Successfully.",
         "assignment_data" =>  array()
-      ); $i=0;
+      );
       while ($row = $resultset->fetch_assoc()) {
         $queryAssignmnetFile = "select * from task_file_upload where Enabled = 1 AND Task_Id = ?";
         $queryAssignmnetFilePrepare = $dbhandle->prepare($queryAssignmnetFile);
         $queryAssignmnetFilePrepare->bind_param("i", $row['Task_Id']);
         $queryAssignmnetFilePrepare->execute();
+        $server_link = "http://$_SERVER[HTTP_HOST]/app_images/".$row_file['Upload_Name'];
         $queryAssignmnetFileResult = $queryAssignmnetFilePrepare->get_result();
         $row_file = $queryAssignmnetFileResult->fetch_assoc();
-        $data["assignment_data"][$i] = array(
+        $data["assignment_data"][] = array(
           "task_id"     =>  $row['Task_Id'],
           "task_name"   =>  $row['Task_Name'],
           "updated_by"  =>  $row['Updated_By'],
           "updated_on"  =>  $row['Updated_On'],
           "last_date"   =>  $row['Last_Submissable_Date'],
           "file_type"   =>  $row_file['Upload_Type'],
-          "file_link"   =>  $row_file['Upload_Name'],
-          "verify_assignment_link"  =>  'StudentAssignmentSubmitted.php?assignmentId=' . $row['Task_Id'] . ''
+          "file_link"   =>  $server_link
         );
-        $i++;
       }
     } else {
       $data = array(
@@ -323,4 +321,43 @@ if (isset($_REQUEST['assignment'])) {
     }
     echo json_encode($data, JSON_PRETTY_PRINT);
   }
+
+  /********** check uploaded files according assignments **********/
+  if ($_REQUEST['assignment']=='view_assignment_files') {
+    /*
+      1. Assignment Id
+        field name : task_id
+      2. login id
+        field name  : school_id
+      http://stage.swiftcampus.com/TeacherAppAssignmentApi.php?assignment=view_assignment_files&task_id=1&school_id=1        
+    */
+    $query = "SELECT * FROM `task_file_upload` WHERE `Task_Id` = ? AND `School_Id` = ?";
+    $query_prep = $dbhandle->prepare($query);
+    $query_prep->bind_param("ii",$_REQUEST['task_id'],$_REQUEST['school_id']);
+    $query_prep->execute();
+    $result_set = $query_prep->get_result();
+    $data = array();
+    if ($result_set->num_rows>0) {
+      $data = array(
+        "status"  =>  "200",
+        "type"    =>  "success",
+        "message" =>  "some record found"
+      );
+      while($row_files = $result_set->fetch_assoc()){       
+        $server_link = "http://$_SERVER[HTTP_HOST]/app_images/".$row_files['Upload_Name'];
+        $data["files"][]  =array(
+          "file_type"   =>  $row_files['Upload_Type'],
+          "file_name"   =>   $server_link
+        );
+      }
+    }else{
+      $data = array(
+        "status"  =>  "500",
+        "type"    =>  "error",
+        "message" =>  "no record found"
+      );
+    }
+    echo json_encode($data);
+  }
+
 }

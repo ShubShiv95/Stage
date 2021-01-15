@@ -52,10 +52,11 @@ if (isset($_REQUEST["submit"])) {
           }
           else 
           {
+              $error_msg = $ins_query_prep->error;
               $el = new LogMessage();
-              $sql = $docquery;
+              $sql = $ins_query;
               //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-              $el->write_log_message('Staff Document Upload ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+              $el->write_log_message('Add Class Time Table ', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
               mysqli_rollback($dbhandle);
               $statusMsg = 'Error: Assignment Task Creation Error.  Please consult application consultant.';
               die;

@@ -298,7 +298,7 @@ $schoolId=$_SESSION["SCHOOLID"];
                                 </div>
                             </div>
                         </div> -->
-                        <form class="new-added-form school-form aj-new-added-form"id="designationform" method="post" action="EditTeacherTimeTable2.php" enctype="multipart/form-data">
+                        <form class="new-added-form school-form aj-new-added-form"id="designationform" method="post" action="EditTeacherTimeTable_2.php" enctype="multipart/form-data">
                             <div class="row justify-content-center">
                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                     <div class="box-sedow">

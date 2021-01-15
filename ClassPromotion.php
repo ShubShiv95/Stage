@@ -1,11 +1,11 @@
 <?php
-session_start();
 $pageTitle = "Sudent's Promotion";
-
+require_once './includes/header.php';
 include_once 'dbobj.php';
 include_once 'errorLog.php';
 include_once 'security.php';
-require_once './includes/header.php';
+
+require_once './includes/navbar.php';
 ?>
 <form class="new-added-form school-form aj-new-added-form">
     <div class="row justify-content-center">

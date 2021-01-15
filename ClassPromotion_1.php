@@ -42,7 +42,6 @@ if(isset($_REQUEST['student_prom_data_sender'])){
 
       // student class master table details
       $rows_stdus = $result_set->fetch_assoc();
-      
       // next year and next session
         // current Year
         $curr_year = $rows_stdus['Session_End_Year']; // session end year
@@ -78,8 +77,9 @@ if(isset($_REQUEST['student_prom_data_sender'])){
         $class_rown = $class_result_setn->fetch_assoc();
                 
         // previous year section
-        $sec_query = "SELECT * FROM `class_section_table` WHERE `Class_Id` = ".$rows_stdus['Class_Id']." AND Enabled = 1 AND School_Id = ".$_SESSION["SCHOOLID"]." AND Class_Sec_Id = ".$rows_stdus['Class_Sec_Id']." ";
+        $sec_query = "SELECT * FROM `class_section_table` WHERE `Class_Id` = ? AND Enabled = 1 AND School_Id = ".$_SESSION["SCHOOLID"]." AND Class_Sec_Id = ? ";
         $sec_query_pre = $dbhandle->prepare($sec_query);
+        $sec_query_pre->bind_param("ii",$rows_stdus['Class_Id'],$rows_stdus['Class_Sec_Id']);
         $sec_query_pre->execute();$result_sec = $sec_query_pre->get_result();
         $sec_rows = $result_sec->fetch_assoc();
         

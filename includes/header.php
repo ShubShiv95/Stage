@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html class="no-js" lang="">
 <?php
@@ -13,7 +14,7 @@ $schoolId = $_SESSION["SCHOOLID"];
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>SWIFTCAMPUS | Add Staff Form</title>
+    <title>SWIFTCAMPUS | <?php echo $pageTitle; ?></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -28,7 +29,9 @@ $schoolId = $_SESSION["SCHOOLID"];
     <link rel="stylesheet" href="css/all.min.css">
     <!-- Flaticon CSS -->
     <link rel="stylesheet" href="fonts/flaticon.css">
+    <!-- Fontawsome CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Animate CSS -->
     <link rel="stylesheet" href="css/animate.min.css">
     <!-- Select 2 CSS -->
@@ -64,7 +67,7 @@ $schoolId = $_SESSION["SCHOOLID"];
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
             <?php
-            include 'includes/sidebar.php';
+            include_once 'includes/sidebar.php';
             ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">

@@ -268,7 +268,7 @@ if (isset($_REQUEST['get_admission_details'])) {
   $query = "SELECT amt.*, cmt.Class_Name, conmt.Concession_Name FROM admission_master_table amt, class_master_table cmt, concession_master_table conmt WHERE amt.Class_Id = cmt.Class_Id AND conmt.Concession_Id = amt.Discount_Category AND amt.Admission_Id = ? ";
   $data=array();
   $query_prep = $dbhandle->prepare($query);
-  $query_prep->bind_param("i",$_REQUEST["admission_id"]);
+  $query_prep->bind_param("i",$_REQUEST["stud_data"]);
   $query_prep->execute();
   $result_set = $query_prep->get_result();
   while ($rows = $result_set->fetch_assoc()) {

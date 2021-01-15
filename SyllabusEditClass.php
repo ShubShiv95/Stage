@@ -9,6 +9,7 @@ include 'errorLog.php';
 include 'security.php';
 $lid=$_SESSION["LOGINID"];
 $schoolId=$_SESSION["SCHOOLID"];
+
 ?>
 <html class="no-js" lang="">
 
@@ -264,11 +265,29 @@ $schoolId=$_SESSION["SCHOOLID"];
                         <li>Class Syllabus</li>
                     </ul>
                 </div>
-				<?php 
+
+                <?php 
+        
 					if(isset($_SESSION['successmsg'])){
 					echo $_SESSION["successmsg"]; 
                     }
+                    $displayroutineid="select * from class_syllabus_table where Class_Syllabus_Id=?";
+                    $displayroutineid_prep=$dbhandle->prepare($displayroutineid);
+                    $displayroutineid_prep->bind_param("i",$_REQUEST['Class_Syllabus_Id']);
+                    $displayroutineid_prep->execute();
+                    $result_set= $displayroutineid_prep->get_result();
+                   $row_routine=$result_set->fetch_assoc();
+
+                   $displaysubject="SELECT * FROM class_syllabus_table where Class_Syllabus_Id=?";
+                   $displaysubject_prep=$dbhandle->prepare($displaysubject);
+                   $displaysubject_prep->bind_param("i",$_REQUEST['Class_Syllabus_Id']);
+                   $displaysubject_prep->execute();
+                   $subject_result_set= $displaysubject_prep->get_result();
+                   $subject_row_routine=$subject_result_set->fetch_assoc();
                     
+
+
+                   
 				?>
                 <!-- Breadcubs Area End Here -->
                 <!-- Admit Form Area Start Here -->
@@ -278,87 +297,64 @@ $schoolId=$_SESSION["SCHOOLID"];
                             <div class="item-title aj-item-title">
                                 <h3 class="mb-4">Add Class Syllabus</h3>
                             </div>
-                            <!-- <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                    aria-expanded="false">...</a>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                </div>
-                            </div>
-                        </div> -->
-                        <form class="new-added-form school-form aj-new-added-form" id="designationform" method="post" action="./SyllabusClass_1.php" enctype="multipart/form-data">
+                            
+                        <form class="new-added-form school-form aj-new-added-form"id="designationform" method="post" action="./SyllabusEditClass_1.php" enctype="multipart/form-data">
                              <div class="row justify-content-center">
                                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                                     <div class="box-sedow">
-                                        
-                                        <div class="row justify-content-center">
+                                    <div class="form-group aj-form-group">
+                                                    <label class="ml-4">Syllabus Id</label>
+                                                    <input type="number" readonly value="<?php echo $_REQUEST['Class_Syllabus_Id'] ?>" name="class_routine_id" placeholder="" class="form-control">
+                                                </div>
+                                                <div class="row justify-content-center">
                                             <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
+                                            
                                                 <div class="form-group aj-form-group">
+                                                
                                                     <label>Select Class <span>*</span></label>
-                                                    <select class="select2 col-12" required="" name="assignment_class" id="assignment_class">
-
-                                                    </select>
+                                                    <select class="select2" name="assignment_class"
+                                                     required>
+                                                        <option value="">Select Class</option>
+                                                    <?php
+                                                    $Class_Syllabus_Id=$_REQUEST['Class_Syllabus_Id'];                                           
+                                                     $sqldept="select Class_Id,class_name from class_master_table";                              
+                                                     $resultdept=mysqli_query($dbhandle,$sqldept);
+													 while($row_c=mysqli_fetch_assoc($resultdept)) {
+                                                         if ($row_routine['Class_Id']==$row_c["Class_Id"]) {
+                                                            echo '<option value="'.$row_c["Class_Id"].'" selected="selected">'.$row_c["class_name"].'</option>';
+                                                         }else{
+                                                            echo '<option value="'.$row_c["Class_Id"].'" >'.$row_c["class_name"].'</option>';
+                                                         }
+                                                        }
+													 ?>
+                                                   </select>
                                                 </div>
                                                 <div class="form-group aj-form-group">
                                                 <label>Select Subject</label>
-                                                <select class="select2 col-12" required="" name="assignment_subject" id="assignment_subject">
-                                                        <option value="">Select One </option>
+                                                <select class="select2" required="" name="assignment_subject" required>
+                                                        <option value="">Select One</option>
+                                                        <?php	
+                                                        $Class_Syllabus_Id=$_REQUEST['Class_Syllabus_Id'];
+                                               $sqlsubject="select Subject_Id,Subject_Name from subject_master_table";
+                                                     $resultsubject=mysqli_query($dbhandle,$sqlsubject);
+													 while($row_s=mysqli_fetch_assoc($resultsubject)) {
+                                                         if ($subject_row_routine['Subject_Id']==$row_s["Subject_Id"]) {
+                                                            echo '<option value="'.$row_s["Subject_Id"].'" selected="selected">'.$row_s["Subject_Name"].'</option>';
+                                                         }else{
+                                                             //echo 'hlw';
+                                                            echo '<option value="'.$row_s["Subject_Id"].'" >'.$row_s["Subject_Name"].'</option>';
+                                                         }
+                                                        }
+													 ?>
                                                     </select>
                                                 </div>
-                                               <!-- <div class="form-group aj-form-group">
-                                                    <label>Select  Teacher <span>*</span></label>
-                                                    <select class="select2" name="desi_department" required>
-                                                        <option value="">Select  Teacher</option>
-													
-                                                    </select>
-                                                    
-                                                </div> -->                                               
-                                                <div class="form-group aj-form-group">
-                                                    <label class="ml-4">Select Syllabus(PDF Files only)</label>
-                                                    <input type="file" name="class_routine_file" placeholder="" class="form-control">
-                                                </div>
+                                              
                                             </div>
                                         </div>                                       
                                         <div class="aaj-btn-chang-cbtn text-right">
-                                                <button type="submit" name="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button> 
+                                                <button type="submit" name="submit" id="opne-form-Promotion" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Update </button> 
                                                 <!-- <a  href="javascript:void(0);"  class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Submit </a>-->
-                                        </div>
-                                    
-                                    <div class="">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th >Edit </th>
-                                                        <th>Class </th>
-                                                        <th>Subject</th>
-                                                        <th>View Syllabus</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-												<?php
-                                                $sqldesc="SELECT cst.Class_Syllabus_Id,cmt.Class_Name,smt.Subject_Name ,cst.filename from class_syllabus_table cst ,class_master_table cmt, subject_master_table smt where cst.subject_id=smt.subject_id and cst.class_id=cmt.class_id order by cst.Class_Syllabus_Id desc";
-                                                $resultdesc=mysqli_query($dbhandle,$sqldesc);
-                                                     while($row=mysqli_fetch_assoc($resultdesc)) {
-													 	 
-												?>
-                                                    <tr>
-                                                        <td ><a href="EditSyllabusClass.php?Class_Syllabus_Id=<?php echo $row['Class_Syllabus_Id']?>"><i class="fa fa-pencil" aria-hidden="true"></i></i></a></td>
-                                                        <td><?php echo $row["Class_Name"]; ?></td>
-                                                        <td><?php echo $row["Subject_Name"]; ?></td>
-                                                        <td> <a href="./app_images/Syllabus_class/<?php echo $row  ["filename"]; ?>" target="_blank">Click to View</a> </td>
-                                                    </tr>
-                                                 <?php } ?> 
-                                                 </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                        </div>                                  
                                 </div>
                                 </div>
                             </div>
@@ -393,89 +389,13 @@ $schoolId=$_SESSION["SCHOOLID"];
              $('.tebal-promotion').slideToggle('slow');
             })
     </script> 
-<?php    
+
+
+<?php   
 unset($_SESSION['successmsg']); 
 ?>
-<script>
-function showsection(str)
-{
-var xmlhttp;    
-if (str=="")
-  {
-  document.getElementById("section").innerHTML="";
-  return;
-  }
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("secid").innerHTML=xmlhttp.responseText;
-    }
-  }
-xmlhttp.open("GET","getSectionList.php?classid="+str,true);
-xmlhttp.send();
-}
-
-</script>
-<script>
-     getAllClass();
-
-function getAllClass() {
-    $.ajax({
-        url: './universal_apis.php',
-        type: 'get',
-        data: {
-            'getAllClass': 1
-        },
-        dataType: 'json',
-        success: function(data) {
-            var classData = JSON.parse(JSON.stringify(data));
-            var html = '<option value="">Select</option>';
-            for (let i = 0; i < classData.length; i++) {
-                const classRow = classData[i];
-                html += '<option value="' + classRow.Class_Id + '">' + classRow.Class_Name + '</option>';
-            }
-            $('#assignment_class').html(html);
-        }
-    });
-}
-
-/*
-    1. to fetch data from subject table just copy code from below functions.
-    2. keep object id as assignment_subject
-*/
-getAllSubjects();
-
-function getAllSubjects() {
-    $.ajax({
-        url: './universal_apis.php',
-        type: 'get',
-        data: {
-            'getAllSubjects': 1
-        },
-        dataType: 'json',
-        success: function(data) {
-            var subjectData = JSON.parse(JSON.stringify(data));
-            var html = '<option value="">Select Subject</option>';
-            for (let i = 0; i < subjectData.length; i++) {
-                const subjectRow = subjectData[i];
-                html += '<option value="' + subjectRow.Subject_Id + '">' + subjectRow.Subject_Name + '</option>';
-            }
-            $('#assignment_subject').html(html);
-        }
-    });
-}
 
 
-</script>	
 </body>
 
 </html>

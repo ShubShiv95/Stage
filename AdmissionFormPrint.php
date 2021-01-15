@@ -88,11 +88,11 @@ require_once './GlobalModel.php';
                             </tr>
                             <tr>
                                 <th>Name</th>
-                                <td colspan="3" class="first_name">Md Meraj Alam</td>                              
+                                <td colspan="3" class="first_name text-uppercase">Md Meraj Alam</td>                              
                                 <th rowspan="6" colspan="2"  width="20%" class="image_th" width="20%"><img class="main_img" src="./img/avatar_blank.png" width="200px" alt=""></th>
                             </tr>
                             <tr>
-                                <th>Student Id</th>
+                                <th>Admission No</th>
                                 <td class="student_id"></td>                                  
                                 <th>Class</th>
                                 <td class="class"></td>
@@ -145,8 +145,8 @@ require_once './GlobalModel.php';
                                 <th colspan="3" class="padd">Residential Address</th>
                             </tr>
                             <tr>
-                                <td colspan="4" class="com_add padd"></td>
-                                <td class="res_add padd" colspan="3"></td>
+                                <td colspan="4" class="com_add padd text-uppercase"></td>
+                                <td class="res_add padd text-uppercase" colspan="3"></td>
                             </tr>
                         </table>
 
@@ -155,9 +155,9 @@ require_once './GlobalModel.php';
                                 <th colspan="6">Father's Detail</th>
                             </tr>
                             <tr>
-                                <th class="padd">Name</th><td class="father_name"></td>
+                                <th class="padd">Name</th><td class="father_name text-uppercase"></td>
                                 <th class="padd">Occupation</th><td class="father_occupation"></td>
-                                <th colspan="2" rowspan="5" style="text-align: center;"  width="20%"><img class="main_img" src="./img/avatar_blank.png"  width="200px" alt=""></th>
+                                <th colspan="2" rowspan="5" style="text-align: center;"  width="20%"><img class="main_img_father" src="./img/avatar_blank.png"  width="200px" alt=""></th>
                             </tr>
                             <tr>
                                 <th>Designation</th><td class="father_desig"></td>
@@ -178,9 +178,9 @@ require_once './GlobalModel.php';
                                 <th colspan="6">Mother's Detail</th>
                             </tr>
                             <tr>
-                                <th class="padd">Name</th><td class="mother_name"></td>
+                                <th class="padd">Name</th><td class="mother_name text-uppercase"></td>
                                 <th class="padd">Occupation</th><td class="mother_occupation"></td>
-                                <th colspan="2" rowspan="5" style="text-align: center;" width="20%"><img class="main_img" src="./img/avatar_blank.png" alt=""></th>
+                                <th colspan="2" rowspan="5" style="text-align: center;" width="20%"><img class="main_img_mother" src="./img/avatar_blank.png" alt=""></th>
                             </tr>
                             <tr>
                                 <th>Designation</th><td class="mother_desig"></td>
@@ -262,10 +262,10 @@ require_once './GlobalModel.php';
     <!-- MyScript Js -->
     <script src="js/myscript.js"></script>
     <script>
-        load_student_data(<?php echo $_REQUEST['student_id'] ?>);
+        load_student_data(<?php echo $_REQUEST['admission_id'] ?>);
         // function to load student data 
         function load_student_data(student_id) {
-            var url = "./universal_apis.php?admission_form_print=1&stud_data=" + student_id + "";
+            var url = "./universal_apis.php?get_admission_details=1&stud_data=" + student_id + "";
             $.getJSON(url, function(data) {
                 $.each(data, function(key, value) {
                     if (value.Middle_Name == null) {
@@ -285,7 +285,7 @@ require_once './GlobalModel.php';
                     var locality = <?php echo json_encode($GLOBAL_LOCALITY); ?>;
                     st_locality = locality[value.Locality];
                     $('.first_name').text(name_studs);
-                    $('.student_id').text(value.Student_Id)
+                    $('.student_id').text(value.Admission_Id)
                     $('.class').text(value.Class_Name);
                     $('.section').text(value.Section);
                     $('.stream').text(value.Stream);
@@ -327,9 +327,14 @@ require_once './GlobalModel.php';
                     $('.mother_contact').text(value.Mother_Contact_No);
                     $('.sms_contact').text(value.SMS_Contact_No);
                     $('.whatsapp_contact').text(value.Whatsapp_Contact_No);
+                    console.log(value.Student_Image);
                     $('.email_add').text(value.Email_Id);
+                    url_father = './app_images/'+value.Father_Image;
+                        $('.main_img_mother').attr('src', url_father);
+                    url_mother = './app_images/'+value.Mother_Image;
+                        $('.main_img_father').attr('src', url_mother);
                     if (value.Student_Image != null) {
-                        url = './app_images/AdmissionDocuments/' + value.Admission_Id + '_AdmissionDocs/' + value.Student_Image;
+                        url = './app_images/'+value.Student_Image;
                         $('.main_img').attr('src', url);
                     }
                 });
@@ -340,7 +345,7 @@ require_once './GlobalModel.php';
         function load_school_details(){
             school_url = './universal_apis.php?get_school_name_by_id=1';
             $.getJSON(school_url,function(school_response){
-                console.log(school_response);
+                
             });
         }
        

@@ -12,7 +12,7 @@ if (isset($_REQUEST['assignment_parent'])) {
         3. monthNumber = number of month
         4. start_year = year of asignment
         5. Login Type = PARENT | STUDENT
-        http://stage.swiftcampus.com/ParentAppAssignmentApi.php?assignment=parent_view&&LOGINTYPE=PARENT&SECTIONID=3&STARTYEAR=2020&monthNumber=11 
+        http://stage.swiftcampus.com/ParentAppAssignmentApi.php?assignment=parent_view&LOGINTYPE=PARENT&sectionId=3&start_year=2020&monthNumber=11 
     
         ///// response ////
         {
@@ -62,7 +62,7 @@ if (isset($_REQUEST['assignment_parent'])) {
             "type"      =>  "Success",
             "message"   =>  "Assignment Fetched Successfully.",
             "assignment_data" =>  array()
-          ); $i=0;
+          );
           while ($row = $resultset->fetch_assoc()) {
             $queryAssignmnetFile = "select * from task_file_upload where Enabled = 1 AND Task_Id = ?";
             $queryAssignmnetFilePrepare = $dbhandle->prepare($queryAssignmnetFile);
@@ -70,7 +70,7 @@ if (isset($_REQUEST['assignment_parent'])) {
             $queryAssignmnetFilePrepare->execute();
             $queryAssignmnetFileResult = $queryAssignmnetFilePrepare->get_result();
             $row_file = $queryAssignmnetFileResult->fetch_assoc();
-            $data["assignment_data"][$i] = array(
+            $data["assignment_data"][] = array(
               "task_id"     =>  $row['Task_Id'],
               "task_name"   =>  $row['Task_Name'],
               "updated_by"  =>  $row['Updated_By'],
@@ -79,7 +79,6 @@ if (isset($_REQUEST['assignment_parent'])) {
               "file_type"   =>  $row_file['Upload_Type'],
               "file_link"   =>  $row_file['Upload_Name']
             );
-            $i++;
           }
         } else {
           $data = array(

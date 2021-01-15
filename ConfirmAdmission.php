@@ -157,7 +157,7 @@ include 'security.php';
         $(document).ready(function(){
             get_admission_details();
             function get_admission_details(){
-                var stud_url = './universal_apis.php?get_admission_details=1&admission_id='+<?php echo $_GET['adminssion_id'] ?>+'';
+                var stud_url = './universal_apis.php?get_admission_details=1&stud_data='+<?php echo $_GET['adminssion_id'] ?>+'';
                 $.getJSON(stud_url,function(stud_response){
                     $.each(stud_response,function(key,value){
                         if(value.Middle_Name == null ){

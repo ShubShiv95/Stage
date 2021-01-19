@@ -527,7 +527,7 @@ if($request_type=='CollectFeeDetails')
     }
     if($request_type=='CollectOtherFee')
     {
-        $data=array("status"=>"Error","message"=>"Database Error: Not able to get student advance fee detail information. Please try again later.")
+        $data=array("status"=>"Error","message"=>"Database Error: Not able to get student advance fee detail information. Please try again later.");
 
     }
     

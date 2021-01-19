@@ -299,7 +299,7 @@
                                         <input type="password" id="re_password" name="re_password" placeholder="" autocomplete="off" required="" class="form-control">
                                     </div>
                                     <div class="col-xl-12 col-lg-12 col-1 aj-mb-2">
-                                        <button type="submit" name="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark float-right" id="search_data">Change Password</button>
+                                        <button type="submit" name="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark float-right" >Change Password</button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12 mt-2 table-responsive populate_student_list form_output">
@@ -313,33 +313,3 @@
         </div>
     </div>
 </div>
-    <script type="text/javascript">
-    $(document).on('click', '#change_pwd', function(event) {
-        event.preventDefault();
-        $('.change_pwd_modal').fadeIn('slow');
-    });
-    $(document).on('click','.close_pwd_modal',function(event){
-        event.preventDefault();
-        $('.change_pwd_modal').fadeOut('slow');
-    });
-    $(document).on('submit','#change_password_form',function(event){
-        event.preventDefault();
-        current_pwd = $('#current_password').val();
-        $('.form_output').html('');
-        var form_data = $(this).serialize();
-        if(current_pwd!=''){
-            $.post($(this).attr('action'),form_data,function(reset_resp){
-                $('.form_output').html(reset_resp);
-            });
-        }
-    });
-    $(document).on('blur','#re_password',function(){
-        var new_pwd = $('#new_password').val();
-        var re_pwd = $(this).val();
-        if(re_pwd != new_pwd){
-            alert("Password Not Matched With New Password");
-            $(this).val('');
-        }
-    });
-
-</script>

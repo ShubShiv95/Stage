@@ -377,8 +377,10 @@
 
 
 /************** enroll student *************/
-if (isset($_REQUEST['admission_confirm'])) {
-  if (empty($_REQUEST['admission_confirm'])) {
+if (isset($_REQUEST['admission_confirm'])) 
+{
+  if (empty($_REQUEST['admission_confirm'])) 
+  {
     mysqli_autocommit($dbhandle, false);  
    
     // searching student by their admission id
@@ -388,8 +390,14 @@ if (isset($_REQUEST['admission_confirm'])) {
     $search_stuednt_prep->execute();
     $row_stud = $search_stuednt_prep->get_result();
     $student_details = $row_stud->fetch_assoc();
-    
-    // generate 10 digit student id
+    if ($student_details['Is_Admited']=='Yes') {
+     echo '<div class="alert alert-danger" role="alert">
+              <strong>Warning </strong> Student Already Enrolled;
+          </div>';
+    }
+    else
+    {
+      // generate 10 digit student id
     $student_id_gen = generate_student_id('student_master_table',$dbhandle);
   
     // hard coded variables
@@ -403,7 +411,8 @@ if (isset($_REQUEST['admission_confirm'])) {
     ?,?,?,?)";
     $insert_q_prep = $dbhandle->prepare($insert_q);
     $insert_q_prep->bind_param("isiisiisssiississssssssssssssssssssssssssssiiiiiissssssssssssssssssssssssssssssssissssssssssiissssssssss", $student_id_gen, $student_id_gen, $student_details['Admission_Id'], $student_details['School_Id'], $student_details['Session'], $_SESSION["STARTYEAR"], $_SESSION["ENDYEAR"], $student_details['First_Name'], $student_details['Middle_Name'], $student_details['Last_Name'], $student_details['Class_Id'], $stud_sec,$student_details['Gender'], $student_details['DOB'], $student_details['Age'], $student_details['Social_Category'], $student_details['Discount_Category'], $student_details['Locality'], $student_details['Academic_Session'], $student_details['Mother_Tongue'], $student_details['Religion'], $student_details['Nationality'], $student_details['Blood_Group'], $student_details['Aadhar_No'], $student_details['Student_Image'], $student_details['Prev_School_Name'], $student_details['Prev_School_Medium'], $student_details['Prev_School_Board'], $student_details['Prev_School_Class'], $student_details['Comm_Address'], $student_details['Comm_Add_Country'], $student_details['Comm_Add_State'], $student_details['Comm_Add_City_Dist'], $student_details['Comm_Add_Pincode'], $student_details['Comm_Add_ContactNo'], $student_details['Resid_Address'], $student_details['Resid_Add_Country'], $student_details['Resid_Add_State'], $student_details['Resid_Add_City_Dist'], $student_details['Resid_Add_Pincode'], $student_details['Resid_Add_ContactNo'], $student_details['Sibling_1_Student_Id'], $student_details['Sibling_1_Class'], $student_details['Sibling_1_Section'], $student_details['Sibling_1_RollNo'], $student_details['Sibling_2_Student_Id'], $student_details['Sibling_2_Class'], $student_details['Sibling_2_Section'], $student_details['Sibling_2_RollNo'], $student_details['Father_Name'], $student_details['Father_Qualification'], $student_details['Father_Occupation'], $student_details['Father_Designation'], $student_details['Father_Org_Name'], $student_details['Father_Org_Add'], $student_details['Father_City'], $student_details['Father_State'], $student_details['Father_Country'], $student_details['Father_Pincode'], $student_details['Father_Email'], $student_details['Father_Contact_No'], $student_details['Father_Annual_Income'], $student_details['Father_Aadhar_Card'], $student_details['Father_Alumni'], $student_details['Father_Image'], $student_details['Mother_Name'], $student_details['Mother_Qualification'], $student_details['Mother_Occupation'], $student_details['Mother_Designation'], $student_details['Mother_Org_Name'], $student_details['Mother_Org_Add'], $student_details['Mother_City'], $student_details['Mother_State'], $student_details['Mother_Country'], $student_details['Mother_Pincode'], $student_details['Mother_Email'], $student_details['Mother_Contact_No'], $student_details['Mother_Annual_Income'], $student_details['Mother_Aadhar_Card'], $student_details['Mother_Alumni'], $student_details['Mother_Image'], $student_details['Gurdian_Type'], $student_details['Guardian_Address'], $student_details['Guardian_Name'], $student_details['Guardian_Relation'], $student_details['Guardian_Contact_No'], $student_details['Guardian_Image'], $student_details['SMS_Contact_No'], $student_details['Whatsapp_Contact_No'], $student_details['Email_Id'],$stud_sec,$stud_sec,$enabled,$Is_Blocked,$stud_sec,$stud_sec,$stud_sec,$stud_sec,$stud_sec,$stud_sec,$stud_sec,$stud_sec,$_SESSION["LOGINTYPE"],$_REQUEST['admission_number']);
-    if ($insert_q_prep->execute()) {
+    if ($insert_q_prep->execute()) 
+    {
 
       // update admission master table
       $is_admitted = 'Yes';
@@ -415,7 +424,7 @@ if (isset($_REQUEST['admission_confirm'])) {
       // inserting into student class details
       $student_cl_gen = sequence_number('student_class_details',$dbhandle);
       // class details by class id
-      $query_class = "SELECT Class_No FROM class_master_table WHERE Class_Id = ?";
+      $query_class = "SELECT cmt.Class_No, cst.Class_Sec_Id FROM class_master_table cmt, class_section_table cst WHERE cmt.Class_Id = ? AND cst.Class_Id = cmt.Class_Id";
       $query_class_prep = $dbhandle->prepare($query_class);
       $query_class_prep->bind_param("i",$student_details['Class_Id']);
       $query_class_prep->execute();
@@ -425,10 +434,11 @@ if (isset($_REQUEST['admission_confirm'])) {
       // session start / end year
       $session_year = explode('-',$student_details['Session']);
       
-      $insert_class_tbl = "INSERT INTO `student_class_details`(`Student_Details_Id`, `Student_Id`, `Class_Id`, `Class_No`, `Stream`, `Session`, `Session_Start_Year`, `Session_End_Year`, `Updated_By`,`School_Id`,`Student_Type`,`Concession_Id`) VALUES (?,?,?,?,?,?,?,?,?,?,'New',?)";
+      $insert_class_tbl = "INSERT INTO `student_class_details`(`Student_Details_Id`, `Student_Id`, `Class_Id`, `Class_No`, `Stream`, `Session`, `Session_Start_Year`, `Session_End_Year`, `Updated_By`,`School_Id`,`Student_Type`,`Concession_Id`,`Class_Sec_Id`) VALUES (?,?,?,?,?,?,?,?,?,?,'New',?,?)";
       $insert_class_tbl_prep = $dbhandle->prepare($insert_class_tbl);
-      $insert_class_tbl_prep->bind_param("iiiissiisii",$student_cl_gen,$student_id_gen,$student_details['Class_Id'],$row_class_name['Class_No'],$student_details['Stream'],$student_details['Session'],      $session_year[0],$session_year[1],$_SESSION["LOGINTYPE"],$_SESSION["SCHOOLID"],$student_details['Discount_Category']);
-      if(!$insert_class_tbl_prep->execute()){
+      $insert_class_tbl_prep->bind_param("iiiissiisiii",$student_cl_gen,$student_id_gen,$student_details['Class_Id'],$row_class_name['Class_No'],$student_details['Stream'],$student_details['Session'],      $session_year[0],$session_year[1],$_SESSION["LOGINTYPE"],$_SESSION["SCHOOLID"],$student_details['Discount_Category'],$row_class_name);
+      if(!$insert_class_tbl_prep->execute())
+      {
         $message = $insert_class_tbl_prep->error;
         $el = new LogMessage();
         $sql = $insert_class_tbl;
@@ -438,24 +448,24 @@ if (isset($_REQUEST['admission_confirm'])) {
         mysqli_rollback($dbhandle);
        echo $statusMsg = '<p class="text-danger">Error: Enroll Student Details.  Please consult application consultant.</p>';
         die; 
-
-       
       }
       else
       {
+        mysqli_commit($dbhandle);
         // run fee list creation php page
-       /* require_once './FeeListCreation.php'; 
+       /* require_once './RegularFeeCreation.php'; 
         */
-        $url = 'RegularFeeCreation.php?studentid='.$student_id_gen.'&session='.$student_details['Session'].'';
-       $curl=curl_init($url);
-       curl_setopt($curl,CURLOPT_URL,$url);
-       $response=curl_exec($curl);
-       curl_close($curl);
-       //SELECT * FROM `student_fee_master` WHERE `Student_Id` = '2020000096'
-        echo "Response".$response;
-         echo $statusMsg = '<p class="text-success pt-4">Student Enrolled With Student Id <strong>'.$student_id_gen.'<strong> .</p><script>window.setTimeout(function(){window.open("AdmissionFormPrint.php?student_id='.$student_id_gen.'");},2000);</script>';
+        require_once './FeeApplyCurl.php';
+        $fee_gen = generate_student_fee_using_curl($student_id_gen,$student_details['Session'],$_SESSION["SCHOOLID"],$_SESSION["LOGINID"]);
+        $json_data = json_decode($fee_gen);
+        //$json_data= array();
+        if ($json_data->status == "Success") {
+          echo $statusMsg = '<p class="text-success pt-4">Student Enrolled With Student Id <strong>'.$student_id_gen.'</strong> '.$json_data->message.' .</p><script>window.setTimeout(function(){window.href="AdmissionFormPrint.php?student_id='.$student_id_gen.'";},2000);</script>';
+        }else{
+          echo $statusMsg = '<p class="text-danger pt-4">Student Enrolled With Student Id <strong>'.$student_id_gen.'</strong> Student Fee Didnot Generated. Please Consult Application Support</p>';
+        }
       }
-    
+    }
     else
     {
       $message = $insert_q_prep->error;
@@ -469,6 +479,7 @@ if (isset($_REQUEST['admission_confirm'])) {
       die; 
     }
     mysqli_commit($dbhandle);
+    }
   }
 }
 

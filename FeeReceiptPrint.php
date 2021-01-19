@@ -71,15 +71,14 @@ include 'security.php';
                         </div>
                         <div class="col-12 table-reponsive mt-5 row border border-dark">
                             <div class="row">
-                                <div class="col-12 text-center p-3 head-brdr">
+                                <div class="col-12  head-brdr">
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <img class="img-tbl-logo" src="./app_images/school_images/logo.jpeg" alt="">
+                                        <div class="col-md-6 text-center">
+                                            <img style="height: 40px; width:auto;" class="img-tbl-logo" src="./app_images/school_images/logo.jpeg" alt="">
                                         </div>
-                                        <div class="col-md-12">
-                                            <p class="head-text-table">Affilicated By: CBSE, New Delhi JH101</p>
-                                            <p class="head-text-table">Bokaro Steel City, Bokaro, Jharkhand</p>
-                                            <p class="head-text-table">Phone : +91-9489510124</p>
+                                        <div class="col-md-6 text-right" style="font-size: 12px;">
+                                            <span>Affilicated By: CBSE, New Delhi JH101</span>
+                                            <span>Bokaro Steel City, Bokaro, Jharkhand,Phone : +91-9489510124</span>
                                         </div>
                                     </div>
                                 </div>
@@ -157,12 +156,7 @@ include 'security.php';
             </div>
         </div>
     </div>
-    <!-- Admit Form Area End Here -->
-    <footer class="footer-wrap-layout1 d-print-none">
-        <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
-    </footer>
-    </div>
-    </div>
+
     <style>
         @media print {
 
@@ -195,13 +189,15 @@ include 'security.php';
     <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
     <script>
         $(document).ready(function() {
-            show_receipt("<?php echo $_GET['receipt_id']; ?>")
+            var receipt_id = "<?php echo $_GET['receipt_id']; ?>";
+            show_receipt(receipt_id);
 
             function show_receipt(receipt_id) {
-                const receipt_url = "./FeeReceiptAPI.php?receipt_id=" + receipt_id + "";
+                var schoolid = "<?php echo $_SESSION["SCHOOLID"]; ?>";
+                const receipt_url = "./FeeReceiptAPI.php?receipt_id=" + receipt_id + "&schoolid=" + schoolid + "";
                 var receiving_modes = '';
-                var fee_details = ``;
-                fee_details += `<table class="custom-table">
+                var fee_details_html = ``;
+                fee_details_html += `<table class="custom-table">
                                     <tr>
                                         <th colspan="5" class="cus-head">Fee Details</th>
                                     </tr>
@@ -219,62 +215,63 @@ include 'security.php';
                                             </th>
                                         </tr>`;
                 $.getJSON(receipt_url, function(receipt_response) {
-                    if (receipt_response.type == 'success') {
-                        $('.receipt_no').text(receipt_response.fee_Details.fee_receipt_no);
-                        $('.receipt_date').text(receipt_response.fee_Details.receipt_date);
-                        $('.receipt_for').text(receipt_response.fee_Details.fee_receipt_for);
-                        $('.student_name').text(receipt_response.fee_Details.student_name);
-                        $('.admission_no').text(receipt_response.fee_Details.admission_no);
-                        $('.student_class').text(receipt_response.fee_Details.class);
-                        $('.parent_name').text(receipt_response.fee_Details.parent_name);
-                        $('.contact_no').text(receipt_response.fee_Details.contact_no);
-                        $('.route_name').text(receipt_response.fee_Details.route_name);
-                        $('.drop_stop').text(receipt_response.fee_Details.stoppage);
-                        $('.address').text(receipt_response.fee_Details.address);
-                        $('.staff_name').text(receipt_response.fee_Details.staff_name);;
+                    // if (receipt_response.type == 'success') {
+                    $('.receipt_no').text(receipt_response.fee_Details.fee_receipt_no);
+                    $('.receipt_date').text(receipt_response.fee_Details.receipt_date);
+                    $('.receipt_for').text(receipt_response.fee_Details.fee_receipt_for);
+                    $('.student_name').text(receipt_response.fee_Details.student_name);
+                    $('.admission_no').text(receipt_response.fee_Details.admission_no);
+                    $('.student_class').text(receipt_response.fee_Details.class);
+                    $('.parent_name').text(receipt_response.fee_Details.parent_name);
+                    $('.contact_no').text(receipt_response.fee_Details.contact_no);
+                    $('.route_name').text(receipt_response.fee_Details.route_name);
+                    $('.drop_stop').text(receipt_response.fee_Details.stoppage);
+                    $('.address').text(receipt_response.fee_Details.address);
+                    $('.staff_name').text(receipt_response.fee_Details.staff_name);
 
-                        $.each(receipt_response.fee_Details.payment_receiving_details, function(key, value_rec) {
-                            $.each(value_rec, function(key, rec_details) {
-                                receiving_modes += `<tr>
-                                                    <td>${rec_details.transaction_type}</td>
-                                                    <td>${rec_details.transaction_no}</td>
-                                                    <td>${rec_details.instrument_no}</td>
-                                                    <td>${rec_details.amount}</td>
+                    $.each(receipt_response.fee_Details.payment_receiving_details, function(key, value_rec) {
+                        receiving_modes += `<tr>
+                                                    <td>${value_rec.transaction_type}</td>
+                                                    <td>${value_rec.transaction_no}</td>
+                                                    <td>${value_rec.instrument_no}</td>
+                                                    <td>${value_rec.amount}</td>
                                                 </tr>  `;
-                            });
-                            receiving_modes += `</table>`;
-                            $('.payment_receivings').html(receiving_modes);
-                        });
-
-                        $.each(receipt_response.fee_Details.payment_details_fee_head_wise, function(key, value_rec) {
-                            var i = 0;
-                            $.each(value_rec, function(key, rec_details) {
-                                i = i++;
-                                fee_details += `<tr>
-                                                    <td>${++i}</td>
-                                                    <td>${rec_details.descriptiom}</td>
-                                                    <td>${rec_details.due_amount}</td>
-                                                    <td>${rec_details.concession}</td>
-                                                    <td>${rec_details.paid}</td>
-                                                </tr>  `;
-                            });
-                            fee_details += `<tr>
-                                        <th colspan="2">Total</th><th><span class="total_due">${receipt_response.fee_Details.total_due_amt}</span></th><th><span class="total_conc">${receipt_response.fee_Details.total_concession_amount}</span></th><th><span class="total_paid">${receipt_response.fee_Details.total_paid_amuont}</span></th>
-                                    </tr><tr>
-                                        <th colspan="5">Amt. In Words : ${price_in_words(receipt_response.fee_Details.total_paid_amuont)} Rupees Only</th>
+                        receiving_modes += `</table>`;
+                        $('.payment_receivings').html(receiving_modes);
+                    });
+                    var i = 0;
+                    $.each(receipt_response.fee_Details.payment_details_fee_head_wise, function(key, value_rec_desc) {
+                        i = i++;
+                        fee_details_html += `<tr>
+                                                <td>${++i}</td>
+                                                <td>${value_rec_desc.descriptiom}</td>
+                                                <td>${value_rec_desc.due_amount}</td>
+                                                <td>${value_rec_desc.concession}</td>
+                                                <td>${value_rec_desc.paid}</td>
+                                            </tr>  `;
+                    });
+                    $.each(receipt_response.fee_Details.Totalling, function(key, value_rec_ttl) {
+                        fee_details_html += `<tr>
+                                        <th colspan="2">Total</th><th><span class="total_due">${value_rec_ttl.total_due_amt}</span></th>
+                                        <th><span class="total_conc">${value_rec_ttl.total_concession_amount}</span></th>
+                                        <th><span class="total_paid">${value_rec_ttl.total_paid_amuont}</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5">Amt. In Words : ${price_in_words(value_rec_ttl.total_paid_amuont)} Rupees Only</th>
                                     </tr>                                
-                                </table>`;
-                            fee_details += `</table>`;
-                            $('.fee_details').html(fee_details);
-                        });
+                                `;
+                    });
 
-                    } else {
-                        alert("No Record Found");
-                        window.location.href = "./FeeCollection.php";
-                    }
+                    fee_details_html += `</table>`;
+                    $('.fee_details').html(fee_details_html);
+
+                    /* } else {
+                         alert("No Record Found");
+                        // window.location.href = "./FeeCollection.php";
+                     }*/
                 });
 
-                ///////////////
+                //
                 function price_in_words(price) {
                     var sglDigit = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"],
                         dblDigit = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"],

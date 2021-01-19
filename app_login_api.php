@@ -1,33 +1,12 @@
 <?php
-
-//include 'crawlerBhashSMS.php';
+session_start();
 include 'dbobj.php';
 
-
-
-$lid = mysqli_real_escape_string($dbhandle,trim($_REQUEST['loginid']));
+$lid = mysqli_real_escape_string($dbhandle,trim($_REQUEST["loginid"]));
 $passwd = mysqli_real_escape_string($dbhandle,$_REQUEST['password']);
-/*
-@ $dbhandle = mysql_connect('localhost','dsc_user','dscuser','dsc'); // mysqli('hostname','databasse_user','database_user_password','database name')
 
-$name = "";
-$lid = mysql_real_escape_string(trim($_POST['loginid']), $dbhandle);
-$passwd = mysql_real_escape_string($_POST['passwd'],$dbhandle);
-//$_SESSION['LOGINID']= $lid;
-*/
-//include 'dbhandle.php';
+$Login_Query = "select * from login_table where login_id='admin' and enabled=1";
 
-//$lid = mysqli_real_escape_string($dbhandle,trim($_REQUEST['loginid']));
-//$passwd = mysqli_real_escape_string($dbhandle,$_REQUEST['password']);
-
-//$lid = mysql_real_escape_string(trim($_POST['loginid']), $dbhandle);
-//$passwd = mysql_real_escape_string($_POST['passwd'],$dbhandle);
-
-$Login_Query = "select * from login_table where login_id='" . $lid . "' and enabled=1";
-//echo $Login_Query;
-
-//select * from user_login where user_id='admin';
-//$result = mysqli_query($dbhandle,$query);   //mysqli_query just runs the query only without returning any extra properties.
 $Login_Query_Result=$dbhandle->query($Login_Query);
 $Login_Query_Row = $Login_Query_Result->fetch_assoc();
 //echo mysqli_num_rows($result);
@@ -41,7 +20,7 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 		{
 			
 			//Listing All Sessions from school_master_table;
-			$Get_Session_List_Sql="select session from school_master_table";
+			$Get_Session_List_Sql="select * from school_master_table";
 			$Get_Session_List_result=$dbhandle->query($Get_Session_List_Sql);
 			if(!$Get_Session_List_result)
 
@@ -61,9 +40,19 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 			}
 				$_SESSION["SESSIONLIST"]=NULL;
 				$count=1;
+				$SESSION='';
+				$STARTYEAR='';
+				$ENDYEAR='';
+				
 				while($Get_Session_List_row=$Get_Session_List_result->fetch_assoc())
 				{
 					$_SESSION["SESSIONLIST"][$count]=$Get_Session_List_row["session"];
+					
+					if($Get_Session_List_row["enabled"]==1){ //for default session values.
+						$SESSION=$Get_Session_List_row["session"];
+						$STARTYEAR= $Get_Session_List_row["start_year"];
+						$ENDYEAR= $Get_Session_List_row["end_year"];
+					}
 					$count++;
 				}
 
@@ -101,9 +90,9 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 						"LOGINTYPE" =>      $Login_Query_Row["LOGIN_TYPE"],
 						"STATUS"    =>      1,
 						"USERID"    =>      $Get_Student_Details_Row["Student_Id"],
-						"SESSION"   =>      $Get_Student_Details_Row["Session"],
-						"STARTYEAR" =>      $Get_Student_Details_Row["Session_Start_Year"],
-						"ENDYEAR"   =>      $Get_Student_Details_Row["Session_End_Year"],
+						"SESSION"   =>      $SESSION,
+						"STARTYEAR" =>      $STARTYEAR,
+						"ENDYEAR"   =>      $ENDYEAR,
 						"CLASSID"   =>      $Get_Student_Details_Row["Class_Id"],
 						"SECTIONID" =>      $Get_Student_Details_Row["Class_Sec_Id"],
 						"NAME"      =>      $Get_Student_Details_Row["First_Name"].' '.    
@@ -134,9 +123,9 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 									"LOGINTYPE" =>      $Login_Query_Row["LOGIN_TYPE"],
 									"STATUS"    =>      1,
 									"USERID"    =>      $Get_Parent_Details_Result["Student_Id"],
-									"SESSION"   =>      $Get_Parent_Details_Result["Session"],
-									"STARTYEAR" =>      $Get_Parent_Details_Result["Session_Start_Year"],
-									"ENDYEAR"   =>      $Get_Parent_Details_Result["Session_End_Year"],
+									"SESSION"   =>      $SESSION,
+									"STARTYEAR" =>      $STARTYEAR,
+									"ENDYEAR"   =>      $ENDYEAR,
 									"CLASSID"   =>      $Get_Parent_Details_Result["Class_Id"],
 									"SECTIONID" =>      $Get_Parent_Details_Result["Class_Sec_Id"],
 									"NAME"      =>      $Get_Parent_Details_Result["Guardian_Name"],
@@ -158,7 +147,7 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 			}	
 			else if($Login_Query_Row["LOGIN_TYPE"]=='STAFF')
 			{
-				$Get_Staff_Details_Sql="select * from staff_master_table where staff_reff_login_id='" . $lid . "' and enabled=1";
+				$Get_Staff_Details_Sql="select * from staff_master_table where Login_Id='" . $lid . "' and enabled=1";
 
 				$Get_Staff_Details_Result=$dbhandle->query($Get_Staff_Details_Sql);
 				$Get_Staff_Details_Row=$Get_Staff_Details_Result->fetch_assoc();
@@ -170,9 +159,9 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
                         "LOGINTYPE" =>      $Login_Query_Row["LOGIN_TYPE"],
                         "STATUS"    =>      1,
                         "USERID"    =>      $Get_Staff_Details_Row["Staff_Id"],
-                        "SESSION"   =>      $Get_Staff_Details_Row["Default_Session"],
-                        "STARTYEAR" =>      $Get_Staff_Details_Row["Default_Start_Year"],
-                        "ENDYEAR"   =>      $Get_Staff_Details_Row["Default_End_Year"],
+                        "SESSION"   =>      $SESSION,
+						"STARTYEAR" =>      $STARTYEAR,
+						"ENDYEAR"   =>      $ENDYEAR,
                         "NAME"      =>      $Get_Staff_Details_Row["Staff_Name"],
                         "SCHOOLID"  =>      $Get_Staff_Details_Row["School_Id"]
                 ));			

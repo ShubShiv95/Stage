@@ -91,7 +91,7 @@ $schoolId = $_SESSION["SCHOOLID"];
                 <div class="card height-auto">
                     <div class="card-body">
                         <div class="heading-layout1">
-                            <div class="item-title aj-item-title">
+                            <div class="item-title aj-item-title d-print-none">
                                 <h3 class="mb-4"><?php if (empty($bodyHeader)) {
                                                         echo $pageTitle;
                                                     } else {

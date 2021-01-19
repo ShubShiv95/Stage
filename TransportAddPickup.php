@@ -1,5 +1,4 @@
 <?php
-session_start();
 /*make a variable named $pageTitle */
 $pageTitle = "Transport Stoppages";
 $bodyHeader = "Transport Add Stoppages";
@@ -7,6 +6,9 @@ require_once './includes/header.php';
 include 'dbobj.php';
 //include 'errorLog.php';
 include 'security.php';
+$num = "3.14";
+echo $int = (int)$num;
+echo '<br>'.$float = (float)$num;
 ?>
 <!-- start your UI here -->
 <div class="col-md-12">

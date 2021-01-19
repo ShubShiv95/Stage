@@ -61,11 +61,21 @@ if(isset($_REQUEST['fee_head_sender'])){
         }   
         elseif (!empty($fee_name) && !empty($fee_print_label) && !empty($fee_type)) {
             // check existed transport fee head
-            $query_check = "SELECT COUNT(Fee_Head_Id) FROM `fee_head_table` WHERE `Fee_Type` = 'Transport' AND School_Id = ".$_SESSION["SCHOOLID"]."";
-            $query_check_prep = $dbhandle->prepare($query_check);
-            $query_check_prep->execute();
-            $row_query = $query_check_prep->get_result();
-            if($row_query->num_rows>0){
+            
+            if($_REQUEST["fee_type_choosen"]=='Transport')
+                {
+                    $query_check = "SELECT Fee_Head_Id FROM `fee_head_table` WHERE `Fee_Type` = ? AND School_Id = ?";
+                    $query_check_prep = $dbhandle->prepare($query_check);
+                    $query_check_prep->bind_param("si",$_REQUEST["fee_type_choosen"],$_SESSION["SCHOOLID"]);
+                    $query_check_prep->execute();
+                    $row_query = $query_check_prep->get_result();
+                    $TransportRowCnt=$row_query->num_rows;
+
+                }
+            else {
+                $TransportRowCnt=0;
+            }    
+            if($TransportRowCnt>0){
                 $html_data []= '<a href="#" class="list-group-item list-group-item-action text-danger">Transport Fee Head Already Existed Use This!!!</a>';
             }else{
                 // saving data into database
@@ -189,14 +199,27 @@ if (isset($_REQUEST['cluster_Sender'])) {
 
         if (!empty($_REQUEST['fee_stream']) && !empty($_REQUEST['cluster_name'])) {
             // check fee cluster data
-            $query_search = "SELECT COUNT(FG_Id) FROM fee_group_table WHERE Student_Type = ? AND FG_Name = ? AND School_Id = ?";
+            /*$query_search = "SELECT COUNT(FG_Id) as total_rows FROM fee_group_table WHERE Student_Type = ? AND FG_Name = ? AND School_Id = ?";
+
             $query_search_prep = $dbhandle->prepare($query_search);
-            $query_search_prep->bind_param("ssi",$_REQUEST['student_type'],$cluster_name,$_SESSION["SCHOOLID"]);
+            $query_search_prep->bind_param("ssi",$_REQUEST['student_type'],$cluster_name,$_SESSION["SCHOOLID"]);*/
+            $class_ids = implode(',', $_REQUEST['class_names']);
+            $query_search = "SELECT fgcl.class_id FROM FEE_GROUP_TABLE fgt,fee_group_class_list fgcl WHERE
+            fgt.fee_group_type='Regular' AND
+            fgt.fee_account_type='School-Fee' AND
+            fgt.student_type=? AND
+            fgt.school_id=? AND
+            fgcl.stream=? AND
+            fgcl.fg_id=fgt.fg_id AND
+            fgcl.class_id in(?) AND
+            fgcl.enabled=1";
+            $query_search_prep = $dbhandle->prepare($query_search);
+            $query_search_prep->bind_param("siss",$_REQUEST['student_type'],$_SESSION["SESSIONID"],$_REQUEST['fee_stream'],$class_ids);
             $query_search_prep->execute();
             $result_set = $query_search_prep->get_result();
             if($result_set->num_rows>0)
             {
-                echo '<p class="text-danger">Fee Grroup Already Existed Try Another</p>';
+                echo '<p class="text-danger">Fee Grroup Already Existed For The Selected Class. Check List Below</p>';
             }
             else
             {
@@ -326,7 +349,7 @@ if (isset($_REQUEST['transport_cluster_Sender'])) {
 
 /**** get all clusters ***/
 if (isset($_REQUEST['get_all_clusters'])) {
-    $cluster_query = "SELECT fgt.*, fgcl.*, cmt.Class_Name, smt.school_name FROM fee_group_table fgt, fee_group_class_list fgcl, class_master_table cmt, school_master_table smt WHERE fgt.FG_Id = fgcl.FG_Id AND fgt.Enabled = 1 AND fgcl.Enabled=1 AND fgt.School_Id = ? AND cmt.Class_Id = fgcl.Class_Id  AND cmt.School_Id = smt.school_id AND fgt.Fee_Group_Type=? ORDER BY fgt.FG_Id DESC";
+    $cluster_query = "SELECT fgt.*, fgcl.*, cmt.Class_Name, smt.school_name FROM fee_group_table fgt, fee_group_class_list fgcl, class_master_table cmt, school_master_table smt WHERE fgt.FG_Id = fgcl.FG_Id AND fgt.Enabled = 1 AND fgcl.Enabled=1 AND fgt.School_Id = ? AND cmt.Class_Id = fgcl.Class_Id  AND cmt.School_Id = smt.school_id AND fgt.Fee_Group_Type=? ORDER BY fgt.FG_Id, fgcl.FGCL_Id DESC";
     $cluster_query_prep = $dbhandle->prepare($cluster_query);
     $cluster_query_prep->bind_param("is",$_SESSION["SCHOOLID"],$_REQUEST['fee_type']);
     $cluster_query_prep->execute();

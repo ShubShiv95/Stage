@@ -7,7 +7,7 @@
         $count=$row["receptno"];
         $count++;
         //Generatig Recept Number srring in the format of : mmyy/total count rows number+1
-        $rno=$row["dateformat"] .  '/' . $count ;
+        $rno=$row["dateformat"] .  '-' . $count;
         return $rno;
     }
 

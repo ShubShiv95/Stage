@@ -12,7 +12,7 @@
    $fileHandle = fopen($file, "r");
    $counter = 0;
    $isFieldMissing[] = true; //dummy data
-   $htmlbody = '<div class="table-responsive"><table class="table table-bordered"><th>Student Id</th><th>School ID</th><th>Session</th><th>Session Start Year</th><th>Session End Year</th><th>First Name</th><th>Middle Name</th><th>Last Name </th><th>Class Id</th><th>Class Sec</th><th>Roll No.</th><th>Gender</th><th>DOB</th><th>Discount Category</th><th>Father Name</th><th>Mother Name</th><th>Guardian Name</th><th>SMS ContactNo</th></tr></thead>';
+   $htmlbody = '<div class="table-responsive"><table class="table table-bordered"><th>Student Id</th><th>School ID</th><th>Session</th><th>Session Start Year</th><th>Session End Year</th><th>First Name</th><th>Middle Name</th><th>Last Name </th><th>Class Id</th><th>Class Sec</th><th>Roll No.</th><th>Gender</th><th>DOB</th><th>Discount Category</th><th>Father Name</th><th>Mother Name</th><th>Guardian Name</th><th>SMS ContactNo</th><th>Student Type</th><th>Stream</th><th>Enabled</th></tr></thead>';
    $htmlbody = $htmlbody . '<tbody>';
 
    
@@ -172,6 +172,29 @@
                      : $htmlbody . '<td>' . $smsContactNo . '</td>';
       $isFieldMissing []= ($isMandatory && empty($smsContactNo)) ? false : true ; 
 
+      $dataArray[$counter][18] = $filesop[18];
+      $studentType = $filesop[18];
+      $isMandatory = array_search("STUDENT_TYPE",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
+      $htmlbody = ($isMandatory && empty($studentType)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
+                     : $htmlbody . '<td>' . $studentType . '</td>';
+      $isFieldMissing []= ($isMandatory && empty($studentType)) ? false : true ; 
+
+
+      $dataArray[$counter][19] = $filesop[19];
+      $stream = $filesop[19];
+      $isMandatory = array_search("STREAM",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
+      $htmlbody = ($isMandatory && empty($stream)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
+                     : $htmlbody . '<td>' . $stream . '</td>';
+      $isFieldMissing []= ($isMandatory && empty($stream)) ? false : true ; 
+
+
+      $dataArray[$counter][20] = $filesop[20];
+      $enabled = $filesop[20];
+      $isMandatory = array_search("ENABLED",$GLOBAL_ADMISSION_FIELD_IS_MANDATORY);
+      $htmlbody = ($isMandatory && empty($enabled)) ? $htmlbody . '<td style="background-color: red">' . " " . '</td>'
+                     : $htmlbody . '<td>' . $enabled . '</td>';
+      $isFieldMissing []= ($isMandatory && empty($enabled)) ? false : true ; 
+
       $htmlbody = $htmlbody . '</tr>';
 
 		$counter++;
@@ -192,12 +215,12 @@
       $errorAreaMessage = "";
 
       $insertStudentClassTableSql = "insert into student_class_details (Student_Details_Id, Student_Id, Class_Id, Class_No, Class_Sec_Id, Roll_No, Session,
-      Session_Start_Year, Session_End_Year, School_Id, Updated_By) values(?,?,?,?,?,?,?,?,?,?,?)";
+      Session_Start_Year, Session_End_Year, School_Id, Student_Type, Stream, Enabled, Concession_Id, Updated_By) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
       
       $insertStudentTableSql = "insert into student_master_table
-      (Student_Id, School_Id, Session, Session_Start_Year, Session_End_Year, First_Name, Middle_Name, Last_Name, Class_Id, Class_Sec_Id, Gender, DOB, Discount_Category, Father_Name,
+      (Student_Id, School_Id, Session, Session_Start_Year, Session_End_Year, First_Name, Middle_Name, Last_Name, Class_Id, Class_Sec_Id, Gender, DOB, Father_Name,
       Mother_Name, Guardian_Name, SMS_Contact_No, Updated_By) 
-      values(?,?,?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?,?)";
+      values(?,?,?,?,?,?,?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?,?,?,?,?)";
       
 
       $tempArray = array();
@@ -262,7 +285,7 @@
                    
           $stmt = $dbhandle -> prepare($insertStudentClassTableSql);
     
-          $stmt->bind_param("isiiiisiiis",   
+          $stmt->bind_param("isiiiisiiissiis",   
           $student_Detail_Id,
           $tempArray[1],
           $studClassId,
@@ -273,6 +296,10 @@
           $tempArray[4],
           $tempArray[5],
           $schoolId,
+          $studentType,
+          $stream,
+          $enabled,
+          $discCat,
           $updatedBy          
          );
             
@@ -286,7 +313,7 @@
 
           $stmt2 = $dbhandle -> prepare($insertStudentTableSql);
     
-          $stmt2->bind_param("sisiisssiississsss",   
+          $stmt2->bind_param("sisiisssiisssssss",   
           $tempArray[1],
           $schoolId,
           $tempArray[3],
@@ -298,7 +325,6 @@
           $studClassId,
           $studSecsId,
           $tempArray[12],
-          $tempArray[13],
           $tempArray[14],
           $tempArray[15],
           $tempArray[16],
@@ -327,9 +353,7 @@
           mysqli_rollback($dbhandle);
          //$dbhandle->query('UNLOCK TABLES');
          echo "Sorry! Unable to import  |  Error Area :- " . "<br>". $errorAreaMessage;
-      }
-   
-
+      }   
    }//end of else
    
 

@@ -129,7 +129,7 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
         //Step2 Generate a Fee Recept Number using function generate_fee_recept($dbhandle,$Session,$SchoolId);
         $ReceptNo='';           //To store the recept number generated.
         $ReceptNo = generate_fee_recept($dbhandle,$Session,$SchoolId);
-        
+        //echo $ReceptNo;
         //Step3. Generate primary key value for fee_payment_master to enter into the FP_Id column by using sequence_number function.
         $FP_Id=sequence_number('Fee_Payment_Master',$dbhandle);
 

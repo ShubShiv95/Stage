@@ -121,7 +121,7 @@ include 'security.php';
                                                 /*$_SESSION["STARTYEAR"] = 2020;
                                                 $_SESSION["ENDYEAR"] = 2021;*/
                                                 $current_session = $_SESSION["STARTYEAR"] . '-' . $_SESSION["ENDYEAR"];
-                                                $next_session = $_SESSION["ENDYEAR"] . '-' . date('Y',strtotime($_SESSION["ENDYEAR"])+(3600*24*365*2));
+                                                $next_session = $_SESSION["ENDYEAR"] . '-' . date('Y',strtotime($_SESSION["ENDYEAR"])+(3600*24*365));
                                                 echo '<option value="' . $current_session . '">' . $current_session . '</option>
                                                     <option value="' . $next_session . '">' . $next_session . '</option>';
                                                 ?>
@@ -129,7 +129,7 @@ include 'security.php';
                                         </div>
                                     </div>
                                     <div class="table-responsive" >
-                                    <div class="load_cluster_ui border border-primary" style="height: 50vh; overflow-x: auto;"></div>
+                                    <div class="load_cluster_ui border border-primary" style="height: 50vh; overflow-x: auto;"></div> 
                                         <table class="stripe row-border order-column ">
                                             <!--<thead class="month_head">
                                                 <tr>

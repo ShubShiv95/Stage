@@ -491,7 +491,6 @@ include 'security.php';
             function load_fee_details(student_id) {
                 $('.load_dyn_fee_data').html('');
                 var ac_type = $("#account_type").val(); //$('.account_type').val();
-                alert(ac_type);
                 var school_id = $('.show_school').val();
                 var curr_session = $('#school_session').val();
                 const fee_url = "./FeeCollectionAPI.php?Parameter=CollectFee&studentid=" + student_id + "&ac_type=" + ac_type + "&school_id=" + school_id + "&session="+curr_session+"";

@@ -354,7 +354,6 @@ else
                           <span><?php echo $mainMenu_row["Menu_Name"]; ?></span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                  </a>
-                 <?php// echo $subMenu_sql;?>
                   <?php
                     $subMenu_sql="select * from menu_details_table  where menu_id=" . $mainMenu_row['Menu_Id'] . " order by sequence_no";
                     //echo $subMenu_sql;

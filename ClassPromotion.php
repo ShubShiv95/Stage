@@ -95,14 +95,13 @@ require_once './includes/navbar.php';
                     const stud_json = JSON.parse(JSON.stringify(response));
                     if (stud_json == '') {
                         table_html += '';
-                    } else 
-                    {
+                    } else {
                         table_html = '<thead><tr><th>Serial No. </th><th>Class </th><th>Roll No.</th><th>Student Name</th><th>Promoted </th><th>Not Promoted</th><th>Remarks</th></tr></thead><tbody><tr>';
                         for (let i = 0; i < stud_json.length; i++) {
                             sl = 1 + i;
                             const data_json = stud_json[i];
                             table_html += ' <tr>';
-                            table_html += '<td><input type="text" class="d-none" value="'+data_json.Session_End_Year+'" name="sesion_end_year"><input type="text" class="d-none" value="'+data_json.Student_Details_Id+'" name="student_details_id[]">' + sl + '</td>';
+                            table_html += '<td><input type="text" class="d-none" value="' + data_json.Session_End_Year + '" name="sesion_end_year"><input type="text" class="d-none" value="' + data_json.Student_Details_Id + '" name="student_details_id[]">' + sl + '</td>';
                             table_html += '<td>' + data_json.Class_Name + '</td>';
                             table_html += '<td>' + data_json.Roll_No + '</td>';
                             if (data_json.Middle_Name == null) {
@@ -110,9 +109,9 @@ require_once './includes/navbar.php';
                             } else {
                                 table_html += '<td>' + data_json.First_Name + ' ' + data_json.Middle_Name + ' ' + data_json.Last_Name + '</td>';
                             }
-                            table_html += '<td><div class="radio"><span><input type="radio"class="gaurdian-bs promoted" checked name="promoted['+i+']" value="1" id="' + data_json.Student_Details_Id + '" > Promoted</span></div></td>';
-                            table_html += '<td><div class="radio"><span><input type="radio" class="gaurdian-bs not_promoted" name="promoted['+i+']" value="0" id="' + data_json.Student_Details_Id + '"> Not Promoted</span></div></td>';
-                            table_html += '<td><textarea class="form-control reason_not_promoted" name="student_remarks['+i+']" id="' + data_json.Student_Details_Id + '"></textarea></td>';
+                            table_html += '<td><div class="radio"><span><input type="radio"class="gaurdian-bs promoted" checked name="promoted[' + i + ']" value="1" id="' + data_json.Student_Details_Id + '" > Promoted</span></div></td>';
+                            table_html += '<td><div class="radio"><span><input type="radio" class="gaurdian-bs not_promoted" name="promoted[' + i + ']" value="0" id="' + data_json.Student_Details_Id + '"> Not Promoted</span></div></td>';
+                            table_html += '<td><textarea class="form-control reason_not_promoted" name="student_remarks[' + i + ']" id="' + data_json.Student_Details_Id + '"></textarea></td>';
                             table_html += '</tr>';
                         }
                         table_html += '</tbody>';
@@ -148,36 +147,38 @@ require_once './includes/navbar.php';
     });
 
     // submit student promotion data
-    $('#student_promotion').submit(function(event){
+    $('#student_promotion').submit(function(event) {
         event.preventDefault();
         $.ajax({
-            url : $(this).attr('action'),
-            type : $(this).attr('method'),
-            data : $(this).serialize(),
-            success : function(data){
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: $(this).serialize(),
+            success: function(data) {
                 $('#form_output').html(data);
-               // window.setTimeout(function(){$('#form_output').html('')},2000);
-               // $('.tebal-promotion').fadeOut('slow');
+                // window.setTimeout(function(){$('#form_output').html('')},2000);
+                // $('.tebal-promotion').fadeOut('slow');
             }
         });
     });
 
     // count not promoted
-    $(document).on('change','.not_promoted',function(){
+    $(document).on('change', '.not_promoted', function() {
         var count_promoted = $('#count_promoted').val();
         var count_not_promoted = $('#count_not_promoted').val();
-        var new_count = parseInt(count_promoted)-1;
-        var new_not_pr = parseInt(count_not_promoted)+1;
-        $('#count_promoted').val(new_count); $('#count_not_promoted').val(new_not_pr);
+        var new_count = parseInt(count_promoted) - 1;
+        var new_not_pr = parseInt(count_not_promoted) + 1;
+        $('#count_promoted').val(new_count);
+        $('#count_not_promoted').val(new_not_pr);
     });
 
     // count promoted
-    $(document).on('change','.promoted',function(){
+    $(document).on('change', '.promoted', function() {
         var count_promoted = $('#count_promoted').val();
         var count_not_promoted = $('#count_not_promoted').val();
-        var new_count = parseInt(count_promoted)+1;
-        var new_not_pr = parseInt(count_not_promoted)-1;
-        $('#count_promoted').val(new_count); $('#count_not_promoted').val(new_not_pr);
+        var new_count = parseInt(count_promoted) + 1;
+        var new_not_pr = parseInt(count_not_promoted) - 1;
+        $('#count_promoted').val(new_count);
+        $('#count_not_promoted').val(new_not_pr);
     });
 </script>
 <?php include_once './includes/closebody.php'; ?>

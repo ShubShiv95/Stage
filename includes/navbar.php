@@ -252,19 +252,35 @@
 
 
                 <li class="navbar-item dropdown header-language">
-                    <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>Session 2020-2021</a>
+                    <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>
+                    <?php 
+                        if($_SESSION["LOGINTYPE"]=="STAFF")
+                            {echo $_SESSION["SESSION"];} 
+                        if($_SESSION["LOGINTYPE"]=="PARENT") 
+                            {echo $_SESSION["NAME"];}
+                    ?></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <?php
-
-
-                        foreach ($_SESSION["SESSIONLIST"] as $value) {
-                            echo '<a class="dropdown-item" href="Reset_Session.php?sessionid=' . $value .  '">' . $value . '</a>';
-                        }
+                        $count=1;
+                        if($_SESSION["LOGINTYPE"]=="STAFF")    
+                            {
+                                foreach ($_SESSION["SESSIONLIST"] as $value) 
+                                {
+                                    echo '<a class="dropdown-item" href="Reset_Session.php?sessionid=' . $value .  '">' . $value . '</a>';
+                                }
+                            }
+                            
+                            if($_SESSION["LOGINTYPE"]=="PARENT")  
+                                {
+                                    while($count<=count($_SESSION["SIBLINGLIST"]))    
+                                        {
+                                            
+                                            echo '<a class="dropdown-item" href="Reset_Sibling.php?studentid=' .$_SESSION["SIBLINGLIST"][$count]["STUDENTID"] .  '">' . $_SESSION["SIBLINGLIST"][$count]["NAME"] . '</a>';
+                                            $count++;
+                                        }
+                                }         
                         ?>
-                        <!--a class="dropdown-item" href="#">2021-2022</a>
-                            <a class="dropdown-item" href="#">2020-2021</a>
-                            <a class="dropdown-item" href="#">2019-2020</a>
-                            <a class="dropdown-item" href="#">2018-2019</a-->
+                      
                     </div>
                 </li>
             </ul>

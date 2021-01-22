@@ -2,10 +2,10 @@
 session_start();
 include 'dbobj.php';
 
-$lid = mysqli_real_escape_string($dbhandle,trim($_REQUEST["loginid"]));
+$loginid = mysqli_real_escape_string($dbhandle,trim($_REQUEST["loginid"]));
 $passwd = mysqli_real_escape_string($dbhandle,$_REQUEST['password']);
 
-$Login_Query = "select * from login_table where login_id='admin' and enabled=1";
+$Login_Query = "select * from login_table where login_id=$loginid and enabled=1";
 
 $Login_Query_Result=$dbhandle->query($Login_Query);
 $Login_Query_Row = $Login_Query_Result->fetch_assoc();
@@ -18,7 +18,7 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 		if($Login_Query_Row['PASSWORD']== sha1($passwd)) // check if the user password matches.
 
 		{
-			
+			$LID=$Login_Query_Row['LID'];
 			//Listing All Sessions from school_master_table;
 			$Get_Session_List_Sql="select * from school_master_table";
 			$Get_Session_List_result=$dbhandle->query($Get_Session_List_Sql);
@@ -57,7 +57,7 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 				}
 
 			
-			$Update_Login_Status_Sql="update login_table set login_status=1,login_time=now() where login_id='" . $lid . "'";
+			$Update_Login_Status_Sql="update login_table set login_status=1,login_time=now() where login_id='" . $loginid . "'";
 			$Update_Login_Status_Result=$dbhandle->query($Update_Login_Status_Sql);
 			if($Update_Login_Status_Result==false)
 			{
@@ -77,7 +77,7 @@ if(mysqli_num_rows($Login_Query_Result) == 1)  // Checks if the userid exist in 
 
 			if($Login_Query_Row["LOGIN_TYPE"]=='STUDENT')
 			{
-				$Get_Student_Details_Sql="select * from student_master_table where student_reff_login_id='" . $lid . "' and enabled=1";
+				$Get_Student_Details_Sql="select smt.*,scd.session,scd.start_year,scd.end_year,scd.class_id,scd.class_sec_id,cst.section,cst.stream,cmt.class_name from student_master_table smt,student_class_details scd,class_section_table cst,class_master_table cmt where smt.lid=" . $LID . " and  scd.student_id=smt.student_id and and smt.enabled=1 and scd.enabled=1 and cst.class_sec_id=scd.class_sec_id and cmt.class_id=cst.class_id";
 				//echo $Get_Student_Details_Sql;
 				$Get_Student_Details_Result=$dbhandle->query($Get_Student_Details_Sql);
 				$Get_Student_Details_Row=$Get_Student_Details_Result->fetch_assoc();

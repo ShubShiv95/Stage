@@ -1185,3 +1185,68 @@ if($request_type=='StudMAttendance')
                     echo json_encode($data, JSON_PRETTY_PRINT);
         }
 
+        if($request_type=='SyllabusList')
+        {
+            $studentId=$_REQUEST["StudentId"];
+            $schoolId=$_REQUEST["schooid"];
+    
+            $data = array(
+                "status"=>"200",
+                "message"=>"success",
+                "name" => "Ravi Kumar",
+                "class"=> "Class 5",
+                "section" => "A",
+                "roll_no" => "15",
+                "subjects"=>array(
+                                array(
+                                        "name" => "Math",
+                                        "filelist"=>array( 
+                                                "http://stage.swiftcampus.com/app_images/syllabus/Doc1.pdf"
+                                                    ),	  
+                                        "description" => "Some description" 
+                                     ),
+                                array(
+                                        "name" => "English",
+                                        "filelist"=>array( 
+                                                "http://stage.swiftcampus.com/app_images/syllabus/Doc2.pdf"
+                                                    ),	  
+                                        "description" => "Some description" 
+                                     ),
+                                array(
+                                        "name" => "Hindi",
+                                        "filelist"=>array( 
+                                                "http://stage.swiftcampus.com/app_images/syllabus/Doc3.pdf"
+                                                    ),	  
+                                        "description" => "Some description"  
+                                     ),
+                                array(
+                                        "name" => "Science",
+                                        "filelist"=>array( 
+                                                "http://stage.swiftcampus.com/app_images/syllabus/Doc1.pdf",
+                                                "http://stage.swiftcampus.com/app_images/syllabus/Doc2.pdf", 
+                                                "http://stage.swiftcampus.com/app_images/syllabus/Doc3.pdf"
+                                        ),                
+                                        "description" => "Some description" 
+                                     ),
+                                array(
+                                        "name" => "IT",
+                                        "filelist"=> array(
+                                                "http://stage.swiftcampus.com/app_images/syllabus/Doc1.pdf"
+                                                    ),	  
+                                        "description" => "Some description" 
+                                     ),
+                                 array(
+                                        "name" => "Sanskrit",
+                                        "filelist"=> array(
+                                        "http://stage.swiftcampus.com/app_images/syllabus/Doc2.pdf"
+                                        ),
+                                        "description" => "Some description"
+                                     )
+    
+                                     
+                            )
+                ); 
+            header('Content-type: text/javascript');
+            echo json_encode($data, JSON_PRETTY_PRINT);
+        }                            
+    

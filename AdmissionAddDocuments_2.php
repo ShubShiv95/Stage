@@ -53,10 +53,10 @@
   }
 
 
-  if(isset($_POST['student_docs_submitter'])){
-    if (empty($_POST['student_docs_submitter'])) {
-      $clearStId = mysqli_real_escape_string($dbhandle,$_POST['student_id']);
-      $documentType = mysqli_real_escape_string($dbhandle,$_POST['doc_type']);
+  if(isset($_REQUEST['student_docs_submitter'])){
+    if (empty($_REQUEST['student_docs_submitter'])) {
+      $clearStId = $_REQUEST['student_id'];
+      $documentType = mysqli_real_escape_string($dbhandle,$_REQUEST['doc_type']);
       $documentName = mysqli_real_escape_string($dbhandle,$_FILES['document_name']['name']);
 
       if(empty($clearStId)){
@@ -99,17 +99,17 @@
             </div>';
         }
         else{
-          $mainDirectory = "./AdmissionDocuments/";
+          $mainDirectory = "./app_images/AdmissionDocuments/";
           if (!file_exists($mainDirectory)) {
             mkdir('./AdmissionDocuments/', 0777, true);
           }
           $directory = $clearStId."_AdmissionDocs";
           
-          $fillePath = "./AdmissionDocuments/".$directory;
+          $fillePath = "./app_images/AdmissionDocuments/".$directory;
           if (!file_exists($fillePath)) {
             mkdir('./AdmissionDocuments/'.$directory, 0777, true);
           } 
-            $selectDocumentSql = "SELECT Doc_Id FROM admission_master_documents WHERE Student_Id = ? AND Document_Type = ?";
+            $selectDocumentSql = "SELECT Doc_Id FROM admission_master_documents WHERE Admission_Id = ? AND Document_Type = ?";
             $stmt=$dbhandle->prepare($selectDocumentSql);
             $stmt->bind_param("is", $clearStId,$documentType);
             $execResult=$stmt->execute();
@@ -135,10 +135,9 @@
               $rowId = $resultId->fetch_assoc();
               $docId = $rowId['MAX(Doc_Id)']+1;
               $fileName = $directory.'/'.$fileName;
-              $updateDocumentSql = "INSERT INTO `admission_master_documents`(`Doc_Id`, `Student_Id`, `Document_Name`, `Document_Type`) VALUES (?,?,?,?)";
+              $updateDocumentSql = "INSERT INTO `admission_master_documents`(`Doc_Id`, `Admission_Id`, `Document_Name`, `Document_Type`) VALUES (?,?,?,?)";
               $stmtIns=$dbhandle->prepare($updateDocumentSql);
-              
-              $stmtIns->bind_param("isss", $docId,$clearStId,$fileName,$documentType);
+              $stmtIns->bind_param("iiss", $docId,$clearStId,$fileName,$documentType);
               $resultSet = $stmtIns->execute();
               if (($resultSet == true)&&($fileSave==true)) {
                 echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -169,20 +168,19 @@
                 <span aria-hidden="true">&times;</span>
                 <span class="sr-only">Close</span>
               </button>
-              <strong>DAnger!</strong> Bot Detected.
+              <strong>Danger!</strong> Bot Detected.
             </div>';
     }
     $stmt->close();
   }
 
   if (isset($_GET['getAllDocuments'])) {
-    $studentId = $_GET['student_id'];
-    $selectDocumentSql = "SELECT * FROM `admission_master_documents` WHERE `Student_Id` = ? ORDER BY Doc_Id DESC";
+    $studentId = $_REQUEST['student_id'];
+    $selectDocumentSql = "SELECT * FROM `admission_master_documents` WHERE `Admission_Id` = ? ORDER BY Doc_Id DESC";
     $stmt=$dbhandle->prepare($selectDocumentSql);
     $stmt->bind_param("i", $studentId);
     $execResult=$stmt->execute();
     $result = $stmt->get_result();
-
     if(empty($result->num_rows)){
       echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -205,11 +203,11 @@
               <td>'.$docRows['Document_Type'].'</td>
               <td>'; 
               if ($fileExtension == "jpeg" || $fileExtension == "jpg") {
-                echo '<img src="./AdmissionDocuments/'.$docRows['Document_Name'].'" style="width:200px;">';
+                echo '<img src="./app_images/AdmissionDocuments/'.$docRows['Document_Name'].'" style="width:200px;">';
               }
               else if($fileExtension == "pdf" )
               {
-                echo '<embed src="./AdmissionDocuments/'.$docRows['Document_Name'].'" width="200px" height="200px" /><a href="./AdmissionDocuments/'.$docRows['Document_Name'].'" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a>';  
+                echo '<embed src="./app_images/AdmissionDocuments/'.$docRows['Document_Name'].'" width="200px" height="200px" /><a href="./app_images/AdmissionDocuments/'.$docRows['Document_Name'].'" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a>';  
               }
               echo'</td>
               <td><button class="btn btn-danger btn-sm deleteDocuments" id="'.$docRows['Doc_Id'].'"><i class="fas fa-trash"></i></button></td>

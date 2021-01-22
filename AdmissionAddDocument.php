@@ -28,7 +28,9 @@
             <form action="./AdmissionAddDocuments_2.php" class="new-added-form aj-new-added-form" id="admission_documents" enctype="multipart/form-data">
               <input type="text" autofill="none" style="display: none;" name="student_docs_submitter">
               <div class="row" id="append_form">
+
                 <input type="text" autofill="none" style="display: none;" id="student_id" readonly name="student_id" class="form-control mb-3">
+
                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                   <div class="form-group aj-form-group">
                     <label>Document Upload</label>
@@ -42,7 +44,9 @@
                       ?>
                     </select>
                   </div>
+
                 </div>
+
 
                 <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                   <div class="form-group aj-form-group">
@@ -149,7 +153,7 @@
               processData: false,
               success: function(data) {
                 $('#form_output').html(data);
-                $('#admission_documents')[0].reset();
+
                 load_documents(student_id);
               }
             });

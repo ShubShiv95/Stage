@@ -1,45 +1,10 @@
 <?php
-session_start();
+
+$pageTitle = "Dashboard";
+require_once './includes/header.php';
+require_once './includes/navbar.php';
 
 ?>
-<!doctype html>
-<html class="no-js" lang="">
-<?php
-include 'dbobj.php';
-include 'errorLog.php';
-include 'security.php';
-?>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Home 1</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <!-- Normalize CSS -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/main.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="css/all.min.css">
-    <!-- Flaticon CSS -->
-    <link rel="stylesheet" href="fonts/flaticon.css">
-    <!-- Full Calender CSS -->
-    <link rel="stylesheet" href="css/fullcalendar.min.css">
-    <!-- Animate CSS -->
-    <link rel="stylesheet" href="css/animate.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Modernize js -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="js/modernizr-3.6.0.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         function demoFromHTML() {
             var pdf = new jsPDF('p', 'pt', 'letter');
@@ -74,40 +39,6 @@ include 'security.php';
             );
         }
     </script>
-</head>
-
-<body class="home">
-    <!-- Preloader Start Here -->
-    <div id="preloader"></div>
-    <!-- Preloader End Here -->
-    <div id="wrapper" class="wrapper bg-ash">
-        <!-- Header Menu Area Start Here -->
-        <?php include('includes/navbar.php') ?>
-        <!-- Header Menu Area End Here -->
-        <!-- Page Area Start Here -->
-        <div class="dashboard-page-one">
-            <!-- Sidebar Area Start Here -->
-            <?php include('includes/sidebar.php') ?>
-            <!-- Sidebar Area End Here -->
-            <div class="dashboard-content-one">
-                <!-- Breadcubs Area Start Here -->
-
-                <!-- Breadcubs Area End Here -->
-
-                <!-- Hot Links Area Start Here -->
-                <?php include('includes/hot-link.php'); ?>
-                <!-- Hot Links Area End Here -->
-                <div class="breadcrumbs-area">
-                    <ul>
-                        <li>
-                            <a href="dashboard.php">Dashboard</a>
-                        </li>
-                    </ul>
-
-                </div>
-                <!-- Dashboard Content Start Here -->
-
-
                 <div class="row gutters-20" id="printpdf">
                     <div class="col-12 col-xl-8 col-6-xxxl">
                         <div class="card dashboard-card-one pd-b-20">
@@ -354,107 +285,5 @@ include 'security.php';
                         </div>
                     </div>
                 </div>
-                <!-- Dashboard Content End Here -->
-                <!-- Social Media Start Here -->
-                <!--div class="row gutters-20">
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="card dashboard-card-seven">
-                            <div class="social-media bg-fb hover-fb">
-                                <div class="media media-none--lg">
-                                    <div class="social-icon">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <h6 class="item-title">Like us on facebook</h6>
-                                    </div>
-                                </div>
-                                <div class="social-like">30,000</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="card dashboard-card-seven">
-                            <div class="social-media bg-twitter hover-twitter">
-                                <div class="media media-none--lg">
-                                    <div class="social-icon">
-                                        <i class="fab fa-twitter"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <h6 class="item-title">Follow us on twitter</h6>
-                                    </div>
-                                </div>
-                                <div class="social-like">1,11,000</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="card dashboard-card-seven">
-                            <div class="social-media bg-gplus hover-gplus">
-                                <div class="media media-none--lg">
-                                    <div class="social-icon">
-                                        <i class="fab fa-google-plus-g"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <h6 class="item-title">Follow us on googleplus</h6>
-                                    </div>
-                                </div>
-                                <div class="social-like">19,000</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="card dashboard-card-seven">
-                            <div class="social-media bg-linkedin hover-linked">
-                                <div class="media media-none--lg">
-                                    <div class="social-icon">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <h6 class="item-title">Follow us on linked</h6>
-                                    </div>
-                                </div>
-                                <div class="social-like">45,000</div>
-                            </div>
-                        </div>
-                    </div>
-                </div-->
-                <!-- Social Media End Here -->
-                <!-- Footer Area Start Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">
-                        <?php if (isset($_SESSION["FOOTERNOTE"])) echo $_SESSION["FOOTERNOTE"];
-                        else echo 'Powered by  <a href="http://swipetouch.tech" target="_blank">SwipeTouch Technologies</a>'; ?></div>
-                </footer>
-                <!-- Footer Area End Here -->
-            </div>
-        </div>
-        <!-- Page Area End Here -->
-    </div>
-    <!-- jquery-->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
-    <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Counterup Js -->
-    <script src="js/jquery.counterup.min.js"></script>
-    <!-- Moment Js -->
-    <script src="js/moment.min.js"></script>
-    <!-- Waypoints Js -->
-    <script src="js/jquery.waypoints.min.js"></script>
-    <!-- Scroll Up Js -->
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <!-- Full Calender Js -->
-    <script src="js/fullcalendar.min.js"></script>
-    <!-- Chart Js -->
-    <script src="js/Chart.min.js"></script>
-    <!-- Custom Js -->
-    <script src="js/main.js"></script>
-    <script src="js/myscript.js"></script>
 
-
-</body>
-
-</html>
+<?php  require_once './includes/scripts.php'; require_once './includes/closebody.php'; ?>

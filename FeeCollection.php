@@ -1,12 +1,7 @@
 <?php
-session_start();
-?>
-<!doctype html>
-<html class="no-js" lang="">
-<?php
-include 'dbobj.php';
-include 'errorLog.php';
-include 'security.php';
+require_once './includes/header.php';
+require_once 'dbobj.php';
+
 ?>
 
 <head>

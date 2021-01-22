@@ -27,11 +27,12 @@ require_once './GlobalModel.php';
                 <select class="select2 studclassToApply col-12" name="studclassToApply" id="studclassToApply">
                     <option value="0">Select Class</option>
 
+
                 </select>
             </div>
             <div class="form-group aj-form-group">
                 <label>Stream</label>
-                <select class="select2 col-12" name="f_Gender" readonly>
+                <select class="select2 col-12" name="stud_stream" id="stud_stream" readonly>
                     <option value="0">Select Stream</option>
                     <?php
                     foreach ($GLOBAL_CLASS_STREAM as $stream) {
@@ -69,13 +70,14 @@ require_once './GlobalModel.php';
                     <?php
                     $string = "";
                     foreach ($GLOBAL_SOCIAL_CAT as $x => $x_value) {
+
                         $string =  '<option value="' . $x . '">' . $x_value . '</option>' . $string;
                     }
                     echo $string;
                     ?>
                 </select>
             </div>
-            <div class="form-group aj-form-group">
+            <div class="form-group a
                 <label>Discount Category <span>*</span></label>
                 <select class="select2 col-12" name="studDiscCat" id="studDiscCat">
                 </select>
@@ -97,6 +99,7 @@ require_once './GlobalModel.php';
                     <?php
                     $string = "";
                     foreach ($GLOBAL_SCHOOL_SESSION as $x => $x_value) {
+
                         $string =  '<option value="' . $x . '">' . $x_value . '</option>' . $string;
                     }
                     echo $string;
@@ -104,6 +107,7 @@ require_once './GlobalModel.php';
                 </select>
             </div>
             <div class="form-group aj-form-group">
+
                 <label>Mother Tongue <span>*</span></label>
                 <select class="select2 col-12" name="studMotherTongue" id="studMotherTongue">
                     <?php
@@ -130,6 +134,7 @@ require_once './GlobalModel.php';
                     ?>
                 </select>
             </div>
+
             <div class="form-group aj-form-group">
                 <label>Nationality <span>*</span></label>
                 <select class="select2 col-12" name="studNationality" id="studNationality">
@@ -144,12 +149,14 @@ require_once './GlobalModel.php';
                     <?php
                     $string = "";
                     foreach ($GLOBAL_BLOOD_GROUP as $x => $x_value) {
+
                         $string =  '<option value="' . $x . '">' . $x_value . '</option>' . $string;
                     }
                     echo $string;
                     ?>
                 </select>
             </div>
+
             <div class="form-group aj-form-group">
                 <label>Adhaar Card No.</label>
                 <input type="text" name="studAdharCardNo" id="studAdharCardNo" placeholder="" class="form-control" maxlength="12" minlength="12">
@@ -292,10 +299,12 @@ require_once './GlobalModel.php';
             <div class="form-group aj-form-group">
                 <label>Country</label>
                 <input type="text" maxlength="12" name="raCountry" id="raCountry" placeholder="" class="form-control">
+
             </div>
         </div>
     </div>
     <div class="item-title aj-item-title f-aj-item-title">
+
         <h3 class="mb-4">Sibling Details <small> (if Any, After entering Admission No. Kindly press enter key again)</small></h3>
     </div>
     <div class="row">
@@ -454,7 +463,9 @@ require_once './GlobalModel.php';
                 </div>
                 <div class="form-group aj-form-group">
                     <label>Alumni</label>
-                    <select class="select2" name="fatherAlumni" id="fatherAlumni">
+
+                    <select class="select2 col-12" name="fatherAlumni" id="fatherAlumni">
+
                         <option selected value="No">No</option>
                         <option value="Yes">Yes</option>
                     </select>
@@ -574,7 +585,9 @@ require_once './GlobalModel.php';
         </div>
     </div>
     <div class="item-title aj-item-title f-aj-item-title">
-        <h3 class="mb-4">Gaurdian Details</h3>
+
+        <h3 class="mb-4">Guardian Details</h3>
+
     </div>
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-12 ">
@@ -782,7 +795,9 @@ require_once './GlobalModel.php';
     <div class="footer-sec-aj mt-3" id="formOutput" style="display: none;"> </div>
 
     <div class="aaj-btn-chang-c">
-        <button type="submit" class="aj-btn-a btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Submit</button>
+
+        <button type="submit" class="aj-btn-a btn-fill-lg btn-gradient-yellow btn-hover-bluedark submit_btn">Submit</button>
+
         <button type="reset" class="aj-btn-a btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
     </div>
 </form>
@@ -828,11 +843,19 @@ require_once './GlobalModel.php';
                 success: function(data) {
                     $('#formOutput').fadeIn('slow');
                     $('#formOutput').html(data);
+
+                    $('.submit_btn').hide();
+
                     window.setTimeout(function() {
                         $('.hide_time').fadeOut('slow');
                     }, 3000);
                 }
             });
+        });
+
+        // show submit button
+        $(document).on('blur','#studentFirstName',function(){
+            $('.submit_btn').show();
         });
 
         /* image preview */
@@ -877,7 +900,9 @@ require_once './GlobalModel.php';
                 var html = '<option value="">Select</option>';
                 for (let i = 0; i < classData.length; i++) {
                     const classRow = classData[i];
-                    html += '<option value="' + classRow.Class_Id + '">' + classRow.Class_Name + '</option>';
+
+                    html += '<option value="' + classRow.Class_Id + '|' + classRow.Class_No + '">' + classRow.Class_Name + '</option>';
+
                 }
                 $('.studclassToApply').html(html);
                 $('#studClass').html(html);
@@ -888,6 +913,7 @@ require_once './GlobalModel.php';
     }
     get_discount();
 
+
     function get_discount() {
         var disc_data = '<option value="0">Select Discount Category</option>';
         const discount_url = './universal_apis.php?get_all_discounts=1';
@@ -897,6 +923,20 @@ require_once './GlobalModel.php';
             });
             $('#studDiscCat').html(disc_data);
         });
+    }
+
+    $('#stud_stream').change(function(){
+        check_stream();
+    });
+    function check_stream(){
+        var stream = $('#stud_stream').val();
+        var class_nos = $('#studclassToApply').val();
+        var class_no_arr = class_nos.split('|');
+        class_no = class_no_arr[1];
+        if((stream !='General') && (class_no<=10)){
+            alert("Stream Should Be General If Class is Less Than 10");
+        }
+
     }
     $(document).on('click', '#copy_address', function() {
         const comm_add = $('#commAddress').val();

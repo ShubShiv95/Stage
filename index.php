@@ -41,7 +41,7 @@
                 <form action="lvalidate.php" class="login-form" method="post" id="login_form">
                     <div class="form-group">
                         <label>Username</label>
-                        <input type="text" placeholder="Enter usrename" class="form-control" name="loginid" method="post">
+                        <input type="text" placeholder="Enter Username" class="form-control" name="loginid" method="post">
                         <i class="far fa-envelope"></i>
                     </div>
                     <div class="form-group">

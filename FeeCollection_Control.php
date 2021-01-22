@@ -90,4 +90,3 @@ if (isset($_REQUEST['collect_fee_sender'])) {
 
     }
 }
-?>

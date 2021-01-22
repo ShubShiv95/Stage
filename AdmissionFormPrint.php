@@ -198,7 +198,9 @@ include 'AdmissionModel.php';
 </style>
 <?php require_once './includes/scripts.php'; ?>
 <script>
-    var student_id = "<?php echo $_REQUEST['student_id'] ?>";
+
+    var student_id = "<?php echo $_REQUEST['admission_id'] ?>";
+
     load_student_data(student_id);
     // function to load student data 
     function load_student_data(student_id) {

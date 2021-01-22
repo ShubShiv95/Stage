@@ -42,7 +42,9 @@ include 'dbobj.php';
                     </div>
                     <div class="form-group aj-form-group admission_class" style="display: none;">
                         <label>School Class <span>*</span></label>
-                        <select class="select2 class_name" name="f_class" id="schoolClass" name="schoolClass">
+
+                        <select class="select2 col-12 class_name" name="f_class" id="schoolClass" name="schoolClass">
+
                         </select>
                     </div>
                 </div>

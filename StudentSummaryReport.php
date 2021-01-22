@@ -80,6 +80,7 @@ require_once './includes/header.php';
                           <table class="table">
                               <thead>
                                   <tr>
+                                      <th>Stud. Id</th>
                                       <th>Name</th>
                                       <th>Father Name</th>
                                       <th>DOB</th>
@@ -322,7 +323,7 @@ require_once './includes/header.php';
                     } else {
                         var name_studs = value.First_Name + ' ' + value.Middle_Name + ' ' + value.Last_Name;
                     }
-                    html_table += '<tr><td>' + name_studs + '</td><td>' + value.Father_Name + '</td><td>' + value.DOB + '</td><td><button class="btn btn-warning load_student_data" id="' + value.Student_Id + '"><i class="fas fa-binoculars fa-2x"></i></button></td></tr>';
+                    html_table += '<tr><td>' + value.Student_Id + '</td><td>' + name_studs + '</td><td>' + value.Father_Name + '</td><td>' + value.DOB + '</td><td><button class="btn btn-warning load_student_data" id="' + value.Student_Id + '"><i class="fas fa-binoculars fa-2x"></i></button></td></tr>';
                 });
                 $('.append_stud_data').html(html_table);
             });
@@ -354,14 +355,20 @@ require_once './includes/header.php';
             $.getJSON(url, function(data) {
                 $.each(data, function(key, value) {
                     if (value.Middle_Name == null) {
-                        var name_studs = value.First_Name + ' ' + value.Last_Name;
+                        var name_studs = value.First_Name + ' ' + value.Last_Name+' ('+value.Student_Id+')';
                     } else {
-                        var name_studs = value.First_Name + ' ' + value.Middle_Name + ' ' + value.Last_Name;
+                        var name_studs = value.First_Name + ' ' + value.Middle_Name + ' ' + value.Last_Name+' ('+value.Student_Id+')';
                     }
                     $('.first_name').text(name_studs);
                     $('.class').text(value.Class_Name);
                     $('.section').text(value.Section);
-                    $('.roll').text(value.Roll_No);
+                    if(value.Roll_No==null){
+                        roll_no = 'N.A.';
+                    }
+                    else{
+                        roll_no = value.Roll_No;
+                    }
+                    $('.roll').text(roll_no);
                     $('.gender').text(value.Gender);
                     $('.father_name').text(value.Father_Name);
                     $('.mother_name').text(value.Mother_Name);

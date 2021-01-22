@@ -21,11 +21,13 @@ include_once './includes/navbar.php';
                     <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                         <div class="form-group aj-form-group">
                             <label>Master Account</label>
-                            <select class="select2 show_school" name="cluster_school_name">
+
+                            <select class="select2 col-12 show_school" name="cluster_school_name">
                             </select>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-12    ">
+                    <div class="col-xl-6 col-lg-6 col-12">
+
                         <div class="form-group aj-form-group">
                             <label>Select Applicable Class</label>
                             <div class="chackbox-cl">
@@ -37,7 +39,9 @@ include_once './includes/navbar.php';
                     <div class="col-xl-6 col-lg-6 col-12 mb-3">
                         <div class="form-group aj-form-group">
                             <label>Stream</label>
-                            <select class="select2" name="fee_stream">
+
+                            <select class="select2 col-12" name="fee_stream">
+
                                 <option value="">-- Stream --</option>
                                 <option value="Science">Science</option>
                                 <option value="Commerce">Commerce</option>
@@ -50,7 +54,9 @@ include_once './includes/navbar.php';
                     <div class="col-xl-6 col-lg-6 col-12 mb-3">
                         <div class="form-group aj-form-group">
                             <label>Student Type</label>
-                            <select class="select2" name="student_type">
+
+                            <select class="select2 col-12" name="student_type">
+
                                 <option value="">-- Type --</option>
                                 <option value="New">New</option>
                                 <option value="Existing">Existing</option>

@@ -18,9 +18,18 @@ include 'dbobj.php';
                 <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
                     <div class="form-group aj-form-group">
                   
-                        <label>Select Date</label>
+                        <label>From Date</label>
                             <!--input type="text" id="adt" name="adt" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker" data-position='bottom right' value="<?php $datetime = new DateTime(); echo $datetime->format("d/m/Y");?>"-->
-                            <input type="text" id="dcrd" name="dcrd" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker" data-position='bottom right' value="<?php  date_default_timezone_set('Asia/Kolkata');; echo date("d/m/Y");?>">
+                            <input type="text" id="fdate" name="fdate" required="" placeholder="dd-mm-yyyy" class="form-control air-datepicker" data-position='bottom right' value="<?php  date_default_timezone_set('Asia/Kolkata');; echo date("d/m/Y");?>">
+                            <i class="far fa-calendar-alt"></i>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
+                    <div class="form-group aj-form-group">
+                  
+                        <label>To Date</label>
+                            <!--input type="text" id="adt" name="adt" required="" placeholder="dd/mm/yyyy" class="form-control air-datepicker" data-position='bottom right' value="<?php $datetime = new DateTime(); echo $datetime->format("d/m/Y");?>"-->
+                            <input type="text" id="tdate" name="tdate" required="" placeholder="dd-mm-yyyy" class="form-control air-datepicker" data-position='bottom right' value="<?php  date_default_timezone_set('Asia/Kolkata');; echo date("d/m/Y");?>">
                             <i class="far fa-calendar-alt"></i>
                     </div>
                 </div>

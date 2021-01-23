@@ -1,12 +1,9 @@
 <?php
-session_start();
 /*make a variable named $pageTitle */
 $pageTitle = "Transport Send Message to Parent";
 $bodyHeader = "Transport Send Message to Parent";
 require_once './includes/header.php';
-include 'dbobj.php';
-//include 'errorLog.php';
-include 'security.php';
+require_once './includes/navbar.php';
 ?>
 <!-- start your UI here -->
 <div class="col-md-12">

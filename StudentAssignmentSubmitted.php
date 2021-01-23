@@ -14,7 +14,7 @@ while ($rowSub = mysqli_fetch_assoc($resultSub)) {
   $subjectDropdownValue = '<option value="' . $rowSub["Subject_Id"] . '">' . $rowSub["Subject_Name"] . ' </option>' . $subjectDropdownValue;
 }
 ?>
-<?php require_once './includes/header.php'; ?>
+<?php require_once './includes/header.php'; require_once './includes/navbar.php'; ?>
 <!-- start your UI here -->
 <div class="col-md-12 loadSData">
 

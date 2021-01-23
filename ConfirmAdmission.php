@@ -81,7 +81,8 @@ include_once './includes/navbar.php';
         get_admission_details();
 
         function get_admission_details() {
-            var stud_url = './universal_apis.php?get_admission_details=1&stud_data=' + <?php echo $_GET['adminssion_id'] ?> + '';
+            var admission_id = "<?php echo $_GET['adminssion_id'] ?>";
+            var stud_url = './universal_apis.php?get_admission_details=1&stud_data=' + admission_id + '';
             $.getJSON(stud_url, function(stud_response) {
                 $.each(stud_response, function(key, value) {
                     if (value.Middle_Name == null) {
@@ -106,11 +107,11 @@ include_once './includes/navbar.php';
 
 
         function get_fee_cluster(stream, class_id, session) {
-            url_cl = "./universal_apis.php?fee_cluster_id_by_class=1&class_id=" + class_id + "&stream=" + stream + "";
+            url_cl = "./universal_apis.php?fee_cluster_id_by_class=1&class_id=" + class_id + "&stream="+ stream+"&stud_type=New";
             $.getJSON(url_cl, function(cl_head) {
-                $.each(cl_head, function(key, value) {
-                    load_fee_cluster_details(value.FC_Id, session);
-                    $('#fee_cluster_id').val(value.FC_Id);
+                $.each(cl_head, function(key, value_fc) {
+                    $('#fee_cluster_id').val(value_fc.fg_id);
+                    load_fee_cluster_details(value_fc.fg_id, session);
                 });
             });
         }
@@ -119,7 +120,8 @@ include_once './includes/navbar.php';
             var send_data = {
                 'get_clust_details': 1,
                 'cluster_session': session,
-                'cluster_name': fc_id
+                'cluster_name': fc_id,
+                'structure_type':'Regular'
             };
             $.get('./FeeControl_1.php', send_data, function(data) {
                 $('.show_cluster').html(data);

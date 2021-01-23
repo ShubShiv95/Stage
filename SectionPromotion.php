@@ -1,10 +1,6 @@
 <?php
-require_once './includes/header.php';
 $pageTitle = "Sudent's Section Allocation";
-
-include_once 'dbobj.php';
-include_once 'errorLog.php';
-include_once 'security.php';
+require_once './includes/header.php';
 require_once './includes/navbar.php';
 ?>
 <form class="new-added-form school-form aj-new-added-form">
@@ -55,15 +51,11 @@ require_once './includes/navbar.php';
             </div>
             <div class="new-added-form aj-new-added-form">
                 <div class="aaj-btn-chang-cbtn">
-                    <!--<button type="submit" class="aj-btn-a1 btn-fill-lg btn-gradient-dark  btn-hover-bluedark">Promote Student </button>-->
                 </div>
             </div>
         </div>
-
     </form>
 </div>
-
-
 <?php require_once './includes/scripts.php'; ?>
 <script type="text/javascript">
     $('#opne-form-Promotion').click('.sibling-bs', function() {

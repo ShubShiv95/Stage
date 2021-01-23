@@ -1,9 +1,9 @@
 <?php
-session_start();
 /*make a variable named $pageTitle */
 $pageTitle = "Transport  Add Route Fee";
 $bodyHeader = "Transport Add Route Fee";
 require_once './includes/header.php';
+require_once './includes/navbar.php';
 ?>
 <!-- start your UI here -->
 <div class="col-md-12">

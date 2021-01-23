@@ -1,174 +1,99 @@
 <?php
-session_start();
+$pageTitle = "Monthly Attendance Report";
+require_once './includes/header.php';
+include_once './includes/navbar.php';
 ?>
-<!doctype html>
-<html class="no-js" lang="">
-<?php
-include 'dbobj.php';
-include 'errorLog.php';
-include 'security.php';
-?>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Student Attendence</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <!-- Normalize CSS -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/main.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="css/all.min.css">
-    <!-- Flaticon CSS -->
-    <link rel="stylesheet" href="fonts/flaticon.css">
-    <!-- Animate CSS -->
-    <link rel="stylesheet" href="css/animate.min.css">
-    <!-- Select 2 CSS -->
-    <link rel="stylesheet" href="css/select2.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Modernize js -->
-    <script src="js/modernizr-3.6.0.min.js"></script>
-</head>
+<form class="new-added-form aj-new-added-form">
+    <div class="row">
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <div class="form-group aj-form-group">
+                <label>Select Class</label>
+                <select class="select2 col-12" required name="classid" id="classid" onchange="showsection(this.value)">
+                    <!--option value="">Please Select Class *</option-->
+                    <option value="0">Please Select Class *</option>
+                    <?php
+                    $str = '';
+                    $query = 'select Class_Id,Class_Name from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
+                    $result = $dbhandle->query($query);
+                    if (!$result) {
+                        //var_dump($getStudentCount_result);
+                        $error_msg = mysqli_error($dbhandle);
+                        $el = new LogMessage();
+                        $sql = $query;
+                        //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
+                        $el->write_log_message('Student Attendance Entry', $error_msg, $sql, __FILE__, $_SESSION['LOGINID']);
+                        $_SESSION["MESSAGE"] = "<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
+                        $dbhandle->query("unlock tables");
+                        mysqli_rollback($dbhandle);
+                        //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
+                        $messsage = 'Error: Class list not generated.  Please consult application consultant.';
+                        //$str_end='</div>';
+                        //echo $str_start.$messsage.$str_end;
+                        //echo "";
+                        //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
+                    }
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . '</option>';
+                    }
+                    //echo $str;
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <div class="form-group aj-form-group">
+                <label>Select Section</label>
+                <select class="select2 col-12" name="secid" id="secid" required>
+                    <option value="">Please Select Section *</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <div class="form-group aj-form-group">
+                <label>Select Period</label>
+                <select class="select2 col-12" name="period" id="period" required>
+                    <option value="1">Period 1</option>
+                    <option value="2">Period 2</option>
+                    <option value="3">Period 3</option>
+                    <option value="4">Period 4</option>
+                    <option value="5">Period 5</option>
+                    <option value="6">Period 6</option>
+                    <option value="7">Period 7</option>
+                    <option value="8">Period 8</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <div class="form-group aj-form-group">
+                <label>Select Month</label>
+                <select class="select2 col-12" name="month" id="month" required>
+                    <option value="0">Select Month</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">Sepetember</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12 aaj-btn-chang">
+            <button type="button" class="aj-btn-a btn-fill-lg btn-gradient-yellow btn-hover-bluedark" onClick="getMonthlyReport();">View</button>
+            <button type="button" class="aj-btn-a btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+        </div>
+    </div>
+</form>
 
-<body>
-    <!-- Preloader Start Here -->
-    <div id="preloader"></div>
-    <!-- Preloader End Here -->
-    <div id="wrapper" class="wrapper bg-ash">
-         <!-- Header Menu Area Start Here -->
-         <?php include ('includes/navbar.php') ?>
-        <!-- Header Menu Area End Here -->
-        <!-- Page Area Start Here -->
-        <div class="dashboard-page-one">
-            <!-- Sidebar Area Start Here -->
-            <?php 
-            include 'includes/sidebar.php'; 
-            ?>
-            <!-- Sidebar Area End Here -->
-            <div class="dashboard-content-one">
-                <!-- Breadcubs Area Start Here -->
-                <div class="breadcrumbs-area">
-                    <h3>Student Attendence</h3>
-                    <ul>
-                        <li>
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li>Attendence</li>
-                    </ul>
-                </div>
-                <!-- Breadcubs Area End Here -->
-                <div class="row">
-                    <!-- Student Attendence Search Area Start Here -->
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="heading-layout1">
-                                    <div class="item-title aj-item-title">
-                                        <h3>Student Attendence</h3>
-                                    </div>
-                                </div>
-                                <form class="new-added-form aj-new-added-form">
-                                    <div class="row">
-                                        <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                        <div class="form-group aj-form-group">
-                                                <label>Select Class</label>
-                                                <select class="select2" required name="classid" id="classid" onchange="showsection(this.value)">
-                                                    <!--option value="">Please Select Class *</option-->
-                                                    <option value="0">Please Select Class *</option>
-                                                    <?php
-                                                        $str='';
-                                                        $query='select Class_Id,class_name from class_master_table where enabled=1' . ' and School_Id=' . $_SESSION["SCHOOLID"] . " and class_no!=0 order by class_no";
-                                                        $result=$dbhandle->query($query);
-                                                        if(!$result)
-                                                            {
-                                                                //var_dump($getStudentCount_result);
-                                                                $error_msg=mysqli_error($dbhandle);
-                                                                $el=new LogMessage();
-                                                                $sql=$query;
-                                                                //$el->write_log_message('Module Name','Error Message','SQL','File','User Name');
-                                                                $el->write_log_message('Student Attendance Entry',$error_msg,$sql,__FILE__,$_SESSION['LOGINID']);
-                                                                $_SESSION["MESSAGE"]="<h1>Database Error: Not able to generate account list array. Please try after some time.</h1>";
-                                                                $dbhandle->query("unlock tables");
-                                                                mysqli_rollback($dbhandle);
-                                                                //$str_start='<div class="alert icon-alart bg-pink2" role="alert"><i class="fas fa-times bg-pink3"></i>';
-                                                                $messsage='Error: Class list not generated.  Please consult application consultant.';
-                                                                //$str_end='</div>';
-                                                                //echo $str_start.$messsage.$str_end;
-                                                                //echo "";
-                                                                //echo '<meta HTTP-EQUIV="Refresh" content="0; URL=message.php">';						
-                                                            }
-                                                        while($row=$result->fetch_assoc())
-                                                        {
-                                                            echo '<option value="' . $row["Class_Id"] . '">Class ' . $row["class_name"] . '</option>';
-                                                            
-                                                        }
-                                                        //echo $str;
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                            <div class="form-group aj-form-group">
-                                                <label>Select Section</label>
-                                                <select class="select2" name="secid" id="secid" required>
-                                                    <option value="">Please Select Section *</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                            <div class="form-group aj-form-group">
-                                                <label>Select Period</label>
-                                                <select class="select2" name="period" id="period" required>
-                                                    <option value="1">Period 1</option>
-                                                    <option value="2">Period 2</option>
-                                                    <option value="3">Period 3</option>
-                                                    <option value="4">Period 4</option>
-                                                    <option value="5">Period 5</option>
-                                                    <option value="6">Period 6</option>
-                                                    <option value="7">Period 7</option>
-                                                    <option value="8">Period 8</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                            <div class="form-group aj-form-group">
-                                                <label>Select Month</label>
-                                                <select class="select2" name="month" id="month" required>
-                                                    <option value="0">Select Month</option>
-                                                    <option value="1">January</option>
-                                                    <option value="2">February</option>
-                                                    <option value="3">March</option>
-                                                    <option value="4">April</option>
-                                                    <option value="5">May</option>
-                                                    <option value="6">June</option>
-                                                    <option value="7">July</option>
-                                                    <option value="8">August</option>
-                                                    <option value="9">Sepetember</option>
-                                                    <option value="10">October</option>
-                                                    <option value="11">November</option>
-                                                    <option value="12">December</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 aaj-btn-chang">
-                                            <button type="button" class="aj-btn-a btn-fill-lg btn-gradient-yellow btn-hover-bluedark" onClick="getMonthlyReport();">View</button>
-                                            <button type="button" class="aj-btn-a btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body" id="div-AttendanceMonthlyReport">
-                                <!--div class="heading-layout1">
+<div class="col-12">
+    <div class="card">
+        <div class="card-body" id="div-AttendanceMonthlyReport">
+            <!--div class="heading-layout1">
                                     <div class="item-title">
                                         <h3>Attendence Sheet Of Class One: Section A, April 2019</h3>
                                     </div>
@@ -904,181 +829,145 @@ include 'security.php';
                                         </tfoot>
                                     </table>
                                 </div-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Student Attendence Area End Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
-                </footer>
-            </div>
         </div>
-        <!-- Page Area End Here -->
     </div>
-    <!-- jquery-->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
-    <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Select 2 Js -->
-    <script src="js/select2.min.js"></script>
-    <!-- Scroll Up Js -->
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <!-- Custom Js -->
-    <script src="js/main.js"></script>
+</div>
+<?php require_once './includes/scripts.php'; ?>
+
 <script type="text/javascript">
-    $(function(){
-        $("input[type='text']").each(function( index ) {
-          if(this.value == 'P' || this.value == 'p'){
-            $(this).addClass("atent-p");
-            $(this).removeClass("atent-a");
-            $(this).removeClass("atent-l");
-            $(this).removeClass("atent-h");
-            $(this).removeClass("atent-hd");
-            $(this).removeClass("atent-s");
-          }else if(this.value == 'A' || this.value == 'a'){
-            $(this).removeClass("atent-p");
-            $(this).addClass("atent-a");
-            $(this).removeClass("atent-l");
-            $(this).removeClass("atent-h");
-            $(this).removeClass("atent-hd");
-            $(this).removeClass("atent-s");
-          }else if(this.value == 'L' || this.value == 'l'){
-            $(this).removeClass("atent-p");
-            $(this).removeClass("atent-a");
-            $(this).addClass("atent-l");
-            $(this).removeClass("atent-h");
-            $(this).removeClass("atent-hd");
-            $(this).removeClass("atent-s");
-          }else if(this.value == 'H' || this.value == 'h'){
-            $(this).removeClass("atent-p");
-            $(this).removeClass("atent-a");
-            $(this).removeClass("atent-l");
-            $(this).addClass("atent-h");
-            $(this).removeClass("atent-hd");
-            $(this).removeClass("atent-s");
-          }else if(this.value == 'HD' || this.value == 'hd'){
-            $(this).removeClass("atent-p");
-            $(this).removeClass("atent-a");
-            $(this).removeClass("atent-l");
-            $(this).removeClass("atent-h");
-            $(this).addClass("atent-hd");
-            $(this).removeClass("atent-s");
-          }else if(this.value == 'S' || this.value == 's'){
-            $(this).removeClass("atent-p");
-            $(this).removeClass("atent-a");
-            $(this).removeClass("atent-l");
-            $(this).removeClass("atent-h");
-            $(this).removeClass("atent-hd");
-            $(this).addClass("atent-s");
-          }
+    $(function() {
+        $("input[type='text']").each(function(index) {
+            if (this.value == 'P' || this.value == 'p') {
+                $(this).addClass("atent-p");
+                $(this).removeClass("atent-a");
+                $(this).removeClass("atent-l");
+                $(this).removeClass("atent-h");
+                $(this).removeClass("atent-hd");
+                $(this).removeClass("atent-s");
+            } else if (this.value == 'A' || this.value == 'a') {
+                $(this).removeClass("atent-p");
+                $(this).addClass("atent-a");
+                $(this).removeClass("atent-l");
+                $(this).removeClass("atent-h");
+                $(this).removeClass("atent-hd");
+                $(this).removeClass("atent-s");
+            } else if (this.value == 'L' || this.value == 'l') {
+                $(this).removeClass("atent-p");
+                $(this).removeClass("atent-a");
+                $(this).addClass("atent-l");
+                $(this).removeClass("atent-h");
+                $(this).removeClass("atent-hd");
+                $(this).removeClass("atent-s");
+            } else if (this.value == 'H' || this.value == 'h') {
+                $(this).removeClass("atent-p");
+                $(this).removeClass("atent-a");
+                $(this).removeClass("atent-l");
+                $(this).addClass("atent-h");
+                $(this).removeClass("atent-hd");
+                $(this).removeClass("atent-s");
+            } else if (this.value == 'HD' || this.value == 'hd') {
+                $(this).removeClass("atent-p");
+                $(this).removeClass("atent-a");
+                $(this).removeClass("atent-l");
+                $(this).removeClass("atent-h");
+                $(this).addClass("atent-hd");
+                $(this).removeClass("atent-s");
+            } else if (this.value == 'S' || this.value == 's') {
+                $(this).removeClass("atent-p");
+                $(this).removeClass("atent-a");
+                $(this).removeClass("atent-l");
+                $(this).removeClass("atent-h");
+                $(this).removeClass("atent-hd");
+                $(this).addClass("atent-s");
+            }
         });
     })
-$(document).on("change","input[type='text']",function(){
-    if($(this).val() == 'P' || $(this).val() == 'p'){
+    $(document).on("change", "input[type='text']", function() {
+        if ($(this).val() == 'P' || $(this).val() == 'p') {
             $(this).addClass("atent-p");
             $(this).removeClass("atent-a");
             $(this).removeClass("atent-l");
             $(this).removeClass("atent-h");
             $(this).removeClass("atent-hd");
             $(this).removeClass("atent-s");
-          }else if($(this).val() == 'A' || $(this).val() == 'a'){
+        } else if ($(this).val() == 'A' || $(this).val() == 'a') {
             $(this).removeClass("atent-p");
             $(this).addClass("atent-a");
             $(this).removeClass("atent-l");
             $(this).removeClass("atent-h");
             $(this).removeClass("atent-hd");
             $(this).removeClass("atent-s");
-          }else if($(this).val() == 'L' || $(this).val() == 'l'){
+        } else if ($(this).val() == 'L' || $(this).val() == 'l') {
             $(this).removeClass("atent-p");
             $(this).removeClass("atent-a");
             $(this).addClass("atent-l");
             $(this).removeClass("atent-h");
             $(this).removeClass("atent-hd");
             $(this).removeClass("atent-s");
-          }else if($(this).val() == 'H' || $(this).val() == 'h'){
+        } else if ($(this).val() == 'H' || $(this).val() == 'h') {
             $(this).removeClass("atent-p");
             $(this).removeClass("atent-a");
             $(this).removeClass("atent-l");
             $(this).addClass("atent-h");
             $(this).removeClass("atent-hd");
             $(this).removeClass("atent-s");
-          }else if($(this).val() == 'HD' || $(this).val() == 'hd'){
+        } else if ($(this).val() == 'HD' || $(this).val() == 'hd') {
             $(this).removeClass("atent-p");
             $(this).removeClass("atent-a");
             $(this).removeClass("atent-l");
             $(this).removeClass("atent-h");
             $(this).addClass("atent-hd");
             $(this).removeClass("atent-s");
-          }else if($(this).val() == 'S' || $(this).val() == 's'){
+        } else if ($(this).val() == 'S' || $(this).val() == 's') {
             $(this).removeClass("atent-p");
             $(this).removeClass("atent-a");
             $(this).removeClass("atent-l");
             $(this).removeClass("atent-h");
             $(this).removeClass("atent-hd");
             $(this).addClass("atent-s");
-          }
-})
+        }
+    })
 </script>
 <script>
-function showsection(str)
-{
-var xmlhttp;    
-if (str=="")
-  {
-  document.getElementById("section").innerHTML="";
-  return;
-  }
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("secid").innerHTML=xmlhttp.responseText;
+    function showsection(str) {
+        var xmlhttp;
+        if (str == "") {
+            document.getElementById("section").innerHTML = "";
+            return;
+        }
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("secid").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET", "getSectionList.php?classid=" + str, true);
+        xmlhttp.send();
     }
-  }
-xmlhttp.open("GET","getSectionList.php?classid="+str,true);
-xmlhttp.send();
-}
 </script>
 <script>
-function getMonthlyReport()
-{
-var xmlhttp;    
-var classid=document.getElementById("classid").value;
-var secid=document.getElementById("secid").value;
-var month=document.getElementById("month").value;
-var period=document.getElementById("period").value;
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("div-AttendanceMonthlyReport").innerHTML=xmlhttp.responseText;
+    function getMonthlyReport() {
+        var xmlhttp;
+        var classid = document.getElementById("classid").value;
+        var secid = document.getElementById("secid").value;
+        var month = document.getElementById("month").value;
+        var period = document.getElementById("period").value;
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("div-AttendanceMonthlyReport").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("POST", "getMonthlyAttendanceReport.php?classid=" + classid + "&secid=" + secid + "&period=" + period + "&month=" + month, true);
+        xmlhttp.send();
     }
-  }
-xmlhttp.open("POST","getMonthlyAttendanceReport.php?classid="+classid+"&secid="+secid+"&period="+period+"&month="+month,true);
-xmlhttp.send();
-}
 </script>
-</body>
-
-</html>
+<?php require_once './includes/closebody.php'; ?>

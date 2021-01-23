@@ -292,10 +292,11 @@ if (isset($_REQUEST['get_admission_details'])) {
 
 /************** get fee cluster id by class 22 ***************/
 if (isset($_REQUEST['fee_cluster_id_by_class'])) {
-  $query = "SELECT * FROM `fee_group_class_list` WHERE `Class_Id` = ? AND Enabled = 1 AND School_Id = ? AND `Stream` = ?";
+  //$query = "SELECT * FROM `fee_group_class_list` WHERE `Class_Id` = ? AND Enabled = 1 AND School_Id = ? AND `Stream` = ?";
+  $query = "select fgt.fg_id as fg_id from fee_group_table fgt,fee_group_class_list fgcl where fgcl.class_id=? AND fgcl.stream=? AND fgt.fg_id=fgcl.fg_id AND fgt.student_type=?";
   $data=array();
   $query_prep = $dbhandle->prepare($query);
-  $query_prep->bind_param("iis",$_REQUEST['class_id'],$_SESSION["SCHOOLID"],$_REQUEST['stream']);
+  $query_prep->bind_param("iis",$_REQUEST['class_id'],$_REQUEST['stream'],$_REQUEST["stud_type"]);
   $query_prep->execute();
   $result_set = $query_prep->get_result();
   while ($rows = $result_set->fetch_assoc()) {
@@ -343,5 +344,4 @@ if (isset($_REQUEST['get_all_banks'])) {
   }
   echo json_encode($data);
 }
-
 ?>

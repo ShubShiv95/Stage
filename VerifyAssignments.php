@@ -1,20 +1,16 @@
 <?php
 session_start();
-include 'dbobj.php';
-//include 'errorLog.php';
-//include 'security.php';
-/*make a variable named $pageTitle */
 $pageTitle = "Verify Assignment";
 error_reporting(0);
 ?>
-<?php require_once './includes/header.php'; ?>
+<?php require_once './includes/header.php'; require_once './includes/navbar.php'; ?>
 <!-- start your UI here -->
 <div class="col-md-12">
   <div class="container row new-added-form school-form aj-new-added-form">
     <div class="col-md-4 aj-mb-2">
       <div class="form-group aj-form-group">
         <label>Subject <span>*</span></label>
-        <select class="select2" required="" id="subjectList">
+        <select class="select2 col-12" required="" id="subjectList">
 
         </select>
       </div>
@@ -22,7 +18,7 @@ error_reporting(0);
     <div class="col-md-4 aj-mb-2">
       <div class="form-group aj-form-group monthdiv">
         <label>Month</label>
-        <select class="select2" required="" id="monthList">
+        <select class="select2 col-12" required="" id="monthList">
           <option value="0">Select One </option>
           <option value="1">January </option>
           <option value="2">February </option>

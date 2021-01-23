@@ -4,9 +4,7 @@ session_start();
 $pageTitle = "Upload Assignment Content";
 $bodyHeader = "Assignments List";
 require_once './includes/header.php';
-include 'dbobj.php';
-//include 'errorLog.php';
-include 'security.php';
+require_once './includes/navbar.php';
 
 $subjectDropdownValue = "";
 $sqlSub = 'SELECT * FROM `subject_master_table` WHERE `School_Id` = ' . $_SESSION['SCHOOLID'] . ' AND `Enabled` = 1 ORDER BY `Subject_Name`';

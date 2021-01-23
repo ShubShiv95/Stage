@@ -1,5 +1,3 @@
-    <?php //session_start();  
-    ?>
     <div class="navbar navbar-expand-md header-menu-one bg-light d-print-none">
         <div class="nav-bar-header-one">
             <div class="header-logo">
@@ -248,84 +246,78 @@
                         </div>
                     </div>
                 </li>
-
-
-
                 <li class="navbar-item dropdown header-language">
                     <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>
-                    <?php 
-                        if($_SESSION["LOGINTYPE"]=="STAFF")
-                            {echo $_SESSION["SESSION"];} 
-                        if($_SESSION["LOGINTYPE"]=="PARENT") 
-                            {echo $_SESSION["NAME"];}
-                    ?></a>
+                        <?php
+                        if ($_SESSION["LOGINTYPE"] == "STAFF") {
+                            echo $_SESSION["SESSION"];
+                        }
+                        if ($_SESSION["LOGINTYPE"] == "PARENT") {
+                            echo $_SESSION["NAME"];
+                        }
+                        ?></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <?php
-                        $count=1;
-                        if($_SESSION["LOGINTYPE"]=="STAFF")    
-                            {
-                                foreach ($_SESSION["SESSIONLIST"] as $value) 
-                                {
-                                    echo '<a class="dropdown-item" href="Reset_Session.php?sessionid=' . $value .  '">' . $value . '</a>';
-                                }
+                        $count = 1;
+                        if ($_SESSION["LOGINTYPE"] == "STAFF") {
+                            foreach ($_SESSION["SESSIONLIST"] as $value) {
+                                echo '<a class="dropdown-item" href="Reset_Session.php?sessionid=' . $value .  '">' . $value . '</a>';
                             }
-                            
-                            if($_SESSION["LOGINTYPE"]=="PARENT")  
-                                {
-                                    while($count<=count($_SESSION["SIBLINGLIST"]))    
-                                        {
-                                            
-                                            echo '<a class="dropdown-item" href="Reset_Sibling.php?studentid=' .$_SESSION["SIBLINGLIST"][$count]["STUDENTID"] .  '">' . $_SESSION["SIBLINGLIST"][$count]["NAME"] . '</a>';
-                                            $count++;
-                                        }
-                                }         
+                        }
+
+                        if ($_SESSION["LOGINTYPE"] == "PARENT") {
+                            while ($count <= count($_SESSION["SIBLINGLIST"])) {
+
+                                echo '<a class="dropdown-item" href="Reset_Sibling.php?studentid=' . $_SESSION["SIBLINGLIST"][$count]["STUDENTID"] .  '">' . $_SESSION["SIBLINGLIST"][$count]["NAME"] . '</a>';
+                                $count++;
+                            }
+                        }
                         ?>
-                      
                     </div>
                 </li>
             </ul>
         </div>
     </div>
 
-<!-- change password modal -->
+    <!-- change password modal -->
     <div class="modal change_pwd_modal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title">Change Password</h6>
-                <button type="button" class="close close_pwd_modal" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="model-tebal-in">
-                    <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
-                        <form class="new-added-form aj-new-added-form Fee-collection" action="./change_password_1.php" method="POST" id="change_password_form">
-                            <div class="Attendance-staff  aj-scroll-Attendance-staff">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 aj-mb-2 mt-3 ml-1 row">
-                                    <div class="form-group aj-form-group col-xl-12 col-lg-12 col-12">
-                                        <label>Current Password</label>
-                                        <input type="text" class="d-none" name="password_sender">
-                                        <input type="password" id="current_password" name="current_password" placeholder="" autocomplete="off" required="" class="form-control">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Change Password</h6>
+                    <button type="button" class="close close_pwd_modal" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="model-tebal-in">
+                        <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
+                            <form class="new-added-form aj-new-added-form Fee-collection" action="./change_password_1.php" method="POST" id="change_password_form">
+                                <div class="Attendance-staff  aj-scroll-Attendance-staff">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 aj-mb-2 mt-3 ml-1 row">
+                                        <div class="form-group aj-form-group col-xl-12 col-lg-12 col-12">
+                                            <label>Current Password</label>
+                                            <input type="text" class="d-none" name="password_sender">
+                                            <input type="password" id="current_password" name="current_password" placeholder="" autocomplete="off" required="" class="form-control">
+                                        </div>
+                                        <div class="form-group aj-form-group col-xl-12 col-lg-12 col-12">
+                                            <label>New Password</label>
+                                            <input type="password" id="new_password" name="new_password" placeholder="" autocomplete="off" required="" class="form-control">
+                                        </div>
+                                        <div class="form-group aj-form-group col-xl-12 col-lg-12 col-12">
+                                            <label>Re-Type Password</label>
+                                            <input type="password" id="re_password" name="re_password" placeholder="" autocomplete="off" required="" class="form-control">
+                                        </div>
+                                        <div class="col-xl-12 col-lg-12 col-1 aj-mb-2">
+                                            <button type="submit" name="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark float-right">Change Password</button>
+                                        </div>
                                     </div>
-                                    <div class="form-group aj-form-group col-xl-12 col-lg-12 col-12">
-                                        <label>New Password</label>
-                                        <input type="password" id="new_password" name="new_password" placeholder="" autocomplete="off" required="" class="form-control">
-                                    </div>
-                                    <div class="form-group aj-form-group col-xl-12 col-lg-12 col-12">
-                                        <label>Re-Type Password</label>
-                                        <input type="password" id="re_password" name="re_password" placeholder="" autocomplete="off" required="" class="form-control">
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-1 aj-mb-2">
-                                        <button type="submit" name="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark float-right" >Change Password</button>
+                                    <div class="col-12 col-md-12 mt-2 table-responsive populate_student_list form_output">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-12 mt-2 table-responsive populate_student_list form_output">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

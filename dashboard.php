@@ -1,9 +1,8 @@
 <?php
-
 $pageTitle = "Dashboard";
 require_once './includes/header.php';
 require_once './includes/navbar.php';
-
+echo $_SESSION['SCHOOLID'];
 ?>
     <script>
         function demoFromHTML() {

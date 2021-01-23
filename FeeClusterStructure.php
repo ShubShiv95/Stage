@@ -22,9 +22,6 @@ require_once 'dbobj.php';
                 <select class="select2 col-12" id="f_academic_session" name="f_academic_session" required>
                     <option value="">-- SELECT Session --</option>
                     <?php
-                    /*$_SESSION["STARTYEAR"] = 2020;
-                                                $_SESSION["ENDYEAR"] = 2021;*/
-
                     $current_session = $_SESSION["STARTYEAR"] . '-' . $_SESSION["ENDYEAR"];
                     $next_session = $_SESSION["ENDYEAR"] . '-' . date('Y', strtotime($_SESSION["ENDYEAR"]) + (3600 * 24 * 365));
                     echo '<option value="' . $current_session . '">' . $current_session . '</option>
@@ -36,17 +33,7 @@ require_once 'dbobj.php';
         <div class="table-responsive">
             <div class="load_cluster_ui border border-primary" style="height: 50vh; overflow-x: auto;"></div>
             <table class="stripe row-border order-column ">
-                <!--<thead class="month_head">
 
-                                                <tr>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="fee_head_table">
-                                                <tr>
-
-                                                </tr>
-                                            </tbody>
-                                        </table>-->
         </div>
         <div class="col-12 text-right mt-3">
             <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" name="submit">Save</button>
@@ -80,7 +67,6 @@ require_once 'dbobj.php';
             var cluster_session = $('#f_academic_session').val();
             $.post($(this).attr('action'), $('form#cluster_form').serialize(), function(data) {
                 $('.form_output').html(data);
-                //$('#cluster_form')[0].reset();   
                 show_fees_templt(cluster_name, cluster_session, 'Regular')
             }, );
         });

@@ -45,8 +45,10 @@ require_once './includes/navbar.php';
             <thead class="thead-inverse">
                 <tr>
                     <th>Sl</th>
+                    <th>Student Id</th>
                     <th>Name</th>
                     <th>DOB</th>
+                    <th>Father's Name</th>
                     <th>Details</th>
                     <th>Certificate</th>
                 </tr>
@@ -93,21 +95,25 @@ require_once './includes/scripts.php';
                 $.each(studs_data, function(key, stud_data){
                     stud_html += `<tr>
                                     <td scope="row">${++i}</td>
+                                    <td>${stud_data.stud_id}</td>
                                     <td>${stud_data.stud_name}</td>
                                     <td>${stud_data.dob}</td>
+                                    <td>${stud_data.f_name}</td>
                                     <td><a href="./Details.php" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                                     <td> <div class="row">   <div class="form-group col-9 aj-form-group">  <select class="select2 col-12 form-group aj-form-group " name="f_class" id="cert_type${i}" name="schoolSession">
                                         <option value="">SELECT Certificate</option>                 
-                                        <option value="tc">TC</option>
-                                        <option value="slc">SLC</option>
+                                        <option value="bonafide_curr">Bonafide (Current)</option>
+                                        <option value="bonafide_ex">Bonafide (Ex)</option>
                                         <option value="character">Character</option>
+                                        <option value="slc">SLC</option>
+                                        <option value="tc">TC</option>
+                                        <option value="tution_fee">Tution Fee</option>
                                     </select></div>
                                     <div class="col-3">
                                     <button type="button" class="btn btn-warning btn_print" id="${stud_data.stud_id}" btn_no="${i}"><i class="fa fa-print fa-2x" aria-hidden="true"></i></button></div>
                                     </div>
                                     </td>
                                 </tr>`;
-                                console.log(stud_data);
                 });
                 $('.show_student_data').html(stud_html);
             });

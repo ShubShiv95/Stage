@@ -4,7 +4,7 @@ include_once 'dbobj.php';
 include_once 'errorLog.php';
 /********** get all student list by class and session **********/
 if (isset($_REQUEST['get_student_by_class_session'])) {
-    $query = "SELECT smt.* FROM student_master_table smt, student_class_details scd WHERE scd.Student_Id = smt.Student_Id AND scd.Enabled = 1 AND scd.School_Id = ? AND scd.Session = ? AND scd.Class_Id = ?";
+    $query = "SELECT smt.* FROM student_master_table smt, student_class_details scd WHERE scd.Student_Id = smt.Student_Id AND scd.Enabled = 1 AND scd.School_Id = ? AND scd.Session = ? AND scd.Class_Id = ? ORDER BY smt.Student_Id";
     $query_prep = $dbhandle->prepare($query);
     $query_prep->bind_param("isi",$_REQUEST['school'],$_REQUEST['session'],$_REQUEST['class']);
     $query_prep->execute();
@@ -15,7 +15,8 @@ if (isset($_REQUEST['get_student_by_class_session'])) {
         $data[]  =array(
             'stud_name'  =>  $name_stud,
             'dob'        =>  date("d/M/Y",strtotime($row_studs['DOB'])),
-            'stud_id'    =>   $row_studs['Student_Id']  
+            'stud_id'    =>  $row_studs['Student_Id'],
+            'f_name'     =>  $row_studs['Father_Name'],
         );  
     }
     echo json_encode($data,JSON_PRETTY_PRINT);

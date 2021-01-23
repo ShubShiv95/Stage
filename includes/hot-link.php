@@ -1,10 +1,10 @@
-	<div class="row gutters-20 hot-link-main-sec print-d-none">
+	<div class="row gutters-20 hot-link-main-sec  d-print-none">
 		<div class="hot-links-sec-title" id="HotLink">
 			<button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse">
 				<i class="fa fa-caret-down"></i>
 			</button>
 		</div>
-		<div class="hot-links-sec-content col-xl-12 print-d-none">
+		<div class="hot-links-sec-content col-xl-12 ">
 			<div class="col-xl-2 col-lg-6 col-12 partsec">
 				<a href="GroupSMS.php">
 					<div class="dashboard-summery-one mg-b-20 bg-wild-strawberry">
@@ -27,7 +27,7 @@
 				</a>
 			</div>
 
-			<div class="col-xl-2 col-lg-6 col-12 partsec print-d-none">
+			<div class="col-xl-2 col-lg-6 col-12 partsec ">
 				<a href="AdmissionEnquiry.php">
 					<div class="dashboard-summery-one mg-b-20 bg-mauvelous">
 						<div class="row align-items-center">
@@ -48,7 +48,7 @@
 					</div>
 				</a>
 			</div>
-			<div class="col-xl-2 col-lg-6 col-12 partsec print-d-none">
+			<div class="col-xl-2 col-lg-6 col-12 partsec ">
 				<a href="FeeCollection.php">
 					<div class="dashboard-summery-one mg-b-20 bg-violet-blue">
 						<div class="row align-items-center">
@@ -69,7 +69,7 @@
 					</div>
 				</a>
 			</div>
-			<div class="col-xl-2 col-lg-6 col-12 partsec print-d-none">
+			<div class="col-xl-2 col-lg-6 col-12 partsec ">
 				<a href="CreateNewAssignments.php">
 					<div class="dashboard-summery-one mg-b-20 bg-skyblue">
 						<div class="row align-items-center">
@@ -90,7 +90,7 @@
 					</div>
 				</a>
 			</div>
-			<div class="col-xl-2 col-lg-6 col-12 partsec print-d-none">
+			<div class="col-xl-2 col-lg-6 col-12 partsec ">
 				<a href="Notices.php">
 					<div class="dashboard-summery-one mg-b-20 bg-orange">
 						<div class="row align-items-center">
@@ -111,7 +111,7 @@
 					</div>
 				</a>
 			</div>
-			<div class="col-xl-2 col-lg-6 col-12 partsec print-d-none">
+			<div class="col-xl-2 col-lg-6 col-12 partsec ">
 				<a href="StudentAttendanceMessage.php">
 					<div class="dashboard-summery-one mg-b-20 bg-dodger-blue">
 						<div class="row align-items-center">

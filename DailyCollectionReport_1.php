@@ -80,7 +80,7 @@
             $Receipt_Dtl_Prep->execute();
             if($Receipt_Dtl_Prep->num_rows()==0)
                 {
-                    echo "No Fee payment details found between the dates $FromDate and $ToDate";
+                    echo "<center><h3>No Fee payment details found between the dates $FromDate and $ToDate</h3></center>";
                     die;
 
                 }

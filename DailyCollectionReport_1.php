@@ -18,7 +18,7 @@
     $session = $_SESSION["SESSION"];
     $FromDate=$_REQUEST["fdate"];
     $ToDate=$_REQUEST["tdate"];
-    $lid=$_REQUEST["loginid"];
+   
     
 
 
@@ -59,16 +59,9 @@
     $htmlStr=$htmlStr . '<td>Late Fee</td>'. '<td>ReAdm Fee</td>'. '<td>OD Fee</td>'. '<td>Chq-Bon</td><td>Adv. Amt</td><td>Net Disc.</td><td>Total Amt</td>';
     $htmlStr=$htmlStr . '</tr>';
 
-    $ReceiptListSql='';
+    //$ReceiptListSql='';
     $feeheadamount=array();
-    if(strtolower($lid)=='all')
-        {
-            $ReceiptListSql="select distinct recept_no from student_fee_master where pay_status='Paid' and paid_amount_date between str_to_date('$FromDate','%d-%m-%Y') and str_to_date('$ToDate','%d-%m-%Y')";
-        }
-    else
-        {
-            $ReceiptListSql="select distinct recept_no from student_fee_master where pay_status='Paid' and paid_amount_date between str_to_date('$FromDate','%d-%m-%Y') and str_to_date('$ToDate','%d-%m-%Y') and ";
-        }    
+    $ReceiptListSql="select distinct recept_no from student_fee_master where pay_status='Paid' and paid_amount_date between str_to_date('$FromDate','%d-%m-%Y') and str_to_date('$ToDate','%d-%m-%Y')";
    
     $ReceiptListResult=$dbhandle->query($ReceiptListSql);
     //Query for inner head wise amount data fetching for the receipt number from student_fee_details table.

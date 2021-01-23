@@ -208,6 +208,10 @@
                         <a href="FeeClusterStructure.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Structure
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="./DailyCollectionReport.php" class="nav-link"><i class="fas fa-angle-right"></i>Daily Collection Report
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item sidebar-nav-item  print-d-none">

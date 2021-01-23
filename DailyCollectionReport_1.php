@@ -78,6 +78,12 @@
             $Receipt_Dtl_Prep = $dbhandle->prepare($ReceiptDetailsSql);
             $Receipt_Dtl_Prep->bind_param("s", $row["recept_no"]);
             $Receipt_Dtl_Prep->execute();
+            if($Receipt_Dtl_Prep->num_rows()==0)
+                {
+                    echo "No Fee payment details found between the dates $FromDate and $ToDate";
+                    die;
+
+                }
             $Receipt_Dtl_ResultSet = $Receipt_Dtl_Prep->get_result();
             
             

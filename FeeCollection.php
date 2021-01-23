@@ -392,7 +392,7 @@ include_once './includes/navbar.php';
             var i = 1;
             $.each(modes_resp, function(key, value) {
                 var pmt_mode_val = value.Paymode_Id + "," + value.Service_Percent;
-                modes_html += `<option value="${pmt_mode_val}" >${value.Paymode_Nane}</option>`;
+                modes_html += `<option value="${pmt_mode_val}" >${value.Paymode_Name}</option>`;
                 i = i + 1;
             });
             $('.payment_type' + pmt_no).html(modes_html);

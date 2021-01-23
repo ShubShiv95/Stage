@@ -320,7 +320,7 @@ if(isset($_REQUEST['admission_form_print'])){
 
 /*********** get payment modes ***********/
 if (isset($_REQUEST['get_payment_modes'])) {
-  $pmode_q = "SELECT * FROM `paymode_master_table` WHERE Enabled = 1 ORDER BY `Paymode_Nane`";
+  $pmode_q = "SELECT * FROM `paymode_master_table` WHERE Enabled = 1 ORDER BY `Paymode_Name`";
   $pmode_q_prep = $dbhandle->prepare($pmode_q);
   $pmode_q_prep->execute(); $data = array();
   $result_set = $pmode_q_prep->get_result();

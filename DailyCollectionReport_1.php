@@ -61,8 +61,8 @@
 
     //$ReceiptListSql='';
     $feeheadamount=array();
-    $ReceiptListSql="select distinct recept_no from student_fee_master where pay_status='Paid' and paid_amount_date between str_to_date('$FromDate','%d-%m-%Y') and str_to_date('$ToDate','%d-%m-%Y')";
-   
+    $ReceiptListSql="select distinct recept_no from student_fee_master where pay_status='Paid' and paid_amount_date between str_to_date('$FromDate','%d/%m/%Y') and str_to_date('$ToDate','%d/%m/%Y')";
+   // echo $ReceiptListSql;
     $ReceiptListResult=$dbhandle->query($ReceiptListSql);
     //Query for inner head wise amount data fetching for the receipt number from student_fee_details table.
     $ReceiptDetailsSql="select fee_head_id,sum(fee_amount) amount,sum(concession_amount) as con_amount from student_fee_details where sfm_id in(select sfm_id from student_fee_master where recept_no=?) group by fee_head_id order by fee_head_id";
@@ -78,12 +78,13 @@
             $Receipt_Dtl_Prep = $dbhandle->prepare($ReceiptDetailsSql);
             $Receipt_Dtl_Prep->bind_param("s", $row["recept_no"]);
             $Receipt_Dtl_Prep->execute();
+            /*
             if($Receipt_Dtl_Prep->num_rows()==0)
                 {
                     echo "<center><h3>No Fee payment details found between the dates $FromDate and $ToDate</h3></center>";
                     die;
 
-                }
+                }*/
             $Receipt_Dtl_ResultSet = $Receipt_Dtl_Prep->get_result();
             
             
@@ -145,7 +146,7 @@
 
     //Payment Mode Details     
 
-    $PaymentModeListSql="select distinct paymode_name as paymode_name,sum(fpd.amount) as paid_amount from fee_payment_master fpm,fee_payment_details fpd,paymode_master_table pmt where fpm.recept_no in (select distinct recept_no from student_fee_master where pay_status='Paid' and paid_amount_date between str_to_date('$FromDate','%d-%m-%Y') and str_to_date('$ToDate','%d-%m-%Y')) and pmt.paymode_id=fpd.paymode and fpd.fp_id=fpm.fp_id";
+    $PaymentModeListSql="select distinct paymode_name as paymode_name,sum(fpd.amount) as paid_amount from fee_payment_master fpm,fee_payment_details fpd,paymode_master_table pmt where fpm.recept_no in (select distinct recept_no from student_fee_master where pay_status='Paid' and paid_amount_date between str_to_date('$FromDate','%d/%m/%Y') and str_to_date('$ToDate','%d/%m/%Y')) and pmt.paymode_id=fpd.paymode and fpd.fp_id=fpm.fp_id";
     $PaymentModeListResult=$dbhandle->query($PaymentModeListSql);
     
     /*
@@ -154,16 +155,17 @@
             $htmlStr=$htmlbody . '<td>' . $value.'</td>';
         }*/
     $htmlStr=$htmlStr . '</table>';
-    echo "<h3>Fee Collection Report from $FromDate to $ToDate.";
-    echo $htmlStr ;
     
-    $PML_Html='<br>Paymode Details<br><table border="1">' . '<tr><td>Paymode Type</td><td>Collected Amount</td></tr>';
+    $htmlStr= "<h3>Fee Collection Report from $FromDate to $ToDate.<BR>" . $htmlStr;
+    
+   // echo $htmlStr ;
+   $htmlStr= $htmlStr.'<br>Paymode Details<br><table border="1">' . '<tr><td>Paymode Type</td><td>Collected Amount</td></tr>';
     while($PMLRow=$PaymentModeListResult->fetch_assoc())
         {
-            $PML_Html=$PML_Html . "<tr><td>" . $PMLRow["paymode_name"] . "</td><td>" . $PMLRow["paid_amount"] . "</td></tr>";
+            $htmlStr=$htmlStr . "<tr><td>" . $PMLRow["paymode_name"] . "</td><td>" . $PMLRow["paid_amount"] . "</td></tr>";
         }
-    $PML_Html=$PML_Html . "</table>";
-    echo $PML_Html;    
+    $htmlStr=$htmlStr . "</table>";
+    echo $htmlStr;    
     //var_dump($feeheadList);    
 
 //}

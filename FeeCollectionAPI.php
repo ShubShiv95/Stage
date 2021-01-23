@@ -206,7 +206,7 @@ if ($request_type == 'CollectOtherAmounts') {
     //End of Advance Fee Adjustment Information.
     // Cheque Bounce Charges Information starts here.
     $GetChequeBounceAmount = "select * from fee_cheque_table where student_id='$StudentId' and adjusted=0 and school_id=$schoolid";
-    echo $GetChequeBounceAmount;
+    //echo $GetChequeBounceAmount;
     $GetChequeBounceAmountRes = $dbhandle->query($GetChequeBounceAmount);
     if (!$GetChequeBounceAmountRes) {
         $error_msg = $dbhandle->error;

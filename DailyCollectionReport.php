@@ -38,16 +38,17 @@ include 'dbobj.php';
                     <button type="button" id="fetchResult" class="aj-btn-a1 btn-fill-lg btn-gradient-dark btn-hover-bluedark">Submit </button>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
-                    
-                </div>
             </div>
         </div>
 </form>
+<div class="col-xl-6 col-lg-3 col-12 aj-mb-2 offset-xl-3 offset-lg-3 text-right download_pdf">
+    <button class="btn btn-warning"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i></button>
+</div>
 <div class="col-12 mt-4" id="tablehere"></div>
 <?php require_once './includes/scripts.php';  ?>
 <script>
 $(document).ready(function(){
+    $('.download_pdf').hide();
 $(document).on('click','#fetchResult',function(ev){
     ev.preventDefault();
     let fdate = $('#fdate').val();
@@ -57,6 +58,7 @@ $(document).on('click','#fetchResult',function(ev){
     form_data = {'fdate':fdate,'tdate':tdate,'loginid':loginid};
     $.get('./DailyCollectionReport_1.php',form_data,function(response){
         $('#tablehere').html(response);
+        $('.download_pdf').show();
     });
 });
 });

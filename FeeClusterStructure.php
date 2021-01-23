@@ -45,22 +45,7 @@ require_once 'dbobj.php';
 <?php require_once './includes/scripts.php'; ?>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable({
-            scrollY: 300,
-            scrollX: true,
-            scrollCollapse: true,
-            paging: false,
-            fixedColumns: true
-        });
-    });
-    $(document).ready(function() {
-        $('#example1').DataTable({
-            scrollY: 300,
-            scrollX: true,
-            scrollCollapse: true,
-            paging: false,
-            fixedColumns: true
-        });
+
         $(document).on('submit', '#cluster_form', function(event) {
             event.preventDefault();
             const cluster_name = $('#fee_cluster_name').val();
@@ -86,6 +71,17 @@ require_once 'dbobj.php';
         $(document).on('change', '#f_academic_session', function() {
             const cluster_name = $('#fee_cluster_name').val();
             var cluster_session = $('#f_academic_session').val();
+            check_existing_group(cluster_name,cluster_session)
+        });
+
+        $(document).on('change', '#fee_cluster_name', function() {
+            const cluster_name = $('#fee_cluster_name').val();
+            var cluster_session = $('#f_academic_session').val();
+            check_existing_group(cluster_name,cluster_session)
+        });
+
+        /* check existing fee group */
+        function check_existing_group(cluster_name,cluster_session){
             var data = {
                 'check_existing_fee': 1,
                 'cluster_name': cluster_name,
@@ -98,10 +94,10 @@ require_once 'dbobj.php';
             } else {
                 $.post('./FeeControl_1.php', data, function(data) {
                     $('.f_msg').html(data);
-                    show_fees_templt(cluster_name, cluster_session, 'Regular');
                 });
+                show_fees_templt(cluster_name, cluster_session, 'Regular');
             }
-        });
+        }
 
         function show_fees_templt(cluster_name, cluster_session, structure_type) {
             data = {

@@ -1,12 +1,11 @@
 <?php
-session_start();
+$pageTitle = "Add Section";
+require_once './includes/header.php';
 include 'dbobj.php';
 //include 'errorLog.php';
-include 'security.php';
-$pageTitle = "Add Section";
 //$bodyHeader = "Add Notice/Circular";
-require_once './includes/header.php';
 require_once './GlobalModel.php';
+require_once './includes/navbar.php';
 ?>
 <form class="new-added-form aj-new-added-form new-aj-new-added-form col-xl-6 col-lg-6 col-12 offset-lg-3 offset-md-3" action="./AddSection_1.php" id="section_form" method="post">
     <div class="row">

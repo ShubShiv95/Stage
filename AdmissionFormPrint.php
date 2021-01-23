@@ -26,7 +26,7 @@ include 'AdmissionModel.php';
             </tr>
             <tr>
                 <th>Name</th>
-                <td colspan="3" class="first_name text-uppercase">Md Meraj Alam</td>
+                <td colspan="3" class="first_name text-uppercase"></td>
                 <th rowspan="6" colspan="2" width="20%" class="image_th" width="20%"><img class="main_img" src="./img/avatar_blank.png" width="200px" alt=""></th>
             </tr>
             <tr>
@@ -43,37 +43,37 @@ include 'AdmissionModel.php';
             </tr>
             <tr>
                 <th>Date of Birth</th>
-                <td class="dob">General</td>
+                <td class="dob"></td>
                 <th>Gender</th>
-                <td class="gender">General</td>
+                <td class="gender"></td>
             </tr>
             <tr>
                 <th>Stream</th>
-                <td class="stream">BPL</td>
+                <td class="stream"></td>
                 <th>Category</th>
-                <td class="soc_cat">Dhanbad</td>
+                <td class="soc_cat"></td>
             </tr>
             <tr>
                 <th>Discount Category</th>
-                <td class="dis_category">2020-2021</td>
+                <td class="dis_category"></td>
                 <th>Locality</th>
-                <td class="locality">English</td>
+                <td class="locality"></td>
             </tr>
             <tr>
                 <th>Session</th>
-                <td class="session">Hindu</td>
+                <td class="session"></td>
                 <th>Mother Tongue</th>
-                <td class="tongue">Indian</td>
+                <td class="tongue"></td>
                 <th>Religion</th>
-                <td class="religion">A+</td>
+                <td class="religion"></td>
             </tr>
             <tr>
                 <th>Nationality</th>
-                <td class="nationality">4698 5689 9852</td>
+                <td class="nationality"></td>
                 <th>Blood Group</th>
-                <td class="b_group">4698 5689 9852</td>
+                <td class="b_group"></td>
                 <th>Aadhar</th>
-                <td class="aadhar">4698 5689 9852</td>
+                <td class="aadhar"></td>
             </tr>
         </table>
 

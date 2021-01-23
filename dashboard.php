@@ -1,9 +1,7 @@
 <?php
-
 $pageTitle = "Dashboard";
 require_once './includes/header.php';
 require_once './includes/navbar.php';
-
 ?>
     <script>
         function demoFromHTML() {

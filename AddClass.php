@@ -1,11 +1,8 @@
 <?php
-session_start();
-include 'dbobj.php';
-include 'errorLog.php';
-include 'security.php';
 $pageTitle = "Add Class";
-//$bodyHeader = "Add Class";
 require_once './includes/header.php';
+include 'dbobj.php';
+require_once './includes/navbar.php';
 ?>
 <form class="new-added-form aj-new-added-form new-aj-new-added-form col-xl-6 col-lg-6 col-md-6 col-12 offset-xl-3 offset-lg-3 offset-md-3" action="./AddClass_1.php" id="class_form" enctype="multipart/form-data" method="post">
     <div class="row">

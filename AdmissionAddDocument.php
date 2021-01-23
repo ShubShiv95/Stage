@@ -66,99 +66,99 @@
           <!--<span id="element_no">0</span>-->
         </div>
 
-    <?php require_once './includes/scripts.php'; ?>
+        <?php require_once './includes/scripts.php'; ?>
 
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('#search_student_id').keyup(function() {
-          var student_id = $(this).val();
-          if (student_id != '') {
-            $.ajax({
-              url: './AdmissionAddDocuments_2.php',
-              method: 'post',
-              data: {
-                'search_students': 1,
-                'student_id': student_id
-              },
-              success: function(data) {
-                $('#students_searched_data').fadeIn();
-                $('#students_searched_data').html(data);
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $('#search_student_id').keyup(function() {
+              var student_id = $(this).val();
+              if (student_id != '') {
+                $.ajax({
+                  url: './AdmissionAddDocuments_2.php',
+                  method: 'post',
+                  data: {
+                    'search_students': 1,
+                    'student_id': student_id
+                  },
+                  success: function(data) {
+                    $('#students_searched_data').fadeIn();
+                    $('#students_searched_data').html(data);
+                  }
+                });
+              } else {
+                alert("Please Type Student Id");
+                $('#students_searched_data').fadeOut();
               }
             });
-          } else {
-            alert("Please Type Student Id");
-            $('#students_searched_data').fadeOut();
-          }
-        });
 
-        $(document).on('click', '.student_id_grabber', function(event) {
-          event.preventDefault();
-          var student_id = $(this).attr('id');
-          $('#search_student_id').val(student_id);
-          $('#student_id').val(student_id);
-          $('#students_searched_data').fadeOut();
-          load_documents(student_id);
-        });
+            $(document).on('click', '.student_id_grabber', function(event) {
+              event.preventDefault();
+              var student_id = $(this).attr('id');
+              $('#search_student_id').val(student_id);
+              $('#student_id').val(student_id);
+              $('#students_searched_data').fadeOut();
+              load_documents(student_id);
+            });
 
-        function load_documents(student_id) {
-          $('#displayDocuments').html('');
-          $.ajax({
-            url: './AdmissionAddDocuments_2.php',
-            method: 'get',
-            data: {
-              'getAllDocuments': 1,
-              'student_id': student_id
-            },
-            success: function(data) {
-              $('#displayDocuments').fadeIn('slow');
-              $('#displayDocuments').html(data);
+            function load_documents(student_id) {
+              $('#displayDocuments').html('');
+              $.ajax({
+                url: './AdmissionAddDocuments_2.php',
+                method: 'get',
+                data: {
+                  'getAllDocuments': 1,
+                  'student_id': student_id
+                },
+                success: function(data) {
+                  $('#displayDocuments').fadeIn('slow');
+                  $('#displayDocuments').html(data);
+                }
+              });
             }
+
+            $(document).on('click', '.deleteDocuments', function(e) {
+              e.preventDefault();
+              if (confirm("Are You Sure To Delete?")) {
+                const docId = $(this).attr('id');
+                const stidentId = $('#search_student_id').val();
+                $.ajax({
+                  url: './AdmissionAddDocuments_2.php',
+                  method: 'post',
+                  data: {
+                    'deleteDocument': 1,
+                    'docId': docId
+                  },
+                  success: function(data) {
+                    alert("Data Deleted Successfully");
+                    load_documents(stidentId);
+                    $('#element_no').html(data);
+                  }
+                });
+              } else {
+                return false;
+              }
+            });
+
+            $(document).on('submit', '#admission_documents', function(e) {
+              event.preventDefault();
+              const student_id = $('#student_id').val();
+              if (student_id == '') {
+                alert("Please Fill Student Id");
+              } else {
+                $.ajax({
+                  url: $(this).attr('action'),
+                  method: 'post',
+                  data: new FormData(this),
+                  contentType: false,
+                  processData: false,
+                  success: function(data) {
+                    $('#form_output').html(data);
+
+                    load_documents(student_id);
+                  }
+                });
+              }
+            });
           });
-        }
-
-        $(document).on('click', '.deleteDocuments', function(e) {
-          e.preventDefault();
-          if (confirm("Are You Sure To Delete?")) {
-            const docId = $(this).attr('id');
-            const stidentId = $('#search_student_id').val();
-            $.ajax({
-              url: './AdmissionAddDocuments_2.php',
-              method: 'post',
-              data: {
-                'deleteDocument': 1,
-                'docId': docId
-              },
-              success: function(data) {
-                alert("Data Deleted Successfully");
-                load_documents(stidentId);
-                $('#element_no').html(data);
-              }
-            });
-          } else {
-            return false;
-          }
-        });
-
-        $(document).on('submit', '#admission_documents', function(e) {
-          event.preventDefault();
-          const student_id = $('#student_id').val();
-          if (student_id == '') {
-            alert("Please Fill Student Id");
-          } else {
-            $.ajax({
-              url: $(this).attr('action'),
-              method: 'post',
-              data: new FormData(this),
-              contentType: false,
-              processData: false,
-              success: function(data) {
-                $('#form_output').html(data);
-
-                load_documents(student_id);
-              }
-            });
-          }
-        });
-      });
-    </script>
-    <?php require_once './includes/closebody.php'; ?>
+        </script>
+        <?php require_once './includes/closebody.php'; ?>

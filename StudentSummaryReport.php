@@ -1,6 +1,7 @@
 <?php
 $pageTitle = "Student Information";
 require_once './includes/header.php';
+require_once './includes/navbar.php';
 ?>
 <!-- Tab Area Start Here -->
 
@@ -41,14 +42,14 @@ require_once './includes/header.php';
     <div class="tab-pane container active" id="home">
         <?php
         if ($_SESSION["LOGINTYPE"] != "STUDENT") {
-            echo '                        <h3 class="text-center">Student Information</h3>
+            echo '                
       <div class="row">
-          <div class="col-lg-3">
+          <div class="col-lg-3 mt-5">
               <div class="image">
                   <img src="img/avtar.png" class="pro-image main_img w-75">
               </div>
           </div>
-          <div class="col-lg-9 content-fild">
+          <div class="col-lg-9 mt-5 content-fild">
               <div class="row new-added-form school-form aj-new-added-form">
                   <div class="col-xl-5 col-lg-5 col-3 row aj-mb-2">
                       <div class="form-group aj-form-group col-lg-12 col-12">
@@ -100,7 +101,6 @@ require_once './includes/header.php';
         ?>
     </div>
     <div class="tab-pane container fade" id="menu1">
-        <h3 class="text-center">Student Information</h3>
         <div class="row">
             <div class="col-lg-3 text-center">
                 <div class="image">
@@ -229,23 +229,23 @@ require_once './includes/header.php';
         <div class="col-12  table-responsive pt-3">
             <table class="table table-striped table-inverse text-center">
                 <thead class="thead-inverse fee_months">
-                        <tr>
-                            <th>Apr</th>
-                            <th>May</th>
-                            <th>Jun</th>
-                            <th>Jul</th>
-                            <th>Aug</th>
-                            <th>Sep</th>
-                            <th>Oct</th>
-                            <th>Nov</th>
-                            <th>Dec</th>
-                            <th>Jan</th>
-                            <th>Feb</th>
-                            <th>Mar</th>
-                        </tr>
-                    </thead>
-                    <tbody class="show_fee_data">
-                    </tbody>
+                    <tr>
+                        <th>Apr</th>
+                        <th>May</th>
+                        <th>Jun</th>
+                        <th>Jul</th>
+                        <th>Aug</th>
+                        <th>Sep</th>
+                        <th>Oct</th>
+                        <th>Nov</th>
+                        <th>Dec</th>
+                        <th>Jan</th>
+                        <th>Feb</th>
+                        <th>Mar</th>
+                    </tr>
+                </thead>
+                <tbody class="show_fee_data">
+                </tbody>
             </table>
         </div>
     </div>
@@ -355,17 +355,16 @@ require_once './includes/header.php';
             $.getJSON(url, function(data) {
                 $.each(data, function(key, value) {
                     if (value.Middle_Name == null) {
-                        var name_studs = value.First_Name + ' ' + value.Last_Name+' ('+value.Student_Id+')';
+                        var name_studs = value.First_Name + ' ' + value.Last_Name + ' (' + value.Student_Id + ')';
                     } else {
-                        var name_studs = value.First_Name + ' ' + value.Middle_Name + ' ' + value.Last_Name+' ('+value.Student_Id+')';
+                        var name_studs = value.First_Name + ' ' + value.Middle_Name + ' ' + value.Last_Name + ' (' + value.Student_Id + ')';
                     }
                     $('.first_name').text(name_studs);
                     $('.class').text(value.Class_Name);
                     $('.section').text(value.Section);
-                    if(value.Roll_No==null){
+                    if (value.Roll_No == null) {
                         roll_no = 'N.A.';
-                    }
-                    else{
+                    } else {
                         roll_no = value.Roll_No;
                     }
                     $('.roll').text(roll_no);
@@ -416,7 +415,7 @@ require_once './includes/header.php';
         function show_attendence(student_id) {
             var bar_level = [];
             bar_data = [];
-            var url_attedence = "./universal_app_api2.php?Parameter=StudYearlyAttendance&StudentId="+student_id+"";
+            var url_attedence = "./universal_app_api2.php?Parameter=StudYearlyAttendance&StudentId=" + student_id + "";
             $.getJSON(url_attedence, function(att_response) {
                 $.each(att_response.month, function(key, value) {
                     bar_level.push(value.month_name);
@@ -479,48 +478,46 @@ require_once './includes/header.php';
         }
 
         // load student fee details
-        function show_fee_details(student_id){
-           // const fee_url ="./FeeCollectionAPI.php?Parameter=ViewFeeSummary&studentid=156/2018&ac_type=SchoolBusFee&school_id=1&session=2020-2021";
-           var school_id = "<?php echo $_SESSION['SCHOOLID'] ?>";
-           var stud_session = "<?php echo $_SESSION['SESSION'] ?>";
-           const fee_url = "./FeeCollectionAPI.php?Parameter=ViewFeeSummary&studentid="+student_id+"&ac_type=SchoolBusFee&school_id="+school_id+"&session="+stud_session+"";
-           var html_fee_row = '';
-            $.getJSON(fee_url, function(fee_response){
-               html_fee_row += `<tr>`; 
-                $.each(fee_response.School_Fee, function(key,value_det){ 
-                    if(value_det.Pay_Status=="Paid"){
+        function show_fee_details(student_id) {
+            // const fee_url ="./FeeCollectionAPI.php?Parameter=ViewFeeSummary&studentid=156/2018&ac_type=SchoolBusFee&school_id=1&session=2020-2021";
+            var school_id = "<?php echo $_SESSION['SCHOOLID'] ?>";
+            var stud_session = "<?php echo $_SESSION['SESSION'] ?>";
+            const fee_url = "./FeeCollectionAPI.php?Parameter=ViewFeeSummary&studentid=" + student_id + "&ac_type=SchoolBusFee&school_id=" + school_id + "&session=" + stud_session + "";
+            var html_fee_row = '';
+            $.getJSON(fee_url, function(fee_response) {
+                html_fee_row += `<tr>`;
+                $.each(fee_response.School_Fee, function(key, value_det) {
+                    if (value_det.Pay_Status == "Paid") {
                         active_class = 'text-success';
-                    }
-                    else{
+                    } else {
                         active_class = 'text-danger';
                     }
                     html_fee_row += `<td><span class="${active_class}">${value_det.Fee_Amount}<span></td>`;
                 });
-                html_fee_row += `</tr>` ; 
-                html_fee_row += `<tr>`; 
-                $.each(fee_response.Bus_Fee, function(key,b_value_det){  
-                    if(b_value_det.Pay_Status=="Paid"){
+                html_fee_row += `</tr>`;
+                html_fee_row += `<tr>`;
+                $.each(fee_response.Bus_Fee, function(key, b_value_det) {
+                    if (b_value_det.Pay_Status == "Paid") {
                         active_class = 'text-success';
-                    }
-                    else{
+                    } else {
                         active_class = 'text-danger';
                     }
                     html_fee_row += `<td><span class="${active_class}">${b_value_det.Fee_Amount}<span></td>`;
                 });
-                html_fee_row += `</tr>` ;   
-                html_fee_row += `<tr>`; var link = '';
-                $.each(fee_response.School_Fee, function(key,value_det_rec){ 
-                    if(value_det_rec.Receipt==0){
+                html_fee_row += `</tr>`;
+                html_fee_row += `<tr>`;
+                var link = '';
+                $.each(fee_response.School_Fee, function(key, value_det_rec) {
+                    if (value_det_rec.Receipt == 0) {
                         link = 'N.A.';
-                    }
-                    else{
-                        link = `<a href="./FeeReceiptPrint.php?receipt_id=${value_det_rec.Receipt}&schoolid=${school_id}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Receipt</a>`;    
+                    } else {
+                        link = `<a href="./FeeReceiptPrint.php?receipt_id=${value_det_rec.Receipt}&schoolid=${school_id}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Receipt</a>`;
                     }
                     html_fee_row += `<td class="text-center">${link}</td>`;
                 });
-                html_fee_row += `</tr>` ;                     
+                html_fee_row += `</tr>`;
                 html_fee_row += `<tr><th colspan="6"><span class="text-success">Green=Paid</span></th><th colspan="6"><span class="text-danger">Red=Unpaid</span></th></tr>
-                `;    
+                `;
                 $('.show_fee_data').html(html_fee_row);
             });
         }

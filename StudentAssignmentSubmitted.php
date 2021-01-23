@@ -1,10 +1,7 @@
 <?php
-session_start();
-include 'dbobj.php';
-//include 'errorLog.php';
-//include 'security.php';
-/*make a variable named $pageTitle */
 $pageTitle = "Submitted Assignment";
+require_once './includes/header.php';
+include 'dbobj.php';
 error_reporting(0);
 $subjectDropdownValue = "";
 $sqlSub = 'SELECT * FROM `subject_master_table` WHERE `School_Id` = ' . $_SESSION['SCHOOLID'] . ' AND `Enabled` = 1 ORDER BY `Subject_Name`';
@@ -13,8 +10,7 @@ $resultSub = mysqli_query($dbhandle, $sqlSub);
 while ($rowSub = mysqli_fetch_assoc($resultSub)) {
   $subjectDropdownValue = '<option value="' . $rowSub["Subject_Id"] . '">' . $rowSub["Subject_Name"] . ' </option>' . $subjectDropdownValue;
 }
-?>
-<?php require_once './includes/header.php'; ?>
+  require_once './includes/navbar.php'; ?>
 <!-- start your UI here -->
 <div class="col-md-12 loadSData">
 

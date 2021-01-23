@@ -26,8 +26,6 @@ require_once './GlobalModel.php';
                 <label>Class <span>*</span></label>
                 <select class="select2 studclassToApply col-12" name="studclassToApply" id="studclassToApply">
                     <option value="0">Select Class</option>
-
-
                 </select>
             </div>
             <div class="form-group aj-form-group">
@@ -77,7 +75,7 @@ require_once './GlobalModel.php';
                     ?>
                 </select>
             </div>
-            <div class="form-group a
+            <div class="form-group aj-form-group">
                 <label>Discount Category <span>*</span></label>
                 <select class="select2 col-12" name="studDiscCat" id="studDiscCat">
                 </select>
@@ -887,7 +885,7 @@ require_once './GlobalModel.php';
 
     getAllClass();
 
-    function getAllClass() {
+    function getAllClass() {    
         $.ajax({
             url: './universal_apis.php',
             type: 'get',
@@ -897,22 +895,19 @@ require_once './GlobalModel.php';
             dataType: 'json',
             success: function(data) {
                 var classData = JSON.parse(JSON.stringify(data));
-                var html = '<option value="">Select</option>';
+                var html_class = '<option value="">Select Class</option>';
                 for (let i = 0; i < classData.length; i++) {
                     const classRow = classData[i];
-
-                    html += '<option value="' + classRow.Class_Id + '|' + classRow.Class_No + '">' + classRow.Class_Name + '</option>';
-
+                    html_class += '<option value="' + classRow.Class_Id + '|' + classRow.Class_No + '">' + classRow.Class_Name + '</option>';
                 }
-                $('.studclassToApply').html(html);
-                $('#studClass').html(html);
-                $('#sibling1Class').html(html);
-                $('#sibling2Class').html(html);
+                $('#studclassToApply').html(html_class);
+                $('#studClass').html(html_class);
+                $('#sibling1Class').html(html_class);
+                $('#sibling2Class').html(html_class);
             }
         });
     }
     get_discount();
-
 
     function get_discount() {
         var disc_data = '<option value="0">Select Discount Category</option>';

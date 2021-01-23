@@ -27,19 +27,19 @@ require_once './includes/navbar.php';
             <p>His conduct and behaviour were good. </p>
             <p>His date of birth as recorded is (in figure) <span class="bol-text date_of_birth">16/01/2005</span> (in words) <span class="bol-text dob_in_words">Sixteen January Two Thousand Five</span>.</p>
         </div>
-        <div class="col-12 text-right"  style="margin-top:100px;">
+        <div class="col-12 text-right" style="margin:100px 0px 0px 0px;">
             <span class="bol-text">PRINCIPAL</span>
         </div>
     </div>
 </div>
 <style>
-    p {
+    p{
         line-height: 40px;
     }
     .bol-text{
         font-weight: bold;
     }
-    .tab4 {
+    .tab4{
         tab-size: 8;
     }
 </style>

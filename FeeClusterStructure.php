@@ -22,9 +22,6 @@ require_once 'dbobj.php';
                 <select class="select2 col-12" id="f_academic_session" name="f_academic_session" required>
                     <option value="">-- SELECT Session --</option>
                     <?php
-                    /*$_SESSION["STARTYEAR"] = 2020;
-                                                $_SESSION["ENDYEAR"] = 2021;*/
-
                     $current_session = $_SESSION["STARTYEAR"] . '-' . $_SESSION["ENDYEAR"];
                     $next_session = $_SESSION["ENDYEAR"] . '-' . date('Y', strtotime($_SESSION["ENDYEAR"]) + (3600 * 24 * 365));
                     echo '<option value="' . $current_session . '">' . $current_session . '</option>
@@ -36,17 +33,7 @@ require_once 'dbobj.php';
         <div class="table-responsive">
             <div class="load_cluster_ui border border-primary" style="height: 50vh; overflow-x: auto;"></div>
             <table class="stripe row-border order-column ">
-                <!--<thead class="month_head">
 
-                                                <tr>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="fee_head_table">
-                                                <tr>
-
-                                                </tr>
-                                            </tbody>
-                                        </table>-->
         </div>
         <div class="col-12 text-right mt-3">
             <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" name="submit">Save</button>
@@ -58,29 +45,13 @@ require_once 'dbobj.php';
 <?php require_once './includes/scripts.php'; ?>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable({
-            scrollY: 300,
-            scrollX: true,
-            scrollCollapse: true,
-            paging: false,
-            fixedColumns: true
-        });
-    });
-    $(document).ready(function() {
-        $('#example1').DataTable({
-            scrollY: 300,
-            scrollX: true,
-            scrollCollapse: true,
-            paging: false,
-            fixedColumns: true
-        });
+
         $(document).on('submit', '#cluster_form', function(event) {
             event.preventDefault();
             const cluster_name = $('#fee_cluster_name').val();
             var cluster_session = $('#f_academic_session').val();
             $.post($(this).attr('action'), $('form#cluster_form').serialize(), function(data) {
                 $('.form_output').html(data);
-                //$('#cluster_form')[0].reset();   
                 show_fees_templt(cluster_name, cluster_session, 'Regular')
             }, );
         });
@@ -100,6 +71,17 @@ require_once 'dbobj.php';
         $(document).on('change', '#f_academic_session', function() {
             const cluster_name = $('#fee_cluster_name').val();
             var cluster_session = $('#f_academic_session').val();
+            check_existing_group(cluster_name,cluster_session)
+        });
+
+        $(document).on('change', '#fee_cluster_name', function() {
+            const cluster_name = $('#fee_cluster_name').val();
+            var cluster_session = $('#f_academic_session').val();
+            check_existing_group(cluster_name,cluster_session)
+        });
+
+        /* check existing fee group */
+        function check_existing_group(cluster_name,cluster_session){
             var data = {
                 'check_existing_fee': 1,
                 'cluster_name': cluster_name,
@@ -112,10 +94,10 @@ require_once 'dbobj.php';
             } else {
                 $.post('./FeeControl_1.php', data, function(data) {
                     $('.f_msg').html(data);
-                    show_fees_templt(cluster_name, cluster_session, 'Regular');
                 });
+                show_fees_templt(cluster_name, cluster_session, 'Regular');
             }
-        });
+        }
 
         function show_fees_templt(cluster_name, cluster_session, structure_type) {
             data = {

@@ -7,8 +7,6 @@ include 'AdmissionModel.php';
 <form class="new-added-form aj-new-added-form new-aj-new-added-form" id="admissionform" method="post" action="AdmissionEnquiry2.php">
     <input type="hidden" id="votp" name="votp" placeholder="" value="0" class="form-control" required>
     <div class="row">
-
-
         <div class="col-xl-4 col-lg-4 col-12 ">
             <div class="form-group aj-form-group">
                 <label>Student Name <span>*</span></label>

@@ -2,7 +2,7 @@
 </div>
 <!-- Admit Form Area End Here -->
 <footer class="footer-wrap-layout1 d-print-none">
-<div class="copyright">Powered by <a href="http://swipetouch.tech">SwipeTouch Technologies</a></div>
+<div class="copyright"> <a href="http://swipetouch.tech">Powered by : SwipeTouch Technologies, LLP || &copy; <?php echo date("Y"); ?></a></div>
 </footer>
 </div>
 </div>

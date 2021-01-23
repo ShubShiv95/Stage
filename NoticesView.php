@@ -1,11 +1,11 @@
 <?php
-session_start();
-include 'dbobj.php';
-//include 'errorLog.php';
-include 'security.php';
 $pageTitle = "View Notices And Circular";
 $bodyHeader = "View Notice/Circular";
 require_once './includes/header.php';
+require_once './includes/navbar.php';
+include 'dbobj.php';
+//include 'errorLog.php';
+include 'security.php';
 
 if ($_SESSION["LOGINTYPE"] != 'STUDENT') {
     echo '<div class="container-fluid new-added-form aj-new-added-form new-aj-new-added-form">

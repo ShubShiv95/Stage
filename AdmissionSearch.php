@@ -1,9 +1,9 @@
-
 <?php
 $pageTitle  = "Admission Search";
-require_once './includes/header.php';   
+require_once './includes/header.php';
 include 'dbobj.php';
- ?>
+require_once './includes/navbar.php';
+?>
 <form class="new-added-form school-form aj-new-added-form" id="searchAddForm" name="searchAddForm">
     <div class="row justify-content-center">
         <div class="col-xl-8 col-lg-8 col-12 aj-mb-2">
@@ -20,7 +20,7 @@ include 'dbobj.php';
                             $current_session = $_SESSION["STARTYEAR"] . '-' . $_SESSION["ENDYEAR"];
                             $next_session = $_SESSION["ENDYEAR"] . '-' . date('Y', strtotime($_SESSION["ENDYEAR"]) + (3600 * 24 * 365));
                             echo '<option value="' . $current_session . '">' . $current_session . '</option>
-                                                                <option value="' . $next_session . '">' . $next_session . '</option>';
+                                <option value="' . $next_session . '">' . $next_session . '</option>';
                             ?>
                         </select>
                     </div>
@@ -44,7 +44,6 @@ include 'dbobj.php';
                         <label>School Class <span>*</span></label>
 
                         <select class="select2 col-12 class_name" name="f_class" id="schoolClass" name="schoolClass">
-
                         </select>
                     </div>
                 </div>

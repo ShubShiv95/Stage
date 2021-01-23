@@ -22,14 +22,14 @@ require_once './includes/navbar.php';
                     <div class="col-xl-6 col-lg-6 col-12 aj-mb-2">
                         <div class="form-group aj-form-group">
                             <label>Master Account</label>
-                            <select class="select2 show_school" name="cluster_school_name">
+                            <select class="select2 col-12 show_school" name="cluster_school_name">
                             </select>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-12 mb-3">
                         <div class="form-group aj-form-group">
                             <label>Student Type</label>
-                            <select class="select2" name="student_type">
+                            <select class="select2 col-12" name="student_type">
                                 <option value="">-- Type --</option>
                                 <option value="New">New</option>
                                 <option value="Existing">Existing</option>

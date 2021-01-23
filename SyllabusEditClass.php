@@ -30,7 +30,7 @@ $subject_row_routine = $subject_result_set->fetch_assoc();
                         <div class="form-group aj-form-group">
 
                             <label>Select Class <span>*</span></label>
-                            <select class="select2" name="assignment_class" required>
+                            <select class="select2 col-12" name="assignment_class" required>
                                 <option value="">Select Class</option>
                                 <?php
                                 $Class_Syllabus_Id = $_REQUEST['Class_Syllabus_Id'];
@@ -48,7 +48,7 @@ $subject_row_routine = $subject_result_set->fetch_assoc();
                         </div>
                         <div class="form-group aj-form-group">
                             <label>Select Subject</label>
-                            <select class="select2" required="" name="assignment_subject" required>
+                            <select class="select2 col-12" required="" name="assignment_subject" required>
                                 <option value="">Select One</option>
                                 <?php
                                 $Class_Syllabus_Id = $_REQUEST['Class_Syllabus_Id'];

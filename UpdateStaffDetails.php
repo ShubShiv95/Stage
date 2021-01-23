@@ -12,7 +12,7 @@ require_once './includes/navbar.php';
         <div class="col-xl-5 col-lg-5 col-12 aj-mb-2">
             <div class="form-group aj-form-group">
                 <label>Role <span>*</span></label>
-                <select class="select2" name="depar_Category">
+                <select class="select2 col-12" name="depar_Category">
                     <option value="">Bro. Satheesh K. Don</option>
                     <option value="">Bro. Satheesh K. Don</option>
                     <option value="">Bro. Satheesh K. Don</option>

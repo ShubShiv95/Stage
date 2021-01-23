@@ -29,7 +29,7 @@ require_once './includes/navbar.php';
         <div class="col-xl-5 col-lg-5 col-12 aj-mb-2">
             <div class="form-group aj-form-group">
                 <label>Fee Group Name <span>*</span></label>
-                <select class="select2 fee_cluster" id="fee_cluster_name" name="fee_cluster_name" required>
+                <select class="select2 col-12 fee_cluster" id="fee_cluster_name" name="fee_cluster_name" required>
                     <option value="">-- SELECT Group --</option>
                 </select>
                 <p class="mt-2 font-size-14 line-height-14 f_msg">Example : Tuition Fee Or Admission Fee Or Computer Fee , etc</p>
@@ -38,7 +38,7 @@ require_once './includes/navbar.php';
         <div class="col-xl-5 col-lg-5 col-12">
             <div class="form-group aj-form-group">
                 <label>Session *</label>
-                <select class="select2" id="f_academic_session" name="f_academic_session" required>
+                <select class="select2 col-12" id="f_academic_session" name="f_academic_session" required>
                     <option value="">-- SELECT Session --</option>
                     <?php
                     /*$_SESSION["STARTYEAR"] = 2020;

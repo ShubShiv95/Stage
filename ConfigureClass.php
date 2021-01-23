@@ -1,11 +1,11 @@
 <?php
-session_start();
-include 'dbobj.php';
-//include 'errorLog.php';
-include 'security.php';
 $pageTitle = "Notices And Circular";
 $bodyHeader = "Add Notice/Circular";
 require_once './includes/header.php';
+include 'dbobj.php';
+//include 'errorLog.php';
+include 'security.php';
+require_once './includes/navbar.php';
 ?>
 <form class="new-added-form aj-new-added-form new-aj-new-added-form" action="./Notice_1.php" id="notice_form" enctype="multipart/form-data" method="post">
     <div class="row">

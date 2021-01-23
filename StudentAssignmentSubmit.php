@@ -1,5 +1,4 @@
 <?php
-session_start();
 /*make a variable named $pageTitle */
 $pageTitle = "View Submitted Assignment";
 $bodyHeader = "Assignments List";

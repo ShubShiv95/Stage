@@ -49,7 +49,7 @@ require_once './includes/navbar.php';
                     <th>Name</th>
                     <th>DOB</th>
                     <th>Father's Name</th>
-                    <th>Details</th>
+                    <!--<th>Details</th>-->
                     <th>Certificate</th>
                 </tr>
                 </thead>
@@ -58,6 +58,48 @@ require_once './includes/navbar.php';
         </table>
     </div>
 </div>
+<!-- details modal -->
+<div class="modal student_details">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Student's Detail</h6>
+                <button type="button" class="close close_st_mod" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="model-tebal-in">
+                    <div class="col-xl-12 col-lg-12 col-12 aj-mb-2">
+                            <div class="Attendance-staff  aj-scroll-Attendance-staff">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 aj-mb-2 mt-3 ml-1 row student_data table-responsive">
+                                    <table class="table table-striped table-inverse ">
+                                            <tr>
+                                                <th>Name</th><td>Rakesh Kumar</td>
+                                                <th>Class / Roll</th><td>5(A)/15</td>
+                                            </tr>
+                                            <tr>                                            
+                                                <th>DOB</th><td>15/10/2000</td>
+                                                <th>Father Name</th><td>Gyan Prakash</td>
+                                            </tr>
+                                    </table>
+                                </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
 <?php
 require_once './includes/scripts.php';
 ?>
@@ -99,7 +141,7 @@ require_once './includes/scripts.php';
                                     <td>${stud_data.stud_name}</td>
                                     <td>${stud_data.dob}</td>
                                     <td>${stud_data.f_name}</td>
-                                    <td><a href="./Details.php" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                    <!--<td><a href="#" id="${stud_data.stud_id}" class="btn btn-primary see_details"><i class="fa fa-eye" aria-hidden="true"></i></a></td>-->
                                     <td> <div class="row">   <div class="form-group col-9 aj-form-group">  <select class="select2 col-12 form-group aj-form-group " name="f_class" id="cert_type${i}" name="schoolSession">
                                         <option value="">SELECT Certificate</option>                 
                                         <option value="bonafide_curr">Bonafide (Current)</option>
@@ -118,6 +160,27 @@ require_once './includes/scripts.php';
                 $('.show_student_data').html(stud_html);
             });
         }
+    });
+
+    $(document).on('click','.btn_print',function(){
+        let student_id = $(this).attr('id');
+        let serial_no = $(this).attr('btn_no');
+        let certificate_type = $('#cert_type'+serial_no+'').val();
+        if (certificate_type == '') {
+            alert("Please Select Certificate Of Serial No "+serial_no+"");
+        }
+        else{
+            window.open("./Certificate.php?type="+certificate_type+"&studentid="+student_id+"");
+        }
+    });
+    $(document).on('click','.see_details',function(event){
+        event.preventDefault();
+        let student_id = $(this).attr('id');
+        //$('.student_data').html('');
+        $('.student_details').fadeIn();
+    });
+    $('.close_st_mod').click(function(){
+        $('.student_details').fadeOut();
     });
 </script>
 <?php require_once './includes/closebody.php'; ?>

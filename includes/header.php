@@ -1,16 +1,13 @@
-<?php session_start(); ?>
-<!doctype html>
-<html class="no-js" lang="">
 <?php
-
+session_start();
 include_once 'dbobj.php';
 include_once 'errorLog.php';
 include_once 'security.php';
-
 $lid = $_SESSION["LOGINID"];
 $schoolId = $_SESSION["SCHOOLID"];
 ?>
-
+<!doctype html>
+<html class="no-js" lang="">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -58,8 +55,6 @@ $schoolId = $_SESSION["SCHOOLID"];
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
         <!-- Header Menu Area Start Here -->
-        <?php //session_start();
-        ?>
         <?php require_once './includes/navbar.php'; ?>
 
         <!-- Header Menu Area End Here -->
@@ -71,6 +66,7 @@ $schoolId = $_SESSION["SCHOOLID"];
             ?>
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
+               <?php require_once './includes/hot-link.php'; ?>
                 <!-- Breadcubs Area Start Here -->
                 <!-- <div class="breadcrumbs-area">
                     <h3>Staff</h3>

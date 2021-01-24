@@ -46,7 +46,11 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
             echo "Fee cannot be deposited with Balance amount more than zero.";
             die;
         }
-
+        $AdvanceAmount=0;
+        if($BalanceAmount<0)
+        {
+            $AdvanceAmount=$BalanceAmount*(-1);
+        }
     //Checking Balance Amount By calculation as per the posted data from fee to make the process hack proof.    
      
         //Creating installment id list for in operator for sql query.
@@ -92,6 +96,8 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
         
         $ActualBalance=$ActualAmt-$TotalPaidAmt; //Preparing actual balance as per database record.
         
+
+        /*  Ignoring Backend Balance check condition --will be enabled after debugging.
         if($ActualBalance==$BalanceAmount)
             {
                 echo "Payment Amount is correct.<br>";
@@ -103,6 +109,8 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
                 echo "This system found the mismatch between the balance posted and actual balance.  Please consult Application Development Team.";
                 die; 
             }    
+
+        */    
 
         //End of checking  balance amount Hack proof.   
         
@@ -151,7 +159,7 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
         $ChequeBounceChg,
         $AdjustedAmt,
         $DiscountAmt,
-        $BalanceAmount,
+        $AdvanceAmount,
         $SchoolId,
         $_SESSION["LOGINID"]
         );
@@ -355,17 +363,14 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
             }
               
     //Step7. Inserting Advance amount if advance balance exist.        
-    if($BalanceAmount<0)
-        {
-            $BalanceAmount=$BalanceAmount*(-1);
-        }
+ 
     $FA_Id = sequence_number('Fee_Advance_Table',$dbhandle);
     $InsertFeeAdvTable="INSERT INTO fee_advance_table(FA_Id, Student_Id, Advance_Amount, Advance_Date, Source_Recept_No, School_Id, Updated_By) VALUES (?,?,?, str_to_date(?,'%Y-%m-%d'),?,?,?)";
     $InsertFeeAdvTablePrep = $dbhandle->prepare($InsertFeeAdvTable);
     $InsertFeeAdvTablePrep->bind_param('isissis', 
     $FA_Id,
     $StudentId,
-    $BalanceAmount,
+    $AdvanceAmount,
     $FeeDepositeDate,
     $ReceptNo,
     $SchoolId,
@@ -388,10 +393,10 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
             }    
     
     //Step 8. Update student_fee_master with recept number and pay_status to Paid.
-    $UpdateInstallmentStatus="update student_fee_master sfm,fee_group_table fgt set Recept_No=?,Pay_Status='Paid' where student_id=?  and Installment_Id in $InstallmentIdList and sfm.session=? and sfm.school_id=? and Pay_Status='Unpaid' and fgt.FG_Id=sfm.FG_Id";
+    $UpdateInstallmentStatus="update student_fee_master sfm,fee_group_table fgt set Recept_No=?,Pay_Status='Paid',Paid_Amount_Date=str_to_date(?,'%Y-%m-%d') where student_id=?  and Installment_Id in $InstallmentIdList and sfm.session=? and sfm.school_id=? and Pay_Status='Unpaid' and fgt.FG_Id=sfm.FG_Id";
     //echo $GetInstallmentFeeSql;
     $UpdateInstallmentStatusPrep = $dbhandle->prepare($UpdateInstallmentStatus);
-    $UpdateInstallmentStatusPrep->bind_param("sssi",$ReceptNo,$StudentId,$Session,$SchoolId);
+    $UpdateInstallmentStatusPrep->bind_param("ssssi",$ReceptNo,$FeeDepositeDate,$StudentId,$Session,$SchoolId);
 
     
     if (!$UpdateInstallmentStatusPrep->execute()) 
@@ -411,7 +416,10 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
 
     mysqli_commit($dbhandle);
     mysqli_query($dbhandle,"Unlock Tables");
-    echo "Fee Updated Successfully. Recept#: $ReceptNo";        
+    echo "Fee Updated Successfully. Recept#: $ReceptNo";  
+    echo '<script>window.open("./FeeReceiptPrint.php?receipt_id='.$ReceptNo.'")</script>';
+    //$url =  './FeeReceiptPrint.php?receipt_id='.$ReceptNo;
+    //header('Location: ' . $url);
 
 
 }//End of Honey Trap Section.   

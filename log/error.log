@@ -2398,3 +2398,9 @@ Module Name: 	Student Fee Creation
 Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '1, 0,'Unpaid','2020000036','2020-2021',4,1,'admin')' at line 1
 SQL:	INSERT INTO `student_fee_master`(`SFM_Id`, `FG_Id`, `Installment_Id`, `Total_Amount`, `Pay_Status`,  `Student_Id`, `Session`, `Installment_Month`, `School_Id`, `Updated_By`) VALUES (361,,1, 0,'Unpaid','2020000036','2020-2021',4,1,'admin')
 File:	F:\xampp\htdocs\stage\RegularFeeCreation.php
+
+Date:	23-Jan-2021 04:10:31 PM	 By User:admin
+Module Name: 	Student Other Fee List Creation: Advance Fee Fetch Error. 
+Message:	You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'Unpaid'' and adjusted=0 and school_id=1' at line 1
+SQL:	select * from fee_advance_table where student_id='update student_fee_master set pay_staus='Unpaid'' and adjusted=0 and school_id=1
+File:	F:\xampp\htdocs\stage\FeeCollectionAPI.php

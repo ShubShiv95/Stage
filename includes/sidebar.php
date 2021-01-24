@@ -191,22 +191,39 @@
                 <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Fee Management</span></a>
                 <ul class="nav sub-group-menu">
                     <li class="nav-item">
-                        <a href="FeeHead.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Head</a>
-                    </li>
-                    <li class="nav-item">
                         <a href="FeeCollection.php" class="nav-link"><i class="fas fa-angle-right"></i>Collect Fee</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="Fee_Cluster.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Group
-                        </a>
+
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><span>Settings</span></a>
+                        <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+                        <ul class="nav sub-group-menu">
+                            <li class="nav-item">
+                                <a href="FeeHead.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Head</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Fee_Cluster.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Group
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="Fee_Concession.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Concession
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="FeeClusterStructure.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Structure
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="Fee_Concession.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Concession
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="FeeClusterStructure.php" class="nav-link"><i class="fas fa-angle-right"></i>Create Fee Structure
-                        </a>
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><span>Report</span></a>
+                        <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
+                        <ul class="nav sub-group-menu">
+                            <li class="nav-item">
+                                <a href="./DailyCollectionReport.php" class="nav-link"><i class="fas fa-angle-right"></i>Daily Collection Report
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>
@@ -251,9 +268,17 @@
                     </li>
                 </ul>
             </li>
-
-
-
+            <li class="nav-item sidebar-nav-item  print-d-none">
+                <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Certificates</span></a>
+                <ul class="nav sub-group-menu">
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><span>View SLC</span></a>
+                    </li>
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="./CertificateGenerate.php" class="nav-link"><span>Generate Certificate</span></a>
+                    </li>
+                </ul>
+            </li>
 
             <li class="nav-item sidebar-nav-item  print-d-none">
                 <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Time Table</span></a>
@@ -265,21 +290,21 @@
                             <li class="nav-item">
                                 <a href="AddClassTimeTable.php" class="nav-link"><i class="fas fa-angle-right"></i>Class Time Table</a>
                             </li>
-                            <li class="nav-item">
+                            <!--<li class="nav-item">
                                 <a href="AddTeacherTimeTable.php" class="nav-link"><i class="fas fa-angle-right"></i>Teacher's Time Table</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </li>
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><span>View Time Table</span></a>
                         <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
                         <ul class="nav sub-group-menu">
-                        <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="ViewClassTimeTable.php" class="nav-link"><i class="fas fa-angle-right"></i>Class Time Table</a>
                             </li>
-                            <li class="nav-item">
+                            <!--<li class="nav-item">
                                 <a href="ViewTeacherTimeTable.php" class="nav-link"><i class="fas fa-angle-right"></i>Teacher's Time Table</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </li>
                 </ul>
@@ -319,10 +344,10 @@
                             </li>
                             <li class="nav-item">
                                 <a href="./TransportAddVehicle.php" class="nav-link"><i class="fas fa-angle-right"></i>Vehicle Driver</a>
-                            </li>  
+                            </li>
                             <li class="nav-item">
                                 <a href="./TransportAddVehicleDetails.php" class="nav-link"><i class="fas fa-angle-right"></i>Vehicle Details</a>
-                            </li>                                                        
+                            </li>
                             <li class="nav-item">
                                 <a href="./TransportAddVehicleDocument.php" class="nav-link"><i class="fas fa-angle-right"></i>Add Vehicle Document</a>
                             </li>
@@ -330,7 +355,7 @@
                                 <a href="./TransportAssignStudent.php" class="nav-link"><i class="fas fa-angle-right"></i>Assign Student</a>
                             </li>
 
-                           <!-- <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="./TransportDriver.php" class="nav-link"><i class="fas fa-angle-right"></i>Driver</a>
                             </li>
                             <li class="nav-item">
@@ -349,7 +374,7 @@
                                 <a href="./TransportStructure.php" class="nav-link"><i class="fas fa-angle-right"></i>Structure</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><span>Messaging</span></a>
                         <!--removed the i tag with class value flaticon-dashboard which was prefixed to span tag.-->
@@ -381,7 +406,7 @@
                             <li class="nav-item">
                                 <a href="./TransportListDocuments.php" class="nav-link"><i class="fas fa-angle-right"></i>List Vehicle Documents</a></a>
                             </li>
-                            <li  class="nav-item">
+                            <li class="nav-item">
                                 <a href="./TransportListVehicle.php" class="nav-link"><i class="fas fa-angle-right"></i>List Vehicles</a></a>
                             </li>
                             <li class="nav-item">
@@ -428,7 +453,7 @@
                         <a href="AddTeacherTimeTable.php" class="nav-link"><i class="fas fa-angle-right"></i>Teaacher Time Table</a>
                     </li>
                 </ul>
-            </li>            
+            </li>
             <li class="nav-item sidebar-nav-item  print-d-none">
                 <a href="#" class="nav-link"><i class="flaticon-checklist"></i><span>Master Settings</span></a>
                 <ul class="nav sub-group-menu">

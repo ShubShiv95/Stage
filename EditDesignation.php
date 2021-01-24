@@ -1,5 +1,4 @@
 <?php
-include 'dbobj.php';
 $pageTitle = "Edit Designtion";
 require_once './includes/header.php';
 include_once './includes/navbar.php';

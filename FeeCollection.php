@@ -768,7 +768,6 @@ include_once './includes/navbar.php';
                 var form_data = $(this).serialize();
                 $.post($(this).attr('action'), form_data, function(fee_response) {
                     $('.form_output').html(fee_response);
-                    window.open("FeeReceiptPrint.php?receipt_id=5625");
                     reset_form();
                 });
             } else {

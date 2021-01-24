@@ -134,7 +134,7 @@
             $htmlStr=$htmlStr . '</tr>';
         }
         
-        $htmlStr=$htmlStr . "<tr><td></td><td></td><td></td>";
+        $htmlStr=$htmlStr . '<tr><td colspan="3">Total</td>';
         foreach($feeheadList as $value)
         {
             //echo (array_key_exists($value,$feeheadamount) ? "not found " : " found");

@@ -6,19 +6,19 @@ require_once './includes/navbar.php';
 <!-- Tab Area Start Here -->
 
 
-<ul class="nav nav-pills">
+<ul class="nav nav-pills border-bottom">
     <?php
     if ($_SESSION["LOGINTYPE"] != "STUDENT") {
-        echo '<li class="nav-item">
+        echo '<li class="nav-item border-right">
             <a class="nav-link active" data-toggle="pill" href="#home">Serach Student</a>
         </li>';
     }
     ?>
     <li class="nav-item">
-        <a class="nav-link" data-toggle="pill" href="#menu1">Details</a>
+        <a class="nav-link border-right" data-toggle="pill" href="#menu1">Details</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-toggle="pill" href="#menu2">Attendance</a>
+        <a class="nav-link border-right" data-toggle="pill" href="#menu2">Attendance</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" data-toggle="pill" href="#menu3">Fee</a>
@@ -103,114 +103,114 @@ require_once './includes/navbar.php';
     <div class="tab-pane container fade" id="menu1">
         <div class="row">
             <div class="col-lg-3 text-center">
-                <div class="image">
-                    <img src="img/avtar.png" class="pro-image back_img w-50">
+                <div class="image mt-3">
+                    <img src="img/avtar.png" class="pro-image back_img w-75">
                 </div>
             </div>
-            <div class="col-lg-9" style="height: 40vh; overflow:scroll;">
+            <div class="col-lg-9" style="height: 60vh; overflow:scroll;">
                 <div class="content-fild row">
-                    <div class="fild-row left col-12 mt-3 border">
-                        <div class="name">Name : <span class="content first_name">Ajay</span></div>
+                    <div class="fild-row left col-12 mt-3 border " style="background-color: #ffae01!important;">
+                        <div class="name">Name : <span class="content first_name"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Date Of Birth : <span class="content dob">Ajay</span></div>
+                        <div class="name">Date Of Birth : <span class="content dob"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Class : <span class="content class">Ajay</span></div>
+                        <div class="name">Class : <span class="content class"></span></div>
                     </div>
                     <div class="fild-row right col-6 mt-3 border">
-                        <div class="name">Section : <span class="content section">Ajay</span></div>
+                        <div class="name">Section : <span class="content section"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Roll : <span class="content roll">Ajay</span></div>
+                        <div class="name">Roll : <span class="content roll"></span></div>
                     </div>
                     <div class="fild-row right col-6 mt-3 border">
-                        <div class="name">Gender : <span class="content gender">Ajay</span></div>
+                        <div class="name">Gender : <span class="content gender"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Religion : <span class="content religion">Ajay</span></div>
+                        <div class="name">Religion : <span class="content religion"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Category : <span class="content category">Ajay</span></div>
+                        <div class="name">Category : <span class="content category"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Discount Category : <span class="content dis_category">Ajay</span></div>
+                        <div class="name">Discount Category : <span class="content dis_category"></span></div>
                     </div>
 
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Session : <span class="content session">Ajay</span></div>
+                        <div class="name">Session : <span class="content session"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Session Start : <span class="content session_st">Ajay</span></div>
+                        <div class="name">Session Start : <span class="content session_st"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Session End : <span class="content session_en">Ajay</span></div>
+                        <div class="name">Session End : <span class="content session_en"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Mother Tongue : <span class="content mother_tongue">Ajay</span></div>
+                        <div class="name">Mother Tongue : <span class="content mother_tongue"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Locality : <span class="content locality">Ajay</span></div>
+                        <div class="name">Locality : <span class="content locality"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">AADHAR : <span class="content aadhar">Ajay</span></div>
+                        <div class="name">AADHAR : <span class="content aadhar"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Blood Group : <span class="content b_group">Ajay</span></div>
+                        <div class="name">Blood Group : <span class="content b_group"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Nationality : <span class="content nationality">Ajay</span></div>
+                        <div class="name">Nationality : <span class="content nationality"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Comm. Add. : <span class="content com_add">Ajay</span></div>
+                        <div class="name">Comm. Add. : <span class="content com_add"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Res. Add. : <span class="content res_add">Ajay</span></div>
+                        <div class="name">Res. Add. : <span class="content res_add"></span></div>
                     </div>
                     <div class="fild-row left col-12 mt-3 border" style="background-color: #ffae01!important;">
-                        <div class="name">Father Name : <span class="content father_name">Ajay</span></div>
+                        <div class="name">Father Name : <span class="content father_name"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Father Occupation : <span class="content father_occupation">Ajay</span></div>
+                        <div class="name">Father Occupation : <span class="content father_occupation"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Father Qualification : <span class="content father_qualification">Ajay</span></div>
+                        <div class="name">Father Qualification : <span class="content father_qualification"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Father Contact : <span class="content father_contact">Ajay</span></div>
+                        <div class="name">Father Contact : <span class="content father_contact"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Father Email : <span class="content father_email">Ajay</span></div>
+                        <div class="name">Father Email : <span class="content father_email"></span></div>
                     </div>
                     <div class="fild-row left col-12 mt-3 border">
-                        <div class="name">Father Add : <span class="content father_add">Ajay</span></div>
+                        <div class="name">Father Add : <span class="content father_add"></span></div>
                     </div>
                     <div class="fild-row left col-12 mt-3 border" style="background-color: #ffae01!important;">
-                        <div class="name">Mother Name : <span class="content mother_name">Ajay</span></div>
+                        <div class="name">Mother Name : <span class="content mother_name"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Mother Occupation : <span class="content mother_occupation">Ajay</span></div>
+                        <div class="name">Mother Occupation : <span class="content mother_occupation"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Mother Qualification : <span class="content mother_qualification">Ajay</span></div>
+                        <div class="name">Mother Qualification : <span class="content mother_qualification"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Mother Contact : <span class="content mother_contact">Ajay</span></div>
+                        <div class="name">Mother Contact : <span class="content mother_contact"></span></div>
                     </div>
                     <div class="fild-row left col-6 mt-3 border">
-                        <div class="name">Mother Email : <span class="content mother_email">Ajay</span></div>
+                        <div class="name">Mother Email : <span class="content mother_email"></span></div>
                     </div>
                     <div class="fild-row left col-12 mt-3 border">
-                        <div class="name">Mother Add : <span class="content mother_add">Ajay</span></div>
+                        <div class="name">Mother Add : <span class="content mother_add"></span></div>
                     </div>
                     <div class="fild-row left col-4 mt-3 border">
-                        <div class="name">SMS Contact : <span class="content sms_contact">Ajay</span></div>
+                        <div class="name">SMS Contact : <span class="content sms_contact"></span></div>
                     </div>
                     <div class="fild-row left col-4 mt-3 border">
-                        <div class="name">Whatsapp Contact : <span class="content whatsapp_contact">Ajay</span></div>
+                        <div class="name">Whatsapp Contact : <span class="content whatsapp_contact"></span></div>
                     </div>
                     <div class="fild-row left col-4 mt-3 border">
-                        <div class="name">Email : <span class="content email_add">Ajay</span></div>
+                        <div class="name">Email : <span class="content email_add"></span></div>
                     </div>
                 </div>
             </div>

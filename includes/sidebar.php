@@ -35,7 +35,7 @@
                         <a href="AdmissionEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Admission Eqnuiry</a>
                     </li>
                     <li class="nav-item">
-                        <a href="http://localhost/stage/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor Entry</a>
+                        <a href="http://abcpaathshala.swiftcampus.com/VisitorEnquiry.php" class="nav-link"><i class="fas fa-angle-right"></i>Visitor Entry</a>
                     </li>
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><span>Reports</span></a>

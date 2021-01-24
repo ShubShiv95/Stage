@@ -65,22 +65,6 @@ require_once './includes/navbar.php';
 <?php require_once './includes/scripts.php'; ?>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable({
-            scrollY: 300,
-            scrollX: true,
-            scrollCollapse: true,
-            paging: false,
-            fixedColumns: true
-        });
-    });
-    $(document).ready(function() {
-        $('#example1').DataTable({
-            scrollY: 300,
-            scrollX: true,
-            scrollCollapse: true,
-            paging: false,
-            fixedColumns: true
-        });
         $(document).on('submit', '#cluster_form', function(event) {
             event.preventDefault();
             const cluster_name = $('#fee_cluster_name').val();

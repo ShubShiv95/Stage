@@ -551,17 +551,10 @@ if (isset($_REQUEST['admission_confirm'])) {
         } else {
           mysqli_commit($dbhandle);
           // run fee list creation php page
-          /* require_once './RegularFeeCreation.php'; 
-        */
-          require_once './FeeApplyCurl.php';
-          $fee_gen = generate_student_fee_using_curl($student_id_gen, $student_details['Session'], $_SESSION["SCHOOLID"], $_SESSION["LOGINID"]);
-          $json_data = json_decode($fee_gen);
-          //$json_data= array();
-          if ($json_data['status'] == "Success") {
-            echo $statusMsg = '<p class="text-success pt-4">Student Enrolled With Student Id <strong>' . $student_id_gen . '</strong> ' . $json_data->message . ' .</p><script>window.setTimeout(function(){window.href="AdmissionFormPrint.php?student_id=' . $student_id_gen . '";},2000);</script>';
-          } else {
-            echo $statusMsg = '<p class="text-danger pt-4">Student Enrolled With Student Id <strong>' . $student_id_gen . '</strong> Student Fee Didnot Generated. Please Consult Application Support</p>';
-          }
+          require_once './RegularFeeCreation.php'; 
+          $fee_gen_message = Add_Regular_Fee($dbhandle,$student_id_gen, $student_details['Session'], $_SESSION["SCHOOLID"], $_SESSION["LOGINID"]);
+
+          echo $statusMsg = '<p class="text-success pt-4">Student Enrolled With Student Id <strong>' . $student_id_gen . '</strong> ' . $fee_gen_message. ' .</p><script>window.setTimeout(function(){window.href="AdmissionFormPrint.php?student_id=' . $student_id_gen . '";},2000);</script>';
         }
       } else {
         $message = $insert_q_prep->error;

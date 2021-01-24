@@ -37,15 +37,15 @@
 				$seqid=$seqid+1;
 				if ($seqid<10) {
 					$seqid='00000'.$seqid;
-				}else if($seqid>10 && $seqid<100) {
+				}else if($seqid>=10 && $seqid<100) {
 					$seqid='0000'.$seqid;
 				}
-				elseif ($seqid>100 && $seqid<1000) {
+				elseif ($seqid>=100 && $seqid<1000) {
 					$seqid='000'.$seqid;
 				}
-				elseif ($seqid>1000 && $seqid<10000) {
+				elseif ($seqid>=1000 && $seqid<10000) {
 					$seqid='00'.$seqid;
-				}else if ($seqid>100000 && $seqid<999999){
+				}else if ($seqid>=100000 && $seqid<999999){
 					$seqid=$seqid;
 				}
 				return $_SESSION["STARTYEAR"].$seqid;

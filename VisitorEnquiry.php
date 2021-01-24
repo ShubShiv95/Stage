@@ -3,6 +3,7 @@ $pageTitle = "Visitor Enquiry";
 require_once './includes/header.php';
 require_once './includes/navbar.php';
 ?>
+<script src="js/webcam.min.js"></script>
 <style type="text/css">
     #camContainer {
         width: 600px;

@@ -3,8 +3,10 @@
 
     
     $getseq_sql="select count(*) as cnt from $tablename";
-    $seqid=0;
-	if($getseq_result=$dbhandle->query($getseq_sql))
+	$seqid=0;
+	$getseq_result=$dbhandle->query($getseq_sql);
+	//var_dump($getseq_result);
+	if($getseq_result)
 		{
             $getseq_row=$getseq_result->fetch_assoc();
             $seqid=$getseq_row["cnt"];
@@ -14,6 +16,7 @@
 	else
 		{
 			echo "Database Error: Not able to create Unique Id. Please try after some time.";
+			//echo $tablename;
 			die();
 			return false;
 		}

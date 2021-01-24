@@ -90,7 +90,8 @@
             $Receipt_Dtl_ResultSet = $Receipt_Dtl_Prep->get_result();
             
             
-                $GetConcNameSql="select sfm.student_id,concession_name from concession_master_table cmt,student_Fee_master sfm,student_class_details scd where sfm.recept_no=? and scd.student_id=sfm.student_id and cmt.concession_id=scd.concession_id";
+                $GetConcNameSql="select sfm.student_id,concession_name from concession_master_table cmt,student_fee_master sfm,student_class_details scd where sfm.recept_no=? and scd.student_id=sfm.student_id and cmt.concession_id=scd.concession_id";
+                //echo "select sfm.student_id,concession_name from concession_master_table cmt,student_Fee_master sfm,student_class_details scd where sfm.recept_no=" . $row["recept_no"] ." and scd.student_id=sfm.student_id and cmt.concession_id=scd.concession_id";
                 $GetConcNamePrep = $dbhandle->prepare($GetConcNameSql);
                 $GetConcNamePrep->bind_param("s", $row["recept_no"]);
                 $GetConcNamePrep->execute();

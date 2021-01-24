@@ -139,8 +139,8 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
         $ReceptNo = generate_fee_recept($dbhandle,$Session,$SchoolId);
         //echo $ReceptNo;
         //Step3. Generate primary key value for fee_payment_master to enter into the FP_Id column by using sequence_number function.
-        $FP_Id=sequence_number('Fee_Payment_Master',$dbhandle);
-
+        $FP_Id=sequence_number('fee_payment_master',$dbhandle);
+        //echo "fpid=$FP_ID=";    
         //Step4. Insert a record in fee_payment_master with the Recept Number and with the all aggregate amounts.
         $FeePaymentMasterSql="INSERT INTO fee_payment_master(FP_Id, Recept_No, Student_Id,Session, Payment_Date, Due_Amount, Paid_Amount, Late_Fee, Ree_Adm_Fee, On_Demand_Fee, Chq_Bon_Amount, Advance_Adjusted, Discount_Amount, Advance_Amount, School_Id, Updated_By) VALUES (?,?,?,?,str_to_date(?,'%Y-%m-%d'),?,?,?,?,?,?,?,?,?,?,?)";
         //echo $GetInstallmentFeeSql;
@@ -261,7 +261,8 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
                 { 
                     $ServiceCharge = 0;
                 } 
-            $FPD_Id=sequence_number('Fee_Payment_Details',$dbhandle);
+            $FPD_Id=sequence_number('fee_payment_details',$dbhandle);
+            //echo "FPD_Id=$FPD_Id=";  
             if (!$FeePaymentDetailsPrep->execute()) 
             {
                 $error_msg = $FeePaymentDetailsPrep->error;
@@ -364,7 +365,7 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
               
     //Step7. Inserting Advance amount if advance balance exist.        
  
-    $FA_Id = sequence_number('Fee_Advance_Table',$dbhandle);
+    $FA_Id = sequence_number('fee_advance_table',$dbhandle);
     $InsertFeeAdvTable="INSERT INTO fee_advance_table(FA_Id, Student_Id, Advance_Amount, Advance_Date, Source_Recept_No, School_Id, Updated_By) VALUES (?,?,?, str_to_date(?,'%Y-%m-%d'),?,?,?)";
     $InsertFeeAdvTablePrep = $dbhandle->prepare($InsertFeeAdvTable);
     $InsertFeeAdvTablePrep->bind_param('isissis', 

@@ -163,6 +163,7 @@ include 'dbobj.php';
             $PaymentODFee=$row5["On_Demand_Fee"];
             $PaymentChqBonFee=$row5["Chq_Bon_Amount"];
             $PaymentAdvAdjAmt=$row5["Advance_Adjusted"];
+            $PaymentAdvAmt=$row5["Advance_Amount"];
             $PaymentDiscount=$row5["Discount_Amount"];
 
             $FeePaymentDetailsSql="select fpd.*,pmt.Paymode_Name from fee_payment_details fpd,paymode_master_table pmt where fp_id=".$row5["FP_Id"] . " and pmt.paymode_id=fpd.paymode";
@@ -254,7 +255,7 @@ include 'dbobj.php';
             if($PaymentReeAdmFee>0)
                 {
                     $data['fee_Details']['payment_details_fee_head_wise'][]   =   array(
-                        "descriptiom"                   =>  "Ree Admission Fee",
+                        "descriptiom"                   =>  "Re-Admission Fee",
                         "due_amount"                    =>  $PaymentReeAdmFee,
                         "concession"                    =>  0,
                         "paid"                          =>  $PaymentReeAdmFee);
@@ -287,6 +288,29 @@ include 'dbobj.php';
                         $TotalDue = $TotalDue + $ODFeeDue;            //totaling due amount.
                         $TotalCons = 0;  //toatalling concession amount.
                         $TotalPaid = $TotalPaid - $PaymentDiscount;   //totalling fee head amounts
+                }
+            
+            if($PaymentAdvAmt>0)
+                {
+                    $data['fee_Details']['payment_details_fee_head_wise'][]   =   array(
+                        "descriptiom"                   =>  "Advance Amount Deposit",
+                        "due_amount"                    =>  0,
+                        "concession"                    =>  0,
+                        "paid"                          =>  $PaymentAdvAmt);
+                        //$TotalDue = $TotalDue + $PaymentAdvAmt;            //totaling due amount.
+                        $TotalCons = 0;  //toatalling concession amount.
+                        $TotalPaid = $TotalPaid + $PaymentAdvAmt;   //totalling fee head amounts
+                }
+            if($PaymentAdvAdjAmt>0)
+                {
+                    $data['fee_Details']['payment_details_fee_head_wise'][]   =   array(
+                        "descriptiom"                   =>  "Advance Deposited Adjusted",
+                        "due_amount"                    =>  0,
+                        "concession"                    =>  0,
+                        "paid"                          =>  '-' . $PaymentAdvAdjAmt);
+                        //$TotalDue = $TotalDue + $PaymentAdvAmt;            //totaling due amount.
+                        $TotalCons = 0;  //toatalling concession amount.
+                        $TotalPaid = $TotalPaid - $PaymentAdvAdjAmt;   //totalling fee head amounts
                 }
                 
             $data['fee_Details']['Totalling'][]   =   array( 

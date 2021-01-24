@@ -417,8 +417,9 @@ $BalanceAmount = $_REQUEST['amount_balance']; //The amount that can be taken as 
     mysqli_commit($dbhandle);
     mysqli_query($dbhandle,"Unlock Tables");
     echo "Fee Updated Successfully. Recept#: $ReceptNo";  
-    $url =  './FeeReceiptPrint.php?receipt_id='.$ReceptNo;
-    header('Location: ' . $url);
+    echo '<script>window.open("./FeeReceiptPrint.php?receipt_id='.$ReceptNo.'")</script>';
+    //$url =  './FeeReceiptPrint.php?receipt_id='.$ReceptNo;
+    //header('Location: ' . $url);
 
 
 }//End of Honey Trap Section.   

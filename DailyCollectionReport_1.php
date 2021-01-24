@@ -46,7 +46,9 @@
         }
     $FeeHeadListResultset = $FeeHeadListPrep->get_result();
 
-    $htmlStr='<table border="1" style="text-align: center;"><tr><td>Receipt No.</td><td>Student Id</td><td>Disc. Cat.</td>';
+    $htmlStr='<img src="./app_images/school_images/logo.jpeg"><table class="fee_coll_tbl" border="1" style="text-align: center;">
+        <tr><th colspan="24">Fee Collection Report from '.$FromDate.' to '.$ToDate.'</th></tr>
+    <tr><td>Receipt No.</td><td>Student Id</td><td>Disc. Cat.</td>';
 
     while($row = $FeeHeadListResultset->fetch_assoc()) //Preaparing array of Fee_head_id and printing table header containing fee head names.
         {
@@ -156,10 +158,10 @@
         }*/
     $htmlStr=$htmlStr . '</table>';
     
-    $htmlStr= "<h3>Fee Collection Report from $FromDate to $ToDate.<BR>" . $htmlStr;
+    $htmlStr= $htmlStr;
     
    // echo $htmlStr ;
-   $htmlStr= $htmlStr.'<br>Paymode Details<br><table border="1">' . '<tr><td>Paymode Type</td><td>Collected Amount</td></tr>';
+   $htmlStr= $htmlStr.'<table class="fee_coll_tbl" border="1"><tr><th colspan="2" style="margin-top:30px;">Paymode Details</th></tr>' . '<tr><td>Mode</td><td>Amount</td></tr>';
     while($PMLRow=$PaymentModeListResult->fetch_assoc())
         {
             $htmlStr=$htmlStr . "<tr><td>" . $PMLRow["paymode_name"] . "</td><td>" . $PMLRow["paid_amount"] . "</td></tr>";

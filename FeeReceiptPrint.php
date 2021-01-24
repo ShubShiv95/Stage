@@ -3,6 +3,7 @@ $pageTitle = "Fee Receipt Print";
 require_once './includes/header.php';
 require_once './includes/navbar.php';
 ?>
+<link rel="stylesheet" href="./css/custom_table.css">
 <div class="col-12 table-reponsive mt-5 row border border-dark">
     <div class="row">
         <div class="col-12  head-brdr">

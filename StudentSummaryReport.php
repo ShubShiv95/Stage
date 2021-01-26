@@ -2,10 +2,9 @@
 $pageTitle = "Student Information";
 require_once './includes/header.php';
 require_once './includes/navbar.php';
+require_once './GlobalModel.php';
 ?>
 <!-- Tab Area Start Here -->
-
-
 <ul class="nav nav-pills border-bottom">
     <?php
     if ($_SESSION["LOGINTYPE"] != "STUDENT") {
@@ -367,11 +366,13 @@ require_once './includes/navbar.php';
                     } else {
                         roll_no = value.Roll_No;
                     }
+                    var locality = <?php $array_val = array_values($GLOBAL_LOCALITY); echo json_encode($array_val); ?>;
+                    //console.log(locality);
                     $('.roll').text(roll_no);
                     $('.gender').text(value.Gender);
                     $('.father_name').text(value.Father_Name);
                     $('.mother_name').text(value.Mother_Name);
-                    $('.dis_category').text(value.Discount_Category);
+                    $('.dis_category').text(value.Concession_Name);
                     $('.dob').text(value.DOB);
                     $('.father_occupation').text(value.Father_Occupation);
                     $('.religion').text(value.Religion);
@@ -379,9 +380,9 @@ require_once './includes/navbar.php';
                     $('.session').text(value.Session);
                     $('.session_st').text(value.Session_Start_Year);
                     $('.session_en').text(value.Session_End_Year);
-                    $('.tongue').text(value.Mother_Tongue);
-                    $('.tongue').text(value.Mother_Tongue);
-                    $('.locality').text(value.Locality);
+                    $('.mother_tongue').text(value.Mother_Tongue);
+                    $('.category').text(value.Social_Category);
+                    $('.locality').text(locality[value.Locality]);
                     $('.aadhar').text(value.Aadhar_No);
                     $('.b_group').text(value.Blood_Group);
                     $('.nationality').text(value.Nationality);

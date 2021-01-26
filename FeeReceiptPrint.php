@@ -8,20 +8,23 @@ require_once './includes/navbar.php';
     <div class="row">
         <div class="col-12  head-brdr">
             <div class="row">
-                <div class="col-md-6 text-center">
-                    <img style="height: 40px; width:auto;" class="img-tbl-logo" src="./app_images/school_images/logo.jpeg" alt="">
+                <div class="col-md-5 text-center">
+                    <img style="height: 80px; width:auto;" class="img-tbl-logo" src="./app_images/school_images/logo.jpeg" alt="">
                 </div>
-                <div class="col-md-6 text-right" style="font-size: 12px;">
+                <div class="col-md-5 text-right" style="font-size: 12px;">
                     <span>Affilicated By: CBSE, New Delhi JH101</span>
                     <span>Bokaro Steel City, Bokaro, Jharkhand,Phone : +91-9489510124</span>
+                </div>
+                <div class="col-md-2">
+                    <div id="qr_code" style="height: 80px; width:80px"></div>
                 </div>
             </div>
         </div>
         <div class="col-6 mb-2 head-brdr">
-            <strong>Receipt No :</strong> <span class="receipt_no">1234/2020</span>
+            <strong>Receipt No :</strong> <span class="receipt_no"></span>
         </div>
         <div class="col-6 mb-2 text-right head-brdr">
-            <strong>Date :</strong> <span class="receipt_date">12/34/2020</span>
+            <strong>Date :</strong> <span class="receipt_date"></span>
         </div>
         <div class="col-6">
             <div class="row">
@@ -29,7 +32,7 @@ require_once './includes/navbar.php';
                     <table class="table-nbrdr">
                         <tr>
                             <th colspan="2" class="cus-head-s">
-                                Fee Recipt For <span class="receipt_for">Apr - 2020-Jul-2020</span>
+                                Fee Recipt For <span class="receipt_for"></span>
                             </th>
                         </tr>
                         <tr>
@@ -99,10 +102,18 @@ require_once './includes/navbar.php';
     }
 </style>
 <?php require_once './includes/scripts.php'; ?>
+<script src="./js/qrcode.min.js"></script>
 <script>
     $(document).ready(function() {
         var receipt_id = "<?php echo $_GET['receipt_id']; ?>";
         show_receipt(receipt_id);
+
+        generate_qr(receipt_id);
+        function generate_qr(receipt_id) {
+            var qr_rec_data = receipt_id;
+            console.log(qr_rec_data);
+            new QRCode(document.getElementById("qr_code"), qr_rec_data);
+        }
 
         function show_receipt(receipt_id) {
             var schoolid = "<?php echo $_SESSION["SCHOOLID"]; ?>";

@@ -4,7 +4,7 @@
 //Move
     $GLOBAL_DISCOUNT_CAT =  array("20"=>"20%","10"=>"10%","5"=>"5%","Select Discount"=>"Select Discount");
     //Move
-    $GLOBAL_LOCALITY =  array("4"=>"Dhanbad", "3"=>"Bokaro Sec-1","2"=>"Bokaro Chas","1"=>"Bokaro Steel City", "" => "Select Locality");
+    $GLOBAL_LOCALITY =  array("0" =>"Select Locality","1"=>"Bokaro Steel City","2"=>"Bokaro Chas","3"=>"Bokaro Sec-1","4"=>"Dhanbad");
     //Move
     $GLOBAL_SCHOOL_SESSION =  array("2019-2020"=>"2019-2020", "2020-2021"=>"2020-2021");
 

@@ -18,7 +18,7 @@ if(isset($_REQUEST['notice_sender']))
     $notice_details = $_REQUEST['notice_details'];
     $publish = $_REQUEST['publish'];
     $notice_attachment = $_FILES['notice_attachment']['name'];
-    
+    $file_name = '';
     // notice_refs
     if(empty($notice_title)){
       $errors[] = 'Notice Title Cannot Be Empty.';
@@ -26,14 +26,13 @@ if(isset($_REQUEST['notice_sender']))
     if (empty($notice_type)) {
       $errors[] = 'Notice Type Cannot Be Empty.';
     }
-    if (empty(stripslashes(strip_tags($notice_details))) ) {
+    if ($notice_details) {
       $errors[] = 'Notice Details Cannot Be Empty.';
     }
-    else{
+    if (count($errors)==0){
     // file updateion
     if (!empty($notice_attachment)) 
     {
-      
       $directory = 'notices';
       $dir_path = "./app_images/".$directory;
       $file_path = $dir_path;
@@ -42,8 +41,10 @@ if(isset($_REQUEST['notice_sender']))
       }
       $allowedImageExtension = array("jpg","jpeg","pdf");
       $fileExtension = strtolower(pathinfo($_FILES['notice_attachment']['name'],PATHINFO_EXTENSION));
-      if (!in_array($fileExtension, $allowedImageExtension)) {
+      if (!in_array($fileExtension, $allowedImageExtension)) 
+      {
         $errors[] = 'Only pdf/jpg/jpeg are Allowed';
+        die;
       }
       else{
         $file_name = md5($_SESSION["LOGINID"].date('YmdHis')).'.'.$fileExtension;
@@ -54,7 +55,6 @@ if(isset($_REQUEST['notice_sender']))
     {
       $file_name = 'NULL'; $file_path = 'NULL';
     }
-    
     $updatedBy = $_SESSION["LOGINID"];
     $schoolId = $_SESSION["SCHOOLID"];
 
@@ -122,6 +122,7 @@ if(isset($_REQUEST['notice_sender']))
         }
       }  
     }
+    mysqli_commit($dbhandle);
     if($qLink == true){
       $errors[] = 'Notice Saved Successfully!!';
     }
@@ -135,8 +136,6 @@ if(isset($_REQUEST['notice_sender']))
     }
     $htlml_d .= '</ul>';
     echo $htlml_d;
-    // commitment ends
-    mysqli_commit($dbhandle);
   }
   }
 }

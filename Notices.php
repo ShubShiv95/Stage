@@ -95,7 +95,7 @@ require_once './includes/navbar.php';
         <div class="col-xl-3 col-lg-3 col-md-3 col-12  aj-mb-2">
             <div class="form-group aj-form-group text-right">
                 <button type="reset" class="aj-btn-a btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>    
-                <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Create</button>
+                <button type="submit" name="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Create</button>
             </div>
         </div>
     </div>
@@ -159,6 +159,9 @@ $(document).ready(function(){
         success : function(data){
             $('.formErrors').html(data);
             $('#notice_form')[0].reset();   
+            window.setTimeout(function(){
+                $('.formErrors').html('');
+            },3000);
         }
     });
   });

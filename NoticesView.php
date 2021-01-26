@@ -32,7 +32,7 @@ if ($_SESSION["LOGINTYPE"] != 'STUDENT') {
             <div class="col-xl-12 col-lg-12 col-md-12 col-12 aj-mb-2">
                 <div class="form-group aj-form-group">
                     <label> Notice To</label>
-                    <select class="select2" id="notice_to" name="notice_to">
+                    <select class="select2 col-12" id="notice_to" name="notice_to">
                         <option value="All">All</option>
                         <option value="ClassId" data-select2-id="Students">Students</option>
                         <option value="DepartmentId" data-select2-id="Staff">Staff</option>

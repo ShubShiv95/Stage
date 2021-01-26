@@ -620,7 +620,7 @@ include_once './includes/navbar.php';
                     $('.student_class').val(value.Class_Name);
                     if (value.Student_Image != null) {
                         //url = './app_images/AdmissionDocuments/' + value.Admission_Id + '_AdmissionDocs/' + value.Student_Image;
-                        url = './app_images/profile/' + value.Student_Image;
+                        url = './app_images/' + value.Student_Image;
                         $('.main_img').attr('src', url);
                     }
                 });

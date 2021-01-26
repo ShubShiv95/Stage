@@ -404,7 +404,7 @@ require_once './GlobalModel.php';
                     $('.whatsapp_contact').text(value.Whatsapp_Contact_No);
                     $('.email_add').text(value.Email_Id);
                     if (value.Student_Image != null) {
-                        url = './app_images/AdmissionDocuments/' + value.Admission_Id + '_AdmissionDocs/' + value.Student_Image;
+                        url = './app_images/' + value.Student_Image;
                         $('.main_img').attr('src', url);
                         $('.back_img').attr('src', url);
                     }

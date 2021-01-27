@@ -14,7 +14,7 @@ include_once './includes/navbar.php';
         <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
             <div class="form-group aj-form-group">
                 <label>Select Class</label>
-                <select class="select2" required name="classid" id="classid" onchange="showsection(this.value)">
+                <select class="select2 col-12" required name="classid" id="classid" onchange="showsection(this.value)">
                     <!--option value="">Please Select Class *</option-->
                     <option value="0">Please Select Class *</option>
                     <?php
@@ -49,7 +49,7 @@ include_once './includes/navbar.php';
         <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
             <div class="form-group aj-form-group">
                 <label>Select Section</label>
-                <select class="select2" name="secid" id="secid" required>
+                <select class="select2 col-12" name="secid" id="secid" required>
                     <option value="">Please Select Section *</option>
                 </select>
             </div>
@@ -57,7 +57,7 @@ include_once './includes/navbar.php';
         <div class="col-xl-3 col-lg-3 col-12 aj-mb-2">
             <div class="form-group aj-form-group">
                 <label>Select Section</label>
-                <select class="select2" name="cperiod" id="cperiod" required>
+                <select class="select2 col-12" name="cperiod" id="cperiod" required>
                     <option value="1">Period 1</option>
                     <option value="2">Period 2</option>
                     <option value="3">Period 3</option>

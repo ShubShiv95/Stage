@@ -91,7 +91,6 @@ require_once './includes/navbar.php';
     </div>
 </div>
 
-
 <style>
     .modal {
   position: fixed;
@@ -170,7 +169,13 @@ require_once './includes/scripts.php';
             alert("Please Select Certificate Of Serial No "+serial_no+"");
         }
         else{
-            window.open("./Certificate.php?type="+certificate_type+"&studentid="+student_id+"");
+            if(certificate_type =='tc'){
+                window.open("./CertificateOfTransfer.php?type="+certificate_type+"&studentid="+student_id+"");
+            }
+            else{
+                window.open("./Certificate.php?type="+certificate_type+"&studentid="+student_id+"");
+            }
+           
         }
     });
     $(document).on('click','.see_details',function(event){
